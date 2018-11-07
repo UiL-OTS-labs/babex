@@ -1,0 +1,10 @@
+Django>=2.0,<2.1
+django-braces
+django-csp
+django-simple-menu
+pip-tools
+cryptography
+PyJWT
+bpython
+djangorestframework
+-e git+git@github.com:UiL-OTS-labs/django-shared-core.git@master#egg=uil-django-core
