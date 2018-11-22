@@ -90,6 +90,8 @@ AUTH_USER_MODEL = 'main.User'
 
 LOGIN_URL = reverse_lazy('main:login')
 
+LOGIN_REDIRECT_URL = reverse_lazy('main:home')
+
 SESSION_COOKIE_NAME = "sessionid_admin"
 
 REST_FRAMEWORK = {
