@@ -5,6 +5,7 @@ from django.contrib.auth.hashers import check_password
 from .token import JwtToken
 from .models import ApiUser
 
+
 class JwtAuthentication(authentication.TokenAuthentication):
     keyword = "Bearer"
 
