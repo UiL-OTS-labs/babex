@@ -3,6 +3,6 @@
 
 {% if request.user.is_authenticated %}
     {% with request.user as user %}
-        {% transformat "site:header:login" user.email %}
+        {% transformat "site:header:login" user.get_full_name %}
     {% endwith %}
 {% endif %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-20 11:20+0000\n"
+"POT-Creation-Date: 2018-11-22 13:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,17 +22,33 @@ msgstr ""
 msgid "mainmenu:home"
 msgstr "Home"
 
-#: main/menus.py:10
+#: main/menus.py:9
+msgid "mainmenu:experiments"
+msgstr "Experiments"
+
+#: main/menus.py:16
+msgid "mainmenu:leaders"
+msgstr "Leaders"
+
+#: main/menus.py:20
+msgid "mainmenu:participants"
+msgstr "Participants"
+
+#: main/menus.py:24
+msgid "mainmenu:comments"
+msgstr "Comments"
+
+#: main/menus.py:28
 msgid "footermenu:login"
 msgstr "Log in"
 
-#: main/menus.py:15
+#: main/menus.py:33
 msgid "footermenu:logout"
 msgstr "Log out"
 
 #: main/templates/base/login_header.html:6
 msgid "site:header:login"
-msgstr ""
+msgstr "Welcome {}."
 
 #. Translators: This is the title that will end up in the header (in blue)
 #: main/templates/base/site_header.html:4
@@ -43,6 +59,12 @@ msgstr "UiL OTS Experiments Admin"
 #: main/templates/base/site_title.html:5
 msgid "site:name"
 msgstr "UiL OTS Experiments Admin"
+
+#: main/templates/main/index.html:8
+msgid "main:home:text"
+msgstr "Welcome {},<br/>"
+"<br/>"
+"There are currently {} open experiments. "
 
 #: main/templates/registration/logged_out.html:8
 msgid "main:logged_out_title"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-20 11:20+0000\n"
+"POT-Creation-Date: 2018-11-22 13:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,11 +22,27 @@ msgstr ""
 msgid "mainmenu:home"
 msgstr "Home"
 
-#: main/menus.py:10
+#: main/menus.py:9
+msgid "mainmenu:experiments"
+msgstr "Experimenten"
+
+#: main/menus.py:16
+msgid "mainmenu:leaders"
+msgstr "Proefleiders"
+
+#: main/menus.py:20
+msgid "mainmenu:participants"
+msgstr "Participanten"
+
+#: main/menus.py:24
+msgid "mainmenu:comments"
+msgstr "Opmerkingen"
+
+#: main/menus.py:28
 msgid "footermenu:login"
 msgstr "Log in"
 
-#: main/menus.py:15
+#: main/menus.py:33
 msgid "footermenu:logout"
 msgstr "Log uit"
 
@@ -43,6 +59,12 @@ msgstr "Experimenten UiL OTS Admin"
 #: main/templates/base/site_title.html:5
 msgid "site:name"
 msgstr "Experimenten UiL OTS Admin"
+
+#: main/templates/main/index.html:8
+#, fuzzy
+#| msgid "mainmenu:home"
+msgid "main:home:text"
+msgstr "Home"
 
 #: main/templates/registration/logged_out.html:8
 msgid "main:logged_out_title"

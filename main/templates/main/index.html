@@ -1,11 +1,12 @@
 {% extends "base/base.html" %}
 {% load i18n %}
-
+{% load transformat %}
 
 {% block content %}
 <div class="uu-inner-container">
     <div class="col-12">
-        Kip!
+        {# TODO: Full text here! #}
+        {% transformat 'main:home:text' request.user.get_full_name 0 %}
     </div>
 </div>
 {% endblock %}

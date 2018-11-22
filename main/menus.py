@@ -6,6 +6,24 @@ Menu.add_item("home", MenuItem(_('mainmenu:home'),
                                reverse('main:home'),
                                ))
 
+Menu.add_item("main", MenuItem(_('mainmenu:experiments'),
+                               '#',
+                               children=[
+                                   MenuItem('test', '#')
+                               ]
+                               ))
+
+Menu.add_item("main", MenuItem(_('mainmenu:leaders'),
+                               '#'
+                               ))
+
+Menu.add_item("main", MenuItem(_('mainmenu:participants'),
+                               '#'
+                               ))
+
+Menu.add_item("main", MenuItem(_('mainmenu:comments'),
+                               '#'
+                               ))
 
 Menu.add_item("footer", MenuItem(_('footermenu:login'),
                                  reverse('main:login'),
