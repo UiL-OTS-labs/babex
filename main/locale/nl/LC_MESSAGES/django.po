@@ -1,0 +1,61 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-11-20 11:20+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: main/menus.py:5
+msgid "mainmenu:home"
+msgstr "Home"
+
+#: main/menus.py:10
+msgid "footermenu:login"
+msgstr "Log in"
+
+#: main/menus.py:15
+msgid "footermenu:logout"
+msgstr "Log uit"
+
+#: main/templates/base/login_header.html:6
+msgid "site:header:login"
+msgstr ""
+
+#. Translators: This is the title that will end up in the header (in blue)
+#: main/templates/base/site_header.html:4
+msgid "site:header:title"
+msgstr "Experimenten UiL OTS Admin"
+
+#. Translators: This is the title that will end up in the tab of the browser
+#: main/templates/base/site_title.html:5
+msgid "site:name"
+msgstr "Experimenten UiL OTS Admin"
+
+#: main/templates/registration/logged_out.html:8
+msgid "main:logged_out_title"
+msgstr "Uitgelogd"
+
+#: main/templates/registration/logged_out.html:9
+msgid "main:logged_out_text"
+msgstr "U bent succesvol uitgelogd!"
+
+#: main/templates/registration/login.html:9
+msgid "login:header:login"
+msgstr "Log in"
+
+#: main/templates/registration/login.html:15
+msgid "login:button:login"
+msgstr "Log in"
