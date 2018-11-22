@@ -9,6 +9,7 @@ from ..permissions import IsPermittedClient
 class ApiLoginView(views.ObtainAuthToken):
 
     serializer_class = AuthTokenSerializer
+    permission_classes = (IsPermittedClient, )
 
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data,
