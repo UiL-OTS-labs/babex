@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -49,6 +48,10 @@ INSTALLED_APPS = [
     'uil.core',
     'api',
     'api.auth',
+    'main',
+    'experiments',
+
+    'django.contrib.admin',
 ]
 
 MIDDLEWARE = [
@@ -81,6 +84,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ppn_backend.wsgi.application'
 
+
+SESSION_COOKIE_NAME = "sessionid_admin"
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'api.permissions.IsPermittedClient',
+    )
+}
+
+REST_PERMITTED_CLIENTS = ['127.0.0.1']
+
+# Either RSA512 or HS512
+JWT_ALGORITHM = 'HS512'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
@@ -115,7 +131,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'nl'
+LANGUAGES = (
+    ('nl', _('lang:nl')),
+    ('en', _('lang:en')),
+)
 
 TIME_ZONE = 'UTC'
 

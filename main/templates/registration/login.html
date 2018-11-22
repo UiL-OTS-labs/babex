@@ -1,0 +1,21 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+
+
+{% block content %}
+    <div class="uu-inner-container">
+        <div class="col-12">
+            <h2>
+                {% trans 'login:header:login' %}
+            </h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">
+                    {% trans 'login:button:login' %}
+                </button>
+            </form>
+            <br/>
+        </div>
+    </div>
+{% endblock %}

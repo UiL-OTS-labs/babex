@@ -19,5 +19,10 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
-
+    path('', include('main.urls')),
+    path('i18n/', include('django.conf.urls.i18n')),
 ]
+
+admin.site.site_header = 'Proefpersonen systeem BACKEND'
+admin.site.site_title = 'Proefpersonen systeem BACKEND'
+admin.site.index_title = 'Proefpersonen systeem BACKEND'

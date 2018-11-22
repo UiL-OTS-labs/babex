@@ -1,0 +1,8 @@
+{% load i18n %}
+{% load transformat %}
+
+{% if request.user.is_authenticated %}
+    {% with request.user as user %}
+        {% transformat "site:header:login" user.email %}
+    {% endwith %}
+{% endif %}
