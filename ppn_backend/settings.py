@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'main',
     'experiments',
     'leaders',
+    'participants',
 
     'django.contrib.admin',
 ]

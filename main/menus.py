@@ -15,7 +15,7 @@ Menu.add_item("main", MenuItem(_('mainmenu:leaders'),
                                ))
 
 Menu.add_item("main", MenuItem(_('mainmenu:participants'),
-                               '#'
+                               reverse('participants:home')
                                ))
 
 Menu.add_item("main", MenuItem(_('mainmenu:comments'),
