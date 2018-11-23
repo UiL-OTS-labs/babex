@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-22 13:49+0000\n"
+"POT-Creation-Date: 2018-11-23 07:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,23 +26,23 @@ msgstr "Home"
 msgid "mainmenu:experiments"
 msgstr "Experiments"
 
-#: main/menus.py:16
+#: main/menus.py:13
 msgid "mainmenu:leaders"
 msgstr "Leaders"
 
-#: main/menus.py:20
+#: main/menus.py:17
 msgid "mainmenu:participants"
 msgstr "Participants"
 
-#: main/menus.py:24
+#: main/menus.py:21
 msgid "mainmenu:comments"
 msgstr "Comments"
 
-#: main/menus.py:28
+#: main/menus.py:25
 msgid "footermenu:login"
 msgstr "Log in"
 
-#: main/menus.py:33
+#: main/menus.py:30
 msgid "footermenu:logout"
 msgstr "Log out"
 
@@ -60,11 +60,9 @@ msgstr "UiL OTS Experiments Admin"
 msgid "site:name"
 msgstr "UiL OTS Experiments Admin"
 
-#: main/templates/main/index.html:8
+#: main/templates/main/index.html:9
 msgid "main:home:text"
-msgstr "Welcome {},<br/>"
-"<br/>"
-"There are currently {} open experiments. "
+msgstr "Welcome {},<br/><br/>There are currently {} open experiments. "
 
 #: main/templates/registration/logged_out.html:8
 msgid "main:logged_out_title"
