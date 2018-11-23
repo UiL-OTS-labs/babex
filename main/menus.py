@@ -11,7 +11,7 @@ Menu.add_item("main", MenuItem(_('mainmenu:experiments'),
                                ))
 
 Menu.add_item("main", MenuItem(_('mainmenu:leaders'),
-                               '#'
+                               reverse('leaders:home')
                                ))
 
 Menu.add_item("main", MenuItem(_('mainmenu:participants'),

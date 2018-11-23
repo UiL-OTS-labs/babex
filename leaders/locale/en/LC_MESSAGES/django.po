@@ -17,11 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: leaders/templates/leaders/index.html:11
+msgid "leaders:home:create_leader"
+msgstr ""
 
-#: ppn_backend/settings.py:148
-msgid "lang:nl"
-msgstr "Nederlands"
+#: leaders/templates/leaders/index.html:15
+msgid "leaders:home:header"
+msgstr ""
 
-#: ppn_backend/settings.py:149
-msgid "lang:en"
-msgstr "English"
+#: leaders/templates/leaders/index.html:18
+msgid "leaders:home:info_text"
+msgstr ""
