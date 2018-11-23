@@ -1,6 +1,4 @@
 from rest_framework import authentication
-from rest_framework import exceptions
-from django.contrib.auth.hashers import check_password
 
 from .token import JwtToken
 from .models import ApiUser
@@ -26,7 +24,7 @@ class PostAuthenticator:
 
         user = ApiUser.objects.get(email=username)
 
-        if check_password(password, user.password):
+        if user.check_password(password):
             return user
 
         return None
