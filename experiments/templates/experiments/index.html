@@ -1,0 +1,90 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <div class="float-right button button-colored">
+            <a href="#">
+                {% trans 'experiments:home:create_experiment' %}
+            </a>
+        </div>
+        <h1>
+            {% trans 'experiments:home:header' %}
+        </h1>
+        <p>
+            {% trans 'experiments:home:info_text' %}
+        </p>
+        <table class="dt" width="100%" data-language="{% datatables_lang %}">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Slots
+                    </th>
+                    <th>
+                        Participants
+                    </th>
+                    <th>
+                        Excl_exp
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Visibility
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for experiment in object_list %}
+                    <tr>
+                        <td>
+                            {{ experiment.pk }}
+                        </td>
+                        <td>
+                            {{ experiment.name }}
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            {{ experiment.excluded_experiments.count }}
+                        </td>
+                        <td>
+                            {{ experiment.open }}
+                        </td>
+                        <td>
+                            {{ experiment.visible }}
+                        </td>
+                        <td>
+                            Nada!
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td>
+                            Empty
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br/>
+    </div>
+</div>
+{% endblock %}

@@ -7,10 +7,7 @@ Menu.add_item("home", MenuItem(_('mainmenu:home'),
                                ))
 
 Menu.add_item("main", MenuItem(_('mainmenu:experiments'),
-                               '#',
-                               children=[
-                                   MenuItem('test', '#')
-                               ]
+                               reverse('experiments:home')
                                ))
 
 Menu.add_item("main", MenuItem(_('mainmenu:leaders'),

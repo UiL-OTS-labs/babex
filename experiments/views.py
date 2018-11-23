@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from django.views import generic
+import braces.views as braces
 
-# Create your views here.
+from .models import Experiment
+
+
+class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
+    template_name = 'experiments/index.html'
+    model = Experiment

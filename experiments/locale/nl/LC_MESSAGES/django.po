@@ -17,19 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: api/auth/serializers.py:8
-msgid "Username"
+#: experiments/templates/experiments/index.html:50
+msgid "experiments:home:create_experiment"
 msgstr ""
 
-#: api/auth/serializers.py:10
-msgid "Password"
+#: experiments/templates/experiments/index.html:53
+msgid "experiments:home:header"
 msgstr ""
 
-#: api/auth/serializers.py:27
-msgid "Unable to log in with provided credentials."
-msgstr ""
-
-#: api/auth/serializers.py:30
-msgid "Must include \"username\" and \"password\"."
+#: experiments/templates/experiments/index.html:56
+msgid "experiments:home:info_text"
 msgstr ""
