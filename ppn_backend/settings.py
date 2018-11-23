@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'experiments',
     'leaders',
     'participants',
+    'comments',
 
     'django.contrib.admin',
 ]

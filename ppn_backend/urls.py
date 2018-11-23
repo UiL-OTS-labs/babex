@@ -23,6 +23,7 @@ urlpatterns = [
     path('experiments/', include('experiments.urls')),
     path('leaders/', include('leaders.urls')),
     path('participants/', include('participants.urls')),
+    path('comments/', include('comments.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
 ]
 

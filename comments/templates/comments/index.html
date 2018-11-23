@@ -1,0 +1,73 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <h1>
+            {% trans 'comments:home:header' %}
+        </h1>
+        <p>
+            {% trans 'comments:home:info_text' %}
+        </p>
+        <table class="dt" width="100%" data-language="{% datatables_lang %}">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Participant
+                    </th>
+                    <th>
+                        Participant Email
+                    </th>
+                    <th>
+                        Added by
+                    </th>
+                    <th>
+                        Experiment
+                    </th>
+                    <th>
+                        Comment
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for comment in object_list %}
+                    <tr>
+                        <td>
+                            {{ comment.pk }}
+                        </td>
+                        <td>
+                            {{ comment.participant.name }}
+                        </td>
+                        <td>
+                            {{ comment.participant.email }}
+                        </td>
+                        <td>
+                            {{ comment.leader.name }}
+                        </td>
+                        <td>
+                            {{ comment.experiment }}
+                        </td>
+                        <td>
+                            {{ comment.comment }}
+                        </td>
+                        <td>
+                            Nada!
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br/>
+    </div>
+</div>
+{% endblock %}

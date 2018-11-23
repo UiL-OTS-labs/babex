@@ -19,7 +19,7 @@ Menu.add_item("main", MenuItem(_('mainmenu:participants'),
                                ))
 
 Menu.add_item("main", MenuItem(_('mainmenu:comments'),
-                               '#'
+                               reverse('comments:home')
                                ))
 
 Menu.add_item("footer", MenuItem(_('footermenu:login'),
