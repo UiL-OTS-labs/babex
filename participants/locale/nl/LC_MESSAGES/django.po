@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-11-23 11:20+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: participants/models.py:10
+msgid "participant:attribute:handedness:lefthanded"
+msgstr "Linkshandig"
+
+#: participants/models.py:11
+msgid "participant:attribute:handedness:righthanded"
+msgstr "Rechtshandig"
+
+#: participants/models.py:16
+msgid "participant:attribute:sex:male"
+msgstr "Man"
+
+#: participants/models.py:17
+msgid "participant:attribute:sex:female"
+msgstr "Vrouw"
+
+#: participants/models.py:21
+msgid "participant:attribute:social_role:student"
+msgstr "Student"
+
+#: participants/models.py:22
+msgid "participant:attribute:social_role:other"
+msgstr "Anders"
+
+#: participants/templates/participants/index.html:11
+msgid "participants:home:merge_participants"
+msgstr "Combineer Participanten"
+
+#: participants/templates/participants/index.html:15
+msgid "participants:home:header"
+msgstr "Participanten"
+
+#: participants/templates/participants/index.html:18
+msgid "participants:home:info_text"
+msgstr "<br/>"

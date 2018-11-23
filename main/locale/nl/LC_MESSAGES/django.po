@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-23 10:16+0000\n"
+"POT-Creation-Date: 2018-11-23 11:20+0000\n"
 "PO-Revision-Date: 2018-11-23 08:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -61,8 +61,6 @@ msgid "site:name"
 msgstr "Experimenten UiL OTS Admin"
 
 #: main/templates/main/index.html:9
-#, fuzzy
-#| msgid "mainmenu:home"
 msgid "main:home:text"
 msgstr "Home"
 

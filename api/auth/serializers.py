@@ -4,6 +4,7 @@ from rest_framework import serializers
 from .authenticators import PostAuthenticator
 
 
+# TODO: figure out this abstract methods error
 class AuthTokenSerializer(serializers.Serializer):
     username = serializers.CharField(label=_("Username"))
     password = serializers.CharField(
@@ -18,16 +19,16 @@ class AuthTokenSerializer(serializers.Serializer):
 
         if username and password:
             user = PostAuthenticator.authenticate(request=self.context.get('request'),
-                                username=username, password=password)
+                                                  username=username, password=password)
 
             # The authenticate call simply returns None for is_active=False
             # users. (Assuming the default ModelBackend authentication
             # backend.)
             if not user:
-                msg = _('Unable to log in with provided credentials.')
+                msg = _('api:auth:login_failed')
                 raise serializers.ValidationError(msg, code='authorization')
         else:
-            msg = _('Must include "username" and "password".')
+            msg = _('api:auth:missing_values')
             raise serializers.ValidationError(msg, code='authorization')
 
         attrs['user'] = user

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-23 07:26+0000\n"
+"POT-Creation-Date: 2018-11-23 11:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,14 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: experiments/templates/experiments/index.html:50
+
+#: experiments/templates/experiments/index.html:11
 msgid "experiments:home:create_experiment"
-msgstr ""
+msgstr "Nieuw experiment"
 
-#: experiments/templates/experiments/index.html:53
+#: experiments/templates/experiments/index.html:15
 msgid "experiments:home:header"
-msgstr ""
+msgstr "Experimenten"
 
-#: experiments/templates/experiments/index.html:56
+#: experiments/templates/experiments/index.html:18
 msgid "experiments:home:info_text"
-msgstr ""
+msgstr "<br/>"

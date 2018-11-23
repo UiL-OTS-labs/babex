@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-23 07:26+0000\n"
+"POT-Creation-Date: 2018-11-23 11:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,18 +18,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: api/auth/serializers.py:8
+#: api/auth/serializers.py:9
 msgid "Username"
-msgstr ""
+msgstr "Gebruikersnaam"
 
-#: api/auth/serializers.py:10
+#: api/auth/serializers.py:11
 msgid "Password"
-msgstr ""
+msgstr "Wachtwoord"
 
-#: api/auth/serializers.py:27
-msgid "Unable to log in with provided credentials."
-msgstr ""
+#: api/auth/serializers.py:28
+msgid "api:auth:login_failed"
+msgstr "Authenticatie mislukt met de verstrekte inloggegevens "
 
-#: api/auth/serializers.py:30
-msgid "Must include \"username\" and \"password\"."
-msgstr ""
+#: api/auth/serializers.py:31
+msgid "api:auth:missing_values"
+msgstr "Moet \"username\" en \"password\" bevatten."
