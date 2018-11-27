@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-27 14:14+0000\n"
+"POT-Creation-Date: 2018-11-27 15:49+0000\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -132,37 +132,51 @@ msgstr "What should the participant's language be?"
 msgid "default_criteria:attribute:multilingual"
 msgstr "Does the participant have to speak one or many languages? "
 
-#: experiments/models.py:144
+#: experiments/models.py:146
 msgid "default_criteria:attribute:sex"
 msgstr "Should the participant be Male or Female?"
 
-#: experiments/models.py:150
+#: experiments/models.py:154
 msgid "default_criteria:attribute:handedness"
 msgstr "Should the participant be left- or righthanded? "
 
-#: experiments/models.py:156
+#: experiments/models.py:162
 msgid "default_criteria:attribute:dyslexia"
 msgstr "Should the participant be dyslectic?"
 
-#: experiments/models.py:162
+#: experiments/models.py:170
 msgid "default_criteria:attribute:social_status"
 msgstr "What should the social role of the participant be? "
 
-#: experiments/models.py:168
+#: experiments/models.py:178
 msgid "default_criteria:attribute:min_age"
 msgstr "What should the lower bound of the participant's age?"
 
-#: experiments/models.py:173
+#: experiments/models.py:184
 msgid "default_criteria:attribute:max_age"
 msgstr "What should the upper bound of the participant's age?"
 
-#: experiments/models.py:186
+#: experiments/models.py:198
 msgid "time_slot:attribute:datetime"
 msgstr "Date & Time"
 
-#: experiments/models.py:190
+#: experiments/models.py:202
 msgid "time_slot:attribute:max_places"
 msgstr "Max places"
+
+#: experiments/templates/criteria/update_default.html:12
+msgid "experiments:new_default_criteria:header"
+msgstr "Criteria for {}"
+
+#: experiments/templates/criteria/update_default.html:15
+msgid "experiments:new_default_criteria:info_text"
+msgstr " "
+
+#: experiments/templates/criteria/update_default.html:24
+#: experiments/templates/locations/edit.html:23
+#: experiments/templates/locations/new.html:23
+msgid "experiments:globals:save_button"
+msgstr "Save"
 
 #: experiments/templates/experiments/index.html:12
 msgid "experiments:home:create_experiment"
@@ -205,11 +219,6 @@ msgstr "Update Location"
 msgid "locations:update:info_text"
 msgstr " "
 
-#: experiments/templates/locations/edit.html:23
-#: experiments/templates/locations/new.html:23
-msgid "experiments:globals:save_button"
-msgstr "Save"
-
 #: experiments/templates/locations/index.html:12
 msgid "locations:home:create_location"
 msgstr "Create location"
@@ -237,3 +246,8 @@ msgstr "New Location"
 #: experiments/templates/locations/new.html:14
 msgid "locations:new:info_text"
 msgstr " "
+
+#: experiments/views/criteria_views.py:40
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr ""

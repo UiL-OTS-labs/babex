@@ -16,4 +16,4 @@ class CreateExperimentView(braces.LoginRequiredMixin, generic.CreateView):
     form_class = CreateExperimentForm
 
     def get_success_url(self):
-        return reverse('experiments:home')
+        return reverse('experiments:default_criteria', args=[self.object.pk])

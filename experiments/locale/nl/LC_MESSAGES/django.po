@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-27 14:14+0000\n"
+"POT-Creation-Date: 2018-11-27 15:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -132,37 +132,51 @@ msgstr "Wat moet de moedertaal van de participant zijn?"
 msgid "default_criteria:attribute:multilingual"
 msgstr "Moet de participant een of meerdere talen spreken?"
 
-#: experiments/models.py:144
+#: experiments/models.py:146
 msgid "default_criteria:attribute:sex"
 msgstr "Moet de participant man of vrouw zijn?"
 
-#: experiments/models.py:150
+#: experiments/models.py:154
 msgid "default_criteria:attribute:handedness"
 msgstr "Moet de participant links- of rechtshandig zijn?"
 
-#: experiments/models.py:156
+#: experiments/models.py:162
 msgid "default_criteria:attribute:dyslexia"
 msgstr "Moet de participant dyslectisch zijn?"
 
-#: experiments/models.py:162
+#: experiments/models.py:170
 msgid "default_criteria:attribute:social_status"
 msgstr "Wat moet de sociale status van de participant zijn?"
 
-#: experiments/models.py:168
+#: experiments/models.py:178
 msgid "default_criteria:attribute:min_age"
 msgstr "Wat moet de ondergrens van de participant's leeftijd zijn?"
 
-#: experiments/models.py:173
+#: experiments/models.py:184
 msgid "default_criteria:attribute:max_age"
 msgstr "Wat moet de bovengrens van de participant's leeftijd zijn?"
 
-#: experiments/models.py:186
+#: experiments/models.py:198
 msgid "time_slot:attribute:datetime"
 msgstr "Tijd & Datum"
 
-#: experiments/models.py:190
+#: experiments/models.py:202
 msgid "time_slot:attribute:max_places"
 msgstr "Max plaatsen"
+
+#: experiments/templates/criteria/update_default.html:12
+msgid "experiments:new_default_criteria:header"
+msgstr "Criteria voor {}"
+
+#: experiments/templates/criteria/update_default.html:15
+msgid "experiments:new_default_criteria:info_text"
+msgstr " "
+
+#: experiments/templates/criteria/update_default.html:24
+#: experiments/templates/locations/edit.html:23
+#: experiments/templates/locations/new.html:23
+msgid "experiments:globals:save_button"
+msgstr "Opslaan"
 
 #: experiments/templates/experiments/index.html:12
 msgid "experiments:home:create_experiment"
@@ -206,11 +220,6 @@ msgstr "Verander locatie"
 msgid "locations:update:info_text"
 msgstr " "
 
-#: experiments/templates/locations/edit.html:23
-#: experiments/templates/locations/new.html:23
-msgid "experiments:globals:save_button"
-msgstr "Opslaan"
-
 #: experiments/templates/locations/index.html:12
 msgid "locations:home:create_location"
 msgstr "Nieuwe locatie"
@@ -238,3 +247,13 @@ msgstr "Nieuwe locatie"
 #: experiments/templates/locations/new.html:14
 msgid "locations:new:info_text"
 msgstr " "
+
+#: experiments/views/criteria_views.py:40
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr ""
+
+#, fuzzy
+#~| msgid "experiments:globals:save_button"
+#~ msgid "experiments:globals:save_buttons"
+#~ msgstr "Opslaan"
