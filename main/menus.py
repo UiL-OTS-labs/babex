@@ -10,6 +10,10 @@ Menu.add_item("main", MenuItem(_('mainmenu:experiments'),
                                reverse('experiments:home')
                                ))
 
+Menu.add_item("main", MenuItem(_('mainmenu:locations'),
+                               reverse('experiments:location_home')
+                               ))
+
 Menu.add_item("main", MenuItem(_('mainmenu:leaders'),
                                reverse('leaders:home')
                                ))
