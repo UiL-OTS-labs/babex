@@ -131,37 +131,47 @@ class DefaultCriteria(models.Model):
 
     language = models.TextField(
         _('default_criteria:attribute:language'),
-        default='nl'
+        default='nl',
     )
 
     multilingual = models.CharField(
         _('default_criteria:attribute:multilingual'),
         choices=MULTILINGUAL,
         max_length=1,
+        blank=False,
+        default='I',
     )
 
     sex = models.CharField(
         _('default_criteria:attribute:sex'),
         choices=SEX,
         max_length=1,
+        blank=False,
+        default='I',
     )
 
     handedness = models.CharField(
         _('default_criteria:attribute:handedness'),
         choices=HANDEDNESS,
         max_length=1,
+        blank=False,
+        default='I',
     )
 
     dyslexia = models.CharField(
         _('default_criteria:attribute:dyslexia'),
         choices=DYSLEXIA,
-        max_length=1
+        max_length=1,
+        blank=False,
+        default='I',
     )
 
     social_status = models.CharField(
         _('default_criteria:attribute:social_status'),
         choices=SOCIAL_STATUS,
-        max_length=1
+        max_length=1,
+        blank=False,
+        default='I',
     )
 
     min_age = models.IntegerField(
