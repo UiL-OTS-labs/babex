@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-27 09:53+0000\n"
+"POT-Creation-Date: 2018-11-27 13:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,47 +18,71 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: experiments/models.py:9
+#: experiments/models.py:11
+msgid "location:attribute:name"
+msgstr "Naam"
+
+#: experiments/models.py:15
+msgid "location:attribute:route_url"
+msgstr "Routebeschrijving URL"
+
+#: experiments/models.py:24
 msgid "experiment:attribute:name"
 msgstr "Naam"
 
-#: experiments/models.py:13
+#: experiments/models.py:28
 msgid "experiment:attribute:duration"
 msgstr "Tijdsduur"
 
-#: experiments/models.py:17
+#: experiments/models.py:32
 msgid "experiment:attribute:compensation"
 msgstr "Compensatie"
 
-#: experiments/models.py:21
+#: experiments/models.py:36
+msgid "experiment:attribute:task_description"
+msgstr "Taak omschrijving"
+
+#: experiments/models.py:40
 msgid "experiment:attribute:additional_instructions"
 msgstr "Extra instructies"
 
-#: experiments/models.py:25
+#: experiments/models.py:45
 msgid "experiment:attribute:location"
 msgstr "Locatie"
 
-#: experiments/models.py:29
+#: experiments/models.py:51
+msgid "experiment:attribute:default_max_places"
+msgstr "Standaard aantal plekken"
+
+#: experiments/models.py:56
 msgid "experiment:attribute:open"
 msgstr "Open voor participanten"
 
-#: experiments/models.py:33
+#: experiments/models.py:60
 msgid "experiment:attribute:public"
 msgstr "Openbaar"
 
-#: experiments/models.py:37
+#: experiments/models.py:64
 msgid "experiment:attribute:participants_visible"
 msgstr "Participanten zichtbaar"
 
-#: experiments/models.py:42
+#: experiments/models.py:69
 msgid "experiment:attribute:excluded_experiments"
 msgstr "Buitengesloten experimenten"
 
-#: experiments/models.py:54
+#: experiments/models.py:75
+msgid "experiment:attribute:leader"
+msgstr "Proefleider"
+
+#: experiments/models.py:83
+msgid "experiment:attribute:additional_leaders"
+msgstr "Extra proefleiders"
+
+#: experiments/models.py:104
 msgid "time_slot:attribute:datetime"
 msgstr "Tijd & Datum"
 
-#: experiments/models.py:58
+#: experiments/models.py:108
 msgid "time_slot:attribute:max_places"
 msgstr "Max plaatsen"
 
@@ -81,3 +105,15 @@ msgstr "Slots"
 #: experiments/templates/experiments/index.html:34
 msgid "experiments:global:participants"
 msgstr "Participanten"
+
+#: experiments/templates/experiments/new.html:11
+msgid "experiments:new:header"
+msgstr "Nieuw experiment"
+
+#: experiments/templates/experiments/new.html:14
+msgid "experiments:new:info_text"
+msgstr "Hier kunt u een nieuw experiment aanmaken. Criteria kunt u op de volgende pagina instellen."
+
+#: experiments/templates/experiments/new.html:23
+msgid "experiments:globals:next_button"
+msgstr "Volgende >>"
