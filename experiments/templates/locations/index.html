@@ -1,0 +1,63 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <div class="float-right button button-colored">
+            <a href="{% url 'experiments:location_create' %}">
+                {% trans 'locations:home:create_location' %}
+            </a>
+        </div>
+        <h1>
+            {% trans 'locations:home:header' %}
+        </h1>
+        <p>
+            {% trans 'locations:home:info_text' %}
+        </p>
+        <table class="dt" width="100%" data-language="{% datatables_lang %}">
+            <thead>
+                <tr>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Location" "id" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Location" "name" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Location" "route_url" %}
+                    </th>
+                    <th>
+                        {% trans 'experiments:globals:actions' %}
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for location in object_list %}
+                    <tr>
+                        <td>
+                            {{ location.pk }}
+                        </td>
+                        <td>
+                            {{ location.name }}
+                        </td>
+                        <td>
+                            {{ location.route_url }}
+                        </td>
+                        <td>
+                            <a href="{% url 'experiments:location_update' location.pk %}">
+                                {% trans 'experiments:globals:edit' %}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br/>
+    </div>
+</div>
+{% endblock %}

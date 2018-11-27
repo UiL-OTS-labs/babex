@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-27 13:05+0000\n"
+"POT-Creation-Date: 2018-11-27 13:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -112,8 +112,51 @@ msgstr "Nieuw experiment"
 
 #: experiments/templates/experiments/new.html:14
 msgid "experiments:new:info_text"
-msgstr "Hier kunt u een nieuw experiment aanmaken. Criteria kunt u op de volgende pagina instellen."
+msgstr ""
+"Hier kunt u een nieuw experiment aanmaken. Criteria kunt u op de volgende "
+"pagina instellen."
 
 #: experiments/templates/experiments/new.html:23
 msgid "experiments:globals:next_button"
 msgstr "Volgende >>"
+
+#: experiments/templates/locations/edit.html:11
+msgid "locations:update:header"
+msgstr "Verander locatie"
+
+#: experiments/templates/locations/edit.html:14
+msgid "locations:update:info_text"
+msgstr " "
+
+#: experiments/templates/locations/edit.html:23
+#: experiments/templates/locations/new.html:23
+msgid "experiments:globals:save_button"
+msgstr "Opslaan"
+
+#: experiments/templates/locations/index.html:12
+msgid "locations:home:create_location"
+msgstr "Nieuwe locatie"
+
+#: experiments/templates/locations/index.html:16
+msgid "locations:home:header"
+msgstr "Locaties"
+
+#: experiments/templates/locations/index.html:19
+msgid "locations:home:info_text"
+msgstr "<br/>"
+
+#: experiments/templates/locations/index.html:34
+msgid "experiments:globals:actions"
+msgstr "Acties"
+
+#: experiments/templates/locations/index.html:53
+msgid "experiments:globals:edit"
+msgstr "Aanpassen"
+
+#: experiments/templates/locations/new.html:11
+msgid "locations:new:header"
+msgstr "Nieuwe locatie"
+
+#: experiments/templates/locations/new.html:14
+msgid "locations:new:info_text"
+msgstr " "

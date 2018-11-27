@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-27 13:05+0000\n"
+"POT-Creation-Date: 2018-11-27 13:32+0000\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -112,8 +112,50 @@ msgstr "New Experiment"
 
 #: experiments/templates/experiments/new.html:14
 msgid "experiments:new:info_text"
-msgstr "You can create new experiments here. Criteria are set on the next page."
+msgstr ""
+"You can create new experiments here. Criteria are set on the next page."
 
 #: experiments/templates/experiments/new.html:23
 msgid "experiments:globals:next_button"
 msgstr "Next >>"
+
+#: experiments/templates/locations/edit.html:11
+msgid "locations:update:header"
+msgstr "Update Location"
+
+#: experiments/templates/locations/edit.html:14
+msgid "locations:update:info_text"
+msgstr " "
+
+#: experiments/templates/locations/edit.html:23
+#: experiments/templates/locations/new.html:23
+msgid "experiments:globals:save_button"
+msgstr "Save"
+
+#: experiments/templates/locations/index.html:12
+msgid "locations:home:create_location"
+msgstr "Create location"
+
+#: experiments/templates/locations/index.html:16
+msgid "locations:home:header"
+msgstr "Locations"
+
+#: experiments/templates/locations/index.html:19
+msgid "locations:home:info_text"
+msgstr "<br/>"
+
+#: experiments/templates/locations/index.html:34
+msgid "experiments:globals:actions"
+msgstr "Actions"
+
+#: experiments/templates/locations/index.html:53
+msgid "experiments:globals:edit"
+msgstr "Edit"
+
+#: experiments/templates/locations/new.html:11
+msgid "locations:new:header"
+msgstr "New Location"
+
+#: experiments/templates/locations/new.html:14
+msgid "locations:new:info_text"
+msgstr " "
