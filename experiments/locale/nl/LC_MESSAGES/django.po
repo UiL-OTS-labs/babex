@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-23 11:38+0000\n"
+"POT-Creation-Date: 2018-11-27 09:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,14 +18,66 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: experiments/templates/experiments/index.html:11
+#: experiments/models.py:9
+msgid "experiment:attribute:name"
+msgstr "Naam"
+
+#: experiments/models.py:13
+msgid "experiment:attribute:duration"
+msgstr "Tijdsduur"
+
+#: experiments/models.py:17
+msgid "experiment:attribute:compensation"
+msgstr "Compensatie"
+
+#: experiments/models.py:21
+msgid "experiment:attribute:additional_instructions"
+msgstr "Extra instructies"
+
+#: experiments/models.py:25
+msgid "experiment:attribute:location"
+msgstr "Locatie"
+
+#: experiments/models.py:29
+msgid "experiment:attribute:open"
+msgstr "Open voor participanten"
+
+#: experiments/models.py:33
+msgid "experiment:attribute:public"
+msgstr "Openbaar"
+
+#: experiments/models.py:37
+msgid "experiment:attribute:participants_visible"
+msgstr "Participanten zichtbaar"
+
+#: experiments/models.py:42
+msgid "experiment:attribute:excluded_experiments"
+msgstr "Buitengesloten experimenten"
+
+#: experiments/models.py:54
+msgid "time_slot:attribute:datetime"
+msgstr "Tijd & Datum"
+
+#: experiments/models.py:58
+msgid "time_slot:attribute:max_places"
+msgstr "Max plaatsen"
+
+#: experiments/templates/experiments/index.html:12
 msgid "experiments:home:create_experiment"
 msgstr "Nieuw experiment"
 
-#: experiments/templates/experiments/index.html:15
+#: experiments/templates/experiments/index.html:16
 msgid "experiments:home:header"
 msgstr "Experimenten"
 
-#: experiments/templates/experiments/index.html:18
+#: experiments/templates/experiments/index.html:19
 msgid "experiments:home:info_text"
 msgstr "<br/>"
+
+#: experiments/templates/experiments/index.html:31
+msgid "experiments:global:slots"
+msgstr "Slots"
+
+#: experiments/templates/experiments/index.html:34
+msgid "experiments:global:participants"
+msgstr "Participanten"

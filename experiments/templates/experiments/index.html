@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load transformat %}
 {% load datatables %}
+{% load get_field_name %}
 
 {% block content %}
 <div class="uu-inner-container">
@@ -21,25 +22,25 @@
             <thead>
                 <tr>
                     <th>
-                        Id
+                        {% get_verbose_field_name "experiments" "Experiment" "id" %}
                     </th>
                     <th>
-                        Name
+                        {% get_verbose_field_name "experiments" "Experiment" "name" %}
                     </th>
                     <th>
-                        Slots
+                        {% trans "experiments:global:slots" %}
                     </th>
                     <th>
-                        Participants
+                        {% trans "experiments:global:participants" %}
                     </th>
                     <th>
-                        Excl_exp
+                        {% get_verbose_field_name "experiments" "Experiment" "excluded_experiments" %}
                     </th>
                     <th>
-                        Status
+                        {% get_verbose_field_name "experiments" "Experiment" "open" %}
                     </th>
                     <th>
-                        Visibility
+                        {% get_verbose_field_name "experiments" "Experiment" "public" %}
                     </th>
                     <th>
                         Actions
@@ -57,7 +58,7 @@
                             {{ experiment.name }}
                         </td>
                         <td>
-                            0
+                            {{ experiment.timeslot_set.count }}
                         </td>
                         <td>
                             0
@@ -69,7 +70,7 @@
                             {{ experiment.open }}
                         </td>
                         <td>
-                            {{ experiment.visible }}
+                            {{ experiment.public }}
                         </td>
                         <td>
                             Nada!
