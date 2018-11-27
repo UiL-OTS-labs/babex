@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-27 13:32+0000\n"
+"POT-Creation-Date: 2018-11-27 14:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,63 +26,141 @@ msgstr "Naam"
 msgid "location:attribute:route_url"
 msgstr "Routebeschrijving URL"
 
-#: experiments/models.py:24
+#: experiments/models.py:27
 msgid "experiment:attribute:name"
 msgstr "Naam"
 
-#: experiments/models.py:28
+#: experiments/models.py:31
 msgid "experiment:attribute:duration"
 msgstr "Tijdsduur"
 
-#: experiments/models.py:32
+#: experiments/models.py:35
 msgid "experiment:attribute:compensation"
 msgstr "Compensatie"
 
-#: experiments/models.py:36
+#: experiments/models.py:39
 msgid "experiment:attribute:task_description"
 msgstr "Taak omschrijving"
 
-#: experiments/models.py:40
+#: experiments/models.py:43
 msgid "experiment:attribute:additional_instructions"
 msgstr "Extra instructies"
 
-#: experiments/models.py:45
+#: experiments/models.py:48
 msgid "experiment:attribute:location"
 msgstr "Locatie"
 
-#: experiments/models.py:51
+#: experiments/models.py:54
 msgid "experiment:attribute:default_max_places"
 msgstr "Standaard aantal plekken"
 
-#: experiments/models.py:56
+#: experiments/models.py:59
 msgid "experiment:attribute:open"
 msgstr "Open voor participanten"
 
-#: experiments/models.py:60
+#: experiments/models.py:63
 msgid "experiment:attribute:public"
 msgstr "Openbaar"
 
-#: experiments/models.py:64
+#: experiments/models.py:67
 msgid "experiment:attribute:participants_visible"
 msgstr "Participanten zichtbaar"
 
-#: experiments/models.py:69
+#: experiments/models.py:72
 msgid "experiment:attribute:excluded_experiments"
 msgstr "Buitengesloten experimenten"
 
-#: experiments/models.py:75
+#: experiments/models.py:78
 msgid "experiment:attribute:leader"
 msgstr "Proefleider"
 
-#: experiments/models.py:83
+#: experiments/models.py:86
 msgid "experiment:attribute:additional_leaders"
 msgstr "Extra proefleiders"
 
+#: experiments/models.py:98
+msgid "default_criteria:attribute:multilingual:yes"
+msgstr ""
+
+#: experiments/models.py:99
+msgid "default_criteria:attribute:multilingual:no"
+msgstr ""
+
+#: experiments/models.py:100 experiments/models.py:106
+#: experiments/models.py:112 experiments/models.py:118
+#: experiments/models.py:124
+msgid "experiments:globals:indifferent"
+msgstr "Maakt niet uit"
+
 #: experiments/models.py:104
+msgid "default_criteria:attribute:sex:male"
+msgstr "Man"
+
+#: experiments/models.py:105
+msgid "default_criteria:attribute:sex:female"
+msgstr "Vrouw"
+
+#: experiments/models.py:110
+msgid "default_criteria:attribute:handedness:lefthanded"
+msgstr "Links"
+
+#: experiments/models.py:111
+msgid "default_criteria:attribute:handedness:righthanded"
+msgstr "Rechts"
+
+#: experiments/models.py:116
+msgid "default_criteria:attribute:dyslexia:yes"
+msgstr "Ja"
+
+#: experiments/models.py:117
+msgid "default_criteria:attribute:dyslexia:no"
+msgstr "Nee"
+
+#: experiments/models.py:122
+msgid "default_criteria:attribute:social_status:student"
+msgstr "Student"
+
+#: experiments/models.py:123
+msgid "default_criteria:attribute:social_status:other"
+msgstr "Overig"
+
+#: experiments/models.py:133
+msgid "default_criteria:attribute:language"
+msgstr "Wat moet de moedertaal van de participant zijn?"
+
+#: experiments/models.py:138
+msgid "default_criteria:attribute:multilingual"
+msgstr "Moet de participant een of meerdere talen spreken?"
+
+#: experiments/models.py:144
+msgid "default_criteria:attribute:sex"
+msgstr "Moet de participant man of vrouw zijn?"
+
+#: experiments/models.py:150
+msgid "default_criteria:attribute:handedness"
+msgstr "Moet de participant links- of rechtshandig zijn?"
+
+#: experiments/models.py:156
+msgid "default_criteria:attribute:dyslexia"
+msgstr "Moet de participant dyslectisch zijn?"
+
+#: experiments/models.py:162
+msgid "default_criteria:attribute:social_status"
+msgstr "Wat moet de sociale status van de participant zijn?"
+
+#: experiments/models.py:168
+msgid "default_criteria:attribute:min_age"
+msgstr "Wat moet de ondergrens van de participant's leeftijd zijn?"
+
+#: experiments/models.py:173
+msgid "default_criteria:attribute:max_age"
+msgstr "Wat moet de bovengrens van de participant's leeftijd zijn?"
+
+#: experiments/models.py:186
 msgid "time_slot:attribute:datetime"
 msgstr "Tijd & Datum"
 
-#: experiments/models.py:108
+#: experiments/models.py:190
 msgid "time_slot:attribute:max_places"
 msgstr "Max plaatsen"
 

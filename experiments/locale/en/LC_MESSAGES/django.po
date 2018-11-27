@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-27 13:32+0000\n"
+"POT-Creation-Date: 2018-11-27 14:14+0000\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -26,63 +26,141 @@ msgstr "Name"
 msgid "location:attribute:route_url"
 msgstr "Routedescription URL"
 
-#: experiments/models.py:24
+#: experiments/models.py:27
 msgid "experiment:attribute:name"
 msgstr "Name"
 
-#: experiments/models.py:28
+#: experiments/models.py:31
 msgid "experiment:attribute:duration"
 msgstr "Duration"
 
-#: experiments/models.py:32
+#: experiments/models.py:35
 msgid "experiment:attribute:compensation"
 msgstr "Compensation"
 
-#: experiments/models.py:36
+#: experiments/models.py:39
 msgid "experiment:attribute:task_description"
 msgstr "Task description"
 
-#: experiments/models.py:40
+#: experiments/models.py:43
 msgid "experiment:attribute:additional_instructions"
 msgstr "Additional Instructions"
 
-#: experiments/models.py:45
+#: experiments/models.py:48
 msgid "experiment:attribute:location"
 msgstr "Location"
 
-#: experiments/models.py:51
+#: experiments/models.py:54
 msgid "experiment:attribute:default_max_places"
 msgstr "Default number of places"
 
-#: experiments/models.py:56
+#: experiments/models.py:59
 msgid "experiment:attribute:open"
 msgstr "Open"
 
-#: experiments/models.py:60
+#: experiments/models.py:63
 msgid "experiment:attribute:public"
 msgstr "Public"
 
-#: experiments/models.py:64
+#: experiments/models.py:67
 msgid "experiment:attribute:participants_visible"
 msgstr "Participants Visible"
 
-#: experiments/models.py:69
+#: experiments/models.py:72
 msgid "experiment:attribute:excluded_experiments"
 msgstr "Excluded experiment"
 
-#: experiments/models.py:75
+#: experiments/models.py:78
 msgid "experiment:attribute:leader"
 msgstr "Leader"
 
-#: experiments/models.py:83
+#: experiments/models.py:86
 msgid "experiment:attribute:additional_leaders"
 msgstr "Additional leaders"
 
+#: experiments/models.py:98
+msgid "default_criteria:attribute:multilingual:yes"
+msgstr "One"
+
+#: experiments/models.py:99
+msgid "default_criteria:attribute:multilingual:no"
+msgstr "Many"
+
+#: experiments/models.py:100 experiments/models.py:106
+#: experiments/models.py:112 experiments/models.py:118
+#: experiments/models.py:124
+msgid "experiments:globals:indifferent"
+msgstr "Indifferent"
+
 #: experiments/models.py:104
+msgid "default_criteria:attribute:sex:male"
+msgstr "Male"
+
+#: experiments/models.py:105
+msgid "default_criteria:attribute:sex:female"
+msgstr "Female"
+
+#: experiments/models.py:110
+msgid "default_criteria:attribute:handedness:lefthanded"
+msgstr "Left"
+
+#: experiments/models.py:111
+msgid "default_criteria:attribute:handedness:righthanded"
+msgstr "Right"
+
+#: experiments/models.py:116
+msgid "default_criteria:attribute:dyslexia:yes"
+msgstr "Yes"
+
+#: experiments/models.py:117
+msgid "default_criteria:attribute:dyslexia:no"
+msgstr "No"
+
+#: experiments/models.py:122
+msgid "default_criteria:attribute:social_status:student"
+msgstr "Student"
+
+#: experiments/models.py:123
+msgid "default_criteria:attribute:social_status:other"
+msgstr "Other"
+
+#: experiments/models.py:133
+msgid "default_criteria:attribute:language"
+msgstr "What should the participant's language be?"
+
+#: experiments/models.py:138
+msgid "default_criteria:attribute:multilingual"
+msgstr "Does the participant have to speak one or many languages? "
+
+#: experiments/models.py:144
+msgid "default_criteria:attribute:sex"
+msgstr "Should the participant be Male or Female?"
+
+#: experiments/models.py:150
+msgid "default_criteria:attribute:handedness"
+msgstr "Should the participant be left- or righthanded? "
+
+#: experiments/models.py:156
+msgid "default_criteria:attribute:dyslexia"
+msgstr "Should the participant be dyslectic?"
+
+#: experiments/models.py:162
+msgid "default_criteria:attribute:social_status"
+msgstr "What should the social role of the participant be? "
+
+#: experiments/models.py:168
+msgid "default_criteria:attribute:min_age"
+msgstr "What should the lower bound of the participant's age?"
+
+#: experiments/models.py:173
+msgid "default_criteria:attribute:max_age"
+msgstr "What should the upper bound of the participant's age?"
+
+#: experiments/models.py:186
 msgid "time_slot:attribute:datetime"
 msgstr "Date & Time"
 
-#: experiments/models.py:108
+#: experiments/models.py:190
 msgid "time_slot:attribute:max_places"
 msgstr "Max places"
 
