@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import  MinValueValidator
 
 
 class Experiment(models.Model):
@@ -29,4 +30,6 @@ class TimeSlot(models.Model):
 
     datetime = models.DateTimeField()
 
-    max_places = models.IntegerField()
+    max_places = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(1)]
+    )
