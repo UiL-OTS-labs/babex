@@ -21,3 +21,12 @@ class Experiment(models.Model):
     participants_visible = models.BooleanField()
 
     excluded_experiments = models.ManyToManyField("self")
+
+
+class TimeSlot(models.Model):
+
+    experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE)
+
+    datetime = models.DateTimeField()
+
+    max_places = models.IntegerField()
