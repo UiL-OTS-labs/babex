@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Experiment, Location
+from ..models import Experiment
 
 
 class CreateExperimentForm(forms.ModelForm):
@@ -13,11 +13,3 @@ class CreateExperimentForm(forms.ModelForm):
             'compensation': forms.TextInput,
         }
 
-
-class CreateLocationForm(forms.ModelForm):
-    class Meta:
-        model = Location
-        fields = '__all__'
-        widgets = {
-            'name': forms.TextInput,
-        }
