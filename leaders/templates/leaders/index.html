@@ -7,7 +7,7 @@
 <div class="uu-inner-container">
     <div class="col-12">
         <div class="float-right button button-colored">
-            <a href="#">
+            <a href="{% url 'leaders:create' %}">
                 {% trans 'leaders:home:create_leader' %}
             </a>
         </div>
@@ -33,6 +33,9 @@
                         Phonenumber
                     </th>
                     <th>
+                        Active
+                    </th>
+                    <th>
                         Actions
                     </th>
                 </tr>
@@ -54,7 +57,12 @@
                             {{ leader.phonenumber }}
                         </td>
                         <td>
-                            Nada!
+                            {{ leader.api_user.is_active }}
+                        </td>
+                        <td>
+                            <a href="{% url 'leaders:update' leader.pk %}" class="icon-update">
+                                
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}

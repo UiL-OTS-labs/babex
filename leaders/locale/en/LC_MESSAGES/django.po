@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-23 11:38+0000\n"
+"POT-Creation-Date: 2018-11-29 12:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,69 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: leaders/forms.py:14
+msgid "leader:form:password:error:not_equal"
+msgstr "The supplied passwords don't match!"
+
+#: leaders/forms.py:27 leaders/forms.py:94
+msgid "leader:form:name"
+msgstr "(Full) name"
+
+#: leaders/forms.py:31 leaders/forms.py:98
+msgid "leader:form:email"
+msgstr "E-mail address"
+
+#: leaders/forms.py:35 leaders/forms.py:102
+msgid "leader:form:phonenumber"
+msgstr "Phone number"
+
+#: leaders/forms.py:39 leaders/forms.py:114
+msgid "leader:form:password"
+msgstr "Password"
+
+#: leaders/forms.py:40 leaders/forms.py:115
+msgid "leader:form:password:help_text"
+msgstr "You can leave this empty if you don't want to set/change a password"
+
+#: leaders/forms.py:46 leaders/forms.py:121
+msgid "leader:form:confirm_password:label"
+msgstr "Confirm password"
+
+#: leaders/forms.py:47 leaders/forms.py:122
+msgid "leader:form:confirm_password:help_text"
+msgstr "You can leave this empty if you don't want to set/change a password"
+
+#: leaders/forms.py:53
+msgid "leaders:forms:create_form:notify_user:label"
+msgstr "Notify user"
+
+#: leaders/forms.py:54
+msgid "leaders:forms:create_form:notify_user:help_text"
+msgstr ""
+"If checked, the system will sent out an email to this user informing them of "
+"their new account. If no password was set, this email will contain "
+"instructions on how to set a password on their own."
+
+#: leaders/forms.py:68 leaders/forms.py:138
+msgid "leader:form:email:error:user_exists"
+msgstr "There already is a leader with this email address!"
+
+#: leaders/forms.py:89
+msgid "leader:form:active"
+msgstr "Account active"
+
+#: leaders/forms.py:106
+msgid "leaders:forms:create_form:keep_current_password:label"
+msgstr "Keep current password"
+
+#: leaders/forms.py:108
+msgid "leaders:forms:create_form:keep_current_password:help_text"
+msgstr "If checked, no changes will be made to the user's password."
+
+#: leaders/forms.py:153
+msgid "leader:form:password:error:empty"
+msgstr "This field cannot be empty when 'Keep current password' is unchecked!"
 
 #: leaders/templates/leaders/index.html:11
 msgid "leaders:home:create_leader"
@@ -29,3 +92,32 @@ msgstr "Leaders"
 #: leaders/templates/leaders/index.html:18
 msgid "leaders:home:info_text"
 msgstr "<br/>"
+
+#: leaders/templates/leaders/new.html:11
+msgid "leaders:new:header"
+msgstr "New leader"
+
+#: leaders/templates/leaders/new.html:14
+msgid "leaders:new:info_text"
+msgstr "<br/>"
+
+#: leaders/templates/leaders/new.html:22
+#: leaders/templates/leaders/update.html:22
+msgid "leaders:globals:save_button"
+msgstr "Save"
+
+#: leaders/templates/leaders/update.html:11
+msgid "leaders:update:header"
+msgstr "Update leader '{}'"
+
+#: leaders/templates/leaders/update.html:14
+msgid "leaders:update:info_text"
+msgstr "<br/>"
+
+#: leaders/views.py:22
+msgid "leaders:create:success_message"
+msgstr "Leader successfully created!"
+
+#: leaders/views.py:49
+msgid "leaders:update:success_message"
+msgstr "Leader successfully updated!"

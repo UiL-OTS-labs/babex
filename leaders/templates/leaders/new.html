@@ -1,0 +1,29 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <h1>
+            {% trans 'leaders:new:header' %}
+        </h1>
+        <p>
+            {% trans 'leaders:new:info_text' %}
+        </p>
+        <form method="post">
+            {% csrf_token %}
+            <table width="100%">
+                {{ form.as_table }}
+            </table>
+            <div class="float-right">
+                <button type="submit">{% trans 'leaders:globals:save_button' %}</button>
+            </div>
+        </form>
+        <br/>
+        <br/>
+    </div>
+</div>
+{% endblock %}

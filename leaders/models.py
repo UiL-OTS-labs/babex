@@ -10,3 +10,6 @@ class Leader(models.Model):
     phonenumber = models.TextField()
 
     api_user = models.OneToOneField(ApiUser, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
