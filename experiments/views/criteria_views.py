@@ -7,7 +7,7 @@ from ..models import DefaultCriteria
 from ..forms import DefaultCriteriaForm
 
 
-class UpdateDefaultCriteriaView(braces.LoginRequiredMixin, generic.UpdateView):
+class DefaultCriteriaUpdateView(braces.LoginRequiredMixin, generic.UpdateView):
     template_name = 'criteria/update_default.html'
     form_class = DefaultCriteriaForm
     model = DefaultCriteria

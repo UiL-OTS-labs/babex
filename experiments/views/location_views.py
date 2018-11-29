@@ -11,7 +11,7 @@ class LocationHomeView(braces.LoginRequiredMixin, generic.ListView):
     model = Location
 
 
-class CreateLocationView(braces.LoginRequiredMixin, generic.CreateView):
+class LocationCreateView(braces.LoginRequiredMixin, generic.CreateView):
     template_name = 'locations/new.html'
     form_class = CreateLocationForm
 

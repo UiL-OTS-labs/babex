@@ -11,7 +11,7 @@ class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
     model = Experiment
 
 
-class CreateExperimentView(braces.LoginRequiredMixin, generic.CreateView):
+class ExperimentCreateView(braces.LoginRequiredMixin, generic.CreateView):
     template_name = 'experiments/new.html'
     form_class = CreateExperimentForm
 
