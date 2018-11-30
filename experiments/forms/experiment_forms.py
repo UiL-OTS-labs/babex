@@ -3,7 +3,7 @@ from django import forms
 from ..models import Experiment
 
 
-class CreateExperimentForm(forms.ModelForm):
+class ExperimentForm(forms.ModelForm):
     class Meta:
         model = Experiment
         fields = '__all__'

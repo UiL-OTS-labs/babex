@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-30 09:09+0000\n"
+"POT-Creation-Date: 2018-11-30 10:32+0000\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -243,6 +243,30 @@ msgstr "Slots"
 msgid "experiments:global:participants"
 msgstr "Participants"
 
+#: experiments/templates/experiments/index.html:76
+#, fuzzy
+#| msgid "experiments:home:header"
+msgid "experiments:home:switch_open:title"
+msgstr "Experiments"
+
+#: experiments/templates/experiments/index.html:85
+#, fuzzy
+#| msgid "experiments:home:info_text"
+msgid "experiments:home:switch_public:title"
+msgstr "<br/>"
+
+#: experiments/templates/experiments/index.html:94
+#, fuzzy
+#| msgid "experiments:home:header"
+msgid "experiments:home:switch_visible:title"
+msgstr "Experiments"
+
+#: experiments/templates/experiments/index.html:103
+#, fuzzy
+#| msgid "experiments:home:create_experiment"
+msgid "experiments:home:edit_experiment:title"
+msgstr "Create experiment"
+
 #: experiments/templates/experiments/new.html:11
 msgid "experiments:new:header"
 msgstr "New Experiment"
@@ -292,3 +316,40 @@ msgstr " "
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr ""
+
+#: experiments/views/experiment_views.py:21
+#: experiments/views/experiment_views.py:31
+#, fuzzy
+#| msgid "experiments:home:create_experiment"
+msgid "experiments:message:create:success"
+msgstr "Create experiment"
+
+#: experiments/views/experiment_views.py:46
+msgid "experiments:message:switch_open:closed"
+msgstr ""
+
+#: experiments/views/experiment_views.py:49
+#, fuzzy
+#| msgid "experiment:attribute:open"
+msgid "experiments:message:switch_open:opened"
+msgstr "Open"
+
+#: experiments/views/experiment_views.py:67
+msgid "experiments:message:switch_public:closed"
+msgstr ""
+
+#: experiments/views/experiment_views.py:70
+msgid "experiments:message:switch_public:opened"
+msgstr ""
+
+#: experiments/views/experiment_views.py:89
+#, fuzzy
+#| msgid "experiment:attribute:participants_visible"
+msgid "experiments:message:switch_visible:visible"
+msgstr "Participants Visible"
+
+#: experiments/views/experiment_views.py:94
+#, fuzzy
+#| msgid "experiment:attribute:participants_visible"
+msgid "experiments:message:switch_visible:invisible"
+msgstr "Participants Visible"
