@@ -68,7 +68,11 @@
                             {{ comment.comment }}
                         </td>
                         <td>
-                            Nada!
+                            <a  href="{% url 'comments:delete' comment.pk %}"
+                                title="{% trans 'comments:home:delete' %}"
+                                class="icon-delete">
+                                
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}
