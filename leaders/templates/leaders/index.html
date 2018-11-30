@@ -57,7 +57,7 @@
                             {{ leader.phonenumber }}
                         </td>
                         <td>
-                            {{ leader.api_user.is_active }}
+                            {{ leader.is_active_leader }}
                         </td>
                         <td>
                             <a href="{% url 'leaders:update' leader.pk %}" class="icon-update">
