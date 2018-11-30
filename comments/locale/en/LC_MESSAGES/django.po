@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-23 11:38+0000\n"
+"POT-Creation-Date: 2018-11-30 13:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,10 +17,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: comments/templates/comments/index.html:10
+
+#: comments/models.py:14
+msgid "comment:attribute:participant"
+msgstr "Participant"
+
+#: comments/models.py:20
+msgid "comment:attribute:leader"
+msgstr "Added by"
+
+#: comments/models.py:26
+msgid "comment:attribute:experiment"
+msgstr "Experiment"
+
+#: comments/models.py:30
+msgid "comment:attribute:comment"
+msgstr "Comment"
+
+#: comments/templates/comments/index.html:11
 msgid "comments:home:header"
 msgstr "Comments"
 
-#: comments/templates/comments/index.html:13
+#: comments/templates/comments/index.html:14
 msgid "comments:home:info_text"
 msgstr "<br/>"
+
+#: comments/templates/comments/index.html:38
+msgid "comments:home:table:actions"
+msgstr "Actions"

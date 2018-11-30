@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load transformat %}
 {% load datatables %}
+{% load get_field_name %}
 
 {% block content %}
 <div class="uu-inner-container">
@@ -16,25 +17,25 @@
             <thead>
                 <tr>
                     <th>
-                        Id
+                        {% get_verbose_field_name "comments" "Comment" "id" %}
                     </th>
                     <th>
-                        Participant
+                        {% get_verbose_field_name "comments" "Comment" "participant" %}
                     </th>
                     <th>
-                        Participant Email
+                        {% get_verbose_field_name "participants" "Participant" "email" %}
                     </th>
                     <th>
-                        Added by
+                        {% get_verbose_field_name "comments" "Comment" "leader" %}
                     </th>
                     <th>
-                        Experiment
+                        {% get_verbose_field_name "comments" "Comment" "experiment" %}
                     </th>
                     <th>
-                        Comment
+                        {% get_verbose_field_name "comments" "Comment" "comment" %}
                     </th>
                     <th>
-                        Actions
+                        {% trans 'comments:home:table:actions' %}
                     </th>
                 </tr>
             </thead>
