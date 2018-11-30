@@ -4,6 +4,7 @@ from django.urls import reverse
 
 Menu.add_item("home", MenuItem(_('mainmenu:home'),
                                reverse('main:home'),
+                               exact_url=True
                                ))
 
 Menu.add_item("main", MenuItem(_('mainmenu:experiments'),
