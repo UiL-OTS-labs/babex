@@ -29,3 +29,9 @@ class Comment(models.Model):
     comment = models.TextField(
         verbose_name=_('comment:attribute:comment'),
     )
+
+    datetime = models.DateTimeField(
+        verbose_name=_('comment:attribute:datetime'),
+        blank=True,
+        null=True,
+    )

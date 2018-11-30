@@ -32,6 +32,9 @@
                         {% get_verbose_field_name "comments" "Comment" "experiment" %}
                     </th>
                     <th>
+                        {% get_verbose_field_name "comments" "Comment" "datetime" %}
+                    </th>
+                    <th>
                         {% get_verbose_field_name "comments" "Comment" "comment" %}
                     </th>
                     <th>
@@ -57,6 +60,9 @@
                         </td>
                         <td>
                             {{ comment.experiment }}
+                        </td>
+                        <td>
+                            {{ comment.datetime|date:"Y-m-d H:i" }}
                         </td>
                         <td>
                             {{ comment.comment }}
