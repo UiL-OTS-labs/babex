@@ -56,8 +56,8 @@
                         <td>
                             {{ leader.phonenumber }}
                         </td>
-                        <td>
-                            {{ leader.is_active_leader }}
+                        <td class="icon-yesno">
+                            {{ leader.is_active_leader|yesno:"," }}
                         </td>
                         <td>
                             <a href="{% url 'leaders:update' leader.pk %}" class="icon-update">
