@@ -52,25 +52,34 @@ class Experiment(models.Model):
 
     default_max_places = models.PositiveSmallIntegerField(
         _('experiment:attribute:default_max_places'),
-        validators=[MinValueValidator(1)]
+        validators=[MinValueValidator(1)],
+        help_text=_('experiment:attribute:default_max_places:help_text'),
+        default=1,
     )
 
     open = models.BooleanField(
-        _('experiment:attribute:open')
+        _('experiment:attribute:open'),
+        default=False,
+        help_text=_('experiment:attribute:open:help_text'),
     )
 
     public = models.BooleanField(
-        _('experiment:attribute:public')
+        _('experiment:attribute:public'),
+        default=True,
+        help_text=_('experiment:attribute:public:help_text'),
     )
 
     participants_visible = models.BooleanField(
-        _('experiment:attribute:participants_visible')
+        _('experiment:attribute:participants_visible'),
+        default=True,
+        help_text=_('experiment:attribute:participants_visible:help_text'),
     )
 
     excluded_experiments = models.ManyToManyField(
         "self",
         verbose_name=_('experiment:attribute:excluded_experiments'),
-        blank=True
+        blank=True,
+        help_text=_('experiment:attribute:excluded_experiments:help_text'),
     )
 
     leader = models.ForeignKey(
@@ -78,14 +87,16 @@ class Experiment(models.Model):
         verbose_name=_("experiment:attribute:leader"),
         on_delete=models.SET_DEFAULT,
         related_name='experiments',
-        default=1
+        default=1,
+        help_text=_("experiment:attribute:leader:help_text"),
     )
 
     additional_leaders = models.ManyToManyField(
         Leader,
         verbose_name=_("experiment:attribute:additional_leaders"),
         related_name='secondary_experiments',
-        blank=True
+        blank=True,
+        help_text=_("experiment:attribute:additional_leaders:help_text"),
     )
 
     def __str__(self):

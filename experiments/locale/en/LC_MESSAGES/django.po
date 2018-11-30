@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-30 08:00+0000\n"
+"POT-Creation-Date: 2018-11-30 09:09+0000\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -54,113 +54,158 @@ msgstr "Location"
 msgid "experiment:attribute:default_max_places"
 msgstr "Default number of places"
 
-#: experiments/models.py:59
+#: experiments/models.py:56
+msgid "experiment:attribute:default_max_places:help_text"
+msgstr ""
+"Determines the default number of places for the timeslots. Can be overridden "
+"on a per-slot basis."
+
+#: experiments/models.py:61
 msgid "experiment:attribute:open"
 msgstr "Open"
 
 #: experiments/models.py:63
+msgid "experiment:attribute:open:help_text"
+msgstr "Determines if the experiment is open for new participants."
+
+#: experiments/models.py:67
 msgid "experiment:attribute:public"
 msgstr "Public"
 
-#: experiments/models.py:67
+#: experiments/models.py:69
+msgid "experiment:attribute:public:help_text"
+msgstr ""
+"Determines if the experiment should be advertised on the front page. If not, "
+"participants will only be able to find it through a direct link. Meant to be "
+"used for follow-up experiments where only participants who have participated "
+"in the original experiment should register."
+
+#: experiments/models.py:73
 msgid "experiment:attribute:participants_visible"
 msgstr "Participants Visible"
 
-#: experiments/models.py:72
+#: experiments/models.py:75
+msgid "experiment:attribute:participants_visible:help_text"
+msgstr ""
+"If unchecked, participant data will be hidden from the experiment leader(s)."
+
+#: experiments/models.py:80
 msgid "experiment:attribute:excluded_experiments"
 msgstr "Excluded experiment"
 
-#: experiments/models.py:78
+#: experiments/models.py:82
+msgid "experiment:attribute:excluded_experiments:help_text"
+msgstr ""
+"Any experiments that should exclude a participant if they have been a "
+"participant in said experiment. <br/>You can type a name in the field to "
+"search through the list. Once selected, the experiment should show up in the "
+"field as a box."
+
+#: experiments/models.py:87
 msgid "experiment:attribute:leader"
 msgstr "Leader"
 
-#: experiments/models.py:86
+#: experiments/models.py:91
+msgid "experiment:attribute:leader:help_text"
+msgstr ""
+"The main experiment leader, who will be displayed as the contact on the "
+"experiment page."
+
+#: experiments/models.py:96
 msgid "experiment:attribute:additional_leaders"
 msgstr "Additional leaders"
 
-#: experiments/models.py:98
+#: experiments/models.py:99
+msgid "experiment:attribute:additional_leaders:help_text"
+msgstr ""
+"Any additional leaders for this experiment. They will be able to login and "
+"see appointments, like the main leader. <br/>You can type in a name to "
+"search through the list. Once selected, the leader should show up in the "
+"field as a box."
+
+#: experiments/models.py:109
 msgid "default_criteria:attribute:multilingual:yes"
 msgstr "One"
 
-#: experiments/models.py:99
+#: experiments/models.py:110
 msgid "default_criteria:attribute:multilingual:no"
 msgstr "Many"
 
-#: experiments/models.py:100 experiments/models.py:106
-#: experiments/models.py:112 experiments/models.py:118
-#: experiments/models.py:124
+#: experiments/models.py:111 experiments/models.py:117
+#: experiments/models.py:123 experiments/models.py:129
+#: experiments/models.py:135
 msgid "experiments:globals:indifferent"
 msgstr "Indifferent"
 
-#: experiments/models.py:104
+#: experiments/models.py:115
 msgid "default_criteria:attribute:sex:male"
 msgstr "Male"
 
-#: experiments/models.py:105
+#: experiments/models.py:116
 msgid "default_criteria:attribute:sex:female"
 msgstr "Female"
 
-#: experiments/models.py:110
+#: experiments/models.py:121
 msgid "default_criteria:attribute:handedness:lefthanded"
 msgstr "Left"
 
-#: experiments/models.py:111
+#: experiments/models.py:122
 msgid "default_criteria:attribute:handedness:righthanded"
 msgstr "Right"
 
-#: experiments/models.py:116
+#: experiments/models.py:127
 msgid "default_criteria:attribute:dyslexia:yes"
 msgstr "Yes"
 
-#: experiments/models.py:117
+#: experiments/models.py:128
 msgid "default_criteria:attribute:dyslexia:no"
 msgstr "No"
 
-#: experiments/models.py:122
+#: experiments/models.py:133
 msgid "default_criteria:attribute:social_status:student"
 msgstr "Student"
 
-#: experiments/models.py:123
+#: experiments/models.py:134
 msgid "default_criteria:attribute:social_status:other"
 msgstr "Other"
 
-#: experiments/models.py:133
+#: experiments/models.py:144
 msgid "default_criteria:attribute:language"
 msgstr "What should the participant's language be?"
 
-#: experiments/models.py:138
+#: experiments/models.py:149
 msgid "default_criteria:attribute:multilingual"
 msgstr "Does the participant have to speak one or many languages? "
 
-#: experiments/models.py:146
+#: experiments/models.py:157
 msgid "default_criteria:attribute:sex"
 msgstr "Should the participant be Male or Female?"
 
-#: experiments/models.py:154
+#: experiments/models.py:165
 msgid "default_criteria:attribute:handedness"
 msgstr "Should the participant be left- or righthanded? "
 
-#: experiments/models.py:162
+#: experiments/models.py:173
 msgid "default_criteria:attribute:dyslexia"
 msgstr "Should the participant be dyslectic?"
 
-#: experiments/models.py:170
+#: experiments/models.py:181
 msgid "default_criteria:attribute:social_status"
 msgstr "What should the social role of the participant be? "
 
-#: experiments/models.py:178
+#: experiments/models.py:189
 msgid "default_criteria:attribute:min_age"
 msgstr "What should the lower bound of the participant's age?"
 
-#: experiments/models.py:184
+#: experiments/models.py:195
 msgid "default_criteria:attribute:max_age"
 msgstr "What should the upper bound of the participant's age?"
 
-#: experiments/models.py:198
+#: experiments/models.py:209
 msgid "time_slot:attribute:datetime"
 msgstr "Date & Time"
 
-#: experiments/models.py:202
+#: experiments/models.py:213
 msgid "time_slot:attribute:max_places"
 msgstr "Max places"
 
