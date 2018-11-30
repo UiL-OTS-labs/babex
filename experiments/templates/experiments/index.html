@@ -69,17 +69,90 @@
                         <td>
                             {{ experiment.excluded_experiments.count }}
                         </td>
-                        <td class="icon-yesno">
-                            {{ experiment.open|yesno:"," }}
+                        <td>
+                            <a
+                                href="{% url 'experiments:switch_open' experiment.pk %}"
+                                class="icon-yesno"
+                                title="{% trans 'experiments:home:switch_open:title' %}"
+                            >
+                                {{ experiment.open|yesno:"," }}
+                            </a>
                         </td>
                         <td class="icon-yesno">
-                            {{ experiment.public|yesno:"," }}
+                            <a
+                                href="{% url 'experiments:switch_public' experiment.pk %}"
+                                class="icon-yesno"
+                                title="{% trans 'experiments:home:switch_public:title' %}"
+                            >
+                                {{ experiment.public|yesno:"," }}
+                            </a>
                         </td>
                         <td class="icon-yesno">
-                            {{ experiment.participants_visible|yesno:"," }}
+                            <a
+                                href="{% url 'experiments:switch_visible' experiment.pk %}"
+                                class="icon-yesno"
+                                title="{% trans 'experiments:home:switch_visible:title' %}"
+                            >
+                                {{ experiment.participants_visible|yesno:"," }}
+                            </a>
                         </td>
                         <td>
-                            Nada!
+                            <a
+                                href="#"
+                                class="icon-timeslots"
+                                title="{% trans 'experiments:home:edit_timeslots:title' %}"
+                            >
+                                
+                            </a>
+                            <a
+                                href="{% url 'experiments:update' experiment.pk %}"
+                                class="icon-update"
+                                title="{% trans 'experiments:home:edit_experiment:title' %}"
+                            >
+                                
+                            </a>
+                            <a
+                                href="{% url 'experiments:default_criteria' experiment.pk %}"
+                                class="icon-update"
+                                title="{% trans 'experiments:home:edit_default_criteria:title' %}"
+                            >
+                                 
+                            </a>
+                            <a
+                                href="#"
+                                class="icon-update"
+                                title="{% trans 'experiments:home:edit_specific_criteria:title' %}"
+                            >
+                                 
+                            </a>
+                            <a
+                                href="#"
+                                class="icon-exclude"
+                                title="{% trans 'experiments:home:exclude_experiments:title' %}"
+                            >
+                                 
+                            </a>
+                            <a
+                                href="#"
+                                class="icon-invite"
+                                title="{% trans 'experiments:home:invite:title' %}"
+                            >
+                                
+                            </a>
+                            <a
+                                href="#"
+                                class="icon-participants"
+                                title="{% trans 'experiments:home:participants:title' %}"
+                            >
+                                
+                            </a>
+                            <a
+                                href="#"
+                                class="icon-delete"
+                                title="{% trans 'experiments:home:delete:title' %}"
+                            >
+                                
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}
