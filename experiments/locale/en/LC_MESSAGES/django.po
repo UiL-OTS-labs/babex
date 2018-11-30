@@ -219,7 +219,7 @@ msgstr "Max places"
 
 #: experiments/templates/criteria/update_default.html:12
 msgid "experiments:new_default_criteria:header"
-msgstr "Criteria for {}"
+msgstr "Default criteria for {}"
 
 #: experiments/templates/criteria/update_default.html:15
 msgid "experiments:new_default_criteria:info_text"
