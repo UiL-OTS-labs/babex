@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-27 15:49+0000\n"
+"POT-Creation-Date: 2018-11-30 08:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -236,10 +236,6 @@ msgstr "<br/>"
 msgid "experiments:globals:actions"
 msgstr "Acties"
 
-#: experiments/templates/locations/index.html:53
-msgid "experiments:globals:edit"
-msgstr "Aanpassen"
-
 #: experiments/templates/locations/new.html:11
 msgid "locations:new:header"
 msgstr "Nieuwe locatie"
@@ -252,8 +248,3 @@ msgstr " "
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr ""
-
-#, fuzzy
-#~| msgid "experiments:globals:save_button"
-#~ msgid "experiments:globals:save_buttons"
-#~ msgstr "Opslaan"

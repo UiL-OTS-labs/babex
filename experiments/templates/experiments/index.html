@@ -43,6 +43,9 @@
                         {% get_verbose_field_name "experiments" "Experiment" "public" %}
                     </th>
                     <th>
+                        {% get_verbose_field_name "experiments" "Experiment" "participants_visible" %}
+                    </th>
+                    <th>
                         Actions
                     </th>
                 </tr>
@@ -66,11 +69,14 @@
                         <td>
                             {{ experiment.excluded_experiments.count }}
                         </td>
-                        <td>
-                            {{ experiment.open }}
+                        <td class="icon-yesno">
+                            {{ experiment.open|yesno:"," }}
                         </td>
-                        <td>
-                            {{ experiment.public }}
+                        <td class="icon-yesno">
+                            {{ experiment.public|yesno:"," }}
+                        </td>
+                        <td class="icon-yesno">
+                            {{ experiment.participants_visible|yesno:"," }}
                         </td>
                         <td>
                             Nada!

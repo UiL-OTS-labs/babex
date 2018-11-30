@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-29 12:00+0000\n"
+"POT-Creation-Date: 2018-11-30 08:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -110,15 +110,15 @@ msgid "leaders:new:info_text"
 msgstr "<br/>"
 
 #: leaders/templates/leaders/new.html:22
-#: leaders/templates/leaders/update.html:22
+#: leaders/templates/leaders/update.html:31
 msgid "leaders:globals:save_button"
 msgstr "Opslaan"
 
-#: leaders/templates/leaders/update.html:11
+#: leaders/templates/leaders/update.html:19
 msgid "leaders:update:header"
 msgstr "Proefleider '{}' aanpassen"
 
-#: leaders/templates/leaders/update.html:14
+#: leaders/templates/leaders/update.html:22
 msgid "leaders:update:info_text"
 msgstr "<br/>"
 
