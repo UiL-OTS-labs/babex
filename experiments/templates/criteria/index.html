@@ -1,0 +1,75 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <div class="float-right button button-colored">
+            <a href="#">
+                {% trans 'criteria:home:create_criterium' %}
+            </a>
+        </div>
+        <h1>
+            {% trans 'criteria:home:header' %}
+        </h1>
+        <p>
+            {% trans 'criteria:home:info_text' %}
+        </p>
+        <table class="dt" width="100%" data-language="{% datatables_lang %}">
+            <thead>
+                <tr>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Criterium" "id" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Criterium" "name_form" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Criterium" "values" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Criterium" "correct_value" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Criterium" "message_failed" %}
+                    </th>
+                    <th>
+                        {% trans 'experiments:globals:actions' %}
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for criterium in object_list %}
+                    <tr>
+                        <td>
+                            {{ criterium.pk }}
+                        </td>
+                        <td>
+                            {{ criterium.name_natural }}
+                        </td>
+                        <td>
+                            {{ criterium.values }}
+                        </td>
+                        <td>
+                            {{ criterium.correct_value }}
+                        </td>
+                        <td>
+                            {{ criterium.message_failed }}
+                        </td>
+                        <td>
+                            <a href="#" class="icon-update">
+                                
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br/>
+    </div>
+</div>
+{% endblock %}

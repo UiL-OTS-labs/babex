@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-23 11:38+0000\n"
+"POT-Creation-Date: 2018-11-30 15:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,27 +22,35 @@ msgstr ""
 msgid "mainmenu:home"
 msgstr "Home"
 
-#: main/menus.py:9
+#: main/menus.py:10
 msgid "mainmenu:experiments"
 msgstr "Experiments"
 
-#: main/menus.py:13
+#: main/menus.py:14
+msgid "mainmenu:locations"
+msgstr "Locations"
+
+#: main/menus.py:18
+msgid "mainmenu:criteria"
+msgstr "Criteria"
+
+#: main/menus.py:22
 msgid "mainmenu:leaders"
 msgstr "Leaders"
 
-#: main/menus.py:17
+#: main/menus.py:26
 msgid "mainmenu:participants"
 msgstr "Participants"
 
-#: main/menus.py:21
+#: main/menus.py:30
 msgid "mainmenu:comments"
 msgstr "Comments"
 
-#: main/menus.py:25
+#: main/menus.py:34
 msgid "footermenu:login"
 msgstr "Log in"
 
-#: main/menus.py:30
+#: main/menus.py:39
 msgid "footermenu:logout"
 msgstr "Log out"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-30 12:31+0000\n"
+"POT-Creation-Date: 2018-11-30 15:28+0000\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,61 +18,166 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: experiments/models.py:11
-msgid "location:attribute:name"
-msgstr "Name"
+#: experiments/models/criteria_models.py:11
+msgid "default_criteria:attribute:multilingual:yes"
+msgstr "One"
 
-#: experiments/models.py:15
-msgid "location:attribute:route_url"
-msgstr "Routedescription URL"
+#: experiments/models/criteria_models.py:12
+msgid "default_criteria:attribute:multilingual:no"
+msgstr "Many"
 
-#: experiments/models.py:27
+#: experiments/models/criteria_models.py:13
+#: experiments/models/criteria_models.py:19
+#: experiments/models/criteria_models.py:25
+#: experiments/models/criteria_models.py:31
+#: experiments/models/criteria_models.py:37
+#: experiments/templates/widgets/language_widget.html:20
+msgid "experiments:globals:indifferent"
+msgstr "Indifferent"
+
+#: experiments/models/criteria_models.py:17
+msgid "default_criteria:attribute:sex:male"
+msgstr "Male"
+
+#: experiments/models/criteria_models.py:18
+msgid "default_criteria:attribute:sex:female"
+msgstr "Female"
+
+#: experiments/models/criteria_models.py:23
+msgid "default_criteria:attribute:handedness:lefthanded"
+msgstr "Left"
+
+#: experiments/models/criteria_models.py:24
+msgid "default_criteria:attribute:handedness:righthanded"
+msgstr "Right"
+
+#: experiments/models/criteria_models.py:29
+msgid "default_criteria:attribute:dyslexia:yes"
+msgstr "Yes"
+
+#: experiments/models/criteria_models.py:30
+msgid "default_criteria:attribute:dyslexia:no"
+msgstr "No"
+
+#: experiments/models/criteria_models.py:35
+msgid "default_criteria:attribute:social_status:student"
+msgstr "Student"
+
+#: experiments/models/criteria_models.py:36
+msgid "default_criteria:attribute:social_status:other"
+msgstr "Other"
+
+#: experiments/models/criteria_models.py:46
+msgid "default_criteria:attribute:language"
+msgstr "What should the participant's language be?"
+
+#: experiments/models/criteria_models.py:51
+msgid "default_criteria:attribute:multilingual"
+msgstr "Does the participant have to speak one or many languages? "
+
+#: experiments/models/criteria_models.py:59
+msgid "default_criteria:attribute:sex"
+msgstr "Should the participant be Male or Female?"
+
+#: experiments/models/criteria_models.py:67
+msgid "default_criteria:attribute:handedness"
+msgstr "Should the participant be left- or righthanded? "
+
+#: experiments/models/criteria_models.py:75
+msgid "default_criteria:attribute:dyslexia"
+msgstr "Should the participant be dyslectic?"
+
+#: experiments/models/criteria_models.py:83
+msgid "default_criteria:attribute:social_status"
+msgstr "What should the social role of the participant be? "
+
+#: experiments/models/criteria_models.py:91
+msgid "default_criteria:attribute:min_age"
+msgstr "What should the lower bound of the participant's age?"
+
+#: experiments/models/criteria_models.py:94
+msgid "default_criteria:attribute:min_age:help_text"
+msgstr "Set to -1 if this criteria doesn't matter."
+
+#: experiments/models/criteria_models.py:98
+msgid "default_criteria:attribute:max_age"
+msgstr "What should the upper bound of the participant's age?"
+
+#: experiments/models/criteria_models.py:101
+msgid "default_criteria:attribute:max_age:help_text"
+msgstr "Set to -1 if this criteria doesn't matter"
+
+#: experiments/models/criteria_models.py:108
+msgid "criterium:attribute:name_form"
+msgstr "Form name"
+
+#: experiments/models/criteria_models.py:112
+msgid "criterium:attribute:name_natural"
+msgstr "Display name"
+
+#: experiments/models/criteria_models.py:116
+msgid "criterium:attribute:values"
+msgstr "Values (comma separated)"
+
+#: experiments/models/criteria_models.py:120
+msgid "criterium:attribute:correct_value"
+msgstr "Correct value"
+
+#: experiments/models/criteria_models.py:124
+msgid "criterium:attribute:message_failed"
+msgstr "Message when failed"
+
+#: experiments/models/criteria_models.py:129
+msgid "criterium:attribute:experiments"
+msgstr "Experiments"
+
+#: experiments/models/experiment_models.py:13
 msgid "experiment:attribute:name"
 msgstr "Name"
 
-#: experiments/models.py:31
+#: experiments/models/experiment_models.py:17
 msgid "experiment:attribute:duration"
 msgstr "Duration"
 
-#: experiments/models.py:35
+#: experiments/models/experiment_models.py:21
 msgid "experiment:attribute:compensation"
 msgstr "Compensation"
 
-#: experiments/models.py:39
+#: experiments/models/experiment_models.py:25
 msgid "experiment:attribute:task_description"
 msgstr "Task description"
 
-#: experiments/models.py:43
+#: experiments/models/experiment_models.py:29
 msgid "experiment:attribute:additional_instructions"
 msgstr "Additional Instructions"
 
-#: experiments/models.py:48
+#: experiments/models/experiment_models.py:34
 msgid "experiment:attribute:location"
 msgstr "Location"
 
-#: experiments/models.py:54
+#: experiments/models/experiment_models.py:40
 msgid "experiment:attribute:default_max_places"
 msgstr "Default number of places"
 
-#: experiments/models.py:56
+#: experiments/models/experiment_models.py:42
 msgid "experiment:attribute:default_max_places:help_text"
 msgstr ""
 "Determines the default number of places for the timeslots. Can be overridden "
 "on a per-slot basis."
 
-#: experiments/models.py:61
+#: experiments/models/experiment_models.py:47
 msgid "experiment:attribute:open"
 msgstr "Open"
 
-#: experiments/models.py:63
+#: experiments/models/experiment_models.py:49
 msgid "experiment:attribute:open:help_text"
 msgstr "Determines if the experiment is open for new participants."
 
-#: experiments/models.py:67
+#: experiments/models/experiment_models.py:53
 msgid "experiment:attribute:public"
 msgstr "Public"
 
-#: experiments/models.py:69
+#: experiments/models/experiment_models.py:55
 msgid "experiment:attribute:public:help_text"
 msgstr ""
 "Determines if the experiment should be advertised on the front page. If not, "
@@ -80,20 +185,20 @@ msgstr ""
 "used for follow-up experiments where only participants who have participated "
 "in the original experiment should register."
 
-#: experiments/models.py:73
+#: experiments/models/experiment_models.py:59
 msgid "experiment:attribute:participants_visible"
 msgstr "Participants Visible"
 
-#: experiments/models.py:75
+#: experiments/models/experiment_models.py:61
 msgid "experiment:attribute:participants_visible:help_text"
 msgstr ""
 "If unchecked, participant data will be hidden from the experiment leader(s)."
 
-#: experiments/models.py:80
+#: experiments/models/experiment_models.py:66
 msgid "experiment:attribute:excluded_experiments"
 msgstr "Excluded experiment"
 
-#: experiments/models.py:82
+#: experiments/models/experiment_models.py:68
 msgid "experiment:attribute:excluded_experiments:help_text"
 msgstr ""
 "Any experiments that should exclude a participant if they have been a "
@@ -101,21 +206,21 @@ msgstr ""
 "search through the list. Once selected, the experiment should show up in the "
 "field as a box."
 
-#: experiments/models.py:87
+#: experiments/models/experiment_models.py:73
 msgid "experiment:attribute:leader"
 msgstr "Leader"
 
-#: experiments/models.py:91
+#: experiments/models/experiment_models.py:77
 msgid "experiment:attribute:leader:help_text"
 msgstr ""
 "The main experiment leader, who will be displayed as the contact on the "
 "experiment page."
 
-#: experiments/models.py:96
+#: experiments/models/experiment_models.py:82
 msgid "experiment:attribute:additional_leaders"
 msgstr "Additional leaders"
 
-#: experiments/models.py:99
+#: experiments/models/experiment_models.py:85
 msgid "experiment:attribute:additional_leaders:help_text"
 msgstr ""
 "Any additional leaders for this experiment. They will be able to login and "
@@ -123,99 +228,38 @@ msgstr ""
 "search through the list. Once selected, the leader should show up in the "
 "field as a box."
 
-#: experiments/models.py:109
-msgid "default_criteria:attribute:multilingual:yes"
-msgstr "One"
-
-#: experiments/models.py:110
-msgid "default_criteria:attribute:multilingual:no"
-msgstr "Many"
-
-#: experiments/models.py:111 experiments/models.py:117
-#: experiments/models.py:123 experiments/models.py:129
-#: experiments/models.py:135
-msgid "experiments:globals:indifferent"
-msgstr "Indifferent"
-
-#: experiments/models.py:115
-msgid "default_criteria:attribute:sex:male"
-msgstr "Male"
-
-#: experiments/models.py:116
-msgid "default_criteria:attribute:sex:female"
-msgstr "Female"
-
-#: experiments/models.py:121
-msgid "default_criteria:attribute:handedness:lefthanded"
-msgstr "Left"
-
-#: experiments/models.py:122
-msgid "default_criteria:attribute:handedness:righthanded"
-msgstr "Right"
-
-#: experiments/models.py:127
-msgid "default_criteria:attribute:dyslexia:yes"
-msgstr "Yes"
-
-#: experiments/models.py:128
-msgid "default_criteria:attribute:dyslexia:no"
-msgstr "No"
-
-#: experiments/models.py:133
-msgid "default_criteria:attribute:social_status:student"
-msgstr "Student"
-
-#: experiments/models.py:134
-msgid "default_criteria:attribute:social_status:other"
-msgstr "Other"
-
-#: experiments/models.py:144
-msgid "default_criteria:attribute:language"
-msgstr "What should the participant's language be?"
-
-#: experiments/models.py:149
-msgid "default_criteria:attribute:multilingual"
-msgstr "Does the participant have to speak one or many languages? "
-
-#: experiments/models.py:157
-msgid "default_criteria:attribute:sex"
-msgstr "Should the participant be Male or Female?"
-
-#: experiments/models.py:165
-msgid "default_criteria:attribute:handedness"
-msgstr "Should the participant be left- or righthanded? "
-
-#: experiments/models.py:173
-msgid "default_criteria:attribute:dyslexia"
-msgstr "Should the participant be dyslectic?"
-
-#: experiments/models.py:181
-msgid "default_criteria:attribute:social_status"
-msgstr "What should the social role of the participant be? "
-
-#: experiments/models.py:189
-msgid "default_criteria:attribute:min_age"
-msgstr "What should the lower bound of the participant's age?"
-
-#: experiments/models.py:192
-msgid "default_criteria:attribute:min_age:help_text"
-msgstr "Set to -1 if this criteria doesn't matter."
-
-#: experiments/models.py:196
-msgid "default_criteria:attribute:max_age"
-msgstr "What should the upper bound of the participant's age?"
-
-#: experiments/models.py:199
-msgid "default_criteria:attribute:max_age:help_text"
-msgstr "Set to -1 if this criteria doesn't matter"
-
-#: experiments/models.py:211
+#: experiments/models/experiment_models.py:100
 msgid "time_slot:attribute:datetime"
 msgstr "Date & Time"
 
-#: experiments/models.py:215
+#: experiments/models/experiment_models.py:104
 msgid "time_slot:attribute:max_places"
 msgstr "Max places"
+
+#: experiments/models/location_models.py:8
+msgid "location:attribute:name"
+msgstr "Name"
+
+#: experiments/models/location_models.py:12
+msgid "location:attribute:route_url"
+msgstr "Routedescription URL"
+
+#: experiments/templates/criteria/index.html:12
+msgid "criteria:home:create_criterium"
+msgstr "New criterium"
+
+#: experiments/templates/criteria/index.html:16
+msgid "criteria:home:header"
+msgstr "Criteria"
+
+#: experiments/templates/criteria/index.html:19
+msgid "criteria:home:info_text"
+msgstr "<br/>"
+
+#: experiments/templates/criteria/index.html:40
+#: experiments/templates/locations/index.html:34
+msgid "experiments:globals:actions"
+msgstr "Actions"
 
 #: experiments/templates/criteria/update_default.html:12
 msgid "experiments:new_default_criteria:header"
@@ -357,10 +401,6 @@ msgstr "Locations"
 msgid "locations:home:info_text"
 msgstr "<br/>"
 
-#: experiments/templates/locations/index.html:34
-msgid "experiments:globals:actions"
-msgstr "Actions"
-
 #: experiments/templates/locations/new.html:11
 msgid "locations:new:header"
 msgstr "New Location"
@@ -369,7 +409,7 @@ msgstr "New Location"
 msgid "locations:new:info_text"
 msgstr " "
 
-#: experiments/views/criteria_views.py:40
+#: experiments/views/criteria_views.py:46
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr ""

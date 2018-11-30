@@ -1,10 +1,16 @@
 from django.http import Http404
 from django.views import generic
 from django.urls import reverse
+from django.utils.translation import ugettext_lazy as _
 import braces.views as braces
 
-from ..models import DefaultCriteria
+from ..models import DefaultCriteria, Criterium
 from ..forms import DefaultCriteriaForm
+
+
+class CriteriaHomeView(braces.LoginRequiredMixin, generic.ListView):
+    model = Criterium
+    template_name = 'criteria/index.html'
 
 
 class DefaultCriteriaUpdateView(braces.LoginRequiredMixin, generic.UpdateView):
