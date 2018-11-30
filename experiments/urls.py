@@ -1,6 +1,7 @@
 from django.conf.urls import url, include
 from .views import (ExperimentHomeView, ExperimentCreateView,
-                    ExperimentUpdateView,
+                    ExperimentUpdateView, ExperimentEditExcludedExperimentsView,
+                    ExperimentExcludeOtherExperimentView,
                     ExperimentSwitchOpenView, ExperimentSwitchVisibleView,
                     ExperimentSwitchPublicView,
                     LocationHomeView, LocationCreateView, UpdateLocationView,
@@ -13,8 +14,23 @@ urlpatterns = [
     url(r'^new/$', ExperimentCreateView.as_view(), name='create'),
     url(r'^(?P<pk>\d+)/$', ExperimentUpdateView.as_view(), name='update'),
 
-    url(r'^(?P<experiment>\d+)/default_criteria/$',
-        DefaultCriteriaUpdateView.as_view(), name='default_criteria'),
+    url(
+        r'^(?P<experiment>\d+)/excluded_experiments/$',
+        ExperimentEditExcludedExperimentsView.as_view(),
+        name='excluded_experiments'
+    ),
+    url(
+        r'^(?P<current_experiment>\d+)/exclude_experiment/('
+        r'?P<exclude_experiment>\d+)/$',
+        ExperimentExcludeOtherExperimentView.as_view(),
+        name='exclude_experiment'
+    ),
+
+    url(
+        r'^(?P<experiment>\d+)/default_criteria/$',
+        DefaultCriteriaUpdateView.as_view(),
+        name='default_criteria'
+    ),
 
 
     url(r'(?P<pk>\d+)/switch_open/', ExperimentSwitchOpenView.as_view(),

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-30 11:16+0000\n"
+"POT-Creation-Date: 2018-11-30 12:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -232,6 +232,26 @@ msgstr "Verander experiment"
 msgid "experiments:edit:info_text"
 msgstr " "
 
+#: experiments/templates/experiments/excluded_experiments.html:11
+msgid "experiments:excluded_experiments:header"
+msgstr "Uitgesloten experimenten"
+
+#: experiments/templates/experiments/excluded_experiments.html:14
+msgid "experiments:excluded_experiments:info_text"
+msgstr " "
+
+#: experiments/templates/experiments/excluded_experiments.html:29
+msgid "experiments:excluded_experiments:toggle_header"
+msgstr "Participanten hebben mogen deelnemen in dit experiment"
+
+#: experiments/templates/experiments/excluded_experiments.html:51
+msgid "experiments:excluded_experiments:excluded:title"
+msgstr "Neem experiment op"
+
+#: experiments/templates/experiments/excluded_experiments.html:59
+msgid "experiments:excluded_experiments:included:title"
+msgstr "Sluit experiment uit"
+
 #: experiments/templates/experiments/index.html:12
 msgid "experiments:home:create_experiment"
 msgstr "Nieuw experiment"
@@ -355,26 +375,34 @@ msgstr "Nieuw experiment succesvol aangemaakt"
 msgid "experiments:message:update:success"
 msgstr "Experiment aangepast"
 
-#: experiments/views/experiment_views.py:47
+#: experiments/views/experiment_views.py:68
+msgid "experiments:message:exclude:included"
+msgstr "Experiment succesvol opgenomen"
+
+#: experiments/views/experiment_views.py:71"
+msgid "experiments:message:exclude:excluded"
+msgstr "Experiment succesvol uitgesloten"
+
+#: experiments/views/experiment_views.py:89
 msgid "experiments:message:switch_open:closed"
 msgstr "Experiment openbaar gemaakt"
 
-#: experiments/views/experiment_views.py:50
+#: experiments/views/experiment_views.py:92
 msgid "experiments:message:switch_open:opened"
 msgstr "Experiment verborgen"
 
-#: experiments/views/experiment_views.py:68
+#: experiments/views/experiment_views.py:110
 msgid "experiments:message:switch_public:closed"
 msgstr "Experiment ge-opent"
 
-#: experiments/views/experiment_views.py:71
+#: experiments/views/experiment_views.py:113
 msgid "experiments:message:switch_public:opened"
 msgstr "Experiment gesloten"
 
-#: experiments/views/experiment_views.py:90
+#: experiments/views/experiment_views.py:132
 msgid "experiments:message:switch_visible:visible"
 msgstr "Participant informatie zichtbaar gemaakt voor proefleiders"
 
-#: experiments/views/experiment_views.py:95
+#: experiments/views/experiment_views.py:137
 msgid "experiments:message:switch_visible:invisible"
 msgstr "Participant informatie verborgen voor proefleiders"
