@@ -46,7 +46,9 @@
                             {{ location.name }}
                         </td>
                         <td>
-                            {{ location.route_url }}
+                            {% if location.route_url %}
+                                {{ location.route_url }}
+                            {% endif %}
                         </td>
                         <td>
                             <a href="{% url 'experiments:location_update' location.pk %}" class="icon-update">
