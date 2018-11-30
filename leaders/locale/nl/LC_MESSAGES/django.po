@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-30 08:00+0000\n"
+"POT-Creation-Date: 2018-11-30 08:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,6 +88,10 @@ msgid "leader:form:password:error:empty"
 msgstr ""
 "Dit veld kan niet leeg gelaten worden als 'Behoud huidig wachtwoord' is "
 "aangevinkt!"
+
+#: leaders/models.py:24
+msgid "leader:inactive"
+msgstr "{} (inactief)"
 
 #: leaders/templates/leaders/index.html:11
 msgid "leaders:home:create_leader"

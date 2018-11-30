@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
 
 from api.auth.models import ApiUser
 
@@ -19,4 +20,7 @@ class Leader(models.Model):
         return False
 
     def __str__(self):
+        if not self.is_active_leader():
+            return _("leader:inactive").format(self.name)
+
         return self.name
