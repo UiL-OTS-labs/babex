@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-30 10:32+0000\n"
+"POT-Creation-Date: 2018-11-30 11:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -218,10 +218,19 @@ msgid "experiments:new_default_criteria:info_text"
 msgstr " "
 
 #: experiments/templates/criteria/update_default.html:24
+#: experiments/templates/experiments/edit.html:23
 #: experiments/templates/locations/edit.html:23
 #: experiments/templates/locations/new.html:23
 msgid "experiments:globals:save_button"
 msgstr "Opslaan"
+
+#: experiments/templates/experiments/edit.html:11
+msgid "experiments:edit:header"
+msgstr "Verander experiment"
+
+#: experiments/templates/experiments/edit.html:14
+msgid "experiments:edit:info_text"
+msgstr " "
 
 #: experiments/templates/experiments/index.html:12
 msgid "experiments:home:create_experiment"
@@ -244,28 +253,48 @@ msgid "experiments:global:participants"
 msgstr "Participanten"
 
 #: experiments/templates/experiments/index.html:76
-#, fuzzy
-#| msgid "experiments:home:header"
 msgid "experiments:home:switch_open:title"
-msgstr "Experimenten"
+msgstr "Open/sluit experiment"
 
 #: experiments/templates/experiments/index.html:85
-#, fuzzy
-#| msgid "experiments:home:info_text"
 msgid "experiments:home:switch_public:title"
-msgstr "<br/>"
+msgstr "Maak experiment openbaar/verborgen"
 
 #: experiments/templates/experiments/index.html:94
-#, fuzzy
-#| msgid "experiments:home:header"
 msgid "experiments:home:switch_visible:title"
-msgstr "Experimenten"
+msgstr "Maak participant data openbaar/verborgen voor proefleiders"
 
 #: experiments/templates/experiments/index.html:103
-#, fuzzy
-#| msgid "experiments:home:create_experiment"
+msgid "experiments:home:edit_timeslots:title"
+msgstr "Pas timeslots aan"
+
+#: experiments/templates/experiments/index.html:110
 msgid "experiments:home:edit_experiment:title"
-msgstr "Nieuw experiment"
+msgstr "Pas experiment aan"
+
+#: experiments/templates/experiments/index.html:117
+msgid "experiments:home:edit_default_criteria:title"
+msgstr "Pas standaard criteria aan"
+
+#: experiments/templates/experiments/index.html:124
+msgid "experiments:home:edit_specific_criteria:title"
+msgstr "Pas specifieke criteria aan"
+
+#: experiments/templates/experiments/index.html:131
+msgid "experiments:home:exclude_experiments:title"
+msgstr "Sluit experimenten uit"
+
+#: experiments/templates/experiments/index.html:138
+msgid "experiments:home:invite:title"
+msgstr "Nodig participanten uit"
+
+#: experiments/templates/experiments/index.html:145
+msgid "experiments:home:participants:title"
+msgstr "Participanten"
+
+#: experiments/templates/experiments/index.html:152
+msgid "experiments:home:delete:title"
+msgstr "Verwijder experiment"
 
 #: experiments/templates/experiments/new.html:11
 msgid "experiments:new:header"
@@ -319,38 +348,33 @@ msgid "No %(verbose_name)s found matching the query"
 msgstr ""
 
 #: experiments/views/experiment_views.py:21
-#: experiments/views/experiment_views.py:31
-#, fuzzy
-#| msgid "experiments:home:create_experiment"
 msgid "experiments:message:create:success"
-msgstr "Nieuw experiment"
+msgstr "Nieuw experiment succesvol aangemaakt"
 
-#: experiments/views/experiment_views.py:46
+#: experiments/views/experiment_views.py:32
+msgid "experiments:message:update:success"
+msgstr "Experiment aangepast"
+
+#: experiments/views/experiment_views.py:47
 msgid "experiments:message:switch_open:closed"
-msgstr ""
+msgstr "Experiment openbaar gemaakt"
 
-#: experiments/views/experiment_views.py:49
-#, fuzzy
-#| msgid "experiment:attribute:open"
+#: experiments/views/experiment_views.py:50
 msgid "experiments:message:switch_open:opened"
-msgstr "Open voor participanten"
+msgstr "Experiment verborgen"
 
-#: experiments/views/experiment_views.py:67
+#: experiments/views/experiment_views.py:68
 msgid "experiments:message:switch_public:closed"
-msgstr ""
+msgstr "Experiment ge-opent"
 
-#: experiments/views/experiment_views.py:70
+#: experiments/views/experiment_views.py:71
 msgid "experiments:message:switch_public:opened"
-msgstr ""
+msgstr "Experiment gesloten"
 
-#: experiments/views/experiment_views.py:89
-#, fuzzy
-#| msgid "experiment:attribute:participants_visible"
+#: experiments/views/experiment_views.py:90
 msgid "experiments:message:switch_visible:visible"
-msgstr "Participanten zichtbaar"
+msgstr "Participant informatie zichtbaar gemaakt voor proefleiders"
 
-#: experiments/views/experiment_views.py:94
-#, fuzzy
-#| msgid "experiment:attribute:participants_visible"
+#: experiments/views/experiment_views.py:95
 msgid "experiments:message:switch_visible:invisible"
-msgstr "Participanten zichtbaar"
+msgstr "Participant informatie verborgen voor proefleiders"
