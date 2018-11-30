@@ -78,7 +78,7 @@
                                 {{ experiment.open|yesno:"," }}
                             </a>
                         </td>
-                        <td class="icon-yesno">
+                        <td >
                             <a
                                 href="{% url 'experiments:switch_public' experiment.pk %}"
                                 class="icon-yesno"
@@ -87,7 +87,7 @@
                                 {{ experiment.public|yesno:"," }}
                             </a>
                         </td>
-                        <td class="icon-yesno">
+                        <td>
                             <a
                                 href="{% url 'experiments:switch_visible' experiment.pk %}"
                                 class="icon-yesno"
