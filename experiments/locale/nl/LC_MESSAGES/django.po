@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-30 12:08+0000\n"
+"POT-Creation-Date: 2018-11-30 12:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -197,15 +197,27 @@ msgstr "Wat moet de sociale status van de participant zijn?"
 msgid "default_criteria:attribute:min_age"
 msgstr "Wat moet de ondergrens van de participant's leeftijd zijn?"
 
-#: experiments/models.py:195
+#: experiments/models.py:192
+#, fuzzy
+#| msgid "default_criteria:attribute:min_age"
+msgid "default_criteria:attribute:min_age:help_text"
+msgstr "Wat moet de ondergrens van de participant's leeftijd zijn?"
+
+#: experiments/models.py:196
 msgid "default_criteria:attribute:max_age"
 msgstr "Wat moet de bovengrens van de participant's leeftijd zijn?"
 
-#: experiments/models.py:209
+#: experiments/models.py:199
+#, fuzzy
+#| msgid "default_criteria:attribute:max_age"
+msgid "default_criteria:attribute:max_age:help_text"
+msgstr "Wat moet de bovengrens van de participant's leeftijd zijn?"
+
+#: experiments/models.py:211
 msgid "time_slot:attribute:datetime"
 msgstr "Tijd & Datum"
 
-#: experiments/models.py:213
+#: experiments/models.py:215
 msgid "time_slot:attribute:max_places"
 msgstr "Max plaatsen"
 
@@ -240,15 +252,15 @@ msgstr "Uitgesloten experimenten"
 msgid "experiments:excluded_experiments:info_text"
 msgstr " "
 
-#: experiments/templates/experiments/excluded_experiments.html:29
+#: experiments/templates/experiments/excluded_experiments.html:32
 msgid "experiments:excluded_experiments:toggle_header"
 msgstr "Participanten hebben mogen deelnemen in dit experiment"
 
-#: experiments/templates/experiments/excluded_experiments.html:51
+#: experiments/templates/experiments/excluded_experiments.html:59
 msgid "experiments:excluded_experiments:excluded:title"
 msgstr "Neem experiment op"
 
-#: experiments/templates/experiments/excluded_experiments.html:59
+#: experiments/templates/experiments/excluded_experiments.html:67
 msgid "experiments:excluded_experiments:included:title"
 msgstr "Sluit experiment uit"
 
@@ -379,7 +391,7 @@ msgstr "Experiment aangepast"
 msgid "experiments:message:exclude:included"
 msgstr "Experiment succesvol opgenomen"
 
-#: experiments/views/experiment_views.py:71"
+#: experiments/views/experiment_views.py:71
 msgid "experiments:message:exclude:excluded"
 msgstr "Experiment succesvol uitgesloten"
 

@@ -189,12 +189,14 @@ class DefaultCriteria(models.Model):
         _('default_criteria:attribute:min_age'),
         validators=[MinValueValidator(-1)],
         default=-1,
+        help_text=_('default_criteria:attribute:min_age:help_text'),
     )
 
     max_age = models.IntegerField(
         _('default_criteria:attribute:max_age'),
         validators=[MinValueValidator(-1)],
         default=-1,
+        help_text=_('default_criteria:attribute:max_age:help_text'),
     )
 
 
