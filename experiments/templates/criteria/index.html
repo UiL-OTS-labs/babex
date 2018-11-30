@@ -8,7 +8,7 @@
 <div class="uu-inner-container">
     <div class="col-12">
         <div class="float-right button button-colored">
-            <a href="#">
+            <a href="{% url 'experiments:criterium_create' %}">
                 {% trans 'criteria:home:create_criterium' %}
             </a>
         </div>
@@ -61,7 +61,9 @@
                             {{ criterium.message_failed }}
                         </td>
                         <td>
-                            <a href="#" class="icon-update">
+                            <a  href="{% url 'experiments:criterium_update' criterium.pk %}"
+                                title="{% trans 'criteria:home:edit' %}"
+                                class="icon-update">
                                 
                             </a>
                         </td>

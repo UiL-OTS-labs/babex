@@ -5,7 +5,8 @@ from .views import (ExperimentHomeView, ExperimentCreateView,
                     ExperimentSwitchOpenView, ExperimentSwitchVisibleView,
                     ExperimentSwitchPublicView,
                     LocationHomeView, LocationCreateView, UpdateLocationView,
-                    CriteriaHomeView, DefaultCriteriaUpdateView,)
+                    CriteriaHomeView, DefaultCriteriaUpdateView,
+                    CriteriaCreateView, CriteriaUpdateView)
 
 app_name = 'experiments'
 
@@ -49,6 +50,8 @@ urlpatterns = [
 
     url(r'^criteria/', include([
         url(r'^$', CriteriaHomeView.as_view(), name='criteria_home'),
-
+        url(r'^new/$', CriteriaCreateView.as_view(), name='criterium_create'),
+        url(r'^(?P<pk>\d+)/$', CriteriaUpdateView.as_view(),
+            name='criterium_update'),
     ])),
 ]

@@ -1,16 +1,34 @@
 from django.http import Http404
+from django.contrib.messages.views import SuccessMessageMixin
 from django.views import generic
-from django.urls import reverse
+from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 import braces.views as braces
 
 from ..models import DefaultCriteria, Criterium
-from ..forms import DefaultCriteriaForm
+from ..forms import DefaultCriteriaForm, CriteriumForm
 
 
 class CriteriaHomeView(braces.LoginRequiredMixin, generic.ListView):
     model = Criterium
     template_name = 'criteria/index.html'
+
+
+class CriteriaCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
+                         generic.CreateView):
+    form_class = CriteriumForm
+    template_name = 'criteria/new.html'
+    success_url = reverse('experiments:criteria_home')
+    success_message = _('criteria:messages:created')
+
+
+class CriteriaUpdateView(braces.LoginRequiredMixin, SuccessMessageMixin,
+                         generic.UpdateView):
+    form_class = CriteriumForm
+    template_name = 'criteria/edit.html'
+    success_url = reverse('experiments:criteria_home')
+    success_message = _('criteria:messages:updated')
+    model = Criterium
 
 
 class DefaultCriteriaUpdateView(braces.LoginRequiredMixin, generic.UpdateView):
