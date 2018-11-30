@@ -57,7 +57,7 @@ class LeaderUpdateView(braces.LoginRequiredMixin, SuccessMessageMixin,
             'email':       leader.api_user.email,
             'phonenumber': leader.phonenumber,
             'leader':      leader,
-            'active':      leader.api_user.is_active
+            'active':      leader.is_active_leader(),
         }
 
     def form_valid(self, form):
