@@ -108,6 +108,11 @@ REST_PERMITTED_CLIENTS = ['127.0.0.1']
 # Either RSA512 or HS512
 JWT_ALGORITHM = 'HS512'
 
+# Groups
+
+LEADER_GROUP = 'leader'
+PARTICIPANT_GROUP = 'participant'
+
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
