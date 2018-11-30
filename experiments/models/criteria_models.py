@@ -100,3 +100,32 @@ class DefaultCriteria(models.Model):
         default=-1,
         help_text=_('default_criteria:attribute:max_age:help_text'),
     )
+
+
+class Criterium(models.Model):
+
+    name_form = models.TextField(
+        _('criterium:attribute:name_form'),
+    )
+
+    name_natural = models.TextField(
+        _('criterium:attribute:name_natural'),
+    )
+
+    values = models.TextField(
+        _('criterium:attribute:values'),
+    )
+
+    correct_value = models.TextField(
+        _('criterium:attribute:correct_value'),
+    )
+
+    message_failed = models.TextField(
+        _('criterium:attribute:message_failed'),
+    )
+
+    experiments = models.ManyToManyField(
+        Experiment,
+        verbose_name=_('criterium:attribute:experiments'),
+        related_name='specific_criteria',
+    )
