@@ -8,6 +8,9 @@ from experiments.models import Experiment
 
 class Comment(models.Model):
 
+    class Meta:
+        ordering = ('-id',)
+
     participant = models.ForeignKey(
         Participant,
         on_delete=models.CASCADE,
