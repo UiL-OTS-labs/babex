@@ -1,6 +1,7 @@
 from django import forms
 
 from ..models import DefaultCriteria
+from ..widgets import LanguageWidget
 
 
 class DefaultCriteriaForm(forms.ModelForm):
@@ -9,8 +10,7 @@ class DefaultCriteriaForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'experiment': forms.HiddenInput,
-            # TODO: special widget for language
-            'language': forms.TextInput,
+            'language': LanguageWidget,
             'multilingual': forms.RadioSelect,
             'sex': forms.RadioSelect,
             'handedness': forms.RadioSelect,
