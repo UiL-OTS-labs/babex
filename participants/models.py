@@ -4,6 +4,9 @@ from django.utils.translation import ugettext_lazy as _
 from api.auth.models import ApiUser
 
 
+# TODO: encrypted fields!
+# TODO: criteria saving!
+
 class Participant(models.Model):
 
     HANDEDNESS = (
