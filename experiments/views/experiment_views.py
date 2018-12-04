@@ -8,6 +8,7 @@ from uil.core.views.mixins import RedirectSuccessMessageMixin, \
 
 from ..models import Experiment
 from ..forms import ExperimentForm
+from .mixins import ExperimentObjectMixin
 
 
 class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
@@ -86,66 +87,63 @@ class ExperimentDeleteView(braces.LoginRequiredMixin, DeleteSuccessMessageMixin,
 
 class ExperimentSwitchOpenView(braces.LoginRequiredMixin,
                                RedirectSuccessMessageMixin,
+                               ExperimentObjectMixin,
                                generic.RedirectView):
+    experiment_kwargs_name = 'pk'
 
     def get_redirect_url(self, *args, **kwargs):
-        pk = self.kwargs.get('pk')
 
-        experiment = Experiment.objects.get(pk=pk)
-
-        if experiment.open:
-            experiment.open = False
+        if self.experiment.open:
+            self.experiment.open = False
             self.success_message = _('experiments:message:switch_open:closed')
         else:
-            experiment.open = True
+            self.experiment.open = True
             self.success_message = _('experiments:message:switch_open:opened')
 
-        experiment.save()
+        self.experiment.save()
 
         return reverse('experiments:home')
 
 
 class ExperimentSwitchPublicView(braces.LoginRequiredMixin,
                                  RedirectSuccessMessageMixin,
+                                 ExperimentObjectMixin,
                                  generic.RedirectView):
+    experiment_kwargs_name = 'pk'
 
     def get_redirect_url(self, *args, **kwargs):
-        pk = self.kwargs.get('pk')
 
-        experiment = Experiment.objects.get(pk=pk)
-
-        if experiment.public:
-            experiment.public = False
+        if self.experiment.public:
+            self.experiment.public = False
             self.success_message = _('experiments:message:switch_public:closed')
         else:
-            experiment.public = True
+            self.experiment.public = True
             self.success_message = _('experiments:message:switch_public:opened')
 
-        experiment.save()
+        self.experiment.save()
 
         return reverse('experiments:home')
 
 
 class ExperimentSwitchVisibleView(braces.LoginRequiredMixin,
                                   RedirectSuccessMessageMixin,
+                                  ExperimentObjectMixin,
                                   generic.RedirectView):
+    experiment_kwargs_name = 'pk'
 
     def get_redirect_url(self, *args, **kwargs):
-        pk = self.kwargs.get('pk')
 
-        experiment = Experiment.objects.get(pk=pk)
-
-        if experiment.participants_visible:
-            experiment.participants_visible = False
+        if self.experiment.participants_visible:
+            self.experiment.participants_visible = False
             self.success_message = _(
                 'experiments:message:switch_visible:visible'
             )
         else:
-            experiment.participants_visible = True
+            self.experiment.participants_visible = True
             self.success_message = _(
                 'experiments:message:switch_visible:invisible'
             )
 
-        experiment.save()
+        self.experiment.save()
 
         return reverse('experiments:home')

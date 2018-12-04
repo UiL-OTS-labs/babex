@@ -8,6 +8,7 @@ from uil.core.views.mixins import RedirectSuccessMessageMixin
 
 from ..models import DefaultCriteria, Criterium, Experiment
 from ..forms import DefaultCriteriaForm, CriteriumForm, ExperimentCriteriumForm
+from .mixins import ExperimentObjectMixin
 from main.views import FormListView
 
 
@@ -85,7 +86,7 @@ class DefaultCriteriaUpdateView(braces.LoginRequiredMixin, generic.UpdateView):
 
 
 class CriteriaListView(braces.LoginRequiredMixin, SuccessMessageMixin,
-                       FormListView):
+                       ExperimentObjectMixin, FormListView):
     """
     This view is a bit special, it's both a ListView and a CreateView in one!
     In addition, there is a second form in the template that POSTs to the
@@ -105,14 +106,12 @@ class CriteriaListView(braces.LoginRequiredMixin, SuccessMessageMixin,
         """
         initial = super(CriteriaListView, self).get_initial()
 
-        experiment = Experiment.objects.get(pk=self.kwargs.get('experiment'))
-
-        initial['experiments'] = [experiment]
+        initial['experiments'] = [self.experiment]
 
         return initial
 
     def get_success_url(self):
-        args = [self.kwargs.get('experiment')]
+        args = [self.experiment.pk]
         return reverse('experiments:specific_criteria', args=args)
 
     def get_context_data(self, **kwargs):
@@ -122,8 +121,7 @@ class CriteriaListView(braces.LoginRequiredMixin, SuccessMessageMixin,
             id__in=self.get_queryset()
         )
 
-        experiment_pk = self.kwargs['experiment']
-        context['experiment'] = Experiment.objects.get(pk=experiment_pk)
+        context['experiment'] = self.experiment
 
         return context
 
@@ -131,37 +129,43 @@ class CriteriaListView(braces.LoginRequiredMixin, SuccessMessageMixin,
         """
         Only show the Criterium objects connected to the specified experiment
         """
-        return self.model.objects.filter(experiments=self.kwargs['experiment'])
+        return self.model.objects.filter(experiments=self.experiment)
 
 
 class AddExistingCriteriumToExperimentView(braces.LoginRequiredMixin,
                                            RedirectSuccessMessageMixin,
+                                           ExperimentObjectMixin,
                                            generic.RedirectView):
     success_message = _('criteria:messages:added_to_experiment')
 
     def get_redirect_url(self, *args, **kwargs):
-        experiment_pk = self.kwargs.get('experiment')
         # Get the criterium from POST. No idea why it's a list, but it is...
         criterium_pk = self.request.POST.get('criterium')[0]
 
         criterium = Criterium.objects.get(pk=criterium_pk)
-        criterium.experiments.add(experiment_pk)
+        criterium.experiments.add(self.experiment)
         criterium.save()
 
-        return reverse('experiments:specific_criteria', args=[experiment_pk])
+        return reverse(
+            'experiments:specific_criteria',
+            args=[self.experiment.pk]
+        )
 
 
 class RemoveCriteriumFromExperiment(braces.LoginRequiredMixin,
                                     RedirectSuccessMessageMixin,
+                                    ExperimentObjectMixin,
                                     generic.RedirectView):
     success_message = _('criteria:messages:removed_from_experiment')
 
     def get_redirect_url(self, *args, **kwargs):
-        experiment_pk = self.kwargs.get('experiment')
         criterium_pk = self.kwargs.get('criterium')
 
         criterium = Criterium.objects.get(pk=criterium_pk)
-        criterium.experiments.remove(experiment_pk)
+        criterium.experiments.remove(self.experiment)
         criterium.save()
 
-        return reverse('experiments:specific_criteria', args=[experiment_pk])
+        return reverse(
+            'experiments:specific_criteria',
+            args=[self.experiment.pk]
+        )
