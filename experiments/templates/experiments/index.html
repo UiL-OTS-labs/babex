@@ -5,6 +5,13 @@
 {% load get_field_name %}
 
 {% block content %}
+<style>
+    {# How dare you call this a CSS Hack! It's not a CSS hack, it's a horrible CSS hack! #}
+    .behind-icon {
+        margin-right: -15px;
+        font-weight: bold;
+    }
+</style>
 <div class="uu-inner-container">
     <div class="col-12">
         <div class="float-right button button-colored">
@@ -116,14 +123,14 @@
                                 class="icon-update"
                                 title="{% trans 'experiments:home:edit_default_criteria:title' %}"
                             >
-                                 
+                                <span class="behind-icon">D</span> 
                             </a>
                             <a
                                 href="{% url 'experiments:specific_criteria' experiment.pk %}"
                                 class="icon-update"
                                 title="{% trans 'experiments:home:edit_specific_criteria:title' %}"
                             >
-                                 
+                                <span class="behind-icon">S</span> 
                             </a>
                             <a
                                 href="{% url 'experiments:excluded_experiments' experiment.pk %}"
