@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from .location_models import Location
 from leaders.models import Leader
+from participants.models import Participant
 
 
 class Experiment(models.Model):
@@ -104,3 +105,15 @@ class TimeSlot(models.Model):
         _('time_slot:attribute:max_places'),
         validators=[MinValueValidator(1)]
     )
+
+    participants = models.ManyToManyField(
+        Participant,
+        verbose_name=_('time_slot:attribute:participants')
+    )
+
+    def has_free_places(self) -> bool:
+        return self.participants.count() < self.max_places
+
+    @property
+    def free_places(self) -> int:
+        return self.max_places - self.participants.count()
