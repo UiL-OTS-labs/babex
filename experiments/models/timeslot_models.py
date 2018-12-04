@@ -4,10 +4,10 @@ from django.utils.translation import ugettext_lazy as _
 
 from participants.models import Participant
 from .experiment_models import Experiment
+from ..utils import enumerate_to
 
 
 class TimeSlot(models.Model):
-
     experiment = models.ForeignKey(
         Experiment,
         on_delete=models.CASCADE
@@ -26,6 +26,15 @@ class TimeSlot(models.Model):
         Participant,
         verbose_name=_('time_slot:attribute:participants')
     )
+
+    @property
+    def places(self) -> list:
+        """Returns a list of places with a corresponding participant (if any)"""
+        return [{
+            'n':           n,
+            'participant': participant
+        } for n, participant in enumerate_to(self.participants.all(),
+                                             self.max_places, 1)]
 
     def has_free_places(self) -> bool:
         return self.participants.count() < self.max_places

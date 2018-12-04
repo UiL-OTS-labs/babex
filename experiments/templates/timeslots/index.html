@@ -1,0 +1,92 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <h1>
+            {% transformat 'timeslots:home:header' experiment %}
+        </h1>
+        <p>
+            {% trans 'timeslots:home:info_text' %}
+        </p>
+        <table class="dt" width="100%" data-language="{% datatables_lang %}">
+            <thead>
+                <tr>
+                    <th>
+                        {% get_verbose_field_name "experiments" "TimeSlot" "id" %}
+                    </th>
+                    <th>
+                        {% trans 'timeslots:day' %}
+                    </th>
+                    <th>
+                        {% trans 'timeslots:date' %}
+                    </th>
+                    <th>
+                        {% trans 'timeslots:time' %}
+                    </th>
+                    <th>
+                        {% trans 'timeslots:place' %}
+                    </th>
+                    <th>
+                        {% trans 'timeslots:participant:name' %}
+                    </th>
+                    <th>
+                        {% trans 'timeslots:participant:email' %}
+                    </th>
+                    <th>
+                        {% trans 'experiments:globals:actions' %}
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for timeslot in object_list %}
+                    {# a timeslot can have multiple places, which we want to display seperately #}
+                    {% for place in timeslot.places %}
+                        <tr>
+                            <td>
+                                {{ timeslot.pk }}
+                            </td>
+                            <td>
+                                {{ timeslot.datetime|date:'l' }}
+                            </td>
+                            <td>
+                                {{ timeslot.datetime|date:'Y-m-d' }}
+                            </td>
+                            <td>
+                                {{ timeslot.datetime|date:'H:i:s' }}
+                            </td>
+                            <td>
+                                {{ place.n }}
+                            </td>
+                            {% if place.participant %}
+                                <td>
+                                    {{ place.participant.name }}
+                                </td>
+                                <td>
+                                    {{ place.participant.email }}
+                                </td>
+                            {% else %}
+                                <td>
+                                    -
+                                </td>
+                                <td>
+                                    -
+                                </td>
+                            {% endif %}
+                            <td>
+
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <br/>
+    </div>
+</div>
+{% endblock %}

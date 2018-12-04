@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-04 12:55+0000\n"
+"POT-Creation-Date: 2018-12-04 15:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -111,27 +111,27 @@ msgstr "Wat moet de bovengrens van de participant's leeftijd zijn?"
 msgid "default_criteria:attribute:max_age:help_text"
 msgstr "Zet dit op -1 als er geen bovengrens is."
 
-#: experiments/models/criteria_models.py:106
+#: experiments/models/criteria_models.py:109
 msgid "criterium:attribute:name_form"
 msgstr "Form naam"
 
-#: experiments/models/criteria_models.py:110
+#: experiments/models/criteria_models.py:113
 msgid "criterium:attribute:name_natural"
 msgstr "Weergave naam"
 
-#: experiments/models/criteria_models.py:114
+#: experiments/models/criteria_models.py:117
 msgid "criterium:attribute:values"
 msgstr "Mogelijke waardes"
 
-#: experiments/models/criteria_models.py:118
+#: experiments/models/criteria_models.py:121
 msgid "criterium:attribute:correct_value"
 msgstr "Correctie waarde"
 
-#: experiments/models/criteria_models.py:122
+#: experiments/models/criteria_models.py:125
 msgid "criterium:attribute:message_failed"
 msgstr "Melding indien incorrect"
 
-#: experiments/models/criteria_models.py:127
+#: experiments/models/criteria_models.py:130
 msgid "criterium:attribute:experiments"
 msgstr "Experimenten"
 
@@ -232,14 +232,6 @@ msgstr ""
 "account.<br/>Je kan zoeken door de lijst door in dit veld te typen, als je "
 "een proefleider selecteert zal hij als een blokje verschijnen in het veld."
 
-#: experiments/models/experiment_models.py:100
-msgid "time_slot:attribute:datetime"
-msgstr "Tijd & Datum"
-
-#: experiments/models/experiment_models.py:104
-msgid "time_slot:attribute:max_places"
-msgstr "Max plaatsen"
-
 #: experiments/models/location_models.py:8
 msgid "location:attribute:name"
 msgstr "Naam"
@@ -247,6 +239,20 @@ msgstr "Naam"
 #: experiments/models/location_models.py:12
 msgid "location:attribute:route_url"
 msgstr "Routebeschrijving URL"
+
+#: experiments/models/timeslot_models.py:17
+msgid "time_slot:attribute:datetime"
+msgstr "Tijd & Datum"
+
+#: experiments/models/timeslot_models.py:21
+msgid "time_slot:attribute:max_places"
+msgstr "Max plaatsen"
+
+#: experiments/models/timeslot_models.py:27
+#, fuzzy
+#| msgid "time_slot:attribute:max_places"
+msgid "time_slot:attribute:participants"
+msgstr "Max plaatsen"
 
 #: experiments/templates/criteria/edit.html:11
 msgid "criteria:edit:header"
@@ -280,6 +286,7 @@ msgstr "<br/>"
 #: experiments/templates/criteria/index.html:40
 #: experiments/templates/criteria/specific_list.html:35
 #: experiments/templates/locations/index.html:34
+#: experiments/templates/timeslots/index.html:41
 msgid "experiments:globals:actions"
 msgstr "Acties"
 
@@ -490,71 +497,103 @@ msgstr "Nieuwe locatie"
 msgid "locations:new:info_text"
 msgstr " "
 
-#: experiments/views/criteria_views.py:27
+#: experiments/templates/timeslots/index.html:11
+msgid "timeslots:home:header"
+msgstr "Timeslots voor experiment '{}'"
+
+#: experiments/templates/timeslots/index.html:14
+msgid "timeslots:home:info_text"
+msgstr "<br/>"
+
+#: experiments/templates/timeslots/index.html:23
+msgid "timeslots:day"
+msgstr "Dag"
+
+#: experiments/templates/timeslots/index.html:26
+msgid "timeslots:date"
+msgstr "Datum"
+
+#: experiments/templates/timeslots/index.html:29
+msgid "timeslots:time"
+msgstr "Tijd"
+
+#: experiments/templates/timeslots/index.html:32
+msgid "timeslots:place"
+msgstr "Plaats #"
+
+#: experiments/templates/timeslots/index.html:35
+msgid "timeslots:participant:name"
+msgstr "Participant"
+
+#: experiments/templates/timeslots/index.html:38
+msgid "timeslots:participant:email"
+msgstr "Participant email"
+
+#: experiments/views/criteria_views.py:28
 msgid "criteria:messages:created"
 msgstr "Criterium aangemaakt"
 
-#: experiments/views/criteria_views.py:35
+#: experiments/views/criteria_views.py:36
 msgid "criteria:messages:updated"
 msgstr "Criterium aangepast"
 
-#: experiments/views/criteria_views.py:76
+#: experiments/views/criteria_views.py:77
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr ""
 
-#: experiments/views/criteria_views.py:99
+#: experiments/views/criteria_views.py:100
 msgid "criteria:messages:created_and_added"
 msgstr "Criterium aangemaakt en aan experiment toegevoegd!"
 
-#: experiments/views/criteria_views.py:139
+#: experiments/views/criteria_views.py:140
 msgid "criteria:messages:added_to_experiment"
 msgstr "Criterium toegevoegd aan experiment!"
 
-#: experiments/views/criteria_views.py:156
+#: experiments/views/criteria_views.py:157
 msgid "criteria:messages:removed_from_experiment"
 msgstr "Criterium verwijderd uit experiment!"
 
-#: experiments/views/experiment_views.py:21
+#: experiments/views/experiment_views.py:22
 msgid "experiments:message:create:success"
 msgstr "Nieuw experiment succesvol aangemaakt"
 
-#: experiments/views/experiment_views.py:32
+#: experiments/views/experiment_views.py:33
 msgid "experiments:message:update:success"
 msgstr "Experiment aangepast"
 
-#: experiments/views/experiment_views.py:68
+#: experiments/views/experiment_views.py:69
 msgid "experiments:message:exclude:included"
 msgstr "Experiment succesvol opgenomen"
 
-#: experiments/views/experiment_views.py:71
+#: experiments/views/experiment_views.py:72
 msgid "experiments:message:exclude:excluded"
 msgstr "Experiment succesvol uitgesloten"
 
-#: experiments/views/experiment_views.py:83
+#: experiments/views/experiment_views.py:84
 msgid "experiments:message:deleted_experiment"
 msgstr "Experiment verwijderd!"
 
-#: experiments/views/experiment_views.py:97
+#: experiments/views/experiment_views.py:98
 msgid "experiments:message:switch_open:closed"
 msgstr "Experiment openbaar gemaakt"
 
-#: experiments/views/experiment_views.py:100
+#: experiments/views/experiment_views.py:101
 msgid "experiments:message:switch_open:opened"
 msgstr "Experiment verborgen"
 
-#: experiments/views/experiment_views.py:118
+#: experiments/views/experiment_views.py:119
 msgid "experiments:message:switch_public:closed"
 msgstr "Experiment ge-opent"
 
-#: experiments/views/experiment_views.py:121
+#: experiments/views/experiment_views.py:122
 msgid "experiments:message:switch_public:opened"
 msgstr "Experiment gesloten"
 
-#: experiments/views/experiment_views.py:140
+#: experiments/views/experiment_views.py:141
 msgid "experiments:message:switch_visible:visible"
 msgstr "Participant informatie zichtbaar gemaakt voor proefleiders"
 
-#: experiments/views/experiment_views.py:145
+#: experiments/views/experiment_views.py:146
 msgid "experiments:message:switch_visible:invisible"
 msgstr "Participant informatie verborgen voor proefleiders"
