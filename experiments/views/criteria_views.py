@@ -4,10 +4,11 @@ from django.views import generic
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 import braces.views as braces
+from uil.core.views.mixins import RedirectSuccessMessageMixin
 
 from ..models import DefaultCriteria, Criterium, Experiment
 from ..forms import DefaultCriteriaForm, CriteriumForm, ExperimentCriteriumForm
-from main.views import FormListView, RedirectSuccessMessageMixin
+from main.views import FormListView
 
 
 #

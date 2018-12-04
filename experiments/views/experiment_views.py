@@ -3,8 +3,9 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 import braces.views as braces
+from uil.core.views.mixins import RedirectSuccessMessageMixin, \
+    DeleteSuccessMessageMixin
 
-from main.views import RedirectSuccessMessageMixin
 from ..models import Experiment
 from ..forms import ExperimentForm
 
@@ -42,7 +43,7 @@ class ExperimentEditExcludedExperimentsView(braces.LoginRequiredMixin,
         return Experiment.objects.exclude(pk=self.kwargs['experiment'])
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(ExperimentEditExcludedExperimentsView, self)\
+        context = super(ExperimentEditExcludedExperimentsView, self) \
             .get_context_data(object_list=object_list, **kwargs)
 
         context['current_experiment'] = Experiment.objects.get(
