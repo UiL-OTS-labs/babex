@@ -39,19 +39,19 @@
             </thead>
 
             <tbody>
-                {% for leader in object_list %}
+                {% for participant in object_list %}
                     <tr>
                         <td>
-                            {{ leader.pk }}
+                            {{ participant.pk }}
                         </td>
                         <td>
-                            {{ leader.name }}
+                            {{ participant.name }}
                         </td>
                         <td>
-                            {{ leader.api_user.email }}
+                            {{ participant.email }}
                         </td>
                         <td>
-                            {{ leader.phonenumber }}
+                            {{ participant.phonenumber }}
                         </td>
                         <td>
                             Nada!
