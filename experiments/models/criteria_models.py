@@ -102,6 +102,9 @@ class DefaultCriteria(models.Model):
 
 
 class Criterium(models.Model):
+    class Meta:
+        ordering = ('name_natural',)
+
     name_form = models.TextField(
         _('criterium:attribute:name_form'),
     )
