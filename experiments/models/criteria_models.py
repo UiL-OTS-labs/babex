@@ -142,5 +142,5 @@ class Criterium(models.Model):
     def __str__(self):
         return "{} ({})".format(
             self.name_natural,
-            ", ".join(self.formatted_values_str())
+            self.formatted_values_str(True)
         )
