@@ -61,3 +61,17 @@ class CriteriumForm(forms.ModelForm):
                 'criteria:form:correct_value:error:not_a_value'))
 
         return correct_value
+
+
+class ExperimentCriteriumForm(CriteriumForm):
+    class Meta:
+        model = Criterium
+        fields = ['name_form', 'name_natural', 'values', 'correct_value',
+                  'message_failed', 'experiments']
+        widgets = {
+            'name_form':     forms.TextInput,
+            'name_natural':  forms.TextInput,
+            'values':        forms.TextInput,
+            'correct_value': forms.TextInput,
+            'experiments':   forms.MultipleHiddenInput,
+        }

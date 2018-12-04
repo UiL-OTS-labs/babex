@@ -6,7 +6,9 @@ from .views import (ExperimentHomeView, ExperimentCreateView,
                     ExperimentSwitchPublicView,
                     LocationHomeView, LocationCreateView, UpdateLocationView,
                     CriteriaHomeView, DefaultCriteriaUpdateView,
-                    CriteriaCreateView, CriteriaUpdateView)
+                    CriteriaCreateView, CriteriaUpdateView, CriteriaListView,
+                    AddExistingCriteriumToExperimentView,
+                    RemoveCriteriumFromExperiment, )
 
 app_name = 'experiments'
 
@@ -33,6 +35,21 @@ urlpatterns = [
         name='default_criteria'
     ),
 
+    url(
+        r'^(?P<experiment>\d+)/criteria/$',
+        CriteriaListView.as_view(),
+        name='specific_criteria'
+    ),
+    url(
+        r'^(?P<experiment>\d+)/criteria/remove/(?P<criterium>\d+)/$',
+        RemoveCriteriumFromExperiment.as_view(),
+        name='remove_criterium_from_experiment'
+    ),
+    url(
+        r'^(?P<experiment>\d+)/criteria/add/$',
+        AddExistingCriteriumToExperimentView.as_view(),
+        name='add_criterium_to_experiment'
+    ),
 
     url(r'(?P<pk>\d+)/switch_open/', ExperimentSwitchOpenView.as_view(),
         name='switch_open'),
