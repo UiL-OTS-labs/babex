@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-04 12:22+0000\n"
+"POT-Creation-Date: 2018-12-04 12:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,116 +22,116 @@ msgstr ""
 msgid "criteria:form:correct_value:error:not_a_value"
 msgstr "Deze waarde is niet opgegeven in 'waardes'!"
 
-#: experiments/models/criteria_models.py:11
+#: experiments/models/criteria_models.py:10
 msgid "default_criteria:attribute:multilingual:yes"
 msgstr "Een"
 
-#: experiments/models/criteria_models.py:12
+#: experiments/models/criteria_models.py:11
 msgid "default_criteria:attribute:multilingual:no"
 msgstr "Meerdere"
 
-#: experiments/models/criteria_models.py:13
-#: experiments/models/criteria_models.py:19
-#: experiments/models/criteria_models.py:25
-#: experiments/models/criteria_models.py:31
-#: experiments/models/criteria_models.py:37
+#: experiments/models/criteria_models.py:12
+#: experiments/models/criteria_models.py:18
+#: experiments/models/criteria_models.py:24
+#: experiments/models/criteria_models.py:30
+#: experiments/models/criteria_models.py:36
 #: experiments/templates/widgets/language_widget.html:20
 msgid "experiments:globals:indifferent"
 msgstr "Maakt niet uit"
 
-#: experiments/models/criteria_models.py:17
+#: experiments/models/criteria_models.py:16
 msgid "default_criteria:attribute:sex:male"
 msgstr "Man"
 
-#: experiments/models/criteria_models.py:18
+#: experiments/models/criteria_models.py:17
 msgid "default_criteria:attribute:sex:female"
 msgstr "Vrouw"
 
-#: experiments/models/criteria_models.py:23
+#: experiments/models/criteria_models.py:22
 msgid "default_criteria:attribute:handedness:lefthanded"
 msgstr "Links"
 
-#: experiments/models/criteria_models.py:24
+#: experiments/models/criteria_models.py:23
 msgid "default_criteria:attribute:handedness:righthanded"
 msgstr "Rechts"
 
-#: experiments/models/criteria_models.py:29
+#: experiments/models/criteria_models.py:28
 msgid "default_criteria:attribute:dyslexia:yes"
 msgstr "Ja"
 
-#: experiments/models/criteria_models.py:30
+#: experiments/models/criteria_models.py:29
 msgid "default_criteria:attribute:dyslexia:no"
 msgstr "Nee"
 
-#: experiments/models/criteria_models.py:35
+#: experiments/models/criteria_models.py:34
 msgid "default_criteria:attribute:social_status:student"
 msgstr "Student"
 
-#: experiments/models/criteria_models.py:36
+#: experiments/models/criteria_models.py:35
 msgid "default_criteria:attribute:social_status:other"
 msgstr "Overig"
 
-#: experiments/models/criteria_models.py:46
+#: experiments/models/criteria_models.py:45
 msgid "default_criteria:attribute:language"
 msgstr "Wat moet de moedertaal van de participant zijn?"
 
-#: experiments/models/criteria_models.py:51
+#: experiments/models/criteria_models.py:50
 msgid "default_criteria:attribute:multilingual"
 msgstr "Moet de participant een of meerdere talen spreken?"
 
-#: experiments/models/criteria_models.py:59
+#: experiments/models/criteria_models.py:58
 msgid "default_criteria:attribute:sex"
 msgstr "Moet de participant man of vrouw zijn?"
 
-#: experiments/models/criteria_models.py:67
+#: experiments/models/criteria_models.py:66
 msgid "default_criteria:attribute:handedness"
 msgstr "Moet de participant links- of rechtshandig zijn?"
 
-#: experiments/models/criteria_models.py:75
+#: experiments/models/criteria_models.py:74
 msgid "default_criteria:attribute:dyslexia"
 msgstr "Moet de participant dyslectisch zijn?"
 
-#: experiments/models/criteria_models.py:83
+#: experiments/models/criteria_models.py:82
 msgid "default_criteria:attribute:social_status"
 msgstr "Wat moet de sociale status van de participant zijn?"
 
-#: experiments/models/criteria_models.py:91
+#: experiments/models/criteria_models.py:90
 msgid "default_criteria:attribute:min_age"
 msgstr "Wat moet de ondergrens van de participant's leeftijd zijn?"
 
-#: experiments/models/criteria_models.py:94
+#: experiments/models/criteria_models.py:93
 msgid "default_criteria:attribute:min_age:help_text"
 msgstr "Zet dit op -1 als er geen ondergrens is."
 
-#: experiments/models/criteria_models.py:98
+#: experiments/models/criteria_models.py:97
 msgid "default_criteria:attribute:max_age"
 msgstr "Wat moet de bovengrens van de participant's leeftijd zijn?"
 
-#: experiments/models/criteria_models.py:101
+#: experiments/models/criteria_models.py:100
 msgid "default_criteria:attribute:max_age:help_text"
 msgstr "Zet dit op -1 als er geen bovengrens is."
 
-#: experiments/models/criteria_models.py:108
+#: experiments/models/criteria_models.py:106
 msgid "criterium:attribute:name_form"
 msgstr "Form naam"
 
-#: experiments/models/criteria_models.py:112
+#: experiments/models/criteria_models.py:110
 msgid "criterium:attribute:name_natural"
 msgstr "Weergave naam"
 
-#: experiments/models/criteria_models.py:116
+#: experiments/models/criteria_models.py:114
 msgid "criterium:attribute:values"
 msgstr "Mogelijke waardes"
 
-#: experiments/models/criteria_models.py:120
+#: experiments/models/criteria_models.py:118
 msgid "criterium:attribute:correct_value"
 msgstr "Correctie waarde"
 
-#: experiments/models/criteria_models.py:124
+#: experiments/models/criteria_models.py:122
 msgid "criterium:attribute:message_failed"
 msgstr "Melding indien incorrect"
 
-#: experiments/models/criteria_models.py:129
+#: experiments/models/criteria_models.py:127
 msgid "criterium:attribute:experiments"
 msgstr "Experimenten"
 
@@ -332,6 +332,30 @@ msgstr "Standaard criteria voor {}"
 msgid "experiments:new_default_criteria:info_text"
 msgstr " "
 
+#: experiments/templates/experiments/delete.html:11
+#, fuzzy
+#| msgid "experiments:edit:header"
+msgid "experiments:delete:header"
+msgstr "Verander experiment"
+
+#: experiments/templates/experiments/delete.html:14
+#, fuzzy
+#| msgid "experiments:home:delete:title"
+msgid "experiments:delete:text"
+msgstr "Verwijder experiment"
+
+#: experiments/templates/experiments/delete.html:17
+#, fuzzy
+#| msgid "experiments:home:delete:title"
+msgid "experiments:delete:cancel"
+msgstr "Verwijder experiment"
+
+#: experiments/templates/experiments/delete.html:20
+#, fuzzy
+#| msgid "experiments:home:delete:title"
+msgid "experiments:delete:confirm"
+msgstr "Verwijder experiment"
+
 #: experiments/templates/experiments/edit.html:11
 msgid "experiments:edit:header"
 msgstr "Verander experiment"
@@ -360,67 +384,67 @@ msgstr "Neem experiment op"
 msgid "experiments:excluded_experiments:included:title"
 msgstr "Sluit experiment uit"
 
-#: experiments/templates/experiments/index.html:12
+#: experiments/templates/experiments/index.html:19
 msgid "experiments:home:create_experiment"
 msgstr "Nieuw experiment"
 
-#: experiments/templates/experiments/index.html:16
+#: experiments/templates/experiments/index.html:23
 msgid "experiments:home:header"
 msgstr "Experimenten"
 
-#: experiments/templates/experiments/index.html:19
+#: experiments/templates/experiments/index.html:26
 msgid "experiments:home:info_text"
 msgstr "<br/>"
 
-#: experiments/templates/experiments/index.html:31
+#: experiments/templates/experiments/index.html:38
 msgid "experiments:global:slots"
 msgstr "Slots"
 
-#: experiments/templates/experiments/index.html:34
+#: experiments/templates/experiments/index.html:41
 msgid "experiments:global:participants"
 msgstr "Participanten"
 
-#: experiments/templates/experiments/index.html:76
+#: experiments/templates/experiments/index.html:83
 msgid "experiments:home:switch_open:title"
 msgstr "Open/sluit experiment"
 
-#: experiments/templates/experiments/index.html:85
+#: experiments/templates/experiments/index.html:92
 msgid "experiments:home:switch_public:title"
 msgstr "Maak experiment openbaar/verborgen"
 
-#: experiments/templates/experiments/index.html:94
+#: experiments/templates/experiments/index.html:101
 msgid "experiments:home:switch_visible:title"
 msgstr "Maak participant data openbaar/verborgen voor proefleiders"
 
-#: experiments/templates/experiments/index.html:103
+#: experiments/templates/experiments/index.html:110
 msgid "experiments:home:edit_timeslots:title"
 msgstr "Pas timeslots aan"
 
-#: experiments/templates/experiments/index.html:110
+#: experiments/templates/experiments/index.html:117
 msgid "experiments:home:edit_experiment:title"
 msgstr "Pas experiment aan"
 
-#: experiments/templates/experiments/index.html:117
+#: experiments/templates/experiments/index.html:124
 msgid "experiments:home:edit_default_criteria:title"
 msgstr "Pas standaard criteria aan"
 
-#: experiments/templates/experiments/index.html:124
+#: experiments/templates/experiments/index.html:131
 msgid "experiments:home:edit_specific_criteria:title"
 msgstr "Pas specifieke criteria aan"
 
-#: experiments/templates/experiments/index.html:131
+#: experiments/templates/experiments/index.html:138
 msgid "experiments:home:exclude_experiments:title"
 msgstr "Sluit experimenten uit"
 
-#: experiments/templates/experiments/index.html:138
+#: experiments/templates/experiments/index.html:145
 msgid "experiments:home:invite:title"
 msgstr "Nodig participanten uit"
 
-#: experiments/templates/experiments/index.html:145
+#: experiments/templates/experiments/index.html:152
 msgid "experiments:home:participants:title"
 msgstr "Participanten"
 
-#: experiments/templates/experiments/index.html:152
+#: experiments/templates/experiments/index.html:159
 msgid "experiments:home:delete:title"
 msgstr "Verwijder experiment"
 
@@ -507,26 +531,30 @@ msgstr "Experiment succesvol opgenomen"
 msgid "experiments:message:exclude:excluded"
 msgstr "Experiment succesvol uitgesloten"
 
-#: experiments/views/experiment_views.py:89
+#: experiments/views/experiment_views.py:83
+msgid "experiments:message:deleted_experiment"
+msgstr "Experiment verwijderd!"
+
+#: experiments/views/experiment_views.py:97
 msgid "experiments:message:switch_open:closed"
 msgstr "Experiment openbaar gemaakt"
 
-#: experiments/views/experiment_views.py:92
+#: experiments/views/experiment_views.py:100
 msgid "experiments:message:switch_open:opened"
 msgstr "Experiment verborgen"
 
-#: experiments/views/experiment_views.py:110
+#: experiments/views/experiment_views.py:118
 msgid "experiments:message:switch_public:closed"
 msgstr "Experiment ge-opent"
 
-#: experiments/views/experiment_views.py:113
+#: experiments/views/experiment_views.py:121
 msgid "experiments:message:switch_public:opened"
 msgstr "Experiment gesloten"
 
-#: experiments/views/experiment_views.py:132
+#: experiments/views/experiment_views.py:140
 msgid "experiments:message:switch_visible:visible"
 msgstr "Participant informatie zichtbaar gemaakt voor proefleiders"
 
-#: experiments/views/experiment_views.py:137
+#: experiments/views/experiment_views.py:145
 msgid "experiments:message:switch_visible:invisible"
 msgstr "Participant informatie verborgen voor proefleiders"

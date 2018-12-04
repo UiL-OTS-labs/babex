@@ -76,6 +76,14 @@ class ExperimentExcludeOtherExperimentView(braces.LoginRequiredMixin,
         return reverse('experiments:excluded_experiments', args=[experiment_pk])
 
 
+class ExperimentDeleteView(braces.LoginRequiredMixin, DeleteSuccessMessageMixin,
+                           generic.DeleteView):
+    model = Experiment
+    success_url = reverse('experiments:home')
+    template_name = 'experiments/delete.html'
+    success_message = _('experiments:message:deleted_experiment')
+
+
 class ExperimentSwitchOpenView(braces.LoginRequiredMixin,
                                RedirectSuccessMessageMixin,
                                generic.RedirectView):
@@ -141,4 +149,3 @@ class ExperimentSwitchVisibleView(braces.LoginRequiredMixin,
         experiment.save()
 
         return reverse('experiments:home')
-

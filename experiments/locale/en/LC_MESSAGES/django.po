@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-04 12:22+0000\n"
+"POT-Creation-Date: 2018-12-04 12:55+0000\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -22,116 +22,116 @@ msgstr ""
 msgid "criteria:form:correct_value:error:not_a_value"
 msgstr "This is not a value as specified in 'values'!"
 
-#: experiments/models/criteria_models.py:11
+#: experiments/models/criteria_models.py:10
 msgid "default_criteria:attribute:multilingual:yes"
 msgstr "One"
 
-#: experiments/models/criteria_models.py:12
+#: experiments/models/criteria_models.py:11
 msgid "default_criteria:attribute:multilingual:no"
 msgstr "Many"
 
-#: experiments/models/criteria_models.py:13
-#: experiments/models/criteria_models.py:19
-#: experiments/models/criteria_models.py:25
-#: experiments/models/criteria_models.py:31
-#: experiments/models/criteria_models.py:37
+#: experiments/models/criteria_models.py:12
+#: experiments/models/criteria_models.py:18
+#: experiments/models/criteria_models.py:24
+#: experiments/models/criteria_models.py:30
+#: experiments/models/criteria_models.py:36
 #: experiments/templates/widgets/language_widget.html:20
 msgid "experiments:globals:indifferent"
 msgstr "Indifferent"
 
-#: experiments/models/criteria_models.py:17
+#: experiments/models/criteria_models.py:16
 msgid "default_criteria:attribute:sex:male"
 msgstr "Male"
 
-#: experiments/models/criteria_models.py:18
+#: experiments/models/criteria_models.py:17
 msgid "default_criteria:attribute:sex:female"
 msgstr "Female"
 
-#: experiments/models/criteria_models.py:23
+#: experiments/models/criteria_models.py:22
 msgid "default_criteria:attribute:handedness:lefthanded"
 msgstr "Left"
 
-#: experiments/models/criteria_models.py:24
+#: experiments/models/criteria_models.py:23
 msgid "default_criteria:attribute:handedness:righthanded"
 msgstr "Right"
 
-#: experiments/models/criteria_models.py:29
+#: experiments/models/criteria_models.py:28
 msgid "default_criteria:attribute:dyslexia:yes"
 msgstr "Yes"
 
-#: experiments/models/criteria_models.py:30
+#: experiments/models/criteria_models.py:29
 msgid "default_criteria:attribute:dyslexia:no"
 msgstr "No"
 
-#: experiments/models/criteria_models.py:35
+#: experiments/models/criteria_models.py:34
 msgid "default_criteria:attribute:social_status:student"
 msgstr "Student"
 
-#: experiments/models/criteria_models.py:36
+#: experiments/models/criteria_models.py:35
 msgid "default_criteria:attribute:social_status:other"
 msgstr "Other"
 
-#: experiments/models/criteria_models.py:46
+#: experiments/models/criteria_models.py:45
 msgid "default_criteria:attribute:language"
 msgstr "What should the participant's language be?"
 
-#: experiments/models/criteria_models.py:51
+#: experiments/models/criteria_models.py:50
 msgid "default_criteria:attribute:multilingual"
 msgstr "Does the participant have to speak one or many languages? "
 
-#: experiments/models/criteria_models.py:59
+#: experiments/models/criteria_models.py:58
 msgid "default_criteria:attribute:sex"
 msgstr "Should the participant be Male or Female?"
 
-#: experiments/models/criteria_models.py:67
+#: experiments/models/criteria_models.py:66
 msgid "default_criteria:attribute:handedness"
 msgstr "Should the participant be left- or righthanded? "
 
-#: experiments/models/criteria_models.py:75
+#: experiments/models/criteria_models.py:74
 msgid "default_criteria:attribute:dyslexia"
 msgstr "Should the participant be dyslectic?"
 
-#: experiments/models/criteria_models.py:83
+#: experiments/models/criteria_models.py:82
 msgid "default_criteria:attribute:social_status"
 msgstr "What should the social role of the participant be? "
 
-#: experiments/models/criteria_models.py:91
+#: experiments/models/criteria_models.py:90
 msgid "default_criteria:attribute:min_age"
 msgstr "What should the lower bound of the participant's age?"
 
-#: experiments/models/criteria_models.py:94
+#: experiments/models/criteria_models.py:93
 msgid "default_criteria:attribute:min_age:help_text"
 msgstr "Set to -1 if this criteria doesn't matter."
 
-#: experiments/models/criteria_models.py:98
+#: experiments/models/criteria_models.py:97
 msgid "default_criteria:attribute:max_age"
 msgstr "What should the upper bound of the participant's age?"
 
-#: experiments/models/criteria_models.py:101
+#: experiments/models/criteria_models.py:100
 msgid "default_criteria:attribute:max_age:help_text"
 msgstr "Set to -1 if this criteria doesn't matter"
 
-#: experiments/models/criteria_models.py:108
+#: experiments/models/criteria_models.py:106
 msgid "criterium:attribute:name_form"
 msgstr "Form name"
 
-#: experiments/models/criteria_models.py:112
+#: experiments/models/criteria_models.py:110
 msgid "criterium:attribute:name_natural"
 msgstr "Display name"
 
-#: experiments/models/criteria_models.py:116
+#: experiments/models/criteria_models.py:114
 msgid "criterium:attribute:values"
 msgstr "Values (comma separated)"
 
-#: experiments/models/criteria_models.py:120
+#: experiments/models/criteria_models.py:118
 msgid "criterium:attribute:correct_value"
 msgstr "Correct value"
 
-#: experiments/models/criteria_models.py:124
+#: experiments/models/criteria_models.py:122
 msgid "criterium:attribute:message_failed"
 msgstr "Message when failed"
 
-#: experiments/models/criteria_models.py:129
+#: experiments/models/criteria_models.py:127
 msgid "criterium:attribute:experiments"
 msgstr "Experiments"
 
@@ -332,6 +332,22 @@ msgstr "Default criteria for {}"
 msgid "experiments:new_default_criteria:info_text"
 msgstr " "
 
+#: experiments/templates/experiments/delete.html:11
+msgid "experiments:delete:header"
+msgstr "Delete experiment"
+
+#: experiments/templates/experiments/delete.html:14
+msgid "experiments:delete:text"
+msgstr "Are you sure you want to delete the experiment '{}'?"
+
+#: experiments/templates/experiments/delete.html:17
+msgid "experiments:delete:cancel"
+msgstr "Cancel"
+
+#: experiments/templates/experiments/delete.html:20
+msgid "experiments:delete:confirm"
+msgstr "Delete experiment"
+
 #: experiments/templates/experiments/edit.html:11
 msgid "experiments:edit:header"
 msgstr "Edit experiment"
@@ -360,67 +376,67 @@ msgstr "Exclude experiment"
 msgid "experiments:excluded_experiments:included:title"
 msgstr "Include experiment"
 
-#: experiments/templates/experiments/index.html:12
+#: experiments/templates/experiments/index.html:19
 msgid "experiments:home:create_experiment"
 msgstr "Create experiment"
 
-#: experiments/templates/experiments/index.html:16
+#: experiments/templates/experiments/index.html:23
 msgid "experiments:home:header"
 msgstr "Experiments"
 
-#: experiments/templates/experiments/index.html:19
+#: experiments/templates/experiments/index.html:26
 msgid "experiments:home:info_text"
 msgstr "<br/>"
 
-#: experiments/templates/experiments/index.html:31
+#: experiments/templates/experiments/index.html:38
 msgid "experiments:global:slots"
 msgstr "Slots"
 
-#: experiments/templates/experiments/index.html:34
+#: experiments/templates/experiments/index.html:41
 msgid "experiments:global:participants"
 msgstr "Participants"
 
-#: experiments/templates/experiments/index.html:76
+#: experiments/templates/experiments/index.html:83
 msgid "experiments:home:switch_open:title"
 msgstr "Open/close experiment"
 
-#: experiments/templates/experiments/index.html:85
+#: experiments/templates/experiments/index.html:92
 msgid "experiments:home:switch_public:title"
 msgstr "Make experiment public/private"
 
-#: experiments/templates/experiments/index.html:94
+#: experiments/templates/experiments/index.html:101
 msgid "experiments:home:switch_visible:title"
 msgstr "Toggle participant details visibility"
 
-#: experiments/templates/experiments/index.html:103
+#: experiments/templates/experiments/index.html:110
 msgid "experiments:home:edit_timeslots:title"
 msgstr "Edit timeslots"
 
-#: experiments/templates/experiments/index.html:110
+#: experiments/templates/experiments/index.html:117
 msgid "experiments:home:edit_experiment:title"
 msgstr "Edit experiment"
 
-#: experiments/templates/experiments/index.html:117
+#: experiments/templates/experiments/index.html:124
 msgid "experiments:home:edit_default_criteria:title"
 msgstr "Edit default criteria"
 
-#: experiments/templates/experiments/index.html:124
+#: experiments/templates/experiments/index.html:131
 msgid "experiments:home:edit_specific_criteria:title"
 msgstr "Edit specific criteria"
 
-#: experiments/templates/experiments/index.html:131
+#: experiments/templates/experiments/index.html:138
 msgid "experiments:home:exclude_experiments:title"
 msgstr "Exclude experiments"
 
-#: experiments/templates/experiments/index.html:138
+#: experiments/templates/experiments/index.html:145
 msgid "experiments:home:invite:title"
 msgstr "Invite participants"
 
-#: experiments/templates/experiments/index.html:145
+#: experiments/templates/experiments/index.html:152
 msgid "experiments:home:participants:title"
 msgstr "Participants"
 
-#: experiments/templates/experiments/index.html:152
+#: experiments/templates/experiments/index.html:159
 msgid "experiments:home:delete:title"
 msgstr "Delete experiment"
 
@@ -506,26 +522,30 @@ msgstr "Successfully included experiment"
 msgid "experiments:message:exclude:excluded"
 msgstr "Successfully excluded experiment"
 
-#: experiments/views/experiment_views.py:89
+#: experiments/views/experiment_views.py:83
+msgid "experiments:message:deleted_experiment"
+msgstr "Experiment deleted!"
+
+#: experiments/views/experiment_views.py:97
 msgid "experiments:message:switch_open:closed"
 msgstr "Successfully closed experiment"
 
-#: experiments/views/experiment_views.py:92
+#: experiments/views/experiment_views.py:100
 msgid "experiments:message:switch_open:opened"
 msgstr "Successfully opened experiment"
 
-#: experiments/views/experiment_views.py:110
+#: experiments/views/experiment_views.py:118
 msgid "experiments:message:switch_public:closed"
 msgstr "Successfully hid experiment"
 
-#: experiments/views/experiment_views.py:113
+#: experiments/views/experiment_views.py:121
 msgid "experiments:message:switch_public:opened"
 msgstr "Successfully made experiment public"
 
-#: experiments/views/experiment_views.py:132
+#: experiments/views/experiment_views.py:140
 msgid "experiments:message:switch_visible:visible"
 msgstr "Successfully changed participant visibility to visible"
 
-#: experiments/views/experiment_views.py:137
+#: experiments/views/experiment_views.py:145
 msgid "experiments:message:switch_visible:invisible"
 msgstr "Successfully hid participants from leaders"
