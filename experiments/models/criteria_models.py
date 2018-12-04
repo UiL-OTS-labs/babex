@@ -6,7 +6,6 @@ from .experiment_models import Experiment
 
 
 class DefaultCriteria(models.Model):
-
     MULTILINGUAL = (
         ('Y', _('default_criteria:attribute:multilingual:yes')),
         ('N', _('default_criteria:attribute:multilingual:no')),
@@ -103,7 +102,6 @@ class DefaultCriteria(models.Model):
 
 
 class Criterium(models.Model):
-
     name_form = models.TextField(
         _('criterium:attribute:name_form'),
     )
@@ -129,3 +127,20 @@ class Criterium(models.Model):
         verbose_name=_('criterium:attribute:experiments'),
         related_name='specific_criteria',
     )
+
+    def formatted_values_str(self) -> str:
+        values = self.values.split(',')
+        formatted_values = []
+        for value in values:
+            if value == self.correct_value:
+                formatted_values.append("->{}<-".format(value))
+            else:
+                formatted_values.append(value)
+
+        return ", ".join(formatted_values)
+
+    def __str__(self):
+        return "{} ({})".format(
+            self.name_natural,
+            ", ".join(self.formatted_values_str())
+        )
