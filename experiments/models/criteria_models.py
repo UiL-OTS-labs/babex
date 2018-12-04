@@ -128,11 +128,11 @@ class Criterium(models.Model):
         related_name='specific_criteria',
     )
 
-    def formatted_values_str(self) -> str:
+    def formatted_values_str(self, highlight_current: bool = False) -> str:
         values = self.values.split(',')
         formatted_values = []
         for value in values:
-            if value == self.correct_value:
+            if value == self.correct_value and highlight_current:
                 formatted_values.append("->{}<-".format(value))
             else:
                 formatted_values.append(value)
