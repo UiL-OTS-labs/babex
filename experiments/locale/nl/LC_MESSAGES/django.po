@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-06 09:13+0000\n"
+"POT-Creation-Date: 2018-12-06 09:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -337,11 +337,15 @@ msgstr "Criterium"
 
 #: experiments/templates/criteria/update_default.html:10
 #: experiments/templates/criteria/update_default.html:17
-msgid "experiments:new_default_criteria:header"
+#, fuzzy
+#| msgid "experiments:new_default_criteria:header"
+msgid "criteria:new_default_criteria:header"
 msgstr "Standaard criteria voor {}"
 
 #: experiments/templates/criteria/update_default.html:20
-msgid "experiments:new_default_criteria:info_text"
+#, fuzzy
+#| msgid "experiments:new_default_criteria:info_text"
+msgid "criteria:new_default_criteria:info_text"
 msgstr " "
 
 #: experiments/templates/experiments/delete.html:8

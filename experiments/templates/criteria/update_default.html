@@ -5,19 +5,18 @@
 {% load get_field_name %}
 {% load transformat %}
 
-{# TODO: move these translations to the criteria prefix #}
 {% block header_title %}
-     {% transformat 'experiments:new_default_criteria:header' form.instance.experiment.name %} - {{ block.super }}
+     {% transformat 'criteria:new_default_criteria:header' form.instance.experiment.name %} - {{ block.super }}
 {% endblock %}
 
 {% block content %}
 <div class="uu-inner-container">
     <div class="col-12">
         <h1>
-            {% transformat 'experiments:new_default_criteria:header' form.instance.experiment.name %}
+            {% transformat 'criteria:new_default_criteria:header' form.instance.experiment.name %}
         </h1>
         <p>
-            {% trans 'experiments:new_default_criteria:info_text' %}
+            {% trans 'criteria:new_default_criteria:info_text' %}
         </p>
         <form method="post">
             {% csrf_token %}
