@@ -2,13 +2,11 @@ from django.db import models
 from django.core.validators import MinValueValidator
 from django.utils.translation import ugettext_lazy as _
 
-
 from .location_models import Location
 from leaders.models import Leader
 
 
 class Experiment(models.Model):
-
     name = models.TextField(
         _('experiment:attribute:name')
     )
@@ -85,6 +83,20 @@ class Experiment(models.Model):
         help_text=_("experiment:attribute:additional_leaders:help_text"),
     )
 
+    def get_number_of_places(self) -> int:
+        """
+        Returns the number of places in an experiment by counting the
+        max_places for all timeslots.
+        """
+        return sum([x.max_places for x in self.timeslot_set.all()])
+
+    def get_number_of_participants(self) -> int:
+        """
+        Returns the number of participants in an experiment by counting all
+        participants in the timeslot set.
+        """
+        # We use .count() as this is a O(1) operation, in contrast to len()
+        return sum([x.participants.count() for x in self.timeslot_set.all()])
+
     def __str__(self):
         return self.name
-

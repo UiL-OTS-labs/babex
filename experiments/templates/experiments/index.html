@@ -4,6 +4,10 @@
 {% load datatables %}
 {% load get_field_name %}
 
+{% block header_title %}
+    {% trans 'experiments:home:page_title' %} - {{ block.super }}
+{% endblock %}
+
 {% block content %}
 <style>
     {# How dare you call this a CSS Hack! It's not a CSS hack, it's a horrible CSS hack! #}
@@ -68,10 +72,10 @@
                             {{ experiment.name }}
                         </td>
                         <td>
-                            {{ experiment.timeslot_set.count }}
+                            {{ experiment.get_number_of_places }}
                         </td>
                         <td>
-                            0
+                            {{ experiment.get_number_of_participants }}
                         </td>
                         <td>
                             {{ experiment.excluded_experiments.count }}
