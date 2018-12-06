@@ -3,95 +3,221 @@
 {% load transformat %}
 {% load datatables %}
 {% load get_field_name %}
+{% load static %}
 
 {% block header_title %}
     {% transformat 'timeslots:home:header' experiment %} - {{ block.super }}
 {% endblock %}
 
+{% block html_head %}
+    <script src="{% static 'uil.core/js/bootstrap-datetimepicker.min.js' %}"></script>
+    <link href="{% static 'uil.core/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet"/>
+    <script>
+        $(function () {
+            $('#id_datetime').datetimepicker({
+                format: 'yyyy-mm-dd hh:ii',
+                weekStart: 1, // Monday
+                startDate: new Date(),
+                autoclose: true,
+                keyboard: false,
+                pickerPosition: 'top-left',
+            });
+            $('table.dt_custom').DataTable( {
+                dom: 'Bfrtip',
+                buttons : [
+                    'copyHtml5',
+                    'csvHtml5',
+                    'pdfHtml5',
+                    'print',
+                    'pageLength'
+                ],
+                order: [
+                    [2, 'asc'],
+                    [3, 'asc']
+                ],
+                lengthMenu: [
+                    [10, 20, 50, -1],
+                    ["10", "20", "50", "\u221e"]
+                ],
+                responsive: true,
+                paginationType: "full_numbers",
+                pageLength: -1,
+            } );
+        });
+
+    </script>
+{% endblock %}
 
 {% block content %}
-<div class="uu-inner-container">
-    <div class="col-12">
-        <h1>
-            {% transformat 'timeslots:home:header' experiment %}
-        </h1>
-        <p>
-            {% trans 'timeslots:home:info_text' %}
-        </p>
-        <table class="dt" width="100%" data-language="{% datatables_lang %}">
-            <thead>
-                <tr>
-                    <th>
-                        {% get_verbose_field_name "experiments" "TimeSlot" "id" %}
-                    </th>
-                    <th>
-                        {% trans 'timeslots:day' %}
-                    </th>
-                    <th>
-                        {% trans 'timeslots:date' %}
-                    </th>
-                    <th>
-                        {% trans 'timeslots:time' %}
-                    </th>
-                    <th>
-                        {% trans 'timeslots:place' %}
-                    </th>
-                    <th>
-                        {% trans 'timeslots:participant:name' %}
-                    </th>
-                    <th>
-                        {% trans 'timeslots:participant:email' %}
-                    </th>
-                    <th>
-                        {% trans 'experiments:globals:actions' %}
-                    </th>
-                </tr>
-            </thead>
+    <div class="uu-inner-container">
+        <div class="col-12">
+            <h1>
+                {% transformat 'timeslots:home:header' experiment %}
+            </h1>
+            <p>
+                {% trans 'timeslots:home:info_text' %}
+            </p>
+            <form method="post" action="{% url 'experiments:timeslots_bulk_delete' experiment.pk %}">
+                {% csrf_token %}
+                <table class="dt_custom" width="100%" data-language="{% datatables_lang %}">
+                    <thead>
+                    <tr>
+                        <th>
+                            {% get_verbose_field_name "experiments" "TimeSlot" "id" %}
+                        </th>
+                        <th>
+                            {% trans 'timeslots:day' %}
+                        </th>
+                        <th>
+                            {% trans 'timeslots:date' %}
+                        </th>
+                        <th>
+                            {% trans 'timeslots:time' %}
+                        </th>
+                        <th>
+                            {% trans 'timeslots:place' %}
+                        </th>
+                        <th>
+                            {% trans 'timeslots:participant:name' %}
+                        </th>
+                        <th>
+                            {% trans 'timeslots:participant:email' %}
+                        </th>
+                        <th>
+                            {% trans 'experiments:globals:actions' %}
+                        </th>
+                        <th>
+                            <input type="checkbox" id="master_checkbox">
+                        </th>
+                    </tr>
+                    </thead>
 
-            <tbody>
-                {% for timeslot in object_list %}
-                    {# a timeslot can have multiple places, which we want to display seperately #}
-                    {% for place in timeslot.places %}
-                        <tr>
-                            <td>
-                                {{ timeslot.pk }}
-                            </td>
-                            <td>
-                                {{ timeslot.datetime|date:'l' }}
-                            </td>
-                            <td>
-                                {{ timeslot.datetime|date:'Y-m-d' }}
-                            </td>
-                            <td>
-                                {{ timeslot.datetime|date:'H:i:s' }}
-                            </td>
-                            <td>
-                                {{ place.n }}
-                            </td>
-                            {% if place.participant %}
+                    <tbody>
+                    {% for timeslot in object_list %}
+                        {# a timeslot can have multiple places, which we want to display seperately #}
+                        {% for place in timeslot.places %}
+                            <tr>
                                 <td>
-                                    {{ place.participant.name }}
+                                    {{ timeslot.pk }}
                                 </td>
                                 <td>
-                                    {{ place.participant.email }}
-                                </td>
-                            {% else %}
-                                <td>
-                                    -
+                                    {{ timeslot.datetime|date:'l' }}
                                 </td>
                                 <td>
-                                    -
+                                    {{ timeslot.datetime|date:'Y-m-d' }}
                                 </td>
-                            {% endif %}
-                            <td>
-
-                            </td>
-                        </tr>
+                                <td>
+                                    {{ timeslot.datetime|date:'H:i' }}
+                                </td>
+                                <td>
+                                    {{ place.n }}
+                                </td>
+                                {% if place.participant %}
+                                    <td>
+                                        {{ place.participant.name }}
+                                    </td>
+                                    <td>
+                                        {{ place.participant.email }}
+                                    </td>
+                                {% else %}
+                                    <td>
+                                        -
+                                    </td>
+                                    <td>
+                                        -
+                                    </td>
+                                {% endif %}
+                                <td>
+                                    {% if place.n == timeslot.max_places %}
+                                        <a href="{% url 'experiments:timeslots_delete' experiment.pk timeslot.pk %}">
+                                        D
+                                        </a>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <input type="checkbox" class="timeslot_checkbox" name="timeslot_{{ timeslot.pk }}[]" value="{{ place.n }}" data-timeslot="{{ timeslot.pk }}" data-n="{{ place.n }}" data-last="{{ timeslot.max_places }}" id="{{ timeslot.pk }}-{{ place.n }}">
+                                </td>
+                            </tr>
+                        {% endfor %}
                     {% endfor %}
-                {% endfor %}
-            </tbody>
-        </table>
-        <br/>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <button type="submit" class="mt-1">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </form>
+        </div>
+        <script>
+            function reset_disabled()
+            {
+                $('.timeslot_checkbox').each(function () {
+                    let el = $(this);
+                    let last = el.attr('data-last');
+                    let n = el.attr('data-n');
+
+                    if(n !== last) {
+                        el.prop('disabled', true);
+                    }
+                })
+            }
+            $(function () {
+                $('#master_checkbox').change(function () {
+                    let checked = $(this).is(':checked');
+                    let checkboxes = $('.timeslot_checkbox');
+
+                    checkboxes.prop('checked', checked);
+                    checkboxes.prop('disabled', checked);
+
+                    reset_disabled();
+                }).change();
+
+                $('.timeslot_checkbox').change(function () {
+                    let el = $(this);
+                    let checked = el.is(':checked');
+                    let timeslot = el.attr('data-timeslot');
+                    let n = el.attr('data-n');
+
+                    if(n > 0)
+                    {
+                        $('#' + timeslot + '-' + (n-1)).prop('disabled', !checked)
+                    }
+
+                }).change();
+
+                $('button[type="submit"]').click(function () {
+                    let checkboxes = $('.timeslot_checkbox');
+
+                    checkboxes.prop('disabled', false);
+                });
+            });
+        </script>
+        <div class="col-12">
+            <h3>
+                {% trans 'timeslots:home:new_timeslots:header' %}
+            </h3>
+            <form method="post" class="oneline-form">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit">
+                    {% trans 'experiments:globals:add_button' %}
+                </button>
+                <br/>
+                <br/>
+            </form>
+        </div>
     </div>
-</div>
 {% endblock %}

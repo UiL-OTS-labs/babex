@@ -9,7 +9,7 @@ from .views import (ExperimentHomeView, ExperimentCreateView,
                     CriteriaCreateView, CriteriaUpdateView, CriteriaListView,
                     AddExistingCriteriumToExperimentView,
                     RemoveCriteriumFromExperiment,
-                    TimeSlotHomeView
+                    TimeSlotHomeView, TimeSlotDeleteView, TimeSlotBulkDeleteView
                     )
 
 # TODO: make this a little bit more readable
@@ -43,6 +43,18 @@ urlpatterns = [
         r'^(?P<experiment>\d+)/timeslots/$',
         TimeSlotHomeView.as_view(),
         name='timeslots',
+    ),
+
+    url(
+        r'^(?P<experiment>\d+)/timeslots/delete/(?P<timeslot>\d+)/$',
+        TimeSlotDeleteView.as_view(),
+        name='timeslots_delete',
+    ),
+
+    url(
+        r'^(?P<experiment>\d+)/timeslots/delete/$',
+        TimeSlotBulkDeleteView.as_view(),
+        name='timeslots_bulk_delete',
     ),
 
     # Experiment related criteria views

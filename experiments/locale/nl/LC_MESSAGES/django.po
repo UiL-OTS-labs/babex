@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-06 09:15+0000\n"
+"POT-Creation-Date: 2018-12-06 10:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -246,7 +246,7 @@ msgstr "Tijd & Datum"
 
 #: experiments/models/timeslot_models.py:21
 msgid "time_slot:attribute:max_places"
-msgstr "Max plaatsen"
+msgstr "Aantal plekken"
 
 #: experiments/models/timeslot_models.py:27
 #, fuzzy
@@ -265,7 +265,7 @@ msgstr "<br/>"
 
 #: experiments/templates/criteria/edit.html:27
 #: experiments/templates/criteria/new.html:27
-#: experiments/templates/criteria/update_default.html:29
+#: experiments/templates/criteria/update_default.html:28
 #: experiments/templates/experiments/edit.html:27
 #: experiments/templates/locations/edit.html:27
 #: experiments/templates/locations/new.html:28
@@ -288,7 +288,7 @@ msgstr "<br/>"
 #: experiments/templates/criteria/index.html:44
 #: experiments/templates/criteria/specific_list.html:40
 #: experiments/templates/locations/index.html:39
-#: experiments/templates/timeslots/index.html:46
+#: experiments/templates/timeslots/index.html:64
 msgid "experiments:globals:actions"
 msgstr "Acties"
 
@@ -324,6 +324,7 @@ msgstr "Voeg nieuw criterium toe"
 
 #: experiments/templates/criteria/specific_list.html:89
 #: experiments/templates/criteria/specific_list.html:121
+#: experiments/templates/timeslots/index.html:122
 msgid "experiments:globals:add_button"
 msgstr "Toevoegen"
 
@@ -335,16 +336,12 @@ msgstr "Voeg bestaand criterium toe"
 msgid "criteria:existing_form:criterium"
 msgstr "Criterium"
 
-#: experiments/templates/criteria/update_default.html:10
-#: experiments/templates/criteria/update_default.html:17
-#, fuzzy
-#| msgid "experiments:new_default_criteria:header"
+#: experiments/templates/criteria/update_default.html:9
+#: experiments/templates/criteria/update_default.html:16
 msgid "criteria:new_default_criteria:header"
 msgstr "Standaard criteria voor {}"
 
-#: experiments/templates/criteria/update_default.html:20
-#, fuzzy
-#| msgid "experiments:new_default_criteria:info_text"
+#: experiments/templates/criteria/update_default.html:19
 msgid "criteria:new_default_criteria:info_text"
 msgstr " "
 
@@ -514,38 +511,42 @@ msgstr "Nieuwe locatie"
 msgid "locations:new:info_text"
 msgstr " "
 
-#: experiments/templates/timeslots/index.html:8
-#: experiments/templates/timeslots/index.html:16
+#: experiments/templates/timeslots/index.html:9
+#: experiments/templates/timeslots/index.html:33
 msgid "timeslots:home:header"
 msgstr "Timeslots voor experiment '{}'"
 
-#: experiments/templates/timeslots/index.html:19
+#: experiments/templates/timeslots/index.html:36
 msgid "timeslots:home:info_text"
 msgstr "<br/>"
 
-#: experiments/templates/timeslots/index.html:28
+#: experiments/templates/timeslots/index.html:46
 msgid "timeslots:day"
 msgstr "Dag"
 
-#: experiments/templates/timeslots/index.html:31
+#: experiments/templates/timeslots/index.html:49
 msgid "timeslots:date"
 msgstr "Datum"
 
-#: experiments/templates/timeslots/index.html:34
+#: experiments/templates/timeslots/index.html:52
 msgid "timeslots:time"
 msgstr "Tijd"
 
-#: experiments/templates/timeslots/index.html:37
+#: experiments/templates/timeslots/index.html:55
 msgid "timeslots:place"
 msgstr "Plaats #"
 
-#: experiments/templates/timeslots/index.html:40
+#: experiments/templates/timeslots/index.html:58
 msgid "timeslots:participant:name"
 msgstr "Participant"
 
-#: experiments/templates/timeslots/index.html:43
+#: experiments/templates/timeslots/index.html:61
 msgid "timeslots:participant:email"
 msgstr "Participant email"
+
+#: experiments/templates/timeslots/index.html:117
+msgid "timeslots:home:new_timeslots:header"
+msgstr "Nieuw timeslot"
 
 #: experiments/views/criteria_views.py:29
 msgid "criteria:messages:created"
