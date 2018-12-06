@@ -5,6 +5,11 @@
 {% load get_field_name %}
 {% load transformat %}
 
+{# TODO: move these translations to the criteria prefix #}
+{% block header_title %}
+     {% transformat 'experiments:new_default_criteria:header' form.instance.experiment.name %} - {{ block.super }}
+{% endblock %}
+
 {% block content %}
 <div class="uu-inner-container">
     <div class="col-12">

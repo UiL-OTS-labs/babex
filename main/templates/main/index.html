@@ -2,9 +2,16 @@
 {% load i18n %}
 {% load transformat %}
 
+{% block header_title %}
+    {% trans 'main:home:header' %} - {{ block.super }}
+{% endblock %}
+
 {% block content %}
 <div class="uu-inner-container">
     <div class="col-12">
+        <h1>
+            {% trans 'main:home:header' %}
+        </h1>
         {# TODO: Full text here! #}
         {% transformat 'main:home:text' request.user.get_full_name 0 %}
     </div>

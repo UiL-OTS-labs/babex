@@ -3,6 +3,10 @@
 {% load transformat %}
 {% load datatables %}
 
+{% block header_title %}
+    {% trans 'participants:home:header' %} - {{ block.super }}
+{% endblock %}
+
 {% block content %}
 <div class="uu-inner-container">
     <div class="col-12">

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-23 11:38+0000\n"
+"POT-Creation-Date: 2018-12-06 09:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,38 +18,39 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: participants/models.py:10
+#: participants/models.py:13
 msgid "participant:attribute:handedness:lefthanded"
 msgstr "Linkshandig"
 
-#: participants/models.py:11
+#: participants/models.py:14
 msgid "participant:attribute:handedness:righthanded"
 msgstr "Rechtshandig"
 
-#: participants/models.py:16
+#: participants/models.py:19
 msgid "participant:attribute:sex:male"
 msgstr "Man"
 
-#: participants/models.py:17
+#: participants/models.py:20
 msgid "participant:attribute:sex:female"
 msgstr "Vrouw"
 
-#: participants/models.py:21
+#: participants/models.py:24
 msgid "participant:attribute:social_role:student"
 msgstr "Student"
 
-#: participants/models.py:22
+#: participants/models.py:25
 msgid "participant:attribute:social_role:other"
 msgstr "Anders"
 
-#: participants/templates/participants/index.html:11
-msgid "participants:home:merge_participants"
-msgstr "Combineer Participanten"
-
-#: participants/templates/participants/index.html:15
+#: participants/templates/participants/index.html:7
+#: participants/templates/participants/index.html:19
 msgid "participants:home:header"
 msgstr "Participanten"
 
-#: participants/templates/participants/index.html:18
+#: participants/templates/participants/index.html:15
+msgid "participants:home:merge_participants"
+msgstr "Combineer Participanten"
+
+#: participants/templates/participants/index.html:22
 msgid "participants:home:info_text"
 msgstr "<br/>"

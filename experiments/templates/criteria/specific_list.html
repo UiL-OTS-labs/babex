@@ -4,6 +4,11 @@
 {% load datatables %}
 {% load get_field_name %}
 
+{% block header_title %}
+     {% transformat 'criteria:specific_list:header' experiment.name %} - {{ block.super }}
+{% endblock %}
+
+
 {% block content %}
 <div class="uu-inner-container" style="">
     <div class="col-12">

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-30 08:39+0000\n"
+"POT-Creation-Date: 2018-12-06 09:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,36 +93,38 @@ msgstr ""
 msgid "leader:inactive"
 msgstr "{} (inactief)"
 
-#: leaders/templates/leaders/index.html:11
-msgid "leaders:home:create_leader"
-msgstr "Nieuwe proefleider"
-
-#: leaders/templates/leaders/index.html:15
+#: leaders/templates/leaders/index.html:7
+#: leaders/templates/leaders/index.html:20
 msgid "leaders:home:header"
 msgstr "Proefleiders"
 
-#: leaders/templates/leaders/index.html:18
+#: leaders/templates/leaders/index.html:16
+msgid "leaders:home:create_leader"
+msgstr "Nieuwe proefleider"
+
+#: leaders/templates/leaders/index.html:23
 msgid "leaders:home:info_text"
 msgstr "<br/>"
 
-#: leaders/templates/leaders/new.html:11
+#: leaders/templates/leaders/new.html:8 leaders/templates/leaders/new.html:15
 msgid "leaders:new:header"
 msgstr "Nieuwe proefleider aanmaken"
 
-#: leaders/templates/leaders/new.html:14
+#: leaders/templates/leaders/new.html:18
 msgid "leaders:new:info_text"
 msgstr "<br/>"
 
-#: leaders/templates/leaders/new.html:22
-#: leaders/templates/leaders/update.html:31
+#: leaders/templates/leaders/new.html:26
+#: leaders/templates/leaders/update.html:35
 msgid "leaders:globals:save_button"
 msgstr "Opslaan"
 
-#: leaders/templates/leaders/update.html:19
+#: leaders/templates/leaders/update.html:9
+#: leaders/templates/leaders/update.html:23
 msgid "leaders:update:header"
 msgstr "Proefleider '{}' aanpassen"
 
-#: leaders/templates/leaders/update.html:22
+#: leaders/templates/leaders/update.html:26
 msgid "leaders:update:info_text"
 msgstr "<br/>"
 

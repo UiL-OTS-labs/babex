@@ -4,6 +4,11 @@
 {% load datatables %}
 {% load get_field_name %}
 
+{% block header_title %}
+    {% transformat 'timeslots:home:header' experiment %} - {{ block.super }}
+{% endblock %}
+
+
 {% block content %}
 <div class="uu-inner-container">
     <div class="col-12">

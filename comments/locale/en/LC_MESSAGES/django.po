@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-30 15:04+0000\n"
+"POT-Creation-Date: 2018-12-06 09:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,54 +18,56 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: comments/models.py:14
+#: comments/models.py:17
 msgid "comment:attribute:participant"
 msgstr "Participant"
 
-#: comments/models.py:20
+#: comments/models.py:23
 msgid "comment:attribute:leader"
 msgstr "Added by"
 
-#: comments/models.py:26
+#: comments/models.py:29
 msgid "comment:attribute:experiment"
 msgstr "Experiment"
 
-#: comments/models.py:30
+#: comments/models.py:33
 msgid "comment:attribute:comment"
 msgstr "Comment"
 
-#: comments/models.py:34
+#: comments/models.py:37
 msgid "comment:attribute:datetime"
 msgstr "Added on"
 
-#: comments/templates/comments/delete.html:11
+#: comments/templates/comments/delete.html:8
+#: comments/templates/comments/delete.html:15
 msgid "comments:delete:header"
 msgstr "Delete comment"
 
-#: comments/templates/comments/delete.html:14
+#: comments/templates/comments/delete.html:18
 msgid "comments:delete:text"
 msgstr "Are you sure you want to delete this comment?"
 
-#: comments/templates/comments/delete.html:17
+#: comments/templates/comments/delete.html:21
 msgid "comments:delete:cancel"
 msgstr "Cancel"
 
-#: comments/templates/comments/delete.html:20
+#: comments/templates/comments/delete.html:24
 msgid "comments:delete:confirm"
 msgstr "Confirm"
 
-#: comments/templates/comments/index.html:11
+#: comments/templates/comments/index.html:8
+#: comments/templates/comments/index.html:15
 msgid "comments:home:header"
 msgstr "Comments"
 
-#: comments/templates/comments/index.html:14
+#: comments/templates/comments/index.html:18
 msgid "comments:home:info_text"
 msgstr "<br/>"
 
-#: comments/templates/comments/index.html:41
+#: comments/templates/comments/index.html:45
 msgid "comments:home:table:actions"
 msgstr "Actions"
 
-#: comments/templates/comments/index.html:72
+#: comments/templates/comments/index.html:76
 msgid "comments:home:delete"
 msgstr "Delete comment"

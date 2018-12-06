@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-30 15:28+0000\n"
+"POT-Creation-Date: 2018-12-06 09:13+0000\n"
 "PO-Revision-Date: 2018-11-23 08:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -68,7 +68,11 @@ msgstr "Experimenten UiL OTS Admin"
 msgid "site:name"
 msgstr "Experimenten UiL OTS Admin"
 
-#: main/templates/main/index.html:9
+#: main/templates/main/index.html:6 main/templates/main/index.html:13
+msgid "main:home:header"
+msgstr "Home"
+
+#: main/templates/main/index.html:16
 msgid "main:home:text"
 msgstr "Home"
 
@@ -87,3 +91,8 @@ msgstr "Log in"
 #: main/templates/registration/login.html:15
 msgid "login:button:login"
 msgstr "Log in"
+
+#: main/views.py:34
+#, python-format
+msgid "Empty list and '%(class_name)s.allow_empty' is False."
+msgstr ""

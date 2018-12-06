@@ -4,6 +4,11 @@
 {% load datatables %}
 {% load get_field_name %}
 
+{% block header_title %}
+    {% trans 'experiments:delete:header' %} - {{ block.super }}
+{% endblock %}
+
+
 {% block content %}
 <div class="uu-inner-container">
     <div class="col-12">
