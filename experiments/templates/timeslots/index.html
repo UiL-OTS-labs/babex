@@ -12,39 +12,14 @@
 {% block html_head %}
     <script src="{% static 'uil.core/js/bootstrap-datetimepicker.min.js' %}"></script>
     <link href="{% static 'uil.core/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet"/>
-    <script>
-        $(function () {
-            $('#id_datetime').datetimepicker({
-                format: 'yyyy-mm-dd hh:ii',
-                weekStart: 1, // Monday
-                startDate: new Date(),
-                autoclose: true,
-                keyboard: false,
-                pickerPosition: 'top-left',
-            });
-            $('table.dt_custom').DataTable( {
-                dom: 'Bfrtip',
-                buttons : [
-                    'copyHtml5',
-                    'csvHtml5',
-                    'pdfHtml5',
-                    'print',
-                    'pageLength'
-                ],
-                order: [
-                    [2, 'asc'],
-                    [3, 'asc']
-                ],
-                lengthMenu: [
-                    [10, 20, 50, -1],
-                    ["10", "20", "50", "\u221e"]
-                ],
-                responsive: true,
-                paginationType: "full_numbers",
-                pageLength: -1,
-            } );
-        });
+    <script src="{% static 'experiments/timeslots/timeslot_table.js' %}"></script>
 
+    <script>
+        // Because of I18N reasons, we do this stuff here.
+        var strings = {
+            'validation_error': '{% trans 'timeslot:error:cannot_validate_datetime' %}',
+            'invalid_datetime': '{% trans 'timeslot:error:invalid_datetime' %}',
+        }
     </script>
 {% endblock %}
 
@@ -135,7 +110,7 @@
                                     {% endif %}
                                 </td>
                                 <td>
-                                    <input type="checkbox" class="timeslot_checkbox" name="timeslot_{{ timeslot.pk }}[]" value="{{ place.n }}" data-timeslot="{{ timeslot.pk }}" data-n="{{ place.n }}" data-last="{{ timeslot.max_places }}" id="{{ timeslot.pk }}-{{ place.n }}">
+                                    <input type="checkbox" class="timeslot_checkbox" name="timeslot_{{ timeslot.pk }}[]" value="{{ place.n }}" data-timeslot="{{ timeslot.pk }}" data-n="{{ place.n }}" data-participant="{{ place.participant }}" data-last="{{ timeslot.max_places }}" id="{{ timeslot.pk }}-{{ place.n }}">
                                 </td>
                             </tr>
                         {% endfor %}
@@ -152,7 +127,7 @@
                         <td></td>
                         <td></td>
                         <td>
-                            <button type="submit" class="mt-1">
+                            <button type="submit" class="mt-1" id="delete-all-selected">
                                 Delete
                             </button>
                         </td>
@@ -161,50 +136,6 @@
                 </table>
             </form>
         </div>
-        <script>
-            function reset_disabled()
-            {
-                $('.timeslot_checkbox').each(function () {
-                    let el = $(this);
-                    let last = el.attr('data-last');
-                    let n = el.attr('data-n');
-
-                    if(n !== last) {
-                        el.prop('disabled', true);
-                    }
-                })
-            }
-            $(function () {
-                $('#master_checkbox').change(function () {
-                    let checked = $(this).is(':checked');
-                    let checkboxes = $('.timeslot_checkbox');
-
-                    checkboxes.prop('checked', checked);
-                    checkboxes.prop('disabled', checked);
-
-                    reset_disabled();
-                }).change();
-
-                $('.timeslot_checkbox').change(function () {
-                    let el = $(this);
-                    let checked = el.is(':checked');
-                    let timeslot = el.attr('data-timeslot');
-                    let n = el.attr('data-n');
-
-                    if(n > 0)
-                    {
-                        $('#' + timeslot + '-' + (n-1)).prop('disabled', !checked)
-                    }
-
-                }).change();
-
-                $('button[type="submit"]').click(function () {
-                    let checkboxes = $('.timeslot_checkbox');
-
-                    checkboxes.prop('disabled', false);
-                });
-            });
-        </script>
         <div class="col-12">
             <h3>
                 {% trans 'timeslots:home:new_timeslots:header' %}
@@ -212,7 +143,7 @@
             <form method="post" class="oneline-form">
                 {% csrf_token %}
                 {{ form }}
-                <button type="submit">
+                <button type="button" id="save-new-slot">
                     {% trans 'experiments:globals:add_button' %}
                 </button>
                 <br/>
