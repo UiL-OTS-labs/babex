@@ -113,6 +113,12 @@ JWT_ALGORITHM = 'HS512'
 LEADER_GROUP = 'leader'
 PARTICIPANT_GROUP = 'participant'
 
+# Email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 2525
+EMAIL_FROM = 'T.D.Mees@uu.nl'
+
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
