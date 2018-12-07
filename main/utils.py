@@ -3,6 +3,7 @@ from django.conf import settings
 from django.template.loader import render_to_string
 from typing import Tuple, List
 
+from .models import User
 
 def send_template_email(recipient_list: list, subject: str, template: str,
                         template_context: dict, from_email: str = None) -> None:
@@ -76,3 +77,14 @@ def send_personalised_mass_mail(datatuple: Tuple[str, dict, List[str]],
         messages.append(message)
 
     connection.send_messages(messages)
+
+
+def get_supreme_admin() -> User:
+    """
+    The name is kinda a joke. It just returns the first User model that has
+    the supreme_admin flag.
+
+    The supreme admin is the one that's displayed on the site as the contact.
+    :return:
+    """
+    return User.objects.filter(is_supreme_admin=True)[0]

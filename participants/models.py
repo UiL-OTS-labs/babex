@@ -20,7 +20,7 @@ class Participant(models.Model):
         ('F', _('participant:attribute:sex:female')),
     )
 
-    SOCIAL_ROLE = (
+    SOCIAL_STATUS = (
         ('student', _('participant:attribute:social_role:student')),
         ('other', _('participant:attribute:social_role:other')),
     )
@@ -43,7 +43,7 @@ class Participant(models.Model):
 
     sex = models.TextField(choices=SEX)
 
-    social_role = models.TextField(choices=SOCIAL_ROLE)
+    social_status = models.TextField(choices=SOCIAL_STATUS)
 
     email_subscription = models.BooleanField(default=False)
 
@@ -56,4 +56,5 @@ class SecondaryEmail(models.Model):
     email = models.EmailField()
 
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
+
 
