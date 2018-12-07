@@ -1,4 +1,5 @@
 from ..models import Experiment
+from .participant_subscription import unsubscribe_participant
 
 _TIMESLOT_KEY_PREFIX = len("timeslot_")
 _TIMESLOT_KEY_POSTFIX = len("[]")
@@ -9,6 +10,9 @@ def delete_timeslot(experiment: Experiment, timeslot_pk: int, to_delete: int=1) 
     timeslot = experiment.timeslot_set.get(pk=timeslot_pk)
 
     places_left = timeslot.max_places - to_delete
+
+    for place in timeslot.places[places_left:]:
+        unsubscribe_participant(timeslot, place['participant'].pk)
 
     if places_left <= 0:
         timeslot.delete()
@@ -26,4 +30,3 @@ def delete_timeslots(experiment: Experiment, post_data) -> None:
 
             delete_timeslot(experiment, timeslot, len(values))
 
-# TODO handle deleting slots with participants
