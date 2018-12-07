@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-07 08:56+0000\n"
+"POT-Creation-Date: 2018-12-07 09:19+0000\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -286,7 +286,7 @@ msgstr "<br/>"
 #: experiments/templates/criteria/index.html:44
 #: experiments/templates/criteria/specific_list.html:40
 #: experiments/templates/locations/index.html:39
-#: experiments/templates/timeslots/index.html:68
+#: experiments/templates/timeslots/index.html:70
 msgid "experiments:globals:actions"
 msgstr "Actions"
 
@@ -322,7 +322,7 @@ msgstr "Add new criterium"
 
 #: experiments/templates/criteria/specific_list.html:89
 #: experiments/templates/criteria/specific_list.html:121
-#: experiments/templates/timeslots/index.html:158
+#: experiments/templates/timeslots/index.html:171
 msgid "experiments:globals:add_button"
 msgstr "Add"
 
@@ -501,7 +501,7 @@ msgid "locations:new:info_text"
 msgstr " "
 
 #: experiments/templates/timeslots/index.html:9
-#: experiments/templates/timeslots/index.html:36
+#: experiments/templates/timeslots/index.html:38
 msgid "timeslots:home:header"
 msgstr "Timeslots for experiment '{}'"
 
@@ -544,35 +544,57 @@ msgstr ""
 "will be sent to any participants affected, but be sure to send a personal "
 "mail as well, if you haven\\'t done so already.)"
 
-#: experiments/templates/timeslots/index.html:39
+#: experiments/templates/timeslots/index.html:25
+msgid "timeslot:warning:confirm_silent_remove_participant"
+msgstr ""
+"Are you sure you want to unsubscribe this participant? WARNING! This action "
+"will NOT send an automatic email! Use the icon next to this one if you want "
+"the application to send an automatic email."
+
+#: experiments/templates/timeslots/index.html:26
+msgid "timeslot:warning:confirm_remove_participant"
+msgstr ""
+"Are you sure you want to unsubscribe this participant? (An automatic email "
+"will be sent to the participant, but be sure to send a personal mail as "
+"well, if you haven\\'t done so already.)"
+
+#: experiments/templates/timeslots/index.html:41
 msgid "timeslots:home:info_text"
 msgstr "<br/>"
 
-#: experiments/templates/timeslots/index.html:50
+#: experiments/templates/timeslots/index.html:52
 msgid "timeslots:day"
 msgstr "Day"
 
-#: experiments/templates/timeslots/index.html:53
+#: experiments/templates/timeslots/index.html:55
 msgid "timeslots:date"
 msgstr "Date"
 
-#: experiments/templates/timeslots/index.html:56
+#: experiments/templates/timeslots/index.html:58
 msgid "timeslots:time"
 msgstr "Time"
 
-#: experiments/templates/timeslots/index.html:59
+#: experiments/templates/timeslots/index.html:61
 msgid "timeslots:place"
 msgstr "Place #"
 
-#: experiments/templates/timeslots/index.html:62
+#: experiments/templates/timeslots/index.html:64
 msgid "timeslots:participant:name"
 msgstr "Participant"
 
-#: experiments/templates/timeslots/index.html:65
+#: experiments/templates/timeslots/index.html:67
 msgid "timeslots:participant:email"
 msgstr "Participant email"
 
-#: experiments/templates/timeslots/index.html:152
+#: experiments/templates/timeslots/index.html:123
+msgid "timeslots:remove_participant:title"
+msgstr "Unsubscribe participant"
+
+#: experiments/templates/timeslots/index.html:130
+msgid "timeslots:silent_remove_participant:title"
+msgstr "Unsubscribe participant (without sending an automatic confirmation email)"
+
+#: experiments/templates/timeslots/index.html:165
 msgid "timeslots:home:new_timeslots:header"
 msgstr "New timeslot"
 

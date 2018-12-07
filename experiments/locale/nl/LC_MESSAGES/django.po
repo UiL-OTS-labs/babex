@@ -2,12 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-07 08:56+0000\n"
+"POT-Creation-Date: 2018-12-07 09:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -285,7 +284,7 @@ msgstr "<br/>"
 #: experiments/templates/criteria/index.html:44
 #: experiments/templates/criteria/specific_list.html:40
 #: experiments/templates/locations/index.html:39
-#: experiments/templates/timeslots/index.html:68
+#: experiments/templates/timeslots/index.html:70
 msgid "experiments:globals:actions"
 msgstr "Acties"
 
@@ -321,7 +320,7 @@ msgstr "Voeg nieuw criterium toe"
 
 #: experiments/templates/criteria/specific_list.html:89
 #: experiments/templates/criteria/specific_list.html:121
-#: experiments/templates/timeslots/index.html:158
+#: experiments/templates/timeslots/index.html:171
 msgid "experiments:globals:add_button"
 msgstr "Toevoegen"
 
@@ -501,7 +500,7 @@ msgid "locations:new:info_text"
 msgstr " "
 
 #: experiments/templates/timeslots/index.html:9
-#: experiments/templates/timeslots/index.html:36
+#: experiments/templates/timeslots/index.html:38
 msgid "timeslots:home:header"
 msgstr "Timeslots voor experiment '{}'"
 
@@ -545,35 +544,60 @@ msgstr ""
 "een mail naar de participant(en) gestuurd, maar stuur toch nog een "
 "persoonlijke mail als je dit nog niet hebt gedaan."
 
-#: experiments/templates/timeslots/index.html:39
+#: experiments/templates/timeslots/index.html:25
+msgid "timeslot:warning:confirm_silent_remove_participant"
+msgstr ""
+"Weet u zeker dat u deze participant wilt verwijderen uit dit timeslot? "
+"WAARSCHUWING! Deze actie verstuurd GEEN automatische bevestigingsmail! (Je "
+"kan de knop naast deze gebruiken als je wel een automatische mail wilt laten "
+"sturen)."
+
+#: experiments/templates/timeslots/index.html:26
+msgid "timeslot:warning:confirm_remove_participant"
+msgstr ""
+"Weet u zeker dat u deze participant wilt verwijderen uit dit timeslot? (Er "
+"zal een bevestigingsmail naar de participant worden gestuurd, maar stuur "
+"toch nog een persoonlijke mail als je dit nog niet hebt gedaan."
+
+#: experiments/templates/timeslots/index.html:41
 msgid "timeslots:home:info_text"
 msgstr "<br/>"
 
-#: experiments/templates/timeslots/index.html:50
+#: experiments/templates/timeslots/index.html:52
 msgid "timeslots:day"
 msgstr "Dag"
 
-#: experiments/templates/timeslots/index.html:53
+#: experiments/templates/timeslots/index.html:55
 msgid "timeslots:date"
 msgstr "Datum"
 
-#: experiments/templates/timeslots/index.html:56
+#: experiments/templates/timeslots/index.html:58
 msgid "timeslots:time"
 msgstr "Tijd"
 
-#: experiments/templates/timeslots/index.html:59
+#: experiments/templates/timeslots/index.html:61
 msgid "timeslots:place"
 msgstr "Plaats #"
 
-#: experiments/templates/timeslots/index.html:62
+#: experiments/templates/timeslots/index.html:64
 msgid "timeslots:participant:name"
 msgstr "Participant"
 
-#: experiments/templates/timeslots/index.html:65
+#: experiments/templates/timeslots/index.html:67
 msgid "timeslots:participant:email"
 msgstr "Participant email"
 
-#: experiments/templates/timeslots/index.html:152
+#: experiments/templates/timeslots/index.html:123
+msgid "timeslots:remove_participant:title"
+msgstr "Verwijder participant uit dit timeslot."
+
+#: experiments/templates/timeslots/index.html:130
+msgid "timeslots:silent_remove_participant:title"
+msgstr ""
+"Verwijder participant uit dit timeslot (zonder automatische bevestigings-"
+"mail)."
+
+#: experiments/templates/timeslots/index.html:165
 msgid "timeslots:home:new_timeslots:header"
 msgstr "Nieuw timeslot"
 

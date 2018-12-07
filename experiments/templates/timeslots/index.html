@@ -22,6 +22,8 @@
             'invalid_datetime': "{% trans 'timeslot:error:invalid_datetime' %}",
             'confirm_delete': "{% trans 'timeslot:warning:deleting_timeslot' %}",
             'confirm_multi_delete': "{% trans 'timeslot:warning:deleting_timeslots' %}",
+            'confirm_silent_remove_participant': "{% trans 'timeslot:warning:confirm_silent_remove_participant' %}",
+            'confirm_remove_participant': "{% trans 'timeslot:warning:confirm_remove_participant' %}",
         };
     </script>
     <script src="{% static 'experiments/timeslots/timeslot_table.js' %}"></script>
@@ -115,9 +117,20 @@
                                         </a>
                                     {% endif %}
                                     {% if place.participant %}
-                                        <span class="icon-remove-participant">
+                                        <a
+                                            href="#"
+                                            class="icon-remove-participant"
+                                            title="{% trans 'timeslots:remove_participant:title' %}"
+                                        >
                                             
-                                        </span>
+                                        </a>
+                                        <a
+                                            href="#"
+                                            class="icon-silent-remove-participant"
+                                            title="{% trans 'timeslots:silent_remove_participant:title' %}"
+                                        >
+                                            
+                                        </a>
                                     {% endif %}
                                 </td>
                                 <td>
