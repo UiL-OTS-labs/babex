@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-06 10:39+0000\n"
+"POT-Creation-Date: 2018-12-07 08:30+0000\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -286,7 +286,7 @@ msgstr "<br/>"
 #: experiments/templates/criteria/index.html:44
 #: experiments/templates/criteria/specific_list.html:40
 #: experiments/templates/locations/index.html:39
-#: experiments/templates/timeslots/index.html:64
+#: experiments/templates/timeslots/index.html:66
 msgid "experiments:globals:actions"
 msgstr "Actions"
 
@@ -322,7 +322,7 @@ msgstr "Add new criterium"
 
 #: experiments/templates/criteria/specific_list.html:89
 #: experiments/templates/criteria/specific_list.html:121
-#: experiments/templates/timeslots/index.html:122
+#: experiments/templates/timeslots/index.html:156
 msgid "experiments:globals:add_button"
 msgstr "Add"
 
@@ -501,39 +501,64 @@ msgid "locations:new:info_text"
 msgstr " "
 
 #: experiments/templates/timeslots/index.html:9
-#: experiments/templates/timeslots/index.html:33
+#: experiments/templates/timeslots/index.html:34
 msgid "timeslots:home:header"
 msgstr "Timeslots for experiment '{}'"
 
-#: experiments/templates/timeslots/index.html:36
+#: experiments/templates/timeslots/index.html:20
+msgid "timeslot:error:cannot_validate_datetime"
+msgstr ""
+"An error occurred while validating the date and time. This probably means "
+"that you've entered an invalid value. Please ensure the date and time you've "
+"entered is a valid datetime, in the 'yyyy-mm-dd hh:mm' format."
+
+#: experiments/templates/timeslots/index.html:21
+msgid "timeslot:error:invalid_date"
+msgstr ""
+"Invalid date entered! Please ensure the date you've entered is a valid date, "
+"in the yyyy-mm-dd format."
+
+#: experiments/templates/timeslots/index.html:22
+msgid "timeslot:error:invalid_time"
+msgstr ""
+"Invalid time entered! Please ensure the date you've entered is a valid "
+"timestamp, in the hh:mm format."
+
+#: experiments/templates/timeslots/index.html:23
+msgid "timeslot:error:invalid_datetime"
+msgstr ""
+"Invalid value entered in 'Date & Time'! Please ensure the date and time "
+"you've entered is a valid datetime, in the 'yyyy-mm-dd hh:mm' format."
+
+#: experiments/templates/timeslots/index.html:37
 msgid "timeslots:home:info_text"
 msgstr "<br/>"
 
-#: experiments/templates/timeslots/index.html:46
+#: experiments/templates/timeslots/index.html:48
 msgid "timeslots:day"
 msgstr "Day"
 
-#: experiments/templates/timeslots/index.html:49
+#: experiments/templates/timeslots/index.html:51
 msgid "timeslots:date"
 msgstr "Date"
 
-#: experiments/templates/timeslots/index.html:52
+#: experiments/templates/timeslots/index.html:54
 msgid "timeslots:time"
 msgstr "Time"
 
-#: experiments/templates/timeslots/index.html:55
+#: experiments/templates/timeslots/index.html:57
 msgid "timeslots:place"
 msgstr "Place #"
 
-#: experiments/templates/timeslots/index.html:58
+#: experiments/templates/timeslots/index.html:60
 msgid "timeslots:participant:name"
 msgstr "Participant"
 
-#: experiments/templates/timeslots/index.html:61
+#: experiments/templates/timeslots/index.html:63
 msgid "timeslots:participant:email"
 msgstr "Participant email"
 
-#: experiments/templates/timeslots/index.html:117
+#: experiments/templates/timeslots/index.html:150
 msgid "timeslots:home:new_timeslots:header"
 msgstr "New timeslot"
 
@@ -605,3 +630,11 @@ msgstr "Successfully changed participant visibility to visible"
 #: experiments/views/experiment_views.py:144
 msgid "experiments:message:switch_visible:invisible"
 msgstr "Successfully hid participants from leaders"
+
+#: experiments/views/timeslot_views.py:72
+msgid "timeslots:message:deleted_timeslot"
+msgstr "Timeslot removed!"
+
+#: experiments/views/timeslot_views.py:85
+msgid "timeslots:message:deleted_timeslots"
+msgstr "Timeslots removed!"

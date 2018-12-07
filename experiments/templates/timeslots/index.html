@@ -18,9 +18,13 @@
         // Because of I18N reasons, we do this stuff here.
         var strings = {
             'validation_error': '{% trans 'timeslot:error:cannot_validate_datetime' %}',
+            'invalid_date': '{% trans 'timeslot:error:invalid_date' %}',
+            'invalid_time': '{% trans 'timeslot:error:invalid_time' %}',
             'invalid_datetime': '{% trans 'timeslot:error:invalid_datetime' %}',
         }
     </script>
+    <script src="{% static 'experiments/timeslots/new-slot.js' %}"></script>
+
 {% endblock %}
 
 {% block content %}
@@ -104,9 +108,14 @@
                                 {% endif %}
                                 <td>
                                     {% if place.n == timeslot.max_places %}
-                                        <a href="{% url 'experiments:timeslots_delete' experiment.pk timeslot.pk %}">
-                                        D
+                                        <a href="{% url 'experiments:timeslots_delete' experiment.pk timeslot.pk %}" class="icon-delete">
+                                            
                                         </a>
+                                    {% endif %}
+                                    {% if place.participant %}
+                                        <span class="icon-remove-participant">
+                                            
+                                        </span>
                                     {% endif %}
                                 </td>
                                 <td>
@@ -143,7 +152,7 @@
             <form method="post" class="oneline-form">
                 {% csrf_token %}
                 {{ form }}
-                <button type="button" id="save-new-slot">
+                <button type="submit" id="save-new-slot">
                     {% trans 'experiments:globals:add_button' %}
                 </button>
                 <br/>

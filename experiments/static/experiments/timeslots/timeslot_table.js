@@ -11,15 +11,7 @@ function reset_disabled()
     })
 }
 $(function () {
-    $('#id_datetime').datetimepicker({
-        format: 'yyyy-mm-dd hh:ii',
-        weekStart: 1, // Monday
-        startDate: new Date(),
-        autoclose: true,
-        keyboard: false,
-        pickerPosition: 'top-left',
-        forceParse: false,
-    });
+
     $('table.dt_custom').DataTable( {
         dom: 'Bfrtip',
         buttons : [

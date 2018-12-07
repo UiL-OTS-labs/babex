@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-06 10:39+0000\n"
+"POT-Creation-Date: 2018-12-07 08:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -288,7 +288,7 @@ msgstr "<br/>"
 #: experiments/templates/criteria/index.html:44
 #: experiments/templates/criteria/specific_list.html:40
 #: experiments/templates/locations/index.html:39
-#: experiments/templates/timeslots/index.html:64
+#: experiments/templates/timeslots/index.html:66
 msgid "experiments:globals:actions"
 msgstr "Acties"
 
@@ -324,7 +324,7 @@ msgstr "Voeg nieuw criterium toe"
 
 #: experiments/templates/criteria/specific_list.html:89
 #: experiments/templates/criteria/specific_list.html:121
-#: experiments/templates/timeslots/index.html:122
+#: experiments/templates/timeslots/index.html:156
 msgid "experiments:globals:add_button"
 msgstr "Toevoegen"
 
@@ -512,39 +512,63 @@ msgid "locations:new:info_text"
 msgstr " "
 
 #: experiments/templates/timeslots/index.html:9
-#: experiments/templates/timeslots/index.html:33
+#: experiments/templates/timeslots/index.html:34
 msgid "timeslots:home:header"
 msgstr "Timeslots voor experiment '{}'"
 
-#: experiments/templates/timeslots/index.html:36
+#: experiments/templates/timeslots/index.html:20
+#, fuzzy
+#| msgid "time_slot:attribute:datetime"
+msgid "timeslot:error:cannot_validate_datetime"
+msgstr "Tijd & Datum"
+
+#: experiments/templates/timeslots/index.html:21
+#, fuzzy
+#| msgid "timeslots:date"
+msgid "timeslot:error:invalid_date"
+msgstr "Datum"
+
+#: experiments/templates/timeslots/index.html:22
+#, fuzzy
+#| msgid "timeslots:time"
+msgid "timeslot:error:invalid_time"
+msgstr "Tijd"
+
+#: experiments/templates/timeslots/index.html:23
+#, fuzzy
+#| msgid "timeslots:date"
+msgid "timeslot:error:invalid_datetime"
+msgstr "Datum"
+
+#: experiments/templates/timeslots/index.html:37
 msgid "timeslots:home:info_text"
 msgstr "<br/>"
 
-#: experiments/templates/timeslots/index.html:46
+#: experiments/templates/timeslots/index.html:48
 msgid "timeslots:day"
 msgstr "Dag"
 
-#: experiments/templates/timeslots/index.html:49
+#: experiments/templates/timeslots/index.html:51
 msgid "timeslots:date"
 msgstr "Datum"
 
-#: experiments/templates/timeslots/index.html:52
+#: experiments/templates/timeslots/index.html:54
 msgid "timeslots:time"
 msgstr "Tijd"
 
-#: experiments/templates/timeslots/index.html:55
+#: experiments/templates/timeslots/index.html:57
 msgid "timeslots:place"
 msgstr "Plaats #"
 
-#: experiments/templates/timeslots/index.html:58
+#: experiments/templates/timeslots/index.html:60
 msgid "timeslots:participant:name"
 msgstr "Participant"
 
-#: experiments/templates/timeslots/index.html:61
+#: experiments/templates/timeslots/index.html:63
 msgid "timeslots:participant:email"
 msgstr "Participant email"
 
-#: experiments/templates/timeslots/index.html:117
+#: experiments/templates/timeslots/index.html:150
 msgid "timeslots:home:new_timeslots:header"
 msgstr "Nieuw timeslot"
 
@@ -616,3 +640,15 @@ msgstr "Participant informatie zichtbaar gemaakt voor proefleiders"
 #: experiments/views/experiment_views.py:144
 msgid "experiments:message:switch_visible:invisible"
 msgstr "Participant informatie verborgen voor proefleiders"
+
+#: experiments/views/timeslot_views.py:72
+#, fuzzy
+#| msgid "experiments:message:deleted_experiment"
+msgid "timeslots:message:deleted_timeslot"
+msgstr "Experiment verwijderd!"
+
+#: experiments/views/timeslot_views.py:85
+#, fuzzy
+#| msgid "experiments:message:deleted_experiment"
+msgid "timeslots:message:deleted_timeslots"
+msgstr "Experiment verwijderd!"
