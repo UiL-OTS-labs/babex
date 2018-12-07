@@ -10,12 +10,12 @@ from ..forms import TimeSlotForm
 from .mixins import ExperimentObjectMixin
 from ..utils import now, delete_timeslot, delete_timeslots, \
     unsubscribe_participant
-from main.views import FormListView
+from main.views import ModelFormListView
 from uil.core.views.mixins import RedirectSuccessMessageMixin
 
 
 class TimeSlotHomeView(braces.LoginRequiredMixin,
-                       ExperimentObjectMixin, FormListView):
+                       ExperimentObjectMixin, ModelFormListView):
     template_name = 'timeslots/index.html'
     model = TimeSlot
     form_class = TimeSlotForm
