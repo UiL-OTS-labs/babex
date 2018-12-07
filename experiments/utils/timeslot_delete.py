@@ -1,5 +1,8 @@
 from ..models import Experiment
 
+_TIMESLOT_KEY_PREFIX = len("timeslot_")
+_TIMESLOT_KEY_POSTFIX = len("[]")
+
 
 def delete_timeslot(experiment: Experiment, timeslot_pk: int, to_delete: int=1) -> None:
 
@@ -17,9 +20,7 @@ def delete_timeslot(experiment: Experiment, timeslot_pk: int, to_delete: int=1) 
 def delete_timeslots(experiment: Experiment, post_data) -> None:
     for key in post_data.keys():
         if key.startswith('timeslot_'):
-            timeslot = key.replace('timeslot_', '')
-            timeslot = timeslot.replace('[]', '')
-            timeslot = int(timeslot)
+            timeslot = int(key[_TIMESLOT_KEY_PREFIX:-_TIMESLOT_KEY_POSTFIX])
 
             values = post_data.getlist(key)
 
