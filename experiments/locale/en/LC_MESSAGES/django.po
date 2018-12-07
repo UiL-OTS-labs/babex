@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-07 08:30+0000\n"
+"POT-Creation-Date: 2018-12-07 08:56+0000\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -286,7 +286,7 @@ msgstr "<br/>"
 #: experiments/templates/criteria/index.html:44
 #: experiments/templates/criteria/specific_list.html:40
 #: experiments/templates/locations/index.html:39
-#: experiments/templates/timeslots/index.html:66
+#: experiments/templates/timeslots/index.html:68
 msgid "experiments:globals:actions"
 msgstr "Actions"
 
@@ -322,7 +322,7 @@ msgstr "Add new criterium"
 
 #: experiments/templates/criteria/specific_list.html:89
 #: experiments/templates/criteria/specific_list.html:121
-#: experiments/templates/timeslots/index.html:156
+#: experiments/templates/timeslots/index.html:158
 msgid "experiments:globals:add_button"
 msgstr "Add"
 
@@ -501,64 +501,78 @@ msgid "locations:new:info_text"
 msgstr " "
 
 #: experiments/templates/timeslots/index.html:9
-#: experiments/templates/timeslots/index.html:34
+#: experiments/templates/timeslots/index.html:36
 msgid "timeslots:home:header"
 msgstr "Timeslots for experiment '{}'"
 
-#: experiments/templates/timeslots/index.html:20
+#: experiments/templates/timeslots/index.html:19
 msgid "timeslot:error:cannot_validate_datetime"
 msgstr ""
 "An error occurred while validating the date and time. This probably means "
 "that you've entered an invalid value. Please ensure the date and time you've "
 "entered is a valid datetime, in the 'yyyy-mm-dd hh:mm' format."
 
-#: experiments/templates/timeslots/index.html:21
+#: experiments/templates/timeslots/index.html:20
 msgid "timeslot:error:invalid_date"
 msgstr ""
 "Invalid date entered! Please ensure the date you've entered is a valid date, "
 "in the yyyy-mm-dd format."
 
-#: experiments/templates/timeslots/index.html:22
+#: experiments/templates/timeslots/index.html:21
 msgid "timeslot:error:invalid_time"
 msgstr ""
 "Invalid time entered! Please ensure the date you've entered is a valid "
 "timestamp, in the hh:mm format."
 
-#: experiments/templates/timeslots/index.html:23
+#: experiments/templates/timeslots/index.html:22
 msgid "timeslot:error:invalid_datetime"
 msgstr ""
 "Invalid value entered in 'Date & Time'! Please ensure the date and time "
 "you've entered is a valid datetime, in the 'yyyy-mm-dd hh:mm' format."
 
-#: experiments/templates/timeslots/index.html:37
+#: experiments/templates/timeslots/index.html:23
+msgid "timeslot:warning:deleting_timeslot"
+msgstr ""
+"Are you sure you want to delete this this timeslot? (An automatic email will "
+"be sent to any participants affected, but be sure to send a personal mail as "
+"well, if you haven\\'t done so already.)"
+
+#: experiments/templates/timeslots/index.html:24
+msgid "timeslot:warning:deleting_timeslots"
+msgstr ""
+"Are you sure you want to delete this these timeslots? (An automatic email "
+"will be sent to any participants affected, but be sure to send a personal "
+"mail as well, if you haven\\'t done so already.)"
+
+#: experiments/templates/timeslots/index.html:39
 msgid "timeslots:home:info_text"
 msgstr "<br/>"
 
-#: experiments/templates/timeslots/index.html:48
+#: experiments/templates/timeslots/index.html:50
 msgid "timeslots:day"
 msgstr "Day"
 
-#: experiments/templates/timeslots/index.html:51
+#: experiments/templates/timeslots/index.html:53
 msgid "timeslots:date"
 msgstr "Date"
 
-#: experiments/templates/timeslots/index.html:54
+#: experiments/templates/timeslots/index.html:56
 msgid "timeslots:time"
 msgstr "Time"
 
-#: experiments/templates/timeslots/index.html:57
+#: experiments/templates/timeslots/index.html:59
 msgid "timeslots:place"
 msgstr "Place #"
 
-#: experiments/templates/timeslots/index.html:60
+#: experiments/templates/timeslots/index.html:62
 msgid "timeslots:participant:name"
 msgstr "Participant"
 
-#: experiments/templates/timeslots/index.html:63
+#: experiments/templates/timeslots/index.html:65
 msgid "timeslots:participant:email"
 msgstr "Participant email"
 
-#: experiments/templates/timeslots/index.html:150
+#: experiments/templates/timeslots/index.html:152
 msgid "timeslots:home:new_timeslots:header"
 msgstr "New timeslot"
 

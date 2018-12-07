@@ -12,17 +12,19 @@
 {% block html_head %}
     <script src="{% static 'uil.core/js/bootstrap-datetimepicker.min.js' %}"></script>
     <link href="{% static 'uil.core/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet"/>
-    <script src="{% static 'experiments/timeslots/timeslot_table.js' %}"></script>
 
     <script>
         // Because of I18N reasons, we do this stuff here.
         var strings = {
-            'validation_error': '{% trans 'timeslot:error:cannot_validate_datetime' %}',
-            'invalid_date': '{% trans 'timeslot:error:invalid_date' %}',
-            'invalid_time': '{% trans 'timeslot:error:invalid_time' %}',
-            'invalid_datetime': '{% trans 'timeslot:error:invalid_datetime' %}',
-        }
+            'validation_error': "{% trans 'timeslot:error:cannot_validate_datetime' %}",
+            'invalid_date': "{% trans 'timeslot:error:invalid_date' %}",
+            'invalid_time': "{% trans 'timeslot:error:invalid_time' %}",
+            'invalid_datetime': "{% trans 'timeslot:error:invalid_datetime' %}",
+            'confirm_delete': "{% trans 'timeslot:warning:deleting_timeslot' %}",
+            'confirm_multi_delete': "{% trans 'timeslot:warning:deleting_timeslots' %}",
+        };
     </script>
+    <script src="{% static 'experiments/timeslots/timeslot_table.js' %}"></script>
     <script src="{% static 'experiments/timeslots/new-slot.js' %}"></script>
 
 {% endblock %}
@@ -119,7 +121,7 @@
                                     {% endif %}
                                 </td>
                                 <td>
-                                    <input type="checkbox" class="timeslot_checkbox" name="timeslot_{{ timeslot.pk }}[]" value="{{ place.n }}" data-timeslot="{{ timeslot.pk }}" data-n="{{ place.n }}" data-participant="{{ place.participant }}" data-last="{{ timeslot.max_places }}" id="{{ timeslot.pk }}-{{ place.n }}">
+                                    <input type="checkbox" class="timeslot_checkbox" name="timeslot_{{ timeslot.pk }}[]" value="{{ place.n }}" data-timeslot="{{ timeslot.pk }}" data-n="{{ place.n }}" data-participant="{{ place.participant.pk }}" data-last="{{ timeslot.max_places }}" id="{{ timeslot.pk }}-{{ place.n }}">
                                 </td>
                             </tr>
                         {% endfor %}

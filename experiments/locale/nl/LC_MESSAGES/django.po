@@ -2,13 +2,12 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-07 08:30+0000\n"
+"POT-Creation-Date: 2018-12-07 08:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -249,10 +248,8 @@ msgid "time_slot:attribute:max_places"
 msgstr "Aantal plekken"
 
 #: experiments/models/timeslot_models.py:27
-#, fuzzy
-#| msgid "time_slot:attribute:max_places"
 msgid "time_slot:attribute:participants"
-msgstr "Max plaatsen"
+msgstr "Participanten"
 
 #: experiments/templates/criteria/edit.html:8
 #: experiments/templates/criteria/edit.html:15
@@ -288,7 +285,7 @@ msgstr "<br/>"
 #: experiments/templates/criteria/index.html:44
 #: experiments/templates/criteria/specific_list.html:40
 #: experiments/templates/locations/index.html:39
-#: experiments/templates/timeslots/index.html:66
+#: experiments/templates/timeslots/index.html:68
 msgid "experiments:globals:actions"
 msgstr "Acties"
 
@@ -324,7 +321,7 @@ msgstr "Voeg nieuw criterium toe"
 
 #: experiments/templates/criteria/specific_list.html:89
 #: experiments/templates/criteria/specific_list.html:121
-#: experiments/templates/timeslots/index.html:156
+#: experiments/templates/timeslots/index.html:158
 msgid "experiments:globals:add_button"
 msgstr "Toevoegen"
 
@@ -347,26 +344,18 @@ msgstr " "
 
 #: experiments/templates/experiments/delete.html:8
 #: experiments/templates/experiments/delete.html:16
-#, fuzzy
-#| msgid "experiments:edit:header"
 msgid "experiments:delete:header"
-msgstr "Verander experiment"
+msgstr "Verwijder experiment"
 
 #: experiments/templates/experiments/delete.html:19
-#, fuzzy
-#| msgid "experiments:home:delete:title"
 msgid "experiments:delete:text"
-msgstr "Verwijder experiment"
+msgstr "Weet je zeker dat je het experiment '{}' wilt verwijderen?"
 
 #: experiments/templates/experiments/delete.html:22
-#, fuzzy
-#| msgid "experiments:home:delete:title"
 msgid "experiments:delete:cancel"
-msgstr "Verwijder experiment"
+msgstr "Annuleer"
 
 #: experiments/templates/experiments/delete.html:25
-#, fuzzy
-#| msgid "experiments:home:delete:title"
 msgid "experiments:delete:confirm"
 msgstr "Verwijder experiment"
 
@@ -512,63 +501,79 @@ msgid "locations:new:info_text"
 msgstr " "
 
 #: experiments/templates/timeslots/index.html:9
-#: experiments/templates/timeslots/index.html:34
+#: experiments/templates/timeslots/index.html:36
 msgid "timeslots:home:header"
 msgstr "Timeslots voor experiment '{}'"
 
-#: experiments/templates/timeslots/index.html:20
-#, fuzzy
-#| msgid "time_slot:attribute:datetime"
+#: experiments/templates/timeslots/index.html:19
 msgid "timeslot:error:cannot_validate_datetime"
-msgstr "Tijd & Datum"
+msgstr ""
+"Er is een error opgetreden tijdens het valideren van de datum en tijd. Dit "
+"betekend hoogstwaarschijnlijk dat je een fout hebt gemaakt bij het intypen. "
+"Controleer of je een valide datum en tijd hebt ingevuld in 'yyyy-mm-dd hh:"
+"mm' formaat."
+
+#: experiments/templates/timeslots/index.html:20
+msgid "timeslot:error:invalid_date"
+msgstr ""
+"De ingevoerde datum kon niet gevalideerd worden! Controleer of je een valide "
+"datum hebt ingevuld in 'yyyy-mm-dd' formaat."
 
 #: experiments/templates/timeslots/index.html:21
-#, fuzzy
-#| msgid "timeslots:date"
-msgid "timeslot:error:invalid_date"
-msgstr "Datum"
+msgid "timeslot:error:invalid_time"
+msgstr ""
+"De ingevoerde tijd kon niet gevalideerd worden! Controleer of je een valide "
+"tijd hebt ingevuld in 'hh:mm' formaat."
 
 #: experiments/templates/timeslots/index.html:22
-#, fuzzy
-#| msgid "timeslots:time"
-msgid "timeslot:error:invalid_time"
-msgstr "Tijd"
+msgid "timeslot:error:invalid_datetime"
+msgstr ""
+"De ingevoerde datum en/of tijd kon niet gevalideerd worden! Controleer of je "
+"een valide datum en/of tijd hebt ingevuld in 'yyyy-mm-dd hh:mm' formaat."
 
 #: experiments/templates/timeslots/index.html:23
-#, fuzzy
-#| msgid "timeslots:date"
-msgid "timeslot:error:invalid_datetime"
-msgstr "Datum"
+msgid "timeslot:warning:deleting_timeslot"
+msgstr ""
+"Weet je zeker dat je dit timeslot wilt verwijderen? (Indien nodig wordt er "
+"een mail naar de participant gestuurd, maar stuur toch nog een persoonlijke "
+"mail als je dit nog niet gedaan hebt."
 
-#: experiments/templates/timeslots/index.html:37
+#: experiments/templates/timeslots/index.html:24
+msgid "timeslot:warning:deleting_timeslots"
+msgstr ""
+"Weet je zeker dat je deze timeslots wilt verwijderen? (Indien nodig wordt er "
+"een mail naar de participant(en) gestuurd, maar stuur toch nog een "
+"persoonlijke mail als je dit nog niet hebt gedaan."
+
+#: experiments/templates/timeslots/index.html:39
 msgid "timeslots:home:info_text"
 msgstr "<br/>"
 
-#: experiments/templates/timeslots/index.html:48
+#: experiments/templates/timeslots/index.html:50
 msgid "timeslots:day"
 msgstr "Dag"
 
-#: experiments/templates/timeslots/index.html:51
+#: experiments/templates/timeslots/index.html:53
 msgid "timeslots:date"
 msgstr "Datum"
 
-#: experiments/templates/timeslots/index.html:54
+#: experiments/templates/timeslots/index.html:56
 msgid "timeslots:time"
 msgstr "Tijd"
 
-#: experiments/templates/timeslots/index.html:57
+#: experiments/templates/timeslots/index.html:59
 msgid "timeslots:place"
 msgstr "Plaats #"
 
-#: experiments/templates/timeslots/index.html:60
+#: experiments/templates/timeslots/index.html:62
 msgid "timeslots:participant:name"
 msgstr "Participant"
 
-#: experiments/templates/timeslots/index.html:63
+#: experiments/templates/timeslots/index.html:65
 msgid "timeslots:participant:email"
 msgstr "Participant email"
 
-#: experiments/templates/timeslots/index.html:150
+#: experiments/templates/timeslots/index.html:152
 msgid "timeslots:home:new_timeslots:header"
 msgstr "Nieuw timeslot"
 
@@ -642,13 +647,9 @@ msgid "experiments:message:switch_visible:invisible"
 msgstr "Participant informatie verborgen voor proefleiders"
 
 #: experiments/views/timeslot_views.py:72
-#, fuzzy
-#| msgid "experiments:message:deleted_experiment"
 msgid "timeslots:message:deleted_timeslot"
-msgstr "Experiment verwijderd!"
+msgstr "Timeslot verwijderd!"
 
 #: experiments/views/timeslot_views.py:85
-#, fuzzy
-#| msgid "experiments:message:deleted_experiment"
 msgid "timeslots:message:deleted_timeslots"
-msgstr "Experiment verwijderd!"
+msgstr "Timeslots verwijderd!"

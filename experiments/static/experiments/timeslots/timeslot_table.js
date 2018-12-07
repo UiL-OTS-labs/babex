@@ -62,5 +62,15 @@ $(function () {
         let checkboxes = $('.timeslot_checkbox');
 
         checkboxes.prop('disabled', false);
+
+        if(confirm(strings['confirm_multi_delete']))
+            return true;
+
+        reset_disabled();
+        return false;
+    });
+
+    $('.icon-delete').click(function () {
+        return confirm(strings['confirm_delete']);
     });
 });
