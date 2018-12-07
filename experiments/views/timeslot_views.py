@@ -1,5 +1,6 @@
 from django.urls import reverse_lazy as reverse
 from django.core.exceptions import SuspiciousOperation
+from django.utils.functional import cached_property
 from django.utils.text import gettext_lazy as _
 from django.views import generic
 import braces.views as braces
@@ -7,7 +8,8 @@ import braces.views as braces
 from ..models import TimeSlot
 from ..forms import TimeSlotForm
 from .mixins import ExperimentObjectMixin
-from ..utils import now, delete_timeslot, delete_timeslots
+from ..utils import now, delete_timeslot, delete_timeslots, \
+    unsubscribe_participant
 from main.views import FormListView
 from uil.core.views.mixins import RedirectSuccessMessageMixin
 
@@ -91,3 +93,43 @@ class TimeSlotBulkDeleteView(braces.LoginRequiredMixin,
         delete_timeslots(self.experiment, self.request.POST)
 
         return reverse('experiments:timeslots', args=[self.experiment.pk])
+
+
+class UnsubscribeParticipantView(braces.LoginRequiredMixin,
+                                 RedirectSuccessMessageMixin,
+                                 generic.RedirectView):
+    success_message = _('timeslots:message:unsubscribed_participant')
+
+    def get_redirect_url(self, *args, **kwargs):
+        participant_pk = self.kwargs.get('participant')
+
+        unsubscribe_participant(self.time_slot, participant_pk)
+
+        return reverse(
+            'experiments:timeslots',
+            args=[self.time_slot.experiment.pk]
+        )
+
+    @cached_property
+    def time_slot(self):
+        return TimeSlot.objects.get(pk=self.kwargs.get('time_slot'))
+
+
+class SilentUnsubscribeParticipantView(braces.LoginRequiredMixin,
+                                       RedirectSuccessMessageMixin,
+                                       generic.RedirectView):
+    success_message = _('timeslots:message:unsubscribed_participant')
+
+    def get_redirect_url(self, *args, **kwargs):
+        participant_pk = self.kwargs.get('participant')
+
+        unsubscribe_participant(self.time_slot, participant_pk, False)
+
+        return reverse(
+            'experiments:timeslots',
+            args=[self.time_slot.experiment.pk]
+        )
+
+    @cached_property
+    def time_slot(self):
+        return TimeSlot.objects.get(pk=self.kwargs.get('time_slot'))

@@ -1,0 +1,32 @@
+{% extends 'mail/base.html' %}
+
+{% block subtitle %}
+    Uitgeschreven voor experiment: <strong>{{ experiment.name }}</strong>
+{% endblock %}
+
+{% block content %}
+    <p>
+        Beste {{ participant.name }},
+    </p>
+    <p>
+        Je bent door de beheerder uitgeschreven voor experiment: <strong>{{ experiment.name }}</strong><br/><br/>
+        Datum: <strong>{{ time_slot.datetime|date:"l d-m-Y" }}</strong><br/>
+        Tijd: <strong>{{ time_slot.datetime|date:"H:i" }} uur</strong><br/>
+        Locatie: <strong>{{ experiment.location }}</strong><br/>8
+        Uitgeschreven op: <strong>{% now "d-m-Y, H:i" %}</strong>
+    </p>
+    <p>
+        Je kunt je opnieuw inschrijven <a href="{{ other_time_link }}" style="color:#003399">voor een ander tijdstip</a>
+        of voor een ander experiment via de <a href="{{ home_link }}" style="color:#003399">Experimenten homepage</a>.
+    </p>
+{% endblock %}
+
+
+{% block footer %}
+    <p>
+        Dit bericht is automatisch gegegenereerd. Neem bij vragen contact op met {{ admin }} via
+        <a href="mailto:{{ admin_email }}" style="color:#003399">
+            {{ admin_email }}
+        </a>
+    </p>
+{% endblock %}

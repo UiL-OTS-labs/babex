@@ -118,14 +118,14 @@
                                     {% endif %}
                                     {% if place.participant %}
                                         <a
-                                            href="#"
+                                            href="{% url 'experiments:timeslots_unsubscribe' timeslot.pk place.participant.pk %}"
                                             class="icon-remove-participant"
                                             title="{% trans 'timeslots:remove_participant:title' %}"
                                         >
                                             
                                         </a>
                                         <a
-                                            href="#"
+                                            href="{% url 'experiments:timeslots_unsubscribe_silent' timeslot.pk place.participant.pk %}"
                                             class="icon-silent-remove-participant"
                                             title="{% trans 'timeslots:silent_remove_participant:title' %}"
                                         >

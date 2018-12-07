@@ -1,0 +1,15 @@
+Beste {{ participant.name }},
+
+Je bent door de beheerder uitgeschreven voor experiment: {{ experiment.name }}
+
+Datum: {{ time_slot.datetime|date:"l d-m-Y" }}
+Tijd: {{ time_slot.datetime|date:"H:i" }} uur
+Locatie: {{ experiment.location }}
+Uitgeschreven op: {% now "d-m-Y, H:i" %}
+
+Je kunt je opnieuw inschrijven voor een ander tijdstip hier:
+{{ other_time_link }}
+of voor een ander experiment via:
+{{ home_link }}
+
+Dit bericht is automatisch gegegenereerd. Neem bij vragen contact op met {{ admin }} via {{ admin_email }}
