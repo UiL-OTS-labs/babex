@@ -24,7 +24,6 @@ def send_template_email(recipient_list: list, subject: str, template: str,
     :param template: Template name, without extension
     :param template_context: Any context variables for the templates
     :param from_email: FROM header. If absent, settings.FROM_EMAIL will be used
-    :return:
     """
     plain_body = render_to_string('{}.txt'.format(template), template_context)
     html_body = render_to_string('{}.html'.format(template), template_context)
@@ -51,11 +50,10 @@ def send_personalised_mass_mail(datatuple: Tuple[str, dict, List[str]],
     personal_context and template_context will be merged together to create
     a personalised email.
 
-    :param datatuple:
-    :param template:
-    :param template_context:
-    :param from_email:
-    :return:
+    :param datatuple: A tuple of tuples: (subject, personal_context, recipient_list)
+    :param template: Template name, without extension
+    :param template_context: Any context variables for the templates
+    :param from_email: FROM header. If absent, settings.FROM_EMAIL will be used
     """
     messages = []
     from_email = from_email or settings.FROM_EMAIL
@@ -64,6 +62,7 @@ def send_personalised_mass_mail(datatuple: Tuple[str, dict, List[str]],
     for subject, personal_context, recipient_list in datatuple:
         context = personal_context.copy()
         context.update(template_context)
+
         plain_body = render_to_string('{}.txt'.format(template),
                                       context)
         html_body = render_to_string('{}.html'.format(template),
