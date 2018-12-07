@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-07 09:19+0000\n"
+"POT-Creation-Date: 2018-12-07 14:05+0000\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -560,7 +560,12 @@ msgstr ""
 
 #: experiments/templates/timeslots/index.html:41
 msgid "timeslots:home:info_text"
-msgstr "<br/>"
+msgstr ""
+"Timeslots can be edited here. Please note that you can only delete the last "
+"place in a certain timeslot.<br/> If you need to delete multiple (or all) "
+"places, you can use the checkboxes. By default you can only check the last "
+"checkbox for a timeslot. Once a checkbox has been clicked, the one below it "
+"(in terms of place) can be checked too. "
 
 #: experiments/templates/timeslots/index.html:52
 msgid "timeslots:day"
@@ -592,7 +597,8 @@ msgstr "Unsubscribe participant"
 
 #: experiments/templates/timeslots/index.html:130
 msgid "timeslots:silent_remove_participant:title"
-msgstr "Unsubscribe participant (without sending an automatic confirmation email)"
+msgstr ""
+"Unsubscribe participant (without sending an automatic confirmation email)"
 
 #: experiments/templates/timeslots/index.html:165
 msgid "timeslots:home:new_timeslots:header"
@@ -667,10 +673,17 @@ msgstr "Successfully changed participant visibility to visible"
 msgid "experiments:message:switch_visible:invisible"
 msgstr "Successfully hid participants from leaders"
 
-#: experiments/views/timeslot_views.py:72
+#: experiments/views/timeslot_views.py:74
 msgid "timeslots:message:deleted_timeslot"
 msgstr "Timeslot removed!"
 
-#: experiments/views/timeslot_views.py:85
+#: experiments/views/timeslot_views.py:87
 msgid "timeslots:message:deleted_timeslots"
 msgstr "Timeslots removed!"
+
+#: experiments/views/timeslot_views.py:101
+#: experiments/views/timeslot_views.py:121
+#, fuzzy
+#| msgid "time_slot:attribute:participants"
+msgid "timeslots:message:unsubscribed_participant"
+msgstr "Registered participants"

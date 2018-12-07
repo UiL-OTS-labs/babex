@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-07 09:19+0000\n"
+"POT-Creation-Date: 2018-12-07 14:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -561,7 +561,13 @@ msgstr ""
 
 #: experiments/templates/timeslots/index.html:41
 msgid "timeslots:home:info_text"
-msgstr "<br/>"
+msgstr ""
+"Hier kunt u de timeslots voor dit experiment aanpassen. Standaard is alleen "
+"de laatste plek binnen een timeslot verwijderenbaar. <br/> Indien u meerdere "
+"timeslots wilt verwijderen, kunt u de checkboxes gebruiken. Alleen de laaste "
+"checkbox is klikbaar, maar zodra deze is aangeklikt wordt de checkbox van de "
+"plaats eronder geactiveerd. Op deze manier zijn meerdere plaatsen in een "
+"timeslot te verwijderen."
 
 #: experiments/templates/timeslots/index.html:52
 msgid "timeslots:day"
@@ -670,10 +676,17 @@ msgstr "Participant informatie zichtbaar gemaakt voor proefleiders"
 msgid "experiments:message:switch_visible:invisible"
 msgstr "Participant informatie verborgen voor proefleiders"
 
-#: experiments/views/timeslot_views.py:72
+#: experiments/views/timeslot_views.py:74
 msgid "timeslots:message:deleted_timeslot"
 msgstr "Timeslot verwijderd!"
 
-#: experiments/views/timeslot_views.py:85
+#: experiments/views/timeslot_views.py:87
 msgid "timeslots:message:deleted_timeslots"
 msgstr "Timeslots verwijderd!"
+
+#: experiments/views/timeslot_views.py:101
+#: experiments/views/timeslot_views.py:121
+#, fuzzy
+#| msgid "time_slot:attribute:participants"
+msgid "timeslots:message:unsubscribed_participant"
+msgstr "Participanten"
