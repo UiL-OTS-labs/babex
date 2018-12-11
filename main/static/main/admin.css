@@ -5,3 +5,9 @@
 .oneline-form input {
     width: auto;
 }
+
+/* How dare you call this a CSS Hack! It's not a CSS hack, it's a horrible CSS hack! */
+.behind-icon {
+    margin-right: -15px;
+    font-weight: bold;
+}
