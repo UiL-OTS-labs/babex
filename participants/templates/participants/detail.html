@@ -5,7 +5,7 @@
 {% load get_field_name %}
 
 {% block header_title %}
-    {% transformat 'participants:detail:header' participant.name %} - {{ block.super }}
+    {% transformat 'participants:detail:header' participant %} - {{ block.super }}
 {% endblock %}
 
 {% block html_head %}
@@ -25,7 +25,7 @@
             </a>
         </div>
         <h1>
-            {% transformat 'participants:detail:header' participant.name %}
+            {% transformat 'participants:detail:header' participant %}
         </h1>
     </div>
     <div class="col-5">

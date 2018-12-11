@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-11 12:59+0000\n"
+"POT-Creation-Date: 2018-12-11 13:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -98,9 +98,19 @@ msgstr "Op mailinglist"
 msgid "participant:attribute:capable"
 msgstr "Bekwaam"
 
-#: participants/models.py:108
+#: participants/models.py:109
+msgid "participant:name:unknown"
+msgstr "naam onbekend"
+
+#: participants/models.py:114
 msgid "secondary_email:attribute:email"
 msgstr "Secundaire e-mailadres"
+
+#: participants/models.py:127
+#, fuzzy
+#| msgid "participant:attribute:sex"
+msgid "criterium_answer:attribute:answer"
+msgstr "Geslachte"
 
 #: participants/templates/participants/detail.html:8
 #: participants/templates/participants/detail.html:28
@@ -155,6 +165,7 @@ msgid "participants:update:info_text"
 msgstr "<br/>"
 
 #: participants/templates/participants/edit.html:27
+#: participants/templates/participants/specific_criteria.html:32
 msgid "participants:globals:save_button"
 msgstr "Save"
 
@@ -179,6 +190,31 @@ msgstr "Acties"
 msgid "participants:home:detail:title"
 msgstr "Bekijk details"
 
-#: participants/views.py:25
+#: participants/templates/participants/index.html:72
+#, fuzzy
+#| msgid "participants:home:detail:title"
+msgid "participants:home:update:title"
+msgstr "Bekijk details"
+
+#: participants/templates/participants/index.html:79
+#, fuzzy
+#| msgid "participants:home:detail:title"
+msgid "participants:home:update_specific_criteria:title"
+msgstr "Bekijk details"
+
+#: participants/templates/participants/specific_criteria.html:8
+#: participants/templates/participants/specific_criteria.html:15
+#, fuzzy
+#| msgid "participants:home:detail:title"
+msgid "participants:specific_criteria:header"
+msgstr "Bekijk details"
+
+#: participants/templates/participants/specific_criteria.html:18
+#, fuzzy
+#| msgid "participants:home:detail:title"
+msgid "participants:specific_criteria:info_text"
+msgstr "Bekijk details"
+
+#: participants/views.py:27
 msgid "participants:messages:updated_participant"
 msgstr "Participant aangepast!"

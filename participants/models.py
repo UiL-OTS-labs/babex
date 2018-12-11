@@ -102,6 +102,12 @@ class Participant(models.Model):
         on_delete=models.SET_NULL,
     )
 
+    def __str__(self):
+        if self.name:
+            return self.name
+
+        return _('participant:name:unknown').__str__()
+
 
 class SecondaryEmail(models.Model):
     email = models.EmailField(
@@ -111,10 +117,12 @@ class SecondaryEmail(models.Model):
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
 
 
-# class CriteriaAnswer(models.Model):
-#
-#     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
-#
-#     criteria = models.ForeignKey(Criterium, on_delete=models.CASCADE)
-#
-#     answer = models.TextField()
+class CriteriumAnswer(models.Model):
+
+    participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
+
+    criterium = models.ForeignKey(Criterium, on_delete=models.CASCADE)
+
+    answer = models.TextField(
+        _('criterium_answer:attribute:answer')
+    )
