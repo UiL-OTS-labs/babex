@@ -59,7 +59,13 @@
                             {{ participant.phonenumber }}
                         </td>
                         <td>
-                            Nada!
+                            <a
+                                href="{% url 'participants:detail' participant.pk %}"
+                                class="icon-detail"
+                                title="{% trans 'participants:home:detail:title'  %}"
+                            >
+                                
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}
