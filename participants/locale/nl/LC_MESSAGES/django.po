@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-11 11:03+0000\n"
+"POT-Creation-Date: 2018-12-11 11:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,59 +50,76 @@ msgstr "E-mailadres"
 msgid "participant:attribute:name"
 msgstr "Naam"
 
-#: participants/models.py:38
+#: participants/models.py:40
 msgid "participant:attribute:language"
 msgstr "Taal"
 
-#: participants/models.py:42
+#: participants/models.py:44
 msgid "participant:attribute:dyslexic"
 msgstr "Dyslexie"
 
-#: participants/models.py:46
+#: participants/models.py:48
 msgid "participant:attribute:birth_date"
 msgstr "Geboortedatum"
 
-#: participants/models.py:50
+#: participants/models.py:56
 msgid "participant:attribute:multilingual"
 msgstr "Meertalig"
 
-#: participants/models.py:54
+#: participants/models.py:62
 msgid "participant:attribute:phonenumber"
 msgstr "Telefoonnummer"
 
-#: participants/models.py:58
+#: participants/models.py:68
 msgid "participant:attribute:handedness"
 msgstr "Left/rechtshandig"
 
-#: participants/models.py:63
+#: participants/models.py:75
 msgid "participant:attribute:sex"
 msgstr "Geslachte"
 
-#: participants/models.py:68
+#: participants/models.py:82
 msgid "participant:attribute:social_status"
 msgstr "Sociale rol"
 
-#: participants/models.py:73
+#: participants/models.py:89
 msgid "participant:attribute:email_subscription"
 msgstr "Op mailinglist"
 
-#: participants/models.py:78
+#: participants/models.py:94
 msgid "participant:attribute:capable"
 msgstr "Bekwaam"
 
-#: participants/models.py:92
+#: participants/models.py:108
 msgid "secondary_email:attribute:email"
 msgstr "Secundaire e-mailadres"
 
-#: participants/templates/participants/index.html:7
-#: participants/templates/participants/index.html:19
+#: participants/templates/participants/detail.html:7
+#: participants/templates/participants/detail.html:19
+msgid "participants:detail:header"
+msgstr "Details '{}'"
+
+#: participants/templates/participants/detail.html:15
+msgid "participants:detail:edit_participant"
+msgstr "Verander"
+
+#: participants/templates/participants/index.html:8
+#: participants/templates/participants/index.html:20
 msgid "participants:home:header"
 msgstr "Participanten"
 
-#: participants/templates/participants/index.html:15
+#: participants/templates/participants/index.html:16
 msgid "participants:home:merge_participants"
 msgstr "Combineer Participanten"
 
-#: participants/templates/participants/index.html:22
+#: participants/templates/participants/index.html:23
 msgid "participants:home:info_text"
 msgstr "<br/>"
+
+#: participants/templates/participants/index.html:41
+msgid "participants:globals:actions"
+msgstr "Acties"
+
+#: participants/templates/participants/index.html:65
+msgid "participants:home:detail:title"
+msgstr "Bekijk details"

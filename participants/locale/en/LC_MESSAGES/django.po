@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-11 11:03+0000\n"
+"POT-Creation-Date: 2018-12-11 11:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,59 +50,76 @@ msgstr "E-mail address"
 msgid "participant:attribute:name"
 msgstr "Name"
 
-#: participants/models.py:38
+#: participants/models.py:40
 msgid "participant:attribute:language"
 msgstr "Language"
 
-#: participants/models.py:42
+#: participants/models.py:44
 msgid "participant:attribute:dyslexic"
 msgstr "Dyslexic?"
 
-#: participants/models.py:46
+#: participants/models.py:48
 msgid "participant:attribute:birth_date"
 msgstr "Birth date"
 
-#: participants/models.py:50
+#: participants/models.py:56
 msgid "participant:attribute:multilingual"
 msgstr "Multilingual"
 
-#: participants/models.py:54
+#: participants/models.py:62
 msgid "participant:attribute:phonenumber"
 msgstr "Phone number"
 
-#: participants/models.py:58
+#: participants/models.py:68
 msgid "participant:attribute:handedness"
 msgstr "Handedness"
 
-#: participants/models.py:63
+#: participants/models.py:75
 msgid "participant:attribute:sex"
 msgstr "Sex"
 
-#: participants/models.py:68
+#: participants/models.py:82
 msgid "participant:attribute:social_status"
 msgstr "Social role"
 
-#: participants/models.py:73
+#: participants/models.py:89
 msgid "participant:attribute:email_subscription"
 msgstr "On mailing list"
 
-#: participants/models.py:78
+#: participants/models.py:94
 msgid "participant:attribute:capable"
 msgstr "Capable"
 
-#: participants/models.py:92
+#: participants/models.py:108
 msgid "secondary_email:attribute:email"
 msgstr "Secondary e-mail address"
 
-#: participants/templates/participants/index.html:7
-#: participants/templates/participants/index.html:19
+#: participants/templates/participants/detail.html:7
+#: participants/templates/participants/detail.html:19
+msgid "participants:detail:header"
+msgstr "Details '{}'"
+
+#: participants/templates/participants/detail.html:15
+msgid "participants:detail:edit_participant"
+msgstr "Edit"
+
+#: participants/templates/participants/index.html:8
+#: participants/templates/participants/index.html:20
 msgid "participants:home:header"
 msgstr "Participants"
 
-#: participants/templates/participants/index.html:15
+#: participants/templates/participants/index.html:16
 msgid "participants:home:merge_participants"
 msgstr "Merge participants"
 
-#: participants/templates/participants/index.html:22
+#: participants/templates/participants/index.html:23
 msgid "participants:home:info_text"
 msgstr "<br/>"
+
+#: participants/templates/participants/index.html:41
+msgid "participants:globals:actions"
+msgstr "Actions"
+
+#: participants/templates/participants/index.html:65
+msgid "participants:home:detail:title"
+msgstr "View details"

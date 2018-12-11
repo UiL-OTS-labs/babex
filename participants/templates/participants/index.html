@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load transformat %}
 {% load datatables %}
+{% load get_field_name %}
 
 {% block header_title %}
     {% trans 'participants:home:header' %} - {{ block.super }}
@@ -25,19 +26,19 @@
             <thead>
                 <tr>
                     <th>
-                        Id
+                        {% get_verbose_field_name "participants" "Participant" "id" %}
                     </th>
                     <th>
-                        Name
+                        {% get_verbose_field_name "participants" "Participant" "name" %}
                     </th>
                     <th>
-                        Email
+                        {% get_verbose_field_name "participants" "Participant" "email" %}
                     </th>
                     <th>
-                        Phonenumber
+                        {% get_verbose_field_name "participants" "Participant" "phonenumber" %}
                     </th>
                     <th>
-                        Actions
+                        {% trans 'participants:globals:actions' %}
                     </th>
                 </tr>
             </thead>
