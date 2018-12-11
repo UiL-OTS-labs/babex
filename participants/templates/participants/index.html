@@ -35,9 +35,25 @@
                         {% get_verbose_field_name "participants" "Participant" "email" %}
                     </th>
                     <th>
+                        {% transformat 'participants:detail:secondary_emails' %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "participants" "Participant" "sex" %}
+                    </th>
+                    <th>
                         {% get_verbose_field_name "participants" "Participant" "phonenumber" %}
                     </th>
                     <th>
+                        {% get_verbose_field_name "participants" "Participant" "language" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "participants" "Participant" "multilingual" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "participants" "Participant" "dyslexic" %}
+                    </th>
+                    {# The data-priority makes sure this column is always visible #}
+                    <th data-priority="1">
                         {% trans 'participants:globals:actions' %}
                     </th>
                 </tr>
@@ -53,10 +69,27 @@
                             {{ participant }}
                         </td>
                         <td>
-                            {{ participant.email }}
+                            <a href="mailto:{{ participant.email }}">{{ participant.email }}</a>
+                        </td>
+                        <td>
+                            {% for email in participant.secondaryemail_set.all %}
+                                <a href="mailto:{{ email.email }}">{{ email.email }}</a>,
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {{ participant.get_sex_display|default_if_none:"" }}
                         </td>
                         <td>
                             {{ participant.phonenumber }}
+                        </td>
+                        <td>
+                            {{ participant.language }}
+                        </td>
+                        <td>
+                            {{ participant.multilingual|yesno:_('options:many,one') }}
+                        </td>
+                        <td>
+                            {{ participant.dyslexic|yesno:_('yes,no') }}
                         </td>
                         <td>
                             <a
