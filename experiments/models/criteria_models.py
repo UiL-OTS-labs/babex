@@ -27,7 +27,7 @@ class DefaultCriteria(models.Model):
     DYSLEXIA = (
         ('Y', _('default_criteria:attribute:dyslexia:yes')),
         ('N', _('default_criteria:attribute:dyslexia:no')),
-        ('I', _('experiments:globals:indifferent')),
+        # ('I', _('experiments:globals:indifferent')),
     )
 
     SOCIAL_STATUS = (
