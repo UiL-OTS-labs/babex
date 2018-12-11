@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-11 12:14+0000\n"
+"POT-Creation-Date: 2018-12-11 12:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: participants/forms.py:31
+msgid "participants:multilingual:many"
+msgstr "Many"
+
+#: participants/forms.py:32
+msgid "participants:multilingual:one"
+msgstr "One"
 
 #: participants/models.py:14
 msgid "participant:attribute:handedness:lefthanded"
@@ -95,47 +103,60 @@ msgid "secondary_email:attribute:email"
 msgstr "Secondary e-mail address"
 
 #: participants/templates/participants/detail.html:8
-#: participants/templates/participants/detail.html:20
+#: participants/templates/participants/detail.html:28
 msgid "participants:detail:header"
 msgstr "Details of '{}'"
 
-#: participants/templates/participants/detail.html:16
+#: participants/templates/participants/detail.html:24
 msgid "participants:detail:edit_participant"
 msgstr "Edit"
 
-#: participants/templates/participants/detail.html:28
+#: participants/templates/participants/detail.html:36
 msgid "participant:detail:table_header"
 msgstr "Participant Details"
 
-#: participants/templates/participants/detail.html:40
+#: participants/templates/participants/detail.html:48
 msgid "Unknown"
 msgstr "Unknown"
 
-#: participants/templates/participants/detail.html:55
+#: participants/templates/participants/detail.html:63
 msgid "participants:detail:secondary_emails"
 msgstr "Secondary e-mail(s)"
 
-#: participants/templates/participants/detail.html:76
-#: participants/templates/participants/detail.html:132
+#: participants/templates/participants/detail.html:84
 #: participants/templates/participants/detail.html:140
+#: participants/templates/participants/detail.html:148
 msgid "yes,no"
 msgstr "yes,no"
 
-#: participants/templates/participants/detail.html:92
+#: participants/templates/participants/detail.html:100
 msgid "options:many,one"
 msgstr "many,one"
 
-#: participants/templates/participants/detail.html:150
+#: participants/templates/participants/detail.html:158
 msgid "participants:detail:experiments"
 msgstr "Experiment"
 
-#: participants/templates/participants/detail.html:153
+#: participants/templates/participants/detail.html:161
 msgid "participants:detail:datetime"
 msgstr "Date & Time"
 
-#: participants/templates/participants/detail.html:156
+#: participants/templates/participants/detail.html:164
 msgid "participants:detail:place"
 msgstr "Place"
+
+#: participants/templates/participants/edit.html:8
+#: participants/templates/participants/edit.html:15
+msgid "participants:update:header"
+msgstr "Edit participant"
+
+#: participants/templates/participants/edit.html:18
+msgid "participants:update:info_text"
+msgstr "<br/>"
+
+#: participants/templates/participants/edit.html:27
+msgid "participants:globals:save_button"
+msgstr "Save"
 
 #: participants/templates/participants/index.html:8
 #: participants/templates/participants/index.html:20
@@ -157,3 +178,7 @@ msgstr "Actions"
 #: participants/templates/participants/index.html:65
 msgid "participants:home:detail:title"
 msgstr "View details"
+
+#: participants/views.py:25
+msgid "participants:messages:updated_participant"
+msgstr "Participant updated!"
