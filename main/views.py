@@ -73,6 +73,10 @@ class FormListView(FormMixin, generic.ListView):
         return self.render_to_response(context)
 
     def post(self, request, *args, **kwargs):
+        # Manually populate the object_list, to avoid errors when submitting
+        # forms with errors
+        self.object_list = self.get_queryset()
+
         form = self.get_form()
         if form.is_valid():
             return self.form_valid(form)
