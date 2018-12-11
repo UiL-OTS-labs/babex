@@ -124,6 +124,10 @@ class Criterium(models.Model):
     def formatted_values_str(self) -> str:
         return ", ".join(self.values_list)
 
+    @property
+    def choices_tuple(self) -> tuple:
+        return tuple((x, x) for x in self.values_list)
+
     def __str__(self):
         return "{} ({})".format(
             self.name_natural,
