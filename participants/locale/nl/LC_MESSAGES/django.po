@@ -2,13 +2,12 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-11 13:41+0000\n"
+"POT-Creation-Date: 2018-12-11 14:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -107,10 +106,25 @@ msgid "secondary_email:attribute:email"
 msgstr "Secundaire e-mailadres"
 
 #: participants/models.py:127
-#, fuzzy
-#| msgid "participant:attribute:sex"
 msgid "criterium_answer:attribute:answer"
-msgstr "Geslachte"
+msgstr "Antwoord"
+
+#: participants/templates/participants/delete.html:8
+#: participants/templates/participants/delete.html:16
+msgid "participants:delete:header"
+msgstr "Participant verwijderen"
+
+#: participants/templates/participants/delete.html:19
+msgid "participants:delete:text"
+msgstr "Weet je zeker dat je deze participant wilt verwijderen?"
+
+#: participants/templates/participants/delete.html:22
+msgid "participants:delete:cancel"
+msgstr "Annuleer"
+
+#: participants/templates/participants/delete.html:25
+msgid "participants:delete:confirm"
+msgstr "Verwijder participant"
 
 #: participants/templates/participants/detail.html:8
 #: participants/templates/participants/detail.html:28
@@ -191,30 +205,30 @@ msgid "participants:home:detail:title"
 msgstr "Bekijk details"
 
 #: participants/templates/participants/index.html:72
-#, fuzzy
-#| msgid "participants:home:detail:title"
 msgid "participants:home:update:title"
-msgstr "Bekijk details"
+msgstr "Pas participant gegevens aan"
 
 #: participants/templates/participants/index.html:79
-#, fuzzy
-#| msgid "participants:home:detail:title"
 msgid "participants:home:update_specific_criteria:title"
-msgstr "Bekijk details"
+msgstr "Pas participant criteria gegevens aan"
+
+#: participants/templates/participants/index.html:86
+msgid "participants:home:delete:title"
+msgstr "Verwijder participant"
 
 #: participants/templates/participants/specific_criteria.html:8
 #: participants/templates/participants/specific_criteria.html:15
-#, fuzzy
-#| msgid "participants:home:detail:title"
 msgid "participants:specific_criteria:header"
-msgstr "Bekijk details"
+msgstr "Specifieke criteria voor '{}'"
 
 #: participants/templates/participants/specific_criteria.html:18
-#, fuzzy
-#| msgid "participants:home:detail:title"
 msgid "participants:specific_criteria:info_text"
-msgstr "Bekijk details"
+msgstr " "
 
-#: participants/views.py:27
+#: participants/views.py:28
 msgid "participants:messages:updated_participant"
 msgstr "Participant aangepast!"
+
+#: participants/views.py:38
+msgid "participants:messages:deleted_participant"
+msgstr "Participant verwijderd!"

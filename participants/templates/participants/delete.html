@@ -1,0 +1,30 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+
+{% block header_title %}
+    {% trans 'participants:delete:header' %} - {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <h1>
+            {% trans 'participants:delete:header' %}
+        </h1>
+        <form method="post">{% csrf_token %}
+            <p>{% transformat 'participants:delete:text' object %}</p>
+            <div class="button" style="display: inline-block">
+                <a href="{% url 'participants:home' %}" >
+                    {% trans 'participants:delete:cancel' %}
+                </a>
+            </div>
+            <input type="submit" value="{% trans 'participants:delete:confirm' %}">
+        </form>
+        <br/>
+    </div>
+</div>
+{% endblock %}

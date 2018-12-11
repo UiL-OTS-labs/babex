@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-11 13:41+0000\n"
+"POT-Creation-Date: 2018-12-11 14:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -110,6 +110,22 @@ msgstr "Secondary e-mail address"
 msgid "criterium_answer:attribute:answer"
 msgstr "Answer"
 
+#: participants/templates/participants/delete.html:8
+msgid "participants:delete:header"
+msgstr "Delete participant"
+
+#: participants/templates/participants/delete.html:19
+msgid "participants:delete:text"
+msgstr "Are you sure you want to delete this participant?"
+
+#: participants/templates/participants/delete.html:22
+msgid "participants:delete:cancel"
+msgstr "Cancel"
+
+#: participants/templates/participants/delete.html:25
+msgid "participants:delete:confirm"
+msgstr "Delete participant"
+
 #: participants/templates/participants/detail.html:8
 #: participants/templates/participants/detail.html:28
 msgid "participants:detail:header"
@@ -196,6 +212,10 @@ msgstr "Edit participant"
 msgid "participants:home:update_specific_criteria:title"
 msgstr "Edit specific criteria"
 
+#: participants/templates/participants/index.html:86
+msgid "participants:home:delete:title"
+msgstr "Delete this participant"
+
 #: participants/templates/participants/specific_criteria.html:8
 #: participants/templates/participants/specific_criteria.html:15
 msgid "participants:specific_criteria:header"
@@ -205,6 +225,10 @@ msgstr "Specific criteria for '{}'"
 msgid "participants:specific_criteria:info_text"
 msgstr " "
 
-#: participants/views.py:27
+#: participants/views.py:28
 msgid "participants:messages:updated_participant"
 msgstr "Participant updated!"
+
+#: participants/views.py:38
+msgid "participants:messages:deleted_participant"
+msgstr "Participant deleted!"

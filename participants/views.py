@@ -7,7 +7,8 @@ import braces.views as braces
 
 from .models import Participant, CriteriumAnswer
 from .forms import ParticipantForm, CriteriumAnswerForm
-from uil.core.views.base import FormSetUpdateView
+from uil.core.views import FormSetUpdateView
+from uil.core.views.mixins import DeleteSuccessMessageMixin
 
 
 class ParticipantsHomeView(braces.LoginRequiredMixin, generic.ListView):
@@ -31,12 +32,19 @@ class ParticipantUpdateView(braces.LoginRequiredMixin, SuccessMessageMixin,
         return reverse('participants:detail', args=[self.object.pk])
 
 
+class ParticipantDeleteView(braces.LoginRequiredMixin,
+                            DeleteSuccessMessageMixin, generic.DeleteView):
+    success_url = reverse('participants:home')
+    success_message = _('participants:messages:deleted_participant')
+    template_name = 'participants/delete.html'
+    model = Participant
+
+
 class ParticipantSpecificCriteriaUpdateView(braces.LoginRequiredMixin,
-                                            SuccessMessageMixin,
                                             FormSetUpdateView):
-    """"""
     form = CriteriumAnswerForm
     template_name = 'participants/specific_criteria.html'
+    succes_url = reverse('participants:home')
 
     def get_queryset(self):
 

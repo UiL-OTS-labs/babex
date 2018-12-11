@@ -80,6 +80,13 @@
                             >
                                 <span class="behind-icon">S</span> 
                             </a>
+                            <a
+                                href="{% url 'participants:delete' participant.pk %}"
+                                class="icon-delete"
+                                title="{% trans 'participants:home:delete:title' %}"
+                            >
+                                
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}
