@@ -11,7 +11,10 @@ from ..utils import create_and_attach_criterium, attach_criterium, \
     clean_form_existing_criterium
 from .mixins import ExperimentObjectMixin
 from main.views import FormListView
-from uil.core.views.mixins import RedirectSuccessMessageMixin, DeleteSuccessMessageMixin
+
+from uil.core.views import RedirectActionView
+from uil.core.views.mixins import RedirectSuccessMessageMixin,\
+    DeleteSuccessMessageMixin
 
 
 #
@@ -163,11 +166,11 @@ class CriteriaListView(braces.LoginRequiredMixin, SuccessMessageMixin,
 class AddExistingCriteriumToExperimentView(braces.LoginRequiredMixin,
                                            RedirectSuccessMessageMixin,
                                            ExperimentObjectMixin,
-                                           generic.RedirectView):
+                                           RedirectActionView):
     success_message = _('criteria:messages:added_to_experiment')
 
-    def get_redirect_url(self, *args, **kwargs):
-        cleaned_data = clean_form_existing_criterium(self.request.POST)
+    def action(self, request):
+        cleaned_data = clean_form_existing_criterium(request.POST)
 
         attach_criterium(
             self.experiment,
@@ -176,6 +179,7 @@ class AddExistingCriteriumToExperimentView(braces.LoginRequiredMixin,
             cleaned_data['message_failed'],
         )
 
+    def get_redirect_url(self, *args, **kwargs):
         return reverse(
             'experiments:specific_criteria',
             args=[self.experiment.pk]
@@ -185,14 +189,15 @@ class AddExistingCriteriumToExperimentView(braces.LoginRequiredMixin,
 class RemoveCriteriumFromExperiment(braces.LoginRequiredMixin,
                                     RedirectSuccessMessageMixin,
                                     ExperimentObjectMixin,
-                                    generic.RedirectView):
+                                    RedirectActionView):
     success_message = _('criteria:messages:removed_from_experiment')
 
-    def get_redirect_url(self, *args, **kwargs):
+    def action(self, request):
         criterium_pk = self.kwargs.get('criterium')
 
         ExperimentCriterium.objects.get(pk=criterium_pk).delete()
 
+    def get_redirect_url(self, *args, **kwargs):
         return reverse(
             'experiments:specific_criteria',
             args=[self.experiment.pk]

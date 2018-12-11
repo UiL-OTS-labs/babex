@@ -3,12 +3,14 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 import braces.views as braces
-from uil.core.views.mixins import RedirectSuccessMessageMixin, \
-    DeleteSuccessMessageMixin
 
 from ..models import Experiment
 from ..forms import ExperimentForm
 from .mixins import ExperimentObjectMixin
+
+from uil.core.views.mixins import RedirectSuccessMessageMixin, \
+    DeleteSuccessMessageMixin
+from uil.core.views import RedirectActionView
 
 
 class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
@@ -56,13 +58,14 @@ class ExperimentEditExcludedExperimentsView(braces.LoginRequiredMixin,
 
 class ExperimentExcludeOtherExperimentView(braces.LoginRequiredMixin,
                                            RedirectSuccessMessageMixin,
-                                           generic.RedirectView):
+                                           ExperimentObjectMixin,
+                                           RedirectActionView):
+    experiment_kwargs_name = 'current_experiment'
 
-    def get_redirect_url(self, *args, **kwargs):
-        experiment_pk = self.kwargs.get('current_experiment')
+    def action(self, request):
         exclude_experiment_pk = self.kwargs.get('exclude_experiment')
 
-        current_experiment = Experiment.objects.get(pk=experiment_pk)
+        current_experiment = self.experiment
         exclude_experiment = Experiment.objects.get(pk=exclude_experiment_pk)
 
         if exclude_experiment in current_experiment.excluded_experiments.all():
@@ -74,7 +77,9 @@ class ExperimentExcludeOtherExperimentView(braces.LoginRequiredMixin,
 
         current_experiment.save()
 
-        return reverse('experiments:excluded_experiments', args=[experiment_pk])
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse('experiments:excluded_experiments', args=[
+            self.experiment.pk])
 
 
 class ExperimentDeleteView(braces.LoginRequiredMixin, DeleteSuccessMessageMixin,
@@ -88,10 +93,11 @@ class ExperimentDeleteView(braces.LoginRequiredMixin, DeleteSuccessMessageMixin,
 class ExperimentSwitchOpenView(braces.LoginRequiredMixin,
                                RedirectSuccessMessageMixin,
                                ExperimentObjectMixin,
-                               generic.RedirectView):
+                               RedirectActionView):
     experiment_kwargs_name = 'pk'
+    url = reverse('experiments:home')
 
-    def get_redirect_url(self, *args, **kwargs):
+    def action(self, request):
 
         if self.experiment.open:
             self.experiment.open = False
@@ -102,17 +108,15 @@ class ExperimentSwitchOpenView(braces.LoginRequiredMixin,
 
         self.experiment.save()
 
-        return reverse('experiments:home')
-
 
 class ExperimentSwitchPublicView(braces.LoginRequiredMixin,
                                  RedirectSuccessMessageMixin,
                                  ExperimentObjectMixin,
-                                 generic.RedirectView):
+                                 RedirectActionView):
     experiment_kwargs_name = 'pk'
+    url = reverse('experiments:home')
 
-    def get_redirect_url(self, *args, **kwargs):
-
+    def action(self, request):
         if self.experiment.public:
             self.experiment.public = False
             self.success_message = _('experiments:message:switch_public:closed')
@@ -122,28 +126,25 @@ class ExperimentSwitchPublicView(braces.LoginRequiredMixin,
 
         self.experiment.save()
 
-        return reverse('experiments:home')
-
 
 class ExperimentSwitchVisibleView(braces.LoginRequiredMixin,
                                   RedirectSuccessMessageMixin,
                                   ExperimentObjectMixin,
-                                  generic.RedirectView):
+                                  RedirectActionView):
     experiment_kwargs_name = 'pk'
+    url = reverse('experiments:home')
 
-    def get_redirect_url(self, *args, **kwargs):
-
+    def action(self, request):
         if self.experiment.participants_visible:
             self.experiment.participants_visible = False
             self.success_message = _(
-                'experiments:message:switch_visible:visible'
+                'experiments:message:switch_visible:invisible'
             )
         else:
             self.experiment.participants_visible = True
             self.success_message = _(
-                'experiments:message:switch_visible:invisible'
+                'experiments:message:switch_visible:visible'
             )
 
         self.experiment.save()
 
-        return reverse('experiments:home')

@@ -12,6 +12,7 @@ from ..utils import now, delete_timeslot, delete_timeslots, \
     unsubscribe_participant
 from main.views import ModelFormListView
 from uil.core.views.mixins import RedirectSuccessMessageMixin
+from uil.core.views import RedirectActionView
 
 
 class TimeSlotHomeView(braces.LoginRequiredMixin,
@@ -70,41 +71,44 @@ class TimeSlotHomeView(braces.LoginRequiredMixin,
 
 class TimeSlotDeleteView(braces.LoginRequiredMixin,
                          RedirectSuccessMessageMixin, ExperimentObjectMixin,
-                         generic.RedirectView):
+                         RedirectActionView):
     success_message = _('timeslots:message:deleted_timeslot')
 
-    def get_redirect_url(self, *args, **kwargs):
+    def action(self, request):
         timeslot_pk = self.kwargs.get('timeslot')
 
         delete_timeslot(self.experiment, timeslot_pk)
 
+    def get_redirect_url(self, *args, **kwargs):
         return reverse('experiments:timeslots', args=[self.experiment.pk])
 
 
 class TimeSlotBulkDeleteView(braces.LoginRequiredMixin,
                              RedirectSuccessMessageMixin, ExperimentObjectMixin,
-                             generic.RedirectView):
+                             RedirectActionView):
     success_message = _('timeslots:message:deleted_timeslots')
 
-    def get_redirect_url(self, *args, **kwargs):
-        if not self.request.method == 'POST':
+    def action(self, request):
+        if not request.method == 'POST':
             raise SuspiciousOperation
 
-        delete_timeslots(self.experiment, self.request.POST)
+        delete_timeslots(self.experiment, request.POST)
 
+    def get_redirect_url(self, *args, **kwargs):
         return reverse('experiments:timeslots', args=[self.experiment.pk])
 
 
 class UnsubscribeParticipantView(braces.LoginRequiredMixin,
                                  RedirectSuccessMessageMixin,
-                                 generic.RedirectView):
+                                 RedirectActionView):
     success_message = _('timeslots:message:unsubscribed_participant')
 
-    def get_redirect_url(self, *args, **kwargs):
+    def action(self, request):
         participant_pk = self.kwargs.get('participant')
 
         unsubscribe_participant(self.time_slot, participant_pk)
 
+    def get_redirect_url(self, *args, **kwargs):
         return reverse(
             'experiments:timeslots',
             args=[self.time_slot.experiment.pk]
@@ -115,21 +119,10 @@ class UnsubscribeParticipantView(braces.LoginRequiredMixin,
         return TimeSlot.objects.get(pk=self.kwargs.get('time_slot'))
 
 
-class SilentUnsubscribeParticipantView(braces.LoginRequiredMixin,
-                                       RedirectSuccessMessageMixin,
-                                       generic.RedirectView):
-    success_message = _('timeslots:message:unsubscribed_participant')
+class SilentUnsubscribeParticipantView(UnsubscribeParticipantView):
 
-    def get_redirect_url(self, *args, **kwargs):
+    def action(self, request):
         participant_pk = self.kwargs.get('participant')
 
         unsubscribe_participant(self.time_slot, participant_pk, False)
 
-        return reverse(
-            'experiments:timeslots',
-            args=[self.time_slot.experiment.pk]
-        )
-
-    @cached_property
-    def time_slot(self):
-        return TimeSlot.objects.get(pk=self.kwargs.get('time_slot'))
