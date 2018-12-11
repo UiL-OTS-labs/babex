@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-11 09:40+0000\n"
+"POT-Creation-Date: 2018-12-11 10:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -254,6 +254,26 @@ msgstr "Aantal plekken"
 msgid "time_slot:attribute:participants"
 msgstr "Participanten"
 
+#: experiments/templates/criteria/delete.html:8
+#: experiments/templates/criteria/delete.html:16
+msgid "criteria:delete:header"
+msgstr "Criterium verwijderen"
+
+#: experiments/templates/criteria/delete.html:19
+msgid "criteria:delete:text"
+msgstr ""
+"Weet je zeker dat je het criterium '{}' wilt verwijderen? Het wordt op het "
+"moment in {} experiment(en) gebruikt! Indien dit criterium wordt verwijderd "
+"zal deze niet meer gebruikt worden in enige gelinkt experimenten."
+
+#: experiments/templates/criteria/delete.html:22
+msgid "criteria:delete:cancel"
+msgstr "Annuleer"
+
+#: experiments/templates/criteria/delete.html:25
+msgid "criteria:delete:confirm"
+msgstr "Verwijder criterium"
+
 #: experiments/templates/criteria/edit.html:8
 #: experiments/templates/criteria/edit.html:15
 msgid "criteria:edit:header"
@@ -302,8 +322,12 @@ msgid "experiments:globals:actions"
 msgstr "Acties"
 
 #: experiments/templates/criteria/index.html:69
-msgid "criteria:home:edit"
+msgid "criteria:home:edit:title"
 msgstr "Criterium aanpassen"
+
+#: experiments/templates/criteria/index.html:76
+msgid "criteria:home:delete:title"
+msgstr "Criterium verwijderen"
 
 #: experiments/templates/criteria/new.html:8
 #: experiments/templates/criteria/new.html:15
@@ -628,20 +652,24 @@ msgstr "Criterium aangemaakt"
 msgid "criteria:messages:updated"
 msgstr "Criterium aangepast"
 
-#: experiments/views/criteria_views.py:80
+#: experiments/views/criteria_views.py:45
+msgid "criteria:messages:deleted"
+msgstr "Criterium verwijderd!"
+
+#: experiments/views/criteria_views.py:86
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr ""
 
-#: experiments/views/criteria_views.py:104
+#: experiments/views/criteria_views.py:110
 msgid "criteria:messages:created_and_added"
 msgstr "Criterium aangemaakt en aan experiment toegevoegd!"
 
-#: experiments/views/criteria_views.py:160
+#: experiments/views/criteria_views.py:166
 msgid "criteria:messages:added_to_experiment"
 msgstr "Criterium toegevoegd aan experiment!"
 
-#: experiments/views/criteria_views.py:182
+#: experiments/views/criteria_views.py:188
 msgid "criteria:messages:removed_from_experiment"
 msgstr "Criterium verwijderd uit experiment!"
 

@@ -4,7 +4,6 @@ from django.views import generic
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 import braces.views as braces
-from uil.core.views.mixins import RedirectSuccessMessageMixin
 
 from ..models import DefaultCriteria, Criterium, ExperimentCriterium
 from ..forms import DefaultCriteriaForm, CriteriumForm, ExperimentCriteriumForm
@@ -12,6 +11,7 @@ from ..utils import create_and_attach_criterium, attach_criterium, \
     clean_form_existing_criterium
 from .mixins import ExperimentObjectMixin
 from main.views import FormListView
+from uil.core.views.mixins import RedirectSuccessMessageMixin, DeleteSuccessMessageMixin
 
 
 #
@@ -39,6 +39,13 @@ class CriteriaUpdateView(braces.LoginRequiredMixin, SuccessMessageMixin,
     success_message = _('criteria:messages:updated')
     model = Criterium
 
+
+class CriteriaDeleteView(braces.LoginRequiredMixin,
+                         DeleteSuccessMessageMixin, generic.DeleteView):
+    success_message = _('criteria:messages:deleted')
+    success_url = reverse('experiments:criteria_home')
+    model = Criterium
+    template_name = 'criteria/delete.html'
 
 #
 # Experiment Criteria views

@@ -66,9 +66,16 @@
                         </td>
                         <td>
                             <a  href="{% url 'experiments:criterium_update' criterium.pk %}"
-                                title="{% trans 'criteria:home:edit' %}"
+                                title="{% trans 'criteria:home:edit:title' %}"
                                 class="icon-update">
                                 
+                            </a>
+                            <a
+                                href="{% url 'experiments:criterium_delete' criterium.pk %}"
+                                class="icon-delete"
+                                title="{% trans 'criteria:home:delete:title' %}"
+                            >
+                                
                             </a>
                         </td>
                     </tr>
