@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-07 14:05+0000\n"
+"POT-Creation-Date: 2018-12-11 09:40+0000\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,9 +18,37 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: experiments/forms/criteria_forms.py:61
+#: experiments/forms/criteria_forms.py:59
+#: experiments/forms/criteria_forms.py:112
 msgid "criteria:form:correct_value:error:not_a_value"
 msgstr "This is not a value as specified in 'values'!"
+
+#: experiments/forms/criteria_forms.py:67
+#: experiments/models/criteria_models.py:109
+msgid "criterium:attribute:name_form"
+msgstr "Form name"
+
+#: experiments/forms/criteria_forms.py:71
+#: experiments/models/criteria_models.py:113
+msgid "criterium:attribute:name_natural"
+msgstr "Display name"
+
+#: experiments/forms/criteria_forms.py:75
+#: experiments/models/criteria_models.py:117
+msgid "criterium:attribute:values"
+msgstr "Values (comma separated)"
+
+#: experiments/forms/criteria_forms.py:79
+#: experiments/models/criteria_models.py:147
+#: experiments/templates/criteria/specific_list.html:125
+msgid "experiment_criterium:attribute:correct_value"
+msgstr "Correct value"
+
+#: experiments/forms/criteria_forms.py:83
+#: experiments/models/criteria_models.py:151
+#: experiments/templates/criteria/specific_list.html:143
+msgid "experiment_criterium:attribute:message_failed"
+msgstr "Message when failed"
 
 #: experiments/models/criteria_models.py:10
 msgid "default_criteria:attribute:multilingual:yes"
@@ -110,30 +138,6 @@ msgstr "What should the upper bound of the participant's age?"
 #: experiments/models/criteria_models.py:100
 msgid "default_criteria:attribute:max_age:help_text"
 msgstr "Set to -1 if this criteria doesn't matter"
-
-#: experiments/models/criteria_models.py:109
-msgid "criterium:attribute:name_form"
-msgstr "Form name"
-
-#: experiments/models/criteria_models.py:113
-msgid "criterium:attribute:name_natural"
-msgstr "Display name"
-
-#: experiments/models/criteria_models.py:117
-msgid "criterium:attribute:values"
-msgstr "Values (comma separated)"
-
-#: experiments/models/criteria_models.py:121
-msgid "criterium:attribute:correct_value"
-msgstr "Correct value"
-
-#: experiments/models/criteria_models.py:125
-msgid "criterium:attribute:message_failed"
-msgstr "Message when failed"
-
-#: experiments/models/criteria_models.py:130
-msgid "criterium:attribute:experiments"
-msgstr "Experiments"
 
 #: experiments/models/experiment_models.py:11
 msgid "experiment:attribute:name"
@@ -281,10 +285,19 @@ msgstr "New criterium"
 
 #: experiments/templates/criteria/index.html:23
 msgid "criteria:home:info_text"
-msgstr "<br/>"
+msgstr ""
+"Here you will find an overview of existing criteria and how many experiments "
+"use a criterium. You will also be able to create, modify and delete "
+"criteria. <br/>Criteria do not have a correct value or standard error "
+"message, this will be specified when adding a criterium to an experiment. "
+"This is in order to promote re-using criteria."
+
+#: experiments/templates/criteria/index.html:41
+msgid "criteria:home:num_experiment"
+msgstr "Number of linked experiments"
 
 #: experiments/templates/criteria/index.html:44
-#: experiments/templates/criteria/specific_list.html:40
+#: experiments/templates/criteria/specific_list.html:44
 #: experiments/templates/locations/index.html:39
 #: experiments/templates/timeslots/index.html:70
 msgid "experiments:globals:actions"
@@ -303,34 +316,34 @@ msgstr "New criterium"
 msgid "criteria:new:info_text"
 msgstr "<br/>"
 
-#: experiments/templates/criteria/specific_list.html:8
-#: experiments/templates/criteria/specific_list.html:16
+#: experiments/templates/criteria/specific_list.html:9
+#: experiments/templates/criteria/specific_list.html:20
 msgid "criteria:specific_list:header"
 msgstr "Specific criteria for '{}'"
 
-#: experiments/templates/criteria/specific_list.html:19
+#: experiments/templates/criteria/specific_list.html:23
 msgid "criteria:specific_list:info_text"
 msgstr "<br/>"
 
-#: experiments/templates/criteria/specific_list.html:67
+#: experiments/templates/criteria/specific_list.html:71
 msgid "criteria:specific_list:delete:title"
 msgstr "Remove this criterium from this experiment"
 
-#: experiments/templates/criteria/specific_list.html:80
+#: experiments/templates/criteria/specific_list.html:84
 msgid "criteria:specific_list:add_new:header"
 msgstr "Add new criterium"
 
-#: experiments/templates/criteria/specific_list.html:89
-#: experiments/templates/criteria/specific_list.html:121
+#: experiments/templates/criteria/specific_list.html:93
+#: experiments/templates/criteria/specific_list.html:153
 #: experiments/templates/timeslots/index.html:171
 msgid "experiments:globals:add_button"
 msgstr "Add"
 
-#: experiments/templates/criteria/specific_list.html:97
+#: experiments/templates/criteria/specific_list.html:101
 msgid "criteria:specific_list:add_existing:header"
 msgstr "Add existing criterium"
 
-#: experiments/templates/criteria/specific_list.html:105
+#: experiments/templates/criteria/specific_list.html:109
 msgid "criteria:existing_form:criterium"
 msgstr "Criterium"
 
@@ -604,28 +617,28 @@ msgstr ""
 msgid "timeslots:home:new_timeslots:header"
 msgstr "New timeslot"
 
-#: experiments/views/criteria_views.py:29
+#: experiments/views/criteria_views.py:31
 msgid "criteria:messages:created"
 msgstr "Criterium successfully created"
 
-#: experiments/views/criteria_views.py:37
+#: experiments/views/criteria_views.py:39
 msgid "criteria:messages:updated"
 msgstr "Criterium successfully updated"
 
-#: experiments/views/criteria_views.py:78
+#: experiments/views/criteria_views.py:80
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr ""
 
-#: experiments/views/criteria_views.py:101
+#: experiments/views/criteria_views.py:104
 msgid "criteria:messages:created_and_added"
 msgstr "Criterium successfully created and added to the experiment!"
 
-#: experiments/views/criteria_views.py:139
+#: experiments/views/criteria_views.py:160
 msgid "criteria:messages:added_to_experiment"
 msgstr "Criterium successfully added to experiment!"
 
-#: experiments/views/criteria_views.py:159
+#: experiments/views/criteria_views.py:182
 msgid "criteria:messages:removed_from_experiment"
 msgstr "Criterium successfully removed from experiment!"
 
@@ -683,7 +696,8 @@ msgstr "Timeslots removed!"
 
 #: experiments/views/timeslot_views.py:101
 #: experiments/views/timeslot_views.py:121
-#, fuzzy
-#| msgid "time_slot:attribute:participants"
 msgid "timeslots:message:unsubscribed_participant"
-msgstr "Registered participants"
+msgstr "Unsubscribed participant!"
+
+#~ msgid "criterium:attribute:experiments"
+#~ msgstr "Experiments"

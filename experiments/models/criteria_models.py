@@ -117,33 +117,36 @@ class Criterium(models.Model):
         _('criterium:attribute:values'),
     )
 
-    correct_value = models.TextField(
-        _('criterium:attribute:correct_value'),
-    )
+    @property
+    def values_list(self):
+        return self.values.split(',')
 
-    message_failed = models.TextField(
-        _('criterium:attribute:message_failed'),
-    )
-
-    experiments = models.ManyToManyField(
-        Experiment,
-        verbose_name=_('criterium:attribute:experiments'),
-        related_name='specific_criteria',
-    )
-
-    def formatted_values_str(self, highlight_current: bool = False) -> str:
-        values = self.values.split(',')
-        formatted_values = []
-        for value in values:
-            if value == self.correct_value and highlight_current:
-                formatted_values.append("->{}<-".format(value))
-            else:
-                formatted_values.append(value)
-
-        return ", ".join(formatted_values)
+    def formatted_values_str(self) -> str:
+        return ", ".join(self.values_list)
 
     def __str__(self):
         return "{} ({})".format(
             self.name_natural,
-            self.formatted_values_str(True)
+            self.formatted_values_str()
         )
+
+
+class ExperimentCriterium(models.Model):
+
+    criterium = models.ForeignKey(
+        Criterium,
+        on_delete=models.CASCADE,
+    )
+
+    experiment = models.ForeignKey(
+        Experiment,
+        on_delete=models.CASCADE,
+    )
+
+    correct_value = models.TextField(
+        _('experiment_criterium:attribute:correct_value'),
+    )
+
+    message_failed = models.TextField(
+        _('experiment_criterium:attribute:message_failed'),
+    )

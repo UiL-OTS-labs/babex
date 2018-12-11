@@ -6,8 +6,10 @@ from django.utils.translation import ugettext_lazy as _
 import braces.views as braces
 from uil.core.views.mixins import RedirectSuccessMessageMixin
 
-from ..models import DefaultCriteria, Criterium, Experiment
+from ..models import DefaultCriteria, Criterium, ExperimentCriterium
 from ..forms import DefaultCriteriaForm, CriteriumForm, ExperimentCriteriumForm
+from ..utils import create_and_attach_criterium, attach_criterium, \
+    clean_form_existing_criterium
 from .mixins import ExperimentObjectMixin
 from main.views import FormListView
 
@@ -92,11 +94,12 @@ class CriteriaListView(braces.LoginRequiredMixin, SuccessMessageMixin,
     In addition, there is a second form in the template that POSTs to the
     AddExistingCriteriumToExperimentView view (below).
 
-    The get_initial and get_success_url are for the CreateView, the get_queryset
-    is for the ListView and get_context_data is used for the second manual form.
+    The form_valid, get_initial and get_success_url are for the CreateView,
+    the get_queryset is for the ListView and get_context_data is used for the
+    second manual form.
     """
     template_name = 'criteria/specific_list.html'
-    model = Criterium
+    model = ExperimentCriterium
     form_class = ExperimentCriteriumForm
     success_message = _('criteria:messages:created_and_added')
 
@@ -110,6 +113,24 @@ class CriteriaListView(braces.LoginRequiredMixin, SuccessMessageMixin,
 
         return initial
 
+    def form_valid(self, form):
+        """Intercept the form_valid method in order to create the objects
+        as specified in the form.
+
+        Returns the super() of this method to preserve functionality.
+        """
+        data = form.cleaned_data
+        create_and_attach_criterium(
+            self.experiment,
+            data['name_form'],
+            data['name_natural'],
+            data['values'],
+            data['correct_value'],
+            data['message_failed'],
+        )
+
+        return super(CriteriaListView, self).form_valid(form)
+
     def get_success_url(self):
         args = [self.experiment.pk]
         return reverse('experiments:specific_criteria', args=args)
@@ -117,8 +138,8 @@ class CriteriaListView(braces.LoginRequiredMixin, SuccessMessageMixin,
     def get_context_data(self, **kwargs):
         context = super(CriteriaListView, self).get_context_data(**kwargs)
 
-        context['criteria_options'] = self.model.objects.exclude(
-            id__in=self.get_queryset()
+        context['criteria_options'] = Criterium.objects.exclude(
+            experimentcriterium__in=self.get_queryset()
         )
 
         context['experiment'] = self.experiment
@@ -129,7 +150,7 @@ class CriteriaListView(braces.LoginRequiredMixin, SuccessMessageMixin,
         """
         Only show the Criterium objects connected to the specified experiment
         """
-        return self.model.objects.filter(experiments=self.experiment)
+        return self.model.objects.filter(experiment_id=self.experiment.pk)
 
 
 class AddExistingCriteriumToExperimentView(braces.LoginRequiredMixin,
@@ -139,12 +160,14 @@ class AddExistingCriteriumToExperimentView(braces.LoginRequiredMixin,
     success_message = _('criteria:messages:added_to_experiment')
 
     def get_redirect_url(self, *args, **kwargs):
-        # Get the criterium from POST. No idea why it's a list, but it is...
-        criterium_pk = self.request.POST.get('criterium')[0]
+        cleaned_data = clean_form_existing_criterium(self.request.POST)
 
-        criterium = Criterium.objects.get(pk=criterium_pk)
-        criterium.experiments.add(self.experiment)
-        criterium.save()
+        attach_criterium(
+            self.experiment,
+            cleaned_data['criterium'],
+            cleaned_data['correct_value'],
+            cleaned_data['message_failed'],
+        )
 
         return reverse(
             'experiments:specific_criteria',
@@ -161,9 +184,7 @@ class RemoveCriteriumFromExperiment(braces.LoginRequiredMixin,
     def get_redirect_url(self, *args, **kwargs):
         criterium_pk = self.kwargs.get('criterium')
 
-        criterium = Criterium.objects.get(pk=criterium_pk)
-        criterium.experiments.remove(self.experiment)
-        criterium.save()
+        ExperimentCriterium.objects.get(pk=criterium_pk).delete()
 
         return reverse(
             'experiments:specific_criteria',

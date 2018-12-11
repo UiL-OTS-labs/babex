@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-07 14:05+0000\n"
+"POT-Creation-Date: 2018-12-11 09:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,9 +16,37 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: experiments/forms/criteria_forms.py:61
+#: experiments/forms/criteria_forms.py:59
+#: experiments/forms/criteria_forms.py:112
 msgid "criteria:form:correct_value:error:not_a_value"
-msgstr "Deze waarde is niet opgegeven in 'waardes'!"
+msgstr "Deze waarde is niet opgegeven in 'Mogelijke waardes'!"
+
+#: experiments/forms/criteria_forms.py:67
+#: experiments/models/criteria_models.py:109
+msgid "criterium:attribute:name_form"
+msgstr "Form naam"
+
+#: experiments/forms/criteria_forms.py:71
+#: experiments/models/criteria_models.py:113
+msgid "criterium:attribute:name_natural"
+msgstr "Weergave naam"
+
+#: experiments/forms/criteria_forms.py:75
+#: experiments/models/criteria_models.py:117
+msgid "criterium:attribute:values"
+msgstr "Mogelijke waardes"
+
+#: experiments/forms/criteria_forms.py:79
+#: experiments/models/criteria_models.py:147
+#: experiments/templates/criteria/specific_list.html:125
+msgid "experiment_criterium:attribute:correct_value"
+msgstr "Correcte waarde"
+
+#: experiments/forms/criteria_forms.py:83
+#: experiments/models/criteria_models.py:151
+#: experiments/templates/criteria/specific_list.html:143
+msgid "experiment_criterium:attribute:message_failed"
+msgstr "Melding indien incorrect"
 
 #: experiments/models/criteria_models.py:10
 msgid "default_criteria:attribute:multilingual:yes"
@@ -108,30 +136,6 @@ msgstr "Wat moet de bovengrens van de participant's leeftijd zijn?"
 #: experiments/models/criteria_models.py:100
 msgid "default_criteria:attribute:max_age:help_text"
 msgstr "Zet dit op -1 als er geen bovengrens is."
-
-#: experiments/models/criteria_models.py:109
-msgid "criterium:attribute:name_form"
-msgstr "Form naam"
-
-#: experiments/models/criteria_models.py:113
-msgid "criterium:attribute:name_natural"
-msgstr "Weergave naam"
-
-#: experiments/models/criteria_models.py:117
-msgid "criterium:attribute:values"
-msgstr "Mogelijke waardes"
-
-#: experiments/models/criteria_models.py:121
-msgid "criterium:attribute:correct_value"
-msgstr "Correctie waarde"
-
-#: experiments/models/criteria_models.py:125
-msgid "criterium:attribute:message_failed"
-msgstr "Melding indien incorrect"
-
-#: experiments/models/criteria_models.py:130
-msgid "criterium:attribute:experiments"
-msgstr "Experimenten"
 
 #: experiments/models/experiment_models.py:11
 msgid "experiment:attribute:name"
@@ -279,10 +283,19 @@ msgstr "Nieuwe criterium"
 
 #: experiments/templates/criteria/index.html:23
 msgid "criteria:home:info_text"
-msgstr "<br/>"
+msgstr ""
+"Hier kunt u zien welke losse criteria al bestaan, criteria aanmaken en "
+"wijzigen. Ook kunt u zien in hoeveel experimenten een criterium wordt "
+"gebruikt. <br/>  Criteria hebben geen correctie waarde of een ingestelde "
+"foutmelding, dit wordt aangegeven bij het toevoegen van een criterium aan "
+"een experiment. Op deze manier kunnen criteria beter hergebruikt worden. "
+
+#: experiments/templates/criteria/index.html:41
+msgid "criteria:home:num_experiment"
+msgstr "Aantal gelinkte experimenten"
 
 #: experiments/templates/criteria/index.html:44
-#: experiments/templates/criteria/specific_list.html:40
+#: experiments/templates/criteria/specific_list.html:44
 #: experiments/templates/locations/index.html:39
 #: experiments/templates/timeslots/index.html:70
 msgid "experiments:globals:actions"
@@ -301,34 +314,34 @@ msgstr "Nieuw criterium"
 msgid "criteria:new:info_text"
 msgstr "<br/>"
 
-#: experiments/templates/criteria/specific_list.html:8
-#: experiments/templates/criteria/specific_list.html:16
+#: experiments/templates/criteria/specific_list.html:9
+#: experiments/templates/criteria/specific_list.html:20
 msgid "criteria:specific_list:header"
 msgstr "Specifieke criteria voor '{}'"
 
-#: experiments/templates/criteria/specific_list.html:19
+#: experiments/templates/criteria/specific_list.html:23
 msgid "criteria:specific_list:info_text"
 msgstr "<br/>"
 
-#: experiments/templates/criteria/specific_list.html:67
+#: experiments/templates/criteria/specific_list.html:71
 msgid "criteria:specific_list:delete:title"
 msgstr "Verwijder criterium uit experiment"
 
-#: experiments/templates/criteria/specific_list.html:80
+#: experiments/templates/criteria/specific_list.html:84
 msgid "criteria:specific_list:add_new:header"
 msgstr "Voeg nieuw criterium toe"
 
-#: experiments/templates/criteria/specific_list.html:89
-#: experiments/templates/criteria/specific_list.html:121
+#: experiments/templates/criteria/specific_list.html:93
+#: experiments/templates/criteria/specific_list.html:153
 #: experiments/templates/timeslots/index.html:171
 msgid "experiments:globals:add_button"
 msgstr "Toevoegen"
 
-#: experiments/templates/criteria/specific_list.html:97
+#: experiments/templates/criteria/specific_list.html:101
 msgid "criteria:specific_list:add_existing:header"
 msgstr "Voeg bestaand criterium toe"
 
-#: experiments/templates/criteria/specific_list.html:105
+#: experiments/templates/criteria/specific_list.html:109
 msgid "criteria:existing_form:criterium"
 msgstr "Criterium"
 
@@ -607,28 +620,28 @@ msgstr ""
 msgid "timeslots:home:new_timeslots:header"
 msgstr "Nieuw timeslot"
 
-#: experiments/views/criteria_views.py:29
+#: experiments/views/criteria_views.py:31
 msgid "criteria:messages:created"
 msgstr "Criterium aangemaakt"
 
-#: experiments/views/criteria_views.py:37
+#: experiments/views/criteria_views.py:39
 msgid "criteria:messages:updated"
 msgstr "Criterium aangepast"
 
-#: experiments/views/criteria_views.py:78
+#: experiments/views/criteria_views.py:80
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr ""
 
-#: experiments/views/criteria_views.py:101
+#: experiments/views/criteria_views.py:104
 msgid "criteria:messages:created_and_added"
 msgstr "Criterium aangemaakt en aan experiment toegevoegd!"
 
-#: experiments/views/criteria_views.py:139
+#: experiments/views/criteria_views.py:160
 msgid "criteria:messages:added_to_experiment"
 msgstr "Criterium toegevoegd aan experiment!"
 
-#: experiments/views/criteria_views.py:159
+#: experiments/views/criteria_views.py:182
 msgid "criteria:messages:removed_from_experiment"
 msgstr "Criterium verwijderd uit experiment!"
 
@@ -686,7 +699,5 @@ msgstr "Timeslots verwijderd!"
 
 #: experiments/views/timeslot_views.py:101
 #: experiments/views/timeslot_views.py:121
-#, fuzzy
-#| msgid "time_slot:attribute:participants"
 msgid "timeslots:message:unsubscribed_participant"
-msgstr "Participanten"
+msgstr "Participant verwijderd uit timeslot!"

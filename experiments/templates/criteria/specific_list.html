@@ -3,11 +3,15 @@
 {% load transformat %}
 {% load datatables %}
 {% load get_field_name %}
+{% load static %}
 
 {% block header_title %}
      {% transformat 'criteria:specific_list:header' experiment.name %} - {{ block.super }}
 {% endblock %}
 
+{% block html_head %}
+    <script src="{% static 'experiments/criterium/experiment_specific.js' %}"></script>
+{% endblock %}
 
 {% block content %}
 <div class="uu-inner-container" style="">
@@ -31,10 +35,10 @@
                         {% get_verbose_field_name "experiments" "Criterium" "values" %}
                     </th>
                     <th>
-                        {% get_verbose_field_name "experiments" "Criterium" "correct_value" %}
+                        {% get_verbose_field_name "experiments" "ExperimentCriterium" "correct_value" %}
                     </th>
                     <th>
-                        {% get_verbose_field_name "experiments" "Criterium" "message_failed" %}
+                        {% get_verbose_field_name "experiments" "ExperimentCriterium" "message_failed" %}
                     </th>
                     <th>
                         {% trans 'experiments:globals:actions' %}
@@ -43,26 +47,26 @@
             </thead>
 
             <tbody>
-                {% for criterium in object_list %}
+                {% for experiment_criterium in object_list %}
                     <tr>
                         <td>
-                            {{ criterium.pk }}
+                            {{ experiment_criterium.pk }}
                         </td>
                         <td>
-                            {{ criterium.name_natural }}
+                            {{ experiment_criterium.criterium.name_natural }}
                         </td>
                         <td>
-                            {{ criterium.formatted_values_str }}
+                            {{ experiment_criterium.criterium.formatted_values_str }}
                         </td>
                         <td>
-                            {{ criterium.correct_value }}
+                            {{ experiment_criterium.correct_value }}
                         </td>
                         <td>
-                            {{ criterium.message_failed }}
+                            {{ experiment_criterium.message_failed }}
                         </td>
                         <td>
                             <a
-                                href="{% url 'experiments:remove_criterium_from_experiment' experiment=experiment.pk criterium=criterium.pk %}"
+                                href="{% url 'experiments:remove_criterium_from_experiment' experiment=experiment.pk criterium=experiment_criterium.pk %}"
                                 class="icon-delete"
                                 title="{% trans 'criteria:specific_list:delete:title' %}"
                             >
@@ -81,7 +85,7 @@
         </h3>
         <form method="post">
              {% csrf_token %}
-            <table width="100%" class="small-form">
+            <table width="100%">
                 {{ form.as_table }}
             </table>
             <br/>
@@ -98,21 +102,49 @@
         </h3>
         <form method="post" action="{% url 'experiments:add_criterium_to_experiment' experiment.pk %}">
             {% csrf_token %}
-            <table width="100%" class="small-form">
+            <table width="100%">
                 <tr>
                     <th>
                         <label for="id_criterium">
-                            {% trans 'criteria:existing_form:criterium' %}
+                            {% trans 'criteria:existing_form:criterium' %}:
                         </label>
                     </th>
                     <td>
-                        <select id="id_criterium" name="criterium">
+                        <select id="id_criterium" name="criterium" required>
                             {% for criterium in criteria_options %}
                                 <option value="{{ criterium.pk }}">
                                     {{ criterium }}
                                 </option>
                             {% endfor %}
                         </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="id_criterium_correct_value">
+                            {% trans 'experiment_criterium:attribute:correct_value' %}:
+                        </label>
+                    </th>
+                    <td>
+                        <select id="id_criterium_correct_value" name="correct_value" required>
+                            {% for criterium in criteria_options %}
+                                {% for value in criterium.values_list %}
+                                    <option class="correct-answer-option" value="{{ criterium.pk }}-{{ value }}" data-criterium="{{ criterium.pk }}">
+                                        {{ value }}
+                                    </option>
+                                {% endfor %}
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="id_criterium_message_failed">
+                            {% trans 'experiment_criterium:attribute:message_failed' %}:
+                        </label>
+                    </th>
+                    <td>
+                        <textarea id="id_criterium_message_failed" name="message_failed" required cols="35" rows="10"></textarea>
                     </td>
                 </tr>
             </table>

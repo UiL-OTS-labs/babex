@@ -32,13 +32,13 @@
                         {% get_verbose_field_name "experiments" "Criterium" "name_form" %}
                     </th>
                     <th>
+                        {% get_verbose_field_name "experiments" "Criterium" "name_natural" %}
+                    </th>
+                    <th>
                         {% get_verbose_field_name "experiments" "Criterium" "values" %}
                     </th>
                     <th>
-                        {% get_verbose_field_name "experiments" "Criterium" "correct_value" %}
-                    </th>
-                    <th>
-                        {% get_verbose_field_name "experiments" "Criterium" "message_failed" %}
+                        {% trans 'criteria:home:num_experiment' %}
                     </th>
                     <th>
                         {% trans 'experiments:globals:actions' %}
@@ -53,16 +53,16 @@
                             {{ criterium.pk }}
                         </td>
                         <td>
+                            {{ criterium.name_form }}
+                        </td>
+                        <td>
                             {{ criterium.name_natural }}
                         </td>
                         <td>
                             {{ criterium.values }}
                         </td>
                         <td>
-                            {{ criterium.correct_value }}
-                        </td>
-                        <td>
-                            {{ criterium.message_failed }}
+                            {{ criterium.experimentcriterium_set.count }}
                         </td>
                         <td>
                             <a  href="{% url 'experiments:criterium_update' criterium.pk %}"
