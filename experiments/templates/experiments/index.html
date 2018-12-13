@@ -65,13 +65,13 @@
                             {{ experiment.name }}
                         </td>
                         <td>
-                            {{ experiment.get_number_of_places }}
+                            {{ experiment.n_places|default_if_none:0 }}
                         </td>
                         <td>
-                            {{ experiment.get_number_of_participants }}
+                            {{ experiment.n_participants|default_if_none:0 }}
                         </td>
                         <td>
-                            {{ experiment.excluded_experiments.count }}
+                            {{ experiment.n_excluded_experiments|default_if_none:0 }}
                         </td>
                         <td>
                             <a

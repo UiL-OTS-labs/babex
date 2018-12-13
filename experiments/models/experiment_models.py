@@ -84,27 +84,5 @@ class Experiment(models.Model):
         help_text=_("experiment:attribute:additional_leaders:help_text"),
     )
 
-    @cached_property
-    def _places_and_participants(self) -> dict:
-        """Internal function, using a cache to minimize DB usage."""
-        return self.timeslot_set.aggregate(
-            places=models.Sum('max_places'),
-            participants=models.Count('appointments'),
-        )
-
-    def get_number_of_places(self) -> int:
-        """
-        Returns the number of places in an experiment by counting the
-        max_places for all timeslots.
-        """
-        return self._places_and_participants.get('places', 0)
-
-    def get_number_of_participants(self) -> int:
-        """
-        Returns the number of participants in an experiment by counting all
-        participants in the timeslot set.
-        """
-        return self._places_and_participants.get('participants', 0)
-
     def __str__(self):
         return self.name

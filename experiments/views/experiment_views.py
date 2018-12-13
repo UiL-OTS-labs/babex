@@ -1,4 +1,5 @@
 from django.views import generic
+from django.db.models import Sum, Count, Q, F
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
@@ -20,6 +21,19 @@ from uil.core.views import RedirectActionView
 class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
     template_name = 'experiments/index.html'
     model = Experiment
+
+    def get_queryset(self):
+        qs = self.model.objects.select_related('location')
+
+        sum_places = Sum('timeslot__max_places')
+        count_participants = Count('timeslot__appointments')
+        count_excluded_experiments = Count('excluded_experiments')
+
+        return qs.annotate(
+            n_places=sum_places,
+            n_participants=count_participants,
+            n_excluded_experiments=count_excluded_experiments,
+        )
 
 
 class ExperimentCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
