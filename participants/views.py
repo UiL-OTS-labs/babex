@@ -16,6 +16,9 @@ class ParticipantsHomeView(braces.LoginRequiredMixin, generic.ListView):
     template_name = 'participants/index.html'
     model = Participant
 
+    def get_queryset(self):
+        return self.model.objects.prefetch_related('secondaryemail_set')
+
 
 class ParticipantDetailView(braces.LoginRequiredMixin, generic.DetailView):
     model = Participant
