@@ -7,7 +7,7 @@ def merge_participants(old: Participant, new: Participant) -> Participant:
 
     - The new email address is added as a secondary address to the old one
     - Adds all secondary emails from the new object to the old object
-    - Moves experiments from new to old. TODO: <----
+    - Moves experiments from new to old.
     - Updates specific criteria
     - Updates name, phone number and social_status
     """
@@ -27,7 +27,12 @@ def merge_participants(old: Participant, new: Participant) -> Participant:
         else:
             secondary_email.delete()
 
-    # TODO: transfer experiments
+    # Move all appointments to the old model.
+    # In theory this can result in doubles in an experiment, but we're assuming
+    # no participant has managed to turn up twice for the same experiment.
+    for appointment in new.appointments.all():
+        appointment.participant = old
+        appointment.save()
 
     # Merge specific criteria answers
     for criterium_answer in new.criteriumanswer_set.all():

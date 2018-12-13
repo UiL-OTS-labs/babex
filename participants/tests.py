@@ -1,5 +1,8 @@
 from django.test import TestCase
+from datetime import datetime
+import pytz
 
+from experiments.models import Appointment, Experiment, TimeSlot
 from .models import Participant, CriteriumAnswer, SecondaryEmail, Criterium
 from .utils import merge_participants
 
@@ -45,6 +48,17 @@ class MergeParticipantsTest(TestCase):
             # required for the model
             dyslexic=False,
             language='nl'
+        )
+
+        self.e1 = Experiment.objects.create(
+            name='Test experiment 1'
+        )
+
+        self.t1 = TimeSlot.objects.create(
+            max_places=2,
+            experiment=self.e1,
+            datetime=datetime(year=1970, month=1, day=1, hour=12, minute=0,
+                              tzinfo=pytz.utc),
         )
 
     def test_basic_merge(self):
@@ -154,5 +168,22 @@ class MergeParticipantsTest(TestCase):
         self.assertEqual(self.old.secondaryemail_set.count(), 4)
 
     def test_experiments_merge(self):
-        pass
-        # TODO: write this
+        """
+        This test case tests if appointments are merged correctly
+        """
+
+        Appointment.objects.create(
+            participant=self.old,
+            timeslot=self.t1
+        )
+
+        Appointment.objects.create(
+            participant=self.new,
+            timeslot=self.t1,
+        )
+
+        self.assertEqual(self.old.appointments.count(), 1)
+
+        merge_participants(self.old, self.new)
+
+        self.assertEqual(self.old.appointments.count(), 2)
