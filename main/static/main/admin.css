@@ -11,3 +11,15 @@
     margin-right: -15px;
     font-weight: bold;
 }
+
+.criteria-table {
+    font-size: 0.7rem;
+}
+
+.criteria-table td {
+    padding: 1px 5px;
+}
+
+.criteria-table td:nth-child(2)  {
+    color: green;
+}
