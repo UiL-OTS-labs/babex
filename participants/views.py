@@ -6,7 +6,8 @@ from django.urls import reverse_lazy as reverse
 import braces.views as braces
 
 from .models import Participant, CriteriumAnswer
-from .forms import ParticipantForm, CriteriumAnswerForm
+from .forms import ParticipantForm, CriteriumAnswerForm, ParticipantMergeForm
+from .utils import merge_participants
 from uil.core.views import FormSetUpdateView
 from uil.core.views.mixins import DeleteSuccessMessageMixin
 
@@ -63,3 +64,18 @@ class ParticipantSpecificCriteriaUpdateView(braces.LoginRequiredMixin,
         participant_pk = self.kwargs.get('pk')
 
         return Participant.objects.get(pk=participant_pk)
+
+
+class ParticipantMergeView(braces.LoginRequiredMixin, SuccessMessageMixin,
+                           generic.FormView):
+    success_url = reverse('participants:home')
+    success_message = _('participants:messages:merged_participants')
+    template_name = 'participants/merge.html'
+    form_class = ParticipantMergeForm
+
+    def form_valid(self, form):
+        data = form.cleaned_data
+
+        merge_participants(data['old_participant'], data['new_participant'])
+
+        return super(ParticipantMergeView, self).form_valid(form)

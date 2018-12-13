@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from django.utils.text import gettext_lazy as _
 
 from .models import Participant, CriteriumAnswer
@@ -47,3 +48,27 @@ class CriteriumAnswerForm(forms.ModelForm):
         self.fields['answer'].label = self.instance.criterium.name_natural
         self.fields['answer'].widget.choices = \
             self.instance.criterium.choices_tuple
+
+
+class ParticipantMergeForm(forms.Form):
+
+    old_participant = forms.ModelChoiceField(
+        Participant.objects.all(),
+        label=_('participants:merge_form:field:old_participant'),
+    )
+
+    new_participant = forms.ModelChoiceField(
+        Participant.objects.all(),
+        label=_('participants:merge_form:field:new_participant'),
+    )
+
+    def clean_new_participant(self):
+        """This checks if two unique participants have been chosen"""
+        data = self.cleaned_data
+
+        if data['old_participant'] == data['new_participant']:
+            raise ValidationError(
+                _('participants:merge_form:validation:are_equal')
+            )
+
+        return data['new_participant']
