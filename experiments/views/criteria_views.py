@@ -1,4 +1,5 @@
 from django.http import Http404
+from django.db.models import Count
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views import generic
 from django.urls import reverse_lazy as reverse
@@ -24,6 +25,12 @@ from uil.core.views.mixins import RedirectSuccessMessageMixin,\
 class CriteriaHomeView(braces.LoginRequiredMixin, generic.ListView):
     model = Criterium
     template_name = 'criteria/index.html'
+
+    def get_queryset(self):
+        qs = self.model.objects.annotate(
+            n_experiments=Count('experimentcriterium')
+        )
+        return qs
 
 
 class CriteriaCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,

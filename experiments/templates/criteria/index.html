@@ -62,7 +62,7 @@
                             {{ criterium.values }}
                         </td>
                         <td>
-                            {{ criterium.experimentcriterium_set.count }}
+                            {{ criterium.n_experiments }}
                         </td>
                         <td>
                             <a  href="{% url 'experiments:criterium_update' criterium.pk %}"
