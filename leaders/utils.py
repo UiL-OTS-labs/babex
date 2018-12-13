@@ -3,9 +3,6 @@ from django.conf import settings
 from .models import Leader
 from api.auth.models import ApiUser, ApiGroup
 
-_leader_group =  ApiGroup.objects.get(name=settings.LEADER_GROUP)
-_participant_group = ApiGroup.objects.get(name=settings.PARTICIPANT_GROUP)
-
 
 def create_leader(name: str, email: str, phonenumber: str,
                   password: str = None) -> Leader:
@@ -29,6 +26,7 @@ def create_leader(name: str, email: str, phonenumber: str,
     :param password:
     :return:
     """
+    _leader_group = ApiGroup.objects.get(name=settings.LEADER_GROUP)
     existing_leader = Leader.objects.filter(api_user__email=email)
 
     if existing_leader:
@@ -68,6 +66,9 @@ def notify_new_leader(leader: Leader) -> None:
 
 def update_leader(leader: Leader, name: str, email: str, phonenumber: str,
                   password: str = None, is_active: bool = True) -> Leader:
+    _leader_group = ApiGroup.objects.get(name=settings.LEADER_GROUP)
+    _participant_group = ApiGroup.objects.get(name=settings.PARTICIPANT_GROUP)
+
     leader.name = name
     leader.phonenumber = phonenumber
     leader.save()
