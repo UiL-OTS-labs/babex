@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-13 07:55+0000\n"
+"POT-Creation-Date: 2018-12-13 09:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -249,10 +249,6 @@ msgstr "Tijd & Datum"
 msgid "time_slot:attribute:max_places"
 msgstr "Aantal plekken"
 
-#: experiments/models/timeslot_models.py:27
-msgid "time_slot:attribute:participants"
-msgstr "Participanten"
-
 #: experiments/templates/criteria/delete.html:8
 #: experiments/templates/criteria/delete.html:16
 msgid "criteria:delete:header"
@@ -315,6 +311,7 @@ msgstr "Aantal gelinkte experimenten"
 
 #: experiments/templates/criteria/index.html:44
 #: experiments/templates/criteria/specific_list.html:44
+#: experiments/templates/experiments/participants.html:45
 #: experiments/templates/locations/index.html:39
 #: experiments/templates/timeslots/index.html:70
 msgid "experiments:globals:actions"
@@ -376,6 +373,54 @@ msgstr "Standaard criteria voor {}"
 #: experiments/templates/criteria/update_default.html:19
 msgid "criteria:new_default_criteria:info_text"
 msgstr " "
+
+#: experiments/templates/experiments/criteria_snippit.html:7
+#, fuzzy
+#| msgid "default_criteria:attribute:dyslexia"
+msgid "criteria_snippit:dyslexia"
+msgstr "Moet de participant dyslectisch zijn?"
+
+#: experiments/templates/experiments/criteria_snippit.html:15
+#, fuzzy
+#| msgid "default_criteria:attribute:language"
+msgid "criteria_snippit:language"
+msgstr "Wat moet de moedertaal van de participant zijn?"
+
+#: experiments/templates/experiments/criteria_snippit.html:23
+#, fuzzy
+#| msgid "default_criteria:attribute:multilingual"
+msgid "criteria_snippit:multilingual"
+msgstr "Moet de participant een of meerdere talen spreken?"
+
+#: experiments/templates/experiments/criteria_snippit.html:31
+#, fuzzy
+#| msgid "default_criteria:attribute:handedness"
+msgid "criteria_snippit:handedness"
+msgstr "Moet de participant links- of rechtshandig zijn?"
+
+#: experiments/templates/experiments/criteria_snippit.html:39
+#, fuzzy
+#| msgid "criteria:new:info_text"
+msgid "criteria_snippit:sex"
+msgstr "<br/>"
+
+#: experiments/templates/experiments/criteria_snippit.html:47
+#, fuzzy
+#| msgid "default_criteria:attribute:social_status"
+msgid "criteria_snippit:social_status"
+msgstr "Wat moet de sociale status van de participant zijn?"
+
+#: experiments/templates/experiments/criteria_snippit.html:55
+#, fuzzy
+#| msgid "criteria:edit:info_text"
+msgid "criteria_snippit:min_age"
+msgstr "<br/>"
+
+#: experiments/templates/experiments/criteria_snippit.html:63
+#, fuzzy
+#| msgid "default_criteria:attribute:max_age"
+msgid "criteria_snippit:max_age"
+msgstr "Wat moet de bovengrens van de participant's leeftijd zijn?"
 
 #: experiments/templates/experiments/delete.html:8
 #: experiments/templates/experiments/delete.html:16
@@ -504,6 +549,81 @@ msgstr ""
 msgid "experiments:globals:next_button"
 msgstr "Volgende >>"
 
+#: experiments/templates/experiments/participants.html:8
+#: experiments/templates/experiments/participants.html:16
+#, fuzzy
+#| msgid "experiments:home:participants:title"
+msgid "experiments:participants:header"
+msgstr "Participanten"
+
+#: experiments/templates/experiments/participants.html:19
+#, fuzzy
+#| msgid "experiments:home:participants:title"
+msgid "experiments:participants:info_text"
+msgstr "Participanten"
+
+#: experiments/templates/experiments/participants.html:30
+#: experiments/templates/timeslots/index.html:52
+msgid "timeslots:day"
+msgstr "Dag"
+
+#: experiments/templates/experiments/participants.html:36
+#, fuzzy
+#| msgid "experiments:home:participants:title"
+msgid "experiments:participants:place"
+msgstr "Participanten"
+
+#: experiments/templates/experiments/participants.html:42
+#, fuzzy
+#| msgid "experiments:home:participants:title"
+msgid "experiments:participants:reminder"
+msgstr "Participanten"
+
+#: experiments/templates/experiments/participants.html:48
+#, fuzzy
+#| msgid "experiments:home:participants:title"
+msgid "experiments:participants:email"
+msgstr "Participanten"
+
+#: experiments/templates/experiments/participants.html:57
+#, fuzzy
+#| msgid "experiments:home:participants:title"
+msgid "experiments:participants:dyslexic"
+msgstr "Participanten"
+
+#: experiments/templates/experiments/participants.html:60
+#, fuzzy
+#| msgid "experiments:home:participants:title"
+msgid "experiments:participants:language"
+msgstr "Participanten"
+
+#: experiments/templates/experiments/participants.html:63
+#, fuzzy
+#| msgid "experiments:home:participants:title"
+msgid "experiments:participants:multilingual"
+msgstr "Participanten"
+
+#: experiments/templates/experiments/participants.html:66
+#, fuzzy
+#| msgid "experiments:home:participants:title"
+msgid "experiments:participants:handedness"
+msgstr "Participanten"
+
+#: experiments/templates/experiments/participants.html:69
+#, fuzzy
+#| msgid "experiments:home:participants:title"
+msgid "experiments:participants:sex"
+msgstr "Participanten"
+
+#: experiments/templates/experiments/participants.html:113
+#: experiments/templates/experiments/participants.html:131
+msgid "yes,no"
+msgstr ""
+
+#: experiments/templates/experiments/participants.html:119
+msgid "many,one"
+msgstr ""
+
 #: experiments/templates/locations/edit.html:8
 #: experiments/templates/locations/edit.html:15
 msgid "locations:update:header"
@@ -605,10 +725,6 @@ msgstr ""
 "plaats eronder geactiveerd. Op deze manier zijn meerdere plaatsen in een "
 "timeslot te verwijderen."
 
-#: experiments/templates/timeslots/index.html:52
-msgid "timeslots:day"
-msgstr "Dag"
-
 #: experiments/templates/timeslots/index.html:55
 msgid "timeslots:date"
 msgstr "Datum"
@@ -672,47 +788,47 @@ msgstr "Criterium toegevoegd aan experiment!"
 msgid "criteria:messages:removed_from_experiment"
 msgstr "Criterium verwijderd uit experiment!"
 
-#: experiments/views/experiment_views.py:25
+#: experiments/views/experiment_views.py:29
 msgid "experiments:message:create:success"
 msgstr "Nieuw experiment succesvol aangemaakt"
 
-#: experiments/views/experiment_views.py:36
+#: experiments/views/experiment_views.py:40
 msgid "experiments:message:update:success"
 msgstr "Experiment aangepast"
 
-#: experiments/views/experiment_views.py:73
-msgid "experiments:message:exclude:included"
-msgstr "Experiment succesvol opgenomen"
-
-#: experiments/views/experiment_views.py:76
-msgid "experiments:message:exclude:excluded"
-msgstr "Experiment succesvol uitgesloten"
-
-#: experiments/views/experiment_views.py:90
+#: experiments/views/experiment_views.py:49
 msgid "experiments:message:deleted_experiment"
 msgstr "Experiment verwijderd!"
 
-#: experiments/views/experiment_views.py:104
+#: experiments/views/experiment_views.py:89
+msgid "experiments:message:exclude:included"
+msgstr "Experiment succesvol opgenomen"
+
+#: experiments/views/experiment_views.py:92
+msgid "experiments:message:exclude:excluded"
+msgstr "Experiment succesvol uitgesloten"
+
+#: experiments/views/experiment_views.py:135
 msgid "experiments:message:switch_open:closed"
 msgstr "Experiment openbaar gemaakt"
 
-#: experiments/views/experiment_views.py:107
+#: experiments/views/experiment_views.py:138
 msgid "experiments:message:switch_open:opened"
 msgstr "Experiment verborgen"
 
-#: experiments/views/experiment_views.py:122
+#: experiments/views/experiment_views.py:153
 msgid "experiments:message:switch_public:closed"
 msgstr "Experiment ge-opent"
 
-#: experiments/views/experiment_views.py:125
+#: experiments/views/experiment_views.py:156
 msgid "experiments:message:switch_public:opened"
 msgstr "Experiment gesloten"
 
-#: experiments/views/experiment_views.py:141
+#: experiments/views/experiment_views.py:172
 msgid "experiments:message:switch_visible:invisible"
 msgstr "Participant informatie verborgen voor proefleiders"
 
-#: experiments/views/experiment_views.py:146
+#: experiments/views/experiment_views.py:177
 msgid "experiments:message:switch_visible:visible"
 msgstr "Participant informatie zichtbaar gemaakt voor proefleiders"
 
@@ -727,3 +843,6 @@ msgstr "Timeslots verwijderd!"
 #: experiments/views/timeslot_views.py:104
 msgid "timeslots:message:unsubscribed_participant"
 msgstr "Participant verwijderd uit timeslot!"
+
+#~ msgid "time_slot:attribute:participants"
+#~ msgstr "Participanten"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-13 07:55+0000\n"
+"POT-Creation-Date: 2018-12-13 09:45+0000\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -251,10 +251,6 @@ msgstr "Date & Time"
 msgid "time_slot:attribute:max_places"
 msgstr "Places in this slot"
 
-#: experiments/models/timeslot_models.py:27
-msgid "time_slot:attribute:participants"
-msgstr "Registered participants"
-
 #: experiments/templates/criteria/delete.html:8
 #: experiments/templates/criteria/delete.html:16
 msgid "criteria:delete:header"
@@ -317,6 +313,7 @@ msgstr "Number of linked experiments"
 
 #: experiments/templates/criteria/index.html:44
 #: experiments/templates/criteria/specific_list.html:44
+#: experiments/templates/experiments/participants.html:45
 #: experiments/templates/locations/index.html:39
 #: experiments/templates/timeslots/index.html:70
 msgid "experiments:globals:actions"
@@ -378,6 +375,39 @@ msgstr "Default criteria for {}"
 #: experiments/templates/criteria/update_default.html:19
 msgid "criteria:new_default_criteria:info_text"
 msgstr " "
+
+#: experiments/templates/experiments/criteria_snippit.html:7
+
+msgid "criteria_snippit:dyslexia"
+msgstr "Dyslectic:"
+
+#: experiments/templates/experiments/criteria_snippit.html:15
+msgid "criteria_snippit:language"
+msgstr "Language:"
+
+#: experiments/templates/experiments/criteria_snippit.html:23
+msgid "criteria_snippit:multilingual"
+msgstr "Multilingual:"
+
+#: experiments/templates/experiments/criteria_snippit.html:31
+msgid "criteria_snippit:handedness"
+msgstr "Handedness:"
+
+#: experiments/templates/experiments/criteria_snippit.html:39
+msgid "criteria_snippit:sex"
+msgstr "Sex:"
+
+#: experiments/templates/experiments/criteria_snippit.html:47
+msgid "criteria_snippit:social_status"
+msgstr "Social Role:"
+
+#: experiments/templates/experiments/criteria_snippit.html:55
+msgid "criteria_snippit:min_age"
+msgstr "Min Age:"
+
+#: experiments/templates/experiments/criteria_snippit.html:63
+msgid "criteria_snippit:max_age"
+msgstr "Max Age:"
 
 #: experiments/templates/experiments/delete.html:8
 #: experiments/templates/experiments/delete.html:16
@@ -505,6 +535,61 @@ msgstr ""
 msgid "experiments:globals:next_button"
 msgstr "Next >>"
 
+#: experiments/templates/experiments/participants.html:8
+#: experiments/templates/experiments/participants.html:16
+msgid "experiments:participants:header"
+msgstr "Participants - Experiment '{}'"
+
+#: experiments/templates/experiments/participants.html:19
+msgid "experiments:participants:info_text"
+msgstr " "
+
+#: experiments/templates/experiments/participants.html:30
+#: experiments/templates/timeslots/index.html:52
+msgid "timeslots:day"
+msgstr "Day"
+
+#: experiments/templates/experiments/participants.html:36
+msgid "experiments:participants:place"
+msgstr "WP"
+
+#: experiments/templates/experiments/participants.html:42
+msgid "experiments:participants:reminder"
+msgstr "Reminder"
+
+#: experiments/templates/experiments/participants.html:48
+msgid "experiments:participants:email"
+msgstr "Email"
+
+#: experiments/templates/experiments/participants.html:57
+msgid "experiments:participants:dyslexic"
+msgstr "Dysl. (Y/N)"
+
+#: experiments/templates/experiments/participants.html:60
+msgid "experiments:participants:language"
+msgstr "Lang."
+
+#: experiments/templates/experiments/participants.html:63
+msgid "experiments:participants:multilingual"
+msgstr "Multiple Lang. (one/many)"
+
+#: experiments/templates/experiments/participants.html:66
+msgid "experiments:participants:handedness"
+msgstr "Handedness (L/R)"
+
+#: experiments/templates/experiments/participants.html:69
+msgid "experiments:participants:sex"
+msgstr "Sex (M/F)"
+
+#: experiments/templates/experiments/participants.html:113
+#: experiments/templates/experiments/participants.html:131
+msgid "yes,no"
+msgstr "yes,no"
+
+#: experiments/templates/experiments/participants.html:119
+msgid "many,one"
+msgstr "many,one"
+
 #: experiments/templates/locations/edit.html:8
 #: experiments/templates/locations/edit.html:15
 msgid "locations:update:header"
@@ -603,10 +688,6 @@ msgstr ""
 "checkbox for a timeslot. Once a checkbox has been clicked, the one below it "
 "(in terms of place) can be checked too. "
 
-#: experiments/templates/timeslots/index.html:52
-msgid "timeslots:day"
-msgstr "Day"
-
 #: experiments/templates/timeslots/index.html:55
 msgid "timeslots:date"
 msgstr "Date"
@@ -669,47 +750,47 @@ msgstr "Criterium successfully added to experiment!"
 msgid "criteria:messages:removed_from_experiment"
 msgstr "Criterium successfully removed from experiment!"
 
-#: experiments/views/experiment_views.py:25
+#: experiments/views/experiment_views.py:29
 msgid "experiments:message:create:success"
 msgstr "Successfully created experiment"
 
-#: experiments/views/experiment_views.py:36
+#: experiments/views/experiment_views.py:40
 msgid "experiments:message:update:success"
 msgstr "Successfully updated experiment"
 
-#: experiments/views/experiment_views.py:73
-msgid "experiments:message:exclude:included"
-msgstr "Successfully included experiment"
-
-#: experiments/views/experiment_views.py:76
-msgid "experiments:message:exclude:excluded"
-msgstr "Successfully excluded experiment"
-
-#: experiments/views/experiment_views.py:90
+#: experiments/views/experiment_views.py:49
 msgid "experiments:message:deleted_experiment"
 msgstr "Experiment deleted!"
 
-#: experiments/views/experiment_views.py:104
+#: experiments/views/experiment_views.py:89
+msgid "experiments:message:exclude:included"
+msgstr "Successfully included experiment"
+
+#: experiments/views/experiment_views.py:92
+msgid "experiments:message:exclude:excluded"
+msgstr "Successfully excluded experiment"
+
+#: experiments/views/experiment_views.py:135
 msgid "experiments:message:switch_open:closed"
 msgstr "Successfully closed experiment"
 
-#: experiments/views/experiment_views.py:107
+#: experiments/views/experiment_views.py:138
 msgid "experiments:message:switch_open:opened"
 msgstr "Successfully opened experiment"
 
-#: experiments/views/experiment_views.py:122
+#: experiments/views/experiment_views.py:153
 msgid "experiments:message:switch_public:closed"
 msgstr "Successfully hid experiment"
 
-#: experiments/views/experiment_views.py:125
+#: experiments/views/experiment_views.py:156
 msgid "experiments:message:switch_public:opened"
 msgstr "Successfully made experiment public"
 
-#: experiments/views/experiment_views.py:141
+#: experiments/views/experiment_views.py:172
 msgid "experiments:message:switch_visible:invisible"
 msgstr "Successfully hid participants from leaders"
 
-#: experiments/views/experiment_views.py:146
+#: experiments/views/experiment_views.py:177
 msgid "experiments:message:switch_visible:visible"
 msgstr "Successfully changed participant visibility to visible"
 
@@ -724,6 +805,3 @@ msgstr "Timeslots removed!"
 #: experiments/views/timeslot_views.py:104
 msgid "timeslots:message:unsubscribed_participant"
 msgstr "Unsubscribed participant!"
-
-#~ msgid "criterium:attribute:experiments"
-#~ msgstr "Experiments"

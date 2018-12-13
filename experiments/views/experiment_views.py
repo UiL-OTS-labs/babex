@@ -5,7 +5,7 @@ from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 import braces.views as braces
 
-from ..models import Experiment
+from ..models import Experiment, Appointment
 from ..forms import ExperimentForm
 from .mixins import ExperimentObjectMixin
 
@@ -110,6 +110,51 @@ class ExperimentExcludeOtherExperimentView(braces.LoginRequiredMixin,
     def get_redirect_url(self, *args, **kwargs):
         return reverse('experiments:excluded_experiments', args=[
             self.experiment.pk])
+
+
+class ExperimentAppointmentsView(braces.LoginRequiredMixin,
+                                 ExperimentObjectMixin, generic.ListView):
+    template_name = 'experiments/participants.html'
+    model = Appointment
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ExperimentAppointmentsView, self).get_context_data(
+            *args,
+            **kwargs
+        )
+
+        context['experiment'] = self.experiment
+
+        return context
+
+    def get_queryset(self):
+        """
+        Returns an annotated queryset, which injects the `n` attribute. This
+        will hold the place this appointment has in a time slot.
+        :return:
+        """
+
+        # First, get a QuerySet containing only appointments for this experiment
+        qs = self.model.objects.filter(timeslot__experiment=self.experiment)
+
+        # Ensure the time slot and participant objects are collected in the
+        # initial SELECT query
+        qs = qs.select_related('timeslot', 'participant')
+
+        # Build a query filter that selects all appointments with a lower or
+        # equal creation date
+        # (the equal part makes sure we count the appointment in question
+        # too, which is a hack to ensure that we display a 1-based place)
+        q_filter = Q(
+            timeslot__appointments__creation_date__lte=F('creation_date')
+        )
+
+        # Make an aggregation object that counts the number of appointments,
+        # filtered by the filter we made above
+        # This means this will count all appointments with a lower creation_date
+        count = Count('timeslot__appointments', filter=q_filter)
+
+        return qs.annotate(n=count)
 
 
 # -------------------

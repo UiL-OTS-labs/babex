@@ -100,6 +100,18 @@ class DefaultCriteria(models.Model):
         help_text=_('default_criteria:attribute:max_age:help_text'),
     )
 
+    def get_min_age_display(self):
+        if self.min_age == -1:
+            return _('experiments:globals:indifferent')
+
+        return self.min_age
+
+    def get_max_age_display(self):
+        if self.max_age == -1:
+            return _('experiments:globals:indifferent')
+
+        return self.max_age
+
 
 class Criterium(models.Model):
     class Meta:

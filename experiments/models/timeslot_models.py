@@ -23,7 +23,7 @@ class TimeSlot(models.Model):
     )
 
     @property
-    def participants(self):
+    def participants(self) -> list:
         return [appointment.participant for appointment in
                 self.appointments.all()]
 

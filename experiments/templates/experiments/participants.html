@@ -1,0 +1,147 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+
+{% block header_title %}
+   {% transformat 'experiments:participants:header' experiment.name %} - {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <h1>
+            {% transformat 'experiments:participants:header' experiment.name %}
+        </h1>
+    </div>
+</div>
+<div class="uu-inner-container">
+    <div class="col-6">
+        {% include 'experiments/criteria_snippit.html' %}
+    </div>
+    <div class="col-6">
+        <p>
+            {% trans 'experiments:participants:info_text' %}
+        </p>
+    </div>
+</div>
+<br/>
+<div class="mt-2">
+    <div class="col-12">
+        <table class="dt" width="100%" data-language="{% datatables_lang %}" data-responsive="">
+            <thead>
+                <tr>
+                    <th>
+                        {% trans 'timeslots:day' %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "experiments" "TimeSlot" "datetime" %}
+                    </th>
+                    <th>
+                        {% trans 'experiments:participants:place' %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "participants" "Participant" "name" %}
+                    </th>
+                    <th>
+                        {% trans 'experiments:participants:reminder' %}
+                    </th>
+                    <th>
+                        {% trans 'experiments:globals:actions' %}
+                    </th>
+                    <th>
+                        {% trans 'experiments:participants:email' %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "participants" "Participant" "phonenumber" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "participants" "Participant" "birth_date" %}
+                    </th>
+                    <th>
+                        {% trans 'experiments:participants:dyslexic' %}
+                    </th>
+                    <th>
+                        {% trans 'experiments:participants:language' %}
+                    </th>
+                    <th>
+                        {% trans 'experiments:participants:multilingual' %}
+                    </th>
+                    <th>
+                        {% trans 'experiments:participants:handedness' %}
+                    </th>
+                    <th>
+                        {% trans 'experiments:participants:sex' %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "participants" "Participant" "social_status" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "participants" "Participant" "email_subscription" %}
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for appointment in object_list %}
+                    <tr>
+                        <td>
+                            {{ appointment.timeslot.datetime|date:"l" }}
+                        </td>
+                        <td>
+                            {{ appointment.timeslot.datetime|date:"Y-m-d H:m" }}
+                        </td>
+                        <td>
+                            {{ appointment.n }}
+                        </td>
+                        <td>
+                            {{ appointment.participant.fullname }}
+                        </td>
+                        <td>
+                            y
+                        </td>
+                        <td>
+                            z
+                        </td>
+                        <td>
+                            <a href="mailto:{{ appointment.participant.email }}">
+                                {{ appointment.participant.email }}
+                            </a>
+                        </td>
+                        <td>
+                            {{ appointment.participant.phonenumber }}
+                        </td>
+                        <td>
+                            {{ appointment.participant.birth_date|date:"Y-m-d" }}
+                        </td>
+                        <td>
+                            {{ appointment.participant.dyslexic|yesno:_('yes,no') }}
+                        </td>
+                        <td>
+                            {{ appointment.participant.language }}
+                        </td>
+                        <td>
+                            {{ appointment.participant.multilingual|yesno:_('many,one') }}
+                        </td>
+                        <td>
+                            {{ appointment.participant.handedness|default_if_none:"" }}
+                        </td>
+                        <td>
+                            {{ appointment.participant.sex|default_if_none:"" }}
+                        </td>
+                        <td>
+                            {{ appointment.participant.get_social_status_display|default_if_none:"" }}
+                        </td>
+                        <td>
+                            {{ appointment.participant.email_subscription|yesno:_('yes,no') }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br/>
+    </div>
+</div>
+{% endblock %}
