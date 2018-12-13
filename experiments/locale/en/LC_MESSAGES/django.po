@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-11 10:01+0000\n"
+"POT-Creation-Date: 2018-12-13 07:55+0000\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -39,13 +39,13 @@ msgid "criterium:attribute:values"
 msgstr "Values (comma separated)"
 
 #: experiments/forms/criteria_forms.py:79
-#: experiments/models/criteria_models.py:147
+#: experiments/models/criteria_models.py:151
 #: experiments/templates/criteria/specific_list.html:125
 msgid "experiment_criterium:attribute:correct_value"
 msgstr "Correct value"
 
 #: experiments/forms/criteria_forms.py:83
-#: experiments/models/criteria_models.py:151
+#: experiments/models/criteria_models.py:155
 #: experiments/templates/criteria/specific_list.html:143
 msgid "experiment_criterium:attribute:message_failed"
 msgstr "Message when failed"
@@ -61,7 +61,6 @@ msgstr "Many"
 #: experiments/models/criteria_models.py:12
 #: experiments/models/criteria_models.py:18
 #: experiments/models/criteria_models.py:24
-#: experiments/models/criteria_models.py:30
 #: experiments/models/criteria_models.py:36
 #: experiments/templates/widgets/language_widget.html:20
 msgid "experiments:globals:indifferent"
@@ -428,67 +427,67 @@ msgid "experiments:excluded_experiments:included:title"
 msgstr "Include experiment"
 
 #: experiments/templates/experiments/index.html:8
-#: experiments/templates/experiments/index.html:27
+#: experiments/templates/experiments/index.html:20
 msgid "experiments:home:header"
 msgstr "Experiments"
 
-#: experiments/templates/experiments/index.html:23
+#: experiments/templates/experiments/index.html:16
 msgid "experiments:home:create_experiment"
 msgstr "Create experiment"
 
-#: experiments/templates/experiments/index.html:30
+#: experiments/templates/experiments/index.html:23
 msgid "experiments:home:info_text"
 msgstr "<br/>"
 
-#: experiments/templates/experiments/index.html:42
+#: experiments/templates/experiments/index.html:35
 msgid "experiments:global:slots"
 msgstr "Slots"
 
-#: experiments/templates/experiments/index.html:45
+#: experiments/templates/experiments/index.html:38
 msgid "experiments:global:participants"
 msgstr "Participants"
 
-#: experiments/templates/experiments/index.html:87
+#: experiments/templates/experiments/index.html:80
 msgid "experiments:home:switch_open:title"
 msgstr "Open/close experiment"
 
-#: experiments/templates/experiments/index.html:96
+#: experiments/templates/experiments/index.html:89
 msgid "experiments:home:switch_public:title"
 msgstr "Make experiment public/private"
 
-#: experiments/templates/experiments/index.html:105
+#: experiments/templates/experiments/index.html:98
 msgid "experiments:home:switch_visible:title"
 msgstr "Toggle participant details visibility"
 
-#: experiments/templates/experiments/index.html:114
+#: experiments/templates/experiments/index.html:107
 msgid "experiments:home:edit_timeslots:title"
 msgstr "Edit timeslots"
 
-#: experiments/templates/experiments/index.html:121
+#: experiments/templates/experiments/index.html:114
 msgid "experiments:home:edit_experiment:title"
 msgstr "Edit experiment"
 
-#: experiments/templates/experiments/index.html:128
+#: experiments/templates/experiments/index.html:121
 msgid "experiments:home:edit_default_criteria:title"
 msgstr "Edit default criteria"
 
-#: experiments/templates/experiments/index.html:135
+#: experiments/templates/experiments/index.html:128
 msgid "experiments:home:edit_specific_criteria:title"
 msgstr "Edit specific criteria"
 
-#: experiments/templates/experiments/index.html:142
+#: experiments/templates/experiments/index.html:135
 msgid "experiments:home:exclude_experiments:title"
 msgstr "Exclude experiments"
 
-#: experiments/templates/experiments/index.html:149
+#: experiments/templates/experiments/index.html:142
 msgid "experiments:home:invite:title"
 msgstr "Invite participants"
 
-#: experiments/templates/experiments/index.html:156
+#: experiments/templates/experiments/index.html:149
 msgid "experiments:home:participants:title"
 msgstr "Participants"
 
-#: experiments/templates/experiments/index.html:163
+#: experiments/templates/experiments/index.html:156
 msgid "experiments:home:delete:title"
 msgstr "Delete experiment"
 
@@ -641,89 +640,88 @@ msgstr ""
 msgid "timeslots:home:new_timeslots:header"
 msgstr "New timeslot"
 
-#: experiments/views/criteria_views.py:31
+#: experiments/views/criteria_views.py:34
 msgid "criteria:messages:created"
 msgstr "Criterium successfully created"
 
-#: experiments/views/criteria_views.py:39
+#: experiments/views/criteria_views.py:42
 msgid "criteria:messages:updated"
 msgstr "Criterium successfully updated"
 
-#: experiments/views/criteria_views.py:45
+#: experiments/views/criteria_views.py:48
 msgid "criteria:messages:deleted"
 msgstr "Criterium successfully deleted"
 
-#: experiments/views/criteria_views.py:86
+#: experiments/views/criteria_views.py:90
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr ""
 
-#: experiments/views/criteria_views.py:110
+#: experiments/views/criteria_views.py:114
 msgid "criteria:messages:created_and_added"
 msgstr "Criterium successfully created and added to the experiment!"
 
-#: experiments/views/criteria_views.py:166
+#: experiments/views/criteria_views.py:170
 msgid "criteria:messages:added_to_experiment"
 msgstr "Criterium successfully added to experiment!"
 
-#: experiments/views/criteria_views.py:188
+#: experiments/views/criteria_views.py:193
 msgid "criteria:messages:removed_from_experiment"
 msgstr "Criterium successfully removed from experiment!"
 
-#: experiments/views/experiment_views.py:23
+#: experiments/views/experiment_views.py:25
 msgid "experiments:message:create:success"
 msgstr "Successfully created experiment"
 
-#: experiments/views/experiment_views.py:34
+#: experiments/views/experiment_views.py:36
 msgid "experiments:message:update:success"
 msgstr "Successfully updated experiment"
 
-#: experiments/views/experiment_views.py:70
+#: experiments/views/experiment_views.py:73
 msgid "experiments:message:exclude:included"
 msgstr "Successfully included experiment"
 
-#: experiments/views/experiment_views.py:73
+#: experiments/views/experiment_views.py:76
 msgid "experiments:message:exclude:excluded"
 msgstr "Successfully excluded experiment"
 
-#: experiments/views/experiment_views.py:85
+#: experiments/views/experiment_views.py:90
 msgid "experiments:message:deleted_experiment"
 msgstr "Experiment deleted!"
 
-#: experiments/views/experiment_views.py:98
+#: experiments/views/experiment_views.py:104
 msgid "experiments:message:switch_open:closed"
 msgstr "Successfully closed experiment"
 
-#: experiments/views/experiment_views.py:101
+#: experiments/views/experiment_views.py:107
 msgid "experiments:message:switch_open:opened"
 msgstr "Successfully opened experiment"
 
-#: experiments/views/experiment_views.py:118
+#: experiments/views/experiment_views.py:122
 msgid "experiments:message:switch_public:closed"
 msgstr "Successfully hid experiment"
 
-#: experiments/views/experiment_views.py:121
+#: experiments/views/experiment_views.py:125
 msgid "experiments:message:switch_public:opened"
 msgstr "Successfully made experiment public"
 
-#: experiments/views/experiment_views.py:139
-msgid "experiments:message:switch_visible:visible"
-msgstr "Successfully changed participant visibility to visible"
-
-#: experiments/views/experiment_views.py:144
+#: experiments/views/experiment_views.py:141
 msgid "experiments:message:switch_visible:invisible"
 msgstr "Successfully hid participants from leaders"
 
-#: experiments/views/timeslot_views.py:74
+#: experiments/views/experiment_views.py:146
+msgid "experiments:message:switch_visible:visible"
+msgstr "Successfully changed participant visibility to visible"
+
+#: experiments/views/timeslot_views.py:75
 msgid "timeslots:message:deleted_timeslot"
 msgstr "Timeslot removed!"
 
-#: experiments/views/timeslot_views.py:87
+#: experiments/views/timeslot_views.py:89
 msgid "timeslots:message:deleted_timeslots"
 msgstr "Timeslots removed!"
 
-#: experiments/views/timeslot_views.py:101
-#: experiments/views/timeslot_views.py:121
+#: experiments/views/timeslot_views.py:104
 msgid "timeslots:message:unsubscribed_participant"
 msgstr "Unsubscribed participant!"
 

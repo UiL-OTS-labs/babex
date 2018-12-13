@@ -96,7 +96,7 @@ class Experiment(models.Model):
         participants in the timeslot set.
         """
         # We use .count() as this is a O(1) operation, in contrast to len()
-        return sum([x.participants.count() for x in self.timeslot_set.all()])
+        return sum([x.appointments.count() for x in self.timeslot_set.all()])
 
     def __str__(self):
         return self.name

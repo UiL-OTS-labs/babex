@@ -22,10 +22,10 @@ class TimeSlot(models.Model):
         validators=[MinValueValidator(1)]
     )
 
-    participants = models.ManyToManyField(
-        Participant,
-        verbose_name=_('time_slot:attribute:participants')
-    )
+    @property
+    def participants(self):
+        return [appointment.participant for appointment in
+                self.appointments.all()]
 
     @property
     def places(self) -> list:
@@ -33,12 +33,34 @@ class TimeSlot(models.Model):
         return [{
             'n':           n,
             'participant': participant
-        } for n, participant in enumerate_to(self.participants.all(),
+        } for n, participant in enumerate_to(self.participants,
                                              self.max_places, 1)]
 
     def has_free_places(self) -> bool:
-        return self.participants.count() < self.max_places
+        return self.appointments.count() < self.max_places
 
     @property
     def free_places(self) -> int:
-        return self.max_places - self.participants.count()
+        return self.max_places - self.appointments.count()
+
+
+class Appointment(models.Model):
+
+    class Meta:
+        ordering = ['creation_date']
+
+    participant = models.ForeignKey(
+        Participant,
+        on_delete=models.CASCADE,
+        related_name='appointments',
+    )
+
+    timeslot = models.ForeignKey(
+        TimeSlot,
+        on_delete=models.CASCADE,
+        related_name='appointments',
+    )
+
+    creation_date = models.DateTimeField(
+        auto_now_add=True,
+    )
