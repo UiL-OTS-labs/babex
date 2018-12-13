@@ -2,12 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-11 14:07+0000\n"
+"POT-Creation-Date: 2018-12-13 07:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,13 +16,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: participants/forms.py:31
+#: participants/forms.py:32
 msgid "participants:multilingual:many"
 msgstr "Meerdere"
 
-#: participants/forms.py:32
+#: participants/forms.py:33
 msgid "participants:multilingual:one"
 msgstr "Een"
+
+#: participants/forms.py:57
+msgid "participants:merge_form:field:old_participant"
+msgstr "Oude participant"
+
+#: participants/forms.py:62
+msgid "participants:merge_form:field:new_participant"
+msgstr "Participant om mee samen te voegen"
+
+#: participants/forms.py:71
+msgid "participants:merge_form:validation:are_equal"
+msgstr "Dit is dezelfde participant als hierboven gekozen!"
 
 #: participants/models.py:14
 msgid "participant:attribute:handedness:lefthanded"
@@ -144,16 +155,19 @@ msgid "Unknown"
 msgstr ""
 
 #: participants/templates/participants/detail.html:63
+#: participants/templates/participants/index.html:38
 msgid "participants:detail:secondary_emails"
 msgstr "Secundaire emails"
 
 #: participants/templates/participants/detail.html:84
 #: participants/templates/participants/detail.html:140
 #: participants/templates/participants/detail.html:148
+#: participants/templates/participants/index.html:92
 msgid "yes,no"
 msgstr "ja,nee"
 
 #: participants/templates/participants/detail.html:100
+#: participants/templates/participants/index.html:89
 msgid "options:many,one"
 msgstr "meerdere,een"
 
@@ -196,25 +210,38 @@ msgstr "Combineer Participanten"
 msgid "participants:home:info_text"
 msgstr "<br/>"
 
-#: participants/templates/participants/index.html:41
+#: participants/templates/participants/index.html:57
 msgid "participants:globals:actions"
 msgstr "Acties"
 
-#: participants/templates/participants/index.html:65
+#: participants/templates/participants/index.html:98
 msgid "participants:home:detail:title"
 msgstr "Bekijk details"
 
-#: participants/templates/participants/index.html:72
+#: participants/templates/participants/index.html:105
 msgid "participants:home:update:title"
 msgstr "Pas participant gegevens aan"
 
-#: participants/templates/participants/index.html:79
+#: participants/templates/participants/index.html:112
 msgid "participants:home:update_specific_criteria:title"
 msgstr "Pas participant criteria gegevens aan"
 
-#: participants/templates/participants/index.html:86
+#: participants/templates/participants/index.html:119
 msgid "participants:home:delete:title"
 msgstr "Verwijder participant"
+
+#: participants/templates/participants/merge.html:8
+#: participants/templates/participants/merge.html:15
+msgid "participants:merge:header"
+msgstr "Participanten samenvoegen"
+
+#: participants/templates/participants/merge.html:18
+msgid "participants:merge:info_text"
+msgstr " "
+
+#: participants/templates/participants/merge.html:27
+msgid "participants:merge:merge_button"
+msgstr "Participanten samenvoegen"
 
 #: participants/templates/participants/specific_criteria.html:8
 #: participants/templates/participants/specific_criteria.html:15
@@ -225,10 +252,14 @@ msgstr "Specifieke criteria voor '{}'"
 msgid "participants:specific_criteria:info_text"
 msgstr " "
 
-#: participants/views.py:28
+#: participants/views.py:29
 msgid "participants:messages:updated_participant"
 msgstr "Participant aangepast!"
 
-#: participants/views.py:38
+#: participants/views.py:39
 msgid "participants:messages:deleted_participant"
 msgstr "Participant verwijderd!"
+
+#: participants/views.py:72
+msgid "participants:messages:merged_participants"
+msgstr "Participanten samengevoegd!"
