@@ -97,14 +97,14 @@ class Experiment(models.Model):
         Returns the number of places in an experiment by counting the
         max_places for all timeslots.
         """
-        return self._places_and_participants['places']
+        return self._places_and_participants.get('places', 0)
 
     def get_number_of_participants(self) -> int:
         """
         Returns the number of participants in an experiment by counting all
         participants in the timeslot set.
         """
-        return self._places_and_participants['participants']
+        return self._places_and_participants.get('participants', 0)
 
     def __str__(self):
         return self.name
