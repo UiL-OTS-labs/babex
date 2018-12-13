@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.utils.translation import ugettext_lazy as _
+from django.utils.functional import cached_property
 
 from .location_models import Location
 from leaders.models import Leader
@@ -83,20 +84,27 @@ class Experiment(models.Model):
         help_text=_("experiment:attribute:additional_leaders:help_text"),
     )
 
+    @cached_property
+    def _places_and_participants(self) -> dict:
+        """Internal function, using a cache to minimize DB usage."""
+        return self.timeslot_set.aggregate(
+            places=models.Sum('max_places'),
+            participants=models.Count('appointments'),
+        )
+
     def get_number_of_places(self) -> int:
         """
         Returns the number of places in an experiment by counting the
         max_places for all timeslots.
         """
-        return sum([x.max_places for x in self.timeslot_set.all()])
+        return self._places_and_participants['places']
 
     def get_number_of_participants(self) -> int:
         """
         Returns the number of participants in an experiment by counting all
         participants in the timeslot set.
         """
-        # We use .count() as this is a O(1) operation, in contrast to len()
-        return sum([x.appointments.count() for x in self.timeslot_set.all()])
+        return self._places_and_participants['participants']
 
     def __str__(self):
         return self.name
