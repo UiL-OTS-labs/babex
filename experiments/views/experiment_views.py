@@ -13,6 +13,10 @@ from uil.core.views.mixins import RedirectSuccessMessageMixin, \
 from uil.core.views import RedirectActionView
 
 
+# --------------------------------------
+# List, create, update and delete views
+# --------------------------------------
+
 class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
     template_name = 'experiments/index.html'
     model = Experiment
@@ -36,6 +40,18 @@ class ExperimentUpdateView(braces.LoginRequiredMixin, SuccessMessageMixin,
     success_message = _('experiments:message:update:success')
     success_url = reverse('experiments:home')
 
+
+class ExperimentDeleteView(braces.LoginRequiredMixin, DeleteSuccessMessageMixin,
+                           generic.DeleteView):
+    model = Experiment
+    success_url = reverse('experiments:home')
+    template_name = 'experiments/delete.html'
+    success_message = _('experiments:message:deleted_experiment')
+
+
+# --------------------------------------
+# Experiment special aspect views
+# --------------------------------------
 
 class ExperimentEditExcludedExperimentsView(braces.LoginRequiredMixin,
                                             generic.ListView):
@@ -82,13 +98,9 @@ class ExperimentExcludeOtherExperimentView(braces.LoginRequiredMixin,
             self.experiment.pk])
 
 
-class ExperimentDeleteView(braces.LoginRequiredMixin, DeleteSuccessMessageMixin,
-                           generic.DeleteView):
-    model = Experiment
-    success_url = reverse('experiments:home')
-    template_name = 'experiments/delete.html'
-    success_message = _('experiments:message:deleted_experiment')
-
+# -------------------
+# Action views
+# -------------------
 
 class ExperimentSwitchOpenView(braces.LoginRequiredMixin,
                                RedirectSuccessMessageMixin,
