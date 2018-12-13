@@ -5,14 +5,14 @@
 {% load get_field_name %}
 
 {% block header_title %}
-    {% transformat 'participants:specific_criteria:header' participant %} - {{ block.super }}
+    {% transformat 'participants:specific_criteria:header' participant.fullname %} - {{ block.super }}
 {% endblock %}
 
 {% block content %}
 <div class="uu-inner-container">
     <div class="col-12">
         <h1>
-            {% transformat 'participants:specific_criteria:header' participant %}
+            {% transformat 'participants:specific_criteria:header' participant.fullname %}
         </h1>
         <p>
             {% trans 'participants:specific_criteria:info_text' %}

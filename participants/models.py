@@ -102,11 +102,20 @@ class Participant(models.Model):
         on_delete=models.SET_NULL,
     )
 
-    def __str__(self):
+    @property
+    def fullname(self):
         if self.name:
             return self.name
 
-        return _('participant:name:unknown').__str__()
+        return _('participant:name:unknown')
+
+    def __str__(self):
+        name = self.fullname
+
+        if not name:
+            name = _('participant:name:unknown').__str__()
+
+        return "[{}] {}".format(self.pk, name)
 
 
 class SecondaryEmail(models.Model):
