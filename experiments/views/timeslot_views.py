@@ -59,7 +59,16 @@ class TimeSlotHomeView(braces.LoginRequiredMixin,
         return str(now())[:-3]  # Remove the seconds
 
     def get_queryset(self):
-        return self.model.objects.filter(experiment=self.experiment)
+        # Only select them for this experiment
+        qs = self.model.objects.filter(
+            experiment=self.experiment,
+        )
+
+        # Force load all needed releated objects
+        qs = qs.select_related('experiment')
+        qs = qs.prefetch_related('appointments', 'appointments__participant')
+
+        return qs
 
     def get_context_data(self, *_, **kwargs):
         context = super(TimeSlotHomeView, self).get_context_data(**kwargs)
@@ -125,4 +134,3 @@ class SilentUnsubscribeParticipantView(UnsubscribeParticipantView):
         participant_pk = self.kwargs.get('participant')
 
         unsubscribe_participant(self.time_slot, participant_pk, False)
-
