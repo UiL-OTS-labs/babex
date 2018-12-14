@@ -95,12 +95,12 @@
                                 <td>
                                     {{ place.n }}
                                 </td>
-                                {% if place.participant %}
+                                {% if place.appointment %}
                                     <td>
-                                        {{ place.participant.name }}
+                                        {{ place.appointment.participant.name }}
                                     </td>
                                     <td>
-                                        {{ place.participant.email }}
+                                        {{ place.appointment.participant.email }}
                                     </td>
                                 {% else %}
                                     <td>
@@ -116,16 +116,16 @@
                                             
                                         </a>
                                     {% endif %}
-                                    {% if place.participant %}
+                                    {% if place.appointment %}
                                         <a
-                                            href="{% url 'experiments:timeslots_unsubscribe' timeslot.pk place.participant.pk %}"
+                                            href="{% url 'experiments:timeslots_unsubscribe' timeslot.pk place.appointment.pk %}"
                                             class="icon-remove-participant"
                                             title="{% trans 'timeslots:remove_participant:title' %}"
                                         >
                                             
                                         </a>
                                         <a
-                                            href="{% url 'experiments:timeslots_unsubscribe_silent' timeslot.pk place.participant.pk %}"
+                                            href="{% url 'experiments:timeslots_unsubscribe_silent' timeslot.pk place.appointment.pk %}"
                                             class="icon-silent-remove-participant"
                                             title="{% trans 'timeslots:silent_remove_participant:title' %}"
                                         >

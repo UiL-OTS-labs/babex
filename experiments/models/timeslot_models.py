@@ -23,17 +23,12 @@ class TimeSlot(models.Model):
     )
 
     @property
-    def participants(self) -> list:
-        return [appointment.participant for appointment in
-                self.appointments.all()]
-
-    @property
     def places(self) -> list:
         """Returns a list of places with a corresponding participant (if any)"""
         return [{
             'n':           n,
-            'participant': participant
-        } for n, participant in enumerate_to(self.participants,
+            'appointment': appointment
+        } for n, appointment in enumerate_to(self.appointments.all(),
                                              self.max_places, 1)]
 
     def has_free_places(self) -> bool:

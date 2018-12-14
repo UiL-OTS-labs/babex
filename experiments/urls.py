@@ -63,13 +63,13 @@ urlpatterns = [
     ),
 
     url(
-        r'^(?P<time_slot>\d+)/timeslots/unsubscribe/(?P<participant>\d+)/$',
+        r'^(?P<time_slot>\d+)/timeslots/unsubscribe/(?P<appointment>\d+)/$',
         UnsubscribeParticipantView.as_view(),
         name='timeslots_unsubscribe',
     ),
     url(
         r'^(?P<time_slot>\d+)/timeslots/unsubscribe/silent/('
-        r'?P<participant>\d+)/$',
+        r'?P<appointment>\d+)/$',
         SilentUnsubscribeParticipantView.as_view(),
         name='timeslots_unsubscribe_silent',
     ),

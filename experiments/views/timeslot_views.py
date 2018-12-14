@@ -113,9 +113,9 @@ class UnsubscribeParticipantView(braces.LoginRequiredMixin,
     success_message = _('timeslots:message:unsubscribed_participant')
 
     def action(self, request):
-        participant_pk = self.kwargs.get('participant')
+        appointment_pk = self.kwargs.get('appointment')
 
-        unsubscribe_participant(self.time_slot, participant_pk)
+        unsubscribe_participant(self.time_slot, appointment_pk)
 
     def get_redirect_url(self, *args, **kwargs):
         return reverse(
@@ -131,6 +131,6 @@ class UnsubscribeParticipantView(braces.LoginRequiredMixin,
 class SilentUnsubscribeParticipantView(UnsubscribeParticipantView):
 
     def action(self, request):
-        participant_pk = self.kwargs.get('participant')
+        appointment_pk = self.kwargs.get('appointment')
 
-        unsubscribe_participant(self.time_slot, participant_pk, False)
+        unsubscribe_participant(self.time_slot, appointment_pk, False)

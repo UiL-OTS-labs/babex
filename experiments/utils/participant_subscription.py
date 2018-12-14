@@ -1,13 +1,14 @@
 from main.utils import send_template_email, get_supreme_admin
 
 
-def unsubscribe_participant(time_slot, participant_pk: int,
+def unsubscribe_participant(time_slot, appointment_pk: int,
                             sent_email: bool = True) -> None:
 
-    participant = time_slot.participants.get(pk=participant_pk)
+    appointment = time_slot.appointments.get(pk=appointment_pk)
 
-    time_slot.participants.remove(participant)
-    time_slot.save()
+    # Always delete first, the data in it will still be available for the
+    # next bit
+    appointment.delete()
 
     if sent_email:
         admin = get_supreme_admin()
@@ -15,7 +16,7 @@ def unsubscribe_participant(time_slot, participant_pk: int,
 
         subject = 'UiL OTS uitschrijven experiment: {}'.format(experiment.name)
         context = {
-            'participant': participant,
+            'participant': appointment.participant,
             'time_slot': time_slot,
             'experiment': experiment,
             'admin': admin.get_full_name(),
@@ -25,11 +26,12 @@ def unsubscribe_participant(time_slot, participant_pk: int,
         }
 
         send_template_email(
-            [participant.email],
+            [appointment.participant.email],
             subject,
             'timeslots/mail/unsubscribed',
             context,
             admin.email
         )
+
 
 
