@@ -46,6 +46,7 @@ def create_leader(name: str, email: str, phonenumber: str,
 
         if password:
             api_user.set_password(password)
+            api_user.passwords_needs_change = True
 
         api_user.save()
 

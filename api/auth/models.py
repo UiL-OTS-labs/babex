@@ -15,6 +15,8 @@ class ApiUser(models.Model):
     is_active = models.BooleanField(default=True)
     is_frontend_admin = models.BooleanField(default=False)
 
+    passwords_needs_change = models.BooleanField(default=False)
+
     groups = models.ManyToManyField(ApiGroup)
 
     def set_password(self, raw_password):
