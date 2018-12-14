@@ -1,8 +1,8 @@
 from django.conf.urls import url
-from .views import ParticipantsHomeView, ParticipantDetailView, \
-    ParticipantUpdateView, ParticipantDeleteView, \
-    ParticipantSpecificCriteriaUpdateView, ParticipantMergeView
 
+from .views import ParticipantDeleteView, ParticipantDetailView, \
+    ParticipantMergeView, ParticipantSpecificCriteriaUpdateView, \
+    ParticipantUpdateView, ParticipantsHomeView
 
 app_name = 'participants'
 

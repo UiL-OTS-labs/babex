@@ -1,9 +1,9 @@
-from django.views import generic
-from django.views.generic.edit import ModelFormMixin, FormMixin
-from django.contrib import messages
 import braces.views as braces
+from django.contrib import messages
 from django.http import Http404
 from django.utils.translation import ugettext as _
+from django.views import generic
+from django.views.generic.edit import FormMixin, ModelFormMixin
 
 
 class HomeView(braces.LoginRequiredMixin, generic.TemplateView):

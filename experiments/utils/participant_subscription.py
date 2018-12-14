@@ -1,4 +1,4 @@
-from main.utils import send_template_email, get_supreme_admin
+from main.utils import get_supreme_admin, send_template_email
 
 
 def unsubscribe_participant(time_slot, appointment_pk: int,

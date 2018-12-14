@@ -1,12 +1,12 @@
-from django.views import generic
-from django.utils.text import gettext_lazy as _
+import braces.views as braces
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy as reverse
-import braces.views as braces
-
-from .models import Comment
-from .forms import CommentForm
+from django.utils.text import gettext_lazy as _
+from django.views import generic
 from uil.core.views.mixins import DeleteSuccessMessageMixin
+
+from .forms import CommentForm
+from .models import Comment
 
 
 class CommentsHomeView(braces.LoginRequiredMixin, generic.ListView):

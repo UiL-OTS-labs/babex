@@ -1,7 +1,7 @@
 from django.conf import settings
 
+from api.auth.models import ApiGroup, ApiUser
 from .models import Leader
-from api.auth.models import ApiUser, ApiGroup
 
 
 def create_leader(name: str, email: str, phonenumber: str,

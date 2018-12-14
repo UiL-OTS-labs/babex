@@ -1,21 +1,20 @@
-from django.http import Http404
-from django.db.models import Count
+import braces.views as braces
 from django.contrib.messages.views import SuccessMessageMixin
-from django.views import generic
+from django.db.models import Count
+from django.http import Http404
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
-import braces.views as braces
-
-from ..models import DefaultCriteria, Criterium, ExperimentCriterium
-from ..forms import DefaultCriteriaForm, CriteriumForm, ExperimentCriteriumForm
-from ..utils import create_and_attach_criterium, attach_criterium, \
-    clean_form_existing_criterium
-from .mixins import ExperimentObjectMixin
-from main.views import FormListView
-
+from django.views import generic
 from uil.core.views import RedirectActionView
-from uil.core.views.mixins import RedirectSuccessMessageMixin,\
-    DeleteSuccessMessageMixin
+from uil.core.views.mixins import DeleteSuccessMessageMixin, \
+    RedirectSuccessMessageMixin
+
+from main.views import FormListView
+from .mixins import ExperimentObjectMixin
+from ..forms import CriteriumForm, DefaultCriteriaForm, ExperimentCriteriumForm
+from ..models import Criterium, DefaultCriteria, ExperimentCriterium
+from ..utils import attach_criterium, clean_form_existing_criterium, \
+    create_and_attach_criterium
 
 
 #

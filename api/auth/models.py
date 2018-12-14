@@ -1,5 +1,6 @@
-from django.db import models
 from django.contrib.auth.hashers import check_password, make_password
+from django.db import models
+
 
 class ApiGroup(models.Model):
 

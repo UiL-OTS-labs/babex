@@ -1,5 +1,5 @@
-from rest_framework.permissions import BasePermission
 from django.conf import settings
+from rest_framework.permissions import BasePermission
 
 
 class IsPermittedClient(BasePermission):

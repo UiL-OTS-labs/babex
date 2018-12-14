@@ -1,17 +1,16 @@
-from django.views import generic
-from django.db.models import Sum, Count, Q, F
+import braces.views as braces
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import Count, F, Q, Sum
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
-import braces.views as braces
-
-from ..models import Experiment, Appointment
-from ..forms import ExperimentForm
-from .mixins import ExperimentObjectMixin
-
-from uil.core.views.mixins import RedirectSuccessMessageMixin, \
-    DeleteSuccessMessageMixin
+from django.views import generic
 from uil.core.views import RedirectActionView
+from uil.core.views.mixins import DeleteSuccessMessageMixin, \
+    RedirectSuccessMessageMixin
+
+from .mixins import ExperimentObjectMixin
+from ..forms import ExperimentForm
+from ..models import Appointment, Experiment
 
 
 # --------------------------------------

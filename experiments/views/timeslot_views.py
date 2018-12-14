@@ -1,17 +1,17 @@
-from django.urls import reverse_lazy as reverse
+import braces.views as braces
 from django.core.exceptions import SuspiciousOperation
+from django.urls import reverse_lazy as reverse
 from django.utils.functional import cached_property
 from django.utils.text import gettext_lazy as _
-import braces.views as braces
-
-from ..models import TimeSlot
-from ..forms import TimeSlotForm
-from .mixins import ExperimentObjectMixin
-from ..utils import now, delete_timeslot, delete_timeslots, \
-    unsubscribe_participant
-from main.views import ModelFormListView
-from uil.core.views.mixins import RedirectSuccessMessageMixin
 from uil.core.views import RedirectActionView
+from uil.core.views.mixins import RedirectSuccessMessageMixin
+
+from main.views import ModelFormListView
+from .mixins import ExperimentObjectMixin
+from ..forms import TimeSlotForm
+from ..models import TimeSlot
+from ..utils import delete_timeslot, delete_timeslots, now, \
+    unsubscribe_participant
 
 
 class TimeSlotHomeView(braces.LoginRequiredMixin,

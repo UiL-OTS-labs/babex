@@ -1,7 +1,7 @@
 from rest_framework import authentication
 
-from .token import JwtToken
 from .models import ApiUser
+from .token import JwtToken
 
 
 class JwtAuthentication(authentication.TokenAuthentication):

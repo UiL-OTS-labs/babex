@@ -1,8 +1,8 @@
 from django.core.exceptions import ValidationError
 from django.http import QueryDict
-
-from ..models import ExperimentCriterium, Criterium
 from uil.core.utils import set_model_field_value
+
+from ..models import Criterium, ExperimentCriterium
 
 
 def create_and_attach_criterium(experiment, name_form, name_natural, values,

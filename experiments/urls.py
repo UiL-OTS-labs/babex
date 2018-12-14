@@ -1,20 +1,18 @@
-from django.conf.urls import url, include
-from .views import (ExperimentHomeView, ExperimentCreateView,
-                    ExperimentUpdateView, ExperimentEditExcludedExperimentsView,
-                    ExperimentExcludeOtherExperimentView,
-                    ExperimentSwitchOpenView, ExperimentSwitchVisibleView,
-                    ExperimentSwitchPublicView, ExperimentDeleteView,
-                    ExperimentAppointmentsView,
-                    LocationHomeView, LocationCreateView, UpdateLocationView,
-                    CriteriaHomeView, DefaultCriteriaUpdateView,
-                    CriteriaCreateView, CriteriaUpdateView,
-                    CriteriaDeleteView, CriteriaListView,
-                    AddExistingCriteriumToExperimentView,
+from django.conf.urls import include, url
+
+from .views import (AddExistingCriteriumToExperimentView, CriteriaCreateView,
+                    CriteriaDeleteView, CriteriaHomeView, CriteriaListView,
+                    CriteriaUpdateView, DefaultCriteriaUpdateView,
+                    ExperimentAppointmentsView, ExperimentCreateView,
+                    ExperimentDeleteView, ExperimentEditExcludedExperimentsView,
+                    ExperimentExcludeOtherExperimentView, ExperimentHomeView,
+                    ExperimentSwitchOpenView, ExperimentSwitchPublicView,
+                    ExperimentSwitchVisibleView, ExperimentUpdateView,
+                    LocationCreateView, LocationHomeView,
                     RemoveCriteriumFromExperiment,
-                    TimeSlotHomeView, TimeSlotDeleteView,
-                    TimeSlotBulkDeleteView, UnsubscribeParticipantView,
-                    SilentUnsubscribeParticipantView,
-                    )
+                    SilentUnsubscribeParticipantView, TimeSlotBulkDeleteView,
+                    TimeSlotDeleteView, TimeSlotHomeView,
+                    UnsubscribeParticipantView, UpdateLocationView, )
 
 # TODO: make this a little bit more readable
 

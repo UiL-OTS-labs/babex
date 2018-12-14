@@ -1,7 +1,7 @@
-from django.contrib.auth.hashers import (
-    PBKDF2PasswordHasher, BasePasswordHasher
-)
 import hashlib
+
+from django.contrib.auth.hashers import (BasePasswordHasher,
+                                         PBKDF2PasswordHasher, )
 
 
 class UnsaltedMD5PasswordHasher(BasePasswordHasher):

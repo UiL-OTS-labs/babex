@@ -1,15 +1,15 @@
-from django.views import generic
-from django.utils.functional import cached_property
-from django.utils.text import gettext_lazy as _
+import braces.views as braces
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy as reverse
-import braces.views as braces
-
-from .models import Participant, CriteriumAnswer
-from .forms import ParticipantForm, CriteriumAnswerForm, ParticipantMergeForm
-from .utils import merge_participants
+from django.utils.functional import cached_property
+from django.utils.text import gettext_lazy as _
+from django.views import generic
 from uil.core.views import FormSetUpdateView
 from uil.core.views.mixins import DeleteSuccessMessageMixin
+
+from .forms import CriteriumAnswerForm, ParticipantForm, ParticipantMergeForm
+from .models import CriteriumAnswer, Participant
+from .utils import merge_participants
 
 
 class ParticipantsHomeView(braces.LoginRequiredMixin, generic.ListView):

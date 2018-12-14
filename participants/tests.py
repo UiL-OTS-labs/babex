@@ -1,9 +1,10 @@
-from django.test import TestCase
 from datetime import datetime
+
 import pytz
+from django.test import TestCase
 
 from experiments.models import Appointment, Experiment, TimeSlot
-from .models import Participant, CriteriumAnswer, SecondaryEmail, Criterium
+from .models import Criterium, CriteriumAnswer, Participant, SecondaryEmail
 from .utils import merge_participants
 
 

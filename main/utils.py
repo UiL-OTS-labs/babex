@@ -1,9 +1,11 @@
-from django.core.mail import send_mail, EmailMultiAlternatives, get_connection
+from typing import List, Tuple
+
 from django.conf import settings
+from django.core.mail import EmailMultiAlternatives, get_connection, send_mail
 from django.template.loader import render_to_string
-from typing import Tuple, List
 
 from .models import User
+
 
 def send_template_email(recipient_list: list, subject: str, template: str,
                         template_context: dict, from_email: str = None) -> None:

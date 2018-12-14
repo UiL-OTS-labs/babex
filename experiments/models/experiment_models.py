@@ -1,10 +1,9 @@
-from django.db import models
 from django.core.validators import MinValueValidator
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.utils.functional import cached_property
 
-from .location_models import Location
 from leaders.models import Leader
+from .location_models import Location
 
 
 class Experiment(models.Model):

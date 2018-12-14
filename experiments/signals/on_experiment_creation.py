@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from ..models import Experiment, DefaultCriteria
+from ..models import DefaultCriteria, Experiment
 
 
 @receiver(post_save, sender=Experiment)

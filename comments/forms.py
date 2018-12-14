@@ -1,8 +1,8 @@
 from django import forms
 
-from .models import Comment
 from experiments.models import Experiment
 from participants.models import Participant
+from .models import Comment
 
 
 class CommentForm(forms.ModelForm):

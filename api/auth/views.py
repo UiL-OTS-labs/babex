@@ -1,8 +1,8 @@
 from rest_framework.authtoken import views
 from rest_framework.response import Response
 
-from .token import JwtToken
 from .serializers import AuthTokenSerializer
+from .token import JwtToken
 from ..permissions import IsPermittedClient
 
 

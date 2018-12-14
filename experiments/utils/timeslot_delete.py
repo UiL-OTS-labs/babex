@@ -1,5 +1,5 @@
-from ..models import Experiment
 from .participant_subscription import unsubscribe_participant
+from ..models import Experiment
 
 _TIMESLOT_KEY_PREFIX = len("timeslot_")
 _TIMESLOT_KEY_POSTFIX = len("[]")

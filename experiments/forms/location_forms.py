@@ -1,6 +1,6 @@
 from django import forms
 
-from ..models import  Location
+from ..models import Location
 
 
 class CreateLocationForm(forms.ModelForm):

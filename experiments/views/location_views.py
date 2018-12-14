@@ -1,9 +1,9 @@
-from django.views import generic
-from django.urls import reverse
 import braces.views as braces
+from django.urls import reverse
+from django.views import generic
 
-from ..models import Location
 from ..forms import CreateLocationForm
+from ..models import Location
 
 
 class LocationHomeView(braces.LoginRequiredMixin, generic.ListView):

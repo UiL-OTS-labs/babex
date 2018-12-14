@@ -1,11 +1,11 @@
-from django.views import generic
+import braces.views as braces
+from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.messages.views import SuccessMessageMixin
-import braces.views as braces
+from django.views import generic
 
-from .models import Leader
 from .forms import LeaderCreateForm, LeaderUpdateForm
+from .models import Leader
 from .utils import create_leader, notify_new_leader, update_leader
 
 

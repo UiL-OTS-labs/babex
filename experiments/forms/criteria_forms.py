@@ -1,8 +1,8 @@
 from django import forms
-from django.utils.translation import ugettext_lazy as _
 from django.utils.text import slugify
+from django.utils.translation import ugettext_lazy as _
 
-from ..models import DefaultCriteria, Criterium
+from ..models import Criterium, DefaultCriteria
 from ..widgets import LanguageWidget
 
 

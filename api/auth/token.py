@@ -1,7 +1,8 @@
+import enum
+
+import jwt
 from django.conf import settings
 from django.core import exceptions
-import jwt
-import enum
 
 
 class Algorithms(enum.Enum):

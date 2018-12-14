@@ -1,6 +1,6 @@
 from django.conf.urls import url
-from .views import LeaderHomeView, LeaderCreateView, LeaderUpdateView
 
+from .views import LeaderCreateView, LeaderHomeView, LeaderUpdateView
 
 app_name = 'leaders'
 

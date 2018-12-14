@@ -1,5 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+
 from .models import User
+
+# TODO: custom user admin form
 
 admin.site.register(User, UserAdmin)
