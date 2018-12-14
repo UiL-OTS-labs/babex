@@ -1,11 +1,10 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+import main.fields as e_fields
 from api.auth.models import ApiUser
 from experiments.models.criteria_models import Criterium
 
-
-# TODO: encrypted fields!
 
 class Participant(models.Model):
 
@@ -25,25 +24,25 @@ class Participant(models.Model):
         ('other', _('participant:attribute:social_role:other')),
     )
 
-    email = models.EmailField(
+    email = e_fields.EncryptedEmailField(
         _('participant:attribute:email'),
     )
 
-    name = models.TextField(
+    name = e_fields.EncryptedTextField(
         _('participant:attribute:name'),
         blank=True,
         null=True,
     )
 
-    language = models.TextField(
+    language = e_fields.EncryptedTextField(
         _('participant:attribute:language'),
     )
 
-    dyslexic = models.BooleanField(
+    dyslexic = e_fields.EncryptedBooleanField(
         _('participant:attribute:dyslexic'),
     )
 
-    birth_date = models.DateField(
+    birth_date = e_fields.EncryptedDateField(
         _('participant:attribute:birth_date'),
         blank=True,
         null=True,
@@ -51,45 +50,45 @@ class Participant(models.Model):
 
     # NOTE: When updating to Django 2.1 you should change this to a regular
     # BooleanField
-    multilingual = models.NullBooleanField(
+    multilingual = e_fields.EncryptedNullBooleanField(
         _('participant:attribute:multilingual'),
         blank=True,
         null=True,
     )
 
-    phonenumber = models.TextField(
+    phonenumber = e_fields.EncryptedTextField(
         _('participant:attribute:phonenumber'),
         blank=True,
         null=True,
     )
 
-    handedness = models.TextField(
+    handedness = e_fields.EncryptedTextField(
         _('participant:attribute:handedness'),
         choices=HANDEDNESS,
         blank=True,
         null=True,
     )
 
-    sex = models.TextField(
+    sex = e_fields.EncryptedTextField(
         _('participant:attribute:sex'),
         choices=SEX,
         blank=True,
         null=True,
     )
 
-    social_status = models.TextField(
+    social_status = e_fields.EncryptedTextField(
         _('participant:attribute:social_status'),
         choices=SOCIAL_STATUS,
         blank=True,
         null=True,
     )
 
-    email_subscription = models.BooleanField(
+    email_subscription = e_fields.EncryptedBooleanField(
         _('participant:attribute:email_subscription'),
         default=False,
     )
 
-    capable = models.BooleanField(
+    capable = e_fields.EncryptedBooleanField(
         _('participant:attribute:capable'),
         default=True,
     )
@@ -118,7 +117,7 @@ class Participant(models.Model):
 
 
 class SecondaryEmail(models.Model):
-    email = models.EmailField(
+    email = e_fields.EncryptedEmailField(
         _('secondary_email:attribute:email'),
     )
 
@@ -131,6 +130,6 @@ class CriteriumAnswer(models.Model):
 
     criterium = models.ForeignKey(Criterium, on_delete=models.CASCADE)
 
-    answer = models.TextField(
+    answer = e_fields.EncryptedTextField(
         _('criterium_answer:attribute:answer')
     )

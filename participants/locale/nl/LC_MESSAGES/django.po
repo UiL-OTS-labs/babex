@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-13 07:55+0000\n"
+"POT-Creation-Date: 2018-12-14 09:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -108,15 +108,15 @@ msgstr "Op mailinglist"
 msgid "participant:attribute:capable"
 msgstr "Bekwaam"
 
-#: participants/models.py:109
+#: participants/models.py:110 participants/models.py:116
 msgid "participant:name:unknown"
 msgstr "naam onbekend"
 
-#: participants/models.py:114
+#: participants/models.py:123
 msgid "secondary_email:attribute:email"
 msgstr "Secundaire e-mailadres"
 
-#: participants/models.py:127
+#: participants/models.py:136
 msgid "criterium_answer:attribute:answer"
 msgstr "Antwoord"
 
@@ -252,14 +252,14 @@ msgstr "Specifieke criteria voor '{}'"
 msgid "participants:specific_criteria:info_text"
 msgstr " "
 
-#: participants/views.py:29
+#: participants/views.py:32
 msgid "participants:messages:updated_participant"
 msgstr "Participant aangepast!"
 
-#: participants/views.py:39
+#: participants/views.py:42
 msgid "participants:messages:deleted_participant"
 msgstr "Participant verwijderd!"
 
-#: participants/views.py:72
+#: participants/views.py:75
 msgid "participants:messages:merged_participants"
 msgstr "Participanten samengevoegd!"
