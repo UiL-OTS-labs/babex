@@ -117,6 +117,10 @@ class ExperimentAppointmentsView(braces.LoginRequiredMixin,
     template_name = 'experiments/participants.html'
     model = Appointment
 
+    # Prefetch/select related criteria data for the criteria boxes
+    experiment_select_related = ['defaultcriteria']
+    experiment_prefetch_related = ['experimentcriterium_set__criterium']
+
     def get_context_data(self, *args, **kwargs):
         context = super(ExperimentAppointmentsView, self).get_context_data(
             *args,
