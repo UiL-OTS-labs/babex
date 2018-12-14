@@ -8,4 +8,5 @@ PyJWT
 bpython
 djangorestframework
 django-debug-toolbar
+cryptography
 -e git+git@github.com:UiL-OTS-labs/django-shared-core.git@master#egg=uil-django-core
