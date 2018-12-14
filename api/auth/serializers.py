@@ -4,8 +4,14 @@ from rest_framework import serializers
 from .authenticators import PostAuthenticator
 
 
-# TODO: figure out this abstract methods error
 class AuthTokenSerializer(serializers.Serializer):
+
+    def update(self, instance, validated_data):
+        raise NotImplementedError
+
+    def create(self, validated_data):
+        raise NotImplementedError
+
     username = serializers.CharField(label=_("Username"))
     password = serializers.CharField(
         label=_("Password"),
