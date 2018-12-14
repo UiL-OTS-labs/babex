@@ -6,7 +6,6 @@ from experiments.models.criteria_models import Criterium
 
 
 # TODO: encrypted fields!
-# TODO: criteria saving!
 
 class Participant(models.Model):
 
