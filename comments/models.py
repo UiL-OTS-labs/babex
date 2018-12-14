@@ -21,6 +21,7 @@ class Comment(models.Model):
         Leader,
         on_delete=models.CASCADE,
         verbose_name=_('comment:attribute:leader'),
+        null=True,
     )
 
     experiment = models.ForeignKey(

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-06 09:13+0000\n"
+"POT-Creation-Date: 2018-12-14 08:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,15 +26,15 @@ msgstr "Participant"
 msgid "comment:attribute:leader"
 msgstr "Toegevoegd door"
 
-#: comments/models.py:29
+#: comments/models.py:30
 msgid "comment:attribute:experiment"
 msgstr "Experiment"
 
-#: comments/models.py:33
+#: comments/models.py:34
 msgid "comment:attribute:comment"
 msgstr "Opmerking"
 
-#: comments/models.py:37
+#: comments/models.py:38
 msgid "comment:attribute:datetime"
 msgstr "Toegevoegd op"
 
@@ -68,6 +68,10 @@ msgstr "<br/>"
 msgid "comments:home:table:actions"
 msgstr "Acties"
 
-#: comments/templates/comments/index.html:76
+#: comments/templates/comments/index.html:66
+msgid "comments:home:admin_user"
+msgstr "Administrator account"
+
+#: comments/templates/comments/index.html:80
 msgid "comments:home:delete"
 msgstr "Opmerking verwijderen"

@@ -60,7 +60,11 @@
                             {{ comment.participant.email }}
                         </td>
                         <td>
-                            {{ comment.leader.name }}
+                            {% if comment.leader %}
+                                {{ comment.leader.name }}
+                            {% else %}
+                                {% trans 'comments:home:admin_user' %}
+                            {% endif %}
                         </td>
                         <td>
                             {{ comment.experiment }}
