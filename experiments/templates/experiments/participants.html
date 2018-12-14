@@ -129,6 +129,12 @@
                             >
                                 
                             </a>
+                            <a
+                                href="{% url 'comments:new' appointment.participant.pk experiment.pk %}"
+                                class="icon-comment"
+                            >
+                                
+                            </a>
                         </td>
                         <td>
                             <a href="mailto:{{ appointment.participant.email }}">
