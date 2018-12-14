@@ -2,7 +2,6 @@ from django.urls import reverse_lazy as reverse
 from django.core.exceptions import SuspiciousOperation
 from django.utils.functional import cached_property
 from django.utils.text import gettext_lazy as _
-from django.views import generic
 import braces.views as braces
 
 from ..models import TimeSlot
@@ -118,6 +117,9 @@ class UnsubscribeParticipantView(braces.LoginRequiredMixin,
         unsubscribe_participant(self.time_slot, appointment_pk)
 
     def get_redirect_url(self, *args, **kwargs):
+        if self.request.GET.get('next'):
+            return self.request.GET.get('next')
+
         return reverse(
             'experiments:timeslots',
             args=[self.time_slot.experiment.pk]
