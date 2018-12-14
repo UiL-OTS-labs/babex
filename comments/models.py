@@ -1,9 +1,10 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from participants.models import Participant
-from leaders.models import Leader
+import main.fields as e_fields
 from experiments.models import Experiment
+from leaders.models import Leader
+from participants.models import Participant
 
 
 class Comment(models.Model):
@@ -30,7 +31,7 @@ class Comment(models.Model):
         verbose_name=_('comment:attribute:experiment'),
     )
 
-    comment = models.TextField(
+    comment = e_fields.EncryptedTextField(
         verbose_name=_('comment:attribute:comment'),
     )
 
