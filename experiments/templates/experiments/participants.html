@@ -3,9 +3,21 @@
 {% load transformat %}
 {% load datatables %}
 {% load get_field_name %}
+{% load static %}
 
 {% block header_title %}
    {% transformat 'experiments:participants:header' experiment.name %} - {{ block.super }}
+{% endblock %}
+
+{% block html_head %}
+    <script>
+        // Because of I18N reasons, we do this stuff here.
+        var strings = {
+            'confirm_silent_remove_participant': "{% trans 'timeslot:warning:confirm_silent_remove_participant' %}",
+            'confirm_remove_participant': "{% trans 'timeslot:warning:confirm_remove_participant' %}",
+        };
+    </script>
+    <script src="{% static 'experiments/participants/list.js' %}"></script>
 {% endblock %}
 
 
@@ -34,10 +46,10 @@
             <thead>
                 <tr>
                     <th>
-                        {% trans 'timeslots:day' %}
+                        {% get_verbose_field_name "experiments" "TimeSlot" "datetime" %}
                     </th>
                     <th>
-                        {% get_verbose_field_name "experiments" "TimeSlot" "datetime" %}
+                        {% trans 'timeslots:day' %}
                     </th>
                     <th>
                         {% trans 'experiments:participants:place' %}
@@ -88,10 +100,10 @@
                 {% for appointment in object_list %}
                     <tr>
                         <td>
-                            {{ appointment.timeslot.datetime|date:"l" }}
+                            {{ appointment.timeslot.datetime|date:"Y-m-d H:m" }}
                         </td>
                         <td>
-                            {{ appointment.timeslot.datetime|date:"Y-m-d H:m" }}
+                            {{ appointment.timeslot.datetime|date:"l" }}
                         </td>
                         <td>
                             {{ appointment.n }}
@@ -103,7 +115,20 @@
                             y
                         </td>
                         <td>
-                            z
+                            <a
+                                href="{% url 'experiments:timeslots_unsubscribe' appointment.timeslot.pk appointment.pk %}?next={{ request.path }}"
+                                class="icon-remove-participant"
+                                title="{% trans 'timeslots:remove_participant:title' %}"
+                            >
+                                
+                            </a>
+                            <a
+                                href="{% url 'experiments:timeslots_unsubscribe_silent' appointment.timeslot.pk appointment.pk %}?next={{ request.path }}"
+                                class="icon-silent-remove-participant"
+                                title="{% trans 'timeslots:silent_remove_participant:title' %}"
+                            >
+                                
+                            </a>
                         </td>
                         <td>
                             <a href="mailto:{{ appointment.participant.email }}">
