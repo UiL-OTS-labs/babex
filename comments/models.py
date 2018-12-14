@@ -38,4 +38,5 @@ class Comment(models.Model):
         verbose_name=_('comment:attribute:datetime'),
         blank=True,
         null=True,
+        auto_now_add=True,
     )
