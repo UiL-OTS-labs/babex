@@ -3,6 +3,7 @@ from typing import List, Tuple
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives, get_connection, send_mail
 from django.template.loader import render_to_string
+from django.utils import translation
 
 from .models import User
 
@@ -28,8 +29,15 @@ def send_template_email(recipient_list: list, subject: str, template: str,
     :param template_context: Any context variables for the templates
     :param from_email: FROM header. If absent, settings.FROM_EMAIL will be used
     """
+    # Override so that all emails will be parsed with dutch set
+    old_lang = translation.get_language()
+    translation.activate('nl')
+
     plain_body = render_to_string('{}.txt'.format(template), template_context)
     html_body = render_to_string('{}.html'.format(template), template_context)
+
+    # revert to the original language
+    translation.activate(old_lang)
 
     from_email = from_email or settings.FROM_EMAIL
 
@@ -62,6 +70,10 @@ def send_personalised_mass_mail(datatuple: Tuple[str, dict, List[str]],
     from_email = from_email or settings.FROM_EMAIL
     connection = get_connection()
 
+    # Override so that all emails will be parsed with dutch set
+    old_lang = translation.get_language()
+    translation.activate('nl')
+
     for subject, personal_context, recipient_list in datatuple:
         context = personal_context.copy()
         context.update(template_context)
@@ -77,6 +89,8 @@ def send_personalised_mass_mail(datatuple: Tuple[str, dict, List[str]],
         message.attach_alternative(html_body, 'text/html')
 
         messages.append(message)
+
+    translation.activate(old_lang)
 
     connection.send_messages(messages)
 
