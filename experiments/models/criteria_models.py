@@ -75,7 +75,7 @@ class DefaultCriteria(models.Model):
         choices=DYSLEXIA,
         max_length=1,
         blank=False,
-        default='I',
+        default='N',
     )
 
     social_status = models.CharField(

@@ -8,9 +8,11 @@ from uil.core.views import RedirectActionView
 from uil.core.views.mixins import DeleteSuccessMessageMixin, \
     RedirectSuccessMessageMixin
 
+from participants.models import Participant
 from .mixins import ExperimentObjectMixin
 from ..forms import ExperimentForm
 from ..models import Appointment, Experiment
+from ..utils.exclusion import get_eligible_participants_for_experiment
 
 
 # --------------------------------------
@@ -160,6 +162,24 @@ class ExperimentAppointmentsView(braces.LoginRequiredMixin,
         return qs.annotate(n=count)
 
 
+class InviteParticipantsForExperimentView(braces.LoginRequiredMixin,
+                                          ExperimentObjectMixin,
+                                          generic.TemplateView):
+    template_name = 'experiments/invite.html'
+    model = Participant
+
+    def get_context_data(self, **kwargs):
+        context = super(InviteParticipantsForExperimentView,
+                        self).get_context_data(**kwargs)
+
+        context['object_list'] = get_eligible_participants_for_experiment(
+            self.experiment
+        )
+        context['experiment'] = self.experiment
+
+        return context
+
+
 # -------------------
 # Action views
 # -------------------
@@ -221,4 +241,3 @@ class ExperimentSwitchVisibleView(braces.LoginRequiredMixin,
             )
 
         self.experiment.save()
-

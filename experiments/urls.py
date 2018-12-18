@@ -8,8 +8,8 @@ from .views import (AddExistingCriteriumToExperimentView, CriteriaCreateView,
                     ExperimentExcludeOtherExperimentView, ExperimentHomeView,
                     ExperimentSwitchOpenView, ExperimentSwitchPublicView,
                     ExperimentSwitchVisibleView, ExperimentUpdateView,
-                    LocationCreateView, LocationHomeView,
-                    RemoveCriteriumFromExperiment,
+                    InviteParticipantsForExperimentView, LocationCreateView,
+                    LocationHomeView, RemoveCriteriumFromExperiment,
                     SilentUnsubscribeParticipantView, TimeSlotBulkDeleteView,
                     TimeSlotDeleteView, TimeSlotHomeView,
                     UnsubscribeParticipantView, UpdateLocationView, )
@@ -30,6 +30,12 @@ urlpatterns = [
         r'^(?P<experiment>\d+)/participants/$',
         ExperimentAppointmentsView.as_view(),
         name='participants',
+    ),
+
+    url(
+        r'^(?P<experiment>\d+)/invite/$',
+        InviteParticipantsForExperimentView.as_view(),
+        name='invite',
     ),
 
     # Excluded experiments views
