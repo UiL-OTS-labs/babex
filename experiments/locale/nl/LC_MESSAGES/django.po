@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-13 09:45+0000\n"
+"POT-Creation-Date: 2018-12-18 09:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,28 +22,28 @@ msgid "criteria:form:correct_value:error:not_a_value"
 msgstr "Deze waarde is niet opgegeven in 'Mogelijke waardes'!"
 
 #: experiments/forms/criteria_forms.py:67
-#: experiments/models/criteria_models.py:109
+#: experiments/models/criteria_models.py:121
 msgid "criterium:attribute:name_form"
 msgstr "Form naam"
 
 #: experiments/forms/criteria_forms.py:71
-#: experiments/models/criteria_models.py:113
+#: experiments/models/criteria_models.py:125
 msgid "criterium:attribute:name_natural"
 msgstr "Weergave naam"
 
 #: experiments/forms/criteria_forms.py:75
-#: experiments/models/criteria_models.py:117
+#: experiments/models/criteria_models.py:129
 msgid "criterium:attribute:values"
 msgstr "Mogelijke waardes"
 
 #: experiments/forms/criteria_forms.py:79
-#: experiments/models/criteria_models.py:151
+#: experiments/models/criteria_models.py:163
 #: experiments/templates/criteria/specific_list.html:125
 msgid "experiment_criterium:attribute:correct_value"
 msgstr "Correcte waarde"
 
 #: experiments/forms/criteria_forms.py:83
-#: experiments/models/criteria_models.py:155
+#: experiments/models/criteria_models.py:167
 #: experiments/templates/criteria/specific_list.html:143
 msgid "experiment_criterium:attribute:message_failed"
 msgstr "Melding indien incorrect"
@@ -60,6 +60,8 @@ msgstr "Meerdere"
 #: experiments/models/criteria_models.py:18
 #: experiments/models/criteria_models.py:24
 #: experiments/models/criteria_models.py:36
+#: experiments/models/criteria_models.py:105
+#: experiments/models/criteria_models.py:111
 #: experiments/templates/widgets/language_widget.html:20
 msgid "experiments:globals:indifferent"
 msgstr "Maakt niet uit"
@@ -311,7 +313,7 @@ msgstr "Aantal gelinkte experimenten"
 
 #: experiments/templates/criteria/index.html:44
 #: experiments/templates/criteria/specific_list.html:44
-#: experiments/templates/experiments/participants.html:45
+#: experiments/templates/experiments/participants.html:64
 #: experiments/templates/locations/index.html:39
 #: experiments/templates/timeslots/index.html:70
 msgid "experiments:globals:actions"
@@ -374,53 +376,37 @@ msgstr "Standaard criteria voor {}"
 msgid "criteria:new_default_criteria:info_text"
 msgstr " "
 
-#: experiments/templates/experiments/criteria_snippit.html:7
-#, fuzzy
-#| msgid "default_criteria:attribute:dyslexia"
+#: experiments/templates/experiments/criteria_snippit.html:9
 msgid "criteria_snippit:dyslexia"
-msgstr "Moet de participant dyslectisch zijn?"
+msgstr "Dyslectisch:"
 
-#: experiments/templates/experiments/criteria_snippit.html:15
-#, fuzzy
-#| msgid "default_criteria:attribute:language"
+#: experiments/templates/experiments/criteria_snippit.html:17
 msgid "criteria_snippit:language"
-msgstr "Wat moet de moedertaal van de participant zijn?"
+msgstr "Taal:"
 
-#: experiments/templates/experiments/criteria_snippit.html:23
-#, fuzzy
-#| msgid "default_criteria:attribute:multilingual"
+#: experiments/templates/experiments/criteria_snippit.html:25
 msgid "criteria_snippit:multilingual"
-msgstr "Moet de participant een of meerdere talen spreken?"
+msgstr "Meertalig:"
 
-#: experiments/templates/experiments/criteria_snippit.html:31
-#, fuzzy
-#| msgid "default_criteria:attribute:handedness"
+#: experiments/templates/experiments/criteria_snippit.html:33
 msgid "criteria_snippit:handedness"
-msgstr "Moet de participant links- of rechtshandig zijn?"
+msgstr "Links/rechts handig:"
 
-#: experiments/templates/experiments/criteria_snippit.html:39
-#, fuzzy
-#| msgid "criteria:new:info_text"
+#: experiments/templates/experiments/criteria_snippit.html:41
 msgid "criteria_snippit:sex"
-msgstr "<br/>"
+msgstr "Geslacht:"
 
-#: experiments/templates/experiments/criteria_snippit.html:47
-#, fuzzy
-#| msgid "default_criteria:attribute:social_status"
+#: experiments/templates/experiments/criteria_snippit.html:49
 msgid "criteria_snippit:social_status"
-msgstr "Wat moet de sociale status van de participant zijn?"
+msgstr "Sociale rol:"
 
-#: experiments/templates/experiments/criteria_snippit.html:55
-#, fuzzy
-#| msgid "criteria:edit:info_text"
+#: experiments/templates/experiments/criteria_snippit.html:57
 msgid "criteria_snippit:min_age"
-msgstr "<br/>"
+msgstr "Min. leeftijd:"
 
-#: experiments/templates/experiments/criteria_snippit.html:63
-#, fuzzy
-#| msgid "default_criteria:attribute:max_age"
+#: experiments/templates/experiments/criteria_snippit.html:65
 msgid "criteria_snippit:max_age"
-msgstr "Wat moet de bovengrens van de participant's leeftijd zijn?"
+msgstr "Max. leeftijd:"
 
 #: experiments/templates/experiments/delete.html:8
 #: experiments/templates/experiments/delete.html:16
@@ -549,80 +535,97 @@ msgstr ""
 msgid "experiments:globals:next_button"
 msgstr "Volgende >>"
 
-#: experiments/templates/experiments/participants.html:8
-#: experiments/templates/experiments/participants.html:16
-#, fuzzy
-#| msgid "experiments:home:participants:title"
+#: experiments/templates/experiments/participants.html:9
+#: experiments/templates/experiments/participants.html:28
 msgid "experiments:participants:header"
-msgstr "Participanten"
+msgstr "Participanten - Experiment '{}'"
 
-#: experiments/templates/experiments/participants.html:19
-#, fuzzy
-#| msgid "experiments:home:participants:title"
+#: experiments/templates/experiments/participants.html:16
+#: experiments/templates/timeslots/index.html:25
+msgid "timeslot:warning:confirm_silent_remove_participant"
+msgstr ""
+"Weet u zeker dat u deze participant wilt verwijderen uit dit timeslot? "
+"WAARSCHUWING! Deze actie verstuurd GEEN automatische bevestigingsmail! (Je "
+"kan de knop naast deze gebruiken als je wel een automatische mail wilt laten "
+"sturen)."
+
+#: experiments/templates/experiments/participants.html:17
+#: experiments/templates/timeslots/index.html:26
+msgid "timeslot:warning:confirm_remove_participant"
+msgstr ""
+"Weet u zeker dat u deze participant wilt verwijderen uit dit timeslot? (Er "
+"zal een bevestigingsmail naar de participant worden gestuurd, maar stuur "
+"toch nog een persoonlijke mail als je dit nog niet hebt gedaan."
+
+#: experiments/templates/experiments/participants.html:38
 msgid "experiments:participants:info_text"
-msgstr "Participanten"
+msgstr " "
 
-#: experiments/templates/experiments/participants.html:30
+#: experiments/templates/experiments/participants.html:52
 #: experiments/templates/timeslots/index.html:52
 msgid "timeslots:day"
 msgstr "Dag"
 
-#: experiments/templates/experiments/participants.html:36
-#, fuzzy
-#| msgid "experiments:home:participants:title"
+#: experiments/templates/experiments/participants.html:55
 msgid "experiments:participants:place"
-msgstr "Participanten"
+msgstr "WP"
 
-#: experiments/templates/experiments/participants.html:42
-#, fuzzy
-#| msgid "experiments:home:participants:title"
+#: experiments/templates/experiments/participants.html:61
 msgid "experiments:participants:reminder"
-msgstr "Participanten"
+msgstr "Herinner"
 
-#: experiments/templates/experiments/participants.html:48
-#, fuzzy
-#| msgid "experiments:home:participants:title"
+#: experiments/templates/experiments/participants.html:67
 msgid "experiments:participants:email"
-msgstr "Participanten"
+msgstr "Email"
 
-#: experiments/templates/experiments/participants.html:57
-#, fuzzy
-#| msgid "experiments:home:participants:title"
+#: experiments/templates/experiments/participants.html:70
+msgid "experiments:participants:phone_number"
+msgstr "Telefoon- nummer"
+
+#: experiments/templates/experiments/participants.html:73
+msgid "experiments:participants:birth_date"
+msgstr "Geboorte- datum"
+
+#: experiments/templates/experiments/participants.html:76
 msgid "experiments:participants:dyslexic"
-msgstr "Participanten"
+msgstr "Dysl. (J/N)"
 
-#: experiments/templates/experiments/participants.html:60
-#, fuzzy
-#| msgid "experiments:home:participants:title"
+#: experiments/templates/experiments/participants.html:79
 msgid "experiments:participants:language"
-msgstr "Participanten"
+msgstr "Taal"
 
-#: experiments/templates/experiments/participants.html:63
-#, fuzzy
-#| msgid "experiments:home:participants:title"
+#: experiments/templates/experiments/participants.html:82
 msgid "experiments:participants:multilingual"
-msgstr "Participanten"
+msgstr "Meerdere talen"
 
-#: experiments/templates/experiments/participants.html:66
-#, fuzzy
-#| msgid "experiments:home:participants:title"
+#: experiments/templates/experiments/participants.html:85
 msgid "experiments:participants:handedness"
-msgstr "Participanten"
+msgstr "Links-/ Rechts handig"
 
-#: experiments/templates/experiments/participants.html:69
-#, fuzzy
-#| msgid "experiments:home:participants:title"
+#: experiments/templates/experiments/participants.html:88
 msgid "experiments:participants:sex"
-msgstr "Participanten"
+msgstr "Geslacht"
 
-#: experiments/templates/experiments/participants.html:113
-#: experiments/templates/experiments/participants.html:131
+#: experiments/templates/experiments/participants.html:121
+#: experiments/templates/timeslots/index.html:123
+msgid "timeslots:remove_participant:title"
+msgstr "Verwijder participant uit dit timeslot."
+
+#: experiments/templates/experiments/participants.html:128
+#: experiments/templates/timeslots/index.html:130
+msgid "timeslots:silent_remove_participant:title"
+msgstr ""
+"Verwijder participant uit dit timeslot (zonder automatische bevestigings-"
+"mail)."
+
+#: experiments/templates/experiments/participants.html:151
+#: experiments/templates/experiments/participants.html:169
 msgid "yes,no"
-msgstr ""
+msgstr "ja,nee"
 
-#: experiments/templates/experiments/participants.html:119
+#: experiments/templates/experiments/participants.html:157
 msgid "many,one"
-msgstr ""
+msgstr "meerdere,een"
 
 #: experiments/templates/locations/edit.html:8
 #: experiments/templates/locations/edit.html:15
@@ -700,21 +703,6 @@ msgstr ""
 "een mail naar de participant(en) gestuurd, maar stuur toch nog een "
 "persoonlijke mail als je dit nog niet hebt gedaan."
 
-#: experiments/templates/timeslots/index.html:25
-msgid "timeslot:warning:confirm_silent_remove_participant"
-msgstr ""
-"Weet u zeker dat u deze participant wilt verwijderen uit dit timeslot? "
-"WAARSCHUWING! Deze actie verstuurd GEEN automatische bevestigingsmail! (Je "
-"kan de knop naast deze gebruiken als je wel een automatische mail wilt laten "
-"sturen)."
-
-#: experiments/templates/timeslots/index.html:26
-msgid "timeslot:warning:confirm_remove_participant"
-msgstr ""
-"Weet u zeker dat u deze participant wilt verwijderen uit dit timeslot? (Er "
-"zal een bevestigingsmail naar de participant worden gestuurd, maar stuur "
-"toch nog een persoonlijke mail als je dit nog niet hebt gedaan."
-
 #: experiments/templates/timeslots/index.html:41
 msgid "timeslots:home:info_text"
 msgstr ""
@@ -745,104 +733,91 @@ msgstr "Participant"
 msgid "timeslots:participant:email"
 msgstr "Participant email"
 
-#: experiments/templates/timeslots/index.html:123
-msgid "timeslots:remove_participant:title"
-msgstr "Verwijder participant uit dit timeslot."
-
-#: experiments/templates/timeslots/index.html:130
-msgid "timeslots:silent_remove_participant:title"
-msgstr ""
-"Verwijder participant uit dit timeslot (zonder automatische bevestigings-"
-"mail)."
-
 #: experiments/templates/timeslots/index.html:165
 msgid "timeslots:home:new_timeslots:header"
 msgstr "Nieuw timeslot"
 
-#: experiments/views/criteria_views.py:34
+#: experiments/views/criteria_views.py:40
 msgid "criteria:messages:created"
 msgstr "Criterium aangemaakt"
 
-#: experiments/views/criteria_views.py:42
+#: experiments/views/criteria_views.py:48
 msgid "criteria:messages:updated"
 msgstr "Criterium aangepast"
 
-#: experiments/views/criteria_views.py:48
+#: experiments/views/criteria_views.py:54
 msgid "criteria:messages:deleted"
 msgstr "Criterium verwijderd!"
 
-#: experiments/views/criteria_views.py:90
+#: experiments/views/criteria_views.py:96
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr ""
 
-#: experiments/views/criteria_views.py:114
+#: experiments/views/criteria_views.py:120
 msgid "criteria:messages:created_and_added"
 msgstr "Criterium aangemaakt en aan experiment toegevoegd!"
 
-#: experiments/views/criteria_views.py:170
+#: experiments/views/criteria_views.py:176
 msgid "criteria:messages:added_to_experiment"
 msgstr "Criterium toegevoegd aan experiment!"
 
-#: experiments/views/criteria_views.py:193
+#: experiments/views/criteria_views.py:199
 msgid "criteria:messages:removed_from_experiment"
 msgstr "Criterium verwijderd uit experiment!"
 
-#: experiments/views/experiment_views.py:29
+#: experiments/views/experiment_views.py:42
 msgid "experiments:message:create:success"
 msgstr "Nieuw experiment succesvol aangemaakt"
 
-#: experiments/views/experiment_views.py:40
+#: experiments/views/experiment_views.py:53
 msgid "experiments:message:update:success"
 msgstr "Experiment aangepast"
 
-#: experiments/views/experiment_views.py:49
+#: experiments/views/experiment_views.py:62
 msgid "experiments:message:deleted_experiment"
 msgstr "Experiment verwijderd!"
 
-#: experiments/views/experiment_views.py:89
+#: experiments/views/experiment_views.py:102
 msgid "experiments:message:exclude:included"
 msgstr "Experiment succesvol opgenomen"
 
-#: experiments/views/experiment_views.py:92
+#: experiments/views/experiment_views.py:105
 msgid "experiments:message:exclude:excluded"
 msgstr "Experiment succesvol uitgesloten"
 
-#: experiments/views/experiment_views.py:135
+#: experiments/views/experiment_views.py:178
 msgid "experiments:message:switch_open:closed"
 msgstr "Experiment openbaar gemaakt"
 
-#: experiments/views/experiment_views.py:138
+#: experiments/views/experiment_views.py:181
 msgid "experiments:message:switch_open:opened"
 msgstr "Experiment verborgen"
 
-#: experiments/views/experiment_views.py:153
+#: experiments/views/experiment_views.py:196
 msgid "experiments:message:switch_public:closed"
 msgstr "Experiment ge-opent"
 
-#: experiments/views/experiment_views.py:156
+#: experiments/views/experiment_views.py:199
 msgid "experiments:message:switch_public:opened"
 msgstr "Experiment gesloten"
 
-#: experiments/views/experiment_views.py:172
+#: experiments/views/experiment_views.py:215
 msgid "experiments:message:switch_visible:invisible"
 msgstr "Participant informatie verborgen voor proefleiders"
 
-#: experiments/views/experiment_views.py:177
+#: experiments/views/experiment_views.py:220
 msgid "experiments:message:switch_visible:visible"
 msgstr "Participant informatie zichtbaar gemaakt voor proefleiders"
 
-#: experiments/views/timeslot_views.py:75
+#: experiments/views/timeslot_views.py:83
 msgid "timeslots:message:deleted_timeslot"
 msgstr "Timeslot verwijderd!"
 
-#: experiments/views/timeslot_views.py:89
+#: experiments/views/timeslot_views.py:97
 msgid "timeslots:message:deleted_timeslots"
 msgstr "Timeslots verwijderd!"
 
-#: experiments/views/timeslot_views.py:104
+#: experiments/views/timeslot_views.py:112
 msgid "timeslots:message:unsubscribed_participant"
 msgstr "Participant verwijderd uit timeslot!"
-
-#~ msgid "time_slot:attribute:participants"
-#~ msgstr "Participanten"
