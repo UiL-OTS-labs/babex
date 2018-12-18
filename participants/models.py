@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -9,8 +11,8 @@ from experiments.models.criteria_models import Criterium
 class Participant(models.Model):
 
     HANDEDNESS = (
-        ('left', _('participant:attribute:handedness:lefthanded')),
-        ('right', _('participant:attribute:handedness:righthanded')),
+        ('L', _('participant:attribute:handedness:lefthanded')),
+        ('R', _('participant:attribute:handedness:righthanded')),
     )
 
     # Yes, this is controversial. I'm sorry!
@@ -20,8 +22,8 @@ class Participant(models.Model):
     )
 
     SOCIAL_STATUS = (
-        ('student', _('participant:attribute:social_role:student')),
-        ('other', _('participant:attribute:social_role:other')),
+        ('S', _('participant:attribute:social_role:student')),
+        ('O', _('participant:attribute:social_role:other')),
     )
 
     email = e_fields.EncryptedEmailField(
@@ -114,6 +116,16 @@ class Participant(models.Model):
 
         return 'proefpersoon'
 
+    @property
+    def age(self):
+        if self.birth_date:
+            today = date.today()
+
+            return today.year - self.birth_date.year - (
+                        (today.month, today.day) < (self.birth_date.month, self.birth_date.day))
+
+        return -1
+
     def __str__(self):
         name = self.fullname
 
@@ -129,6 +141,12 @@ class SecondaryEmail(models.Model):
     )
 
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.email
+
+    def __repr__(self):
+        return "<SecondaryEmail ({})>".format(self.email)
 
 
 class CriteriumAnswer(models.Model):
