@@ -1,0 +1,30 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+
+{% block header_title %}
+    {% trans 'leaders:delete:header' %} - {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <h1>
+            {% trans 'leaders:delete:header' %}
+        </h1>
+        <form method="post">{% csrf_token %}
+            <p>{% transformat 'leaders:delete:text' object.name %}</p>
+            <div class="button" style="display: inline-block">
+                <a href="{% url 'leaders:home' %}" >
+                    {% trans 'leaders:delete:cancel' %}
+                </a>
+            </div>
+            <input type="submit" value="{% trans 'leaders:delete:confirm' %}">
+        </form>
+        <br/>
+    </div>
+</div>
+{% endblock %}

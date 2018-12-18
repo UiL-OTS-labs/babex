@@ -1,12 +1,15 @@
 import braces.views as braces
+from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views import generic
 
 from .forms import LeaderCreateForm, LeaderUpdateForm
 from .models import Leader
-from .utils import create_leader, notify_new_leader, update_leader
+from .utils import create_leader, delete_leader, notify_new_leader, \
+    update_leader
 
 
 class LeaderHomeView(braces.LoginRequiredMixin, generic.ListView):
@@ -78,5 +81,16 @@ class LeaderUpdateView(braces.LoginRequiredMixin, SuccessMessageMixin,
 
         return super(LeaderUpdateView, self).form_valid(form)
 
-# TODO: find out if we need a deleteview, and if that deleteview should actually
-#       delete or just deactivate
+
+class LeaderDeleteView(braces.LoginRequiredMixin, generic.DetailView):
+    template_name = 'leaders/delete.html'
+    model = Leader
+
+    def post(self, request, *args, **kwargs):
+        object = self.get_object()
+
+        delete_leader(object)
+
+        messages.success(request, _('leaders:messages:deleted'))
+
+        return HttpResponseRedirect(reverse('leaders:home'))

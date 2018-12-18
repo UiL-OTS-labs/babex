@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-06 09:13+0000\n"
+"POT-Creation-Date: 2018-12-18 08:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,6 +85,27 @@ msgstr "This field cannot be empty when 'Keep current password' is unchecked!"
 msgid "leader:inactive"
 msgstr "{} (inactive)"
 
+#: leaders/templates/leaders/delete.html:8
+#: leaders/templates/leaders/delete.html:16
+msgid "leaders:delete:header"
+msgstr "Deleting leader"
+
+#: leaders/templates/leaders/delete.html:19
+msgid "leaders:delete:text"
+msgstr ""
+"Are you sure you want to delete {} as leader? Any experiment where he/she is "
+"the main leader will probably experience unexpected or undefined behaviour. "
+"You might want to disable his/her leader profile instead, which will appear "
+"to the leader as if their account has been deleted."
+
+#: leaders/templates/leaders/delete.html:22
+msgid "leaders:delete:cancel"
+msgstr "Cancel"
+
+#: leaders/templates/leaders/delete.html:25
+msgid "leaders:delete:confirm"
+msgstr "Delete"
+
 #: leaders/templates/leaders/index.html:7
 #: leaders/templates/leaders/index.html:20
 msgid "leaders:home:header"
@@ -97,6 +118,10 @@ msgstr "New leader"
 #: leaders/templates/leaders/index.html:23
 msgid "leaders:home:info_text"
 msgstr "<br/>"
+
+#: leaders/templates/leaders/index.html:74
+msgid "leaders:home:delete:title"
+msgstr "Delete leader"
 
 #: leaders/templates/leaders/new.html:8 leaders/templates/leaders/new.html:15
 msgid "leaders:new:header"
@@ -120,10 +145,14 @@ msgstr "Update leader '{}'"
 msgid "leaders:update:info_text"
 msgstr "<br/>"
 
-#: leaders/views.py:22
+#: leaders/views.py:24
 msgid "leaders:create:success_message"
 msgstr "Leader successfully created!"
 
-#: leaders/views.py:49
+#: leaders/views.py:51
 msgid "leaders:update:success_message"
 msgstr "Leader successfully updated!"
+
+#: leaders/views.py:93
+msgid "leaders:messages:deleted"
+msgstr "Leader deleted!"

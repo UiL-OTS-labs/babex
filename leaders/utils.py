@@ -95,3 +95,23 @@ def update_leader(leader: Leader, name: str, email: str, phonenumber: str,
     api_user.save()
 
     return leader
+
+
+def delete_leader(leader: Leader) -> None:
+    _leader_group = ApiGroup.objects.get(name=settings.LEADER_GROUP)
+    _participant_group = ApiGroup.objects.get(name=settings.PARTICIPANT_GROUP)
+
+    api_user = leader.api_user
+
+    all_groups = api_user.groups.all()
+
+    if _leader_group in all_groups:
+        if len(all_groups) == 1:
+            api_user.delete()
+        else:
+            api_user.groups.remove(_leader_group)
+            api_user.is_active = _participant_group in all_groups
+
+            api_user.save()
+
+    leader.delete()

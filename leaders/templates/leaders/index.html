@@ -68,6 +68,13 @@
                             <a href="{% url 'leaders:update' leader.pk %}" class="icon-update">
                                 
                             </a>
+                            <a
+                                href="{% url 'leaders:delete' leader.pk %}"
+                                class="icon-delete"
+                                title="{% trans 'leaders:home:delete:title' %}"
+                            >
+                                
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}
