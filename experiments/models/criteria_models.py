@@ -100,6 +100,12 @@ class DefaultCriteria(models.Model):
         help_text=_('default_criteria:attribute:max_age:help_text'),
     )
 
+    def get_language_display(self):
+        if self.language == 'I':
+            return _('experiments:globals:indifferent')
+
+        return self.language
+
     def get_min_age_display(self):
         if self.min_age == -1:
             return _('experiments:globals:indifferent')
