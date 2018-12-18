@@ -107,6 +107,13 @@ class Participant(models.Model):
 
         return _('participant:name:unknown')
 
+    @property
+    def mail_name(self):
+        if self.name:
+            return self.name
+
+        return 'proefpersoon'
+
     def __str__(self):
         name = self.fullname
 

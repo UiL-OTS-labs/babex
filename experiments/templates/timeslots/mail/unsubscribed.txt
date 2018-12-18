@@ -1,4 +1,4 @@
-Beste {{ participant.name }},
+Beste {{ participant.mail_name }},
 
 Je bent door de beheerder uitgeschreven voor experiment: {{ experiment.name }}
 
