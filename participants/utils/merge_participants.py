@@ -18,14 +18,19 @@ def merge_participants(old: Participant, new: Participant) -> Participant:
     secondary_email.participant = old
     secondary_email.save()
 
+    # Get all existing emails from the old set
+    # We cannot compare emails in the database, as the database contains
+    # encrypted values only
+    existing_emails = [x.email for x in old.secondaryemail_set.all()]
+
     # Merge new secondary emails into old, if they are not yet there
     for secondary_email in new.secondaryemail_set.all():
         # If the new email is not yet known in the old object
-        if not old.secondaryemail_set.filter(email=secondary_email.email):
+        if secondary_email.email in existing_emails:
+            secondary_email.delete()
+        else:
             secondary_email.participant = old
             secondary_email.save()
-        else:
-            secondary_email.delete()
 
     # Move all appointments to the old model.
     # In theory this can result in doubles in an experiment, but we're assuming
