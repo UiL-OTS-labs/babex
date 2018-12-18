@@ -13,6 +13,10 @@ class Leader(models.Model):
 
     api_user = models.OneToOneField(ApiUser, on_delete=models.CASCADE)
 
+    @property
+    def email(self):
+        return self.api_user.email
+
     def is_active_leader(self) -> bool:
         if self.api_user.groups.filter(name=settings.LEADER_GROUP):
             return self.api_user.is_active
