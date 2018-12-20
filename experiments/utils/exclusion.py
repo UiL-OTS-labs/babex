@@ -1,7 +1,24 @@
+"""
+Note: the functions in this module are heavily optimised to minimize
+processing and database accesses. This does mean that the code is not as
+straightforward as you'd expect.
+
+Also, because we use application-level database encryption, we cannot compare
+inside the database. This is why everything is done in python.
+"""
 from typing import List
 
-from participants.models import Participant
-from experiments.models import Experiment
+from participants.models import Participant, CriteriumAnswer
+from experiments.models import Experiment, ExperimentCriterium
+
+# List of vars that can have the same values as the participant model
+# variables, with an indifferent option
+indifferentable_vars = [
+    'language',
+    'sex',
+    'handedness',
+    'social_status',
+]
 
 
 def get_eligible_participants_for_experiment(experiment: Experiment,
@@ -11,6 +28,13 @@ def get_eligible_participants_for_experiment(experiment: Experiment,
     This function produces a list of participants that can take part in
     the provided experiment.
     """
+    default_criteria = experiment.defaultcriteria
+    specific_experiment_criteria = \
+        experiment.experimentcriterium_set.select_related(
+            'criterium'
+        )
+    specific_criteria = [x.criterium for x in specific_experiment_criteria]
+
     # Base filters: a participant should be capable, and by default be on the
     # mailing list
     filters = {
@@ -18,18 +42,62 @@ def get_eligible_participants_for_experiment(experiment: Experiment,
         'capable':            True,
     }
 
-    default_criteria = experiment.defaultcriteria
-    specific_criteria = experiment.experimentcriterium_set.all()
+    # Build the rest of the filters
+    filters = _build_filters(filters, default_criteria)
 
-    # List of vars that can have the same values as the participant model
-    # variables, with an indifferent option
-    indifferentable_vars = [
-        'language',
-        'sex',
-        'handedness',
-        'social_status',
-    ]
+    # Exclude all participants with an appointment for an experiment that was
+    # marked as an exclusion criteria
+    excludes = {
+        'appointments__timeslot__experiment__in':
+                                                     experiment.excluded_experiments.all(),
+        'appointments__timeslot__experiment__exact': experiment
+    }
+    participants = Participant.objects.exclude(**excludes)
+    participants = participants.prefetch_related('secondaryemail_set', )
 
+    # Get all criterium answers for the criteria in this experiment and the
+    # participants we're going to filter
+    criteria_answers = CriteriumAnswer.objects.select_related(
+        'criterium',
+        'participant',
+    )
+    criteria_answers = criteria_answers.filter(
+        criterium__in=specific_criteria,
+        participant__in=participants
+    )
+
+    # Turn our QuerySet into a list, so we can modify it
+    criteria_answers = list(criteria_answers)
+
+    # List of all allowed participants
+    filtered = []
+
+    for participant in participants:
+
+        if _should_exclude_by_filters(participant, filters):
+            continue
+
+        if _should_exclude_by_age(participant, default_criteria):
+            continue
+
+        if _should_exclude_by_specific_criteria(participant,
+                                                specific_experiment_criteria,
+                                                criteria_answers):
+            continue
+
+        filtered.append(participant)
+
+    return filtered
+
+
+def _build_filters(filters: dict, default_criteria) -> dict:
+    """
+    This function expands a given filter dict with filters as specified in
+    the given default_criteria
+    :param filters:
+    :param default_criteria:
+    :return:
+    """
     for var in indifferentable_vars:
         if getattr(default_criteria, var) != 'I':
             filters[var] = getattr(default_criteria, var)
@@ -42,57 +110,95 @@ def get_eligible_participants_for_experiment(experiment: Experiment,
         expected_value = default_criteria.multilingual == 'Y'
         filters['multilingual'] = expected_value
 
+    return filters
+
+
+def _should_exclude_by_filters(participant: Participant, filters: dict) -> bool:
+    """
+    Determines if a participant should be excluded based upon a given filter
+    dict
+    :param participant:
+    :param filters:
+    :return:
+    """
+    # Loop over the defined filters
+    for attr, expected_value in filters.items():
+        # If we the actual value is not the same as the expected,
+        # mark this participant as 'to exclude'
+        if getattr(participant, attr) != expected_value:
+            return True
+
+    return False
+
+
+def _should_exclude_by_specific_criteria(participant: Participant,
+                                         specific_experiment_criteria,
+                                         criteria_answers: list) -> bool:
+    """
+    Determines if a participant should be excluded based upon their
+    :param participant:
+    :param specific_experiment_criteria:
+    :param criteria_answers:
+    :return:
+    """
+
+    # Loop over all criteria answers
+    for i in range(len(criteria_answers)):
+        specific_criterium_answer = criteria_answers[i]
+
+        # Check if this answer is by the current participant
+        # We do this in python to minimize db queries (it's way faster)
+        if not specific_criterium_answer.participant == participant:
+            continue
+
+        # Get the experiment criterium
+        specific_criterium = _get_specific_criterium(
+            specific_experiment_criteria,
+            specific_criterium_answer.criterium
+        )
+
+        # Remove this answer from our list, in order to shorten this loop in
+        # the next call by removing answers we've already evaluated
+        del criteria_answers[i]
+
+        if specific_criterium and not specific_criterium_answer.answer == \
+                                      specific_criterium.correct_value:
+            return True
+
+    return False
+
+
+def _get_specific_criterium(specific_experiment_criteria, criterium) -> \
+        ExperimentCriterium:
+    """
+    Gets the experimentCriterium object for a criterium object
+    :param specific_experiment_criteria:
+    :param criterium:
+    :return:
+    """
+    for x in specific_experiment_criteria:
+        if x.criterium == criterium:
+            return x
+
+
+def _should_exclude_by_age(participant: Participant, default_criteria) -> bool:
+    """
+    Determines if a participant should be excluded based upon their age
+
+    :param participant:
+    :param default_criteria:
+    :return:
+    """
+    if participant.age < default_criteria.min_age:
+        return True
+
     # We could do this with a different if statement in the loop, but this
     # makes the loop look cleaner
     max_age = default_criteria.max_age
     if max_age == -1:
         max_age = 9000  # we assume no-one is older than 9000 years old....
 
-    # List of all allowed participants
-    filtered = []
+    if participant.age > max_age:
+        return True
 
-    # Exclude all participants with an appointment for an experiment that was
-    # marked as an exclusion criteria
-    excludes = {
-        'appointments__timeslot__experiment__in':
-            experiment.excluded_experiments.all()
-    }
-    participants = Participant.objects.exclude(**excludes)
-    participants = participants.prefetch_related('secondaryemail_set',)
-
-    if experiment.experimentcriterium_set.exists():
-        participants = participants.prefetch_related('criteriumanswer_set')
-
-    for participant in participants:
-        should_include = True
-
-        # Loop over the defined filters
-        for attr, expected_value in filters.items():
-            # If we the actual value is not the same as the expected,
-            # mark this participant as 'to exclude'
-            if getattr(participant, attr) != expected_value:
-                should_include = False
-                continue
-
-        # Loop over the specific criteria for this experiment
-        for specific_criterium in specific_criteria:
-            # See if we have an answer for this participant
-            answer = specific_criterium.criterium.criteriumanswer_set.filter(
-                participant=participant
-            )
-            if answer:
-                # If so, check that answer
-                if specific_criterium.correct_value != answer[0].answer:
-                    should_include = False
-                    continue
-
-        if participant.age < default_criteria.min_age:
-            continue
-
-        if participant.age > max_age:
-            continue
-
-        if should_include:
-            filtered.append(participant)
-
-    return filtered
+    return False
