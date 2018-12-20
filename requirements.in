@@ -9,4 +9,5 @@ bpython
 djangorestframework
 django-debug-toolbar
 cryptography
+python-dateutil
 -e git+git@github.com:UiL-OTS-labs/django-shared-core.git@master#egg=uil-django-core

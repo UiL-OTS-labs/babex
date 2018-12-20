@@ -24,11 +24,12 @@ greenlet==0.4.15          # via bpython
 idna==2.8                 # via cryptography, requests
 pip-tools==3.1.0
 pycparser==2.19           # via cffi
-pygments==2.3.0           # via bpython
+pygments==2.3.1           # via bpython
 pyjwt==1.7.1
+python-dateutil==2.7.5
 pytz==2018.7              # via django
 requests==2.21.0          # via bpython
-six==1.12.0               # via blessings, bpython, cryptography, pip-tools
+six==1.12.0               # via blessings, bpython, cryptography, pip-tools, python-dateutil
 sqlparse==0.2.4           # via django-debug-toolbar
 typing==3.6.6             # via curtsies
 urllib3==1.24.1           # via requests
