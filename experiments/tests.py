@@ -26,7 +26,7 @@ class ExclusionTests(TestCase):
         # We have less dyslexics to simulate real life (and the first two tests
         # are equal otherwise)
         self.dyslexic_options = [True, False, False]
-        self.age_options = [dt_18, dt_20, dt_30]
+        self.age_options = [self.dt_18, self.dt_20, self.dt_30]
         self.multilingual_options = [True, False]
         self.handedness_options = ['L', 'R']
         self.language_options = ['nl', 'Elvish']
@@ -121,35 +121,28 @@ class ExclusionTests(TestCase):
 
         part = get_eligible_participants_for_experiment(self.experiment)
 
-        num_options = len(self.handedness_options) * \
-                      len(self.multilingual_options) * 2 * \
-                      len(self.language_options) * len(self.sex_options) * \
-                      len(self.social_status_options) * 2
-
-        self.assertEqual(num_options, len(part))
+        self._remove_options('age', self.dt_18)
+        self._remove_options('dyslexic', True)
+        self.assertEqual(self.num_options, len(part))
 
     def test_exclude_max_age(self):
         self.experiment.defaultcriteria.max_age = 25
+
         part = get_eligible_participants_for_experiment(self.experiment)
 
-        num_options = len(self.handedness_options) * \
-                      len(self.multilingual_options) * 2 * \
-                      len(self.language_options) * len(self.sex_options) * \
-                      len(self.social_status_options) * 2
-
-        self.assertEqual(num_options, len(part))
+        self._remove_options('age', self.dt_30)
+        self._remove_options('dyslexic', True)
+        self.assertEqual(self.num_options, len(part))
 
     def test_exclude_min_max_age(self):
         self.experiment.defaultcriteria.min_age = 19
         self.experiment.defaultcriteria.max_age = 25
+
         part = get_eligible_participants_for_experiment(self.experiment)
 
-        num_options = len(self.handedness_options) * \
-                      len(self.multilingual_options) * 1 * \
-                      len(self.language_options) * len(self.sex_options) * \
-                      len(self.social_status_options) * 2
-
-        self.assertEqual(num_options, len(part))
+        self._leave_options('age', self.dt_20)
+        self._remove_options('dyslexic', True)
+        self.assertEqual(self.num_options, len(part))
 
     def test_exclude_right_handed(self):
         self.experiment.defaultcriteria.handedness = 'L'
