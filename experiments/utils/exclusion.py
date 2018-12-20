@@ -58,6 +58,10 @@ def get_eligible_participants_for_experiment(experiment: Experiment,
             experiment.excluded_experiments.all()
     }
     participants = Participant.objects.exclude(**excludes)
+    participants = participants.prefetch_related('secondaryemail_set',)
+
+    if experiment.experimentcriterium_set.exists():
+        participants = participants.prefetch_related('criteriumanswer_set')
 
     for participant in participants:
         should_include = True
