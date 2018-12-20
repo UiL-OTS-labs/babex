@@ -8,8 +8,8 @@ inside the database. This is why everything is done in python.
 """
 from typing import List
 
-from participants.models import Participant, CriteriumAnswer
 from experiments.models import Experiment, ExperimentCriterium
+from participants.models import CriteriumAnswer, Participant
 
 # List of vars that can have the same values as the participant model
 # variables, with an indifferent option
@@ -47,12 +47,12 @@ def get_eligible_participants_for_experiment(experiment: Experiment,
 
     # Exclude all participants with an appointment for an experiment that was
     # marked as an exclusion criteria
-    excludes = {
-        'appointments__timeslot__experiment__in':
-                                                     experiment.excluded_experiments.all(),
-        'appointments__timeslot__experiment__exact': experiment
-    }
-    participants = Participant.objects.exclude(**excludes)
+    participants = Participant.objects.exclude(
+        appointments__timeslot__experiment__in=experiment
+            .excluded_experiments.all()
+    ).exclude(
+        appointments__timeslot__experiment=experiment
+    )
     participants = participants.prefetch_related('secondaryemail_set', )
 
     # Get all criterium answers for the criteria in this experiment and the
