@@ -143,9 +143,7 @@ def _should_exclude_by_specific_criteria(participant: Participant,
     """
 
     # Loop over all criteria answers
-    for i in range(len(criteria_answers)):
-        specific_criterium_answer = criteria_answers[i]
-
+    for specific_criterium_answer in criteria_answers.copy():
         # Check if this answer is by the current participant
         # We do this in python to minimize db queries (it's way faster)
         if not specific_criterium_answer.participant == participant:
@@ -159,7 +157,7 @@ def _should_exclude_by_specific_criteria(participant: Participant,
 
         # Remove this answer from our list, in order to shorten this loop in
         # the next call by removing answers we've already evaluated
-        del criteria_answers[i]
+        criteria_answers.remove(specific_criterium_answer)
 
         if specific_criterium and not specific_criterium_answer.answer == \
                                       specific_criterium.correct_value:
