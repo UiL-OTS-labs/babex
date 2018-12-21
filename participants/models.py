@@ -103,21 +103,21 @@ class Participant(models.Model):
     )
 
     @property
-    def fullname(self):
+    def fullname(self) -> str:
         if self.name:
             return self.name
 
         return _('participant:name:unknown')
 
     @property
-    def mail_name(self):
+    def mail_name(self) -> str:
         if self.name:
             return self.name
 
         return 'proefpersoon'
 
     @property
-    def age(self):
+    def age(self) -> int:
         if self.birth_date:
             today = date.today()
 
