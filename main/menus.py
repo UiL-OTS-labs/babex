@@ -8,27 +8,33 @@ Menu.add_item("home", MenuItem(_('mainmenu:home'),
                                ))
 
 Menu.add_item("main", MenuItem(_('mainmenu:experiments'),
-                               reverse('experiments:home')
+                               reverse('experiments:home'),
+                               check=lambda x: x.user.is_authenticated
                                ))
 
 Menu.add_item("main", MenuItem(_('mainmenu:locations'),
-                               reverse('experiments:location_home')
+                               reverse('experiments:location_home'),
+                               check=lambda x: x.user.is_authenticated
                                ))
 
 Menu.add_item("main", MenuItem(_('mainmenu:criteria'),
-                               reverse('experiments:criteria_home')
+                               reverse('experiments:criteria_home'),
+                               check=lambda x: x.user.is_authenticated
                                ))
 
 Menu.add_item("main", MenuItem(_('mainmenu:leaders'),
-                               reverse('leaders:home')
+                               reverse('leaders:home'),
+                               check=lambda x: x.user.is_authenticated
                                ))
 
 Menu.add_item("main", MenuItem(_('mainmenu:participants'),
-                               reverse('participants:home')
+                               reverse('participants:home'),
+                               check=lambda x: x.user.is_authenticated
                                ))
 
 Menu.add_item("main", MenuItem(_('mainmenu:comments'),
-                               reverse('comments:home')
+                               reverse('comments:home'),
+                               check=lambda x: x.user.is_authenticated
                                ))
 
 Menu.add_item("footer", MenuItem(_('footermenu:login'),
