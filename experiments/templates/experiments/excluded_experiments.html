@@ -49,11 +49,11 @@
                                 {{ experiment.name }}
                             </td>
                             <td>
-                                {{ experiment.leader }}
+                                {{ experiment.leader.name }}
                             </td>
                             <td>
                                 {% for leader in experiment.additional_leaders.all %}
-                                    {{ leader }}
+                                    {{ leader.name }}
                                 {% endfor %}
                             </td>
                             <td>
