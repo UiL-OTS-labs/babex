@@ -8,7 +8,10 @@ urlpatterns = [
 
     # Participant in experiment view
 
-    path('', include('experiments.urls.experiments_urls.participants')),
+    path(
+        '<int:experiment>/',
+        include('experiments.urls.experiments_urls.participants')
+    ),
 
     # Excluded experiments views
 
@@ -20,11 +23,17 @@ urlpatterns = [
 
     # Experiment related criteria views
 
-    path('', include('experiments.urls.criteria_urls.experiment')),
+    path(
+        '<int:experiment>/',
+        include('experiments.urls.criteria_urls.experiment')
+    ),
 
     # Experiment state switchers
 
-    path('', include('experiments.urls.experiments_urls.state_switchers')),
+    path(
+        '<int:pk>/',
+        include('experiments.urls.experiments_urls.state_switchers')
+    ),
 
     # Stand-alone location views
 

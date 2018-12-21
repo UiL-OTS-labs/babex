@@ -6,19 +6,19 @@ from experiments.views import (ExperimentAppointmentsView,
 
 urlpatterns = [
     path(
-        '<int:experiment>/participants/',
+        'participants/',
         ExperimentAppointmentsView.as_view(),
         name='participants',
     ),
 
     path(
-        '<int:experiment>/invite/',
+        'invite/',
         InviteParticipantsForExperimentView.as_view(),
         name='invite',
     ),
 
     path(
-        '<int:experiment>/invite/preview/',
+        'invite/preview/',
         MailPreviewView.as_view(),
         name='mail_preview',
     ),

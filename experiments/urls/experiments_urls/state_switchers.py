@@ -5,10 +5,10 @@ from experiments.views import (ExperimentSwitchOpenView,
                                ExperimentSwitchVisibleView, )
 
 urlpatterns = [
-    path('<int:pk>/switch_open/', ExperimentSwitchOpenView.as_view(),
+    path('switch_open/', ExperimentSwitchOpenView.as_view(),
          name='switch_open'),
-    path('<int:pk>/switch_visible/', ExperimentSwitchVisibleView.as_view(),
+    path('switch_visible/', ExperimentSwitchVisibleView.as_view(),
          name='switch_visible'),
-    path('<int:pk>/switch_public/', ExperimentSwitchPublicView.as_view(),
+    path('switch_public/', ExperimentSwitchPublicView.as_view(),
          name='switch_public'),
 ]
