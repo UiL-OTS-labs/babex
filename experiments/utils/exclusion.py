@@ -7,6 +7,7 @@ Also, because we use application-level database encryption, we cannot compare
 inside the database. This is why everything is done in python.
 """
 from typing import List
+from django.db.models.expressions import RawSQL
 
 from experiments.models import Experiment, ExperimentCriterium
 from participants.models import CriteriumAnswer, Participant
@@ -52,8 +53,15 @@ def get_eligible_participants_for_experiment(experiment: Experiment,
             .excluded_experiments.all()
     ).exclude(
         appointments__timeslot__experiment=experiment
+    ).prefetch_related(
+        'secondaryemail_set',
+    ).annotate(
+        # This is black magic (Read: workaround for a bug in Django 2.0)
+        has_invitation=RawSQL("SELECT COUNT(*) AS \"has_invitation\" FROM "
+                              "experiments_invitation WHERE experiment_id = "
+                              "%s AND participant_id = "
+                              "participants_participant.id", (experiment.pk,) )
     )
-    participants = participants.prefetch_related('secondaryemail_set', )
 
     # Get all criterium answers for the criteria in this experiment and the
     # participants we're going to filter
