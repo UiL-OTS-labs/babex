@@ -11,10 +11,27 @@ from .models import Leader
 from .utils import create_leader, delete_leader, notify_new_leader, \
     update_leader
 
+from django.db.models import Count, Q
+from django.conf import settings
+
 
 class LeaderHomeView(braces.LoginRequiredMixin, generic.ListView):
     template_name = 'leaders/index.html'
     model = Leader
+
+    def get_queryset(self):
+        return self.model.objects.select_related(
+            'api_user'
+        ).annotate(
+            # This will either be 0 or 1, thus a boolean. Annotating like
+            # this saves a lot of DB queries
+            active=Count(
+                'api_user__groups',
+                filter=Q(
+                    api_user__groups__name=settings.LEADER_GROUP
+                )
+            )
+        )
 
 
 class LeaderCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
