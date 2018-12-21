@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-07 14:05+0000\n"
+"POT-Creation-Date: 2018-12-21 08:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,37 +26,37 @@ msgstr "Home"
 msgid "mainmenu:experiments"
 msgstr "Experiments"
 
-#: main/menus.py:14
+#: main/menus.py:15
 msgid "mainmenu:locations"
 msgstr "Locations"
 
-#: main/menus.py:18
+#: main/menus.py:20
 msgid "mainmenu:criteria"
 msgstr "Criteria"
 
-#: main/menus.py:22
+#: main/menus.py:25
 msgid "mainmenu:leaders"
 msgstr "Leaders"
 
-#: main/menus.py:26
+#: main/menus.py:30
 msgid "mainmenu:participants"
 msgstr "Participants"
 
-#: main/menus.py:30
+#: main/menus.py:35
 msgid "mainmenu:comments"
 msgstr "Comments"
 
-#: main/menus.py:34
+#: main/menus.py:40
 msgid "footermenu:login"
 msgstr "Log in"
 
-#: main/menus.py:39
-msgid "footermenu:logout"
+#: main/menus.py:45 main/templates/base/login_header.html:7
+msgid "main:globals:logout"
 msgstr "Log out"
 
 #: main/templates/base/login_header.html:6
 msgid "site:header:login"
-msgstr "Welcome {}."
+msgstr "Welcome {}!"
 
 #. Translators: This is the title that will end up in the header (in blue)
 #: main/templates/base/site_header.html:4
@@ -92,7 +92,7 @@ msgstr "Log in"
 msgid "login:button:login"
 msgstr "Log in"
 
-#: main/views.py:34
+#: main/views.py:34 main/views.py:67
 #, python-format
 msgid "Empty list and '%(class_name)s.allow_empty' is False."
 msgstr ""

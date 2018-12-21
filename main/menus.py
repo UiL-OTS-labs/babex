@@ -42,7 +42,7 @@ Menu.add_item("footer", MenuItem(_('footermenu:login'),
                                  check=lambda x: not x.user.is_authenticated
                                  ))
 
-Menu.add_item("footer", MenuItem(_('footermenu:logout'),
+Menu.add_item("footer", MenuItem(_('main:globals:logout'),
                                  reverse('main:logout'),
                                  check=lambda x: x.user.is_authenticated
                                  ))
