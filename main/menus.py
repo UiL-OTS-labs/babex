@@ -37,6 +37,12 @@ Menu.add_item("main", MenuItem(_('mainmenu:comments'),
                                check=lambda x: x.user.is_authenticated
                                ))
 
+Menu.add_item("main", MenuItem(_('mainmenu:admins'),
+                               reverse('main:users_home'),
+                               check=lambda x: x.user.is_authenticated
+                               ))
+
+
 Menu.add_item("footer", MenuItem(_('footermenu:login'),
                                  reverse('main:login'),
                                  check=lambda x: not x.user.is_authenticated
