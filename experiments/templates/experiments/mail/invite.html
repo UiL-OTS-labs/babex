@@ -1,0 +1,22 @@
+{% extends 'mail/base.html' %}
+
+{% block subtitle %}
+    Uitnodiging deelname experiment: <strong>{{ experiment.name }}</strong>
+{% endblock %}
+
+{% block content %}
+    <p>
+        Beste {{ participant.mail_name|default:"proefpersoon" }},
+    </p>
+    <p>
+        {{ content }}
+    </p>
+{% endblock %}
+
+
+{% block footer %}
+    <p>
+        {# TODO: Link! #}
+        Je ontvangt deze e-mail omdat je je e-mailadres hebt opgegeven om informatie te ontvangen over nieuwe experimenten in het UiL OTS. Indien je deze e-mails niet meer wilt ontvangen klik dan hier.
+    </p>
+{% endblock %}

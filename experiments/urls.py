@@ -12,7 +12,8 @@ from .views import (AddExistingCriteriumToExperimentView, CriteriaCreateView,
                     LocationHomeView, RemoveCriteriumFromExperiment,
                     SilentUnsubscribeParticipantView, TimeSlotBulkDeleteView,
                     TimeSlotDeleteView, TimeSlotHomeView,
-                    UnsubscribeParticipantView, UpdateLocationView, )
+                    UnsubscribeParticipantView, UpdateLocationView,
+                    MailPreviewView)
 
 # TODO: make this a little bit more readable
 
@@ -36,6 +37,12 @@ urlpatterns = [
         r'^(?P<experiment>\d+)/invite/$',
         InviteParticipantsForExperimentView.as_view(),
         name='invite',
+    ),
+
+    url(
+        r'^(?P<experiment>\d+)/invite/preview/$',
+        MailPreviewView.as_view(),
+        name='mail_preview',
     ),
 
     # Excluded experiments views

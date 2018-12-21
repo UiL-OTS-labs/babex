@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-18 09:19+0000\n"
+"POT-Creation-Date: 2018-12-21 08:44+0000\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -24,28 +24,28 @@ msgid "criteria:form:correct_value:error:not_a_value"
 msgstr "This is not a value as specified in 'values'!"
 
 #: experiments/forms/criteria_forms.py:67
-#: experiments/models/criteria_models.py:121
+#: experiments/models/criteria_models.py:127
 msgid "criterium:attribute:name_form"
 msgstr "Form name"
 
 #: experiments/forms/criteria_forms.py:71
-#: experiments/models/criteria_models.py:125
+#: experiments/models/criteria_models.py:131
 msgid "criterium:attribute:name_natural"
 msgstr "Display name"
 
 #: experiments/forms/criteria_forms.py:75
-#: experiments/models/criteria_models.py:129
+#: experiments/models/criteria_models.py:135
 msgid "criterium:attribute:values"
 msgstr "Values (comma separated)"
 
 #: experiments/forms/criteria_forms.py:79
-#: experiments/models/criteria_models.py:163
+#: experiments/models/criteria_models.py:169
 #: experiments/templates/criteria/specific_list.html:125
 msgid "experiment_criterium:attribute:correct_value"
 msgstr "Correct value"
 
 #: experiments/forms/criteria_forms.py:83
-#: experiments/models/criteria_models.py:167
+#: experiments/models/criteria_models.py:173
 #: experiments/templates/criteria/specific_list.html:143
 msgid "experiment_criterium:attribute:message_failed"
 msgstr "Message when failed"
@@ -64,6 +64,7 @@ msgstr "Many"
 #: experiments/models/criteria_models.py:36
 #: experiments/models/criteria_models.py:105
 #: experiments/models/criteria_models.py:111
+#: experiments/models/criteria_models.py:117
 #: experiments/templates/widgets/language_widget.html:20
 msgid "experiments:globals:indifferent"
 msgstr "Indifferent"
@@ -521,6 +522,31 @@ msgstr "Participants"
 #: experiments/templates/experiments/index.html:156
 msgid "experiments:home:delete:title"
 msgstr "Delete experiment"
+
+#: experiments/templates/experiments/invite.html:13
+#: experiments/templates/experiments/invite.html:20
+msgid "experiments:invite:header"
+msgstr "Invite Participants - Experiment: {}"
+
+#: experiments/templates/experiments/invite.html:30
+msgid "experiments:invite:info_text"
+msgstr " "
+
+#: experiments/templates/experiments/invite.html:49
+msgid "experiments:invite:secondary_emails"
+msgstr "Secondary emails"
+
+#: experiments/templates/experiments/invite.html:52
+msgid "experiments:invite:already_invited"
+msgstr "Already invited once"
+
+#: experiments/templates/experiments/invite.html:119
+msgid "experiments:invite:preview_button"
+msgstr "Preview"
+
+#: experiments/templates/experiments/invite.html:122
+msgid "experiments:invite:invite_button"
+msgstr "Invite participants"
 
 #: experiments/templates/experiments/new.html:8
 #: experiments/templates/experiments/new.html:15
