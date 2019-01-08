@@ -43,190 +43,193 @@
 <br/>
 <div class="mt-2">
     <div class="col-12">
-        <table class="dt_custom" width="100%" data-language="{% datatables_lang %}" data-responsive="">
-            <thead>
-                <tr>
-                    <th>
-                        {% get_verbose_field_name "experiments" "TimeSlot" "datetime" %}
-                    </th>
-                    <th>
-                        {% trans 'timeslots:day' %}
-                    </th>
-                    <th>
-                        {% trans 'experiments:participants:place' %}
-                    </th>
-                    <th>
-                        {% get_verbose_field_name "participants" "Participant" "name" %}
-                    </th>
-                    <th>
-                        {% trans 'experiments:participants:reminder' %}
-                    </th>
-                    <th>
-                        {% trans 'experiments:globals:actions' %}
-                    </th>
-                    <th>
-                        {% trans 'experiments:participants:email' %}
-                    </th>
-                    <th>
-                        {% trans 'experiments:participants:phone_number' %}
-                    </th>
-                    <th>
-                        {% trans 'experiments:participants:birth_date' %}
-                    </th>
-                    <th>
-                        {% trans 'experiments:participants:dyslexic' %}
-                    </th>
-                    <th>
-                        {% trans 'experiments:participants:language' %}
-                    </th>
-                    <th>
-                        {% trans 'experiments:participants:multilingual' %}
-                    </th>
-                    <th>
-                        {% trans 'experiments:participants:handedness' %}
-                    </th>
-                    <th>
-                        {% trans 'experiments:participants:sex' %}
-                    </th>
-                    <th>
-                        {% get_verbose_field_name "participants" "Participant" "social_status" %}
-                    </th>
-                    <th>
-                        {% get_verbose_field_name "participants" "Participant" "email_subscription" %}
-                    </th>
-                </tr>
-            </thead>
-
-            <tbody>
-                {% for appointment in object_list %}
+        <form method="post" action="{% url 'experiments:remind_participants' experiment.pk %}">
+            {% csrf_token %}
+            <table class="dt_custom" width="100%" data-language="{% datatables_lang %}" data-responsive="">
+                <thead>
                     <tr>
-                        <td>
-                            {{ appointment.timeslot.datetime|date:"Y-m-d H:m" }}
-                        </td>
-                        <td>
-                            {{ appointment.timeslot.datetime|date:"l" }}
-                        </td>
-                        <td>
-                            {{ appointment.n }}
-                        </td>
-                        <td>
-                            {{ appointment.participant.fullname }}
-                        </td>
-                        <td>
-                            y
-                        </td>
-                        <td>
-                            <a
-                                href="{% url 'experiments:timeslots_unsubscribe' appointment.timeslot.pk appointment.pk %}?next={{ request.path }}"
-                                class="icon-remove-participant"
-                                title="{% trans 'timeslots:remove_participant:title' %}"
-                            >
-                                
-                            </a>
-                            <a
-                                href="{% url 'experiments:timeslots_unsubscribe_silent' appointment.timeslot.pk appointment.pk %}?next={{ request.path }}"
-                                class="icon-silent-remove-participant"
-                                title="{% trans 'timeslots:silent_remove_participant:title' %}"
-                            >
-                                
-                            </a>
-                            <a
-                                href="{% url 'comments:new' appointment.participant.pk experiment.pk %}"
-                                class="icon-comment"
-                            >
-                                
-                            </a>
-                        </td>
-                        <td>
-                            <a href="mailto:{{ appointment.participant.email }}">
-                                {{ appointment.participant.email }}
-                            </a>
-                        </td>
-                        <td>
-                            {{ appointment.participant.phonenumber }}
-                        </td>
-                        <td>
-                            {{ appointment.participant.birth_date|date:"Y-m-d" }}
-                        </td>
-                        <td>
-                            {{ appointment.participant.dyslexic|yesno:_('yes,no') }}
-                        </td>
-                        <td>
-                            {{ appointment.participant.language }}
-                        </td>
-                        <td>
-                            {{ appointment.participant.multilingual|yesno:_('many,one') }}
-                        </td>
-                        <td>
-                            {{ appointment.participant.handedness|default_if_none:"" }}
-                        </td>
-                        <td>
-                            {{ appointment.participant.sex|default_if_none:"" }}
-                        </td>
-                        <td>
-                            {{ appointment.participant.get_social_status_display|default_if_none:"" }}
-                        </td>
-                        <td>
-                            {{ appointment.participant.email_subscription|yesno:_('yes,no') }}
-                        </td>
+                        <th>
+                            {% get_verbose_field_name "experiments" "TimeSlot" "datetime" %}
+                        </th>
+                        <th>
+                            {% trans 'timeslots:day' %}
+                        </th>
+                        <th>
+                            {% trans 'experiments:participants:place' %}
+                        </th>
+                        <th>
+                            {% get_verbose_field_name "participants" "Participant" "name" %}
+                        </th>
+                        <th>
+                            {% trans 'experiments:participants:reminder' %}
+                        </th>
+                        <th>
+                            {% trans 'experiments:globals:actions' %}
+                        </th>
+                        <th>
+                            {% trans 'experiments:participants:email' %}
+                        </th>
+                        <th>
+                            {% trans 'experiments:participants:phone_number' %}
+                        </th>
+                        <th>
+                            {% trans 'experiments:participants:birth_date' %}
+                        </th>
+                        <th>
+                            {% trans 'experiments:participants:dyslexic' %}
+                        </th>
+                        <th>
+                            {% trans 'experiments:participants:language' %}
+                        </th>
+                        <th>
+                            {% trans 'experiments:participants:multilingual' %}
+                        </th>
+                        <th>
+                            {% trans 'experiments:participants:handedness' %}
+                        </th>
+                        <th>
+                            {% trans 'experiments:participants:sex' %}
+                        </th>
+                        <th>
+                            {% get_verbose_field_name "participants" "Participant" "social_status" %}
+                        </th>
+                        <th>
+                            {% get_verbose_field_name "participants" "Participant" "email_subscription" %}
+                        </th>
                     </tr>
-                {% endfor %}
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th>
-                        <input type="text" name="date" value="{% get_verbose_field_name "experiments" "TimeSlot" "datetime" %}" class="search_init" />
-                    </th>
-                    <th>
-                        <input type="text" name="day" value="{% trans 'timeslots:day' %}" class="search_init" />
-                    </th>
-                    <th>
-                        <input type="text" name="place" value="{% trans 'experiments:participants:place' %}" class="search_init" />
-                    </th>
-                    <th>
-                        <input type="text" name="name" value="{% get_verbose_field_name "participants" "Participant" "name" %}" class="search_init" />
-                    </th>
-                    <th>
-                        <button>
-                            {% trans 'experiments:participants:send' %}
-                        </button>
-                    </th>
-                    <th>
+                </thead>
 
-                    </th>
-                    <th>
-                        <input type="text" name="name" value="{% trans 'experiments:participants:email' %}" class="search_init" />
-                    </th>
-                    <th>
-                        <input type="text" name="phone" value="{% trans 'experiments:participants:phone_number' %}" class="search_init" />
-                    </th>
-                    <th>
-                        <input type="text" name="birth_date" value="{% trans 'experiments:participants:birth_date' %}" class="search_init" />
-                    </th>
-                    <th>
-                        <input type="text" name="birth_date" value="{% trans 'experiments:participants:dyslexic' %}" class="search_init" />
-                    </th>
-                    <th>
-                        <input type="text" name="language" value="{% trans 'experiments:participants:language' %}" class="search_init" />
-                    </th>
-                    <th>
-                        <input type="text" name="multilingual" value="{% trans 'experiments:participants:multilingual' %}" class="search_init" />
-                    </th>
-                    <th>
-                        <input type="text" name="handedness" value="{% trans 'experiments:participants:handedness' %}" class="search_init" />
-                    </th>
-                    <th>
-                        <input type="text" name="sex" value="{% trans 'experiments:participants:sex' %}" class="search_init" />
-                    </th>
-                    <th>
-                        <input type="text" name="social_status" value="{% get_verbose_field_name "participants" "Participant" "social_status" %}" class="search_init" />
-                    </th>
-                    <th>
-                        <input type="text" name="email_subscription" value="{% get_verbose_field_name "participants" "Participant" "email_subscription" %}" class="search_init" />
-                    </th>
-                </tr>
-            </tfoot>
-        </table>
+                <tbody>
+                    {% for appointment in object_list %}
+                        <tr>
+                            <td>
+                                {{ appointment.timeslot.datetime|date:"Y-m-d H:m" }}
+                            </td>
+                            <td>
+                                {{ appointment.timeslot.datetime|date:"l" }}
+                            </td>
+                            <td>
+                                {{ appointment.n }}
+                            </td>
+                            <td>
+                                {{ appointment.participant.fullname }}
+                            </td>
+                            <td class="text-center">
+                                <input type="checkbox" name="reminder[]" value="{{ appointment.pk }}">
+                            </td>
+                            <td>
+                                <a
+                                    href="{% url 'experiments:timeslots_unsubscribe' appointment.timeslot.pk appointment.pk %}?next={{ request.path }}"
+                                    class="icon-remove-participant"
+                                    title="{% trans 'timeslots:remove_participant:title' %}"
+                                >
+                                    
+                                </a>
+                                <a
+                                    href="{% url 'experiments:timeslots_unsubscribe_silent' appointment.timeslot.pk appointment.pk %}?next={{ request.path }}"
+                                    class="icon-silent-remove-participant"
+                                    title="{% trans 'timeslots:silent_remove_participant:title' %}"
+                                >
+                                    
+                                </a>
+                                <a
+                                    href="{% url 'comments:new' appointment.participant.pk experiment.pk %}"
+                                    class="icon-comment"
+                                >
+                                    
+                                </a>
+                            </td>
+                            <td>
+                                <a href="mailto:{{ appointment.participant.email }}">
+                                    {{ appointment.participant.email }}
+                                </a>
+                            </td>
+                            <td>
+                                {{ appointment.participant.phonenumber }}
+                            </td>
+                            <td>
+                                {{ appointment.participant.birth_date|date:"Y-m-d" }}
+                            </td>
+                            <td>
+                                {{ appointment.participant.dyslexic|yesno:_('yes,no') }}
+                            </td>
+                            <td>
+                                {{ appointment.participant.language }}
+                            </td>
+                            <td>
+                                {{ appointment.participant.multilingual|yesno:_('many,one') }}
+                            </td>
+                            <td>
+                                {{ appointment.participant.handedness|default_if_none:"" }}
+                            </td>
+                            <td>
+                                {{ appointment.participant.sex|default_if_none:"" }}
+                            </td>
+                            <td>
+                                {{ appointment.participant.get_social_status_display|default_if_none:"" }}
+                            </td>
+                            <td>
+                                {{ appointment.participant.email_subscription|yesno:_('yes,no') }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>
+                            <input type="text" name="date" value="{% get_verbose_field_name "experiments" "TimeSlot" "datetime" %}" class="search_init" />
+                        </th>
+                        <th>
+                            <input type="text" name="day" value="{% trans 'timeslots:day' %}" class="search_init" />
+                        </th>
+                        <th>
+                            <input type="text" name="place" value="{% trans 'experiments:participants:place' %}" class="search_init" />
+                        </th>
+                        <th>
+                            <input type="text" name="name" value="{% get_verbose_field_name "participants" "Participant" "name" %}" class="search_init" />
+                        </th>
+                        <th class="text-center">
+                            <button class="button-colored">
+                                {% trans 'experiments:participants:send' %}
+                            </button>
+                        </th>
+                        <th>
+
+                        </th>
+                        <th>
+                            <input type="text" name="name" value="{% trans 'experiments:participants:email' %}" class="search_init" />
+                        </th>
+                        <th>
+                            <input type="text" name="phone" value="{% trans 'experiments:participants:phone_number' %}" class="search_init" />
+                        </th>
+                        <th>
+                            <input type="text" name="birth_date" value="{% trans 'experiments:participants:birth_date' %}" class="search_init" />
+                        </th>
+                        <th>
+                            <input type="text" name="birth_date" value="{% trans 'experiments:participants:dyslexic' %}" class="search_init" />
+                        </th>
+                        <th>
+                            <input type="text" name="language" value="{% trans 'experiments:participants:language' %}" class="search_init" />
+                        </th>
+                        <th>
+                            <input type="text" name="multilingual" value="{% trans 'experiments:participants:multilingual' %}" class="search_init" />
+                        </th>
+                        <th>
+                            <input type="text" name="handedness" value="{% trans 'experiments:participants:handedness' %}" class="search_init" />
+                        </th>
+                        <th>
+                            <input type="text" name="sex" value="{% trans 'experiments:participants:sex' %}" class="search_init" />
+                        </th>
+                        <th>
+                            <input type="text" name="social_status" value="{% get_verbose_field_name "participants" "Participant" "social_status" %}" class="search_init" />
+                        </th>
+                        <th>
+                            <input type="text" name="email_subscription" value="{% get_verbose_field_name "participants" "Participant" "email_subscription" %}" class="search_init" />
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+        </form>
         <br/>
     </div>
 </div>

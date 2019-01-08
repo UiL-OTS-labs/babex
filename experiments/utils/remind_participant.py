@@ -17,7 +17,7 @@ def remind_participant(appointment: Appointment) -> None:
     send_template_email(
         [appointment.participant.email],
         subject,
-        'timeslots/mail/reminder',
+        'experiments/mail/reminder',
         context,
         admin.email
     )

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-08 09:18+0000\n"
+"POT-Creation-Date: 2019-01-08 10:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -314,7 +314,7 @@ msgstr "Aantal gelinkte experimenten"
 
 #: experiments/templates/criteria/index.html:44
 #: experiments/templates/criteria/specific_list.html:44
-#: experiments/templates/experiments/participants.html:64
+#: experiments/templates/experiments/participants.html:67
 #: experiments/templates/locations/index.html:39
 #: experiments/templates/timeslots/index.html:70
 msgid "experiments:globals:actions"
@@ -562,7 +562,7 @@ msgid "experiments:globals:next_button"
 msgstr "Volgende >>"
 
 #: experiments/templates/experiments/participants.html:9
-#: experiments/templates/experiments/participants.html:28
+#: experiments/templates/experiments/participants.html:29
 msgid "experiments:participants:header"
 msgstr "Participanten - Experiment '{}'"
 
@@ -583,87 +583,87 @@ msgstr ""
 "zal een bevestigingsmail naar de participant worden gestuurd, maar stuur "
 "toch nog een persoonlijke mail als je dit nog niet hebt gedaan."
 
-#: experiments/templates/experiments/participants.html:38
+#: experiments/templates/experiments/participants.html:39
 msgid "experiments:participants:info_text"
 msgstr " "
 
-#: experiments/templates/experiments/participants.html:52
-#: experiments/templates/experiments/participants.html:180
+#: experiments/templates/experiments/participants.html:55
+#: experiments/templates/experiments/participants.html:183
 #: experiments/templates/timeslots/index.html:52
 msgid "timeslots:day"
 msgstr "Dag"
 
-#: experiments/templates/experiments/participants.html:55
-#: experiments/templates/experiments/participants.html:183
+#: experiments/templates/experiments/participants.html:58
+#: experiments/templates/experiments/participants.html:186
 msgid "experiments:participants:place"
 msgstr "WP"
 
-#: experiments/templates/experiments/participants.html:61
+#: experiments/templates/experiments/participants.html:64
 msgid "experiments:participants:reminder"
 msgstr "Herinner"
 
-#: experiments/templates/experiments/participants.html:67
-#: experiments/templates/experiments/participants.html:197
+#: experiments/templates/experiments/participants.html:70
+#: experiments/templates/experiments/participants.html:200
 msgid "experiments:participants:email"
 msgstr "Email"
 
-#: experiments/templates/experiments/participants.html:70
-#: experiments/templates/experiments/participants.html:200
+#: experiments/templates/experiments/participants.html:73
+#: experiments/templates/experiments/participants.html:203
 msgid "experiments:participants:phone_number"
 msgstr "Telefoon- nummer"
 
-#: experiments/templates/experiments/participants.html:73
-#: experiments/templates/experiments/participants.html:203
+#: experiments/templates/experiments/participants.html:76
+#: experiments/templates/experiments/participants.html:206
 msgid "experiments:participants:birth_date"
 msgstr "Geboorte- datum"
 
-#: experiments/templates/experiments/participants.html:76
-#: experiments/templates/experiments/participants.html:206
+#: experiments/templates/experiments/participants.html:79
+#: experiments/templates/experiments/participants.html:209
 msgid "experiments:participants:dyslexic"
 msgstr "Dysl. (J/N)"
 
-#: experiments/templates/experiments/participants.html:79
-#: experiments/templates/experiments/participants.html:209
+#: experiments/templates/experiments/participants.html:82
+#: experiments/templates/experiments/participants.html:212
 msgid "experiments:participants:language"
 msgstr "Taal"
 
-#: experiments/templates/experiments/participants.html:82
-#: experiments/templates/experiments/participants.html:212
+#: experiments/templates/experiments/participants.html:85
+#: experiments/templates/experiments/participants.html:215
 msgid "experiments:participants:multilingual"
 msgstr "Meerdere talen"
 
-#: experiments/templates/experiments/participants.html:85
-#: experiments/templates/experiments/participants.html:215
+#: experiments/templates/experiments/participants.html:88
+#: experiments/templates/experiments/participants.html:218
 msgid "experiments:participants:handedness"
 msgstr "Links-/ Rechts handig"
 
-#: experiments/templates/experiments/participants.html:88
-#: experiments/templates/experiments/participants.html:218
+#: experiments/templates/experiments/participants.html:91
+#: experiments/templates/experiments/participants.html:221
 msgid "experiments:participants:sex"
 msgstr "Geslacht"
 
-#: experiments/templates/experiments/participants.html:121
+#: experiments/templates/experiments/participants.html:124
 #: experiments/templates/timeslots/index.html:123
 msgid "timeslots:remove_participant:title"
 msgstr "Verwijder participant uit dit timeslot."
 
-#: experiments/templates/experiments/participants.html:128
+#: experiments/templates/experiments/participants.html:131
 #: experiments/templates/timeslots/index.html:130
 msgid "timeslots:silent_remove_participant:title"
 msgstr ""
 "Verwijder participant uit dit timeslot (zonder automatische bevestigings-"
 "mail)."
 
-#: experiments/templates/experiments/participants.html:151
-#: experiments/templates/experiments/participants.html:169
+#: experiments/templates/experiments/participants.html:154
+#: experiments/templates/experiments/participants.html:172
 msgid "yes,no"
 msgstr "ja,nee"
 
-#: experiments/templates/experiments/participants.html:157
+#: experiments/templates/experiments/participants.html:160
 msgid "many,one"
 msgstr "meerdere,een"
 
-#: experiments/templates/experiments/participants.html:190
+#: experiments/templates/experiments/participants.html:193
 msgid "experiments:participants:send"
 msgstr "Verstuur"
 
@@ -806,49 +806,53 @@ msgstr "Criterium toegevoegd aan experiment!"
 msgid "criteria:messages:removed_from_experiment"
 msgstr "Criterium verwijderd uit experiment!"
 
-#: experiments/views/experiment_views.py:42
+#: experiments/views/experiment_views.py:46
 msgid "experiments:message:create:success"
 msgstr "Nieuw experiment succesvol aangemaakt"
 
-#: experiments/views/experiment_views.py:53
+#: experiments/views/experiment_views.py:57
 msgid "experiments:message:update:success"
 msgstr "Experiment aangepast"
 
-#: experiments/views/experiment_views.py:62
+#: experiments/views/experiment_views.py:66
 msgid "experiments:message:deleted_experiment"
 msgstr "Experiment verwijderd!"
 
-#: experiments/views/experiment_views.py:108
+#: experiments/views/experiment_views.py:112
 msgid "experiments:message:exclude:included"
 msgstr "Experiment succesvol opgenomen"
 
-#: experiments/views/experiment_views.py:111
+#: experiments/views/experiment_views.py:115
 msgid "experiments:message:exclude:excluded"
 msgstr "Experiment succesvol uitgesloten"
 
-#: experiments/views/experiment_views.py:184
+#: experiments/views/experiment_views.py:188
 msgid "experiments:message:switch_open:closed"
 msgstr "Experiment openbaar gemaakt"
 
-#: experiments/views/experiment_views.py:187
+#: experiments/views/experiment_views.py:191
 msgid "experiments:message:switch_open:opened"
 msgstr "Experiment verborgen"
 
-#: experiments/views/experiment_views.py:202
+#: experiments/views/experiment_views.py:206
 msgid "experiments:message:switch_public:closed"
 msgstr "Experiment ge-opent"
 
-#: experiments/views/experiment_views.py:205
+#: experiments/views/experiment_views.py:209
 msgid "experiments:message:switch_public:opened"
 msgstr "Experiment gesloten"
 
-#: experiments/views/experiment_views.py:221
+#: experiments/views/experiment_views.py:225
 msgid "experiments:message:switch_visible:invisible"
 msgstr "Participant informatie verborgen voor proefleiders"
 
-#: experiments/views/experiment_views.py:226
+#: experiments/views/experiment_views.py:230
 msgid "experiments:message:switch_visible:visible"
 msgstr "Participant informatie zichtbaar gemaakt voor proefleiders"
+
+#: experiments/views/experiment_views.py:253
+msgid "experiments:message:sent_reminders"
+msgstr "Herinneringen gestuurd naar {} participant(en)"
 
 #: experiments/views/timeslot_views.py:83
 msgid "timeslots:message:deleted_timeslot"

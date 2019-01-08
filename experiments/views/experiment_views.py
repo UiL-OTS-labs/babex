@@ -1,4 +1,5 @@
 import braces.views as braces
+from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count, F, Q, Sum
 from django.urls import reverse_lazy as reverse
@@ -8,9 +9,12 @@ from uil.core.views import RedirectActionView
 from uil.core.views.mixins import DeleteSuccessMessageMixin, \
     RedirectSuccessMessageMixin
 
+from experiments.utils.remind_participant import remind_participant
 from .mixins import ExperimentObjectMixin
 from ..forms import ExperimentForm
 from ..models import Appointment, Experiment
+
+from django.core.exceptions import SuspiciousOperation
 
 
 # --------------------------------------
@@ -227,3 +231,28 @@ class ExperimentSwitchVisibleView(braces.LoginRequiredMixin,
             )
 
         self.experiment.save()
+
+
+class RemindParticipantsView(braces.LoginRequiredMixin,
+                             ExperimentObjectMixin,
+                             RedirectActionView):
+
+    def action(self, request):
+        if not request.POST:
+            raise SuspiciousOperation
+
+        if "reminder[]" in request.POST:
+            reminders = request.POST.getlist('reminder[]')
+
+            for reminder in reminders:
+                appointment = Appointment.objects.get(pk=reminder)
+                remind_participant(appointment)
+
+            messages.success(self.request,
+                             str(
+                                 _('experiments:message:sent_reminders')
+                                ).format(len(reminders))
+                             )
+
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse('experiments:participants', args=[self.experiment.pk])

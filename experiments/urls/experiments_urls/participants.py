@@ -2,13 +2,19 @@ from django.urls import path
 
 from experiments.views import (ExperimentAppointmentsView,
                                InviteParticipantsForExperimentView,
-                               MailPreviewView, )
+                               MailPreviewView, RemindParticipantsView )
 
 urlpatterns = [
     path(
         'participants/',
         ExperimentAppointmentsView.as_view(),
         name='participants',
+    ),
+
+    path(
+        'participants/remind/',
+        RemindParticipantsView.as_view(),
+        name='remind_participants',
     ),
 
     path(
