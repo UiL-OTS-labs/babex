@@ -9,3 +9,9 @@ tfoot input {
 table {
     font-size: 0.8rem;
 }
+
+ tfoot button {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    line-height: initial;
+}
