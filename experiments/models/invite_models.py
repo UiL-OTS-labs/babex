@@ -17,3 +17,9 @@ class Invitation(models.Model):
         Participant,
         on_delete=models.CASCADE,
     )
+
+    def __str__(self):
+        return "Invitation for {} for {}".format(
+            self.experiment.name,
+            self.participant.name,
+        )

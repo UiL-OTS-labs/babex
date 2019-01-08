@@ -118,6 +118,9 @@ class DefaultCriteria(models.Model):
 
         return self.max_age
 
+    def __str__(self):
+        return "Default criteria for {}".format(self.experiment.name)
+
 
 class Criterium(models.Model):
     class Meta:
@@ -172,3 +175,9 @@ class ExperimentCriterium(models.Model):
     message_failed = models.TextField(
         _('experiment_criterium:attribute:message_failed'),
     )
+
+    def __str__(self):
+        return "{} -> {}".format(
+            self.criterium.name_natural,
+            self.experiment.name,
+        )

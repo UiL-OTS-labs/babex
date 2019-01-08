@@ -6,6 +6,9 @@ class ApiGroup(models.Model):
 
     name = models.TextField(unique=True)
 
+    def __str__(self):
+        return self.name
+
 
 class ApiUser(models.Model):
 
@@ -33,3 +36,6 @@ class ApiUser(models.Model):
             self.save(update_fields=["password"])
 
         return check_password(raw_password, self.password, setter)
+
+    def __str__(self):
+        return self.email

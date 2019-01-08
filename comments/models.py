@@ -41,3 +41,10 @@ class Comment(models.Model):
         null=True,
         auto_now_add=True,
     )
+
+    def __str__(self):
+        return "{}: {} ({})".format(
+            self.leader or "admin",
+            self.comment,
+            self.participant.name,
+        )

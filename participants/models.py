@@ -163,3 +163,10 @@ class CriteriumAnswer(models.Model):
     answer = e_fields.EncryptedTextField(
         _('criterium_answer:attribute:answer')
     )
+
+    def __str__(self):
+        return "({}) {}: {}".format(
+            self.participant.name,
+            self.criterium.name_natural,
+            self.answer
+        )

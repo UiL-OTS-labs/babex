@@ -41,6 +41,12 @@ class TimeSlot(models.Model):
     def free_places(self) -> int:
         return self.max_places - self.appointments.count()
 
+    def __str__(self):
+        return "{}: {}".format(
+            self.experiment.name,
+            self.datetime
+        )
+
 
 class Appointment(models.Model):
 
@@ -62,3 +68,9 @@ class Appointment(models.Model):
     creation_date = models.DateTimeField(
         auto_now_add=True,
     )
+
+    def __str__(self):
+        return "{} -> {}".format(
+            self.participant,
+            self.timeslot
+        )
