@@ -23,3 +23,9 @@
 .criteria-table td:nth-child(2)  {
     color: green;
 }
+
+tfoot input {
+    /* 100% - padding (20 px) - border (2px) */
+    width: calc(100% - 22px);
+    padding: 10px;
+}

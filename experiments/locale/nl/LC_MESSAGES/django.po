@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-21 08:44+0000\n"
+"POT-Creation-Date: 2019-01-08 09:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -588,11 +588,13 @@ msgid "experiments:participants:info_text"
 msgstr " "
 
 #: experiments/templates/experiments/participants.html:52
+#: experiments/templates/experiments/participants.html:180
 #: experiments/templates/timeslots/index.html:52
 msgid "timeslots:day"
 msgstr "Dag"
 
 #: experiments/templates/experiments/participants.html:55
+#: experiments/templates/experiments/participants.html:183
 msgid "experiments:participants:place"
 msgstr "WP"
 
@@ -601,34 +603,42 @@ msgid "experiments:participants:reminder"
 msgstr "Herinner"
 
 #: experiments/templates/experiments/participants.html:67
+#: experiments/templates/experiments/participants.html:197
 msgid "experiments:participants:email"
 msgstr "Email"
 
 #: experiments/templates/experiments/participants.html:70
+#: experiments/templates/experiments/participants.html:200
 msgid "experiments:participants:phone_number"
 msgstr "Telefoon- nummer"
 
 #: experiments/templates/experiments/participants.html:73
+#: experiments/templates/experiments/participants.html:203
 msgid "experiments:participants:birth_date"
 msgstr "Geboorte- datum"
 
 #: experiments/templates/experiments/participants.html:76
+#: experiments/templates/experiments/participants.html:206
 msgid "experiments:participants:dyslexic"
 msgstr "Dysl. (J/N)"
 
 #: experiments/templates/experiments/participants.html:79
+#: experiments/templates/experiments/participants.html:209
 msgid "experiments:participants:language"
 msgstr "Taal"
 
 #: experiments/templates/experiments/participants.html:82
+#: experiments/templates/experiments/participants.html:212
 msgid "experiments:participants:multilingual"
 msgstr "Meerdere talen"
 
 #: experiments/templates/experiments/participants.html:85
+#: experiments/templates/experiments/participants.html:215
 msgid "experiments:participants:handedness"
 msgstr "Links-/ Rechts handig"
 
 #: experiments/templates/experiments/participants.html:88
+#: experiments/templates/experiments/participants.html:218
 msgid "experiments:participants:sex"
 msgstr "Geslacht"
 
@@ -652,6 +662,10 @@ msgstr "ja,nee"
 #: experiments/templates/experiments/participants.html:157
 msgid "many,one"
 msgstr "meerdere,een"
+
+#: experiments/templates/experiments/participants.html:190
+msgid "experiments:participants:send"
+msgstr "Verstuur"
 
 #: experiments/templates/locations/edit.html:8
 #: experiments/templates/locations/edit.html:15
@@ -804,35 +818,35 @@ msgstr "Experiment aangepast"
 msgid "experiments:message:deleted_experiment"
 msgstr "Experiment verwijderd!"
 
-#: experiments/views/experiment_views.py:102
+#: experiments/views/experiment_views.py:108
 msgid "experiments:message:exclude:included"
 msgstr "Experiment succesvol opgenomen"
 
-#: experiments/views/experiment_views.py:105
+#: experiments/views/experiment_views.py:111
 msgid "experiments:message:exclude:excluded"
 msgstr "Experiment succesvol uitgesloten"
 
-#: experiments/views/experiment_views.py:178
+#: experiments/views/experiment_views.py:184
 msgid "experiments:message:switch_open:closed"
 msgstr "Experiment openbaar gemaakt"
 
-#: experiments/views/experiment_views.py:181
+#: experiments/views/experiment_views.py:187
 msgid "experiments:message:switch_open:opened"
 msgstr "Experiment verborgen"
 
-#: experiments/views/experiment_views.py:196
+#: experiments/views/experiment_views.py:202
 msgid "experiments:message:switch_public:closed"
 msgstr "Experiment ge-opent"
 
-#: experiments/views/experiment_views.py:199
+#: experiments/views/experiment_views.py:205
 msgid "experiments:message:switch_public:opened"
 msgstr "Experiment gesloten"
 
-#: experiments/views/experiment_views.py:215
+#: experiments/views/experiment_views.py:221
 msgid "experiments:message:switch_visible:invisible"
 msgstr "Participant informatie verborgen voor proefleiders"
 
-#: experiments/views/experiment_views.py:220
+#: experiments/views/experiment_views.py:226
 msgid "experiments:message:switch_visible:visible"
 msgstr "Participant informatie zichtbaar gemaakt voor proefleiders"
 
