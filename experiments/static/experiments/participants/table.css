@@ -1,0 +1,11 @@
+
+tfoot input {
+    /* 100% - padding (10 px) - border (2px) */
+    width: calc(100% - 22px);
+    padding: 5px;
+    font-size: 0.8rem;
+}
+
+table {
+    font-size: 0.8rem;
+}
