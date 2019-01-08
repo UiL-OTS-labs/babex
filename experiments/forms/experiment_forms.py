@@ -16,6 +16,13 @@ class ExperimentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ExperimentForm, self).__init__(*args, **kwargs)
 
+        self.fields['default_max_places'].widget.attrs.update(
+            {
+                'min': 1,
+                'max': 10,
+            }
+        )
+
         # If we are updating an experiment, make sure you cannot exclude the
         # experiment you are updating!
         if self.instance:

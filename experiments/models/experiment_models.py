@@ -1,4 +1,4 @@
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -36,7 +36,10 @@ class Experiment(models.Model):
 
     default_max_places = models.PositiveSmallIntegerField(
         _('experiment:attribute:default_max_places'),
-        validators=[MinValueValidator(1)],
+        validators=[
+            MinValueValidator(1),
+            MaxValueValidator(10),
+        ],
         help_text=_('experiment:attribute:default_max_places:help_text'),
         default=1,
     )
