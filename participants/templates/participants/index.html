@@ -52,6 +52,9 @@
                     <th>
                         {% get_verbose_field_name "participants" "Participant" "dyslexic" %}
                     </th>
+                    <th>
+                        {% get_verbose_field_name "participants" "Participant" "created" %}
+                    </th>
                     {# The data-priority makes sure this column is always visible #}
                     <th data-priority="1">
                         {% trans 'participants:globals:actions' %}
@@ -90,6 +93,9 @@
                         </td>
                         <td>
                             {{ participant.dyslexic|yesno:_('yes,no') }}
+                        </td>
+                        <td>
+                            {{ participant.created|date:"Y-m-d" }}
                         </td>
                         <td>
                             <a

@@ -102,6 +102,11 @@ class Participant(models.Model):
         on_delete=models.SET_NULL,
     )
 
+    created = models.DateTimeField(
+        verbose_name=_('participant:attribute:created'),
+        auto_now_add=True,
+    )
+
     @property
     def fullname(self) -> str:
         if self.name:
