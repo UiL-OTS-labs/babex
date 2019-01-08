@@ -12,4 +12,14 @@ class TimeSlotForm(forms.ModelForm):
             'experiment': forms.HiddenInput,
         }
 
+    def __init__(self, *args, **kwargs):
+        super(TimeSlotForm, self).__init__(*args, **kwargs)
+
+        self.fields['max_places'].widget.attrs.update(
+            {
+                'min': 1,
+                'max': 10,
+            }
+        )
+
 

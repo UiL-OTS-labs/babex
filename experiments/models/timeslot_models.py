@@ -1,4 +1,4 @@
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -19,7 +19,10 @@ class TimeSlot(models.Model):
 
     max_places = models.PositiveSmallIntegerField(
         _('time_slot:attribute:max_places'),
-        validators=[MinValueValidator(1)]
+        validators=[
+            MinValueValidator(1),
+            MaxValueValidator(10),
+        ]
     )
 
     @property
