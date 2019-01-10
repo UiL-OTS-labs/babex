@@ -98,6 +98,56 @@ def get_eligible_participants_for_experiment(experiment: Experiment,
     return filtered
 
 
+def check_participant_eligible(experiment: Experiment, participant:
+Participant) -> bool:
+    """
+    This function produces a list of participants that can take part in
+    the provided experiment.
+    """
+
+    default_criteria = experiment.defaultcriteria
+    specific_experiment_criteria = \
+        experiment.experimentcriterium_set.select_related(
+            'criterium'
+        )
+    specific_criteria = [x.criterium for x in specific_experiment_criteria]
+
+    filters = {}
+
+    # Build the rest of the filters
+    filters = _build_filters(filters, default_criteria)
+
+    # Get all criterium answers for the criteria in this experiment and the
+    # participants we're going to filter
+    criteria_answers = CriteriumAnswer.objects.select_related(
+        'criterium',
+        'participant',
+    )
+    criteria_answers = criteria_answers.filter(
+        criterium__in=specific_criteria,
+        participant=participant
+    )
+
+    # Turn our QuerySet into a list, so we can modify it
+    criteria_answers = list(criteria_answers)
+
+    # List of all allowed participants
+    filtered = []
+
+    if _should_exclude_by_filters(participant, filters):
+        return False
+
+    if _should_exclude_by_age(participant, default_criteria):
+        return False
+
+    if _should_exclude_by_specific_criteria(participant,
+                                            specific_experiment_criteria,
+                                            criteria_answers):
+        return False
+
+    return True
+
+
 def _build_filters(filters: dict, default_criteria) -> dict:
     """
     This function expands a given filter dict with filters as specified in
