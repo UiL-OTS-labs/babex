@@ -19,7 +19,7 @@ class OpenExperimentsView(rest_mixins.RetrieveModelMixin,  # This default
     authentication_classes = (JwtAuthentication,)
 
     def get_queryset(self):
-        qs = Experiment.objects.filter(open=True)
+        qs = Experiment.objects.filter(open=True, public=True)
 
         qs = qs.select_related('leader', 'location')
         qs = qs.prefetch_related('additional_leaders', 'excluded_experiments')
