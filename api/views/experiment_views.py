@@ -1,19 +1,19 @@
-from rest_framework import viewsets, permissions, views, mixins as rest_mixins
-from rest_framework.generics import get_object_or_404
+from django.core.exceptions import PermissionDenied
+from rest_framework import mixins as rest_mixins, viewsets
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from django.db.models import Q
 
+from api.auth.authenticators import JwtAuthentication
 from api.permissions import IsPermittedClient
 from api.serializers import ExperimentSerializer
 from experiments.models import Experiment
-from api.auth.authenticators import JwtAuthentication
-
 from experiments.utils.exclusion import check_participant_eligible
 
 
 class OpenExperimentsView(rest_mixins.RetrieveModelMixin,  # This default
                           # implementation suits our needs
                           viewsets.GenericViewSet):
-
     serializer_class = ExperimentSerializer
     permission_classes = (IsPermittedClient,)
     authentication_classes = (JwtAuthentication,)
@@ -53,3 +53,29 @@ class OpenExperimentsView(rest_mixins.RetrieveModelMixin,  # This default
         serializer = self.serializer_class(open_experiments, many=True)
 
         return Response(serializer.data)
+
+
+class LeaderExperimentsView(rest_mixins.RetrieveModelMixin,
+                            rest_mixins.ListModelMixin,
+                            viewsets.GenericViewSet):
+    serializer_class = ExperimentSerializer
+    permission_classes = (IsPermittedClient, IsAuthenticated)
+    authentication_classes = (JwtAuthentication,)
+
+    def get_queryset(self):
+        user = self.request.user
+
+        if not hasattr(user, 'leader'):
+            raise PermissionDenied
+
+        leader = user.leader
+
+        qs = Experiment.objects.filter(Q(leader=leader) | Q(
+            additional_leaders=leader))
+
+        qs = qs.select_related('leader', 'location')
+        qs = qs.prefetch_related('additional_leaders', 'excluded_experiments')
+
+        self.queryset = qs
+
+        return qs
