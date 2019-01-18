@@ -14,7 +14,7 @@ from ..utils import delete_timeslot, delete_timeslots, now, \
     unsubscribe_participant
 
 
-class TimeSlotHomeView(braces.LoginRequiredMixin,
+class TimeSlotHomeView(braces.RecentLoginRequiredMixin,
                        ExperimentObjectMixin, ModelFormListView):
     template_name = 'timeslots/index.html'
     model = TimeSlot

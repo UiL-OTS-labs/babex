@@ -15,7 +15,7 @@ from django.db.models import Count, Q
 from django.conf import settings
 
 
-class LeaderHomeView(braces.LoginRequiredMixin, generic.ListView):
+class LeaderHomeView(braces.RecentLoginRequiredMixin, generic.ListView):
     template_name = 'leaders/index.html'
     model = Leader
 
@@ -34,7 +34,7 @@ class LeaderHomeView(braces.LoginRequiredMixin, generic.ListView):
         )
 
 
-class LeaderCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
+class LeaderCreateView(braces.RecentLoginRequiredMixin, SuccessMessageMixin,
                        generic.FormView):
     template_name = 'leaders/new.html'
     form_class = LeaderCreateForm
@@ -61,7 +61,7 @@ class LeaderCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
         return super(LeaderCreateView, self).form_valid(form)
 
 
-class LeaderUpdateView(braces.LoginRequiredMixin, SuccessMessageMixin,
+class LeaderUpdateView(braces.RecentLoginRequiredMixin, SuccessMessageMixin,
                        generic.FormView):
     template_name = 'leaders/update.html'
     form_class = LeaderUpdateForm
@@ -99,7 +99,7 @@ class LeaderUpdateView(braces.LoginRequiredMixin, SuccessMessageMixin,
         return super(LeaderUpdateView, self).form_valid(form)
 
 
-class LeaderDeleteView(braces.LoginRequiredMixin, generic.DetailView):
+class LeaderDeleteView(braces.RecentLoginRequiredMixin, generic.DetailView):
     template_name = 'leaders/delete.html'
     model = Leader
 

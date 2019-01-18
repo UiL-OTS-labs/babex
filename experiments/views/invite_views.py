@@ -1,8 +1,6 @@
 import braces.views as braces
 from django.core.exceptions import ViewDoesNotExist
 from django.utils.text import mark_safe
-from django.contrib.messages.views import SuccessMessageMixin
-from django.utils.translation import ugettext_lazy as _
 from django.views import generic
 
 from .mixins import ExperimentObjectMixin
@@ -10,7 +8,7 @@ from main.utils import get_supreme_admin
 from ..utils.exclusion import get_eligible_participants_for_experiment
 
 
-class InviteParticipantsForExperimentView(braces.LoginRequiredMixin,
+class InviteParticipantsForExperimentView(braces.RecentLoginRequiredMixin,
                                           ExperimentObjectMixin,
                                           generic.TemplateView):
     template_name = 'experiments/invite.html'
