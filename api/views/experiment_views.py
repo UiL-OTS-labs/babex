@@ -1,8 +1,8 @@
 from django.core.exceptions import PermissionDenied
-from rest_framework import mixins as rest_mixins, viewsets
+from django.db.models import Q
+from rest_framework import mixins as rest_mixins, views, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from django.db.models import Q
 
 from api.auth.authenticators import JwtAuthentication
 from api.permissions import IsPermittedClient
@@ -79,3 +79,28 @@ class LeaderExperimentsView(rest_mixins.RetrieveModelMixin,
         self.queryset = qs
 
         return qs
+
+
+class SwitchExperimentOpenView(views.APIView):
+    permission_classes = (IsPermittedClient, IsAuthenticated)
+    authentication_classes = (JwtAuthentication,)
+
+    def post(self, request, experiment):
+        if not hasattr(request.user, 'leader'):
+            raise PermissionDenied
+
+        leader = request.user.leader
+
+        experiment_object = Experiment.objects.get(pk=experiment)
+
+        if not leader == experiment_object.leader and leader not in \
+                experiment_object.additional_leaders.all():
+            raise PermissionDenied
+
+        experiment_object.open = not experiment_object.open
+        experiment_object.save()
+
+        return Response({
+            'success': True,
+            'open':    experiment_object.open
+        })
