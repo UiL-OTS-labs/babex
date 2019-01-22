@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
--e git+git@github.com:UiL-OTS-labs/django-shared-core.git@master#egg=uil-django-core
+-e git+https://github.com/UiL-OTS-labs/django-shared-core.git@master#egg=uil-django-core
 asn1crypto==0.24.0        # via cryptography
 blessings==1.7            # via curtsies
 bpython==0.17.1
@@ -15,11 +15,11 @@ click==7.0                # via pip-tools
 cryptography==2.4.2
 curtsies==0.3.0           # via bpython
 django-braces==1.13.0
-django-csp==3.4
+django-csp==3.5
 django-debug-toolbar==1.11
 django-simple-menu==1.2.1
 django==2.0.10
-djangorestframework==3.9.0
+djangorestframework==3.9.1
 greenlet==0.4.15          # via bpython
 idna==2.8                 # via cryptography, requests
 pip-tools==3.2.0
