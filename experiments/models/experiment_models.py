@@ -24,7 +24,8 @@ class Experiment(models.Model):
     )
 
     additional_instructions = models.TextField(
-        _('experiment:attribute:additional_instructions')
+        _('experiment:attribute:additional_instructions'),
+        blank=True,
     )
 
     location = models.ForeignKey(
