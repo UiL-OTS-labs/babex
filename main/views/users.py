@@ -19,7 +19,8 @@ class UserUpdateView(braces.LoginRequiredMixin,
                      generic.UpdateView):
     model = User
     template_name = 'users/update.html'
-    fields = ['username', 'first_name', 'last_name', 'email']
+    fields = ['username', 'first_name', 'last_name', 'email', 'is_active',
+              'is_supreme_admin']
     success_url = reverse_lazy('main:users_home')
     success_message = _('users:message:updated')
 

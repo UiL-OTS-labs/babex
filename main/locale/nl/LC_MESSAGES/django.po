@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-22 11:48+0000\n"
+"POT-Creation-Date: 2019-01-22 12:05+0000\n"
 "PO-Revision-Date: 2018-11-23 08:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -57,6 +57,10 @@ msgstr "Log in"
 #: main/menus.py:51 main/templates/base/login_header.html:7
 msgid "main:globals:logout"
 msgstr "Log uit"
+
+#: main/models.py:9
+msgid "user:is_supreme_admin"
+msgstr "Hoofd admin"
 
 #: main/templates/base/login_header.html:6
 msgid "site:header:login"
@@ -153,10 +157,6 @@ msgstr ""
 #: main/templates/users/index.html:33
 msgid "users:home:name"
 msgstr "Naam"
-
-#: main/templates/users/index.html:39
-msgid "users:home:is_supreme_admin"
-msgstr "Hoofd admin"
 
 #: main/templates/users/index.html:45
 msgid "users:home:actions"

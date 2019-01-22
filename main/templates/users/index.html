@@ -33,13 +33,15 @@
                         {% trans 'users:home:name' %}
                     </th>
                     <th>
-                        {% get_verbose_field_name 'main' 'User' 'email' %}
+                        {% get_verbose_field_name 'main' 'User' 'email' as email %}
+                        {{ email|capfirst }}
                     </th>
                     <th>
-                        {% trans 'users:home:is_supreme_admin' %}
+                        {% get_verbose_field_name 'main' 'User' 'is_supreme_admin' %}
                     </th>
                     <th>
-                        {% get_verbose_field_name 'main' 'User' 'is_active' %}
+                        {% get_verbose_field_name 'main' 'User' 'is_active' as active %}
+                        {{ active|capfirst }}
                     </th>
                     <th>
                         {% trans 'users:home:actions' %}

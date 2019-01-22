@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-22 11:48+0000\n"
+"POT-Creation-Date: 2019-01-22 12:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,6 +58,10 @@ msgstr "Log in"
 msgid "main:globals:logout"
 msgstr "Log out"
 
+#: main/models.py:9
+msgid "user:is_supreme_admin"
+msgstr "Main admin"
+
 #: main/templates/base/login_header.html:6
 msgid "site:header:login"
 msgstr "Welcome {}!"
@@ -102,7 +106,6 @@ msgid "users:change_password:header"
 msgstr "Change password for '{}'"
 
 #: main/templates/users/change_password.html:26
-
 msgid "users:change_password:info_text"
 msgstr " "
 
@@ -154,10 +157,6 @@ msgstr ""
 #: main/templates/users/index.html:33
 msgid "users:home:name"
 msgstr "Name"
-
-#: main/templates/users/index.html:39
-msgid "users:home:is_supreme_admin"
-msgstr "Main admin"
 
 #: main/templates/users/index.html:45
 msgid "users:home:actions"
