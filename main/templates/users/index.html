@@ -13,7 +13,7 @@
 <div class="uu-inner-container">
     <div class="col-12">
         <div class="float-right button button-colored">
-            <a href="#">
+            <a href="{% url 'main:user_create' %}">
                 {% trans 'users:home:create_user' %}
             </a>
         </div>
@@ -67,17 +67,24 @@
                         </td>
                         <td>
                             <a
-                                href="#"
+                                href="{% url 'main:user_edit' user.pk %}"
                                 title="{% trans 'users:home:edit:title' %}"
                                 class="icon-edit"
                             >
-                                
+                                <span class="behind-icon">U</span> 
+                            </a>
+                            <a
+                                href="{% url 'main:user_password' user.pk %}"
+                                title="{% trans 'users:home:change_password:title' %}"
+                                class="icon-edit"
+                            >
+                                <span class="behind-icon">P</span> 
                             </a>
                             {# We should not allow a user to delete their own account, that will we AWKWARD #}
                             {# https://www.youtube.com/watch?v=q9kDT44DBXs #}
                             {% if not request.user == user %}
                             <a
-                                href="#"
+                                href="{% url 'main:user_delete' user.pk %}"
                                 title="{% trans 'users:home:delete:title' %}"
                                 class="icon-delete"
                             >

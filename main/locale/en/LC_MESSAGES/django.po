@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-21 10:53+0000\n"
+"POT-Creation-Date: 2019-01-22 11:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -96,6 +96,45 @@ msgstr "Log in"
 msgid "login:button:login"
 msgstr "Log in"
 
+#: main/templates/users/change_password.html:9
+#: main/templates/users/change_password.html:23
+msgid "users:change_password:header"
+msgstr "Change password for '{}'"
+
+#: main/templates/users/change_password.html:26
+
+msgid "users:change_password:info_text"
+msgstr " "
+
+#: main/templates/users/change_password.html:35
+#: main/templates/users/create.html:34 main/templates/users/update.html:35
+msgid "main:globals:save_button"
+msgstr "Save"
+
+#: main/templates/users/create.html:8 main/templates/users/create.html:22
+msgid "users:create:header"
+msgstr "Create new Admin account"
+
+#: main/templates/users/create.html:25
+msgid "users:create:info_text"
+msgstr " "
+
+#: main/templates/users/delete.html:8 main/templates/users/delete.html:16
+msgid "users:delete:header"
+msgstr "Delete account"
+
+#: main/templates/users/delete.html:19
+msgid "users:delete:text"
+msgstr "Are you sure you want to delete the account '{}'?"
+
+#: main/templates/users/delete.html:22
+msgid "global:delete:cancel"
+msgstr "Cancel"
+
+#: main/templates/users/delete.html:25
+msgid "global:delete:confirm"
+msgstr "Confirm"
+
 #: main/templates/users/index.html:8 main/templates/users/index.html:21
 msgid "users:home:header"
 msgstr "Administrator accounts"
@@ -128,11 +167,35 @@ msgstr "Actions"
 msgid "users:home:edit:title"
 msgstr "Edit account"
 
-#: main/templates/users/index.html:81
+#: main/templates/users/index.html:78
+msgid "users:home:change_password:title"
+msgstr "Change password"
+
+#: main/templates/users/index.html:88
 msgid "users:home:delete:title"
 msgstr "Delete account"
+
+#: main/templates/users/update.html:9 main/templates/users/update.html:23
+msgid "users:update:header"
+msgstr "Change account '{}'"
+
+#: main/templates/users/update.html:26
+msgid "users:update:info_text"
+msgstr " "
 
 #: main/views/base.py:24 main/views/base.py:59
 #, python-format
 msgid "Empty list and '%(class_name)s.allow_empty' is False."
 msgstr ""
+
+#: main/views/users.py:24
+msgid "users:message:updated"
+msgstr "Account updated!"
+
+#: main/views/users.py:34
+msgid "users:message:created"
+msgstr "New account created!"
+
+#: main/views/users.py:44
+msgid "users:message:changed_password"
+msgstr "Password changed!"
