@@ -1,9 +1,14 @@
+import uuid
+from datetime import datetime
+
 from django.contrib.auth.hashers import check_password, make_password
 from django.db import models
 
+from django.conf import settings
+from pytz import timezone
+
 
 class ApiGroup(models.Model):
-
     name = models.TextField()
 
     def __str__(self):
@@ -11,7 +16,6 @@ class ApiGroup(models.Model):
 
 
 class ApiUser(models.Model):
-
     email = models.EmailField(unique=True)
     password = models.TextField()
 
@@ -39,3 +43,27 @@ class ApiUser(models.Model):
 
     def __str__(self):
         return self.email
+
+
+def _get_date_2hours():
+    tz = timezone(settings.TIME_ZONE)
+    dt = datetime.now(tz)
+    hour = dt.hour + 2
+    return dt.replace(hour=hour)
+
+
+class PasswordResetToken(models.Model):
+    user = models.ForeignKey(
+        ApiUser,
+        on_delete=models.CASCADE,
+    )
+
+    token = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False,
+    )
+
+    expiration = models.DateTimeField(
+        editable=False,
+        default=_get_date_2hours
+    )
