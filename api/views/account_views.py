@@ -21,6 +21,7 @@ class ChangePasswordView(views.APIView):
         if user.check_password(post_data['current_password']):
 
             user.set_password(post_data['new_password'])
+            user.passwords_needs_change = False
             user.save()
 
             success = True
