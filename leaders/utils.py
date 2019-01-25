@@ -90,6 +90,7 @@ def update_leader(leader: Leader, name: str, email: str, phonenumber: str,
         api_user.is_active = _participant_group in api_user.groups.all()
 
     if password:
+        api_user.passwords_needs_change = True
         api_user.set_password(password)
 
     api_user.save()
