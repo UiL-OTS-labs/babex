@@ -1,4 +1,5 @@
 from main.utils import get_supreme_admin, send_template_email
+from django.conf import settings
 
 
 def unsubscribe_participant(time_slot, appointment_pk: int,
@@ -21,8 +22,8 @@ def unsubscribe_participant(time_slot, appointment_pk: int,
             'experiment': experiment,
             'admin': admin.get_full_name(),
             'admin_email': admin.email,
-            'other_time_link': '',
-            'home_link': '',  # TODO: make these links
+            'other_time_link': '',  # TODO: make this link
+            'home_link': settings.FRONTEND_URI,
         }
 
         send_template_email(
