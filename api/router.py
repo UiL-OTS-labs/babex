@@ -1,8 +1,8 @@
 from rest_framework import routers
 
-from .views import OpenExperimentsView, LeaderExperimentsView
+from .views import ExperimentsView, LeaderExperimentsView
 
 router = routers.DefaultRouter()
-router.register('experiments', OpenExperimentsView, basename='experiments')
+router.register('experiments', ExperimentsView, basename='experiments')
 router.register('leader_experiments', LeaderExperimentsView,
                 basename='leader_experiments')
