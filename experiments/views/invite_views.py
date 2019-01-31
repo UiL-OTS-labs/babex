@@ -8,7 +8,7 @@ from main.utils import get_supreme_admin
 from ..utils.exclusion import get_eligible_participants_for_experiment
 
 
-class InviteParticipantsForExperimentView(braces.RecentLoginRequiredMixin,
+class InviteParticipantsForExperimentView(braces.LoginRequiredMixin,
                                           ExperimentObjectMixin,
                                           generic.TemplateView):
     template_name = 'experiments/invite.html'

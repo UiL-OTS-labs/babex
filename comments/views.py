@@ -9,7 +9,7 @@ from .forms import CommentForm
 from .models import Comment
 
 
-class CommentsHomeView(braces.RecentLoginRequiredMixin, generic.ListView):
+class CommentsHomeView(braces.LoginRequiredMixin, generic.ListView):
     template_name = 'comments/index.html'
     model = Comment
 
@@ -39,7 +39,7 @@ class CommentCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
         return reverse('experiments:participants', args=args)
 
 
-class CommentsDeleteView(braces.RecentLoginRequiredMixin,
+class CommentsDeleteView(braces.LoginRequiredMixin,
                          DeleteSuccessMessageMixin, generic.DeleteView):
     model = Comment
     success_url = reverse('comments:home')

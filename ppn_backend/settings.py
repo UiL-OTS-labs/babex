@@ -198,6 +198,9 @@ SESSION_COOKIE_SECURE = not DEBUG
 CSRF_COOKIE_SECURE = not DEBUG
 SECURE_SSL_REDIRECT = not DEBUG
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 60 * 60 * 12  # 12 hours
+
 # Django CSP
 # http://django-csp.readthedocs.io/en/latest/index.html
 CSP_REPORT_ONLY = False

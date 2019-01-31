@@ -121,7 +121,7 @@ class ExperimentExcludeOtherExperimentView(braces.LoginRequiredMixin,
             self.experiment.pk])
 
 
-class ExperimentAppointmentsView(braces.RecentLoginRequiredMixin,
+class ExperimentAppointmentsView(braces.LoginRequiredMixin,
                                  ExperimentObjectMixin, generic.ListView):
     template_name = 'experiments/participants.html'
     model = Appointment

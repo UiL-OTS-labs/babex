@@ -12,7 +12,7 @@ from .models import CriteriumAnswer, Participant
 from .utils import merge_participants
 
 
-class ParticipantsHomeView(braces.RecentLoginRequiredMixin, generic.ListView):
+class ParticipantsHomeView(braces.LoginRequiredMixin, generic.ListView):
     template_name = 'participants/index.html'
     model = Participant
 
@@ -20,13 +20,13 @@ class ParticipantsHomeView(braces.RecentLoginRequiredMixin, generic.ListView):
         return self.model.objects.prefetch_related('secondaryemail_set')
 
 
-class ParticipantDetailView(braces.RecentLoginRequiredMixin,
+class ParticipantDetailView(braces.LoginRequiredMixin,
                             generic.DetailView):
     model = Participant
     template_name = 'participants/detail.html'
 
 
-class ParticipantUpdateView(braces.RecentLoginRequiredMixin,
+class ParticipantUpdateView(braces.LoginRequiredMixin,
                             SuccessMessageMixin,
                             generic.UpdateView):
     model = Participant
@@ -38,7 +38,7 @@ class ParticipantUpdateView(braces.RecentLoginRequiredMixin,
         return reverse('participants:detail', args=[self.object.pk])
 
 
-class ParticipantDeleteView(braces.RecentLoginRequiredMixin,
+class ParticipantDeleteView(braces.LoginRequiredMixin,
                             DeleteSuccessMessageMixin, generic.DeleteView):
     success_url = reverse('participants:home')
     success_message = _('participants:messages:deleted_participant')
@@ -46,7 +46,7 @@ class ParticipantDeleteView(braces.RecentLoginRequiredMixin,
     model = Participant
 
 
-class ParticipantSpecificCriteriaUpdateView(braces.RecentLoginRequiredMixin,
+class ParticipantSpecificCriteriaUpdateView(braces.LoginRequiredMixin,
                                             FormSetUpdateView):
     form = CriteriumAnswerForm
     template_name = 'participants/specific_criteria.html'
@@ -71,7 +71,7 @@ class ParticipantSpecificCriteriaUpdateView(braces.RecentLoginRequiredMixin,
         return Participant.objects.get(pk=participant_pk)
 
 
-class ParticipantMergeView(braces.RecentLoginRequiredMixin, SuccessMessageMixin,
+class ParticipantMergeView(braces.LoginRequiredMixin, SuccessMessageMixin,
                            generic.FormView):
     success_url = reverse('participants:home')
     success_message = _('participants:messages:merged_participants')
