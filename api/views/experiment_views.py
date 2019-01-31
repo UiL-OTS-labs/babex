@@ -22,7 +22,10 @@ class ExperimentsView(rest_mixins.RetrieveModelMixin,  # This default
         qs = Experiment.objects.all()
 
         qs = qs.select_related('leader', 'location')
-        qs = qs.prefetch_related('additional_leaders', 'excluded_experiments')
+        qs = qs.prefetch_related(
+            'additional_leaders',
+            'excluded_experiments',
+        )
 
         self.queryset = qs
 
@@ -38,23 +41,35 @@ class ExperimentsView(rest_mixins.RetrieveModelMixin,  # This default
         It also uses a more limited QuerySet, as it filters out closed and
         non-public experiments.
         """
-        qs = self.get_queryset().filter(public=True, open=True)
+        qs = self.get_queryset().filter(
+            public=True,
+            open=True,
+        )
         open_experiments = list(qs)
 
         # If the request has been issued on behalf of a participant, filter
         # the open experiments to exclude experiments that participant cannot
         # take part in
-        if request.user.is_authenticated and hasattr(request.user,
-                                                     'participant'):
-            filtered = []
-            for experiment in open_experiments:
-                if check_participant_eligible(experiment,
-                                              request.user.participant):
-                    filtered.append(experiment)
+        filter_personally = request.user.is_authenticated and hasattr(
+            request.user, 'participant'
+        )
 
-            open_experiments = filtered
+        filtered = []
+        for experiment in open_experiments:
+            add = True
 
-        serializer = self.serializer_class(open_experiments, many=True)
+            if filter_personally and not check_participant_eligible(
+                    experiment,
+                    request.user.participant):
+                add = False
+
+            if add and not experiment.has_free_timeslots():
+                add = False
+
+            if add:
+                filtered.append(experiment)
+
+        serializer = self.serializer_class(filtered, many=True)
 
         return Response(serializer.data)
 

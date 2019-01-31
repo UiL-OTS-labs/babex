@@ -1,5 +1,7 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+from django.db.models import Count, F
+from django.db.models.functions import Now
 from django.utils.translation import ugettext_lazy as _
 
 from leaders.models import Leader
@@ -86,6 +88,14 @@ class Experiment(models.Model):
         blank=True,
         help_text=_("experiment:attribute:additional_leaders:help_text"),
     )
+
+    def has_free_timeslots(self):
+        return self.timeslot_set.annotate(
+            num_appointments=Count('appointments')
+        ).filter(
+            datetime__gt=Now(),
+            max_places__gt=F('num_appointments')
+        ).exists()
 
     def __str__(self):
         return self.name
