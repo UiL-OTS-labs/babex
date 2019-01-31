@@ -1,11 +1,22 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-from django.db.models import Count, F
-from django.db.models.functions import Now
+from django.db.models import Count, F, Func, fields
 from django.utils.translation import ugettext_lazy as _
 
 from leaders.models import Leader
 from .location_models import Location
+
+
+class TwoHoursAgo(Func):
+    template = 'NOW() - INTERVAL 2 HOUR'
+    output_field = fields.DateTimeField()
+
+    def as_sqlite(self, compiler, connection, **extra_context):
+        return self.as_sql(
+            compiler,
+            connection,
+            template='date(\'now\', \'-2 hours\')'
+        )
 
 
 class Experiment(models.Model):
@@ -93,7 +104,7 @@ class Experiment(models.Model):
         return self.timeslot_set.annotate(
             num_appointments=Count('appointments')
         ).filter(
-            datetime__gt=Now(),
+            datetime__gt=TwoHoursAgo(),
             max_places__gt=F('num_appointments')
         ).exists()
 
