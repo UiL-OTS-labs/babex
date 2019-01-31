@@ -12,7 +12,7 @@ certifi==2018.11.29       # via requests
 cffi==1.11.5              # via cryptography
 chardet==3.0.4            # via requests
 click==7.0                # via pip-tools
-cryptography==2.4.2
+cryptography==2.5
 curtsies==0.3.0           # via bpython
 django-braces==1.13.0
 django-csp==3.5
@@ -21,9 +21,9 @@ django-simple-menu==1.2.1
 django==2.0.10
 djangorestframework==3.9.1
 greenlet==0.4.15          # via bpython
-idna==2.8                 # via cryptography, requests
+idna==2.8                 # via requests
 mysqlclient==1.3.14
-pip-tools==3.2.0
+pip-tools==3.3.2
 pycparser==2.19           # via cffi
 pygments==2.3.1           # via bpython
 pyjwt==1.7.1
