@@ -1,0 +1,39 @@
+*English below*
+
+Beste {{ name }},
+
+Een administrator heeft een account voor u aangemaakt!
+
+Login: {{ email }}>
+{% if not has_password %}
+Klik op de volgende link om uw wachtwoord in te stellen:
+{{ link }}
+{% else %}
+Het wachtwoord dient u te krijgen van de adminstrator.
+{% endif %}
+
+{% if not has_password %}
+Deze link blijft 24 uur geldig. Daarna kunt u een nieuwe link krijgen via 'wachtwoord vergeten?' op het inlog scherm.
+
+Indien de bovenstaande link niet werkt, klik op de onderstaande link en vul uw token in: {{ token }}
+{{ alternative_link }}
+{% endif %}
+-------------
+
+Dear {{ name }},
+
+An administrator has created an account for you!
+
+Login: {{ email }}><br/>
+{% if not has_password %}
+Click on the following link to set a password: {{ link }}
+{% else %}
+The password will be given to you by the administrator.
+{% endif %}
+
+{% if not has_password %}
+This link stays valid for 24 hours. If it has expired, you can request a new link through clicking 'Forgot password' at the login screen.
+
+If the link doesn't work, got to the link below and fill in your token: {{ token }}
+{{ alternative_link }}
+{% endif %}

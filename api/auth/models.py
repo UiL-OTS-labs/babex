@@ -26,6 +26,10 @@ class ApiUser(models.Model):
 
     groups = models.ManyToManyField(ApiGroup)
 
+    @property
+    def has_password(self) -> bool:
+        return self.password is not None and self.password != ''
+
     def set_password(self, raw_password):
         self.password = make_password(raw_password)
 

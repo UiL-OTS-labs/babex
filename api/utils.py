@@ -5,7 +5,7 @@ from main.utils import send_template_email
 
 
 def send_password_reset_mail(user: ApiUser, token: str) -> None:
-    link, alternative_link = _get_links(token)
+    link, alternative_link = get_reset_links(token)
 
     subject = 'UiL OTS Experimenten: password reset'
     context = {
@@ -35,7 +35,7 @@ def _get_name(user: ApiUser):
     return 'proefpersoon'
 
 
-def _get_links(token: str):
+def get_reset_links(token: str):
     root = settings.FRONTEND_URI
 
     root = "{}reset_password/".format(root)

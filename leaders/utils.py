@@ -1,6 +1,11 @@
-from django.conf import settings
+from datetime import datetime, timedelta
 
-from api.auth.models import ApiGroup, ApiUser
+from django.conf import settings
+from pytz import timezone
+
+from api.auth.models import ApiGroup, ApiUser, PasswordResetToken
+from api.utils import get_reset_links
+from main.utils import send_template_email
 from .models import Leader
 
 
@@ -57,12 +62,46 @@ def create_leader(name: str, email: str, phonenumber: str,
     leader.api_user = api_user
     leader.save()
 
-    return api_user
+    return leader
 
 
 def notify_new_leader(leader: Leader) -> None:
-    # TODO: implement this!
-    pass
+    has_password = leader.api_user.has_password
+
+    if not has_password:
+        token = PasswordResetToken.objects.create(
+            user=leader.api_user,
+            expiration=_get_tomorrow()
+        )
+
+        link, alternative_link = get_reset_links(token.token)
+    else:
+        token = None
+        link = None
+        alternative_link = None
+
+    subject = 'UiL OTS Experimenten: new account'
+    context = {
+        'has_password':     has_password,
+        'token':            token.token,
+        'name':             leader.name,
+        'email':            leader.api_user.email,
+        'link':             link,
+        'alternative_link': alternative_link,
+    }
+
+    send_template_email(
+        [leader.api_user.email],
+        subject,
+        'leaders/mail/notify_new_leader',
+        context,
+        'no-reply@uu.nl'
+    )
+
+
+def _get_tomorrow():
+    tz = timezone(settings.TIME_ZONE)
+    return datetime.now(tz) + timedelta(hours=24)
 
 
 def update_leader(leader: Leader, name: str, email: str, phonenumber: str,
