@@ -53,6 +53,7 @@ class LeaderCreateForm(forms.Form):
         label=_('leaders:forms:create_form:notify_user:label'),
         help_text=_('leaders:forms:create_form:notify_user:help_text'),
         required=False,  # Bit of a misnomer, it means False is a valid value
+        initial=True,
     )
 
     def clean_email(self):
