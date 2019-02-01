@@ -67,3 +67,9 @@ class PasswordResetToken(models.Model):
         editable=False,
         default=_get_date_2hours
     )
+
+    def is_valid(self) -> bool:
+        tz = timezone(settings.TIME_ZONE)
+        now = datetime.now(tz)
+
+        return self.expiration > now
