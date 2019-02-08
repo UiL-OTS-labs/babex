@@ -1,4 +1,17 @@
 {% load i18n %}
+<script>
+    $(function () {
+        $('input[name="{{ widget.name }}_other"]').click(function () {
+            $('#id_language_1').prop('checked', true);
+        });
+        $('#id_language_0').click(function () {
+            $('input[name="{{ widget.name }}_other"]').val('');
+        });
+        $('#id_language_2').click(function () {
+            $('input[name="{{ widget.name }}_other"]').val('');
+        });
+    });
+</script>
 
 <ul id="id_language">
 
