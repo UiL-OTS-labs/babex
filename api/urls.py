@@ -4,7 +4,7 @@ import api.auth.views as auth_views
 from api.views import ForgotPasswordView, ResetPasswordView, ValidateTokenView
 from .router import router
 from .views import AdminView, ChangeLeaderView, ChangePasswordView, \
-    LeaderView, SwitchExperimentOpenView, SubscribeToEmaillistView
+    LeaderView, SwitchExperimentOpenView, SubscribeToEmaillistView, GetAppointmentTokenView
 
 urlpatterns = [
     path('', include(router.urls)),
@@ -26,6 +26,7 @@ urlpatterns = [
 
     path('participant/', include([
         path('subscribe_mailinglist/', SubscribeToEmaillistView.as_view()),
+        path('send_cancel_token/', GetAppointmentTokenView.as_view()),
     ])),
 
     path('api-auth/', include('rest_framework.urls',

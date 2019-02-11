@@ -4,4 +4,5 @@ from .admin_views import AdminView
 from .experiment_views import ExperimentsView, LeaderExperimentsView, \
     SwitchExperimentOpenView
 from .leader_views import ChangeLeaderView, LeaderView
-from .participant_views import SubscribeToEmaillistView
+from .participant_views import AppointmentsView, GetAppointmentTokenView, \
+    SubscribeToEmaillistView

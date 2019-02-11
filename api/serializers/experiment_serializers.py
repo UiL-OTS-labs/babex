@@ -22,6 +22,10 @@ class ExperimentSerializer(serializers.ModelSerializer):
         source='timeslot_set'
     )
 
+    leader = serializers.SerializerMethodField()
+
+    additional_leaders = serializers.SerializerMethodField()
+
     def get_specific_criteria(self, o):
         # Local import to prevent import cycles
         from .criteria_serializers import ExperimentCriteriumSerializer
@@ -38,4 +42,21 @@ class ExperimentSerializer(serializers.ModelSerializer):
         return TimeSlotSerializer(
             o.timeslot_set.all(),
             many=True
+        ).data
+
+    def get_leader(self, o):
+        # Local import to prevent import cycles
+        from .leader_serializers import LeaderSerializer
+
+        return LeaderSerializer(
+            o.leader
+        ).data
+
+    def get_additional_leaders(self, o):
+        # Local import to prevent import cycles
+        from .leader_serializers import LeaderSerializer
+
+        return LeaderSerializer(
+            o.additional_leaders.all(),
+            many=True,
         ).data

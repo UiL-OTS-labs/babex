@@ -7,7 +7,7 @@ class LeaderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Leader
         fields = [
-            'email', 'name', 'phonenumber', 'api_user'
+            'email', 'name', 'phonenumber', 'api_user', 'id'
         ]
         depth = 1
 
