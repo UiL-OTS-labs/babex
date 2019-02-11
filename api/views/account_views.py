@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from api.auth.authenticators import JwtAuthentication
-from api.auth.models import ApiUser, PasswordResetToken
+from api.auth.models import ApiUser, UserToken
 from api.permissions import IsPermittedClient
 
 from ..utils import send_password_reset_mail
@@ -48,8 +48,9 @@ class ForgotPasswordView(views.APIView):
             try:
                 user = ApiUser.objects.get(email=email)
 
-                token = PasswordResetToken.objects.create(
+                token = UserToken.objects.create(
                     user=user,
+                    type=UserToken.PASSWORD_RESET,
                 )
 
                 send_password_reset_mail(user, str(token.token))
@@ -74,7 +75,10 @@ class ValidateTokenView(views.APIView):
 
         if token:
             try:
-                o = PasswordResetToken.objects.get(token=token)
+                o = UserToken.objects.get(
+                    token=token,
+                    type=UserToken.PASSWORD_RESET,
+                )
 
                 success = o.is_valid()
 
@@ -82,7 +86,7 @@ class ValidateTokenView(views.APIView):
                 if not success:
                     o.delete()
 
-            except (ValidationError, PasswordResetToken.DoesNotExist):
+            except (ValidationError, UserToken.DoesNotExist):
                 pass
 
         return Response({
@@ -101,8 +105,9 @@ class ResetPasswordView(views.APIView):
 
         if token and new_password:
             try:
-                o = PasswordResetToken.objects.select_related('user').get(
-                    token=token
+                o = UserToken.objects.select_related('user').get(
+                    token=token,
+                    type=UserToken.PASSWORD_RESET,
                 )
 
                 if o.is_valid():
@@ -116,7 +121,7 @@ class ResetPasswordView(views.APIView):
 
                     success = True
 
-            except PasswordResetToken.DoesNotExist:
+            except UserToken.DoesNotExist:
                 pass
 
         return Response({

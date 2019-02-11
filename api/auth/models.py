@@ -64,7 +64,18 @@ def _get_date_2hours():
     return dt.replace(hour=hour)
 
 
-class PasswordResetToken(models.Model):
+class UserToken(models.Model):
+
+    PASSWORD_RESET = 'P'
+    MAILINGLIST_UNSUBSCRIBE = 'M'
+    CANCEL_APPOINTMENTS = 'C'
+
+    TYPES = (
+        (PASSWORD_RESET, 'Password Reset'),
+        (MAILINGLIST_UNSUBSCRIBE, 'Mailinglist unsubscribe'),
+        (CANCEL_APPOINTMENTS, 'Cancel appointments')
+    )
+
     user = models.ForeignKey(
         ApiUser,
         on_delete=models.CASCADE,
@@ -73,6 +84,11 @@ class PasswordResetToken(models.Model):
     token = models.UUIDField(
         default=uuid.uuid4,
         editable=False,
+    )
+
+    type = models.CharField(
+        choices=TYPES,
+        max_length=1,
     )
 
     expiration = models.DateTimeField(

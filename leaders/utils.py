@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from django.conf import settings
 from pytz import timezone
 
-from api.auth.models import ApiGroup, ApiUser, PasswordResetToken
+from api.auth.models import ApiGroup, ApiUser, UserToken
 from api.utils import get_reset_links
 from main.utils import send_template_email
 from .models import Leader
@@ -69,9 +69,10 @@ def notify_new_leader(leader: Leader) -> None:
     has_password = leader.api_user.has_password
 
     if not has_password:
-        token = PasswordResetToken.objects.create(
+        token = UserToken.objects.create(
             user=leader.api_user,
-            expiration=_get_tomorrow()
+            expiration=_get_tomorrow(),
+            type=UserToken.PASSWORD_RESET,
         )
 
         link, alternative_link = get_reset_links(token.token)
