@@ -27,6 +27,14 @@ class ApiUser(models.Model):
     groups = models.ManyToManyField(ApiGroup)
 
     @property
+    def is_leader(self):
+        return hasattr(self, 'leader')
+
+    @property
+    def is_participant(self):
+        return hasattr(self, 'participant')
+
+    @property
     def has_password(self) -> bool:
         return self.password is not None and self.password != ''
 
