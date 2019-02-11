@@ -79,6 +79,13 @@ class UserToken(models.Model):
     user = models.ForeignKey(
         ApiUser,
         on_delete=models.CASCADE,
+        null=True,
+    )
+
+    participant = models.ForeignKey(
+        'participants.Participant',
+        on_delete=models.CASCADE,
+        null=True,
     )
 
     token = models.UUIDField(
