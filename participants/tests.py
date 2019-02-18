@@ -4,7 +4,7 @@ import pytz
 from django.test import TestCase
 
 from experiments.models import Appointment, Experiment, TimeSlot
-from .models import Criterium, CriteriumAnswer, Participant, SecondaryEmail
+from .models import Criterion, CriterionAnswer, Participant, SecondaryEmail
 from .utils import merge_participants
 
 
@@ -14,19 +14,19 @@ class MergeParticipantsTest(TestCase):
         """
         For these testcases we want 2 participants to merge, plus a few criteria
         """
-        self.c1 = Criterium.objects.create(
+        self.c1 = Criterion.objects.create(
             name_form='test',
             name_natural='test',
             values='yes,no,maybe',
         )
 
-        self.c2 = Criterium.objects.create(
+        self.c2 = Criterion.objects.create(
             name_form='test 2',
             name_natural='test 2',
             values='yes,no,maybe',
         )
 
-        self.c3 = Criterium.objects.create(
+        self.c3 = Criterion.objects.create(
             name_form='test 3',
             name_natural='test 3',
             values='yes,no,maybe',
@@ -79,55 +79,55 @@ class MergeParticipantsTest(TestCase):
         # We should only have self.new
         self.assertEqual(Participant.objects.count(), 1)
 
-    def test_criterium_merge(self):
+    def test_criterion_merge(self):
         """
         This test case checks if criteria answers are merged properly.
         """
 
         # old only
-        CriteriumAnswer.objects.create(
-            criterium=self.c1,
+        CriterionAnswer.objects.create(
+            criterion=self.c1,
             participant=self.old,
             answer='yes'
         )
 
         # new and old
-        CriteriumAnswer.objects.create(
-            criterium=self.c2,
+        CriterionAnswer.objects.create(
+            criterion=self.c2,
             participant=self.old,
             answer='yes'
         )
-        CriteriumAnswer.objects.create(
-            criterium=self.c2,
+        CriterionAnswer.objects.create(
+            criterion=self.c2,
             participant=self.new,
             answer='no'
         )
 
         # new only
-        CriteriumAnswer.objects.create(
-            criterium=self.c3,
+        CriterionAnswer.objects.create(
+            criterion=self.c3,
             participant=self.new,
             answer='maybe'
         )
 
         # In the beginning, there were 2 answers in self.old and self.new
-        self.assertEqual(self.old.criteriumanswer_set.count(), 2)
-        self.assertEqual(self.new.criteriumanswer_set.count(), 2)
+        self.assertEqual(self.old.criterionanswer_set.count(), 2)
+        self.assertEqual(self.new.criterionanswer_set.count(), 2)
 
         # Do the merge!
         merge_participants(self.old, self.new)
 
         # We should have 3 answers
-        self.assertEqual(self.old.criteriumanswer_set.count(), 3)
+        self.assertEqual(self.old.criterionanswer_set.count(), 3)
 
         # The answer for c2, c3 should've gotten the value from self.new
-        self.assertEqual(self.old.criteriumanswer_set.get(
-            criterium=self.c2).answer, 'no')
-        self.assertEqual(self.old.criteriumanswer_set.get(
-            criterium=self.c3).answer, 'maybe')
+        self.assertEqual(self.old.criterionanswer_set.get(
+            criterion=self.c2).answer, 'no')
+        self.assertEqual(self.old.criterionanswer_set.get(
+            criterion=self.c3).answer, 'maybe')
 
         # There should only be 3 objects left, as self.new has been deleted
-        self.assertEqual(CriteriumAnswer.objects.count(), 3)
+        self.assertEqual(CriterionAnswer.objects.count(), 3)
 
     def test_email_merge(self):
         """

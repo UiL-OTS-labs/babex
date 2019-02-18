@@ -74,14 +74,14 @@
 <div class="d-inline-block">
     Specific criteria:
     <table class="criteria-table mt-1">
-        {% for exp_criterium in experiment.experimentcriterium_set.all %}
+        {% for exp_criterion in experiment.experimentcriterion_set.all %}
             <tr>
-                {% with criterium=exp_criterium.criterium %}
+                {% with criterion=exp_criterion.criterion %}
                     <td>
-                        {{ criterium.name_natural }}:
+                        {{ criterion.name_natural }}:
                     </td>
                     <td>
-                        {{ exp_criterium.correct_value }}
+                        {{ exp_criterion.correct_value }}
                     </td>
                 {% endwith %}
             </tr>

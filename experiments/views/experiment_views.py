@@ -128,7 +128,7 @@ class ExperimentAppointmentsView(braces.LoginRequiredMixin,
 
     # Prefetch/select related criteria data for the criteria boxes
     experiment_select_related = ['defaultcriteria']
-    experiment_prefetch_related = ['experimentcriterium_set__criterium']
+    experiment_prefetch_related = ['experimentcriterion_set__criterion']
 
     def get_context_data(self, *args, **kwargs):
         context = super(ExperimentAppointmentsView, self).get_context_data(

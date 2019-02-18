@@ -6,5 +6,5 @@ from .models import *
 admin.site.register([
     Participant,
     SecondaryEmail,
-    CriteriumAnswer,
+    CriterionAnswer,
 ])

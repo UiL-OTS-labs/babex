@@ -16,7 +16,7 @@
             {% trans 'criteria:delete:header' %}
         </h1>
         <form method="post">{% csrf_token %}
-            <p>{% transformat 'criteria:delete:text' object.name_natural object.experimentcriterium_set.count %}</p>
+            <p>{% transformat 'criteria:delete:text' object.name_natural object.experimentcriterion_set.count %}</p>
             <div class="button" style="display: inline-block">
                 <a href="{% url 'experiments:criteria_home' %}" >
                     {% trans 'criteria:delete:cancel' %}

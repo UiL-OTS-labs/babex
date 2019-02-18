@@ -2,60 +2,60 @@ from django.core.exceptions import ValidationError
 from django.http import QueryDict
 from uil.core.utils import set_model_field_value
 
-from ..models import Criterium, ExperimentCriterium
+from ..models import Criterion, ExperimentCriterion
 
 
-def create_and_attach_criterium(experiment, name_form, name_natural, values,
+def create_and_attach_criterion(experiment, name_form, name_natural, values,
                                 correct_value, message_failed) -> None:
     """
-    This function creates a new criterium, and uses :func:attach_criterium to
+    This function creates a new criterion, and uses :func:attach_criterion to
     attach it to an existing experiment.
     """
-    criterium = Criterium()
-    criterium.name_form = name_form
-    criterium.name_natural = name_natural
-    criterium.values = values
-    criterium.save()
+    criterion = Criterion()
+    criterion.name_form = name_form
+    criterion.name_natural = name_natural
+    criterion.values = values
+    criterion.save()
 
-    attach_criterium(
+    attach_criterion(
         experiment,
-        criterium,
+        criterion,
         correct_value,
         message_failed,
     )
 
 
-def attach_criterium(experiment, criterium, correct_value, message_failed):
+def attach_criterion(experiment, criterion, correct_value, message_failed):
     """
-    This function attaches an existing criterium to an experiment, setting the
+    This function attaches an existing criterion to an experiment, setting the
     proper values for such a link based upon the method parameters.
     """
-    experiment_criterium = ExperimentCriterium()
+    experiment_criterion = ExperimentCriterion()
 
     # We use this utility function so we can accept both pk values and model
     # instances
-    set_model_field_value(experiment_criterium, 'criterium', criterium)
-    set_model_field_value(experiment_criterium, 'experiment', experiment)
+    set_model_field_value(experiment_criterion, 'criterion', criterion)
+    set_model_field_value(experiment_criterion, 'experiment', experiment)
 
-    experiment_criterium.correct_value = correct_value
-    experiment_criterium.message_failed = message_failed
-    experiment_criterium.save()
+    experiment_criterion.correct_value = correct_value
+    experiment_criterion.message_failed = message_failed
+    experiment_criterion.save()
 
 
-def clean_form_existing_criterium(post_data: QueryDict) -> dict:
+def clean_form_existing_criterion(post_data: QueryDict) -> dict:
     """Cleans the form data from the manual specific criteria form."""
     cleaned_data = {}
     # Get a proper dict, as the QueryDict is ****
     post_data = post_data.dict()
 
-    criterium = post_data.get('criterium')
-    cleaned_data['criterium'] = int(criterium)
+    criterion = post_data.get('criterion')
+    cleaned_data['criterion'] = int(criterion)
 
-    # Split the criterium_pk and the value, and check if the criterium_pk
-    # matches the selected criterium value sent in POST
+    # Split the criterion_pk and the value, and check if the criterion_pk
+    # matches the selected criterion value sent in POST
     check_pk, correct_value = post_data.get('correct_value').split('-', 2)
 
-    if check_pk != criterium:
+    if check_pk != criterion:
         raise ValidationError
 
     cleaned_data['correct_value'] = correct_value.strip()

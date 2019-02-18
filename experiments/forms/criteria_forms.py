@@ -2,7 +2,7 @@ from django import forms
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
-from ..models import Criterium, DefaultCriteria
+from ..models import Criterion, DefaultCriteria
 from ..widgets import LanguageWidget
 
 
@@ -21,9 +21,9 @@ class DefaultCriteriaForm(forms.ModelForm):
         }
 
 
-class CriteriumForm(forms.ModelForm):
+class CriterionForm(forms.ModelForm):
     class Meta:
-        model = Criterium
+        model = Criterion
         fields = ['name_form', 'name_natural', 'values']
         widgets = {
             'name_form':     forms.TextInput,
@@ -61,26 +61,26 @@ class CriteriumForm(forms.ModelForm):
         return correct_value
 
 
-class ExperimentCriteriumForm(forms.Form):
+class ExperimentCriterionForm(forms.Form):
 
     name_form = forms.CharField(
-        label=_('criterium:attribute:name_form'),
+        label=_('criterion:attribute:name_form'),
     )
 
     name_natural = forms.CharField(
-        label=_('criterium:attribute:name_natural'),
+        label=_('criterion:attribute:name_natural'),
     )
 
     values = forms.CharField(
-        label=_('criterium:attribute:values'),
+        label=_('criterion:attribute:values'),
     )
 
     correct_value = forms.CharField(
-        label=_('experiment_criterium:attribute:correct_value'),
+        label=_('experiment_criterion:attribute:correct_value'),
     )
 
     message_failed = forms.CharField(
-        label=_('experiment_criterium:attribute:message_failed'),
+        label=_('experiment_criterion:attribute:message_failed'),
         widget=forms.Textarea({'cols': 35}),
     )
 

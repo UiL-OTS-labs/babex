@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-08 12:17+0000\n"
+"POT-Creation-Date: 2019-02-18 10:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -121,7 +121,7 @@ msgid "secondary_email:attribute:email"
 msgstr "Secondary e-mail address"
 
 #: participants/models.py:164
-msgid "criterium_answer:attribute:answer"
+msgid "criterion_answer:attribute:answer"
 msgstr "Answer"
 
 #: participants/templates/participants/delete.html:8
@@ -256,14 +256,14 @@ msgstr "Specific criteria for '{}'"
 msgid "participants:specific_criteria:info_text"
 msgstr " "
 
-#: participants/views.py:32
+#: participants/views.py:34
 msgid "participants:messages:updated_participant"
 msgstr "Participant updated!"
 
-#: participants/views.py:42
+#: participants/views.py:44
 msgid "participants:messages:deleted_participant"
 msgstr "Participant deleted!"
 
-#: participants/views.py:75
+#: participants/views.py:77
 msgid "participants:messages:merged_participants"
 msgstr "Participant merged!"

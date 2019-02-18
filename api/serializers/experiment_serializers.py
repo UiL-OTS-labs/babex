@@ -15,7 +15,7 @@ class ExperimentSerializer(serializers.ModelSerializer):
         ]
 
     specific_criteria = serializers.SerializerMethodField(
-        source='experimentcriterium_set'
+        source='experimentcriterion_set'
     )
 
     timeslots = serializers.SerializerMethodField(
@@ -28,10 +28,10 @@ class ExperimentSerializer(serializers.ModelSerializer):
 
     def get_specific_criteria(self, o):
         # Local import to prevent import cycles
-        from .criteria_serializers import ExperimentCriteriumSerializer
+        from .criteria_serializers import ExperimentCriterionSerializer
 
-        return ExperimentCriteriumSerializer(
-            o.experimentcriterium_set.all(),
+        return ExperimentCriterionSerializer(
+            o.experimentcriterion_set.all(),
             many=True
         ).data
 

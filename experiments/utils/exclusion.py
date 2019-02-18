@@ -9,8 +9,8 @@ inside the database. This is why everything is done in python.
 from typing import List
 from django.db.models.expressions import RawSQL
 
-from experiments.models import Experiment, ExperimentCriterium
-from participants.models import CriteriumAnswer, Participant
+from experiments.models import Experiment, ExperimentCriterion
+from participants.models import CriterionAnswer, Participant
 
 # List of vars that can have the same values as the participant model
 # variables, with an indifferent option
@@ -31,10 +31,10 @@ def get_eligible_participants_for_experiment(experiment: Experiment,
     """
     default_criteria = experiment.defaultcriteria
     specific_experiment_criteria = \
-        experiment.experimentcriterium_set.select_related(
-            'criterium'
+        experiment.experimentcriterion_set.select_related(
+            'criterion'
         )
-    specific_criteria = [x.criterium for x in specific_experiment_criteria]
+    specific_criteria = [x.criterion for x in specific_experiment_criteria]
 
     # Base filters: a participant should be capable, and by default be on the
     # mailing list
@@ -63,14 +63,14 @@ def get_eligible_participants_for_experiment(experiment: Experiment,
                               "participants_participant.id", (experiment.pk,) )
     )
 
-    # Get all criterium answers for the criteria in this experiment and the
+    # Get all criterion answers for the criteria in this experiment and the
     # participants we're going to filter
-    criteria_answers = CriteriumAnswer.objects.select_related(
-        'criterium',
+    criteria_answers = CriterionAnswer.objects.select_related(
+        'criterion',
         'participant',
     )
     criteria_answers = criteria_answers.filter(
-        criterium__in=specific_criteria,
+        criterion__in=specific_criteria,
         participant__in=participants
     )
 
@@ -107,24 +107,24 @@ Participant) -> bool:
 
     default_criteria = experiment.defaultcriteria
     specific_experiment_criteria = \
-        experiment.experimentcriterium_set.select_related(
-            'criterium'
+        experiment.experimentcriterion_set.select_related(
+            'criterion'
         )
-    specific_criteria = [x.criterium for x in specific_experiment_criteria]
+    specific_criteria = [x.criterion for x in specific_experiment_criteria]
 
     filters = {}
 
     # Build the rest of the filters
     filters = _build_filters(filters, default_criteria)
 
-    # Get all criterium answers for the criteria in this experiment and the
+    # Get all criterion answers for the criteria in this experiment and the
     # participants we're going to filter
-    criteria_answers = CriteriumAnswer.objects.select_related(
-        'criterium',
+    criteria_answers = CriterionAnswer.objects.select_related(
+        'criterion',
         'participant',
     )
     criteria_answers = criteria_answers.filter(
-        criterium__in=specific_criteria,
+        criterion__in=specific_criteria,
         participant=participant
     )
 
@@ -201,39 +201,39 @@ def _should_exclude_by_specific_criteria(participant: Participant,
     """
 
     # Loop over all criteria answers
-    for specific_criterium_answer in criteria_answers.copy():
+    for specific_criterion_answer in criteria_answers.copy():
         # Check if this answer is by the current participant
         # We do this in python to minimize db queries (it's way faster)
-        if not specific_criterium_answer.participant == participant:
+        if not specific_criterion_answer.participant == participant:
             continue
 
-        # Get the experiment criterium
-        specific_criterium = _get_specific_criterium(
+        # Get the experiment criterion
+        specific_criterion = _get_specific_criterion(
             specific_experiment_criteria,
-            specific_criterium_answer.criterium
+            specific_criterion_answer.criterion
         )
 
         # Remove this answer from our list, in order to shorten this loop in
         # the next call by removing answers we've already evaluated
-        criteria_answers.remove(specific_criterium_answer)
+        criteria_answers.remove(specific_criterion_answer)
 
-        if specific_criterium and not specific_criterium_answer.answer == \
-                                      specific_criterium.correct_value:
+        if specific_criterion and not specific_criterion_answer.answer == \
+                                      specific_criterion.correct_value:
             return True
 
     return False
 
 
-def _get_specific_criterium(specific_experiment_criteria, criterium) -> \
-        ExperimentCriterium:
+def _get_specific_criterion(specific_experiment_criteria, criterion) -> \
+        ExperimentCriterion:
     """
-    Gets the experimentCriterium object for a criterium object
+    Gets the experimentCriterion object for a criterion object
     :param specific_experiment_criteria:
-    :param criterium:
+    :param criterion:
     :return:
     """
     for x in specific_experiment_criteria:
-        if x.criterium == criterium:
+        if x.criterion == criterion:
             return x
 
 

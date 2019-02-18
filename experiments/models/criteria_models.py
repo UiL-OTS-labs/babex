@@ -122,20 +122,20 @@ class DefaultCriteria(models.Model):
         return "Default criteria for {}".format(self.experiment.name)
 
 
-class Criterium(models.Model):
+class Criterion(models.Model):
     class Meta:
         ordering = ('name_natural',)
 
     name_form = models.TextField(
-        _('criterium:attribute:name_form'),
+        _('criterion:attribute:name_form'),
     )
 
     name_natural = models.TextField(
-        _('criterium:attribute:name_natural'),
+        _('criterion:attribute:name_natural'),
     )
 
     values = models.TextField(
-        _('criterium:attribute:values'),
+        _('criterion:attribute:values'),
     )
 
     @property
@@ -156,10 +156,10 @@ class Criterium(models.Model):
         )
 
 
-class ExperimentCriterium(models.Model):
+class ExperimentCriterion(models.Model):
 
-    criterium = models.ForeignKey(
-        Criterium,
+    criterion = models.ForeignKey(
+        Criterion,
         on_delete=models.CASCADE,
     )
 
@@ -169,15 +169,15 @@ class ExperimentCriterium(models.Model):
     )
 
     correct_value = models.TextField(
-        _('experiment_criterium:attribute:correct_value'),
+        _('experiment_criterion:attribute:correct_value'),
     )
 
     message_failed = models.TextField(
-        _('experiment_criterium:attribute:message_failed'),
+        _('experiment_criterion:attribute:message_failed'),
     )
 
     def __str__(self):
         return "{} -> {}".format(
-            self.criterium.name_natural,
+            self.criterion.name_natural,
             self.experiment.name,
         )

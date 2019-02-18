@@ -11,10 +11,10 @@ from uil.core.views.mixins import DeleteSuccessMessageMixin, \
 
 from main.views import FormListView
 from .mixins import ExperimentObjectMixin
-from ..forms import CriteriumForm, DefaultCriteriaForm, ExperimentCriteriumForm
-from ..models import Criterium, DefaultCriteria, ExperimentCriterium
-from ..utils import attach_criterium, clean_form_existing_criterium, \
-    create_and_attach_criterium
+from ..forms import CriterionForm, DefaultCriteriaForm, ExperimentCriterionForm
+from ..models import Criterion, DefaultCriteria, ExperimentCriterion
+from ..utils import attach_criterion, clean_form_existing_criterion, \
+    create_and_attach_criterion
 
 
 #
@@ -22,19 +22,19 @@ from ..utils import attach_criterium, clean_form_existing_criterium, \
 #
 
 class CriteriaHomeView(braces.LoginRequiredMixin, generic.ListView):
-    model = Criterium
+    model = Criterion
     template_name = 'criteria/index.html'
 
     def get_queryset(self):
         qs = self.model.objects.annotate(
-            n_experiments=Count('experimentcriterium')
+            n_experiments=Count('experimentcriterion')
         )
         return qs
 
 
 class CriteriaCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
                          generic.CreateView):
-    form_class = CriteriumForm
+    form_class = CriterionForm
     template_name = 'criteria/new.html'
     success_url = reverse('experiments:criteria_home')
     success_message = _('criteria:messages:created')
@@ -42,18 +42,18 @@ class CriteriaCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
 
 class CriteriaUpdateView(braces.LoginRequiredMixin, SuccessMessageMixin,
                          generic.UpdateView):
-    form_class = CriteriumForm
+    form_class = CriterionForm
     template_name = 'criteria/edit.html'
     success_url = reverse('experiments:criteria_home')
     success_message = _('criteria:messages:updated')
-    model = Criterium
+    model = Criterion
 
 
 class CriteriaDeleteView(braces.LoginRequiredMixin,
                          DeleteSuccessMessageMixin, generic.DeleteView):
     success_message = _('criteria:messages:deleted')
     success_url = reverse('experiments:criteria_home')
-    model = Criterium
+    model = Criterion
     template_name = 'criteria/delete.html'
 
 #
@@ -108,15 +108,15 @@ class CriteriaListView(braces.LoginRequiredMixin, SuccessMessageMixin,
     """
     This view is a bit special, it's both a ListView and a CreateView in one!
     In addition, there is a second form in the template that POSTs to the
-    AddExistingCriteriumToExperimentView view (below).
+    AddExistingCriterionToExperimentView view (below).
 
     The form_valid, get_initial and get_success_url are for the CreateView,
     the get_queryset is for the ListView and get_context_data is used for the
     second manual form.
     """
     template_name = 'criteria/specific_list.html'
-    model = ExperimentCriterium
-    form_class = ExperimentCriteriumForm
+    model = ExperimentCriterion
+    form_class = ExperimentCriterionForm
     success_message = _('criteria:messages:created_and_added')
 
     def get_initial(self):
@@ -136,7 +136,7 @@ class CriteriaListView(braces.LoginRequiredMixin, SuccessMessageMixin,
         Returns the super() of this method to preserve functionality.
         """
         data = form.cleaned_data
-        create_and_attach_criterium(
+        create_and_attach_criterion(
             self.experiment,
             data['name_form'],
             data['name_natural'],
@@ -154,8 +154,8 @@ class CriteriaListView(braces.LoginRequiredMixin, SuccessMessageMixin,
     def get_context_data(self, **kwargs):
         context = super(CriteriaListView, self).get_context_data(**kwargs)
 
-        context['criteria_options'] = Criterium.objects.exclude(
-            experimentcriterium__in=self.get_queryset()
+        context['criteria_options'] = Criterion.objects.exclude(
+            experimentcriterion__in=self.get_queryset()
         )
 
         context['experiment'] = self.experiment
@@ -164,23 +164,23 @@ class CriteriaListView(braces.LoginRequiredMixin, SuccessMessageMixin,
 
     def get_queryset(self):
         """
-        Only show the Criterium objects connected to the specified experiment
+        Only show the criterion objects connected to the specified experiment
         """
         return self.model.objects.filter(experiment_id=self.experiment.pk)
 
 
-class AddExistingCriteriumToExperimentView(braces.LoginRequiredMixin,
+class AddExistingCriterionToExperimentView(braces.LoginRequiredMixin,
                                            RedirectSuccessMessageMixin,
                                            ExperimentObjectMixin,
                                            RedirectActionView):
     success_message = _('criteria:messages:added_to_experiment')
 
     def action(self, request):
-        cleaned_data = clean_form_existing_criterium(request.POST)
+        cleaned_data = clean_form_existing_criterion(request.POST)
 
-        attach_criterium(
+        attach_criterion(
             self.experiment,
-            cleaned_data['criterium'],
+            cleaned_data['criterion'],
             cleaned_data['correct_value'],
             cleaned_data['message_failed'],
         )
@@ -192,16 +192,16 @@ class AddExistingCriteriumToExperimentView(braces.LoginRequiredMixin,
         )
 
 
-class RemoveCriteriumFromExperiment(braces.LoginRequiredMixin,
+class RemoveCriterionFromExperiment(braces.LoginRequiredMixin,
                                     RedirectSuccessMessageMixin,
                                     ExperimentObjectMixin,
                                     RedirectActionView):
     success_message = _('criteria:messages:removed_from_experiment')
 
     def action(self, request):
-        criterium_pk = self.kwargs.get('criterium')
+        criterion_pk = self.kwargs.get('criterion')
 
-        ExperimentCriterium.objects.get(pk=criterium_pk).delete()
+        ExperimentCriterion.objects.get(pk=criterion_pk).delete()
 
     def get_redirect_url(self, *args, **kwargs):
         return reverse(

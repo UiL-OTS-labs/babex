@@ -4,8 +4,8 @@ from pytz import timezone
 from dateutil.relativedelta import relativedelta
 from django.test import TestCase
 
-from participants.models import Participant, CriteriumAnswer
-from .models import Experiment, Criterium, ExperimentCriterium, Appointment, TimeSlot
+from participants.models import Participant, CriterionAnswer
+from .models import Experiment, Criterion, ExperimentCriterion, Appointment, TimeSlot
 from .utils.exclusion import get_eligible_participants_for_experiment
 
 
@@ -28,7 +28,7 @@ class ExclusionTests(TestCase):
             max_places=9000,
         )
 
-        self.criterium = Criterium.objects.create(
+        self.criterion = Criterion.objects.create(
             name_form='test',
             name_natural='test',
             values='yes,no',
@@ -49,7 +49,7 @@ class ExclusionTests(TestCase):
         self.language_options = ['nl', 'Elvish']
         self.sex_options = ['M', 'F']
         self.social_status_options = ['S', 'O']
-        self.criterium_answers_options = ['yes', 'no']
+        self.criterion_answers_options = ['yes', 'no']
         self.excluded_experiment_options = [False, True]
 
         for dyslexic in self.dyslexic_options:
@@ -59,8 +59,8 @@ class ExclusionTests(TestCase):
                         for language in self.language_options:
                             for sex in self.sex_options:
                                 for social_status in self.social_status_options:
-                                    for criterium_answer in \
-                                            self.criterium_answers_options:
+                                    for criterion_answer in \
+                                            self.criterion_answers_options:
                                         for excluded_experiment in \
                                                 self.excluded_experiment_options:
                                             p = Participant.objects.create(
@@ -75,10 +75,10 @@ class ExclusionTests(TestCase):
                                                 email_subscription=True,
                                             )
 
-                                            CriteriumAnswer.objects.create(
+                                            CriterionAnswer.objects.create(
                                                 participant=p,
-                                                criterium=self.criterium,
-                                                answer=criterium_answer,
+                                                criterion=self.criterion,
+                                                answer=criterion_answer,
                                             )
 
                                             if excluded_experiment:
@@ -95,7 +95,7 @@ class ExclusionTests(TestCase):
                len(self.multilingual_options) * len(self.age_options) * \
                len(self.language_options) * len(self.sex_options) * \
                len(self.social_status_options) * len(self.dyslexic_options) * \
-               len(self.criterium_answers_options) * \
+               len(self.criterion_answers_options) * \
                len(self.excluded_experiment_options)
 
     def _remove_options(self, name, values):
@@ -269,15 +269,15 @@ class ExclusionTests(TestCase):
         self.assertEqual(self.num_options, len(part))
 
     def test_specific_criteria_exclusion(self):
-        ExperimentCriterium.objects.create(
+        ExperimentCriterion.objects.create(
             experiment=self.experiment,
-            criterium=self.criterium,
+            criterion=self.criterion,
             correct_value='yes'
         )
 
         part = get_eligible_participants_for_experiment(self.experiment)
 
-        self._leave_options('criterium_answers', 'yes')
+        self._leave_options('criterion_answers', 'yes')
         self._remove_options('dyslexic', True)
         self.assertEqual(self.num_options, len(part))
 

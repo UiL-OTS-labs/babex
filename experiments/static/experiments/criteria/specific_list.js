@@ -1,17 +1,16 @@
 $(function () {
-    $("#id_criterium").change(function () {
+    $("#id_criterion").change(function () {
         let self = $(this);
-        let correct_value_select = $('#id_criterium_correct_value');
-        let criterium = self.val();
+        let correct_value_select = $('#id_criterion_correct_value');
+        let criterion = self.val();
 
         // Destroy select2 so we can add items
         correct_value_select.select2("destroy");
 
         $('.correct-answer-option').each(function () {
             let el = $(this);
-            let disabled = el.attr('data-criterium') != criterium;
+            let disabled = el.attr('data-criterion') != criterion;
             el.attr('disabled', disabled);
-            console.log(el)
         });
 
         correct_value_select.val([]);

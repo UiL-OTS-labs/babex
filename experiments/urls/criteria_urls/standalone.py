@@ -6,9 +6,9 @@ from experiments.views import (CriteriaCreateView,
 
 urlpatterns = [
     path('', CriteriaHomeView.as_view(), name='criteria_home'),
-    path('new/', CriteriaCreateView.as_view(), name='criterium_create'),
+    path('new/', CriteriaCreateView.as_view(), name='criterion_create'),
     path('<int:pk>/', CriteriaUpdateView.as_view(),
-         name='criterium_update'),
+         name='criterion_update'),
     path('<int:pk>/delete/', CriteriaDeleteView.as_view(),
-         name='criterium_delete'),
+         name='criterion_delete'),
 ]

@@ -1,12 +1,12 @@
 from rest_framework import serializers
 
-from experiments.models import ExperimentCriterium
+from experiments.models import ExperimentCriterion
 
 
-class ExperimentCriteriumSerializer(serializers.ModelSerializer):
+class ExperimentCriterionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ExperimentCriterium
+        model = ExperimentCriterion
         fields = [
-            'id', 'criterium', 'correct_value', 'message_failed'
+            'id', 'criterion', 'correct_value', 'message_failed'
         ]
         depth = 1

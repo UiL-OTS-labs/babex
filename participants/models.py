@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 import main.fields as e_fields
 from api.auth.models import ApiUser
-from experiments.models.criteria_models import Criterium
+from experiments.models.criteria_models import Criterion
 
 
 class Participant(models.Model):
@@ -154,19 +154,19 @@ class SecondaryEmail(models.Model):
         return "<SecondaryEmail ({})>".format(self.email)
 
 
-class CriteriumAnswer(models.Model):
+class CriterionAnswer(models.Model):
 
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
 
-    criterium = models.ForeignKey(Criterium, on_delete=models.CASCADE)
+    criterion = models.ForeignKey(Criterion, on_delete=models.CASCADE)
 
     answer = e_fields.EncryptedTextField(
-        _('criterium_answer:attribute:answer')
+        _('criterion_answer:attribute:answer')
     )
 
     def __str__(self):
         return "({}) {}: {}".format(
             self.participant.name,
-            self.criterium.name_natural,
+            self.criterion.name_natural,
             self.answer
         )

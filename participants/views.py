@@ -7,8 +7,8 @@ from django.views import generic
 from uil.core.views import FormSetUpdateView
 from uil.core.views.mixins import DeleteSuccessMessageMixin
 
-from .forms import CriteriumAnswerForm, ParticipantForm, ParticipantMergeForm
-from .models import CriteriumAnswer, Participant
+from .forms import CriterionAnswerForm, ParticipantForm, ParticipantMergeForm
+from .models import CriterionAnswer, Participant
 from .utils import merge_participants
 
 
@@ -48,13 +48,13 @@ class ParticipantDeleteView(braces.LoginRequiredMixin,
 
 class ParticipantSpecificCriteriaUpdateView(braces.LoginRequiredMixin,
                                             FormSetUpdateView):
-    form = CriteriumAnswerForm
+    form = CriterionAnswerForm
     template_name = 'participants/specific_criteria.html'
     succes_url = reverse('participants:home')
 
     def get_queryset(self):
 
-        return CriteriumAnswer.objects.filter(participant=self.participant)
+        return CriterionAnswer.objects.filter(participant=self.participant)
 
     def get_context_data(self, **kwargs):
         context = super(ParticipantSpecificCriteriaUpdateView,

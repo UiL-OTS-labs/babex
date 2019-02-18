@@ -1,9 +1,9 @@
 from django.urls import path
 
-from experiments.views import (AddExistingCriteriumToExperimentView,
+from experiments.views import (AddExistingCriterionToExperimentView,
                                CriteriaListView,
                                DefaultCriteriaUpdateView,
-                               RemoveCriteriumFromExperiment,
+                               RemoveCriterionFromExperiment,
                                )
 
 urlpatterns = [
@@ -19,13 +19,13 @@ urlpatterns = [
         name='specific_criteria'
     ),
     path(
-        'criteria/remove/<int:criterium>/',
-        RemoveCriteriumFromExperiment.as_view(),
-        name='remove_criterium_from_experiment'
+        'criteria/remove/<int:criterion>/',
+        RemoveCriterionFromExperiment.as_view(),
+        name='remove_criterion_from_experiment'
     ),
     path(
         'criteria/add/',
-        AddExistingCriteriumToExperimentView.as_view(),
-        name='add_criterium_to_experiment'
+        AddExistingCriterionToExperimentView.as_view(),
+        name='add_criterion_to_experiment'
     ),
 ]

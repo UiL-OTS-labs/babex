@@ -40,19 +40,19 @@ def merge_participants(old: Participant, new: Participant) -> Participant:
         appointment.save()
 
     # Merge specific criteria answers
-    for criterium_answer in new.criteriumanswer_set.all():
+    for criterion_answer in new.criterionanswer_set.all():
         # If the new email is not yet known in the old object
-        old_answer = old.criteriumanswer_set.filter(
-                criterium=criterium_answer.criterium
+        old_answer = old.criterionanswer_set.filter(
+                criterion=criterion_answer.criterion
         )
         if old_answer:
             old_answer = old_answer[0]
-            old_answer.answer = criterium_answer.answer
+            old_answer.answer = criterion_answer.answer
             old_answer.save()
-            criterium_answer.delete()
+            criterion_answer.delete()
         else:
-            criterium_answer.participant = old
-            criterium_answer.save()
+            criterion_answer.participant = old
+            criterion_answer.save()
 
     # Update attributes
     old.name = new.name
