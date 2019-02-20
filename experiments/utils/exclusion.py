@@ -131,9 +131,6 @@ Participant) -> bool:
     # Turn our QuerySet into a list, so we can modify it
     criteria_answers = list(criteria_answers)
 
-    # List of all allowed participants
-    filtered = []
-
     if _should_exclude_by_filters(participant, filters):
         return False
 
