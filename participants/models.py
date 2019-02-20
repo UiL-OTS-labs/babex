@@ -15,7 +15,6 @@ class Participant(models.Model):
         ('R', _('participant:attribute:handedness:righthanded')),
     )
 
-    # Yes, this is controversial. I'm sorry!
     SEX = (
         ('M', _('participant:attribute:sex:male')),
         ('F', _('participant:attribute:sex:female')),
