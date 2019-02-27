@@ -5,15 +5,15 @@ class PpnLdapBackend(LDAPBackend):
 
     def get_or_build_user(self, username, ldap_user):
         """
-       This must return a (User, built) 2-tuple for the given LDAP user.
+        This must return a (User, built) 2-tuple for the given LDAP user.
 
-       username is the Django-friendly username of the user. ldap_user.dn is
-       the user's DN and ldap_user.attrs contains all of their LDAP
-       attributes.
+        username is the Django-friendly username of the user. ldap_user.dn is
+        the user's DN and ldap_user.attrs contains all of their LDAP
+        attributes.
 
-       The returned User object may be an unsaved model instance.
+        The returned User object may be an unsaved model instance.
 
-       """
+        """
         model = self.get_user_model()
 
         if self.settings.USER_QUERY_FIELD:
