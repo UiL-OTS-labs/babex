@@ -1,0 +1,17 @@
+*English below*
+
+Beste {{ name }},
+
+Een administrator heeft een account voor u aangemaakt!
+
+Login: {{ email }}>
+Wachtwoord: Uw Solis wachtwoord
+
+-------------
+
+Dear {{ name }},
+
+An administrator has created an account for you!
+
+Login: {{ email }}><br/>
+Password: Your Solis password

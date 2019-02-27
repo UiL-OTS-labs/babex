@@ -11,11 +11,26 @@
 {% block content %}
 <div class="uu-inner-container">
     <div class="col-12">
-        <div class="float-right button button-colored">
-            <a href="{% url 'leaders:create' %}">
-                {% trans 'leaders:home:create_leader' %}
-            </a>
+        <div class="float-right">
+            <div class="button button-colored">
+                <a href="{% url 'leaders:create' %}">
+                    {% if ldap %}
+                        {% trans 'leaders:home:create_leader:local' %}
+                    {% else %}
+                        {% trans 'leaders:home:create_leader' %}
+                    {% endif %}
+                </a>
+            </div>
+            {% if ldap %}
+                <br/>
+                <div class="button button-colored mt-1">
+                    <a href="{% url 'leaders:create_ldap' %}">
+                        {% trans 'leaders:home:create_leader:ldap' %}
+                    </a>
+                </div>
+            {% endif %}
         </div>
+
         <h1>
             {% trans 'leaders:home:header' %}
         </h1>
@@ -26,22 +41,27 @@
             <thead>
                 <tr>
                     <th>
-                        Id
+                        {% trans 'leaders:home:id' %}
                     </th>
                     <th>
-                        Name
+                        {% trans 'leaders:home:name' %}
                     </th>
                     <th>
-                        Email
+                        {% trans 'leaders:home:email' %}
                     </th>
                     <th>
-                        Phonenumber
+                        {% trans 'leaders:home:phone' %}
                     </th>
                     <th>
-                        Active
+                        {% trans 'leaders:home:active' %}
                     </th>
+                    {% if ldap %}
+                        <th>
+                            {% trans 'leaders:home:is_ldap' %}
+                        </th>
+                    {% endif %}
                     <th>
-                        Actions
+                        {% trans 'leaders:home:actions' %}
                     </th>
                 </tr>
             </thead>
@@ -64,10 +84,21 @@
                         <td class="icon-yesno">
                             {{ leader.active|yesno:"," }}
                         </td>
+                        {% if ldap %}
+                            <td class="icon-yesno">
+                                {{ leader.api_user.is_ldap_account|yesno:"," }}
+                            </td>
+                        {% endif %}
                         <td>
-                            <a href="{% url 'leaders:update' leader.pk %}" class="icon-update">
-                                
-                            </a>
+                            {% if leader.api_user.is_ldap_account %}
+                                <a href="{% url 'leaders:update_ldap' leader.pk %}" class="icon-update">
+                                    
+                                </a>
+                            {% else %}
+                                <a href="{% url 'leaders:update' leader.pk %}" class="icon-update">
+                                    
+                                </a>
+                            {% endif %}
                             <a
                                 href="{% url 'leaders:delete' leader.pk %}"
                                 class="icon-delete"

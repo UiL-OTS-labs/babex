@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from django.conf import settings
 from pytz import timezone
 
+from api.auth.ldap_backend import ApiLdapBackend
 from api.auth.models import ApiGroup, ApiUser, UserToken
 from api.utils import get_reset_links
 from main.utils import send_template_email
@@ -65,6 +66,53 @@ def create_leader(name: str, email: str, phonenumber: str,
     return leader
 
 
+def create_ldap_leader(name: str, email: str, phonenumber: str) -> Leader:
+    """
+    This function creates a new Leader object, which will log in through the
+    LDAP.
+
+    If the email specified is already used, it will return the Leader object for
+    that email.
+
+    If there already is a ApiUser object with that email, that one will be
+    retrieved and used in the Leader object. That account will NOT be
+    updated to use ldap. This can happen if someone who already made an account
+     as a participant is added as a leader.
+
+    If no ApiUser object exists, one will be created.
+
+    In both cases the ApiUser object is added to the leader group.
+
+    :param email:
+    :return:
+    """
+    _leader_group = ApiGroup.objects.get(name=settings.LEADER_GROUP)
+    existing_leader = Leader.objects.filter(api_user__email=email)
+
+    if existing_leader:
+        return existing_leader[0]
+
+    leader = Leader()
+    leader.name = name
+    leader.phonenumber = phonenumber
+
+    existing_api_user = ApiUser.objects.filter(email=email)
+
+    if existing_api_user:
+        api_user = existing_api_user[0]
+    else:
+        api_user = ApiLdapBackend().populate_user(email)
+
+    if _leader_group not in api_user.groups.all():
+        api_user.groups.add(_leader_group)
+        api_user.save()
+
+    leader.api_user = api_user
+    leader.save()
+
+    return leader
+
+
 def notify_new_leader(leader: Leader) -> None:
     has_password = leader.api_user.has_password
 
@@ -95,6 +143,22 @@ def notify_new_leader(leader: Leader) -> None:
         [leader.api_user.email],
         subject,
         'leaders/mail/notify_new_leader',
+        context,
+        'no-reply@uu.nl'
+    )
+
+
+def notify_new_ldap_leader(leader: Leader) -> None:
+    subject = 'UiL OTS Experimenten: new account'
+    context = {
+        'name':             leader.name,
+        'email':            leader.api_user.email,
+    }
+
+    send_template_email(
+        [leader.api_user.email],
+        subject,
+        'leaders/mail/notify_new_ldap_leader',
         context,
         'no-reply@uu.nl'
     )

@@ -1,6 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import authentication
 
+from api.auth.ldap_backend import ApiLdapBackend
 from .models import ApiUser
 from .token import JwtToken
 
@@ -22,13 +23,27 @@ class PostAuthenticator:
 
     @classmethod
     def authenticate(cls, username, password, *args, **kwargs):
-
         try:
             user = ApiUser.objects.get(email=username)
+            print(user)
         except ObjectDoesNotExist:
             return None
 
-        if user.check_password(password):
-            return user
+        # If it's an LDAP account, attempt authentication with the ldap backend
+        # Only available for leader accounts
+        if user.is_ldap_account and user.is_leader:
+            try:
+                # For complicated reasons*, we let the LDAP backend recreate our
+                # user model
+                # * basically, it's easier to do this than to override
+                # everything in the backend
+                user = ApiLdapBackend().authenticate(username, password)
+            except:
+                return None
 
-        return None
+            return user
+        # If it's not an ldap account, check the password field
+        elif user.check_password(password):
+            return user
+        else:
+            return None

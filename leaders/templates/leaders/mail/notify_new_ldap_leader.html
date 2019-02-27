@@ -1,0 +1,35 @@
+{% extends 'mail/base.html' %}
+
+{% block subtitle %}
+{% endblock %}
+
+{% block content %}
+    <p>
+        <strong>English below</strong>
+    </p>
+    <p>
+        Beste {{ name }},
+    </p>
+    <p>
+        Een administrator heeft een account voor u aangemaakt!
+    </p>
+    <p>
+        Login: {{ email }}<br/>
+        Wachtwoord: Uw Solis-wachtwoord
+    </p>
+    <hr>
+    <p>
+        Dear {{ name }},
+    </p>
+    <p>
+        An administrator has created an account for you!
+    </p>
+    <p>
+        Login: {{ email }}<br/>
+        Password: Your solis password
+    </p>
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

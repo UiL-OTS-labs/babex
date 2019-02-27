@@ -26,6 +26,8 @@ class ApiUser(models.Model):
 
     groups = models.ManyToManyField(ApiGroup)
 
+    is_ldap_account = models.BooleanField(default=False)
+
     @property
     def is_leader(self):
         return hasattr(self, 'leader')

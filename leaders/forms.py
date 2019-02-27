@@ -74,6 +74,52 @@ class LeaderCreateForm(forms.Form):
         return _clean_confirm_password(self)
 
 
+class LDAPLeaderCreateForm(forms.Form):
+    """This form is meant for creating Leaders
+
+    We're using a regular form, as the info for Leaders are spread over multiple
+    models.
+    """
+
+    name = forms.Field(
+        label=_('leader:form:name'),
+    )
+
+    email = forms.EmailField(
+        label=_('leader:form:email'),
+    )
+
+    phonenumber = forms.Field(
+        label=_('leader:form:phonenumber'),
+    )
+
+    notify_user = forms.BooleanField(
+        label=_('leaders:forms:create_form:notify_user:label'),
+        help_text=_('leaders:forms:create_form:notify_user:help_text:ldap'),
+        required=False,  # Bit of a misnomer, it means False is a valid value
+        initial=True,
+    )
+
+    def clean_email(self):
+        """This clean method ensures that we do not create new leaders with
+                    existing emails.
+                    """
+        data = self.cleaned_data['email']
+
+        if not data.endswith('uu.nl'):
+            raise forms.ValidationError(
+                _('leader:form:email:error:not_uu_mail')
+            )
+
+        existing_user = Leader.objects.filter(api_user__email=data)
+
+        if existing_user:
+            raise forms.ValidationError(
+                _('leader:form:email:error:user_exists'))
+
+        return data
+
+
 class LeaderUpdateForm(forms.Form):
     """This form is meant for updating Leaders
 
@@ -154,3 +200,53 @@ class LeaderUpdateForm(forms.Form):
                     _('leader:form:password:error:empty'))
 
         return password
+
+
+class LDAPLeaderUpdateForm(forms.Form):
+    """This form is meant for updating Leaders
+
+    We're using a regular form, as the info for Leaders are spread over multiple
+    models.
+    """
+
+    leader = forms.ModelChoiceField(
+        Leader.objects.all(),
+        widget=forms.HiddenInput
+    )
+
+    active = forms.BooleanField(
+        label=_('leader:form:active'),
+        required=False,
+    )
+
+    name = forms.Field(
+        label=_('leader:form:name'),
+    )
+
+    email = forms.EmailField(
+        label=_('leader:form:email'),
+    )
+
+    phonenumber = forms.Field(
+        label=_('leader:form:phonenumber'),
+    )
+
+    def clean_email(self):
+        """This clean method ensures that we do not create new leaders with
+                    existing emails.
+                    """
+        data = self.cleaned_data['email']
+        current_leader = self.cleaned_data['leader']
+
+        if not data.endswith('uu.nl'):
+            raise forms.ValidationError(
+                _('leader:form:email:error:not_uu_mail')
+            )
+
+        existing_user = Leader.objects.filter(api_user__email=data)
+
+        if existing_user and current_leader != existing_user[0]:
+            raise forms.ValidationError(
+                _('leader:form:email:error:user_exists'))
+
+        return data

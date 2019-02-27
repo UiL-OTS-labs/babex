@@ -1,18 +1,19 @@
 import braces.views as braces
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import Count, Q
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views import generic
 
-from .forms import LeaderCreateForm, LeaderUpdateForm
+from main.utils import is_ldap_enabled
+from .forms import LDAPLeaderCreateForm, LeaderCreateForm, LeaderUpdateForm, \
+    LDAPLeaderUpdateForm
 from .models import Leader
-from .utils import create_leader, delete_leader, notify_new_leader, \
-    update_leader
-
-from django.db.models import Count, Q
-from django.conf import settings
+from .utils import create_ldap_leader, create_leader, delete_leader, \
+    notify_new_ldap_leader, notify_new_leader, update_leader
 
 
 class LeaderHomeView(braces.LoginRequiredMixin, generic.ListView):
@@ -32,6 +33,13 @@ class LeaderHomeView(braces.LoginRequiredMixin, generic.ListView):
                 )
             )
         )
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(LeaderHomeView, self).get_context_data(*args, **kwargs)
+
+        context['ldap'] = is_ldap_enabled()
+
+        return context
 
 
 class LeaderCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
@@ -59,6 +67,32 @@ class LeaderCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
             notify_new_leader(leader)
 
         return super(LeaderCreateView, self).form_valid(form)
+
+
+class LDAPLeaderCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
+                           generic.FormView):
+    template_name = 'leaders/new.html'
+    form_class = LDAPLeaderCreateForm
+    success_url = reverse('leaders:home')
+    success_message = _('leaders:create:success_message')
+
+    def form_valid(self, form):
+        """This method creates a new leader and if needed, notifies the new user
+        of this action.
+        """
+
+        data = form.cleaned_data
+
+        leader = create_ldap_leader(
+            data['name'],
+            data['email'],
+            data['phonenumber'],
+        )
+
+        if data['notify_user']:
+            notify_new_ldap_leader(leader)
+
+        return super(LDAPLeaderCreateView, self).form_valid(form)
 
 
 class LeaderUpdateView(braces.LoginRequiredMixin, SuccessMessageMixin,
@@ -97,6 +131,40 @@ class LeaderUpdateView(braces.LoginRequiredMixin, SuccessMessageMixin,
         )
 
         return super(LeaderUpdateView, self).form_valid(form)
+
+
+class LDAPLeaderUpdateView(braces.LoginRequiredMixin, SuccessMessageMixin,
+                           generic.FormView):
+    template_name = 'leaders/update.html'
+    form_class = LDAPLeaderUpdateForm
+    success_url = reverse('leaders:home')
+    success_message = _('leaders:update:success_message')
+
+    def get_initial(self):
+        leader_pk = self.kwargs.pop('pk')
+        leader = Leader.objects.get(pk=leader_pk)
+
+        return {
+            'name':        leader.name,
+            'email':       leader.api_user.email,
+            'phonenumber': leader.phonenumber,
+            'leader':      leader,
+            'active':      leader.is_active_leader(),
+        }
+
+    def form_valid(self, form):
+        data = form.cleaned_data
+
+        update_leader(
+            data['leader'],
+            data['name'],
+            data['email'],
+            data['phonenumber'],
+            None,
+            data['active'],
+        )
+
+        return super(LDAPLeaderUpdateView, self).form_valid(form)
 
 
 class LeaderDeleteView(braces.LoginRequiredMixin, generic.DetailView):
