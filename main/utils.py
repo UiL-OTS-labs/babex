@@ -104,3 +104,7 @@ def get_supreme_admin() -> User:
     :return:
     """
     return User.objects.filter(is_supreme_admin=True)[0]
+
+
+def is_ldap_enabled() -> bool:
+    return hasattr(settings, 'AUTH_LDAP_SERVER_URI')

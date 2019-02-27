@@ -214,3 +214,9 @@ CSP_IMG_SRC = ["'self'", 'data:', ]
 
 MENU_SELECT_PARENTS = True
 MENU_HIDE_EMPTY = False
+
+
+try:
+    from .ldap_settings import *
+except ImportError:
+    print('Proceeding without LDAP settings')

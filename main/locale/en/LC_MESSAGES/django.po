@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-22 12:05+0000\n"
+"POT-Creation-Date: 2019-02-27 13:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,6 +61,10 @@ msgstr "Log out"
 #: main/models.py:9
 msgid "user:is_supreme_admin"
 msgstr "Main admin"
+
+#: main/models.py:14
+msgid "user:is_ldap_account"
+msgstr "Solis Account"
 
 #: main/templates/base/login_header.html:6
 msgid "site:header:login"
@@ -138,15 +142,23 @@ msgstr "Cancel"
 msgid "global:delete:confirm"
 msgstr "Confirm"
 
-#: main/templates/users/index.html:8 main/templates/users/index.html:21
+#: main/templates/users/index.html:8 main/templates/users/index.html:35
 msgid "users:home:header"
 msgstr "Administrator accounts"
 
-#: main/templates/users/index.html:17
+#: main/templates/users/index.html:19
+msgid "users:home:create_user:local"
+msgstr "New local admin account"
+
+#: main/templates/users/index.html:21
 msgid "users:home:create_user"
 msgstr "New admin account"
 
-#: main/templates/users/index.html:24
+#: main/templates/users/index.html:29
+msgid "users:home:create_user:ldap"
+msgstr "New Solis admin account"
+
+#: main/templates/users/index.html:38
 msgid "users:home:info_text"
 msgstr ""
 "The main admin account is the one that will be used as the contact in the "
@@ -154,23 +166,23 @@ msgstr ""
 "will be selected pseudo-randomly. (So you probably want to make sure there "
 "is only one).<br/>"
 
-#: main/templates/users/index.html:33
+#: main/templates/users/index.html:51
 msgid "users:home:name"
 msgstr "Name"
 
-#: main/templates/users/index.html:45
+#: main/templates/users/index.html:70
 msgid "users:home:actions"
 msgstr "Actions"
 
-#: main/templates/users/index.html:71
+#: main/templates/users/index.html:105 main/templates/users/index.html:113
 msgid "users:home:edit:title"
 msgstr "Edit account"
 
-#: main/templates/users/index.html:78
+#: main/templates/users/index.html:120
 msgid "users:home:change_password:title"
 msgstr "Change password"
 
-#: main/templates/users/index.html:88
+#: main/templates/users/index.html:131
 msgid "users:home:delete:title"
 msgstr "Delete account"
 
@@ -187,14 +199,14 @@ msgstr " "
 msgid "Empty list and '%(class_name)s.allow_empty' is False."
 msgstr ""
 
-#: main/views/users.py:24
+#: main/views/users.py:38 main/views/users.py:48
 msgid "users:message:updated"
 msgstr "Account updated!"
 
-#: main/views/users.py:34
+#: main/views/users.py:58 main/views/users.py:68
 msgid "users:message:created"
 msgstr "New account created!"
 
-#: main/views/users.py:44
+#: main/views/users.py:85
 msgid "users:message:changed_password"
 msgstr "Password changed!"

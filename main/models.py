@@ -7,8 +7,10 @@ from django.utils.translation import ugettext_lazy as _
 class User(AbstractUser):
     is_supreme_admin = models.BooleanField(
         _('user:is_supreme_admin'),
-        default=False
+        default=False,
     )
 
-    pass
-
+    is_ldap_account = models.BooleanField(
+        _('user:is_ldap_account'),
+        default=False,
+    )

@@ -12,3 +12,4 @@ cryptography
 python-dateutil
 -e git+https://github.com/UiL-OTS-labs/django-shared-core.git@master#egg=uil-django-core
 mysqlclient<1.4.0
+django-auth-ldap
