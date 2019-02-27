@@ -5,14 +5,10 @@ class PpnLdapBackend(LDAPBackend):
 
     def get_or_build_user(self, username, ldap_user):
         """
-        This must return a (User, built) 2-tuple for the given LDAP user.
+        This override removes the functionality to create new users on login.
 
-        username is the Django-friendly username of the user. ldap_user.dn is
-        the user's DN and ldap_user.attrs contains all of their LDAP
-        attributes.
-
-        The returned User object may be an unsaved model instance.
-
+        Technically this should be done through a config flag, but that
+        doesn't work for some reason.
         """
         model = self.get_user_model()
 
@@ -26,6 +22,17 @@ class PpnLdapBackend(LDAPBackend):
             query_value = username.lower()
             lookup = '{}__iexact'.format(query_field)
 
+        print(lookup, query_value)
+
+        user = self._get_user_object(model, lookup, query_value)
+
+        if user:
+            user.is_ldap_account = True
+            user.save()
+
+        return user, False
+
+    def _get_user_object(self, model, lookup, query_value):
         try:
             user = model.objects.get(**{
                 lookup: query_value
@@ -33,7 +40,4 @@ class PpnLdapBackend(LDAPBackend):
         except model.DoesNotExist:
             user = None
 
-        user.is_ldap_account = True
-        user.save()
-
-        return user, False
+        return user
