@@ -1,6 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
+from api.auth.models import ApiUser
 from .models import Leader
 
 
@@ -178,9 +179,9 @@ class LeaderUpdateForm(forms.Form):
         data = self.cleaned_data['email']
         current_leader = self.cleaned_data['leader']
 
-        existing_user = Leader.objects.filter(api_user__email=data)
+        existing_user = ApiUser.objects.get_by_email(data)
 
-        if existing_user and current_leader != existing_user[0]:
+        if existing_user and existing_user and current_leader != existing_user[0]:
             raise forms.ValidationError(
                 _('leader:form:email:error:user_exists'))
 
@@ -192,7 +193,6 @@ class LeaderUpdateForm(forms.Form):
     def clean_password(self):
         """Ensures the password fields are not empty if they should be"""
         password = self.cleaned_data['password']
-        print(self.cleaned_data)
 
         if not password:
             if not self.cleaned_data['keep_current_password']:
