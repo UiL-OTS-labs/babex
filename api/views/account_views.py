@@ -22,7 +22,10 @@ class ChangePasswordView(views.APIView):
 
         success = False
 
-        if user.check_password(post_data['current_password']):
+        if not user.is_ldap_account and\
+                user.check_password(
+                    post_data['current_password']
+                ):
 
             user.set_password(post_data['new_password'])
             user.passwords_needs_change = False
@@ -47,6 +50,12 @@ class ForgotPasswordView(views.APIView):
         if email:
             try:
                 user = ApiUser.objects.get(email=email)
+
+                if user.is_ldap_account:
+                    # Slightly hacky, but this way we don't enter a new ident
+                    # level. And we could justify this as 'the password does
+                    # not exist'
+                    raise ApiUser.DoesNotExist
 
                 token = UserToken.objects.create(
                     user=user,
@@ -112,6 +121,12 @@ class ResetPasswordView(views.APIView):
 
                 if o.is_valid():
                     user = o.user
+
+                    if user.is_ldap_account:
+                        # Slightly hacky, but this way we don't enter a new
+                        # ident level. And we could justify this as 'the
+                        # password does not exist'
+                        raise ApiUser.DoesNotExist
 
                     user.set_password(new_password)
                     user.passwords_needs_change = False
