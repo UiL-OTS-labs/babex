@@ -20,18 +20,15 @@ class ApiLdapBackend(PpnLdapBackend):
 
         return user
 
-    def _get_user_object(self, model, lookup, query_value):
+    def _get_user_object(self,
+                         model,
+                         lookup: str,
+                         query_value: str):
         try:
-            user = model.objects.get(**{
+            user = model.objects.get_by_email(**{
                 lookup: query_value
             })
         except model.DoesNotExist:
-            # Fix the annoying problem that the university allows student
-            # assistants to have 2 emails
-            if 'students.uu.nl' in query_value:
-                query_value = query_value.replace('students.uu.nl', 'uu.nl')
-                user = self._get_user_object(model, lookup, query_value)
-            else:
-                user = None
+            user = None
 
         return user

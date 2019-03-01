@@ -23,10 +23,9 @@ class PostAuthenticator:
 
     @classmethod
     def authenticate(cls, username, password, *args, **kwargs):
-        try:
-            user = ApiUser.objects.get(email=username)
-            print(user)
-        except ObjectDoesNotExist:
+        user = ApiUser.objects.get_by_email(username)
+
+        if not user:
             return None
 
         # If it's an LDAP account, attempt authentication with the ldap backend
@@ -47,3 +46,4 @@ class PostAuthenticator:
             return user
         else:
             return None
+

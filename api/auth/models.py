@@ -15,7 +15,32 @@ class ApiGroup(models.Model):
         return self.name
 
 
+class ApiUserManager(models.Manager):
+
+    def get_by_email(self, email: str, stop_recursion: bool=False):
+        email = email.strip()
+
+        try:
+            user = self.get(email=email)
+        except ApiUser.DoesNotExist:
+            # Fix the annoying problem that the university allows student
+            # assistants to have 2 emails
+            if not stop_recursion and email.endswith('@students.uu.nl'):
+                email = email.replace('students.uu.nl', 'uu.nl')
+                user = self.get_by_email(email, True)
+            elif not stop_recursion and email.endswith('@uu.nl'):
+                email = email.replace('uu.nl', 'students.uu.nl')
+                user = self.get_by_email(email, True)
+            else:
+                user = None
+
+        return user
+
+
 class ApiUser(models.Model):
+
+    objects = ApiUserManager()
+
     email = models.EmailField(unique=True)
     password = models.TextField()
 

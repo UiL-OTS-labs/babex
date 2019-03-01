@@ -32,7 +32,10 @@ class PpnLdapBackend(LDAPBackend):
 
         return user, False
 
-    def _get_user_object(self, model, lookup, query_value):
+    def _get_user_object(self,
+                         model,
+                         lookup: str,
+                         query_value: str):
         try:
             user = model.objects.get(**{
                 lookup: query_value

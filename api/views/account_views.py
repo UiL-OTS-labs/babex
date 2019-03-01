@@ -50,7 +50,7 @@ class ForgotPasswordView(views.APIView):
 
         if email:
             try:
-                user = ApiUser.objects.get(email=email)
+                user = ApiUser.objects.get_by_email(email)
 
                 if user.is_ldap_account:
                     # Slightly hacky, but this way we don't enter a new ident
