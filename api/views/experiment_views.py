@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from api.auth.authenticators import JwtAuthentication
 from api.permissions import IsPermittedClient
 from api.serializers import ExperimentSerializer
+from api.utils import register_participant
 from experiments.models import Experiment
 from experiments.utils.exclusion import check_participant_eligible
 
@@ -56,18 +57,15 @@ class ExperimentsView(rest_mixins.RetrieveModelMixin,  # This default
 
         filtered = []
         for experiment in open_experiments:
-            add = True
+            if not experiment.has_free_timeslots():
+                continue
 
             if filter_personally and not check_participant_eligible(
                     experiment,
                     request.user.participant):
-                add = False
+                continue
 
-            if add and not experiment.has_free_timeslots():
-                add = False
-
-            if add:
-                filtered.append(experiment)
+            filtered.append(experiment)
 
         serializer = self.serializer_class(filtered, many=True)
 
@@ -122,4 +120,21 @@ class SwitchExperimentOpenView(views.APIView):
         return Response({
             'success': True,
             'open':    experiment_object.open
+        })
+
+
+class RegisterView(views.APIView):
+    permission_classes = (IsPermittedClient,)
+    authentication_classes = (JwtAuthentication,)
+
+    def post(self, request, experiment):
+        data = request.data
+        experiment = Experiment.objects.get(pk=experiment)
+
+        success, recoverable, messages = register_participant(data, experiment)
+
+        return Response({
+            'success': success,
+            'recoverable': recoverable,
+            'messages': messages
         })
