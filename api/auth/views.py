@@ -27,6 +27,7 @@ class ApiLoginView(views.ObtainAuthToken):
             'token': token,
             'is_active': user.is_active,
             'is_admin': user.is_frontend_admin,
+            'is_ldap_account': user.is_ldap_account,
             'id': user.pk,
             'groups': groups,
             'needs_password_change': user.passwords_needs_change,
