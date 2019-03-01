@@ -46,6 +46,7 @@ class ForgotPasswordView(views.APIView):
         email = request.POST.get('email', None)
 
         success = False
+        ldap_blocked = False
 
         if email:
             try:
@@ -55,6 +56,7 @@ class ForgotPasswordView(views.APIView):
                     # Slightly hacky, but this way we don't enter a new ident
                     # level. And we could justify this as 'the password does
                     # not exist'
+                    ldap_blocked = True
                     raise ApiUser.DoesNotExist
 
                 token = UserToken.objects.create(
@@ -69,7 +71,8 @@ class ForgotPasswordView(views.APIView):
                 pass
 
         return Response({
-            'success': success
+            'success': success,
+            'ldap_blocked': ldap_blocked,
         })
 
 
