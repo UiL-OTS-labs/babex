@@ -63,7 +63,7 @@ class LeaderCreateForm(forms.Form):
                     """
         data = self.cleaned_data['email']
 
-        existing_user = Leader.objects.filter(api_user__email=data)
+        existing_user = ApiUser.objects.get_by_email(data)
 
         if existing_user:
             raise forms.ValidationError(
@@ -112,7 +112,7 @@ class LDAPLeaderCreateForm(forms.Form):
                 _('leader:form:email:error:not_uu_mail')
             )
 
-        existing_user = Leader.objects.filter(api_user__email=data)
+        existing_user = ApiUser.objects.get_by_email(data)
 
         if existing_user:
             raise forms.ValidationError(
@@ -181,7 +181,7 @@ class LeaderUpdateForm(forms.Form):
 
         existing_user = ApiUser.objects.get_by_email(data)
 
-        if existing_user and existing_user and current_leader != existing_user[0]:
+        if existing_user and current_leader != existing_user.leader:
             raise forms.ValidationError(
                 _('leader:form:email:error:user_exists'))
 
@@ -243,9 +243,9 @@ class LDAPLeaderUpdateForm(forms.Form):
                 _('leader:form:email:error:not_uu_mail')
             )
 
-        existing_user = Leader.objects.filter(api_user__email=data)
+        existing_user = ApiUser.objects.get_by_email(data)
 
-        if existing_user and current_leader != existing_user[0]:
+        if existing_user and current_leader != existing_user.leader:
             raise forms.ValidationError(
                 _('leader:form:email:error:user_exists'))
 
