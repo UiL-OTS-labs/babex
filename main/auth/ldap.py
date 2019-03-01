@@ -22,8 +22,6 @@ class PpnLdapBackend(LDAPBackend):
             query_value = username.lower()
             lookup = '{}__iexact'.format(query_field)
 
-        print(lookup, query_value)
-
         user = self._get_user_object(model, lookup, query_value)
 
         if user:
