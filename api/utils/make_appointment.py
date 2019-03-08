@@ -1,18 +1,15 @@
-from datetime import datetime, timedelta
 from typing import List, Tuple
 
-from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist, SuspiciousOperation
 from django.core.validators import ValidationError, validate_email
 from django.utils.dateparse import parse_date
 
-from api.auth.models import ApiUser
 from comments.models import Comment
 from experiments.models import Appointment, DefaultCriteria, Experiment, \
     TimeSlot
 from experiments.utils.exclusion import indifferentable_vars
-from main.utils import get_supreme_admin, send_template_email
 from participants.models import Participant
+from .common import x_or_else
 
 DEFAULT_INVALID_MESSAGES = {
     'language':         'Je kunt niet meedoen met het experiment omdat je '
@@ -67,156 +64,91 @@ INVALID_EXPERIMENT_MESSAGE = "Je hebt al meegedaan met een eerdere versie " \
                              " keer meedoen. Dankjewel voor je belangstelling!"
 
 
-def send_password_reset_mail(user: ApiUser, token: str) -> None:
-    link, alternative_link = get_reset_links(token)
+def register_participant(data: dict, experiment: Experiment) -> Tuple[bool,
+                                                                      bool,
+                                                                      list]:
+    default_criteria = experiment.defaultcriteria
 
-    subject = 'UiL OTS Experimenten: password reset'
-    context = {
-        'token':            token,
-        'name':             _get_name(user),
-        'link':             link,
-        'alternative_link': alternative_link,
-    }
+    try:
+        time_slot = experiment.timeslot_set.get(pk=data.get('timeslot'))
+    except TimeSlot.DoesNotExist:
+        time_slot = None
 
-    send_template_email(
-        [user.email],
-        subject,
-        'api/mail/password_reset',
-        context,
-        'no-reply@uu.nl'
+    participant = _get_participant(data)
+
+    invalid_default_criteria, \
+    default_criteria_messages = _handle_default_criteria(
+        default_criteria,
+        participant
     )
 
-
-def send_cancel_token_mail(participant: Participant, token: str,
-                           email: str) -> None:
-    link = "{}participant/appointments/{}/".format(settings.FRONTEND_URI, token)
-
-    subject = 'UiL OTS Experimenten: afspraak afzeggen'
-    context = {
-        'token': token,
-        'name':  participant.name or 'proefpersoon',
-        'link':  link,
-    }
-
-    send_template_email(
-        [email],
-        subject,
-        'api/mail/cancel_token',
-        context,
-        'no-reply@uu.nl'
+    invalid_specific_criteria, \
+    specific_criteria_messages = _handle_specific_criteria(
+        experiment,
+        data,
+        participant
     )
 
-
-def cancel_appointment(appointment: Appointment) -> None:
-    _handle_late_comment(appointment)
-    _inform_leaders(appointment)
-    _send_confirmation(appointment)
-
-    appointment.delete()
-
-
-def _handle_late_comment(appointment: Appointment) -> None:
-    """Helper function that adds a comment for this participant if he/she/it
-    cancelled within 24 prior to the appointment.
-    """
-    dt = appointment.timeslot.datetime
-
-    now = datetime.now(tz=dt.tzinfo)
-
-    deadline = dt - timedelta(days=1)
-
-    if now > deadline:
-        comment = Comment()
-        comment.participant = appointment.participant
-        comment.comment = "Cancelled less than 24 before experiment"
-        comment.experiment = appointment.timeslot.experiment
-        comment.save()
-
-
-def _inform_leaders(appointment: Appointment) -> None:
-    experiment = appointment.timeslot.experiment
-
-    leaders = [experiment.leader]
-    if experiment.additional_leaders.exists():
-        leaders.append(*experiment.additional_leaders.all())
-
-    for leader in leaders:
-        subject = 'UiL OTS participant deregistered for experiment: {}'.format(
-            experiment.name)
-        context = {
-            'participant': appointment.participant,
-            'time_slot':   appointment.timeslot,
-            'experiment':  experiment,
-            'leader':      leader,
-        }
-
-        send_template_email(
-            [leader.email],
-            subject,
-            'api/mail/participant_cancelled',
-            context,
-            'no-reply@uu.nl'
-        )
-
-
-def _send_confirmation(appointment: Appointment) -> None:
-    admin = get_supreme_admin()
-    experiment = appointment.timeslot.experiment
-    time_slot = appointment.timeslot
-
-    subject = 'UiL OTS uitschrijven experiment: {}'.format(experiment.name)
-    context = {
-        'participant':     appointment.participant,
-        'time_slot':       time_slot,
-        'experiment':      experiment,
-        'admin':           admin.get_full_name(),
-        'admin_email':     admin.email,
-        'other_time_link': _get_resub_link(experiment.id),
-        'home_link':       settings.FRONTEND_URI,
-    }
-
-    send_template_email(
-        [appointment.participant.email],
-        subject,
-        'api/mail/cancelled_appointment',
-        context,
-        admin.email
+    invalid_previous_experiments, \
+    experiment_messages = _handle_excluded_experiments(
+        experiment,
+        participant
     )
 
-
-def _get_resub_link(experiment_id: int) -> str:
-    return "{}participant/register/{}/".format(
-        settings.FRONTEND_URI,
-        experiment_id
+    invalid_misc_items, \
+    misc_messages = _handle_misc_items(
+        data,
+        time_slot,
     )
 
+    success = not invalid_default_criteria and not invalid_specific_criteria \
+              and not invalid_previous_experiments and not invalid_misc_items
 
-def _get_name(user: ApiUser) -> str:
-    if hasattr(user, 'participant'):
-        return user.participant.mail_name
+    if success:
+        participant.save()
+        _make_appointment(participant, time_slot)
 
-    if hasattr(user, 'leader'):
-        return user.leader.name
+        # We set recoverable to false, as there is nothing to recover
+        # Also, it's easier to work with in the client's view
+        return success, False, ["Je bent ingeschreven voor het experiment! "
+                                "Je krijgt een bevestiging per email."]
 
-    return 'proefpersoon'
+    recoverable = not invalid_default_criteria and not \
+        invalid_specific_criteria and not invalid_previous_experiments
+
+    # Else, get human-friendly messages and return the whole thing
+    messages = default_criteria_messages + specific_criteria_messages + \
+               experiment_messages + misc_messages
+
+    # Success, recoverable, messages
+    return success, recoverable, messages
 
 
-def get_reset_links(token: str) -> Tuple[str, str]:
-    root = settings.FRONTEND_URI
+def get_required_fields(experiment: Experiment, participant: Participant):
+    fields = []
 
-    root = "{}reset_password/".format(root)
+    for field in experiment.defaultcriteria.__dict__.keys():
+        if field not in ['experiment', 'experiment_id', 'min_age', 'max_age',
+                         'dyslexia', '_state']:
+            if getattr(participant, field) is None:
+                fields.append(field)
 
-    complete = "{}{}/".format(root, token)
+    for field in ['birth_date', 'phonenumber', 'name']:
+        if getattr(participant, field) is None:
+            fields.append(field)
 
-    return complete, root
+    if participant.dyslexic is None:
+        fields.append('dyslexia')
 
+    answers = participant.criterionanswer_set.all()
 
-def x_or_else(x, y):
-    """If x is not None/empty string, return x. Else, return y"""
-    if x is None or x == '':
-        return y
+    for experiment_criterion in experiment.experimentcriterion_set.all():
+        try:
+            answers.get(criterion=experiment_criterion.criterion)
+        except ObjectDoesNotExist:
+            fields.append(experiment_criterion.criterion.name_form)
 
-    return x
+    return fields
 
 
 def _get_participant(data: dict) -> Participant:
@@ -487,92 +419,3 @@ def _make_appointment(participant: Participant, time_slot: TimeSlot):
     appointment.save()
 
     # TODO: sent mail
-
-
-def register_participant(data: dict, experiment: Experiment) -> Tuple[bool,
-                                                                      bool,
-                                                                      list]:
-    default_criteria = experiment.defaultcriteria
-
-    try:
-        time_slot = experiment.timeslot_set.get(pk=data.get('timeslot'))
-    except TimeSlot.DoesNotExist:
-        time_slot = None
-
-    participant = _get_participant(data)
-
-    invalid_default_criteria, \
-    default_criteria_messages = _handle_default_criteria(
-        default_criteria,
-        participant
-    )
-
-    invalid_specific_criteria, \
-    specific_criteria_messages = _handle_specific_criteria(
-        experiment,
-        data,
-        participant
-    )
-
-    invalid_previous_experiments, \
-    experiment_messages = _handle_excluded_experiments(
-        experiment,
-        participant
-    )
-
-    invalid_misc_items, \
-    misc_messages = _handle_misc_items(
-        data,
-        time_slot,
-    )
-
-    # TODO: Move things into their own module in a utils package
-
-    success = not invalid_default_criteria and not invalid_specific_criteria \
-              and not invalid_previous_experiments and not invalid_misc_items
-
-    if success:
-        participant.save()
-        _make_appointment(participant, time_slot)
-
-        # We set recoverable to false, as there is nothing to recover
-        # Also, it's easier to work with in the client's view
-        return success, False, ["Je bent ingeschreven voor het experiment! "
-                                "Je krijgt een bevestiging per email."]
-
-    recoverable = not invalid_default_criteria and not \
-        invalid_specific_criteria and not invalid_previous_experiments
-
-    # Else, get human-friendly messages and return the whole thing
-    messages = default_criteria_messages + specific_criteria_messages + \
-               experiment_messages + misc_messages
-
-    # Success, recoverable, messages
-    return success, recoverable, messages
-
-
-def get_required_fields(experiment: Experiment, participant: Participant):
-    fields = []
-
-    for field in experiment.defaultcriteria.__dict__.keys():
-        if field not in ['experiment', 'experiment_id', 'min_age', 'max_age',
-                         'dyslexia', '_state']:
-            if getattr(participant, field) is None:
-                fields.append(field)
-
-    for field in ['birth_date', 'phonenumber', 'name']:
-        if getattr(participant, field) is None:
-            fields.append(field)
-
-    if participant.dyslexic is None:
-        fields.append('dyslexia')
-
-    answers = participant.criterionanswer_set.all()
-
-    for experiment_criterion in experiment.experimentcriterion_set.all():
-        try:
-            answers.get(criterion=experiment_criterion.criterion)
-        except ObjectDoesNotExist:
-            fields.append(experiment_criterion.criterion.name_form)
-
-    return fields
