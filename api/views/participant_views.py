@@ -1,13 +1,15 @@
 from rest_framework import views, viewsets, mixins as rest_mixins, status
 from rest_framework.exceptions import PermissionDenied
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from api.auth.authenticators import JwtAuthentication
 from api.auth.models import UserToken, ApiUser
 from api.permissions import IsPermittedClient
 from api.serializers import AppointmentSerializer
-from api.utils import send_cancel_token_mail, cancel_appointment
-from experiments.models import Appointment
+from api.utils import send_cancel_token_mail, cancel_appointment, \
+    get_required_fields
+from experiments.models import Appointment, Experiment
 from participants.models import Participant
 
 
@@ -86,6 +88,29 @@ class GetAppointmentTokenView(views.APIView):
 
         return Response({
             'success': success
+        })
+
+
+class GetRequiredFields(views.APIView):
+    permission_classes = (IsPermittedClient, IsAuthenticated)
+    authentication_classes = (JwtAuthentication, )
+
+    def get(self, request, *args, **kwargs):
+        fields = None
+
+        if request.user.is_participant:
+            participant = request.user.participant
+            experiment = Experiment.objects.get(
+                pk=kwargs.get('experiment')
+            )
+
+            fields = get_required_fields(experiment, participant)
+
+        if not fields:
+            fields.append('__all__')
+
+        return Response({
+            'fields': fields
         })
 
 
