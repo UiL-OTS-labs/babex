@@ -8,6 +8,7 @@ from comments.models import Comment
 from experiments.models import Appointment, DefaultCriteria, Experiment, \
     TimeSlot
 from experiments.utils.exclusion import indifferentable_vars
+from main.utils import get_supreme_admin
 from participants.models import Participant
 from .common import x_or_else
 
@@ -117,8 +118,12 @@ def register_participant(data: dict, experiment: Experiment) -> Tuple[bool,
         invalid_specific_criteria and not invalid_previous_experiments
 
     # Else, get human-friendly messages and return the whole thing
-    messages = default_criteria_messages + specific_criteria_messages + \
-               experiment_messages + misc_messages
+    messages = _format_messages(
+        default_criteria_messages,
+        specific_criteria_messages,
+        experiment_messages,
+        misc_messages,
+    )
 
     # Success, recoverable, messages
     return success, recoverable, messages
@@ -419,3 +424,16 @@ def _make_appointment(participant: Participant, time_slot: TimeSlot):
     appointment.save()
 
     # TODO: sent mail
+
+
+def _format_messages(*messages: List[str]) -> list:
+    # Flatten the list of lists
+    messages = [item for sublist in messages for item in sublist]
+
+    admin = get_supreme_admin()
+    contact_string = '<a href="mailto:{}">{}</a>'.format(
+        admin.email,
+        admin.get_full_name()
+    )
+
+    return [message.format(contact_string) for message in messages]
