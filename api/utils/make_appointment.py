@@ -159,7 +159,7 @@ def get_required_fields(experiment: Experiment, participant: Participant):
 def _get_participant(data: dict) -> Participant:
     to_lower = lambda x: str(x).lower()
 
-    email = data.get('email')
+    email = data.get('email').strip().lower()
 
     participants = [x for x in
                     Participant.objects.prefetch_related(
@@ -208,18 +208,29 @@ def _get_participant(data: dict) -> Participant:
         data.get('sex')
     )
 
-    participant.birth_date = x_or_else(
-        participant.birth_date,
-        parse_date(data.get('birth_date'))
-    )
+    if data.get('birth_date'):
+        participant.birth_date = x_or_else(
+            participant.birth_date,
+            parse_date(data.get('birth_date'))
+        )
+
     participant.dyslexic = x_or_else(
         participant.dyslexic,
         data.get('dyslexic') == 'Y'
     )
 
     # Update/set all variables that can be changed
-    participant.social_status = data.get('social_status')
-    participant.phone = data.get('phone')
+    # But only if provided
+    participant.social_status = x_or_else(
+        data.get('social_status', None),
+        participant.social_status
+    )
+
+    participant.phonenumber = x_or_else(
+        data.get('phone', None),
+        participant.phonenumber
+    )
+
     if 'mailinglist' in data:
         participant.email_subscription = data.get('mailinglist')
 
