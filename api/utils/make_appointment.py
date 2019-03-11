@@ -326,42 +326,57 @@ def _handle_specific_criteria(
                 failed_criteria.append(specific_criterion.criterion.name_form)
                 messages.append(specific_criterion.message_failed)
 
-        return failed_criteria, messages
+            return failed_criteria, messages
 
-    try:
-        # Rewrite the list of dicts back into a dict of field: value
-        data = {x['name']: int(x['value']) for x in data['specific_criteria']}
-    except ValueError:
-        # ValueError means the user is submitting weird data. This should not
-        # happen, but just in case we are going to crash Django in a secure
-        # manner
-        raise SuspiciousOperation
+        full_form = False
+    else:
+        full_form = True
+        try:
+            # Rewrite the list of dicts back into a dict of field: value
+            data = {x['name']: int(x['value']) for x in data['specific_criteria']}
+        except ValueError:
+            # ValueError means the user is submitting weird data. This should
+            # not happen, but just in case we are going to crash Django in a
+            # secure manner
+            raise SuspiciousOperation
 
     for specific_criterion in specific_criteria:
         name_form = specific_criterion.criterion.name_form
 
-        if name_form not in data:
+        if name_form not in data and full_form:
             failed_criteria.append(
                 name_form
             )
+            messages.append(specific_criterion.message_failed)
             continue
 
-        value = data.get(name_form)
-        # The value sent is actually an integer index corresponding to a value
-        # in values_list, so we extract the chosen value from that list.
-        value = specific_criterion.criterion.values_list[value]
-
-        if specific_criterion.correct_value != value:
-            failed_criteria.append(name_form)
-
-        answer = participant.criterionanswer_set.filter(
+        existing_answer = participant.criterionanswer_set.filter(
             criterion=specific_criterion.criterion
         ).first()
 
-        if answer:
+        value = data.get(name_form, None)
+
+        # If we have a value from the form, use that one
+        if value:
+            # The value sent is actually an integer index corresponding to a
+            # value in values_list, so we extract the chosen value from that
+            # list.
+            value = specific_criterion.criterion.values_list[value]
+        elif existing_answer and not full_form:
+            # If this is not a full-form processing and we have an existing
+            # answer, use that one.
+            value = existing_answer.answer
+
+        if specific_criterion.correct_value != value:
+            failed_criteria.append(name_form)
+            messages.append(specific_criterion.message_failed)
+
+        if existing_answer:
             # Check if the value answered conflicts with the answer this
             # participant has already given (if that previous answer exists)
-            if answer.answer != value:
+            # (Note: this will always fail if we are in fact using an
+            # existing answer. Not that it matters)
+            if value and existing_answer.answer != value:
                 # Make a comment informing the admins for this situation.
                 # We are not going to fail this directly, as some criteria
                 # answers can actually change over time. (For example: has
@@ -371,7 +386,7 @@ def _handle_specific_criteria(
                                   "he/she answered before: {}, old answer: " \
                                   "{}, new answer: {}".format(
                     specific_criterion.criterion.name_natural,
-                    answer.answer,
+                    existing_answer.answer,
                     value
                 )
                 comment.participant = participant
@@ -382,8 +397,8 @@ def _handle_specific_criteria(
                 # object only exists if the participant exists, we're fine.
                 comment.save()
 
-                answer.answer = value
-                answer.save()
+                existing_answer.answer = value
+                existing_answer.save()
 
     return failed_criteria, messages
 
