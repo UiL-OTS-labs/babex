@@ -9,7 +9,7 @@ from experiments.models import Appointment, DefaultCriteria, Experiment, \
     TimeSlot
 from experiments.utils.exclusion import indifferentable_vars
 from main.utils import get_supreme_admin
-from participants.models import Participant
+from participants.models import Participant, CriterionAnswer
 from .common import x_or_else
 
 DEFAULT_INVALID_MESSAGES = {
@@ -106,8 +106,11 @@ def register_participant(data: dict, experiment: Experiment) -> Tuple[bool,
               and not invalid_previous_experiments and not invalid_misc_items
 
     if success:
+        # Save this participant, make the appointment and register any
+        # answers to specific criteria we didn't know yet
         participant.save()
         _make_appointment(participant, time_slot)
+        _add_specific_criteria_answers(participant, experiment, data)
 
         # We set recoverable to false, as there is nothing to recover
         # Also, it's easier to work with in the client's view
@@ -318,9 +321,10 @@ def _handle_specific_criteria(
 
     # Check if we have specific criteria in our data, if not: fail all fields
     if 'specific_criteria' not in data or not data['specific_criteria']:
-        for specific_criterion in specific_criteria:
-            failed_criteria.append(specific_criterion.criterion.name_form)
-            messages.append(specific_criterion.message_failed)
+        if 'full' in data and data['full']:
+            for specific_criterion in specific_criteria:
+                failed_criteria.append(specific_criterion.criterion.name_form)
+                messages.append(specific_criterion.message_failed)
 
         return failed_criteria, messages
 
@@ -428,13 +432,54 @@ def _handle_misc_items(data: dict, time_slot: TimeSlot) -> Tuple[list, list]:
     return invalid_fields, messages
 
 
-def _make_appointment(participant: Participant, time_slot: TimeSlot):
+def _make_appointment(participant: Participant, time_slot: TimeSlot) -> None:
     appointment = Appointment()
     appointment.participant = participant
     appointment.timeslot = time_slot
     appointment.save()
 
     # TODO: sent mail
+
+
+def _add_specific_criteria_answers(participant: Participant, experiment:
+Experiment, data: dict) -> None:
+
+    specific_criteria = experiment.experimentcriterion_set.all()
+
+    try:
+        # Rewrite the list of dicts back into a dict of field: value
+        data = {x['name']: int(x['value']) for x in data['specific_criteria']}
+    except ValueError:
+        # ValueError means the user is submitting weird data. This should not
+        # happen, but just in case we are going to crash Django in a secure
+        # manner
+        raise SuspiciousOperation
+
+    for specific_criterion in specific_criteria:
+        name_form = specific_criterion.criterion.name_form
+
+        if name_form not in data:
+            continue
+
+        # Check if we have an existing answer. If so, we are going to ignore
+        # this criterion
+        answer_exists = participant.criterionanswer_set.filter(
+            criterion=specific_criterion.criterion
+        ).exists()
+
+        if not answer_exists:
+            value = data.get(name_form)
+            # The value sent is actually an integer index corresponding to a
+            # value in values_list, so we extract the chosen value from that
+            # list.
+            value = specific_criterion.criterion.values_list[value]
+
+            answer = CriterionAnswer()
+            answer.participant = participant
+            answer.criterion = specific_criterion.criterion
+            answer.answer = value
+
+            answer.save()
 
 
 def _format_messages(*messages: List[str]) -> list:
