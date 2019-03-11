@@ -4,7 +4,7 @@ from rest_framework.permissions import BasePermission
 
 class IsPermittedClient(BasePermission):
 
-    def has_permission(self, request, view):
+    def has_permission(self, request, view) -> bool:
         client_ip = request.META.get('REMOTE_ADDR', None)
         client_host = request.META.get('REMOTE_HOST', None)
 
@@ -19,5 +19,5 @@ class IsPermittedClient(BasePermission):
 
 class IsLeader(BasePermission):
 
-    def has_permission(self, request, view):
+    def has_permission(self, request, view) -> bool:
         return request.user.is_authenticated and request.user.is_leader
