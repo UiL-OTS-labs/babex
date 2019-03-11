@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from participants.models import Participant
 from .experiment_models import Experiment
-from ..utils import enumerate_to
+from uil.core.utils import enumerate_to
 
 
 class TimeSlot(models.Model):
