@@ -165,6 +165,19 @@
                     </th>
                 </tr>
             </thead>
+            {% for appointment in participant.appointments.all %}
+                <tr>
+                    <td>
+                        {{ appointment.timeslot.experiment }}
+                    </td>
+                    <td>
+                        {{ appointment.timeslot.datetime|date:"Y-m-d H:i" }}
+                    </td>
+                    <td>
+                        {{ appointment.place }}
+                    </td>
+                </tr>
+            {% endfor %}
         </table>
     </div>
 </div>

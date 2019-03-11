@@ -1,5 +1,6 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 
 from participants.models import Participant
@@ -68,6 +69,16 @@ class Appointment(models.Model):
     creation_date = models.DateTimeField(
         auto_now_add=True,
     )
+
+    @cached_property
+    def place(self):
+        places = self.timeslot.places
+
+        for place in places:
+            if place['appointment'].pk == self.pk:
+                return place['n']
+
+        return -1
 
     def __str__(self):
         return "{} -> {}".format(
