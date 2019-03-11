@@ -8,7 +8,7 @@ from participants.models import Participant
 
 
 def send_password_reset_mail(user: ApiUser, token: str) -> None:
-    link, alternative_link = _get_reset_links(token)
+    link, alternative_link = get_reset_links(token)
 
     subject = 'UiL OTS Experimenten: password reset'
     context = {
