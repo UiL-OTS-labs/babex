@@ -1,5 +1,6 @@
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
+from django.utils.dateparse import parse_datetime
 from rest_framework import mixins as rest_mixins, views, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -9,6 +10,7 @@ from api.permissions import IsLeader, IsPermittedClient
 from api.serializers import ExperimentSerializer
 from api.utils import register_participant
 from experiments.models import Experiment
+from experiments.utils import delete_timeslot
 from experiments.utils.exclusion import check_participant_eligible
 from experiments.utils.timeslot_create import add_timeslot
 
@@ -121,6 +123,70 @@ class SwitchExperimentOpenView(views.APIView):
         return Response({
             'success': True,
             'open':    experiment_object.open
+        })
+
+
+class AddTimeSlotView(views.APIView):
+    permission_classes = (IsPermittedClient, IsAuthenticated, IsLeader)
+    authentication_classes = (JwtAuthentication,)
+
+    def post(self, request, experiment):
+        data = request.data
+        success = False
+
+        leader = request.user.leader
+
+        experiment_object = Experiment.objects.get(pk=experiment)
+
+        if not leader == experiment_object.leader and leader not in \
+                experiment_object.additional_leaders.all():
+            raise PermissionDenied
+
+        try:
+            add_timeslot(
+                experiment_object,
+                data['datetime'],
+                data['max_places'],
+            )
+        except:
+            pass
+        else:
+            success = True
+
+        return Response({
+            'success': success
+        })
+
+
+class DeleteTimeSlots(views.APIView):
+    permission_classes = (IsPermittedClient, IsAuthenticated, IsLeader)
+    authentication_classes = (JwtAuthentication, )
+
+    def post(self, request, experiment):
+        data = request.data
+        success = False
+
+        leader = request.user.leader
+
+        experiment_object = Experiment.objects.get(pk=experiment)
+
+        if not leader == experiment_object.leader and leader not in \
+                experiment_object.additional_leaders.all():
+            raise PermissionDenied
+
+        try:
+            for item in data.get('to_delete'):
+                timeslot, n = item.split('_')
+                timeslot, n = int(timeslot), int(n)
+
+                delete_timeslot(experiment_object, timeslot, n)
+        except:
+            pass
+        else:
+            success = True
+
+        return Response({
+            'success': success
         })
 
 

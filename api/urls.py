@@ -5,8 +5,9 @@ from api.views import ForgotPasswordView, RegisterView, ResetPasswordView, \
     ValidateTokenView
 from .router import router
 from .views import AddTimeSlotView, AdminView, ChangeLeaderView, \
-    ChangePasswordView, GetAppointmentTokenView, GetRequiredFields, LeaderView, \
-    SubscribeToEmaillistView, SwitchExperimentOpenView
+    ChangePasswordView, DeleteTimeSlots, GetAppointmentTokenView, \
+    GetRequiredFields, LeaderView, SubscribeToEmaillistView, \
+    SwitchExperimentOpenView
 
 urlpatterns = [
     path('', include(router.urls)),
@@ -15,7 +16,10 @@ urlpatterns = [
     path('experiment/<int:experiment>/switch_open/',
          SwitchExperimentOpenView.as_view()),
     path('experiment/<int:experiment>/register/', RegisterView.as_view()),
-    path('experiment/<int:experiment>/add_time_slot/', AddTimeSlotView.as_view()),
+    path('experiment/<int:experiment>/add_time_slot/',
+         AddTimeSlotView.as_view()),
+    path('experiment/<int:experiment>/delete_time_slots/',
+         DeleteTimeSlots.as_view()),
 
     path('leader/', include([
         path('', LeaderView.as_view()),
