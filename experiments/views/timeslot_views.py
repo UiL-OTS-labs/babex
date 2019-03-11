@@ -6,6 +6,7 @@ from django.utils.text import gettext_lazy as _
 from uil.core.views import RedirectActionView
 from uil.core.views.mixins import RedirectSuccessMessageMixin
 
+from experiments.utils.timeslot_create import add_timeslot
 from main.views import ModelFormListView
 from .mixins import ExperimentObjectMixin
 from ..forms import TimeSlotForm
@@ -37,7 +38,11 @@ class TimeSlotHomeView(braces.LoginRequiredMixin,
 
     def form_valid(self, form):
         """Only save the form, but stop there."""
-        self.object = form.save()
+        self.object = add_timeslot(
+            self.experiment,
+            form.cleaned_data['datetime'],
+            form.cleaned_data['max_places']
+        )
 
     def get_initial(self):
         initial = super(TimeSlotHomeView, self).get_initial()

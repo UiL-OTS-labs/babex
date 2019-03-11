@@ -5,11 +5,12 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from api.auth.authenticators import JwtAuthentication
-from api.permissions import IsPermittedClient
+from api.permissions import IsLeader, IsPermittedClient
 from api.serializers import ExperimentSerializer
 from api.utils import register_participant
 from experiments.models import Experiment
 from experiments.utils.exclusion import check_participant_eligible
+from experiments.utils.timeslot_create import add_timeslot
 
 
 class ExperimentsView(rest_mixins.RetrieveModelMixin,  # This default
@@ -99,7 +100,7 @@ class LeaderExperimentsView(rest_mixins.RetrieveModelMixin,
 
 
 class SwitchExperimentOpenView(views.APIView):
-    permission_classes = (IsPermittedClient, IsAuthenticated)
+    permission_classes = (IsPermittedClient, IsAuthenticated, IsLeader)
     authentication_classes = (JwtAuthentication,)
 
     def post(self, request, experiment):
@@ -134,7 +135,7 @@ class RegisterView(views.APIView):
         success, recoverable, messages = register_participant(data, experiment)
 
         return Response({
-            'success': success,
+            'success':     success,
             'recoverable': recoverable,
-            'messages': messages
+            'messages':    messages
         })

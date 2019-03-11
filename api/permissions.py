@@ -15,3 +15,9 @@ class IsPermittedClient(BasePermission):
             return client_host in settings.REST_PERMITTED_CLIENTS
 
         return True
+
+
+class IsLeader(BasePermission):
+
+    def has_permission(self, request, view):
+        return request.user.is_authenticated and request.user.is_leader

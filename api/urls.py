@@ -1,12 +1,12 @@
 from django.urls import include, path
 
 import api.auth.views as auth_views
-from api.views import ForgotPasswordView, ResetPasswordView, ValidateTokenView, \
-    RegisterView
+from api.views import ForgotPasswordView, RegisterView, ResetPasswordView, \
+    ValidateTokenView
 from .router import router
-from .views import AdminView, ChangeLeaderView, ChangePasswordView, \
-    LeaderView, SwitchExperimentOpenView, SubscribeToEmaillistView, \
-    GetAppointmentTokenView, GetRequiredFields
+from .views import AddTimeSlotView, AdminView, ChangeLeaderView, \
+    ChangePasswordView, GetAppointmentTokenView, GetRequiredFields, LeaderView, \
+    SubscribeToEmaillistView, SwitchExperimentOpenView
 
 urlpatterns = [
     path('', include(router.urls)),
@@ -15,6 +15,7 @@ urlpatterns = [
     path('experiment/<int:experiment>/switch_open/',
          SwitchExperimentOpenView.as_view()),
     path('experiment/<int:experiment>/register/', RegisterView.as_view()),
+    path('experiment/<int:experiment>/add_time_slot/', AddTimeSlotView.as_view()),
 
     path('leader/', include([
         path('', LeaderView.as_view()),
