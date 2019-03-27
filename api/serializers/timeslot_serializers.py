@@ -28,7 +28,7 @@ class TimeSlotAppointmentSerializer(serializers.ModelSerializer):
         model = Appointment
         depth = 1
         fields = [
-            'id', 'creation_date', 'participant'
+            'id', 'creation_date',
         ]
 
     def get_participant(self, o):
