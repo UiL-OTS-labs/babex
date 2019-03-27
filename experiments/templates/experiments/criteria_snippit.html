@@ -8,6 +8,14 @@
     <table class="criteria-table mt-1">
         <tr>
             <td>
+                {% trans 'criteria_snippit:dyslexia' %}
+            </td>
+            <td>
+                {{ experiment.defaultcriteria.get_dyslexia_display }}
+            </td>
+        </tr>
+        <tr>
+            <td>
                 {% trans 'criteria_snippit:language' %}
             </td>
             <td>
