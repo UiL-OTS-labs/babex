@@ -148,13 +148,11 @@ def get_required_fields(experiment: Experiment, participant: Participant):
     if participant.dyslexic is None:
         fields.append('dyslexia')
 
-    answers = participant.criterionanswer_set.all()
-
+    # All specific criteria should be answered, even if we already have the
+    # answer. The answer to SC can change (like 'has lived in A'dam in the
+    # last x years)
     for experiment_criterion in experiment.experimentcriterion_set.all():
-        try:
-            answers.get(criterion=experiment_criterion.criterion)
-        except ObjectDoesNotExist:
-            fields.append(experiment_criterion.criterion.name_form)
+        fields.append(experiment_criterion.criterion.name_form)
 
     return fields
 
