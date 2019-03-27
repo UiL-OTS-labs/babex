@@ -1,17 +1,11 @@
+{# WARNING! This view has a twin in the frontend! Please check if any changes you made here also need to be made there! #}
+{# Also, the frotend should not show any dyslexia information. The leader should already know this, and this way we don't have medical information in the frontend (#SecurityClassificationWorkaround) #}
 {% load get_field_name %}
 {% load i18n %}
 
 <div class="d-inline-block">
     Default criteria:
     <table class="criteria-table mt-1">
-        <tr>
-            <td>
-                {% trans 'criteria_snippit:dyslexia' %}
-            </td>
-            <td>
-                {{ experiment.defaultcriteria.get_dyslexia_display }}
-            </td>
-        </tr>
         <tr>
             <td>
                 {% trans 'criteria_snippit:language' %}
