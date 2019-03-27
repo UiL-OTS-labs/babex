@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from api.auth.authenticators import JwtAuthentication
 from api.permissions import IsLeader, IsPermittedClient
 from api.serializers import ExperimentSerializer
+from api.serializers.experiment_serializers import LeaderExperimentSerializer
 from api.utils import register_participant
 from experiments.models import Experiment
 from experiments.utils import delete_timeslot
@@ -78,7 +79,7 @@ class ExperimentsView(rest_mixins.RetrieveModelMixin,  # This default
 class LeaderExperimentsView(rest_mixins.RetrieveModelMixin,
                             rest_mixins.ListModelMixin,
                             viewsets.GenericViewSet):
-    serializer_class = ExperimentSerializer
+    serializer_class = LeaderExperimentSerializer
     permission_classes = (IsPermittedClient, IsAuthenticated)
     authentication_classes = (JwtAuthentication,)
 

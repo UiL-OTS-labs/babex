@@ -61,3 +61,25 @@ class ExperimentSerializer(serializers.ModelSerializer):
             o.additional_leaders.all(),
             many=True,
         ).data
+
+
+class LeaderExperimentSerializer(ExperimentSerializer):
+    class Meta:
+        model = Experiment
+        depth = 1
+        fields = [
+            'id', 'name', 'duration', 'compensation', 'task_description',
+            'additional_instructions', 'open', 'public', 'participants_visible',
+            'location', 'leader', 'additional_leaders', 'excluded_experiments',
+            'defaultcriteria', 'specific_criteria', 'timeslots',
+            'default_max_places',
+        ]
+
+    def get_timeslots(self, o):
+        # Local import to prevent import cycles
+        from .timeslot_serializers import LeaderTimeSlotSerializer
+
+        return LeaderTimeSlotSerializer(
+            o.timeslot_set.all(),
+            many=True
+        ).data

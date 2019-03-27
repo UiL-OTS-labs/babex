@@ -1,7 +1,39 @@
 from rest_framework import serializers
 
-from api.serializers.participant_serializers import ParticipantSerializer
+from api.serializers.participant_serializers import ParticipantSerializer, \
+    LeaderParticipantSerializer
 from experiments.models import TimeSlot, Appointment
+
+
+class LeaderTimeSlotSerializer(serializers.ModelSerializer):
+    appointments = serializers.SerializerMethodField()
+
+    class Meta:
+        model = TimeSlot
+        depth = 1
+        fields = [
+            'id', 'datetime', 'max_places', 'free_places', 'appointments'
+        ]
+
+    def get_appointments(self, o):
+        return LeaderTimeSlotAppointmentSerializer(
+            o.appointments.all(),
+            many=True,
+        ).data
+
+
+class LeaderTimeSlotAppointmentSerializer(serializers.ModelSerializer):
+    participant = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Appointment
+        depth = 1
+        fields = [
+            'id', 'creation_date', 'participant'
+        ]
+
+    def get_participant(self, o):
+        return  LeaderParticipantSerializer(o.participant).data
 
 
 class TimeSlotSerializer(serializers.ModelSerializer):
@@ -22,17 +54,12 @@ class TimeSlotSerializer(serializers.ModelSerializer):
 
 
 class TimeSlotAppointmentSerializer(serializers.ModelSerializer):
-    participant = serializers.SerializerMethodField()
-
     class Meta:
         model = Appointment
         depth = 1
         fields = [
             'id', 'creation_date',
         ]
-
-    def get_participant(self, o):
-        return ParticipantSerializer(o.participant).data
 
 
 class AppointmentSerializer(serializers.ModelSerializer):

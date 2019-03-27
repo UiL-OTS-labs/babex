@@ -11,3 +11,15 @@ class ParticipantSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'name', 'email',
         ]
+
+
+class LeaderParticipantSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Participant
+        depth = 1
+        fields = [
+            'id', 'name', 'email', 'phonenumber', 'language', 'multilingual',
+            'birth_date', 'handedness', 'sex', 'social_status',
+            'email_subscription',
+        ]
