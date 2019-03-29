@@ -2,7 +2,7 @@ from django.urls import include, path
 
 import api.auth.views as auth_views
 from api.views import ForgotPasswordView, RegisterView, ResetPasswordView, \
-    ValidateTokenView
+    ValidateTokenView, AddCommentView
 from .router import router
 from .views import AddTimeSlotView, AdminView, ChangeLeaderView, \
     ChangePasswordView, DeleteTimeSlots, GetAppointmentTokenView, \
@@ -24,6 +24,7 @@ urlpatterns = [
     path('leader/', include([
         path('', LeaderView.as_view()),
         path('change/', ChangeLeaderView.as_view()),
+        path('add_comment/', AddCommentView.as_view()),
     ])),
 
     path('account/', include([
