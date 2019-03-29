@@ -26,8 +26,12 @@ class CommentForm(forms.ModelForm):
         self.fields['experiment'].queryset = Experiment.objects.filter(
             pk=self.initial['experiment'])
         self.fields['experiment'].empty_label = None
+        self.fields['experiment'].widget.attrs = {'disabled': 'disabled'}
+        self.fields['experiment'].required = False
 
         self.fields['participant'].queryset = Participant.objects.filter(
             pk=self.initial['participant'])
         self.fields['participant'].empty_label = None
+        self.fields['participant'].widget.attrs = {'disabled': 'disabled'}
+        self.fields['participant'].required = False
 
