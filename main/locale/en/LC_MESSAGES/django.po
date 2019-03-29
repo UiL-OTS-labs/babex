@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-27 13:51+0000\n"
+"POT-Creation-Date: 2019-03-29 11:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,7 +86,13 @@ msgstr "Home"
 
 #: main/templates/main/index.html:16
 msgid "main:home:text"
-msgstr "Welcome {},<br/><br/>There are currently {} open experiments. "
+msgstr ""
+"Welcome {},<br/><br/>There are currently {} open experiments, with {} free "
+"slots. "
+
+#: main/templates/main/index.html:20
+msgid "main:home:menu"
+msgstr "Menu"
 
 #: main/templates/registration/logged_out.html:8
 msgid "main:logged_out_title"

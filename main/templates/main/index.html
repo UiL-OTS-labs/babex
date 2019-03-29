@@ -7,13 +7,27 @@
 {% endblock %}
 
 {% block content %}
-<div class="uu-inner-container">
-    <div class="col-12">
-        <h1>
-            {% trans 'main:home:header' %}
-        </h1>
-        {# TODO: Full text here! #}
-        {% transformat 'main:home:text' request.user.get_full_name 0 %}
+    <div class="uu-inner-container">
+        <div class="col-10">
+            <h1>
+                {% trans 'main:home:header' %}
+            </h1>
+            {# TODO: Full text here! #}
+            {% transformat 'main:home:text' request.user.get_full_name num_proposals num_free_places %}
+        </div>
+        <div class="col-2">
+            <h3>
+                {% trans 'main:home:menu' %}
+            </h3>
+            <ul>
+                {% for item in menus.main %}
+                    <li>
+                        <a href="{{ item.url }}">
+                            {{ item.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
-</div>
 {% endblock %}
