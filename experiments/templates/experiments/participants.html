@@ -105,7 +105,7 @@
                     {% for appointment in object_list %}
                         <tr>
                             <td>
-                                {{ appointment.timeslot.datetime|date:"Y-m-d H:m" }}
+                                {{ appointment.timeslot.datetime|date:"Y-m-d H:i" }}
                             </td>
                             <td>
                                 {{ appointment.timeslot.datetime|date:"l" }}
