@@ -355,7 +355,7 @@ def _handle_specific_criteria(
         value = data.get(name_form, None)
 
         # If we have a value from the form, use that one
-        if value:
+        if value is not None:
             # The value sent is actually an integer index corresponding to a
             # value in values_list, so we extract the chosen value from that
             # list.
