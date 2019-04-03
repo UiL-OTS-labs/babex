@@ -1,6 +1,7 @@
 from typing import List, Tuple
 
-from django.core.exceptions import ObjectDoesNotExist, SuspiciousOperation
+from django.conf import settings
+from django.core.exceptions import SuspiciousOperation
 from django.core.validators import ValidationError, validate_email
 from django.utils.dateparse import parse_date
 
@@ -8,8 +9,8 @@ from comments.models import Comment
 from experiments.models import Appointment, DefaultCriteria, Experiment, \
     TimeSlot
 from experiments.utils.exclusion import indifferentable_vars
-from main.utils import get_supreme_admin
-from participants.models import Participant, CriterionAnswer
+from main.utils import get_supreme_admin, send_template_email
+from participants.models import CriterionAnswer, Participant
 from .common import x_or_else
 
 DEFAULT_INVALID_MESSAGES = {
@@ -331,7 +332,8 @@ def _handle_specific_criteria(
         full_form = True
         try:
             # Rewrite the list of dicts back into a dict of field: value
-            data = {x['name']: int(x['value']) for x in data['specific_criteria']}
+            data = {x['name']: int(x['value']) for x in
+                    data['specific_criteria']}
         except ValueError:
             # ValueError means the user is submitting weird data. This should
             # not happen, but just in case we are going to crash Django in a
@@ -451,12 +453,34 @@ def _make_appointment(participant: Participant, time_slot: TimeSlot) -> None:
     appointment.timeslot = time_slot
     appointment.save()
 
-    # TODO: sent mail
+    admin = get_supreme_admin()
+    experiment = appointment.timeslot.experiment
+
+    subject = 'Bevestiging afspraak experiment UiL OTS: {}'.format(
+        experiment.name
+    )
+
+    cancel_link = "{}participant/cancel/".format(settings.FRONTEND_URI)
+
+    context = {
+        'participant':     participant,
+        'time_slot':       time_slot,
+        'experiment':      experiment,
+        'leader':          experiment.leader,
+        'cancel_link':     cancel_link
+    }
+
+    send_template_email(
+        [participant.email],
+        subject,
+        'api/mail/new_appointment',
+        context,
+        admin.email
+    )
 
 
 def _add_specific_criteria_answers(participant: Participant, experiment:
 Experiment, data: dict) -> None:
-
     specific_criteria = experiment.experimentcriterion_set.all()
 
     try:

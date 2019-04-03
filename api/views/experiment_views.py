@@ -218,6 +218,7 @@ class DeleteAppointment(views.APIView):
             'success': success
         })
 
+
 class RegisterView(views.APIView):
     permission_classes = (IsPermittedClient,)
     authentication_classes = (JwtAuthentication,)
