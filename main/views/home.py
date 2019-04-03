@@ -4,6 +4,7 @@ from django.views import generic
 from experiments.models import Experiment
 
 from django.db.models import Count, Sum
+from django.db.models.functions import Now
 
 
 class HomeView(braces.LoginRequiredMixin, generic.TemplateView):
@@ -18,7 +19,8 @@ class HomeView(braces.LoginRequiredMixin, generic.TemplateView):
         return context
 
     def _get_free_slots(self):
-        qs = Experiment.objects.filter(open=True).select_related('location')
+        qs = Experiment.objects.filter(open=True).select_related(
+            'location').filter(timeslot__datetime__gte=Now())
 
         sum_places = Sum('timeslot__max_places')
         count_participants = Count('timeslot__appointments')
