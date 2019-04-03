@@ -3,6 +3,7 @@ from django.urls import include, path
 import api.auth.views as auth_views
 from api.views import ForgotPasswordView, RegisterView, ResetPasswordView, \
     ValidateTokenView, AddCommentView
+from api.views.experiment_views import DeleteAppointment
 from .router import router
 from .views import AddTimeSlotView, AdminView, ChangeLeaderView, \
     ChangePasswordView, DeleteTimeSlots, GetAppointmentTokenView, \
@@ -20,6 +21,8 @@ urlpatterns = [
          AddTimeSlotView.as_view()),
     path('experiment/<int:experiment>/delete_time_slots/',
          DeleteTimeSlots.as_view()),
+    path('experiment/<int:experiment>/delete_appointment/',
+         DeleteAppointment.as_view()),
 
     path('leader/', include([
         path('', LeaderView.as_view()),

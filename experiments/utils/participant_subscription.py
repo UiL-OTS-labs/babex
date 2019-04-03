@@ -1,11 +1,13 @@
+from experiments.models import Appointment
 from main.utils import get_supreme_admin, send_template_email
 from django.conf import settings
 
 
-def unsubscribe_participant(time_slot, appointment_pk: int,
+def unsubscribe_participant(appointment_pk: int,
                             sent_email: bool = True) -> None:
-
-    appointment = time_slot.appointments.get(pk=appointment_pk)
+    appointment = Appointment.objects.get(pk=appointment_pk)
+    time_slot = appointment.timeslot
+    experiment = time_slot.experiment
 
     # Always delete first, the data in it will still be available for the
     # next bit
@@ -13,7 +15,6 @@ def unsubscribe_participant(time_slot, appointment_pk: int,
 
     if sent_email:
         admin = get_supreme_admin()
-        experiment = time_slot.experiment
 
         subject = 'UiL OTS uitschrijven experiment: {}'.format(experiment.name)
         context = {

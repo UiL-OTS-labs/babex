@@ -119,7 +119,7 @@ class UnsubscribeParticipantView(braces.LoginRequiredMixin,
     def action(self, request):
         appointment_pk = self.kwargs.get('appointment')
 
-        unsubscribe_participant(self.time_slot, appointment_pk)
+        unsubscribe_participant(appointment_pk)
 
     def get_redirect_url(self, *args, **kwargs):
         if self.request.GET.get('next'):
@@ -140,4 +140,4 @@ class SilentUnsubscribeParticipantView(UnsubscribeParticipantView):
     def action(self, request):
         appointment_pk = self.kwargs.get('appointment')
 
-        unsubscribe_participant(self.time_slot, appointment_pk, False)
+        unsubscribe_participant(appointment_pk, False)

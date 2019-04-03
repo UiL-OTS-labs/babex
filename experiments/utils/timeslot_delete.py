@@ -13,7 +13,7 @@ def delete_timeslot(experiment: Experiment, timeslot_pk: int, to_delete: int=1) 
 
     for place in timeslot.places[places_left:]:
         if place['appointment']:
-            unsubscribe_participant(timeslot, place['appointment'].pk)
+            unsubscribe_participant(place['appointment'].pk)
 
     if places_left <= 0:
         timeslot.delete()

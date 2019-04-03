@@ -11,7 +11,7 @@ from api.serializers import ExperimentSerializer
 from api.serializers.experiment_serializers import LeaderExperimentSerializer
 from api.utils import register_participant
 from experiments.models import Experiment
-from experiments.utils import delete_timeslot
+from experiments.utils import delete_timeslot, unsubscribe_participant
 from experiments.utils.exclusion import check_participant_eligible
 from experiments.utils.timeslot_create import add_timeslot
 
@@ -190,6 +190,33 @@ class DeleteTimeSlots(views.APIView):
             'success': success
         })
 
+
+class DeleteAppointment(views.APIView):
+    permission_classes = (IsPermittedClient, IsAuthenticated, IsLeader)
+    authentication_classes = (JwtAuthentication, )
+
+    def post(self, request, experiment):
+        data = request.data
+        success = False
+
+        leader = request.user.leader
+
+        experiment_object = Experiment.objects.get(pk=experiment)
+
+        if not leader == experiment_object.leader and leader not in \
+                experiment_object.additional_leaders.all():
+            raise PermissionDenied
+
+        try:
+            unsubscribe_participant(data.get('to_delete'))
+        except:
+            pass
+        else:
+            success = True
+
+        return Response({
+            'success': success
+        })
 
 class RegisterView(views.APIView):
     permission_classes = (IsPermittedClient,)
