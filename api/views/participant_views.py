@@ -1,10 +1,11 @@
+from django.core.exceptions import ValidationError
 from rest_framework import views, viewsets, mixins as rest_mixins, status
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from api.auth.authenticators import JwtAuthentication
-from api.auth.models import UserToken, ApiUser
+from api.auth.models import UserToken
 from api.permissions import IsPermittedClient
 from api.serializers import AppointmentSerializer
 from api.utils import send_cancel_token_mail, cancel_appointment, \
@@ -43,6 +44,70 @@ class SubscribeToEmaillistView(views.APIView):
 
         return Response({
             'success': success
+        })
+
+
+class ValidateMailinglistTokenView(views.APIView):
+    permission_classes = (IsPermittedClient, )
+
+    def post(self, request):
+
+        token = request.POST.get('token', None)
+
+        success = False
+        email = None
+
+        if token:
+            try:
+                o = UserToken.objects.get(
+                    token=token,
+                    type=UserToken.MAILINGLIST_UNSUBSCRIBE,
+                )
+
+                # Please note that these token's don't have to be checked for
+                # expiration. These tokens should just live on indefinably
+
+                success = True
+                email = o.participant.email
+
+            except (ValidationError, UserToken.DoesNotExist):
+                pass
+
+        return Response({
+            'success': success,
+            'email': email
+        })
+
+
+class UnsubscribeFromMailinglistView(views.APIView):
+    permission_classes = (IsPermittedClient, )
+
+    def post(self, request):
+        token = request.POST.get('token', None)
+
+        success = False
+
+        if token:
+            try:
+                o = UserToken.objects.get(
+                    token=token,
+                    type=UserToken.MAILINGLIST_UNSUBSCRIBE,
+                )
+
+                # Please note that these token's don't have to be checked for
+                # expiration. These tokens should just live on indefinably.
+
+                participant = o.participant
+                participant.email_subscription = False
+                participant.save()
+
+                success = True
+
+            except (ValidationError, UserToken.DoesNotExist):
+                pass
+
+        return Response({
+            'success': success,
         })
 
 

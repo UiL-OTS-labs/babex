@@ -1,4 +1,4 @@
-from experiments.models import Appointment
+from experiments.models import Appointment, Experiment
 from main.utils import get_supreme_admin, send_template_email
 from django.conf import settings
 
@@ -23,7 +23,7 @@ def unsubscribe_participant(appointment_pk: int,
             'experiment': experiment,
             'admin': admin.get_full_name(),
             'admin_email': admin.email,
-            'other_time_link': '',  # TODO: make this link
+            'other_time_link': _get_other_time_link(experiment),
             'home_link': settings.FRONTEND_URI,
         }
 
@@ -36,4 +36,8 @@ def unsubscribe_participant(appointment_pk: int,
         )
 
 
-
+def _get_other_time_link(experiment: Experiment) -> str:
+    return "{}participant/register/{}/".format(
+        settings.FRONTEND_URI,
+        experiment.pk
+    )

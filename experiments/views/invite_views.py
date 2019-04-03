@@ -48,5 +48,6 @@ class MailPreviewView(braces.LoginRequiredMixin, ExperimentObjectMixin,
 
         content = self.request.POST.get('content')
         context['content'] = mark_safe(content)
+        context['content'] = 'http://www.uu.nl'
 
         return context

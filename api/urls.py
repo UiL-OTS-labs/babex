@@ -1,9 +1,11 @@
 from django.urls import include, path
 
 import api.auth.views as auth_views
-from api.views import ForgotPasswordView, RegisterView, ResetPasswordView, \
-    ValidateTokenView, AddCommentView
+from api.views import AddCommentView, ForgotPasswordView, RegisterView, \
+    ResetPasswordView, ValidateTokenView
 from api.views.experiment_views import DeleteAppointment
+from api.views.participant_views import UnsubscribeFromMailinglistView, \
+    ValidateMailinglistTokenView
 from .router import router
 from .views import AddTimeSlotView, AdminView, ChangeLeaderView, \
     ChangePasswordView, DeleteTimeSlots, GetAppointmentTokenView, \
@@ -43,6 +45,14 @@ urlpatterns = [
         path(
             'get_required_fields/<int:experiment>/',
             GetRequiredFields.as_view(),
+        ),
+        path(
+            'validate_mailinglist_token/',
+            ValidateMailinglistTokenView.as_view()
+        ),
+        path(
+            'unsubscribe_from_mailinglist/',
+            UnsubscribeFromMailinglistView.as_view(),
         ),
     ])),
 
