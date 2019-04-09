@@ -52,6 +52,9 @@ class ForgotPasswordView(views.APIView):
             try:
                 user = ApiUser.objects.get_by_email(email)
 
+                if not user:
+                    raise ApiUser.DoesNotExist
+
                 if user.is_ldap_account:
                     # Slightly hacky, but this way we don't enter a new ident
                     # level. And we could justify this as 'the password does
