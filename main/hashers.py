@@ -1,18 +1,5 @@
-import hashlib
-
-from django.contrib.auth.hashers import (BasePasswordHasher,
-                                         PBKDF2PasswordHasher, )
-
-
-class UnsaltedMD5PasswordHasher(BasePasswordHasher):
-    """
-    The Salted MD5 password hashing algorithm (not recommended)
-    """
-    algorithm = "md5"
-
-    def encode(self, password, _):
-        assert password is not None
-        return hashlib.md5(bytes(password, 'utf8')).hexdigest()
+from django.contrib.auth.hashers import (PBKDF2PasswordHasher,
+                                         UnsaltedMD5PasswordHasher)
 
 
 class PBKDF2WrappedMD5PasswordHasher(PBKDF2PasswordHasher):
