@@ -1,4 +1,5 @@
 from django.core.exceptions import ValidationError
+from django.db import DatabaseError
 from rest_framework import views, viewsets, mixins as rest_mixins, status
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
@@ -31,16 +32,29 @@ class SubscribeToEmaillistView(views.APIView):
 
         alreadyKnown = len(filtered) != 0
 
-        if not alreadyKnown:
+        # Initialize it here
+        participant = None
+
+        if alreadyKnown:
+            if len(filtered) > 1:
+                pass  # TODO: figure out how to handle this nicely
+            else:
+                participant = filtered[0]
+        else:
             participant = Participant()
 
             participant.email = email
             participant.language = post_data.get('language')
             participant.multilingual = post_data.get('multilingual')
             participant.dyslexic = post_data.get('dyslexic')
+            participant.email_subscription = True
 
+        try:
+            participant.email_subscription = True
             participant.save()
             success = True
+        except (DatabaseError, AttributeError):
+            pass
 
         return Response({
             'success': success
@@ -48,7 +62,7 @@ class SubscribeToEmaillistView(views.APIView):
 
 
 class ValidateMailinglistTokenView(views.APIView):
-    permission_classes = (IsPermittedClient, )
+    permission_classes = (IsPermittedClient,)
 
     def post(self, request):
 
@@ -75,12 +89,12 @@ class ValidateMailinglistTokenView(views.APIView):
 
         return Response({
             'success': success,
-            'email': email
+            'email':   email
         })
 
 
 class UnsubscribeFromMailinglistView(views.APIView):
-    permission_classes = (IsPermittedClient, )
+    permission_classes = (IsPermittedClient,)
 
     def post(self, request):
         token = request.POST.get('token', None)
@@ -112,7 +126,7 @@ class UnsubscribeFromMailinglistView(views.APIView):
 
 
 class GetAppointmentTokenView(views.APIView):
-    permission_classes = (IsPermittedClient, )
+    permission_classes = (IsPermittedClient,)
 
     def post(self, request):
         to_lower = lambda x: str(x).lower()
@@ -158,7 +172,7 @@ class GetAppointmentTokenView(views.APIView):
 
 class GetRequiredFields(views.APIView):
     permission_classes = (IsPermittedClient, IsAuthenticated)
-    authentication_classes = (JwtAuthentication, )
+    authentication_classes = (JwtAuthentication,)
 
     def get(self, request, *args, **kwargs):
         fields = None
@@ -182,8 +196,8 @@ class GetRequiredFields(views.APIView):
 class AppointmentsView(rest_mixins.ListModelMixin,
                        rest_mixins.RetrieveModelMixin,
                        viewsets.GenericViewSet):
-    permission_classes = (IsPermittedClient, )
-    authentication_classes = (JwtAuthentication, )
+    permission_classes = (IsPermittedClient,)
+    authentication_classes = (JwtAuthentication,)
     serializer_class = AppointmentSerializer
 
     def _get_participant(self):
