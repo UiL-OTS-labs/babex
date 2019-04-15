@@ -382,6 +382,9 @@ def _handle_specific_criteria(
                 comment.participant = participant
                 comment.experiment = experiment
 
+                # Mark this as a system comment
+                comment.system_comment = True
+
                 # NOTE: technically this is an illegal action as the
                 # participant could not exist (yet). However, as the answer
                 # object only exists if the participant exists, we're fine.

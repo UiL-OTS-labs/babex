@@ -30,6 +30,7 @@ def _handle_late_comment(appointment: Appointment) -> None:
         comment.participant = appointment.participant
         comment.comment = "Cancelled less than 24 before experiment"
         comment.experiment = appointment.timeslot.experiment
+        comment.system_comment = True
         comment.save()
 
 
