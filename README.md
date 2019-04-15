@@ -28,6 +28,7 @@ Development instructions:
   environment!). ``pip install -r requirements.txt``
 * Edit ``ppn_backend/settings.py`` to suit your needs.
 * Create a super user using ``python manage.py createsuperuser``
+* Compile the translation files using ``python manage.py compilemessages``
 * You can now run a development server with ``python manage.py runserver``
 
 Note: you probably also want to set your new super user as the main admin, 
