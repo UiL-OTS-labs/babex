@@ -4,10 +4,12 @@
 *.pyc
 __pycache__/
 
-
 ### Project-specific ###
 db.sqlite3
 ppn_backend/ldap_settings.py
+
+## Django ##
+*.mo # Binary translation files. Should be generated on deployment or when testing
 
 ### Virtual environments ###
 venv
