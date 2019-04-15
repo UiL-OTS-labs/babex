@@ -11,6 +11,24 @@ from api.utils.create_participant_account import \
 from ..utils import send_password_reset_mail
 
 
+class CreateParticipantAccountView(views.APIView):
+    permission_classes = (IsPermittedClient,)
+
+    def post(self, request):
+        # The .dict() is very important! Otherwise you get a lying QueryDict
+        # (QueryDict is a MultiValueDict, and will thus return lists if you
+        # treat it like a normal dict. Calling .dict() will give a normal
+        # dict with singular values)
+        data = request.data.dict()
+
+        ret = create_participant_account(**data)
+
+        return Response({
+            'success': ret == CPAReturnValues.OK,
+            'message': ret.name,
+        })
+
+
 class ChangePasswordView(views.APIView):
     permission_classes = (IsPermittedClient, IsAuthenticated)
     authentication_classes = (JwtAuthentication,)
