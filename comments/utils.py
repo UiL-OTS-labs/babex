@@ -6,7 +6,8 @@ from participants.models import Participant
 
 def add_system_comment(
         participants: Union[List[Participant], Participant],
-        comment: str
+        comment: str,
+        experiment = None
 ) -> None:
     """
     Adds a system comment for a given participant or a list of participant.
@@ -24,6 +25,7 @@ def add_system_comment(
     for participant in participants:
         c = Comment()
         c.participant = participant
+        c.experiment = experiment
         c.comment = comment
         c.system_comment = True
         c.save()
