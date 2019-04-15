@@ -24,18 +24,14 @@ class SubscribeToEmaillistView(views.APIView):
 
         email = post_data.get('email')
 
-        qs = Participant.objects.prefetch_related('secondaryemail_set').all()
+        filtered = Participant.objects.find_by_email(email)
 
-        filtered = [x for x in qs if x.email == email
-                    or email
-                    in [y.email for y in x.secondaryemail_set.all()]]
-
-        alreadyKnown = len(filtered) != 0
+        already_known = len(filtered) != 0
 
         # Initialize it here
         participant = None
 
-        if alreadyKnown:
+        if already_known:
             if len(filtered) > 1:
                 pass  # TODO: figure out how to handle this nicely
             else:

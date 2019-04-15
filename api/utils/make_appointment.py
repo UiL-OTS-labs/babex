@@ -159,18 +159,8 @@ def get_required_fields(experiment: Experiment, participant: Participant):
 
 
 def _get_participant(data: dict) -> Participant:
-    to_lower = lambda x: str(x).lower()
 
-    email = data.get('email').strip().lower()
-
-    participants = [x for x in
-                    Participant.objects.prefetch_related(
-                        'secondaryemail_set'
-                    ) if
-                    to_lower(x.email) == email or
-                    email in [to_lower(y.email) for y in
-                              x.secondaryemail_set.all()]
-                    ]
+    participants = Participant.objects.find_by_email(data.get('email'))
 
     # If we have a participant, get the first one that matches
     if len(participants) > 0:
