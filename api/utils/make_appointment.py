@@ -5,7 +5,7 @@ from django.core.exceptions import SuspiciousOperation
 from django.core.validators import ValidationError, validate_email
 from django.utils.dateparse import parse_date
 
-from comments.models import Comment
+from comments.utils import add_system_comment
 from experiments.models import Appointment, DefaultCriteria, Experiment, \
     TimeSlot
 from experiments.utils.exclusion import indifferentable_vars
@@ -159,7 +159,6 @@ def get_required_fields(experiment: Experiment, participant: Participant):
 
 
 def _get_participant(data: dict) -> Participant:
-
     participants = Participant.objects.find_by_email(data.get('email'))
 
     # If we have a participant, get the first one that matches
@@ -371,24 +370,16 @@ def _handle_specific_criteria(
                 # We are not going to fail this directly, as some criteria
                 # answers can actually change over time. (For example: has
                 # lived in Utrecht in the past month).
-                comment = Comment()
-                comment.comment = "Gave a different answer to a criteria " \
-                                  "he/she answered before: {}, old answer: " \
-                                  "{}, new answer: {}".format(
+                comment = "Gave a different answer to a criteria " \
+                          "he/she answered before: {}, old answer: " \
+                          "{}, new answer: {}"
+                comment = comment.format(
                     specific_criterion.criterion.name_natural,
                     existing_answer.answer,
                     value
                 )
-                comment.participant = participant
-                comment.experiment = experiment
 
-                # Mark this as a system comment
-                comment.system_comment = True
-
-                # NOTE: technically this is an illegal action as the
-                # participant could not exist (yet). However, as the answer
-                # object only exists if the participant exists, we're fine.
-                comment.save()
+                add_system_comment(participant, comment, experiment)
 
                 existing_answer.answer = value
                 existing_answer.save()
@@ -456,11 +447,11 @@ def _make_appointment(participant: Participant, time_slot: TimeSlot) -> None:
     cancel_link = "{}participant/cancel/".format(settings.FRONTEND_URI)
 
     context = {
-        'participant':     participant,
-        'time_slot':       time_slot,
-        'experiment':      experiment,
-        'leader':          experiment.leader,
-        'cancel_link':     cancel_link
+        'participant': participant,
+        'time_slot':   time_slot,
+        'experiment':  experiment,
+        'leader':      experiment.leader,
+        'cancel_link': cancel_link
     }
 
     send_template_email(

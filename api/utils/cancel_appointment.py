@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 
 from django.conf import settings
 
-from comments.models import Comment
+from comments.utils import add_system_comment
 from experiments.models import Appointment
 from main.utils import get_supreme_admin, send_template_email
 
@@ -26,12 +26,11 @@ def _handle_late_comment(appointment: Appointment) -> None:
     deadline = dt - timedelta(days=1)
 
     if now > deadline:
-        comment = Comment()
-        comment.participant = appointment.participant
-        comment.comment = "Cancelled less than 24 before experiment"
-        comment.experiment = appointment.timeslot.experiment
-        comment.system_comment = True
-        comment.save()
+        add_system_comment(
+            appointment.participant,
+            "Cancelled less than 24 before experiment",
+            appointment.timeslot.experiment
+        )
 
 
 def _inform_leaders(appointment: Appointment) -> None:
