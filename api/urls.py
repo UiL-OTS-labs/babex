@@ -8,9 +8,9 @@ from api.views.participant_views import UnsubscribeFromMailinglistView, \
     ValidateMailinglistTokenView
 from .router import router
 from .views import AddTimeSlotView, AdminView, ChangeLeaderView, \
-    ChangePasswordView, DeleteTimeSlots, GetAppointmentTokenView, \
-    GetRequiredFields, LeaderView, SubscribeToEmaillistView, \
-    SwitchExperimentOpenView
+    ChangePasswordView, CreateParticipantAccountView, DeleteTimeSlots, \
+    GetAppointmentTokenView, GetRequiredFields, LeaderView, \
+    SubscribeToEmaillistView, SwitchExperimentOpenView
 
 urlpatterns = [
     path('', include(router.urls)),
@@ -54,6 +54,8 @@ urlpatterns = [
             'unsubscribe_from_mailinglist/',
             UnsubscribeFromMailinglistView.as_view(),
         ),
+
+        path('create_account/', CreateParticipantAccountView.as_view())
     ])),
 
     path('api-auth/', include('rest_framework.urls',

@@ -1,0 +1,186 @@
+from enum import Enum
+
+from django.conf import settings
+from api.auth.models import ApiUser, ApiGroup
+from comments.utils import add_system_comment
+from participants.models import Participant
+
+SYSTEM_MESSAGES = {
+    'multiple_participants': "A user tried to create an account, but the "
+                             "email that they specified is used by multiple "
+                             "different participants. This participant is a "
+                             "newly created ony, and the other participants "
+                             "with the same email where: {}"
+}
+
+
+class ReturnValues(Enum):
+    OK = 0
+    ACCOUNT_ALREADY_EXISTS = 1
+
+
+def create_participant_account(email: str,
+                               name: str,
+                               multilingual: bool = None,
+                               language: str = None,
+                               dyslexic: bool = None,
+                               mailing_list: bool = False,
+                               password: str = None) -> 'ReturnValues':
+
+    # Get a list of participants that use this email
+    participants = Participant.objects.find_by_email(email)
+
+    # Count the number of results
+    num_found_participants = len(participants)
+
+    # If we found more than one, create a new participant and add a warning
+    # comment for the admins
+    if num_found_participants > 1:
+        participant = _create_new_participant(email, name, multilingual,
+                                              language, dyslexic, mailing_list)
+
+        message = SYSTEM_MESSAGES['multiple_participants'].format(
+            ", ".join([str(x) for x in participants])
+        )
+        add_system_comment(participant, message)
+
+        new_participant = True
+
+    # If we found none, just create a new one
+    elif num_found_participants < 1:  # or == 0, doesn't matter
+        participant = _create_new_participant(email, name, multilingual,
+                                              language, dyslexic, mailing_list)
+        new_participant = True
+    else:
+        # If we found 1, we can use that one
+        participant = participants[0]
+
+        new_participant = False
+
+        # Switch emails if needed
+        if participant.email != email:
+            _switch_main_email(participant, email)
+
+    # Create a queryset to check if this email is already used
+    api_user_queryset = ApiUser.objects.filter(email=email)
+
+    # If this participant already has an attached account
+    if participant.api_user:
+        # Stop and return that the account already exists
+        return ReturnValues.ACCOUNT_ALREADY_EXISTS
+
+    # Check if we have an existing api user with the same email (can happen
+    # with leaders for example)
+    elif api_user_queryset.exists():
+        # If there already is an account with this email
+        user = api_user_queryset.get()
+
+        # Check if this account is already a participant
+        if user.is_participant:
+            # Delete the new one (if it's new)
+            if new_participant:
+                participant.delete()
+
+            # Stop and return that the account already exists
+            return ReturnValues.ACCOUNT_ALREADY_EXISTS
+
+        # Otherwise, add the relevant participant data to this account (as it
+        # might be a leader)
+        else:
+            _add_participant_group(user)
+            participant.api_user = user
+            participant.save()
+
+    # If there's no account associated in any way, create one!
+    else:
+        _create_new_account(participant, password)
+
+    return ReturnValues.OK
+
+
+def _create_new_participant(email: str,
+                            name: str,
+                            multilingual: bool = None,
+                            language: str = None,
+                            dyslexic: bool = None,
+                            mailing_list: bool = False) -> Participant:
+    """
+    This function creates (and saves) a new participant object based upon
+    the parameters.
+    """
+
+    participant = Participant()
+    participant.email = email
+    participant.name = name
+    participant.multilingual = multilingual
+    participant.language = language
+    participant.dyslexic = dyslexic
+    participant.email_subscription = mailing_list
+
+    participant.save()
+
+    return participant
+
+
+def _create_new_account(participant: Participant, password: str = None) -> None:
+    """
+    This function creates (and saves) a new ApiUser and attaches it to the
+    given participant. If no password is specified, the user will receive an
+    email giving them instructions on how to set one.
+
+    :param participant: The participant object to create the account for
+    :param password: (optional) the password for this user
+    :return: Nada!
+    """
+    user = ApiUser()
+
+    user.participant = participant
+    user.email = participant.email
+    user.save()
+
+    _add_participant_group(user)
+
+    if password:
+        user.set_password(password)
+        user.save()
+    else:
+        # TODO: sent an email
+        pass
+
+
+def _add_participant_group(api_user: ApiUser) -> None:
+    """
+    This function adds a given ApiUser to the Participant group
+    :param api_user:
+    :return:
+    """
+    group = ApiGroup.objects.get(name=settings.PARTICIPANT_GROUP)
+
+    api_user.groups.add(group)
+    api_user.save()
+
+
+def _switch_main_email(participant: Participant, new_email: str) -> None:
+    """
+    This function switches the main email of a participant with one of it's
+    secondary emails. The old secondary email object is used to store the
+    previous main email.
+
+    :param participant: A participant object
+    :param new_email: An email string that corresponds to a secondary email
+    :return: Nothing
+    """
+    # Get the secondary email that now houses the new main email
+    secondary_emails = participant.secondaryemail_set.all()
+    existing_new_email = next(
+        iter([x for x in secondary_emails if x.email == new_email])
+    )
+
+    # Set the old main email as this object's email address
+    existing_new_email.email = participant.email
+    existing_new_email.save()
+
+    # Set the new email (same as the original value of the secondary email
+    # above) as the main email
+    participant.email = new_email
+    participant.save()

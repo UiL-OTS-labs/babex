@@ -6,27 +6,26 @@ from rest_framework.response import Response
 from api.auth.authenticators import JwtAuthentication
 from api.auth.models import ApiUser, UserToken
 from api.permissions import IsPermittedClient
-
+from api.utils.create_participant_account import \
+    ReturnValues as CPAReturnValues, create_participant_account
 from ..utils import send_password_reset_mail
 
 
 class ChangePasswordView(views.APIView):
     permission_classes = (IsPermittedClient, IsAuthenticated)
-    authentication_classes = (JwtAuthentication, )
+    authentication_classes = (JwtAuthentication,)
 
     def post(self, request):
-
         user = request.user
 
         post_data = self.request.POST
 
         success = False
 
-        if not user.is_ldap_account and\
+        if not user.is_ldap_account and \
                 user.check_password(
                     post_data['current_password']
                 ):
-
             user.set_password(post_data['new_password'])
             user.passwords_needs_change = False
             user.save()
@@ -39,7 +38,7 @@ class ChangePasswordView(views.APIView):
 
 
 class ForgotPasswordView(views.APIView):
-    permission_classes = (IsPermittedClient, )
+    permission_classes = (IsPermittedClient,)
 
     def post(self, request):
 
@@ -74,13 +73,13 @@ class ForgotPasswordView(views.APIView):
                 pass
 
         return Response({
-            'success': success,
+            'success':      success,
             'ldap_blocked': ldap_blocked,
         })
 
 
 class ValidateTokenView(views.APIView):
-    permission_classes = (IsPermittedClient, )
+    permission_classes = (IsPermittedClient,)
 
     def post(self, request):
 
@@ -110,7 +109,7 @@ class ValidateTokenView(views.APIView):
 
 
 class ResetPasswordView(views.APIView):
-    permission_classes = (IsPermittedClient, )
+    permission_classes = (IsPermittedClient,)
 
     def post(self, request):
 
