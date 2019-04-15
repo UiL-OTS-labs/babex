@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-14 09:14+0000\n"
+"POT-Creation-Date: 2019-04-15 11:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,23 +18,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: comments/models.py:17
+#: comments/models.py:18
 msgid "comment:attribute:participant"
 msgstr "Participant"
 
-#: comments/models.py:23
+#: comments/models.py:24
 msgid "comment:attribute:leader"
 msgstr "Toegevoegd door"
 
-#: comments/models.py:30
+#: comments/models.py:31
 msgid "comment:attribute:experiment"
 msgstr "Experiment"
 
-#: comments/models.py:34
+#: comments/models.py:36
 msgid "comment:attribute:comment"
 msgstr "Opmerking"
 
-#: comments/models.py:38
+#: comments/models.py:40 comments/models.py:47
 msgid "comment:attribute:datetime"
 msgstr "Toegevoegd op"
 
@@ -68,11 +68,19 @@ msgstr "<br/>"
 msgid "comments:home:table:actions"
 msgstr "Acties"
 
-#: comments/templates/comments/index.html:66
+#: comments/templates/comments/index.html:64
+msgid "comments:home:system_user"
+msgstr "Applicatie"
+
+#: comments/templates/comments/index.html:68
 msgid "comments:home:admin_user"
 msgstr "Administrator account"
 
-#: comments/templates/comments/index.html:80
+#: comments/templates/comments/index.html:75
+msgid "comments:home:no_experiment"
+msgstr "N.v.t."
+
+#: comments/templates/comments/index.html:86
 msgid "comments:home:delete"
 msgstr "Opmerking verwijderen"
 
@@ -93,6 +101,6 @@ msgstr "Toevoegen"
 msgid "comments:messages:created"
 msgstr "Opmerking toegevoegd!"
 
-#: comments/views.py:46
+#: comments/views.py:52
 msgid "comments:messages:deleted"
 msgstr "Opmerking verwijdert!"

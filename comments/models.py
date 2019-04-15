@@ -29,6 +29,7 @@ class Comment(models.Model):
         Experiment,
         on_delete=models.CASCADE,
         verbose_name=_('comment:attribute:experiment'),
+        null=True,
     )
 
     comment = e_fields.EncryptedTextField(
@@ -40,6 +41,11 @@ class Comment(models.Model):
         blank=True,
         null=True,
         auto_now_add=True,
+    )
+
+    system_comment = models.BooleanField(
+        verbose_name=_('comment:attribute:datetime'),
+        default=False
     )
 
     def __str__(self):

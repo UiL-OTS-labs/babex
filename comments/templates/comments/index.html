@@ -60,14 +60,20 @@
                             {{ comment.participant.email }}
                         </td>
                         <td>
-                            {% if comment.leader %}
+                            {% if comment.system_comment %}
+                                {% trans 'comments:home:system_user' %}
+                            {% elif comment.leader %}
                                 {{ comment.leader.name }}
                             {% else %}
                                 {% trans 'comments:home:admin_user' %}
                             {% endif %}
                         </td>
                         <td>
-                            {{ comment.experiment }}
+                            {% if comment.experiment %}
+                                {{ comment.experiment }}
+                            {% else %}
+                                {% trans 'comments:home:no_experiment' %}
+                            {% endif %}
                         </td>
                         <td>
                             {{ comment.datetime|date:"Y-m-d H:i" }}
