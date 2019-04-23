@@ -1,6 +1,8 @@
 from typing import Union, Tuple
 from json import JSONEncoder
 
+from django.conf import settings
+
 from api.auth.models import ApiUser
 from auditlog.enums import Event, UserType
 from auditlog.models import LogEntry
@@ -25,6 +27,10 @@ def log(
     Please only use datatypes that can be encoded by json.JSONEncoder. If
     you've got special datatypes, please encode them into a string manually!
     """
+    # Stop directly if the log isn't enabled
+    if not settings.ENABLE_AUDIT_LOG:
+        return
+
     user = _get_formatted_user(user)
 
     # Encode the extra data as JSON
