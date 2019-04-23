@@ -18,7 +18,6 @@ from django.utils.translation import gettext_lazy as _
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -32,7 +31,6 @@ ENABLE_DEBUG_TOOLBAR = True
 ALLOWED_HOSTS = []
 
 INTERNAL_IPS = ['127.0.0.1']
-
 
 # Application definition
 
@@ -58,6 +56,7 @@ INSTALLED_APPS = [
     'leaders',
     'participants',
     'comments',
+    'auditlog',
 
     'django.contrib.admin',
 ]
@@ -71,20 +70,21 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'csp.middleware.CSPMiddleware',
 ]
 
 if DEBUG and ENABLE_DEBUG_TOOLBAR:
     INSTALLED_APPS.append('debug_toolbar')
-    MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware',)
+    MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware', )
 
 ROOT_URLCONF = 'ppn_backend.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'BACKEND':  'django.template.backends.django.DjangoTemplates',
+        'DIRS':     [],
         'APP_DIRS': True,
-        'OPTIONS': {
+        'OPTIONS':  {
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -137,10 +137,17 @@ EMAIL_FROM = 'T.D.Mees@uu.nl'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME':   os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
+    'auditlog': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME':   os.path.join(BASE_DIR, 'auditlog.sqlite3'),
     }
 }
 
+DATABASE_ROUTERS = [
+    'ppn_backend.db_router.DatabaseRouter'
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -182,12 +189,10 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
 
 # Security
 # https://docs.djangoproject.com/en/2.0/topics/security/
@@ -205,6 +210,8 @@ SESSION_COOKIE_AGE = 60 * 60 * 12  # 12 hours
 # http://django-csp.readthedocs.io/en/latest/index.html
 CSP_REPORT_ONLY = False
 
+CSP_DEFAULT_SRC = ["'self'", ]
+CSP_SCRIPT_SRC = ["'self'", ]
 CSP_FONT_SRC = ["'self'", 'data:', ]
 CSP_STYLE_SRC = ["'self'", ]
 CSP_IMG_SRC = ["'self'", 'data:', ]
@@ -214,7 +221,6 @@ CSP_IMG_SRC = ["'self'", 'data:', ]
 
 MENU_SELECT_PARENTS = True
 MENU_HIDE_EMPTY = False
-
 
 try:
     from .ldap_settings import *

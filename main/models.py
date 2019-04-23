@@ -14,3 +14,6 @@ class User(AbstractUser):
         _('user:is_ldap_account'),
         default=False,
     )
+
+    def __audit_repr__(self):
+        return "<AdminUser: {}>".format(self.email)

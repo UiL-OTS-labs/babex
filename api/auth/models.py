@@ -83,6 +83,19 @@ class ApiUser(models.Model):
     def __str__(self):
         return self.email
 
+    def __audit_repr__(self):
+        roles = []
+        if self.is_leader:
+            roles.append('leader')
+
+        if self.is_participant:
+            roles.append('participant')
+
+        return "<RemoteUser: {} ({})>".format(
+            self.email,
+            ", ".join(roles)
+        )
+
 
 def _get_date_2hours():
     tz = timezone(settings.TIME_ZONE)
