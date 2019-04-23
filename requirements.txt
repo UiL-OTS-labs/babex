@@ -4,12 +4,12 @@
 #
 #    pip-compile -U
 #
--e git+https://github.com/UiL-OTS-labs/django-shared-core.git@master#egg=uil-django-core
+-e git+https://github.com/UiL-OTS-labs/django-shared-core.git@v1.0.0-rc1#egg=uil-django-core
 asn1crypto==0.24.0        # via cryptography
 blessings==1.7            # via curtsies
 bpython==0.18
 certifi==2019.3.9         # via requests
-cffi==1.12.2              # via cryptography
+cffi==1.12.3              # via cryptography
 chardet==3.0.4            # via requests
 click==7.0                # via pip-tools
 cryptography==2.6.1
@@ -37,5 +37,5 @@ requests==2.21.0          # via bpython
 six==1.12.0               # via blessings, bpython, cryptography, pip-tools, python-dateutil
 sqlparse==0.3.0           # via django-debug-toolbar
 typing==3.6.6             # via curtsies
-urllib3==1.24.1           # via requests
+urllib3==1.24.2           # via requests
 wcwidth==0.1.7            # via curtsies

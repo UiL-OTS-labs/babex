@@ -10,6 +10,6 @@ djangorestframework
 django-debug-toolbar
 cryptography
 python-dateutil
--e git+https://github.com/UiL-OTS-labs/django-shared-core.git@master#egg=uil-django-core
+-e git+https://github.com/UiL-OTS-labs/django-shared-core.git@v1.0.0-rc1#egg=uil-django-core
 mysqlclient<1.4.0
 django-auth-ldap
