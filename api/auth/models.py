@@ -106,8 +106,8 @@ def _get_date_2hours():
 
 class UserToken(models.Model):
     """
-    Please note that CANCEL_APPOINTMENTS token's don't have to be checked for
-    expiration. Those tokens should just live on indefinably.
+    Please note that MAILINGLIST_UNSUBSCRIBE token's don't have to be checked
+    for expiration. Those tokens should just live on indefinably.
     """
 
     PASSWORD_RESET = 'P'
