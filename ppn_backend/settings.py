@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Django extensions
+    'django_extensions',
+
     # django-simple-menu
     'menu',
 
