@@ -7,6 +7,7 @@ from django.utils.safestring import mark_safe
 from experiments.models import Experiment, Invitation
 from main.utils import get_supreme_admin, send_personalised_mass_mail
 from participants.models import Participant
+from participants.utils import get_mailinglist_unsubscribe_url
 
 link_to_subscribe_regex = r'{link_to_subscribe(?::\"(.*)\")?}'
 
@@ -25,13 +26,13 @@ def mail_invite(
 
     # Generate the datatuple list for send_personalised_mass_mail
     # Please see that function's docstring for info
-    data = [(subject, {'participant': participant}, [participant.email]) for
+    data = [(subject, {'participant': participant, 'unsub_link':
+        get_mailinglist_unsubscribe_url(participant)}, [participant.email]) for
             participant in participants]
 
     context = {
         'preview': False,
         'content': content,
-        'unsub_link': "{}participant/cancel/".format(settings.FRONTEND_URI)
     }
 
     send_personalised_mass_mail(
