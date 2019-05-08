@@ -1,0 +1,19 @@
+Beste {{ participant.name|default:"proefpersoon" }},
+
+Welkom! Je hebt een nieuw account aangemaakt op {% now "d-m-Y, H:i" %}. Hiermee kan je ten alle tijden inloggen om jouw afspraken te zien/af te zeggen. Ook zullen wij tijdens het inschrijven enkele gegevens voor jou invullen.
+{% if participant.email_subscription %}
+Je kan vanaf nu bij nieuwe experimenten een mailtje ontvangen met een uitnodiging om mee te doen. Wil je deze niet meer ontvangen? Dan kan je je uitschrijven voor de mail lijst via de volgende link:
+{{ unsub_link }}
+{% endif %}
+{% if not has_password %}
+Voordat je kan inloggen, moet je een wachtwoord instellen. Dit kan je doen via de volgende link:
+{{ set_password_link }}
+
+Deze link blijft 24 uur geldig. Daarna kan je een nieuwe link aanvragen via 'wachtwoord vergeten?' op het inlog scherm.
+{% endif %}
+
+Met vriendelijke groet,
+het UiL OTS lab
+
+
+Dit bericht is automatisch verzonden omdat je een account hebt aangemaakt.

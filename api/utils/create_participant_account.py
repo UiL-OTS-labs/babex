@@ -1,9 +1,13 @@
 from enum import Enum
 
 from django.conf import settings
-from api.auth.models import ApiUser, ApiGroup
+from api.auth.models import ApiUser, ApiGroup, UserToken
+from api.utils import get_reset_links
 from comments.utils import add_system_comment
+from leaders.utils import _get_tomorrow
 from participants.models import Participant
+from main.utils import send_template_email, get_supreme_admin
+from participants.utils import get_mailinglist_unsubscribe_url
 
 SYSTEM_MESSAGES = {
     'multiple_participants': "A user tried to create an account, but the "
@@ -140,12 +144,33 @@ def _create_new_account(participant: Participant, password: str = None) -> None:
 
     _add_participant_group(user)
 
+    token = UserToken.objects.create(
+        user=user,
+        expiration=_get_tomorrow(),
+        type=UserToken.PASSWORD_RESET,
+    )
+
+    link, alternative_link = get_reset_links(token.token)
+
+    context = {
+        'participant': participant,
+        'unsub_link': get_mailinglist_unsubscribe_url(participant),
+        'set_password_link': link,
+        'has_password': False,
+    }
+
     if password:
         user.set_password(password)
         user.save()
-    else:
-        # TODO: sent an email
-        pass
+        context['has_password'] = True
+
+    send_template_email(
+        [participant.email],
+        "UiL OTS: Account aangemaakt",
+        'api/mail/new_account',
+        context,
+        get_supreme_admin().email
+    )
 
 
 def _add_participant_group(api_user: ApiUser) -> None:
