@@ -50,7 +50,7 @@ def send_template_email(recipient_list: list, subject: str, template: str,
     )
 
 
-def send_personalised_mass_mail(datatuple: Tuple[str, dict, List[str]],
+def send_personalised_mass_mail(datatuple: List[Tuple[str, dict, List[str]]],
                                 template: str,
                                 template_context: dict,
                                 from_email: str = None) -> None:

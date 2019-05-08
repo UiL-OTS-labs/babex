@@ -1,10 +1,13 @@
 import braces.views as braces
+from django.contrib.messages import error, success
 from django.core.exceptions import ViewDoesNotExist
-from django.utils.text import mark_safe
 from django.views import generic
 
-from .mixins import ExperimentObjectMixin
+from django.utils.translation import ugettext as _
+
+from experiments.utils.invite import mail_invite, parse_contents
 from main.utils import get_supreme_admin
+from .mixins import ExperimentObjectMixin
 from ..utils.exclusion import get_eligible_participants_for_experiment
 
 
@@ -16,7 +19,7 @@ class InviteParticipantsForExperimentView(braces.LoginRequiredMixin,
     experiment_prefetch_related = ['experimentcriterion_set',
                                    'experimentcriterion_set__criterion',
                                    'additional_leaders']
-    experiment_select_related = ['defaultcriteria', 'leader',]
+    experiment_select_related = ['defaultcriteria', 'leader', ]
 
     def get_context_data(self, **kwargs):
         context = super(InviteParticipantsForExperimentView,
@@ -29,6 +32,26 @@ class InviteParticipantsForExperimentView(braces.LoginRequiredMixin,
         context['admin'] = get_supreme_admin().get_full_name()
 
         return context
+
+    def post(self, request, *args, **kwargs):
+        data = request.POST
+        failed = False
+
+        try:
+            mail_invite(
+                data.getlist('participants[]'),
+                data.get('content'),
+                self.experiment
+            )
+        except:
+            failed = True
+
+        if failed:
+            error(request, _('experiments:message:invite_failure'))
+        else:
+            success(request, _('experiments:message:invite_success'))
+
+        return self.get(request)
 
 
 class MailPreviewView(braces.LoginRequiredMixin, ExperimentObjectMixin,
@@ -45,9 +68,9 @@ class MailPreviewView(braces.LoginRequiredMixin, ExperimentObjectMixin,
         context = super(MailPreviewView, self).get_context_data(**kwargs)
 
         context['experiment'] = self.experiment
+        context['preview'] = True
 
         content = self.request.POST.get('content')
-        context['content'] = mark_safe(content)
-        context['content'] = 'http://www.uu.nl'
+        context['content'] = parse_contents(content, self.experiment)
 
         return context

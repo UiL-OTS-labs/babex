@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-18 10:25+0000\n"
+"POT-Creation-Date: 2019-05-08 08:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -244,11 +244,11 @@ msgstr "Naam"
 msgid "location:attribute:route_url"
 msgstr "Routebeschrijving URL"
 
-#: experiments/models/timeslot_models.py:17
+#: experiments/models/timeslot_models.py:18
 msgid "time_slot:attribute:datetime"
 msgstr "Tijd & Datum"
 
-#: experiments/models/timeslot_models.py:21
+#: experiments/models/timeslot_models.py:22
 msgid "time_slot:attribute:max_places"
 msgstr "Aantal plekken"
 
@@ -314,9 +314,9 @@ msgstr "Aantal gelinkte experimenten"
 
 #: experiments/templates/criteria/index.html:44
 #: experiments/templates/criteria/specific_list.html:44
-#: experiments/templates/experiments/participants.html:67
+#: experiments/templates/experiments/participants.html:69
 #: experiments/templates/locations/index.html:39
-#: experiments/templates/timeslots/index.html:70
+#: experiments/templates/timeslots/index.html:71
 msgid "experiments:globals:actions"
 msgstr "Acties"
 
@@ -356,7 +356,7 @@ msgstr "Voeg nieuw criterium toe"
 
 #: experiments/templates/criteria/specific_list.html:93
 #: experiments/templates/criteria/specific_list.html:153
-#: experiments/templates/timeslots/index.html:171
+#: experiments/templates/timeslots/index.html:172
 msgid "experiments:globals:add_button"
 msgstr "Toevoegen"
 
@@ -377,35 +377,35 @@ msgstr "Standaard criteria voor {}"
 msgid "criteria:new_default_criteria:info_text"
 msgstr " "
 
-#: experiments/templates/experiments/criteria_snippit.html:9
+#: experiments/templates/experiments/criteria_snippit.html:11
 msgid "criteria_snippit:dyslexia"
 msgstr "Dyslectisch:"
 
-#: experiments/templates/experiments/criteria_snippit.html:17
+#: experiments/templates/experiments/criteria_snippit.html:19
 msgid "criteria_snippit:language"
 msgstr "Taal:"
 
-#: experiments/templates/experiments/criteria_snippit.html:25
+#: experiments/templates/experiments/criteria_snippit.html:27
 msgid "criteria_snippit:multilingual"
 msgstr "Meertalig:"
 
-#: experiments/templates/experiments/criteria_snippit.html:33
+#: experiments/templates/experiments/criteria_snippit.html:35
 msgid "criteria_snippit:handedness"
 msgstr "Links/rechts handig:"
 
-#: experiments/templates/experiments/criteria_snippit.html:41
+#: experiments/templates/experiments/criteria_snippit.html:43
 msgid "criteria_snippit:sex"
 msgstr "Geslacht:"
 
-#: experiments/templates/experiments/criteria_snippit.html:49
+#: experiments/templates/experiments/criteria_snippit.html:51
 msgid "criteria_snippit:social_status"
 msgstr "Sociale rol:"
 
-#: experiments/templates/experiments/criteria_snippit.html:57
+#: experiments/templates/experiments/criteria_snippit.html:59
 msgid "criteria_snippit:min_age"
 msgstr "Min. leeftijd:"
 
-#: experiments/templates/experiments/criteria_snippit.html:65
+#: experiments/templates/experiments/criteria_snippit.html:67
 msgid "criteria_snippit:max_age"
 msgstr "Max. leeftijd:"
 
@@ -456,6 +456,38 @@ msgstr "Neem experiment op"
 msgid "experiments:excluded_experiments:included:title"
 msgstr "Sluit experiment uit"
 
+#: experiments/templates/experiments/experiment_actions_snippit.html:6
+msgid "experiments:home:edit_timeslots:title"
+msgstr "Pas timeslots aan"
+
+#: experiments/templates/experiments/experiment_actions_snippit.html:13
+msgid "experiments:home:edit_experiment:title"
+msgstr "Pas experiment aan"
+
+#: experiments/templates/experiments/experiment_actions_snippit.html:20
+msgid "experiments:home:edit_default_criteria:title"
+msgstr "Pas standaard criteria aan"
+
+#: experiments/templates/experiments/experiment_actions_snippit.html:27
+msgid "experiments:home:edit_specific_criteria:title"
+msgstr "Pas specifieke criteria aan"
+
+#: experiments/templates/experiments/experiment_actions_snippit.html:34
+msgid "experiments:home:exclude_experiments:title"
+msgstr "Sluit experimenten uit"
+
+#: experiments/templates/experiments/experiment_actions_snippit.html:41
+msgid "experiments:home:invite:title"
+msgstr "Nodig participanten uit"
+
+#: experiments/templates/experiments/experiment_actions_snippit.html:48
+msgid "experiments:home:participants:title"
+msgstr "Participanten"
+
+#: experiments/templates/experiments/experiment_actions_snippit.html:55
+msgid "experiments:home:delete:title"
+msgstr "Verwijder experiment"
+
 #: experiments/templates/experiments/index.html:8
 #: experiments/templates/experiments/index.html:20
 msgid "experiments:home:header"
@@ -488,38 +520,6 @@ msgstr "Maak experiment openbaar/verborgen"
 #: experiments/templates/experiments/index.html:98
 msgid "experiments:home:switch_visible:title"
 msgstr "Maak participant data openbaar/verborgen voor proefleiders"
-
-#: experiments/templates/experiments/index.html:107
-msgid "experiments:home:edit_timeslots:title"
-msgstr "Pas timeslots aan"
-
-#: experiments/templates/experiments/index.html:114
-msgid "experiments:home:edit_experiment:title"
-msgstr "Pas experiment aan"
-
-#: experiments/templates/experiments/index.html:121
-msgid "experiments:home:edit_default_criteria:title"
-msgstr "Pas standaard criteria aan"
-
-#: experiments/templates/experiments/index.html:128
-msgid "experiments:home:edit_specific_criteria:title"
-msgstr "Pas specifieke criteria aan"
-
-#: experiments/templates/experiments/index.html:135
-msgid "experiments:home:exclude_experiments:title"
-msgstr "Sluit experimenten uit"
-
-#: experiments/templates/experiments/index.html:142
-msgid "experiments:home:invite:title"
-msgstr "Nodig participanten uit"
-
-#: experiments/templates/experiments/index.html:149
-msgid "experiments:home:participants:title"
-msgstr "Participanten"
-
-#: experiments/templates/experiments/index.html:156
-msgid "experiments:home:delete:title"
-msgstr "Verwijder experiment"
 
 #: experiments/templates/experiments/invite.html:13
 #: experiments/templates/experiments/invite.html:20
@@ -561,13 +561,13 @@ msgstr ""
 msgid "experiments:globals:next_button"
 msgstr "Volgende >>"
 
-#: experiments/templates/experiments/participants.html:9
-#: experiments/templates/experiments/participants.html:29
+#: experiments/templates/experiments/participants.html:11
+#: experiments/templates/experiments/participants.html:31
 msgid "experiments:participants:header"
 msgstr "Participanten - Experiment '{}'"
 
-#: experiments/templates/experiments/participants.html:16
-#: experiments/templates/timeslots/index.html:25
+#: experiments/templates/experiments/participants.html:18
+#: experiments/templates/timeslots/index.html:26
 msgid "timeslot:warning:confirm_silent_remove_participant"
 msgstr ""
 "Weet u zeker dat u deze participant wilt verwijderen uit dit timeslot? "
@@ -575,95 +575,95 @@ msgstr ""
 "kan de knop naast deze gebruiken als je wel een automatische mail wilt laten "
 "sturen)."
 
-#: experiments/templates/experiments/participants.html:17
-#: experiments/templates/timeslots/index.html:26
+#: experiments/templates/experiments/participants.html:19
+#: experiments/templates/timeslots/index.html:27
 msgid "timeslot:warning:confirm_remove_participant"
 msgstr ""
 "Weet u zeker dat u deze participant wilt verwijderen uit dit timeslot? (Er "
 "zal een bevestigingsmail naar de participant worden gestuurd, maar stuur "
 "toch nog een persoonlijke mail als je dit nog niet hebt gedaan."
 
-#: experiments/templates/experiments/participants.html:39
+#: experiments/templates/experiments/participants.html:41
 msgid "experiments:participants:info_text"
 msgstr " "
 
-#: experiments/templates/experiments/participants.html:55
-#: experiments/templates/experiments/participants.html:183
-#: experiments/templates/timeslots/index.html:52
+#: experiments/templates/experiments/participants.html:57
+#: experiments/templates/experiments/participants.html:185
+#: experiments/templates/timeslots/index.html:53
 msgid "timeslots:day"
 msgstr "Dag"
 
-#: experiments/templates/experiments/participants.html:58
-#: experiments/templates/experiments/participants.html:186
+#: experiments/templates/experiments/participants.html:60
+#: experiments/templates/experiments/participants.html:188
 msgid "experiments:participants:place"
 msgstr "WP"
 
-#: experiments/templates/experiments/participants.html:64
+#: experiments/templates/experiments/participants.html:66
 msgid "experiments:participants:reminder"
 msgstr "Herinner"
 
-#: experiments/templates/experiments/participants.html:70
-#: experiments/templates/experiments/participants.html:200
+#: experiments/templates/experiments/participants.html:72
+#: experiments/templates/experiments/participants.html:202
 msgid "experiments:participants:email"
 msgstr "Email"
 
-#: experiments/templates/experiments/participants.html:73
-#: experiments/templates/experiments/participants.html:203
+#: experiments/templates/experiments/participants.html:75
+#: experiments/templates/experiments/participants.html:205
 msgid "experiments:participants:phone_number"
 msgstr "Telefoon- nummer"
 
-#: experiments/templates/experiments/participants.html:76
-#: experiments/templates/experiments/participants.html:206
+#: experiments/templates/experiments/participants.html:78
+#: experiments/templates/experiments/participants.html:208
 msgid "experiments:participants:birth_date"
 msgstr "Geboorte- datum"
 
-#: experiments/templates/experiments/participants.html:79
-#: experiments/templates/experiments/participants.html:209
+#: experiments/templates/experiments/participants.html:81
+#: experiments/templates/experiments/participants.html:211
 msgid "experiments:participants:dyslexic"
 msgstr "Dysl. (J/N)"
 
-#: experiments/templates/experiments/participants.html:82
-#: experiments/templates/experiments/participants.html:212
+#: experiments/templates/experiments/participants.html:84
+#: experiments/templates/experiments/participants.html:214
 msgid "experiments:participants:language"
 msgstr "Taal"
 
-#: experiments/templates/experiments/participants.html:85
-#: experiments/templates/experiments/participants.html:215
+#: experiments/templates/experiments/participants.html:87
+#: experiments/templates/experiments/participants.html:217
 msgid "experiments:participants:multilingual"
 msgstr "Meerdere talen"
 
-#: experiments/templates/experiments/participants.html:88
-#: experiments/templates/experiments/participants.html:218
+#: experiments/templates/experiments/participants.html:90
+#: experiments/templates/experiments/participants.html:220
 msgid "experiments:participants:handedness"
 msgstr "Links-/ Rechts handig"
 
-#: experiments/templates/experiments/participants.html:91
-#: experiments/templates/experiments/participants.html:221
+#: experiments/templates/experiments/participants.html:93
+#: experiments/templates/experiments/participants.html:223
 msgid "experiments:participants:sex"
 msgstr "Geslacht"
 
-#: experiments/templates/experiments/participants.html:124
-#: experiments/templates/timeslots/index.html:123
+#: experiments/templates/experiments/participants.html:126
+#: experiments/templates/timeslots/index.html:124
 msgid "timeslots:remove_participant:title"
 msgstr "Verwijder participant uit dit timeslot."
 
-#: experiments/templates/experiments/participants.html:131
-#: experiments/templates/timeslots/index.html:130
+#: experiments/templates/experiments/participants.html:133
+#: experiments/templates/timeslots/index.html:131
 msgid "timeslots:silent_remove_participant:title"
 msgstr ""
 "Verwijder participant uit dit timeslot (zonder automatische bevestigings-"
 "mail)."
 
-#: experiments/templates/experiments/participants.html:154
-#: experiments/templates/experiments/participants.html:172
+#: experiments/templates/experiments/participants.html:156
+#: experiments/templates/experiments/participants.html:174
 msgid "yes,no"
 msgstr "ja,nee"
 
-#: experiments/templates/experiments/participants.html:160
+#: experiments/templates/experiments/participants.html:162
 msgid "many,one"
 msgstr "meerdere,een"
 
-#: experiments/templates/experiments/participants.html:193
+#: experiments/templates/experiments/participants.html:195
 msgid "experiments:participants:send"
 msgstr "Verstuur"
 
@@ -698,12 +698,12 @@ msgstr "Nieuwe locatie"
 msgid "locations:new:info_text"
 msgstr " "
 
-#: experiments/templates/timeslots/index.html:9
-#: experiments/templates/timeslots/index.html:38
+#: experiments/templates/timeslots/index.html:10
+#: experiments/templates/timeslots/index.html:39
 msgid "timeslots:home:header"
 msgstr "Timeslots voor experiment '{}'"
 
-#: experiments/templates/timeslots/index.html:19
+#: experiments/templates/timeslots/index.html:20
 msgid "timeslot:error:cannot_validate_datetime"
 msgstr ""
 "Er is een error opgetreden tijdens het valideren van de datum en tijd. Dit "
@@ -711,39 +711,39 @@ msgstr ""
 "Controleer of je een valide datum en tijd hebt ingevuld in 'yyyy-mm-dd hh:"
 "mm' formaat."
 
-#: experiments/templates/timeslots/index.html:20
+#: experiments/templates/timeslots/index.html:21
 msgid "timeslot:error:invalid_date"
 msgstr ""
 "De ingevoerde datum kon niet gevalideerd worden! Controleer of je een valide "
 "datum hebt ingevuld in 'yyyy-mm-dd' formaat."
 
-#: experiments/templates/timeslots/index.html:21
+#: experiments/templates/timeslots/index.html:22
 msgid "timeslot:error:invalid_time"
 msgstr ""
 "De ingevoerde tijd kon niet gevalideerd worden! Controleer of je een valide "
 "tijd hebt ingevuld in 'hh:mm' formaat."
 
-#: experiments/templates/timeslots/index.html:22
+#: experiments/templates/timeslots/index.html:23
 msgid "timeslot:error:invalid_datetime"
 msgstr ""
 "De ingevoerde datum en/of tijd kon niet gevalideerd worden! Controleer of je "
 "een valide datum en/of tijd hebt ingevuld in 'yyyy-mm-dd hh:mm' formaat."
 
-#: experiments/templates/timeslots/index.html:23
+#: experiments/templates/timeslots/index.html:24
 msgid "timeslot:warning:deleting_timeslot"
 msgstr ""
 "Weet je zeker dat je dit timeslot wilt verwijderen? (Indien nodig wordt er "
 "een mail naar de participant gestuurd, maar stuur toch nog een persoonlijke "
 "mail als je dit nog niet gedaan hebt."
 
-#: experiments/templates/timeslots/index.html:24
+#: experiments/templates/timeslots/index.html:25
 msgid "timeslot:warning:deleting_timeslots"
 msgstr ""
 "Weet je zeker dat je deze timeslots wilt verwijderen? (Indien nodig wordt er "
 "een mail naar de participant(en) gestuurd, maar stuur toch nog een "
 "persoonlijke mail als je dit nog niet hebt gedaan."
 
-#: experiments/templates/timeslots/index.html:41
+#: experiments/templates/timeslots/index.html:42
 msgid "timeslots:home:info_text"
 msgstr ""
 "Hier kunt u de timeslots voor dit experiment aanpassen. Standaard is alleen "
@@ -753,27 +753,27 @@ msgstr ""
 "plaats eronder geactiveerd. Op deze manier zijn meerdere plaatsen in een "
 "timeslot te verwijderen."
 
-#: experiments/templates/timeslots/index.html:55
+#: experiments/templates/timeslots/index.html:56
 msgid "timeslots:date"
 msgstr "Datum"
 
-#: experiments/templates/timeslots/index.html:58
+#: experiments/templates/timeslots/index.html:59
 msgid "timeslots:time"
 msgstr "Tijd"
 
-#: experiments/templates/timeslots/index.html:61
+#: experiments/templates/timeslots/index.html:62
 msgid "timeslots:place"
 msgstr "Plaats #"
 
-#: experiments/templates/timeslots/index.html:64
+#: experiments/templates/timeslots/index.html:65
 msgid "timeslots:participant:name"
 msgstr "Participant"
 
-#: experiments/templates/timeslots/index.html:67
+#: experiments/templates/timeslots/index.html:68
 msgid "timeslots:participant:email"
 msgstr "Participant email"
 
-#: experiments/templates/timeslots/index.html:165
+#: experiments/templates/timeslots/index.html:166
 msgid "timeslots:home:new_timeslots:header"
 msgstr "Nieuw timeslot"
 
@@ -854,14 +854,22 @@ msgstr "Participant informatie zichtbaar gemaakt voor proefleiders"
 msgid "experiments:message:sent_reminders"
 msgstr "Herinneringen gestuurd naar {} participant(en)"
 
-#: experiments/views/timeslot_views.py:83
+#: experiments/views/invite_views.py:50
+msgid "experiments:message:invite_failure"
+msgstr "Er is iets fout gegaan..."
+
+#: experiments/views/invite_views.py:52
+msgid "experiments:message:invite_success"
+msgstr "Participant(en) succesvol uitgenodigd!"
+
+#: experiments/views/timeslot_views.py:88
 msgid "timeslots:message:deleted_timeslot"
 msgstr "Timeslot verwijderd!"
 
-#: experiments/views/timeslot_views.py:97
+#: experiments/views/timeslot_views.py:102
 msgid "timeslots:message:deleted_timeslots"
 msgstr "Timeslots verwijderd!"
 
-#: experiments/views/timeslot_views.py:112
+#: experiments/views/timeslot_views.py:117
 msgid "timeslots:message:unsubscribed_participant"
 msgstr "Participant verwijderd uit timeslot!"

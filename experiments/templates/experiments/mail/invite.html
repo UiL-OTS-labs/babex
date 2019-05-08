@@ -5,6 +5,11 @@
 {% endblock %}
 
 {% block content %}
+    {% if preview %}
+        <p>
+            <strong>This is a preview! Styling may not work correctly!</strong>
+        </p>
+    {% endif %}
     <p>
         Beste {{ participant.mail_name|default:"proefpersoon" }},
     </p>
