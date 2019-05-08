@@ -25,6 +25,10 @@
 {% block footer %}
     <p>
         Dit bericht is automatisch verzonden omdat je je hebt uitgeschreven voor een experiment.<br/>
-        Indien je geen e-mails meer wilt ontvangen met informatie over nieuwe experimenten, {# TODO: fix link #}
+        {% if participant.email_subscription %}
+            Indien je geen e-mails meer wilt ontvangen met informatie over nieuwe experimenten, <a href="{{ mailinglist_unsubscribe }}">
+            schrijf je dan hier uit.
+        </a>
+        {% endif %}
     </p>
 {% endblock %}

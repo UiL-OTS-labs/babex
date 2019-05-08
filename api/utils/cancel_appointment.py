@@ -5,6 +5,7 @@ from django.conf import settings
 from comments.utils import add_system_comment
 from experiments.models import Appointment
 from main.utils import get_supreme_admin, send_template_email
+from participants.utils import get_mailinglist_unsubscribe_url
 
 
 def cancel_appointment(appointment: Appointment) -> None:
@@ -66,13 +67,16 @@ def _send_confirmation(appointment: Appointment) -> None:
 
     subject = 'UiL OTS uitschrijven experiment: {}'.format(experiment.name)
     context = {
-        'participant':     appointment.participant,
-        'time_slot':       time_slot,
-        'experiment':      experiment,
-        'admin':           admin.get_full_name(),
-        'admin_email':     admin.email,
-        'other_time_link': _get_resub_link(experiment.id),
-        'home_link':       settings.FRONTEND_URI,
+        'participant':             appointment.participant,
+        'time_slot':               time_slot,
+        'experiment':              experiment,
+        'admin':                   admin.get_full_name(),
+        'admin_email':             admin.email,
+        'other_time_link':         _get_resub_link(experiment.id),
+        'home_link':               settings.FRONTEND_URI,
+        'mailinglist_unsubscribe': get_mailinglist_unsubscribe_url(
+            appointment.participant
+        )
     }
 
     send_template_email(

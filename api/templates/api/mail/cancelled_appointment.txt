@@ -11,4 +11,7 @@ Je kunt je opnieuw inschrijven voor een ander tijdstip via de volgende link:
 {{ other_time_link }}
 
 Dit bericht is automatisch verzonden omdat je je hebt uitgeschreven voor een experiment.
-Indien je geen e-mails meer wilt ontvangen met informatie over nieuwe experimenten, {# TODO: fix link #}
+{% if participant.email_subscription %}
+Indien je geen e-mails meer wilt ontvangen met informatie over nieuwe experimenten, schrijf je dan via de volgende link uit:
+{{ mailinglist_unsubscribe }}
+{% endif %}

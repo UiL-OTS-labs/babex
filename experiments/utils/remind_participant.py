@@ -1,3 +1,5 @@
+from django.conf import settings
+
 from experiments.models import Appointment
 from main.utils import get_supreme_admin, send_template_email
 
@@ -11,7 +13,7 @@ def remind_participant(appointment: Appointment) -> None:
         'participant':     appointment.participant,
         'time_slot':       appointment.timeslot,
         'experiment':      experiment,
-        'cancel_link':     '',  # TODO: make these links
+        'cancel_link':     "{}participant/cancel/".format(settings.FRONTEND_URI)
     }
 
     send_template_email(
