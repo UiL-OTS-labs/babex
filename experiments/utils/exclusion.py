@@ -56,7 +56,8 @@ def get_eligible_participants_for_experiment(experiment: Experiment,
     ).prefetch_related(
         'secondaryemail_set',
     ).annotate(
-        # This is black magic (Read: workaround for a bug in Django 2.0)
+        # This is black magic. Read: workaround for a bug in Django 2.0
+        # If using a Count, it cannot create a valid SQL statement.
         has_invitation=RawSQL("SELECT COUNT(*) AS \"has_invitation\" FROM "
                               "experiments_invitation WHERE experiment_id = "
                               "%s AND participant_id = "
