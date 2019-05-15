@@ -54,7 +54,8 @@ def get_eligible_participants_for_experiment(experiment: Experiment,
     ).exclude(
         appointments__timeslot__experiment=experiment
     ).prefetch_related(
-        'secondaryemail_set',
+        'secondaryemail_set',  # Used in the invite page template!
+        'criterionanswer_set'
     ).annotate(
         # This is black magic. Read: workaround for a bug in Django 2.0
         # If using a Count, it cannot create a valid SQL statement.
@@ -63,20 +64,6 @@ def get_eligible_participants_for_experiment(experiment: Experiment,
                               "%s AND participant_id = "
                               "participants_participant.id", (experiment.pk,) )
     )
-
-    # Get all criterion answers for the criteria in this experiment and the
-    # participants we're going to filter
-    criteria_answers = CriterionAnswer.objects.select_related(
-        'criterion',
-        'participant',
-    )
-    criteria_answers = criteria_answers.filter(
-        criterion__in=specific_criteria,
-        participant__in=participants
-    )
-
-    # Turn our QuerySet into a list, so we can modify it
-    criteria_answers = list(criteria_answers)
 
     # List of all allowed participants
     filtered = []
@@ -90,8 +77,7 @@ def get_eligible_participants_for_experiment(experiment: Experiment,
             continue
 
         if _should_exclude_by_specific_criteria(participant,
-                                                specific_experiment_criteria,
-                                                criteria_answers):
+                                                specific_experiment_criteria):
             continue
 
         filtered.append(participant)
@@ -111,26 +97,11 @@ Participant) -> bool:
         experiment.experimentcriterion_set.select_related(
             'criterion'
         )
-    specific_criteria = [x.criterion for x in specific_experiment_criteria]
 
     filters = {}
 
     # Build the rest of the filters
     filters = _build_filters(filters, default_criteria)
-
-    # Get all criterion answers for the criteria in this experiment and the
-    # participants we're going to filter
-    criteria_answers = CriterionAnswer.objects.select_related(
-        'criterion',
-        'participant',
-    )
-    criteria_answers = criteria_answers.filter(
-        criterion__in=specific_criteria,
-        participant=participant
-    )
-
-    # Turn our QuerySet into a list, so we can modify it
-    criteria_answers = list(criteria_answers)
 
     if _should_exclude_by_filters(participant, filters):
         return False
@@ -139,8 +110,7 @@ Participant) -> bool:
         return False
 
     if _should_exclude_by_specific_criteria(participant,
-                                            specific_experiment_criteria,
-                                            criteria_answers):
+                                            specific_experiment_criteria):
         return False
 
     return True
@@ -188,8 +158,7 @@ def _should_exclude_by_filters(participant: Participant, filters: dict) -> bool:
 
 
 def _should_exclude_by_specific_criteria(participant: Participant,
-                                         specific_experiment_criteria,
-                                         criteria_answers: list) -> bool:
+                                         specific_experiment_criteria) -> bool:
     """
     Determines if a participant should be excluded based upon their
     :param participant:
@@ -199,10 +168,10 @@ def _should_exclude_by_specific_criteria(participant: Participant,
     """
 
     # Loop over all criteria answers
-    for specific_criterion_answer in criteria_answers.copy():
+    for specific_criterion_answer in participant.criterionanswer_set.all():
         # Check if this answer is by the current participant
         # We do this in python to minimize db queries (it's way faster)
-        if not specific_criterion_answer.participant == participant:
+        if not specific_criterion_answer.criterion not in specific_experiment_criteria:
             continue
 
         # Get the experiment criterion
@@ -210,10 +179,6 @@ def _should_exclude_by_specific_criteria(participant: Participant,
             specific_experiment_criteria,
             specific_criterion_answer.criterion
         )
-
-        # Remove this answer from our list, in order to shorten this loop in
-        # the next call by removing answers we've already evaluated
-        criteria_answers.remove(specific_criterion_answer)
 
         if specific_criterion and not specific_criterion_answer.answer == \
                                       specific_criterion.correct_value:
