@@ -1,3 +1,4 @@
+from functools import lru_cache
 from typing import List, Tuple
 
 from django.conf import settings
@@ -151,6 +152,7 @@ def send_personalised_mass_mail(datatuple: List[Tuple[str, dict, List[str]]],
     connection.send_messages(messages)
 
 
+@lru_cache(maxsize=None)
 def get_supreme_admin() -> User:
     """
     The name is kinda a joke. It just returns the first User model that has
