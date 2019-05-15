@@ -1,11 +1,11 @@
 import braces.views as braces
 from django.contrib.messages import error, success
 from django.core.exceptions import ViewDoesNotExist
+from django.utils.translation import ugettext as _
 from django.views import generic
 
-from django.utils.translation import ugettext as _
-
-from experiments.utils.invite import mail_invite, parse_contents
+from experiments.utils.invite import _parse_contents_html as parse_contents, \
+    mail_invite
 from main.utils import get_supreme_admin
 from .mixins import ExperimentObjectMixin
 from ..utils.exclusion import get_eligible_participants_for_experiment
