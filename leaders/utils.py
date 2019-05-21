@@ -101,6 +101,8 @@ def create_ldap_leader(name: str, email: str, phonenumber: str) -> Leader:
     if existing_api_user:
         api_user = existing_api_user[0]
     else:
+        # Create an empty account first, before we populate
+        ApiUser.objects.create(email=email)
         api_user = ApiLdapBackend().populate_user(email)
 
     if _leader_group not in api_user.groups.all():
