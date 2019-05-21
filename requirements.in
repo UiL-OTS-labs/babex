@@ -18,3 +18,4 @@ django-auth-ldap
 
 # Included to downgrade to a Py 3.4 compatible version (and can be removed after an upgrade to 3.5)
 pygments<2.4
+requests<2.22
