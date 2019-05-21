@@ -29,7 +29,7 @@ pip-tools==3.7.0
 pyasn1-modules==0.2.5     # via python-ldap
 pyasn1==0.4.5             # via pyasn1-modules, python-ldap
 pycparser==2.19           # via cffi
-pygments==2.4.0           # via bpython
+pygments==2.3.1
 pyjwt==1.7.1
 python-dateutil==2.8.0
 python-ldap==3.2.0        # via django-auth-ldap

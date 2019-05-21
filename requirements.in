@@ -14,3 +14,7 @@ python-dateutil
 -e git+https://github.com/UiL-OTS-labs/django-shared-core.git@v1.0.0-rc2#egg=uil-django-core
 mysqlclient<1.4.0
 django-auth-ldap
+
+
+# Included to downgrade to a Py 3.4 compatible version (and can be removed after an upgrade to 3.5)
+pygments<2.4
