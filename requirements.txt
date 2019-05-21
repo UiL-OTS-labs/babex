@@ -4,7 +4,7 @@
 #
 #    pip-compile -U
 #
--e git+https://github.com/UiL-OTS-labs/django-shared-core.git@v1.0.0-rc1#egg=uil-django-core
+-e git+https://github.com/UiL-OTS-labs/django-shared-core.git@v1.0.0-rc2#egg=uil-django-core
 asn1crypto==0.24.0        # via cryptography
 blessings==1.7            # via curtsies
 bpython==0.18
@@ -18,25 +18,25 @@ django-auth-ldap==1.7.0
 django-braces==1.13.0
 django-csp==3.5
 django-debug-toolbar==1.11
-django-extensions==2.1.6
+django-extensions==2.1.7
 django-simple-menu==1.2.1
 django==2.0.13
-djangorestframework==3.9.3
+djangorestframework==3.9.4
 greenlet==0.4.15          # via bpython
 idna==2.8                 # via requests
 mysqlclient==1.3.14
-pip-tools==3.6.1
+pip-tools==3.7.0
 pyasn1-modules==0.2.5     # via python-ldap
 pyasn1==0.4.5             # via pyasn1-modules, python-ldap
 pycparser==2.19           # via cffi
-pygments==2.3.1           # via bpython
+pygments==2.4.0           # via bpython
 pyjwt==1.7.1
 python-dateutil==2.8.0
 python-ldap==3.2.0        # via django-auth-ldap
 pytz==2019.1              # via django
-requests==2.21.0          # via bpython
+requests==2.22.0          # via bpython
 six==1.12.0               # via blessings, bpython, cryptography, django-extensions, pip-tools, python-dateutil
 sqlparse==0.3.0           # via django-debug-toolbar
 typing==3.6.6             # via curtsies
-urllib3==1.24.3           # via requests
+urllib3==1.25.2           # via requests
 wcwidth==0.1.7            # via curtsies
