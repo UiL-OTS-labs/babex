@@ -219,6 +219,8 @@ def delete_leader(leader: Leader) -> None:
             api_user.groups.remove(_leader_group)
             api_user.is_active = _participant_group in all_groups
 
+            api_user.is_ldap_account = False
+
             api_user.save()
 
     leader.delete()
