@@ -32,10 +32,7 @@ class SubscribeToEmaillistView(views.APIView):
         participant = None
 
         if already_known:
-            if len(filtered) > 1:
-                pass  # TODO: figure out how to handle this nicely
-            else:
-                participant = filtered[0]
+            participant = filtered[0]
         else:
             participant = Participant()
 
