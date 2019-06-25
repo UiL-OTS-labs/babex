@@ -125,7 +125,7 @@ msgstr "Leaders"
 
 #: leaders/templates/leaders/index.html:18
 msgid "leaders:home:create_leader:local"
-msgstr "New leader (local)"
+msgstr "New guest leader (non-Solis-ID)"
 
 #: leaders/templates/leaders/index.html:20
 msgid "leaders:home:create_leader"

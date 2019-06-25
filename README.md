@@ -26,6 +26,7 @@ Development instructions:
 * Clone this repository
 * Install the dependencies using pip (it is recommended to use a virtual 
   environment!). ``pip install -r requirements.txt``
+* Run all DB migrations ``python manage.py migrate``
 * Edit ``ppn_backend/settings.py`` to suit your needs.
 * Create a super user using ``python manage.py createsuperuser``
 * Compile the translation files using ``python manage.py compilemessages``

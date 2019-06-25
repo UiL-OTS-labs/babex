@@ -162,7 +162,7 @@ msgstr "Administrator accounts"
 
 #: main/templates/users/index.html:19
 msgid "users:home:create_user:local"
-msgstr "New local admin account"
+msgstr "New non-Solis admin account"
 
 #: main/templates/users/index.html:21
 msgid "users:home:create_user"

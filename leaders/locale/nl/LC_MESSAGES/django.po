@@ -132,7 +132,7 @@ msgstr "Proefleiders"
 
 #: leaders/templates/leaders/index.html:18
 msgid "leaders:home:create_leader:local"
-msgstr "Nieuwe proefleider (lokaal)"
+msgstr "Nieuwe gast-proefleider (non-Solis-ID)"
 
 #: leaders/templates/leaders/index.html:20
 msgid "leaders:home:create_leader"
