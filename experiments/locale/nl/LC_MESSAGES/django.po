@@ -50,11 +50,11 @@ msgstr "Melding indien incorrect"
 
 #: experiments/models/criteria_models.py:10
 msgid "default_criteria:attribute:multilingual:yes"
-msgstr "Een"
+msgstr "Meerdere"
 
 #: experiments/models/criteria_models.py:11
 msgid "default_criteria:attribute:multilingual:no"
-msgstr "Meerdere"
+msgstr "Een"
 
 #: experiments/models/criteria_models.py:12
 #: experiments/models/criteria_models.py:18

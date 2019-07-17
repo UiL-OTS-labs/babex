@@ -52,11 +52,11 @@ msgstr "Message when failed"
 
 #: experiments/models/criteria_models.py:10
 msgid "default_criteria:attribute:multilingual:yes"
-msgstr "One"
+msgstr "Many"
 
 #: experiments/models/criteria_models.py:11
 msgid "default_criteria:attribute:multilingual:no"
-msgstr "Many"
+msgstr "One"
 
 #: experiments/models/criteria_models.py:12
 #: experiments/models/criteria_models.py:18

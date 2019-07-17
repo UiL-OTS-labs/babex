@@ -7,8 +7,8 @@ from .experiment_models import Experiment
 
 class DefaultCriteria(models.Model):
     MULTILINGUAL = (
-        ('Y', _('default_criteria:attribute:multilingual:yes')),
         ('N', _('default_criteria:attribute:multilingual:no')),
+        ('Y', _('default_criteria:attribute:multilingual:yes')),
         ('I', _('experiments:globals:indifferent')),
     )
 
