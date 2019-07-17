@@ -11,6 +11,12 @@ class ExperimentForm(forms.ModelForm):
             'name':         forms.TextInput,
             'duration':     forms.TextInput,
             'compensation': forms.TextInput,
+            'task_description': forms.Textarea({
+                'rows': 7,
+            }),
+            'additional_instructions': forms.Textarea({
+                'rows': 7
+            })
         }
 
     def __init__(self, *args, **kwargs):
