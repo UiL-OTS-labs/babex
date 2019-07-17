@@ -88,8 +88,8 @@ def get_eligible_participants_for_experiment(experiment: Experiment,
 def check_participant_eligible(experiment: Experiment, participant:
 Participant) -> bool:
     """
-    This function produces a list of participants that can take part in
-    the provided experiment.
+    This function checks if a given participant can participate in a given 
+    experiment
     """
 
     default_criteria = experiment.defaultcriteria
