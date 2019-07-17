@@ -127,7 +127,7 @@ msgstr "What should the social role of the participant be? "
 
 #: experiments/models/criteria_models.py:90
 msgid "default_criteria:attribute:min_age"
-msgstr "What should the lower bound of the participant's age?"
+msgstr "What should the lower bound of the participant's age be?"
 
 #: experiments/models/criteria_models.py:93
 msgid "default_criteria:attribute:min_age:help_text"
@@ -135,7 +135,7 @@ msgstr "Set to -1 if this criteria doesn't matter."
 
 #: experiments/models/criteria_models.py:97
 msgid "default_criteria:attribute:max_age"
-msgstr "What should the upper bound of the participant's age?"
+msgstr "What should the upper bound of the participant's age be?"
 
 #: experiments/models/criteria_models.py:100
 msgid "default_criteria:attribute:max_age:help_text"
