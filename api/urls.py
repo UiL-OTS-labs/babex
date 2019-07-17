@@ -7,7 +7,7 @@ from api.views.experiment_views import DeleteAppointment
 from api.views.participant_views import UnsubscribeFromMailinglistView, \
     ValidateMailinglistTokenView
 from .router import router
-from .views import AddTimeSlotView, AdminView, ChangeLeaderView, \
+from .views import AddTimeSlotView, AdminView, \
     ChangePasswordView, CreateParticipantAccountView, DeleteTimeSlots, \
     GetAppointmentTokenView, GetRequiredFields, LeaderView, \
     SubscribeToEmaillistView, SwitchExperimentOpenView
@@ -28,7 +28,6 @@ urlpatterns = [
 
     path('leader/', include([
         path('', LeaderView.as_view()),
-        path('change/', ChangeLeaderView.as_view()),
         path('add_comment/', AddCommentView.as_view()),
     ])),
 

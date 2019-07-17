@@ -22,18 +22,21 @@ class LeaderView(views.APIView):
 
         return Response(serializer.data)
 
-
-class ChangeLeaderView(views.APIView):
-    serializer_class = LeaderSerializer
-    permission_classes = (IsPermittedClient, )
-    authentication_classes = (JwtAuthentication, )
-
     def post(self, request, format=None):
         if not hasattr(self.request.user, 'leader'):
             raise PermissionDenied
 
         post_data = self.request.POST
         leader = self.request.user.leader
+
+        try:
+            # We want to compare int's, but we have a string in the POST data
+            post_id = int(post_data['id'])
+        except ValueError:
+            raise PermissionDenied
+
+        if not leader.id == post_id:
+            raise PermissionDenied
 
         leader.name = post_data['name']
         leader.phonenumber = post_data['phonenumber']
