@@ -20,6 +20,12 @@ class DefaultCriteriaForm(forms.ModelForm):
             'social_status': forms.RadioSelect,
         }
 
+    def __init__(self, *args, **kwargs):
+        # This removes the colon from the labels. Without it Django is very
+        # inconsistent in it's use, so we just remove it
+        kwargs.setdefault('label_suffix', '')
+        super(DefaultCriteriaForm, self).__init__(*args, **kwargs)
+
 
 class CriterionForm(forms.ModelForm):
     class Meta:
