@@ -1,7 +1,7 @@
 from typing import Union, Tuple
 from json import JSONEncoder
 
-from django.conf import settings
+from auditlog import settings
 
 from api.auth.models import ApiUser
 from auditlog.enums import Event, UserType
@@ -28,7 +28,12 @@ def log(
     you've got special datatypes, please encode them into a string manually!
     """
     # Stop directly if the log isn't enabled
-    if not settings.ENABLE_AUDIT_LOG:
+    if not settings.AUDIT_LOG_ENABLE:
+        return
+
+    # Check if we need to actually log this event
+    if not settings.AUDIT_LOG_LOGGABLE_EVENTS == '__all__' and \
+            event not in settings.AUDIT_LOG_LOGGABLE_EVENTS:
         return
 
     user = _get_formatted_user(user)
@@ -64,9 +69,9 @@ def _encode_extra_data(extra: dict) -> str:
     except TypeError:
         # If it fails, provide some info about what is happening
         extra = {
-            'error': 'unserializable data provided, original data is lost',
-            'type': str(type(extra)),
-            '__str__': str(extra),
+            'error':    'unserializable data provided, original data is lost',
+            'type':     str(type(extra)),
+            '__str__':  str(extra),
             '__repr__': repr(extra),
         }
         extra = JSONEncoder().encode(extra)
@@ -96,7 +101,7 @@ def _get_formatted_user(user: Union[User, ApiUser, str]) -> str:
         if user is not None and not isinstance(user, str):
             user = user.__audit_repr__()
     except AttributeError:
-        user = "<Unknown user: could call __audit_repr__ on supplied object>"
+        user = "<Unknown user: couldn't call __audit_repr__ on supplied object>"
 
     if not user:
         user = "<Unknown user: no user info was supplied>"

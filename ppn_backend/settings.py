@@ -27,7 +27,6 @@ SECRET_KEY = 'hk+83s0m6j8(ei)gxgy)e59b@^n77y_bmd4(#yyknr#whcrf^#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 ENABLE_DEBUG_TOOLBAR = True
-ENABLE_AUDIT_LOG = True
 
 ALLOWED_HOSTS = []
 
@@ -225,6 +224,10 @@ CSP_IMG_SRC = ["'self'", 'data:', ]
 
 MENU_SELECT_PARENTS = True
 MENU_HIDE_EMPTY = False
+
+# Auditlog
+
+AUDIT_LOG_ENABLE = True
 
 try:
     from .ldap_settings import *

@@ -11,6 +11,8 @@ from api.permissions import IsPermittedClient
 from api.serializers import AppointmentSerializer
 from api.utils import send_cancel_token_mail, cancel_appointment, \
     get_required_fields
+from auditlog.enums import Event, UserType
+import auditlog.utils.log as auditlog
 from experiments.models import Appointment, Experiment
 from participants.models import Participant
 
@@ -187,11 +189,79 @@ class GetRequiredFields(views.APIView):
 
 
 class AppointmentsView(rest_mixins.ListModelMixin,
-                       rest_mixins.RetrieveModelMixin,
                        viewsets.GenericViewSet):
     permission_classes = (IsPermittedClient,)
     authentication_classes = (JwtAuthentication,)
     serializer_class = AppointmentSerializer
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+
+        message = "Participant viewed appointment for experiment '{}'".format(
+            instance.timeslot.experiment.name
+        )
+
+        event = Event.VIEW_DATA
+
+        auditlog.log(
+            event,
+            message,
+            self.request.user,
+            UserType.PARTICIPANT,
+        )
+
+        return Response(serializer.data)
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+
+        message = "Participant viewed entire list of their appointments"
+
+        event = Event.VIEW_DATA
+
+        auditlog.log(
+            event,
+            message,
+            self.request.user,
+            UserType.PARTICIPANT,
+            {
+                'pk_list': [x.pk for x in queryset]
+            }
+        )
+
+        return Response(serializer.data)
+
+    def destroy(self, request, *args, **kwargs):
+        # We do not need to do any checks, the _get_participant method call
+        # in get_queryset() already does all required authentication checks.
+        appointment = self.get_object()
+
+        message = "Participant deleted appointment for experiment '{}'".format(
+            appointment.timeslot.experiment.name
+        )
+
+        event = Event.DELETE_DATA
+
+        auditlog.log(
+            event,
+            message,
+            self.request.user,
+            UserType.PARTICIPANT,
+        )
+
+        cancel_appointment(appointment)
+
+        return Response(
+            status=status.HTTP_204_NO_CONTENT,
+        )
 
     def _get_participant(self):
         if self.request.user.is_authenticated and \
@@ -214,14 +284,3 @@ class AppointmentsView(rest_mixins.ListModelMixin,
 
     def get_queryset(self):
         return Appointment.objects.filter(participant=self._get_participant())
-
-    def destroy(self, request, *args, **kwargs):
-        # We do not need to do any checks, the _get_participant method call
-        # in get_queryset() already does all required authentication checks.
-        appointment = self.get_object()
-
-        cancel_appointment(appointment)
-
-        return Response(
-            status=status.HTTP_204_NO_CONTENT,
-        )

@@ -1,6 +1,5 @@
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
-from django.utils.dateparse import parse_datetime
 from rest_framework import mixins as rest_mixins, views, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -10,6 +9,8 @@ from api.permissions import IsLeader, IsPermittedClient
 from api.serializers import ExperimentSerializer
 from api.serializers.experiment_serializers import LeaderExperimentSerializer
 from api.utils import register_participant
+from auditlog.enums import Event, UserType
+import auditlog.utils.log as auditlog
 from experiments.models import Experiment
 from experiments.utils import delete_timeslot, unsubscribe_participant
 from experiments.utils.exclusion import check_participant_eligible
@@ -76,9 +77,7 @@ class ExperimentsView(rest_mixins.RetrieveModelMixin,  # This default
         return Response(serializer.data)
 
 
-class LeaderExperimentsView(rest_mixins.RetrieveModelMixin,
-                            rest_mixins.ListModelMixin,
-                            viewsets.GenericViewSet):
+class LeaderExperimentsView(viewsets.GenericViewSet):
     serializer_class = LeaderExperimentSerializer
     permission_classes = (IsPermittedClient, IsAuthenticated)
     authentication_classes = (JwtAuthentication,)
@@ -100,6 +99,59 @@ class LeaderExperimentsView(rest_mixins.RetrieveModelMixin,
         self.queryset = qs
 
         return qs
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+
+        message = "Leader accessed '{}' data (pk: {}), which includes " \
+                  "participant data. Participant contact info shown: {}".format(
+            instance.name,
+            instance.pk,
+            instance.participants_visible
+        )
+
+        event = Event.VIEW_SENSITIVE_DATA
+        if 'download' in self.request.query_params:
+            event = Event.DOWNLOAD_DATA
+
+        auditlog.log(
+            event,
+            message,
+            self.request.user,
+            UserType.LEADER,
+        )
+
+        return Response(serializer.data)
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        message = "Leader accessed overview data, which includes " \
+                  "participant data in the payload. However, this should not " \
+                  "be visible to leader."
+
+        event = Event.VIEW_DATA
+        if 'download' in self.request.query_params:
+            event = Event.DOWNLOAD_DATA
+
+        auditlog.log(
+            event,
+            message,
+            self.request.user,
+            UserType.LEADER,
+            {
+                'pk_list': [x.pk for x in queryset]
+            }
+        )
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
 
 class SwitchExperimentOpenView(views.APIView):
@@ -180,7 +232,10 @@ class DeleteTimeSlots(views.APIView):
                 timeslot, n = item.split('_')
                 timeslot, n = int(timeslot), int(n)
 
-                delete_timeslot(experiment_object, timeslot, n)
+                delete_timeslot(experiment_object,
+                                timeslot,
+                                n,
+                                request.user)
         except:
             pass
         else:
@@ -208,7 +263,12 @@ class DeleteAppointment(views.APIView):
             raise PermissionDenied
 
         try:
-            unsubscribe_participant(data.get('to_delete'))
+            # NOTE: this function also logs the action into the auditlog
+            # (This deviates from the usual way, in which it's done by the view)
+            unsubscribe_participant(
+                data.get('to_delete'),
+                deleting_user=request.user
+            )
         except:
             pass
         else:

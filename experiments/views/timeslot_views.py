@@ -90,7 +90,11 @@ class TimeSlotDeleteView(braces.LoginRequiredMixin,
     def action(self, request):
         timeslot_pk = self.kwargs.get('timeslot')
 
-        delete_timeslot(self.experiment, timeslot_pk)
+        delete_timeslot(
+            self.experiment,
+            timeslot_pk,
+            deleting_user=request.user
+        )
 
     def get_redirect_url(self, *args, **kwargs):
         return reverse('experiments:timeslots', args=[self.experiment.pk])
@@ -105,7 +109,7 @@ class TimeSlotBulkDeleteView(braces.LoginRequiredMixin,
         if not request.method == 'POST':
             raise SuspiciousOperation
 
-        delete_timeslots(self.experiment, request.POST)
+        delete_timeslots(self.experiment, request.POST, request.user)
 
     def get_redirect_url(self, *args, **kwargs):
         return reverse('experiments:timeslots', args=[self.experiment.pk])
@@ -119,7 +123,7 @@ class UnsubscribeParticipantView(braces.LoginRequiredMixin,
     def action(self, request):
         appointment_pk = self.kwargs.get('appointment')
 
-        unsubscribe_participant(appointment_pk)
+        unsubscribe_participant(appointment_pk, deleting_user=request.user)
 
     def get_redirect_url(self, *args, **kwargs):
         if self.request.GET.get('next'):
@@ -140,4 +144,6 @@ class SilentUnsubscribeParticipantView(UnsubscribeParticipantView):
     def action(self, request):
         appointment_pk = self.kwargs.get('appointment')
 
-        unsubscribe_participant(appointment_pk, False)
+        unsubscribe_participant(appointment_pk,
+                                False,
+                                deleting_user=request.user)

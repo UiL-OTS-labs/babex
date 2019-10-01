@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import  Tuple, Type, Any, TypeVar
+from typing import Tuple, Type, Any, TypeVar
 
 E = TypeVar('E', bound=Enum)
 
