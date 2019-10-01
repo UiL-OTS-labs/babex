@@ -11,6 +11,9 @@ from .forms import CriterionAnswerForm, ParticipantForm, ParticipantMergeForm
 from .models import CriterionAnswer, Participant
 from .utils import merge_participants
 
+from auditlog.enums import Event, UserType
+import auditlog.utils.log as auditlog
+
 
 class ParticipantsHomeView(braces.LoginRequiredMixin, generic.ListView):
     template_name = 'participants/index.html'
@@ -34,6 +37,17 @@ class ParticipantUpdateView(braces.LoginRequiredMixin,
     success_message = _('participants:messages:updated_participant')
     form_class = ParticipantForm
 
+    def form_valid(self, form):
+        message = "Admin updated participant '{}'".format(self.object)
+        auditlog.log(
+            Event.MODIFY_DATA,
+            message,
+            self.request.user,
+            UserType.ADMIN
+        )
+
+        return super().form_valid(form)
+
     def get_success_url(self):
         return reverse('participants:detail', args=[self.object.pk])
 
@@ -45,6 +59,17 @@ class ParticipantDeleteView(braces.LoginRequiredMixin,
     template_name = 'participants/delete.html'
     model = Participant
 
+    def delete(self, request, *args, **kwargs):
+        message = "Admin deleted participant '{}'".format(self.object)
+        auditlog.log(
+            Event.DELETE_DATA,
+            message,
+            self.request.user,
+            UserType.ADMIN
+        )
+
+        return super().delete(request, *args, **kwargs)
+
 
 class ParticipantSpecificCriteriaUpdateView(braces.LoginRequiredMixin,
                                             FormSetUpdateView):
@@ -53,7 +78,6 @@ class ParticipantSpecificCriteriaUpdateView(braces.LoginRequiredMixin,
     succes_url = reverse('participants:home')
 
     def get_queryset(self):
-
         return CriterionAnswer.objects.filter(participant=self.participant)
 
     def get_context_data(self, **kwargs):

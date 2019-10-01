@@ -1,7 +1,11 @@
 from ..models import Participant, SecondaryEmail
+from auditlog.enums import UserType, Event
+import auditlog.utils.log as auditlog
 
 
-def merge_participants(old: Participant, new: Participant) -> Participant:
+def merge_participants(old: Participant,
+                       new: Participant,
+                       performing_user=None) -> Participant:
     """This function merges a new participant object into a new one,
     by following the following steps:
 
@@ -43,7 +47,7 @@ def merge_participants(old: Participant, new: Participant) -> Participant:
     for criterion_answer in new.criterionanswer_set.all():
         # If the new email is not yet known in the old object
         old_answer = old.criterionanswer_set.filter(
-                criterion=criterion_answer.criterion
+            criterion=criterion_answer.criterion
         )
         if old_answer:
             old_answer = old_answer[0]
@@ -63,4 +67,21 @@ def merge_participants(old: Participant, new: Participant) -> Participant:
     # Finally, delete the new object
     new.delete()
 
+    # Log the modification
+    _log(old, new, performing_user)
+
     return old
+
+
+def _log(old: Participant,
+         new: Participant,
+         performing_user=None) -> None:
+
+    message = "Admin merged participant '{}' into '{}'".format(new, old)
+
+    auditlog.log(
+        Event.MODIFY_DATA,
+        message,
+        performing_user,
+        UserType.ADMIN,
+    )
