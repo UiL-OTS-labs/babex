@@ -28,6 +28,17 @@ class ParticipantDetailView(braces.LoginRequiredMixin,
     model = Participant
     template_name = 'participants/detail.html'
 
+    def get(self, request, *args, **kwargs):
+        message = "Admin viewed participant '{}'".format(self.get_object())
+        auditlog.log(
+            Event.VIEW_SENSITIVE_DATA,
+            message,
+            self.request.user,
+            UserType.ADMIN
+        )
+
+        return super().get(request, *args, **kwargs)
+
 
 class ParticipantUpdateView(braces.LoginRequiredMixin,
                             SuccessMessageMixin,
