@@ -82,3 +82,73 @@ class DatabaseRouter:
 
         # In any other case, let Django's router handle it
         return None
+
+
+class MigrationAppRouter:
+    """
+    To be deleted once all data has been migrated
+    """
+
+    DB = 'old'
+    APP = 'migrate_app'
+
+    def __init__(self):
+        self.db_present = self.DB in settings.DATABASES
+
+    def db_for_read(self, model, **hints):
+
+        # If we don't have a separate DB defined, return that we don't care
+        if not self.db_present:
+            return None
+
+        # If this is a model from the APP, return the DB name
+        if model._meta.app_label == self.APP:
+            return self.DB
+
+        # Otherwise, let Django's router handle it
+        return None
+
+    def db_for_write(self, model, **hints):
+
+        # If we don't have a separate DB defined, return that we don't care
+        if not self.db_present:
+            return None
+
+        # If this is a model from the APP, return the DB name
+        if model._meta.app_label == self.APP:
+            return self.DB
+
+        # Otherwise, let Django's router handle it
+        return None
+
+    def allow_relation(self, obj1, obj2, **hints):
+
+        # If we don't have a separate DB defined, return that we don't care
+        if not self.db_present:
+            return None
+
+        # If both models are in the APP, we allow a relation between them
+        if obj1._meta.app_label == self.APP and \
+                obj2._meta.app_label == self.APP:
+            return True
+        # If none of the models are in the APP, let Django figure out a database
+        elif self.APP not in [obj1._meta.app_label,
+                              obj2._meta.app_label]:
+            return None
+
+        # If one of two are in AUDITLOG_APP, block relations
+        return False
+
+    def allow_migrate(self, db, app_label, model_name=None, **hints):
+
+        # If we don't have a separate DB defined, return that we don't care
+        if not self.db_present:
+            return None
+
+        if app_label == self.APP:
+            return False
+        elif db == self.DB:
+            return False
+
+        # In any other case, let Django's router handle it
+        return None

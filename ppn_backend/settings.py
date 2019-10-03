@@ -62,6 +62,9 @@ INSTALLED_APPS = [
     'auditlog',
 
     'django.contrib.admin',
+
+    # Temp
+    'migrate_app',
 ]
 
 MIDDLEWARE = [
@@ -145,11 +148,20 @@ DATABASES = {
     'auditlog': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME':   os.path.join(BASE_DIR, 'auditlog.sqlite3'),
+    },
+    'old': {
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'user': 'root',
+            'password': 'kipsate',
+            'db': 'ppn_old',
+        }
     }
 }
 
 DATABASE_ROUTERS = [
-    'ppn_backend.db_router.DatabaseRouter'
+    'ppn_backend.db_router.DatabaseRouter',
+    'ppn_backend.db_router.MigrationAppRouter', # TEMP!
 ]
 
 # Password validation
