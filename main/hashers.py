@@ -9,6 +9,6 @@ class PBKDF2WrappedMD5PasswordHasher(PBKDF2PasswordHasher):
         return super().encode(md5_hash, salt, iterations)
 
     def encode(self, password, salt, iterations=None):
-        md5_hash = UnsaltedMD5PasswordHasher().encode(password, None)
+        md5_hash = UnsaltedMD5PasswordHasher().encode(password, '')
         return self.encode_md5_hash(md5_hash, salt, iterations)
 
