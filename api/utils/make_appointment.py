@@ -17,42 +17,42 @@ DEFAULT_INVALID_MESSAGES = {
     'language':         'Je kunt niet meedoen met het experiment omdat je '
                         'moedertaal niet overeen komt met de criteria voor '
                         'dit experiment. Als je denkt dat dit niet klopt, '
-                        'neem dan even contact op met {}',
+                        'neem dan even contact op met {}.',
 
     'multilingual_yes': 'Je kunt niet meedoen met het experiment omdat je '
                         'niet meertalig bent. Om mee te doen aan dit '
                         'experiment moet je meertalig zijn. Als je denkt dat '
-                        'dit niet klopt, neem dan even contact op met {}',
+                        'dit niet klopt, neem dan even contact op met {}.',
     'multilingual_no':  'Je kunt niet meedoen met het experiment omdat je '
                         'meertalig bent. Om mee te doen aan dit experiment '
                         'mag je niet meertalig zijn. Als je denkt dat '
-                        'dit niet klopt, neem dan even contact op met {}',
+                        'dit niet klopt, neem dan even contact op met {}.',
     'sex':              'Je kunt niet meedoen met het experiment omdat je '
                         'geslacht niet overeen komt met de criteria voor '
                         'dit experiment. Als je denkt dat dit niet klopt, '
-                        'neem dan even contact op met {}',
+                        'neem dan even contact op met {}.',
     'handedness':       'Je kunt niet meedoen met het experiment omdat je '
                         'voorkeurshand niet overeen komt met de criteria voor '
                         'dit experiment. Als je denkt dat dit niet klopt, '
-                        'neem dan even contact op met {}',
+                        'neem dan even contact op met {}.',
     'age':              'Je kunt niet meedoen met het experiment omdat je '
                         'leeftijd niet overeen komt met de criteria voor '
                         'dit experiment. Als je denkt dat dit niet klopt, '
-                        'neem dan even contact op met {}',
+                        'neem dan even contact op met {}.',
     'dyslexic_yes':     'Je kunt niet meedoen met het experiment omdat je '
                         'volgens onze gegevens niet dyslectisch bent.  Als je '
                         'denkt dat dit niet klopt, neem dan even contact op '
-                        'met {}',
+                        'met {}.',
     'dyslexic_no':      'Je kunt niet meedoen met het experiment omdat je '
                         'volgens onze gegevens dyslectisch bent. Als je denkt '
-                        'dat dit niet klopt, neem dan even contact op met {}',
+                        'dat dit niet klopt, neem dan even contact op met {}.',
     'social_status_S':  'Je kunt niet meedoen met het experiment omdat je '
                         'volgens onze gegevens niet student bent. Als je '
                         'denkt dat dit niet klopt, neem dan even contact op '
-                        'met {}',
+                        'met {}.',
     'social_status_O':  'Je kunt niet meedoen met het experiment omdat je '
                         'volgens onze gegevens student bent. Als je denkt '
-                        'dat dit niet klopt, neem dan even contact op met {}',
+                        'dat dit niet klopt, neem dan even contact op met {}.',
 }
 
 MISC_INVALID_MESSAGES = {
