@@ -51,7 +51,7 @@ class DefaultCriteria(models.Model):
         choices=MULTILINGUAL,
         max_length=1,
         blank=False,
-        default='I',
+        default='N',
     )
 
     sex = models.CharField(
