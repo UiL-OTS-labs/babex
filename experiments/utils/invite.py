@@ -1,5 +1,6 @@
 import re
 from typing import List
+import urllib.parse as parse
 
 from django.conf import settings
 from django.utils.html import strip_tags
@@ -67,10 +68,12 @@ def mail_invite(
     )
 
 
-def _get_exp_url(experiment) -> str:
-    return "{}participant/register/{}/".format(
+def _get_exp_url(experiment: Experiment) -> str:
+    return parse.urljoin(
         settings.FRONTEND_URI,
-        experiment.id,
+        "participant/register/{}/".format(
+            experiment.pk,
+        )
     )
 
 

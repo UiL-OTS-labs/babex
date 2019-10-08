@@ -1,3 +1,5 @@
+import urllib.parse as parse
+
 from django.conf import settings
 
 from experiments.models import Appointment
@@ -13,7 +15,7 @@ def remind_participant(appointment: Appointment) -> None:
         'participant':     appointment.participant,
         'time_slot':       appointment.timeslot,
         'experiment':      experiment,
-        'cancel_link':     "{}participant/cancel/".format(settings.FRONTEND_URI)
+        'cancel_link':     _make_cancel_link()
     }
 
     send_template_email(
@@ -22,4 +24,11 @@ def remind_participant(appointment: Appointment) -> None:
         'experiments/mail/reminder',
         context,
         admin.email
+    )
+
+
+def _make_cancel_link() -> str:
+    return parse.urljoin(
+        settings.FRONTEND_URI,
+        "participant/cancel/"
     )

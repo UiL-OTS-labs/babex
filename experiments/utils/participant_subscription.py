@@ -1,10 +1,13 @@
+import urllib.parse as parse
+
+from django.conf import settings
+from django.contrib.auth import get_user_model
+
+import auditlog.utils.log as auditlog
+from api.auth.models import ApiUser
+from auditlog.enums import Event, UserType
 from experiments.models import Appointment, Experiment
 from main.utils import get_supreme_admin, send_template_email
-from django.conf import settings
-from auditlog.enums import Event, UserType
-import auditlog.utils.log as auditlog
-from django.contrib.auth import get_user_model
-from api.auth.models import ApiUser
 
 
 def unsubscribe_participant(appointment_pk: int,
@@ -68,7 +71,9 @@ def _log_deletions(message, deleting_user):
 
 
 def _get_other_time_link(experiment: Experiment) -> str:
-    return "{}participant/register/{}/".format(
+    return parse.urljoin(
         settings.FRONTEND_URI,
-        experiment.pk
+        "participant/register/{}/".format(
+            experiment.pk,
+        )
     )
