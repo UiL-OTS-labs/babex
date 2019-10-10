@@ -7,7 +7,8 @@ from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 
 from experiments.models import Experiment, Invitation
-from main.utils import get_supreme_admin, send_personalised_mass_mail
+from main.utils import get_supreme_admin, send_personalised_mass_mail, \
+    get_register_link
 from participants.models import Participant
 from participants.utils import get_mailinglist_unsubscribe_url
 
@@ -69,15 +70,6 @@ def mail_invite(
     )
 
 
-def _get_exp_url(experiment: Experiment) -> str:
-    return parse.urljoin(
-        settings.FRONTEND_URI,
-        "participant/register/{}/".format(
-            experiment.pk,
-        )
-    )
-
-
 def _get_login_exp_url(experiment: Experiment) -> str:
     return parse.urljoin(
         settings.FRONTEND_URI,
@@ -94,7 +86,7 @@ def _parse_contents_html(content: str, experiment: Experiment) -> str:
         return content
 
     replacement = "<a href=\"{}\">{}</a>".format(
-        _get_exp_url(experiment),
+        get_register_link(experiment),
         match.group(1)
     )
 
@@ -112,7 +104,7 @@ def _parse_contents_plain(content: str, experiment: Experiment) -> str:
 
     replacement = "{} ({})".format(
         match.group(1),
-        _get_exp_url(experiment),
+        get_register_link(experiment),
     )
 
     return mark_safe(content.replace(match.group(0), replacement))

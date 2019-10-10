@@ -7,7 +7,8 @@ import auditlog.utils.log as auditlog
 from api.auth.models import ApiUser
 from auditlog.enums import Event, UserType
 from experiments.models import Appointment, Experiment
-from main.utils import get_supreme_admin, send_template_email
+from main.utils import get_supreme_admin, send_template_email, \
+    get_register_link
 
 
 def unsubscribe_participant(appointment_pk: int,
@@ -40,7 +41,7 @@ def unsubscribe_participant(appointment_pk: int,
             'experiment':      experiment,
             'admin':           admin.get_full_name(),
             'admin_email':     admin.email,
-            'other_time_link': _get_other_time_link(experiment),
+            'other_time_link': get_register_link(experiment),
             'home_link':       settings.FRONTEND_URI,
         }
 
@@ -69,11 +70,3 @@ def _log_deletions(message, deleting_user):
         user_type,
     )
 
-
-def _get_other_time_link(experiment: Experiment) -> str:
-    return parse.urljoin(
-        settings.FRONTEND_URI,
-        "participant/register/{}/".format(
-            experiment.pk,
-        )
-    )

@@ -4,7 +4,8 @@ from django.conf import settings
 
 from comments.utils import add_system_comment
 from experiments.models import Appointment
-from main.utils import get_supreme_admin, send_template_email
+from main.utils import get_supreme_admin, send_template_email, \
+    get_register_link
 from participants.utils import get_mailinglist_unsubscribe_url
 
 
@@ -72,7 +73,7 @@ def _send_confirmation(appointment: Appointment) -> None:
         'experiment':              experiment,
         'admin':                   admin.get_full_name(),
         'admin_email':             admin.email,
-        'other_time_link':         _get_resub_link(experiment.id),
+        'other_time_link':         get_register_link(experiment),
         'home_link':               settings.FRONTEND_URI,
         'mailinglist_unsubscribe': get_mailinglist_unsubscribe_url(
             appointment.participant
@@ -85,11 +86,4 @@ def _send_confirmation(appointment: Appointment) -> None:
         'api/mail/cancelled_appointment',
         context,
         admin.email
-    )
-
-
-def _get_resub_link(experiment_id: int) -> str:
-    return "{}participant/register/{}/".format(
-        settings.FRONTEND_URI,
-        experiment_id
     )

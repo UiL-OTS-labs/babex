@@ -1,3 +1,4 @@
+import urllib.parse as parse
 from functools import lru_cache
 from typing import List, Tuple
 
@@ -6,6 +7,7 @@ from django.core.mail import EmailMultiAlternatives, get_connection, send_mail
 from django.template.loader import render_to_string
 from django.utils import translation
 
+from experiments.models import Experiment
 from .models import User
 
 
@@ -166,3 +168,12 @@ def get_supreme_admin() -> User:
 
 def is_ldap_enabled() -> bool:
     return hasattr(settings, 'AUTH_LDAP_SERVER_URI')
+
+
+def get_register_link(experiment: Experiment) -> str:
+    return parse.urljoin(
+        settings.FRONTEND_URI,
+        "participant/register/{}/".format(
+            experiment.pk,
+        )
+    )
