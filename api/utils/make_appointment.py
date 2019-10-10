@@ -134,7 +134,7 @@ def register_participant(data: dict, experiment: Experiment) -> Tuple[bool,
 
 
 def get_required_fields(experiment: Experiment, participant: Participant):
-    fields = ['name', 'phonenumber', 'social_status']
+    fields = ['name', 'phone', 'social_status']
 
     for field in experiment.defaultcriteria.__dict__.keys():
         if field not in ['experiment', 'experiment_id', 'min_age', 'max_age',
@@ -142,9 +142,8 @@ def get_required_fields(experiment: Experiment, participant: Participant):
             if getattr(participant, field) is None:
                 fields.append(field)
 
-    for field in ['birth_date']:
-        if getattr(participant, field) is None:
-            fields.append(field)
+    if getattr(participant, 'birth_date') is None:
+        fields.append('birth_date')
 
     if participant.dyslexic is None:
         fields.append('dyslexia')
