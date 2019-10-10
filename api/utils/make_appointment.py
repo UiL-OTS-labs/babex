@@ -134,7 +134,7 @@ def register_participant(data: dict, experiment: Experiment) -> Tuple[bool,
 
 
 def get_required_fields(experiment: Experiment, participant: Participant):
-    fields = ['phonenumber', 'social_status']
+    fields = ['name', 'phonenumber', 'social_status']
 
     for field in experiment.defaultcriteria.__dict__.keys():
         if field not in ['experiment', 'experiment_id', 'min_age', 'max_age',
