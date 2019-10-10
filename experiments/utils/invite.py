@@ -41,6 +41,7 @@ def mail_invite(
     context = {
         'preview': False,
         'content': html_content,
+        'reg_through_login_link': _get_login_exp_url(experiment)
     }
 
     plain_text_context = {
@@ -72,6 +73,15 @@ def _get_exp_url(experiment: Experiment) -> str:
     return parse.urljoin(
         settings.FRONTEND_URI,
         "participant/register/{}/".format(
+            experiment.pk,
+        )
+    )
+
+
+def _get_login_exp_url(experiment: Experiment) -> str:
+    return parse.urljoin(
+        settings.FRONTEND_URI,
+        "login/?next=/participant/register/{}/".format(
             experiment.pk,
         )
     )
