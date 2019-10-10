@@ -142,7 +142,7 @@ def get_required_fields(experiment: Experiment, participant: Participant):
             if getattr(participant, field) is None:
                 fields.append(field)
 
-    for field in ['birth_date', 'name']:
+    for field in ['birth_date']:
         if getattr(participant, field) is None:
             fields.append(field)
 
