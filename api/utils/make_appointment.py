@@ -1,4 +1,5 @@
 from typing import List, Tuple
+import urllib.parse as parse
 
 from django.conf import settings
 from django.core.exceptions import SuspiciousOperation
@@ -444,7 +445,7 @@ def _make_appointment(participant: Participant, time_slot: TimeSlot) -> None:
         experiment.name
     )
 
-    cancel_link = "{}participant/cancel/".format(settings.FRONTEND_URI)
+    cancel_link = parse.urljoin(settings.FRONTEND_URI, 'participant/cancel/')
 
     context = {
         'participant': participant,

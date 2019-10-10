@@ -1,3 +1,4 @@
+import urllib.parse as parse
 from django.conf import settings
 
 from api.auth.models import UserToken
@@ -24,7 +25,9 @@ def get_mailinglist_unsubscribe_token(participant: Participant) -> UserToken:
 def get_mailinglist_unsubscribe_url(participant: Participant):
     token = get_mailinglist_unsubscribe_token(participant)
 
-    return "{}participant/unsubscribe_mailinglist/{}/".format(
+    return parse.urljoin(
         settings.FRONTEND_URI,
-        token.token
+        "participant/unsubscribe_mailinglist/{}/".format(
+            token.token
+        )
     )

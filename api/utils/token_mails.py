@@ -1,4 +1,5 @@
 from typing import Tuple
+import urllib.parse as parse
 
 from django.conf import settings
 
@@ -29,7 +30,10 @@ def send_password_reset_mail(user: ApiUser, token: str) -> None:
 
 def send_cancel_token_mail(participant: Participant, token: str,
                            email: str) -> None:
-    link = "{}participant/appointments/{}/".format(settings.FRONTEND_URI, token)
+    link = parse.urljoin(
+        settings.FRONTEND_URI,
+        "participant/appointments/{}/".format(token)
+    )
 
     subject = 'UiL OTS Experimenten: afspraak afzeggen'
     context = {
@@ -58,10 +62,15 @@ def _get_name(user: ApiUser) -> str:
 
 
 def get_reset_links(token: str) -> Tuple[str, str]:
-    root = settings.FRONTEND_URI
 
-    root = "{}reset_password/".format(root)
+    root = parse.urljoin(
+        settings.FRONTEND_URI,
+        "reset_password/"
+    )
 
-    complete = "{}{}/".format(root, token)
+    complete = parse.urljoin(
+        root,
+        token + "/"
+    )
 
     return complete, root
