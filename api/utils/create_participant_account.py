@@ -31,6 +31,7 @@ def create_participant_account(email: str,
                                mailing_list: bool = False,
                                password: str = None) -> 'ReturnValues':
 
+    email = email.strip()
     # Get a list of participants that use this email
     participants = Participant.objects.find_by_email(email)
 

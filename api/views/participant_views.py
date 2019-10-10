@@ -24,7 +24,7 @@ class SubscribeToEmaillistView(views.APIView):
         post_data = request.POST
         success = False
 
-        email = post_data.get('email')
+        email = post_data.get('email').strip()
 
         filtered = Participant.objects.find_by_email(email)
 
