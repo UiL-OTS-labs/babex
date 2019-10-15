@@ -34,7 +34,6 @@ def get_eligible_participants_for_experiment(experiment: Experiment,
         experiment.experimentcriterion_set.select_related(
             'criterion'
         )
-    specific_criteria = [x.criterion for x in specific_experiment_criteria]
 
     # Base filters: a participant should be capable, and by default be on the
     # mailing list
@@ -59,7 +58,7 @@ def get_eligible_participants_for_experiment(experiment: Experiment,
     ).annotate(
         # This is black magic. Read: workaround for a bug in Django 2.0
         # If using a Count, it cannot create a valid SQL statement.
-        has_invitation=RawSQL("SELECT COUNT(*) AS \"has_invitation\" FROM "
+        has_invitation=RawSQL("SELECT COUNT(*) AS \"has_invitation\" FROM " 
                               "experiments_invitation WHERE experiment_id = "
                               "%s AND participant_id = "
                               "participants_participant.id", (experiment.pk,) )
@@ -163,15 +162,16 @@ def _should_exclude_by_specific_criteria(participant: Participant,
     Determines if a participant should be excluded based upon their
     :param participant:
     :param specific_experiment_criteria:
-    :param criteria_answers:
     :return:
     """
+    # Create a list of all relevant Criterion objects
+    specific_criteria = [x.criterion for x in specific_experiment_criteria]
 
     # Loop over all criteria answers
     for specific_criterion_answer in participant.criterionanswer_set.all():
-        # Check if this answer is by the current participant
+        # Check if this answer is for any of the relevant criterions
         # We do this in python to minimize db queries (it's way faster)
-        if not specific_criterion_answer.criterion not in specific_experiment_criteria:
+        if not specific_criterion_answer.criterion not in specific_criteria:
             continue
 
         # Get the experiment criterion
