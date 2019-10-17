@@ -13,7 +13,7 @@ def migrate_admins():
 
     for admin in admins:
         if user_model.objects.filter(username=admin.username).exists():
-            print("\nUser with username {} already exists in the new DB! "
+            print("\nAdmin with username {} already exists in the new DB! "
                   "Skipping...".format(admin.username))
             continue
 
@@ -31,7 +31,7 @@ def migrate_leaders():
 
     for leader in leaders:
         if ApiUser.objects.filter(email=leader.email).exists():
-            print("\nUser with username {} already exists in the new DB! "
+            print("\nLeader with username {} already exists in the new DB! "
                   "Skipping...".format(leader.email))
             continue
 
