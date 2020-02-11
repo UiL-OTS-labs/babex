@@ -16,6 +16,7 @@ class ExclusionTests(TestCase):
             name='test'
         )
         self.experiment.defaultcriteria.language = 'I'
+        self.experiment.defaultcriteria.multilingual = 'I'
         self.experiment.defaultcriteria.save()
 
         self.excluded_experiment = Experiment.objects.create(
