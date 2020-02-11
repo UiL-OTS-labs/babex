@@ -70,7 +70,7 @@ def send_template_email(recipient_list: list, subject: str, template: str,
     # revert to the original language
     translation.activate(old_lang)
 
-    from_email = from_email or settings.FROM_EMAIL
+    from_email = from_email or settings.EMAIL_FROM
 
     send_mail(
         subject,
