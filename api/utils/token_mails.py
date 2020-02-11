@@ -62,6 +62,8 @@ def _get_name(user: ApiUser) -> str:
 
 
 def get_reset_links(token: str) -> Tuple[str, str]:
+    if not isinstance(token, str):
+        token = str(token)
 
     root = parse.urljoin(
         settings.FRONTEND_URI,
