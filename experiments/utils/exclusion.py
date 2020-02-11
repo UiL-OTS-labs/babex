@@ -43,7 +43,7 @@ def get_eligible_participants_for_experiment(experiment: Experiment,
     }
 
     # Build the rest of the filters
-    filters = _build_filters(filters, default_criteria)
+    filters = build_exclusion_filters(default_criteria, filters)
 
     # Exclude all participants with an appointment for an experiment that was
     # marked as an exclusion criteria
@@ -69,10 +69,10 @@ def get_eligible_participants_for_experiment(experiment: Experiment,
 
     for participant in participants:
 
-        if _should_exclude_by_filters(participant, filters):
+        if check_default_criteria(participant, filters):
             continue
 
-        if _should_exclude_by_age(participant, default_criteria):
+        if should_exclude_by_age(participant, default_criteria):
             continue
 
         if _should_exclude_by_specific_criteria(participant,
@@ -97,15 +97,12 @@ Participant) -> bool:
             'criterion'
         )
 
-    filters = {}
+    filters = build_exclusion_filters(default_criteria)
 
-    # Build the rest of the filters
-    filters = _build_filters(filters, default_criteria)
-
-    if _should_exclude_by_filters(participant, filters):
+    if check_default_criteria(participant, filters):
         return False
 
-    if _should_exclude_by_age(participant, default_criteria):
+    if should_exclude_by_age(participant, default_criteria):
         return False
 
     if _should_exclude_by_specific_criteria(participant,
@@ -115,7 +112,7 @@ Participant) -> bool:
     return True
 
 
-def _build_filters(filters: dict, default_criteria) -> dict:
+def build_exclusion_filters(default_criteria, filters=None) -> dict:
     """
     This function expands a given filter dict with filters as specified in
     the given default_criteria
@@ -123,6 +120,9 @@ def _build_filters(filters: dict, default_criteria) -> dict:
     :param default_criteria:
     :return:
     """
+    if filters is None:
+        filters = {}
+
     for var in indifferentable_vars:
         if getattr(default_criteria, var) != 'I':
             filters[var] = getattr(default_criteria, var)
@@ -131,6 +131,7 @@ def _build_filters(filters: dict, default_criteria) -> dict:
     expected_value = default_criteria.dyslexia == 'Y'
     filters['dyslexic'] = expected_value
 
+    # Rewrite this expected to a boolean value, as it's stored as a boolean
     if default_criteria.multilingual != 'I':
         expected_value = default_criteria.multilingual == 'Y'
         filters['multilingual'] = expected_value
@@ -138,7 +139,7 @@ def _build_filters(filters: dict, default_criteria) -> dict:
     return filters
 
 
-def _should_exclude_by_filters(participant: Participant, filters: dict) -> bool:
+def check_default_criteria(participant: Participant, filters: dict) -> list:
     """
     Determines if a participant should be excluded based upon a given filter
     dict
@@ -146,14 +147,16 @@ def _should_exclude_by_filters(participant: Participant, filters: dict) -> bool:
     :param filters:
     :return:
     """
+    failed_criteria = []
+
     # Loop over the defined filters
     for attr, expected_value in filters.items():
         # If we the actual value is not the same as the expected,
         # mark this participant as 'to exclude'
         if getattr(participant, attr) != expected_value:
-            return True
+            failed_criteria.append(attr)
 
-    return False
+    return failed_criteria
 
 
 def _should_exclude_by_specific_criteria(participant: Participant,
@@ -171,7 +174,7 @@ def _should_exclude_by_specific_criteria(participant: Participant,
     for specific_criterion_answer in participant.criterionanswer_set.all():
         # Check if this answer is for any of the relevant criterions
         # We do this in python to minimize db queries (it's way faster)
-        if not specific_criterion_answer.criterion not in specific_criteria:
+        if specific_criterion_answer.criterion not in specific_criteria:
             continue
 
         # Get the experiment criterion
@@ -200,7 +203,7 @@ def _get_specific_criterion(specific_experiment_criteria, criterion) -> \
             return x
 
 
-def _should_exclude_by_age(participant: Participant, default_criteria) -> bool:
+def should_exclude_by_age(participant: Participant, default_criteria) -> bool:
     """
     Determines if a participant should be excluded based upon their age
 

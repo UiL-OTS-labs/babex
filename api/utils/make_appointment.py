@@ -1,3 +1,12 @@
+"""This module handles creating a new appointment.
+
+Steps:
+1. Find participant data, or create new Participant object if no existing data
+   is found
+2. Check if the participant is eligible for the given experiment
+3. If yes, create the appointment
+4. If no, return human friendly explanations why the participant is not eligible
+"""
 from typing import List, Tuple
 import urllib.parse as parse
 
@@ -9,7 +18,8 @@ from django.utils.dateparse import parse_date
 from comments.utils import add_system_comment
 from experiments.models import Appointment, DefaultCriteria, Experiment, \
     TimeSlot
-from experiments.utils.exclusion import indifferentable_vars
+from experiments.utils.exclusion import build_exclusion_filters, \
+    check_default_criteria, should_exclude_by_age
 from main.utils import get_supreme_admin, send_template_email
 from participants.models import CriterionAnswer, Participant
 from .common import x_or_else
@@ -57,14 +67,20 @@ DEFAULT_INVALID_MESSAGES = {
 }
 
 MISC_INVALID_MESSAGES = {
-    'email':    "Je hebt geen geldig email adres ingevuld! Probeer opnieuw.",
-    'timeslot': "Aanmelding mislukt: sorry, dit tijdstip is al door iemand "
-                "anders gereserveerd! Probeer opnieuw."
+    'email':              "Je hebt geen geldig email adres ingevuld! Probeer "
+                          "opnieuw.",
+    'timeslot':           "Aanmelding mislukt: sorry, dit tijdstip is al door "
+                          "iemand anders gereserveerd! Probeer opnieuw.",
+    'invalid_experiment': "Je hebt al meegedaan met een eerdere versie "
+                          "van dit experiment en kunt helaas niet nog een "
+                          "keer meedoen. Dankjewel voor je belangstelling!",
+    'incapable':          "De beheerder heeft je uitgesloten van het deelnemen "
+                          "aan experimenten. Hier kunnen verschillende redenen "
+                          "voor zijn; de meest waarschijnlijke is dat je een "
+                          "aantal keer niet bent komen opdagen voor een "
+                          "afspraak. Als je toch nog mee wilt doen, neem dan "
+                          "contact op met {}"
 }
-
-INVALID_EXPERIMENT_MESSAGE = "Je hebt al meegedaan met een eerdere versie " \
-                             "van dit experiment en kunt helaas niet nog een" \
-                             " keer meedoen. Dankjewel voor je belangstelling!"
 
 
 def register_participant(data: dict, experiment: Experiment) -> Tuple[bool,
@@ -78,6 +94,12 @@ def register_participant(data: dict, experiment: Experiment) -> Tuple[bool,
         time_slot = None
 
     participant = _get_participant(data)
+
+    # Incapable participants get direct rejection
+    if not participant.capable:
+        return False, False, [
+            _format_message(MISC_INVALID_MESSAGES['incapable'])
+        ]
 
     invalid_default_criteria, \
     default_criteria_messages = _handle_default_criteria(
@@ -228,71 +250,41 @@ def _get_participant(data: dict) -> Participant:
 
     return participant
 
-
 def _handle_default_criteria(
         default_criteria: DefaultCriteria,
         participant: Participant,
 ) -> Tuple[list, list]:
-    filters = {}
     messages = []
 
-    for var in indifferentable_vars:
-        if getattr(default_criteria, var) != 'I':
-            filters[var] = getattr(default_criteria, var)
+    filters = build_exclusion_filters(default_criteria)
+    failed_criteria = check_default_criteria(participant, filters)
 
-    # Dyslexia is always a filter
-    expected_value = default_criteria.dyslexia == 'Y'
-    filters['dyslexic'] = expected_value
+    for failed_criterion in failed_criteria:
 
-    if default_criteria.multilingual != 'I':
-        expected_value = default_criteria.multilingual == 'Y'
-        filters['multilingual'] = expected_value
+        # These fields have different error messages depending on the
+        # expected value
+        if failed_criterion in ['multilingual', 'dyslexic', 'social_status']:
 
-    failed_criteria = []
-
-    for attr, expected_value in filters.items():
-        value = getattr(participant, attr)
-
-        # If we are going to compare strings, let's make sure we compare
-        # lowercase, stripped strings.
-        if isinstance(value, str):
-            value = value.lower().strip()
-            expected_value = expected_value.lower().strip()
-
-        # If we the actual value is not the same as the expected,
-        # add the field to a list of failed criteria.
-        if value != expected_value:
-            failed_criteria.append(attr)
-
-            # These fields have different error messages depending on the
-            # expected value
-            if attr in ['multilingual', 'dyslexic', 'social_status']:
-
-                # Map booleans to yes,no
-                if isinstance(expected_value, bool):
-                    if expected_value:
-                        specifier = 'yes'
-                    else:
-                        specifier = 'no'
+            # Map booleans to yes,no
+            if isinstance(filters[failed_criterion], bool):
+                if filters[failed_criterion]:
+                    specifier = 'yes'
                 else:
-                    # Otherwise, just use the value
-                    specifier = expected_value
-
-                # Make the right key
-                message_key = "{}_{}".format(attr, specifier)
-
-                messages.append(
-                    DEFAULT_INVALID_MESSAGES[message_key]
-                )
+                    specifier = 'no'
             else:
-                messages.append(DEFAULT_INVALID_MESSAGES[attr])
+                # Otherwise, just use the value0
+                specifier = filters[failed_criterion]
 
-    if participant.age < default_criteria.min_age:
-        failed_criteria.append('age')
-        messages.append(DEFAULT_INVALID_MESSAGES['age'])
-    # Check if the participant is older than the max age, and max age is
-    # bigger than -1 (the special value indicating 'no max age')
-    elif participant.age > default_criteria.max_age > -1:
+            # Make the right key
+            message_key = "{}_{}".format(failed_criterion, specifier)
+
+            messages.append(
+                DEFAULT_INVALID_MESSAGES[message_key]
+            )
+        else:
+            messages.append(DEFAULT_INVALID_MESSAGES[failed_criterion])
+
+    if should_exclude_by_age(participant, default_criteria):
         failed_criteria.append('age')
         messages.append(DEFAULT_INVALID_MESSAGES['age'])
 
@@ -304,6 +296,18 @@ def _handle_specific_criteria(
         data: dict,
         participant: Participant
 ) -> Tuple[list, list]:
+    """
+    Warning! This method does not lean on anything in exclusion.py, as it's data
+    source is fundamentally different.
+
+    _should_exclude_by_specific_criteria in exclusion.py uses Django's data
+    layer, this method uses API data in dict form.
+
+    :param experiment:
+    :param data:
+    :param participant:
+    :return:
+    """
     specific_criteria = experiment.experimentcriterion_set.all()
     failed_criteria = []
     messages = []
@@ -392,6 +396,16 @@ def _handle_excluded_experiments(
         experiment: Experiment,
         participant: Participant
 ) -> Tuple[List[Experiment], List[str]]:
+    """
+    Warning! This method does not lean on anything in exclusion.py, as the
+    exclusion.py version does this with complicated SQL for better performance.
+    (As that method processes ALL participants)
+
+    :param experiment:
+    :param data:
+    :param participant:
+    :return:
+    """
     invalid_experiments = []
     appointments = participant.appointments.all()
     participated_experiments = [x.timeslot.experiment for x in appointments]
@@ -402,7 +416,9 @@ def _handle_excluded_experiments(
 
     messages = []
     if invalid_experiments:
-        messages = [INVALID_EXPERIMENT_MESSAGE]
+        messages = [
+            MISC_INVALID_MESSAGES['invalid_experiment']
+        ]
 
     return invalid_experiments, messages
 
@@ -419,12 +435,6 @@ def _handle_misc_items(data: dict, time_slot: TimeSlot) -> Tuple[list, list]:
     # Ensure this is a valid email address
     try:
         validate_email(data.get('email'))
-        # Mini rant: Django, why isn't this call returning a boolean?
-        # Why do I have to catch a Validation error? I get that it might be
-        # easier in the whole validation framework, but then just use a helper
-        # method that does `if not validate_email(email): raise ValidationError`
-        # That would make this a lot nicer!
-        # [/rant]
     except ValidationError:
         invalid_fields.append('email')
         messages.append(MISC_INVALID_MESSAGES['email'])
@@ -508,10 +518,13 @@ def _format_messages(*messages: List[str]) -> list:
     # Flatten the list of lists
     messages = [item for sublist in messages for item in sublist]
 
+    return [_format_message(message) for message in messages]
+
+def _format_message(message: str) -> str:
     admin = get_supreme_admin()
     contact_string = '<a href="mailto:{}">{}</a>'.format(
         admin.email,
         admin.get_full_name()
     )
 
-    return [message.format(contact_string) for message in messages]
+    return message.format(contact_string)
