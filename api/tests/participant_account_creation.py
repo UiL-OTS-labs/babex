@@ -1,5 +1,5 @@
 from django.test import TestCase
-
+from django.contrib.auth import get_user_model
 from api.auth.models import ApiUser
 from comments.models import Comment
 from leaders.models import Leader
@@ -11,6 +11,12 @@ from ..utils.create_participant_account import ReturnValues, \
 class ParticipantAccountCreationTests(TestCase):
 
     fixtures = ('api_groups',)
+
+    def setUp(self) -> None:
+        get_user_model().objects.create(
+            username="admin",
+            is_supreme_admin=True,
+        )
 
     def test_simple_creation(self):
         self.assertEqual(
