@@ -119,13 +119,14 @@ def notify_new_leader(leader: Leader) -> None:
     has_password = leader.api_user.has_password
 
     if not has_password:
-        token = UserToken.objects.create(
+        token_model = UserToken.objects.create(
             user=leader.api_user,
             expiration=_get_tomorrow(),
             type=UserToken.PASSWORD_RESET,
         )
+        token = token_model.token
 
-        link, alternative_link = get_reset_links(token.token)
+        link, alternative_link = get_reset_links(token_model.token)
     else:
         token = None
         link = None
@@ -134,7 +135,7 @@ def notify_new_leader(leader: Leader) -> None:
     subject = 'UiL OTS Experimenten: new account'
     context = {
         'has_password':     has_password,
-        'token':            token.token,
+        'token':            token,
         'name':             leader.name,
         'email':            leader.api_user.email,
         'link':             link,
