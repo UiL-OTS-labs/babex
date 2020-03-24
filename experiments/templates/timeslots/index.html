@@ -81,17 +81,25 @@
                         {# a timeslot can have multiple places, which we want to display seperately #}
                         {% for place in timeslot.places %}
                             <tr>
-                                <td>
-                                    {{ timeslot.pk }}
+                                <td data-order="{{ timeslot.pk }}">
+                                    {% if place.n == 1 %}
+                                        {{ timeslot.pk }}
+                                    {% endif %}
                                 </td>
-                                <td>
-                                    {{ timeslot.datetime|date:'l' }}
+                                <td data-order="{{ timeslot.datetime|date:'l' }}">
+                                    {% if place.n == 1 %}
+                                        {{ timeslot.datetime|date:'l' }}
+                                    {% endif %}
                                 </td>
-                                <td>
-                                    {{ timeslot.datetime|date:'Y-m-d' }}
+                                <td data-order="{{ timeslot.datetime|date:'Y-m-d' }}">
+                                    {% if place.n == 1 %}
+                                        {{ timeslot.datetime|date:'Y-m-d' }}
+                                    {% endif %}
                                 </td>
-                                <td>
-                                    {{ timeslot.datetime|date:'H:i' }}
+                                <td data-order="{{ timeslot.datetime|date:'H:i' }}">
+                                    {% if place.n == 1 %}
+                                        {{ timeslot.datetime|date:'H:i' }}
+                                    {% endif %}
                                 </td>
                                 <td>
                                     {{ place.n }}
