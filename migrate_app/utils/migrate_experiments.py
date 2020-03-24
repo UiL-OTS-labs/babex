@@ -1,5 +1,8 @@
-from typing import Tuple, List
+from typing import Tuple, List, Dict
 
+from django.db import connections
+
+from participants.models import Participant
 from ..models import Experiments as OldExperiment
 from ..models import ExperimentsLeaders, Leaders as OldLeader
 from ..models import ExperimentsExcluded, ExperimentsDefaultCriteria
@@ -15,13 +18,13 @@ from ..defs import MIGRATE_LOCATION_NAME
 from .migrate_timeslots import migrate_timeslots
 
 
-def migrate_experiments():
+def migrate_experiments(pp_mappings: Dict[int, Participant]):
     experiment_pairs = _migrate_experiments()
     _migrate_other_experiment_exclusions(experiment_pairs)
     _migrate_default_criteria(experiment_pairs)
     _migrate_specific_criteria(experiment_pairs)
 
-    migrate_timeslots(experiment_pairs)
+    migrate_timeslots(experiment_pairs, pp_mappings)
 
 
 def _migrate_experiments() -> List[Tuple[OldExperiment, NewExperiment]]:
@@ -50,34 +53,39 @@ def _migrate_experiments() -> List[Tuple[OldExperiment, NewExperiment]]:
         new_experiment.open = old_experiment.open == 1
         new_experiment.participants_visible = old_experiment.visible == 1
 
-        # get leader
-        experiment_leader = ExperimentsLeaders.objects.get(
-            experiment_id=old_experiment.id
-        )  # type: ExperimentsLeaders
-
-        old_leader = OldLeader.objects.get(pk=experiment_leader.leader_id)
+        old_leader = OldLeader.objects.get(
+            pk=_get_leader_id_from_experiment(old_experiment)
+        )
         new_leader = Leader.objects.get(api_user__email=old_leader.email)
 
         new_experiment.leader = new_leader
+
+        new_experiment.save()
 
         out.append((old_experiment, new_experiment))
 
     return out
 
 
+def _get_leader_id_from_experiment(experiment: OldExperiment) -> int:
+    with connections['old'].cursor() as cursor:
+        cursor.execute(
+            "SELECT leader_id FROM experiments_leaders WHERE experiment_id = "
+            "%s",
+            [experiment.pk]
+        )
+        return cursor.fetchone()[0]
+
+
 def _migrate_other_experiment_exclusions(
         experiment_pairs: List[Tuple[OldExperiment, NewExperiment]]
 ):
     for old_experiment, new_experiment in experiment_pairs:
-        # Get all excluded-links
-        exclusions = ExperimentsExcluded.objects.get(
-            experiment_id=old_experiment.pk
-        )
 
-        for exclusion in exclusions:  # type: ExperimentsExcluded
+        for exclusion_id in _get_exclusions_from_experiment(old_experiment):
             # Get the old experiment for this link
             old_excluded_experiment = OldExperiment.objects.get(
-                pk=exclusion.experiment_ex_id
+                pk=exclusion_id
             )
 
             # Get it's corresponding experiment in the new application
@@ -89,6 +97,16 @@ def _migrate_other_experiment_exclusions(
             new_experiment.excluded_experiments.add(new_excluded_experiment)
 
         new_experiment.save()
+
+
+def _get_exclusions_from_experiment(experiment: OldExperiment) -> List[int]:
+    with connections['old'].cursor() as cursor:
+        cursor.execute(
+            "SELECT experiment_ex_id FROM experiments_excluded WHERE "
+            "experiment_id = %s",
+            [experiment.pk]
+        )
+        return [int(x[0]) for x in cursor.fetchall()]
 
 
 def _migrate_default_criteria(
@@ -150,7 +168,6 @@ def _migrate_default_criteria(
             }
         )
 
-
         # Fix the weird ass age criteria from the old application
         min_age = -1
         max_age = -1
@@ -198,14 +215,7 @@ def _migrate_specific_criteria(
 ):
     for old_experiment, new_experiment in experiment_pairs:
 
-        old_couplings = OldExperimentCriterion.objects.filter(
-            experiment_id=old_experiment.pk
-        )
-
-        for old_coupling in old_couplings:
-            old_crit = OldCriterion.objects.get(
-                pk=old_coupling.criteria_id
-            )
+        for old_crit in _get_criteria_from_experiment(old_experiment):
 
             new_crit = _get_new_crit(old_crit)
 
@@ -215,6 +225,17 @@ def _migrate_specific_criteria(
             new_coupling.correct_value = old_crit.value_correct
             new_coupling.message_failed = old_crit.message_failed
             new_coupling.save()
+
+
+def _get_criteria_from_experiment(experiment: OldExperiment) -> List[OldCriterion]:
+    with connections['old'].cursor() as cursor:
+        cursor.execute(
+            "SELECT criteria_id FROM experiments_criteria WHERE "
+            "experiment_id = %s",
+            [experiment.pk]
+        )
+        return [OldCriterion.objects.get(pk=int(x[0])) for x in
+                                         cursor.fetchall()]
 
 
 def _get_new_crit(old_crit: OldCriterion):
@@ -236,7 +257,7 @@ def _get_new_crit(old_crit: OldCriterion):
 
 def _mapper(val: str, mappings: dict) -> str:
     for old, new in mappings.items():
-        if val.lower == old.lower():
+        if val.lower() == old.lower():
             return new
 
     raise Exception(

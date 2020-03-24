@@ -1,9 +1,13 @@
+from typing import Dict
+
 from ..models import Participants as OldParticipant
 from participants.models import Participant, SecondaryEmail
 
 
-def migrate_participants():
+def migrate_participants() -> Dict[int, Participant]:
     old_participants = OldParticipant.objects.all()
+
+    mapping = {}
 
     for old_participant in old_participants:  # type: OldParticipant
         if Participant.objects.filter(email=old_participant.email).exists():
@@ -38,11 +42,15 @@ def migrate_participants():
 
         new_participant.save()
 
+        mapping[old_participant.pk] = new_participant
+
         for email in old_participant.email_secondary.split(','):
             se = SecondaryEmail()
             se.participant = new_participant
             se.email = email
             se.save()
+
+    return mapping
 
 
 def _yes_no_null_mapper(old_participant, attribute):
