@@ -18,13 +18,16 @@ from ..defs import MIGRATE_LOCATION_NAME
 from .migrate_timeslots import migrate_timeslots
 
 
-def migrate_experiments(pp_mappings: Dict[int, Participant]):
+def migrate_experiments(pp_mappings: Dict[int, Participant]) -> \
+        Dict[int, NewExperiment]:
     experiment_pairs = _migrate_experiments()
     _migrate_other_experiment_exclusions(experiment_pairs)
     _migrate_default_criteria(experiment_pairs)
     _migrate_specific_criteria(experiment_pairs)
 
     migrate_timeslots(experiment_pairs, pp_mappings)
+
+    return {old.pk: new for old, new in experiment_pairs}
 
 
 def _migrate_experiments() -> List[Tuple[OldExperiment, NewExperiment]]:
