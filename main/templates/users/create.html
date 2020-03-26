@@ -10,7 +10,7 @@
 
 {% block content %}
 <script src="{% static 'uil.core/js/form_helpers.js' %}"></script>
-<script>
+<script nonce="{{ request.csp_nonce }}">
 $(function () {
     depends_on_value('keep_current_password', undefined, 'password');
     depends_on_value('keep_current_password', undefined, 'confirm_password');

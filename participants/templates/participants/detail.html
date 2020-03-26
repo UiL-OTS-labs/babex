@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block html_head %}
-    <script>
+    <script nonce="{{ request.csp_nonce }}">
         $(function () {
             $('.dt_custom').DataTable();
         });

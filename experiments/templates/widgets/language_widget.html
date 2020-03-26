@@ -1,5 +1,5 @@
 {% load i18n %}
-<script>
+<script nonce="{{ request.csp_nonce }}">
     $(function () {
         $('input[name="{{ widget.name }}_other"]').click(function () {
             $('#id_language_1').prop('checked', true);

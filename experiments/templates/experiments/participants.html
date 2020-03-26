@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block html_head %}
-    <script>
+    <script nonce="{{ request.csp_nonce }}">
         // Because of I18N reasons, we do this stuff here.
         var strings = {
             'confirm_silent_remove_participant': "{% trans 'timeslot:warning:confirm_silent_remove_participant' %}",
