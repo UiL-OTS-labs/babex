@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-08 08:47+0000\n"
+"POT-Creation-Date: 2020-03-26 14:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,45 +16,45 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: experiments/forms/criteria_forms.py:59
-#: experiments/forms/criteria_forms.py:112
+#: experiments/forms/criteria_forms.py:65
+#: experiments/forms/criteria_forms.py:118
 msgid "criteria:form:correct_value:error:not_a_value"
 msgstr "Deze waarde is niet opgegeven in 'Mogelijke waardes'!"
 
-#: experiments/forms/criteria_forms.py:67
+#: experiments/forms/criteria_forms.py:73
 #: experiments/models/criteria_models.py:130
 msgid "criterion:attribute:name_form"
 msgstr "Form naam"
 
-#: experiments/forms/criteria_forms.py:71
+#: experiments/forms/criteria_forms.py:77
 #: experiments/models/criteria_models.py:134
 msgid "criterion:attribute:name_natural"
 msgstr "Weergave naam"
 
-#: experiments/forms/criteria_forms.py:75
+#: experiments/forms/criteria_forms.py:81
 #: experiments/models/criteria_models.py:138
 msgid "criterion:attribute:values"
 msgstr "Mogelijke waardes"
 
-#: experiments/forms/criteria_forms.py:79
+#: experiments/forms/criteria_forms.py:85
 #: experiments/models/criteria_models.py:172
 #: experiments/templates/criteria/specific_list.html:125
 msgid "experiment_criterion:attribute:correct_value"
 msgstr "Correcte waarde"
 
-#: experiments/forms/criteria_forms.py:83
+#: experiments/forms/criteria_forms.py:89
 #: experiments/models/criteria_models.py:176
 #: experiments/templates/criteria/specific_list.html:143
 msgid "experiment_criterion:attribute:message_failed"
 msgstr "Melding indien incorrect"
 
 #: experiments/models/criteria_models.py:10
-msgid "default_criteria:attribute:multilingual:yes"
-msgstr "Meerdere"
-
-#: experiments/models/criteria_models.py:11
 msgid "default_criteria:attribute:multilingual:no"
 msgstr "Een"
+
+#: experiments/models/criteria_models.py:11
+msgid "default_criteria:attribute:multilingual:yes"
+msgstr "Meerdere"
 
 #: experiments/models/criteria_models.py:12
 #: experiments/models/criteria_models.py:18
@@ -316,7 +316,7 @@ msgstr "Aantal gelinkte experimenten"
 #: experiments/templates/criteria/specific_list.html:44
 #: experiments/templates/experiments/participants.html:69
 #: experiments/templates/locations/index.html:39
-#: experiments/templates/timeslots/index.html:71
+#: experiments/templates/timeslots/index.html:73
 msgid "experiments:globals:actions"
 msgstr "Acties"
 
@@ -356,7 +356,7 @@ msgstr "Voeg nieuw criterium toe"
 
 #: experiments/templates/criteria/specific_list.html:93
 #: experiments/templates/criteria/specific_list.html:153
-#: experiments/templates/timeslots/index.html:172
+#: experiments/templates/timeslots/index.html:186
 msgid "experiments:globals:add_button"
 msgstr "Toevoegen"
 
@@ -567,7 +567,7 @@ msgid "experiments:participants:header"
 msgstr "Participanten - Experiment '{}'"
 
 #: experiments/templates/experiments/participants.html:18
-#: experiments/templates/timeslots/index.html:26
+#: experiments/templates/timeslots/index.html:25
 msgid "timeslot:warning:confirm_silent_remove_participant"
 msgstr ""
 "Weet u zeker dat u deze participant wilt verwijderen uit dit timeslot? "
@@ -576,7 +576,7 @@ msgstr ""
 "sturen)."
 
 #: experiments/templates/experiments/participants.html:19
-#: experiments/templates/timeslots/index.html:27
+#: experiments/templates/timeslots/index.html:26
 msgid "timeslot:warning:confirm_remove_participant"
 msgstr ""
 "Weet u zeker dat u deze participant wilt verwijderen uit dit timeslot? (Er "
@@ -589,7 +589,7 @@ msgstr " "
 
 #: experiments/templates/experiments/participants.html:57
 #: experiments/templates/experiments/participants.html:185
-#: experiments/templates/timeslots/index.html:53
+#: experiments/templates/timeslots/index.html:55
 msgid "timeslots:day"
 msgstr "Dag"
 
@@ -643,12 +643,12 @@ msgid "experiments:participants:sex"
 msgstr "Geslacht"
 
 #: experiments/templates/experiments/participants.html:126
-#: experiments/templates/timeslots/index.html:124
+#: experiments/templates/timeslots/index.html:137
 msgid "timeslots:remove_participant:title"
 msgstr "Verwijder participant uit dit timeslot."
 
 #: experiments/templates/experiments/participants.html:133
-#: experiments/templates/timeslots/index.html:131
+#: experiments/templates/timeslots/index.html:144
 msgid "timeslots:silent_remove_participant:title"
 msgstr ""
 "Verwijder participant uit dit timeslot (zonder automatische bevestigings-"
@@ -698,12 +698,12 @@ msgstr "Nieuwe locatie"
 msgid "locations:new:info_text"
 msgstr " "
 
-#: experiments/templates/timeslots/index.html:10
-#: experiments/templates/timeslots/index.html:39
+#: experiments/templates/timeslots/index.html:9
+#: experiments/templates/timeslots/index.html:38
 msgid "timeslots:home:header"
 msgstr "Timeslots voor experiment '{}'"
 
-#: experiments/templates/timeslots/index.html:20
+#: experiments/templates/timeslots/index.html:19
 msgid "timeslot:error:cannot_validate_datetime"
 msgstr ""
 "Er is een error opgetreden tijdens het valideren van de datum en tijd. Dit "
@@ -711,39 +711,39 @@ msgstr ""
 "Controleer of je een valide datum en tijd hebt ingevuld in 'yyyy-mm-dd hh:"
 "mm' formaat."
 
-#: experiments/templates/timeslots/index.html:21
+#: experiments/templates/timeslots/index.html:20
 msgid "timeslot:error:invalid_date"
 msgstr ""
 "De ingevoerde datum kon niet gevalideerd worden! Controleer of je een valide "
 "datum hebt ingevuld in 'yyyy-mm-dd' formaat."
 
-#: experiments/templates/timeslots/index.html:22
+#: experiments/templates/timeslots/index.html:21
 msgid "timeslot:error:invalid_time"
 msgstr ""
 "De ingevoerde tijd kon niet gevalideerd worden! Controleer of je een valide "
 "tijd hebt ingevuld in 'hh:mm' formaat."
 
-#: experiments/templates/timeslots/index.html:23
+#: experiments/templates/timeslots/index.html:22
 msgid "timeslot:error:invalid_datetime"
 msgstr ""
 "De ingevoerde datum en/of tijd kon niet gevalideerd worden! Controleer of je "
 "een valide datum en/of tijd hebt ingevuld in 'yyyy-mm-dd hh:mm' formaat."
 
-#: experiments/templates/timeslots/index.html:24
+#: experiments/templates/timeslots/index.html:23
 msgid "timeslot:warning:deleting_timeslot"
 msgstr ""
 "Weet je zeker dat je dit timeslot wilt verwijderen? (Indien nodig wordt er "
 "een mail naar de participant gestuurd, maar stuur toch nog een persoonlijke "
 "mail als je dit nog niet gedaan hebt."
 
-#: experiments/templates/timeslots/index.html:25
+#: experiments/templates/timeslots/index.html:24
 msgid "timeslot:warning:deleting_timeslots"
 msgstr ""
 "Weet je zeker dat je deze timeslots wilt verwijderen? (Indien nodig wordt er "
 "een mail naar de participant(en) gestuurd, maar stuur toch nog een "
 "persoonlijke mail als je dit nog niet hebt gedaan."
 
-#: experiments/templates/timeslots/index.html:42
+#: experiments/templates/timeslots/index.html:41
 msgid "timeslots:home:info_text"
 msgstr ""
 "Hier kunt u de timeslots voor dit experiment aanpassen. Standaard is alleen "
@@ -751,29 +751,33 @@ msgstr ""
 "timeslots wilt verwijderen, kunt u de checkboxes gebruiken. Alleen de laaste "
 "checkbox is klikbaar, maar zodra deze is aangeklikt wordt de checkbox van de "
 "plaats eronder geactiveerd. Op deze manier zijn meerdere plaatsen in een "
-"timeslot te verwijderen."
+"timeslot te verwijderen.<br/><br/>Met de knop 'group rows by slot' kunt u "
+"plaatsen onder het tijdstip groeperen. Het is bedoeld om de leesbaarheid te "
+"verbeteren als uw tijdsloten meerdere plaatsen hebben, maar het kan het "
+"tegenovergestelde effect hebben als de meeste van uw tijdsloten slechts 1 "
+"plaats heeft."
 
-#: experiments/templates/timeslots/index.html:56
+#: experiments/templates/timeslots/index.html:58
 msgid "timeslots:date"
 msgstr "Datum"
 
-#: experiments/templates/timeslots/index.html:59
+#: experiments/templates/timeslots/index.html:61
 msgid "timeslots:time"
 msgstr "Tijd"
 
-#: experiments/templates/timeslots/index.html:62
+#: experiments/templates/timeslots/index.html:64
 msgid "timeslots:place"
 msgstr "Plaats #"
 
-#: experiments/templates/timeslots/index.html:65
+#: experiments/templates/timeslots/index.html:67
 msgid "timeslots:participant:name"
 msgstr "Participant"
 
-#: experiments/templates/timeslots/index.html:68
+#: experiments/templates/timeslots/index.html:70
 msgid "timeslots:participant:email"
 msgstr "Participant email"
 
-#: experiments/templates/timeslots/index.html:166
+#: experiments/templates/timeslots/index.html:180
 msgid "timeslots:home:new_timeslots:header"
 msgstr "Nieuw timeslot"
 
@@ -866,10 +870,10 @@ msgstr "Participant(en) succesvol uitgenodigd!"
 msgid "timeslots:message:deleted_timeslot"
 msgstr "Timeslot verwijderd!"
 
-#: experiments/views/timeslot_views.py:102
+#: experiments/views/timeslot_views.py:106
 msgid "timeslots:message:deleted_timeslots"
 msgstr "Timeslots verwijderd!"
 
-#: experiments/views/timeslot_views.py:117
+#: experiments/views/timeslot_views.py:121
 msgid "timeslots:message:unsubscribed_participant"
 msgstr "Participant verwijderd uit timeslot!"

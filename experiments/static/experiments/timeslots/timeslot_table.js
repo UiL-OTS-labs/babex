@@ -19,12 +19,43 @@ $(function () {
             'csvHtml5',
             'pdfHtml5',
             'print',
-            'pageLength'
+            'pageLength',
+            {
+                text: 'Group rows by slot',
+                action: function ( e, dt, node, config ) {
+                    if (config.state === 'grouped')
+                    {
+                        config.state = 'ungrouped';
+                        dt.rowGroup().disable();
+                        this.text('Group rows by slot');
+                        dt.columns( [2, 3, 4] ).visible( true );
+                    }
+                    else if (config.state === 'ungrouped')
+                    {
+                        config.state = 'grouped';
+                        dt.rowGroup().enable();
+                        this.text('Ungroup rows');
+                        dt.columns( [2, 3, 4] ).visible( false );
+                    }
+                    dt.draw()
+                },
+                // rowGroup _should_ have a enabled() method, but it doesn't
+                // So we keep track of the state ourselves
+                state: 'ungrouped'
+            },
         ],
         order: [
-            [2, 'asc'],
-            [3, 'asc']
+            [3, 'asc'],
+            [4, 'asc']
         ],
+        rowGroup: {
+            enable: false,
+            dataSrc: 1
+        },
+        columnDefs: [ {
+            targets: [ 1 ],
+            visible: false
+        } ],
         lengthMenu: [
             [10, 20, 50, -1],
             ["10", "20", "50", "\u221e"]
