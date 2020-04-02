@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-03 10:05+0000\n"
+"POT-Creation-Date: 2020-04-02 14:52+0000\n"
 "PO-Revision-Date: 2018-11-23 08:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,43 +18,47 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: main/menus.py:5
+#: main/menus.py:6
 msgid "mainmenu:home"
 msgstr "Home"
 
-#: main/menus.py:10
+#: main/menus.py:11
 msgid "mainmenu:experiments"
 msgstr "Experimenten"
 
-#: main/menus.py:15
+#: main/menus.py:16
 msgid "mainmenu:locations"
 msgstr "Locaties"
 
-#: main/menus.py:20
+#: main/menus.py:21
 msgid "mainmenu:criteria"
 msgstr "Criteria"
 
-#: main/menus.py:25
+#: main/menus.py:26
 msgid "mainmenu:leaders"
 msgstr "Proefleiders"
 
-#: main/menus.py:30
+#: main/menus.py:31
 msgid "mainmenu:participants"
 msgstr "Participanten"
 
-#: main/menus.py:35
+#: main/menus.py:36
 msgid "mainmenu:comments"
 msgstr "Opmerkingen"
 
-#: main/menus.py:40
+#: main/menus.py:41
 msgid "mainmenu:admins"
 msgstr "Admins"
 
-#: main/menus.py:46
+#: main/menus.py:47
+msgid "mainmenu:datamanagement"
+msgstr "Data management"
+
+#: main/menus.py:53
 msgid "footermenu:login"
 msgstr "Log in"
 
-#: main/menus.py:51 main/templates/base/login_header.html:7
+#: main/menus.py:58 main/templates/base/login_header.html:7
 msgid "main:globals:logout"
 msgstr "Log uit"
 
@@ -98,7 +102,7 @@ msgstr "Experimenten"
 msgid "main:globals:actions"
 msgstr "Acties"
 
-#: main/templates/main/index.html:41
+#: main/templates/main/index.html:43
 msgid "main:home:menu"
 msgstr "Menu"
 
