@@ -1,14 +1,17 @@
 import braces.views as braces
 from django.contrib import messages
+from django.contrib.auth.views import SuccessURLAllowedHostsMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count, F, Q, Sum
 from django.urls import reverse_lazy as reverse
+from django.utils.http import is_safe_url
 from django.utils.translation import ugettext_lazy as _
 from django.views import generic
 from uil.core.views import RedirectActionView
 from uil.core.views.mixins import DeleteSuccessMessageMixin, \
     RedirectSuccessMessageMixin
 
+from comments.models import Comment
 from experiments.utils.remind_participant import remind_participant
 from .mixins import ExperimentObjectMixin
 from ..forms import ExperimentForm
@@ -18,7 +21,7 @@ from django.core.exceptions import SuspiciousOperation
 
 
 # --------------------------------------
-# List, create, update and delete views
+# List, create, detail, update and delete views
 # --------------------------------------
 
 class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
@@ -49,13 +52,50 @@ class ExperimentCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
         return reverse('experiments:default_criteria', args=[self.object.pk])
 
 
-class ExperimentUpdateView(braces.LoginRequiredMixin, SuccessMessageMixin,
+class ExperimentUpdateView(braces.LoginRequiredMixin,
+                           SuccessURLAllowedHostsMixin,
+                           SuccessMessageMixin,
                            generic.UpdateView):
     template_name = 'experiments/edit.html'
     form_class = ExperimentForm
     model = Experiment
     success_message = _('experiments:message:update:success')
-    success_url = reverse('experiments:home')
+
+    def get_success_url(self):
+        url = reverse('experiments:home')
+        redirect_to = self.request.GET.get('next', url)
+
+        url_is_safe = is_safe_url(
+            url=redirect_to,
+            allowed_hosts=self.get_success_url_allowed_hosts(),
+            require_https=self.request.is_secure(),
+        )
+        return redirect_to if url_is_safe else ''
+
+
+class ExperimentDetailView(braces.LoginRequiredMixin, generic.DetailView):
+    template_name = 'experiments/detail.html'
+    model = Experiment
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['appointments'] = self._get_appointments()
+        context['comments'] = Comment.objects.filter(experiment=self.object)
+
+        return context
+
+    def _get_appointments(self):
+        timeslots = self.object.timeslot_set.all()
+        out = []
+
+        for timeslot in timeslots: # Type: TimeSlot
+            out.append(
+                (timeslot.datetime, timeslot.free_places,
+                 timeslot.max_places - timeslot.free_places)
+            )
+
+        return out
 
 
 class ExperimentDeleteView(braces.LoginRequiredMixin, DeleteSuccessMessageMixin,

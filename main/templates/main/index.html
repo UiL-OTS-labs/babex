@@ -27,7 +27,9 @@
                 {% for experiment in experiments %}
                     <tr>
                         <td>
-                            {{ experiment }}
+                            <a href="{% url 'experiments:detail' experiment.pk %}">
+                                {{ experiment }}
+                            </a>
                         </td>
                         <td>
                             {% include 'experiments/experiment_actions_snippit.html' %}

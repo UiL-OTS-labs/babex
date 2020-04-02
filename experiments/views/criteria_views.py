@@ -1,8 +1,10 @@
 import braces.views as braces
+from django.contrib.auth.views import SuccessURLAllowedHostsMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count
 from django.http import Http404
 from django.urls import reverse_lazy as reverse
+from django.utils.http import is_safe_url
 from django.utils.translation import ugettext_lazy as _
 from django.views import generic
 from uil.core.views import RedirectActionView
@@ -61,7 +63,11 @@ class CriteriaDeleteView(braces.LoginRequiredMixin,
 #
 
 
-class DefaultCriteriaUpdateView(braces.LoginRequiredMixin, generic.UpdateView):
+class DefaultCriteriaUpdateView(
+    braces.LoginRequiredMixin,
+    SuccessURLAllowedHostsMixin,
+    generic.UpdateView
+):
     template_name = 'criteria/update_default.html'
     form_class = DefaultCriteriaForm
     model = DefaultCriteria
@@ -100,11 +106,22 @@ class DefaultCriteriaUpdateView(braces.LoginRequiredMixin, generic.UpdateView):
         return obj
 
     def get_success_url(self):
-        return reverse('experiments:home')
+        url = reverse('experiments:home')
+        redirect_to = self.request.GET.get('next', url)
+
+        url_is_safe = is_safe_url(
+            url=redirect_to,
+            allowed_hosts=self.get_success_url_allowed_hosts(),
+            require_https=self.request.is_secure(),
+        )
+        return redirect_to if url_is_safe else ''
 
 
-class CriteriaListView(braces.LoginRequiredMixin, SuccessMessageMixin,
-                       ExperimentObjectMixin, FormListView):
+class CriteriaListView(braces.LoginRequiredMixin,
+                       SuccessURLAllowedHostsMixin,
+                       SuccessMessageMixin,
+                       ExperimentObjectMixin,
+                       FormListView):
     """
     This view is a bit special, it's both a ListView and a CreateView in one!
     In addition, there is a second form in the template that POSTs to the
@@ -148,8 +165,18 @@ class CriteriaListView(braces.LoginRequiredMixin, SuccessMessageMixin,
         return super(CriteriaListView, self).form_valid(form)
 
     def get_success_url(self):
-        args = [self.experiment.pk]
-        return reverse('experiments:specific_criteria', args=args)
+        url = reverse(
+            'experiments:specific_criteria',
+            args=[self.experiment.pk]
+        )
+        redirect_to = self.request.GET.get('next', url)
+
+        url_is_safe = is_safe_url(
+            url=redirect_to,
+            allowed_hosts=self.get_success_url_allowed_hosts(),
+            require_https=self.request.is_secure(),
+        )
+        return redirect_to if url_is_safe else ''
 
     def get_context_data(self, **kwargs):
         context = super(CriteriaListView, self).get_context_data(**kwargs)

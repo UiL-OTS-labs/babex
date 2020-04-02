@@ -70,7 +70,9 @@
                         </td>
                         <td>
                             {% if comment.experiment %}
-                                {{ comment.experiment }}
+                                <a href="{% url 'experiments:detail' comment.experiment.pk %}">
+                                    {{ comment.experiment }}
+                                </a>
                             {% else %}
                                 {% trans 'comments:home:no_experiment' %}
                             {% endif %}

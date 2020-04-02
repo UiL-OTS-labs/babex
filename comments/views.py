@@ -1,6 +1,8 @@
 import braces.views as braces
+from django.contrib.auth.views import SuccessURLAllowedHostsMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy as reverse
+from django.utils.http import is_safe_url
 from django.utils.text import gettext_lazy as _
 from django.views import generic
 from uil.core.views.mixins import DeleteSuccessMessageMixin
@@ -46,8 +48,20 @@ class CommentCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
 
 
 class CommentsDeleteView(braces.LoginRequiredMixin,
-                         DeleteSuccessMessageMixin, generic.DeleteView):
+                         SuccessURLAllowedHostsMixin,
+                         DeleteSuccessMessageMixin,
+                         generic.DeleteView):
     model = Comment
-    success_url = reverse('comments:home')
     success_message = _('comments:messages:deleted')
     template_name = 'comments/delete.html'
+
+    def get_success_url(self):
+        url = reverse('comments:home')
+        redirect_to = self.request.GET.get('next', url)
+
+        url_is_safe = is_safe_url(
+            url=redirect_to,
+            allowed_hosts=self.get_success_url_allowed_hosts(),
+            require_https=self.request.is_secure(),
+        )
+        return redirect_to if url_is_safe else ''

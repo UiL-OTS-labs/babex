@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-26 14:21+0000\n"
+"POT-Creation-Date: 2020-04-02 13:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -314,6 +314,7 @@ msgstr "Aantal gelinkte experimenten"
 
 #: experiments/templates/criteria/index.html:44
 #: experiments/templates/criteria/specific_list.html:44
+#: experiments/templates/experiments/detail.html:202
 #: experiments/templates/experiments/participants.html:69
 #: experiments/templates/locations/index.html:39
 #: experiments/templates/timeslots/index.html:73
@@ -426,6 +427,201 @@ msgstr "Annuleer"
 msgid "experiments:delete:confirm"
 msgstr "Verwijder experiment"
 
+#: experiments/templates/experiments/detail.html:11
+#: experiments/templates/experiments/detail.html:28
+#, fuzzy
+#| msgid "experiments:delete:header"
+msgid "experiments:detail:header"
+msgstr "Verwijder experiment"
+
+#: experiments/templates/experiments/detail.html:24
+#, fuzzy
+#| msgid "experiments:delete:text"
+msgid "experiments:detail:all_experiments"
+msgstr "Weet je zeker dat je het experiment '{}' wilt verwijderen?"
+
+#: experiments/templates/experiments/detail.html:35
+#, fuzzy
+#| msgid "experiments:edit:info_text"
+msgid "experiments:detail:info"
+msgstr " "
+
+#: experiments/templates/experiments/detail.html:38
+#, fuzzy
+#| msgid "experiments:edit:info_text"
+msgid "experiments:detail:edit_info"
+msgstr " "
+
+#: experiments/templates/experiments/detail.html:45
+#, fuzzy
+#| msgid "experiment:attribute:duration"
+msgid "experiments:detail:info:duration"
+msgstr "Tijdsduur"
+
+#: experiments/templates/experiments/detail.html:53
+#, fuzzy
+#| msgid "experiment:attribute:compensation"
+msgid "experiments:detail:info:compensation"
+msgstr "Compensatie"
+
+#: experiments/templates/experiments/detail.html:61
+#, fuzzy
+#| msgid "experiment:attribute:task_description"
+msgid "experiments:detail:info:task_description"
+msgstr "Taak omschrijving"
+
+#: experiments/templates/experiments/detail.html:69
+#, fuzzy
+#| msgid "experiment:attribute:additional_instructions"
+msgid "experiments:detail:info:additional_instructions"
+msgstr "Extra instructies"
+
+#: experiments/templates/experiments/detail.html:77
+#, fuzzy
+#| msgid "experiment:attribute:location"
+msgid "experiments:detail:info:location"
+msgstr "Locatie"
+
+#: experiments/templates/experiments/detail.html:85
+#, fuzzy
+#| msgid "experiments:edit:info_text"
+msgid "experiments:detail:info:open"
+msgstr " "
+
+#: experiments/templates/experiments/detail.html:88
+#: experiments/templates/experiments/detail.html:96
+#: experiments/templates/experiments/detail.html:104
+#: experiments/templates/experiments/participants.html:156
+#: experiments/templates/experiments/participants.html:174
+msgid "yes,no"
+msgstr "ja,nee"
+
+#: experiments/templates/experiments/detail.html:93
+#, fuzzy
+#| msgid "experiment:attribute:public"
+msgid "experiments:detail:info:public"
+msgstr "Openbaar"
+
+#: experiments/templates/experiments/detail.html:101
+#, fuzzy
+#| msgid "experiment:attribute:participants_visible"
+msgid "experiments:detail:info:participants_visible"
+msgstr "Participanten zichtbaar"
+
+#: experiments/templates/experiments/detail.html:109
+#, fuzzy
+#| msgid "experiments:delete:header"
+msgid "experiments:detail:info:leader"
+msgstr "Verwijder experiment"
+
+#: experiments/templates/experiments/detail.html:120
+#, fuzzy
+#| msgid "experiments:delete:text"
+msgid "experiments:detail:criteria"
+msgstr "Weet je zeker dat je het experiment '{}' wilt verwijderen?"
+
+#: experiments/templates/experiments/detail.html:123
+#, fuzzy
+#| msgid "experiments:home:edit_default_criteria:title"
+msgid "experiments:detail:edit_default_criteria"
+msgstr "Pas standaard criteria aan"
+
+#: experiments/templates/experiments/detail.html:127
+#, fuzzy
+#| msgid "experiments:home:edit_specific_criteria:title"
+msgid "experiments:detail:edit_specific_criteria"
+msgstr "Pas specifieke criteria aan"
+
+#: experiments/templates/experiments/detail.html:136
+#, fuzzy
+#| msgid "experiments:delete:text"
+msgid "experiments:detail:appointments"
+msgstr "Weet je zeker dat je het experiment '{}' wilt verwijderen?"
+
+#: experiments/templates/experiments/detail.html:139
+#, fuzzy
+#| msgid "experiments:delete:text"
+msgid "experiments:detail:appointments:edit_timeslots"
+msgstr "Weet je zeker dat je het experiment '{}' wilt verwijderen?"
+
+#: experiments/templates/experiments/detail.html:143
+#, fuzzy
+#| msgid "experiments:delete:text"
+msgid "experiments:detail:appointments:view_participants"
+msgstr "Weet je zeker dat je het experiment '{}' wilt verwijderen?"
+
+#: experiments/templates/experiments/detail.html:151
+#, fuzzy
+#| msgid "experiments:delete:text"
+msgid "experiments:detail:appointments:datetime"
+msgstr "Weet je zeker dat je het experiment '{}' wilt verwijderen?"
+
+#: experiments/templates/experiments/detail.html:154
+#, fuzzy
+#| msgid "experiments:delete:text"
+msgid "experiments:detail:appointments:free_places"
+msgstr "Weet je zeker dat je het experiment '{}' wilt verwijderen?"
+
+#: experiments/templates/experiments/detail.html:157
+#, fuzzy
+#| msgid "experiments:delete:text"
+msgid "experiments:detail:appointments:taken_places"
+msgstr "Weet je zeker dat je het experiment '{}' wilt verwijderen?"
+
+#: experiments/templates/experiments/detail.html:180
+#, fuzzy
+#| msgid "experiments:delete:text"
+msgid "experiments:detail:comments"
+msgstr "Weet je zeker dat je het experiment '{}' wilt verwijderen?"
+
+#: experiments/templates/experiments/detail.html:187
+#, fuzzy
+#| msgid "experiments:delete:text"
+msgid "experiments:detail:comments:participant"
+msgstr "Weet je zeker dat je het experiment '{}' wilt verwijderen?"
+
+#: experiments/templates/experiments/detail.html:190
+#, fuzzy
+#| msgid "experiment:attribute:compensation"
+msgid "experiments:detail:comments:email"
+msgstr "Compensatie"
+
+#: experiments/templates/experiments/detail.html:193
+#, fuzzy
+#| msgid "experiments:delete:header"
+msgid "experiments:detail:comments:added_by"
+msgstr "Verwijder experiment"
+
+#: experiments/templates/experiments/detail.html:196
+#, fuzzy
+#| msgid "experiment:attribute:compensation"
+msgid "experiments:detail:comments:added_on"
+msgstr "Compensatie"
+
+#: experiments/templates/experiments/detail.html:199
+#, fuzzy
+#| msgid "experiments:delete:text"
+msgid "experiments:detail:comments:comment"
+msgstr "Weet je zeker dat je het experiment '{}' wilt verwijderen?"
+
+#: experiments/templates/experiments/detail.html:216
+#, fuzzy
+#| msgid "experiments:delete:text"
+msgid "experiments:detail:comment:system_user"
+msgstr "Weet je zeker dat je het experiment '{}' wilt verwijderen?"
+
+#: experiments/templates/experiments/detail.html:220
+#, fuzzy
+#| msgid "experiments:delete:text"
+msgid "experiments:detail:comment:admin_user"
+msgstr "Weet je zeker dat je het experiment '{}' wilt verwijderen?"
+
+#: experiments/templates/experiments/detail.html:231
+#, fuzzy
+#| msgid "experiment:attribute:compensation"
+msgid "experiments:detail:comment:delete"
+msgstr "Compensatie"
+
 #: experiments/templates/experiments/edit.html:8
 #: experiments/templates/experiments/edit.html:15
 msgid "experiments:edit:header"
@@ -509,15 +705,15 @@ msgstr "Slots"
 msgid "experiments:global:participants"
 msgstr "Participanten"
 
-#: experiments/templates/experiments/index.html:80
+#: experiments/templates/experiments/index.html:82
 msgid "experiments:home:switch_open:title"
 msgstr "Open/sluit experiment"
 
-#: experiments/templates/experiments/index.html:89
+#: experiments/templates/experiments/index.html:91
 msgid "experiments:home:switch_public:title"
 msgstr "Maak experiment openbaar/verborgen"
 
-#: experiments/templates/experiments/index.html:98
+#: experiments/templates/experiments/index.html:100
 msgid "experiments:home:switch_visible:title"
 msgstr "Maak participant data openbaar/verborgen voor proefleiders"
 
@@ -654,11 +850,6 @@ msgstr ""
 "Verwijder participant uit dit timeslot (zonder automatische bevestigings-"
 "mail)."
 
-#: experiments/templates/experiments/participants.html:156
-#: experiments/templates/experiments/participants.html:174
-msgid "yes,no"
-msgstr "ja,nee"
-
 #: experiments/templates/experiments/participants.html:162
 msgid "many,one"
 msgstr "meerdere,een"
@@ -781,80 +972,80 @@ msgstr "Participant email"
 msgid "timeslots:home:new_timeslots:header"
 msgstr "Nieuw timeslot"
 
-#: experiments/views/criteria_views.py:40
+#: experiments/views/criteria_views.py:42
 msgid "criteria:messages:created"
 msgstr "Criterium aangemaakt"
 
-#: experiments/views/criteria_views.py:48
+#: experiments/views/criteria_views.py:50
 msgid "criteria:messages:updated"
 msgstr "Criterium aangepast"
 
-#: experiments/views/criteria_views.py:54
+#: experiments/views/criteria_views.py:56
 msgid "criteria:messages:deleted"
 msgstr "Criterium verwijderd!"
 
-#: experiments/views/criteria_views.py:96
+#: experiments/views/criteria_views.py:102
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr ""
 
-#: experiments/views/criteria_views.py:120
+#: experiments/views/criteria_views.py:137
 msgid "criteria:messages:created_and_added"
 msgstr "Criterium aangemaakt en aan experiment toegevoegd!"
 
-#: experiments/views/criteria_views.py:176
+#: experiments/views/criteria_views.py:203
 msgid "criteria:messages:added_to_experiment"
 msgstr "Criterium toegevoegd aan experiment!"
 
-#: experiments/views/criteria_views.py:199
+#: experiments/views/criteria_views.py:226
 msgid "criteria:messages:removed_from_experiment"
 msgstr "Criterium verwijderd uit experiment!"
 
-#: experiments/views/experiment_views.py:46
+#: experiments/views/experiment_views.py:49
 msgid "experiments:message:create:success"
 msgstr "Nieuw experiment succesvol aangemaakt"
 
-#: experiments/views/experiment_views.py:57
+#: experiments/views/experiment_views.py:62
 msgid "experiments:message:update:success"
 msgstr "Experiment aangepast"
 
-#: experiments/views/experiment_views.py:66
+#: experiments/views/experiment_views.py:106
 msgid "experiments:message:deleted_experiment"
 msgstr "Experiment verwijderd!"
 
-#: experiments/views/experiment_views.py:112
+#: experiments/views/experiment_views.py:152
 msgid "experiments:message:exclude:included"
 msgstr "Experiment succesvol opgenomen"
 
-#: experiments/views/experiment_views.py:115
+#: experiments/views/experiment_views.py:155
 msgid "experiments:message:exclude:excluded"
 msgstr "Experiment succesvol uitgesloten"
 
-#: experiments/views/experiment_views.py:188
+#: experiments/views/experiment_views.py:228
 msgid "experiments:message:switch_open:closed"
 msgstr "Experiment openbaar gemaakt"
 
-#: experiments/views/experiment_views.py:191
+#: experiments/views/experiment_views.py:231
 msgid "experiments:message:switch_open:opened"
 msgstr "Experiment verborgen"
 
-#: experiments/views/experiment_views.py:206
+#: experiments/views/experiment_views.py:246
 msgid "experiments:message:switch_public:closed"
 msgstr "Experiment ge-opent"
 
-#: experiments/views/experiment_views.py:209
+#: experiments/views/experiment_views.py:249
 msgid "experiments:message:switch_public:opened"
 msgstr "Experiment gesloten"
 
-#: experiments/views/experiment_views.py:225
+#: experiments/views/experiment_views.py:265
 msgid "experiments:message:switch_visible:invisible"
 msgstr "Participant informatie verborgen voor proefleiders"
 
-#: experiments/views/experiment_views.py:230
+#: experiments/views/experiment_views.py:270
 msgid "experiments:message:switch_visible:visible"
 msgstr "Participant informatie zichtbaar gemaakt voor proefleiders"
 
-#: experiments/views/experiment_views.py:253
+#: experiments/views/experiment_views.py:293
 msgid "experiments:message:sent_reminders"
 msgstr "Herinneringen gestuurd naar {} participant(en)"
 
@@ -877,3 +1068,8 @@ msgstr "Timeslots verwijderd!"
 #: experiments/views/timeslot_views.py:121
 msgid "timeslots:message:unsubscribed_participant"
 msgstr "Participant verwijderd uit timeslot!"
+
+#, fuzzy
+#~| msgid "experiments:delete:cancel"
+#~ msgid "experiments:detail:back"
+#~ msgstr "Annuleer"

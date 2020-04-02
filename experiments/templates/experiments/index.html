@@ -62,7 +62,9 @@
                             {{ experiment.pk }}
                         </td>
                         <td>
-                            {{ experiment.name }}
+                            <a href="{% url 'experiments:detail' experiment.pk %}">
+                                {{ experiment }}
+                            </a>
                         </td>
                         <td>
                             {{ experiment.n_places|default_if_none:0 }}
