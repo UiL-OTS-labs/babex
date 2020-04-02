@@ -53,6 +53,14 @@ class ApiUser(models.Model):
 
     is_ldap_account = models.BooleanField(default=False)
 
+    date_joined = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    last_login = models.DateTimeField(
+        null=True
+    )
+
     @property
     def is_leader(self):
         return hasattr(self, 'leader')
