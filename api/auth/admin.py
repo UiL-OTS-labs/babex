@@ -11,9 +11,6 @@ from django.urls import reverse
 from django.contrib.admin.options import IS_POPUP_VAR
 from django.template.response import TemplateResponse
 
-
-
-
 # Register your models here.
 from api.auth.models import ApiUser, ApiGroup
 
@@ -30,7 +27,7 @@ class ApiUserAdmin(auth_admin.UserAdmin):
             'fields': ('email', 'password')
         }),
         (_('Personal info'), {
-            'fields': ('email', )
+            'fields': ('email',)
         }),
         (_('Permissions'), {
             'fields': ('is_frontend_admin', 'groups',)
@@ -112,8 +109,3 @@ class ApiUserAdmin(auth_admin.UserAdmin):
             'admin/auth/user/change_password.html',
             context,
         )
-
-
-
-
-
