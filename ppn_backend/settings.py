@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'participants',
     'comments',
     'auditlog',
+    'datamanagement',
 
     'django.contrib.admin',
 

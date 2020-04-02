@@ -32,6 +32,11 @@ admin.site.site_header = 'Proefpersonen systeem BACKEND'
 admin.site.site_title = 'Proefpersonen systeem BACKEND'
 admin.site.index_title = 'Proefpersonen systeem BACKEND'
 
+if 'datamanagement' in settings.INSTALLED_APPS:
+    urlpatterns = [
+        path('datamanagement/', include('datamanagement.urls')),
+    ] + urlpatterns
+
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns = [

@@ -1,0 +1,111 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-02 14:52+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: datamanagement/templates/datamanagement/index.html:8
+#: datamanagement/templates/datamanagement/index.html:19
+msgid "datamanagement:home:header"
+msgstr "Data management"
+
+#: datamanagement/templates/datamanagement/index.html:16
+msgid "datamanagement:home:edit_thresholds"
+msgstr "Edit thresholds"
+
+#: datamanagement/templates/datamanagement/index.html:22
+msgid "datamanagement:home:info_text"
+msgstr ""
+"This page is intended to keep track of data stored in the database, and will "
+"advise you on what data may need to be deleted and/or anonymised."
+
+#: datamanagement/templates/datamanagement/index_parts/comments.html:4
+msgid "datamanagement:home:comments:header"
+msgstr "Comments"
+
+#: datamanagement/templates/datamanagement/index_parts/comments.html:7
+msgid "datamanagement:home:comments:info_text"
+msgstr ""
+"These experiments have comments that are older than the threshold, it might "
+"be a good idea to remove them. You can view all comments for this experiment "
+"by going to the experiment details page. (Click on the experiment name). You "
+"can also delete them individually there."
+
+#: datamanagement/templates/datamanagement/index_parts/comments.html:13
+#: datamanagement/templates/datamanagement/index_parts/invites.html:13
+msgid "datamanagement:global:experiment"
+msgstr "Experiment"
+
+#: datamanagement/templates/datamanagement/index_parts/comments.html:16
+#: datamanagement/templates/datamanagement/index_parts/invites.html:16
+msgid "datamanagement:global:num"
+msgstr "Number"
+
+#: datamanagement/templates/datamanagement/index_parts/comments.html:19
+#: datamanagement/templates/datamanagement/index_parts/invites.html:19
+#: datamanagement/templates/datamanagement/index_parts/participants.html:22
+msgid "datamanagement:global:actions"
+msgstr "Actions"
+
+#: datamanagement/templates/datamanagement/index_parts/comments.html:35
+msgid "datamanagement:home:delete_comments"
+msgstr "Delete comments from this experiment"
+
+#: datamanagement/templates/datamanagement/index_parts/invites.html:4
+msgid "datamanagement:home:invites:header"
+msgstr "Experiment invites"
+
+#: datamanagement/templates/datamanagement/index_parts/invites.html:7
+msgid "datamanagement:home:invites:info_text"
+msgstr ""
+"Here you can delete 'already invited' trackers for participants from an "
+"experiment. While not necessary for data protection, it does keep the "
+"database clean."
+
+#: datamanagement/templates/datamanagement/index_parts/invites.html:35
+msgid "datamanagement:home:delete_invites"
+msgstr "Delete invite trackers from this experiment"
+
+#: datamanagement/templates/datamanagement/index_parts/participants.html:4
+msgid "datamanagement:home:participants:header"
+msgstr "Participants"
+
+#: datamanagement/templates/datamanagement/index_parts/participants.html:7
+msgid "datamanagement:home:participants:info_text"
+msgstr ""
+"These participants haven't participated in an experiment for the threshold "
+"amount of years."
+
+#: datamanagement/templates/datamanagement/index_parts/participants.html:13
+msgid "datamanagement:global:participant"
+msgstr "Participant"
+
+#: datamanagement/templates/datamanagement/index_parts/participants.html:16
+msgid "datamanagement:home:participants:last_appointment"
+msgstr "Last appointment"
+
+#: datamanagement/templates/datamanagement/index_parts/participants.html:19
+msgid "datamanagement:home:participants:num_appointments"
+msgstr "Number of appointments"
+
+#: datamanagement/views.py:46
+msgid "datamanagement:messages:deleted_invites"
+msgstr "Successfully deleted invites for {}"
+
+#: datamanagement/views.py:66
+msgid "datamanagement:messages:deleted_comments"
+msgstr "Successfully deleted comments for {}"

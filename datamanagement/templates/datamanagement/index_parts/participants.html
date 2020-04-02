@@ -1,0 +1,49 @@
+{% load i18n %}
+
+<h3>
+    {% trans 'datamanagement:home:participants:header' %}
+</h3>
+<p>
+    {% trans 'datamanagement:home:participants:info_text' %}
+</p>
+<table class="w-100 dt">
+    <thead>
+        <tr>
+            <th class="w-25">
+                {% trans 'datamanagement:global:participant' %}
+            </th>
+            <th class="w-25">
+                {% trans 'datamanagement:home:participants:last_appointment' %}
+            </th>
+            <th class="w-25">
+                {% trans 'datamanagement:home:participants:num_appointments' %}
+            </th>
+            <th class="w-25">
+                {% trans 'datamanagement:global:actions' %}
+            </th>
+        </tr>
+    </thead>
+    {% for participant, last_appointment, num_appointments in participants %}
+        <tr>
+            <td>
+                <a href="{% url 'participants:detail' participant.pk %}">
+                    {{ participant.name }}
+                </a>
+            </td>
+            <td>
+                {{ last_appointment|date:"Y-m-d" }}
+            </td>
+            <td>
+                {{ num_appointments }}
+            </td>
+            <td> {#  TODO: this #}
+{#                 <a  href="{% url 'datamanagement:delete_participants' experiment.pk %}"#}
+{#                        title="{% trans 'datamanagement:home:delete_participants' %}"#}
+{#                        class="icon-delete">#}
+{#                        #}
+{#                    </a>#}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+<br/>

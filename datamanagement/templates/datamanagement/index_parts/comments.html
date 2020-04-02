@@ -1,0 +1,43 @@
+{% load i18n %}
+
+<h3>
+    {% trans 'datamanagement:home:comments:header' %}
+</h3>
+<p>
+    {% trans 'datamanagement:home:comments:info_text' %}
+</p>
+<table class="w-100 dt">
+    <thead>
+        <tr>
+            <th class="w-50">
+                {% trans 'datamanagement:global:experiment' %}
+            </th>
+            <th class="w-25">
+                {% trans 'datamanagement:global:num' %}
+            </th>
+            <th class="w-25">
+                {% trans 'datamanagement:global:actions' %}
+            </th>
+        </tr>
+    </thead>
+    {% for experiment, num in comments %}
+        <tr>
+            <td>
+                <a href="{% url 'experiments:detail' experiment.pk %}">
+                    {{ experiment }}
+                </a>
+            </td>
+            <td>
+                {{ num }}
+            </td>
+            <td>
+                 <a  href="{% url 'datamanagement:delete_comments' experiment.pk %}"
+                        title="{% trans 'datamanagement:home:delete_comments' %}"
+                        class="icon-delete">
+                        
+                    </a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+<br/>

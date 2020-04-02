@@ -1,0 +1,31 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+
+{% block header_title %}
+    {% trans 'datamanagement:home:header' %} - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <div class="float-right button button-colored">
+            {# TODO: this #}
+            {% trans 'datamanagement:home:edit_thresholds' %}
+        </div>
+        <h1>
+            {% trans 'datamanagement:home:header' %}
+        </h1>
+        <p>
+            {% trans 'datamanagement:home:info_text' %}
+        </p>
+
+        {% include 'datamanagement/index_parts/participants.html' %}
+        {% include 'datamanagement/index_parts/comments.html' %}
+        {% include 'datamanagement/index_parts/invites.html' %}
+        <br/>
+    </div>
+</div>
+{% endblock %}
