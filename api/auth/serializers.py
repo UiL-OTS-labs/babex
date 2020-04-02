@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
 
@@ -24,8 +25,11 @@ class AuthTokenSerializer(serializers.Serializer):
         password = attrs.get('password')
 
         if username and password:
-            user = PostAuthenticator.authenticate(request=self.context.get('request'),
-                                                  username=username, password=password)
+            user = PostAuthenticator.authenticate(
+                request=self.context.get('request'),
+                username=username,
+                password=password
+            )
 
             # The authenticate call simply returns None for is_active=False
             # users. (Assuming the default ModelBackend authentication
@@ -37,5 +41,6 @@ class AuthTokenSerializer(serializers.Serializer):
             msg = _('api:auth:missing_values')
             raise serializers.ValidationError(msg, code='authorization')
 
+        user.last_login = timezone.now()
         attrs['user'] = user
         return attrs
