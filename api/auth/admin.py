@@ -1,18 +1,17 @@
 from django.contrib import admin, messages
-from django.contrib.auth import admin as auth_admin
-from django.contrib.auth.admin import sensitive_post_parameters_m
-from django.utils.translation import gettext, gettext_lazy as _
-from django.core.exceptions import PermissionDenied
-from django.contrib.admin.utils import unquote
-from django.http import Http404, HttpResponseRedirect
-from django.utils.html import escape
-from django.contrib.auth import update_session_auth_hash
-from django.urls import reverse
 from django.contrib.admin.options import IS_POPUP_VAR
+from django.contrib.admin.utils import unquote
+from django.contrib.auth import admin as auth_admin, update_session_auth_hash
+from django.contrib.auth.admin import sensitive_post_parameters_m
+from django.core.exceptions import PermissionDenied
+from django.http import Http404, HttpResponseRedirect
 from django.template.response import TemplateResponse
+from django.urls import reverse
+from django.utils.html import escape
+from django.utils.translation import gettext, gettext_lazy as _
 
 # Register your models here.
-from api.auth.models import ApiUser, ApiGroup
+from api.auth.models import ApiGroup, ApiUser
 
 
 @admin.register(ApiGroup)
