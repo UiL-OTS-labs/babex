@@ -39,6 +39,8 @@ class ApiUserManager(models.Manager):
 
 class ApiUser(models.Model):
 
+    USERNAME_FIELD = 'email'
+
     objects = ApiUserManager()
 
     email = models.EmailField(unique=True)

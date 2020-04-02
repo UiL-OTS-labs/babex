@@ -11,6 +11,7 @@ from django.utils.html import escape
 from django.utils.translation import gettext, gettext_lazy as _
 
 # Register your models here.
+from api.auth.forms import ApiUserCreationForm
 from api.auth.models import ApiGroup, ApiUser
 
 
@@ -28,6 +29,9 @@ class ApiUserAdmin(auth_admin.UserAdmin):
         (_('Personal info'), {
             'fields': ('email',)
         }),
+        ('Linked profiles', {
+            'fields': ('participant', 'leader',)
+        }),
         (_('Permissions'), {
             'fields': ('is_frontend_admin', 'groups',)
         }),
@@ -37,9 +41,10 @@ class ApiUserAdmin(auth_admin.UserAdmin):
     )
     filter_horizontal = ('groups',)
     ordering = ('email',)
+    add_form = ApiUserCreationForm
     list_display = ('email', 'is_frontend_admin')
     list_filter = ('is_frontend_admin', 'is_active', 'groups')
-    readonly_fields = ["date_joined"]
+    readonly_fields = ["date_joined", "participant", "leader"]
 
     @sensitive_post_parameters_m
     def user_change_password(self, request, id, form_url=''):
