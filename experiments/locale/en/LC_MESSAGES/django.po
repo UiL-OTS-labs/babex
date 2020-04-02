@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-02 13:34+0000\n"
+"POT-Creation-Date: 2020-04-02 14:01+0000\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -316,7 +316,7 @@ msgstr "Number of linked experiments"
 
 #: experiments/templates/criteria/index.html:44
 #: experiments/templates/criteria/specific_list.html:44
-#: experiments/templates/experiments/detail.html:202
+#: experiments/templates/experiments/detail.html:195
 #: experiments/templates/experiments/participants.html:69
 #: experiments/templates/locations/index.html:39
 #: experiments/templates/timeslots/index.html:73
@@ -429,136 +429,136 @@ msgstr "Cancel"
 msgid "experiments:delete:confirm"
 msgstr "Delete experiment"
 
-#: experiments/templates/experiments/detail.html:11
-#: experiments/templates/experiments/detail.html:28
+#: experiments/templates/experiments/detail.html:9
+#: experiments/templates/experiments/detail.html:21
 msgid "experiments:detail:header"
 msgstr "Experiment '{}'"
 
-#: experiments/templates/experiments/detail.html:24
+#: experiments/templates/experiments/detail.html:17
 msgid "experiments:detail:all_experiments"
 msgstr "All experiments"
 
-#: experiments/templates/experiments/detail.html:35
+#: experiments/templates/experiments/detail.html:28
 msgid "experiments:detail:info"
 msgstr "General info"
 
-#: experiments/templates/experiments/detail.html:38
+#: experiments/templates/experiments/detail.html:31
 msgid "experiments:detail:edit_info"
 msgstr "Edit"
 
-#: experiments/templates/experiments/detail.html:45
+#: experiments/templates/experiments/detail.html:38
 msgid "experiments:detail:info:duration"
 msgstr "Duration"
 
-#: experiments/templates/experiments/detail.html:53
+#: experiments/templates/experiments/detail.html:46
 msgid "experiments:detail:info:compensation"
 msgstr "Compensation"
 
-#: experiments/templates/experiments/detail.html:61
+#: experiments/templates/experiments/detail.html:54
 msgid "experiments:detail:info:task_description"
 msgstr "Task description"
 
-#: experiments/templates/experiments/detail.html:69
+#: experiments/templates/experiments/detail.html:62
 msgid "experiments:detail:info:additional_instructions"
 msgstr "Additional Instructions"
 
-#: experiments/templates/experiments/detail.html:77
+#: experiments/templates/experiments/detail.html:70
 msgid "experiments:detail:info:location"
 msgstr "Location"
 
-#: experiments/templates/experiments/detail.html:85
+#: experiments/templates/experiments/detail.html:78
 msgid "experiments:detail:info:open"
 msgstr "Open"
 
-#: experiments/templates/experiments/detail.html:88
-#: experiments/templates/experiments/detail.html:96
-#: experiments/templates/experiments/detail.html:104
+#: experiments/templates/experiments/detail.html:81
+#: experiments/templates/experiments/detail.html:89
+#: experiments/templates/experiments/detail.html:97
 #: experiments/templates/experiments/participants.html:156
 #: experiments/templates/experiments/participants.html:174
 msgid "yes,no"
 msgstr "yes,no"
 
-#: experiments/templates/experiments/detail.html:93
+#: experiments/templates/experiments/detail.html:86
 msgid "experiments:detail:info:public"
 msgstr "Public"
 
-#: experiments/templates/experiments/detail.html:101
+#: experiments/templates/experiments/detail.html:94
 msgid "experiments:detail:info:participants_visible"
 msgstr "Participants Visible"
 
-#: experiments/templates/experiments/detail.html:109
+#: experiments/templates/experiments/detail.html:102
 msgid "experiments:detail:info:leader"
 msgstr "Main leader"
 
-#: experiments/templates/experiments/detail.html:120
+#: experiments/templates/experiments/detail.html:113
 msgid "experiments:detail:criteria"
 msgstr "Criteria"
 
-#: experiments/templates/experiments/detail.html:123
+#: experiments/templates/experiments/detail.html:116
 msgid "experiments:detail:edit_default_criteria"
 msgstr "Edit default criteria"
 
-#: experiments/templates/experiments/detail.html:127
+#: experiments/templates/experiments/detail.html:120
 msgid "experiments:detail:edit_specific_criteria"
 msgstr "Edit specific criteria"
 
-#: experiments/templates/experiments/detail.html:136
+#: experiments/templates/experiments/detail.html:129
 msgid "experiments:detail:appointments"
 msgstr "Appointments"
 
-#: experiments/templates/experiments/detail.html:139
+#: experiments/templates/experiments/detail.html:132
 msgid "experiments:detail:appointments:edit_timeslots"
 msgstr "Edit timeslots"
 
-#: experiments/templates/experiments/detail.html:143
+#: experiments/templates/experiments/detail.html:136
 msgid "experiments:detail:appointments:view_participants"
 msgstr "View participants"
 
-#: experiments/templates/experiments/detail.html:151
+#: experiments/templates/experiments/detail.html:144
 msgid "experiments:detail:appointments:datetime"
 msgstr "Date & Time"
 
-#: experiments/templates/experiments/detail.html:154
+#: experiments/templates/experiments/detail.html:147
 msgid "experiments:detail:appointments:free_places"
 msgstr "Free places"
 
-#: experiments/templates/experiments/detail.html:157
+#: experiments/templates/experiments/detail.html:150
 msgid "experiments:detail:appointments:taken_places"
 msgstr "Taken places"
 
-#: experiments/templates/experiments/detail.html:180
+#: experiments/templates/experiments/detail.html:173
 msgid "experiments:detail:comments"
 msgstr "Comments"
 
-#: experiments/templates/experiments/detail.html:187
+#: experiments/templates/experiments/detail.html:180
 msgid "experiments:detail:comments:participant"
 msgstr "Participant"
 
-#: experiments/templates/experiments/detail.html:190
+#: experiments/templates/experiments/detail.html:183
 msgid "experiments:detail:comments:email"
 msgstr "E-mail"
 
-#: experiments/templates/experiments/detail.html:193
+#: experiments/templates/experiments/detail.html:186
 msgid "experiments:detail:comments:added_by"
 msgstr "Added by"
 
-#: experiments/templates/experiments/detail.html:196
+#: experiments/templates/experiments/detail.html:189
 msgid "experiments:detail:comments:added_on"
 msgstr "Added on"
 
-#: experiments/templates/experiments/detail.html:199
+#: experiments/templates/experiments/detail.html:192
 msgid "experiments:detail:comments:comment"
 msgstr "Comment"
 
-#: experiments/templates/experiments/detail.html:216
+#: experiments/templates/experiments/detail.html:209
 msgid "experiments:detail:comment:system_user"
 msgstr "System"
 
-#: experiments/templates/experiments/detail.html:220
+#: experiments/templates/experiments/detail.html:213
 msgid "experiments:detail:comment:admin_user"
 msgstr "Admin user"
 
-#: experiments/templates/experiments/detail.html:231
+#: experiments/templates/experiments/detail.html:224
 msgid "experiments:detail:comment:delete"
 msgstr "Delete comment"
 
