@@ -4,7 +4,7 @@
 #
 #    pip-compile
 #
--e git+https://github.com/UiL-OTS-labs/django-shared-core.git@v1.0.0-rc4#egg=uil-django-core
+-e git+https://github.com/UiL-OTS-labs/django-shared-core.git@v1.0.0-rc5#egg=uil-django-core
 blessings==1.7            # via curtsies
 bpython==0.18
 certifi==2019.11.28       # via requests
