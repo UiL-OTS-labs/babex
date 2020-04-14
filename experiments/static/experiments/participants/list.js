@@ -1,5 +1,8 @@
+/**
+ * This file creates a custom datatable instance, enables the search per-column
+ * search functionality and handles the remove-participants buttons.
+ */
 $(function () {
-    let asInitVals = [];
     let oTable = $('.dt_custom').DataTable({
         dom: 'Bfrtip',
         buttons: [
@@ -19,41 +22,22 @@ $(function () {
         paginationType: "full_numbers",
     });
 
-
+    // This event handler will initiate a search in the column of the searchbox
     $("tfoot input").keyup(function () {
-        /* Filter on the column (the index) of this element */
+        // Get the index of this column by making a list of all columns, and
+        // looking at what index this column has in the list
         let columnIndex = $("tfoot th").index($(this).parent());
 
+        // Select the column in DT, run a search and do a draw to display the results
         oTable.column(columnIndex).search(this.value).draw();
     });
 
-    /*
-    * Support functions to provide a little bit of 'user friendlyness' to the textboxes in
-    * the footer
-    */
-    $("tfoot input").each(function (i) {
-        asInitVals[i] = this.value;
-    });
-
-    $("tfoot input").focus(function () {
-        if (this.className == "search_init") {
-            this.className = "";
-            this.value = "";
-        }
-    });
-
-    $("tfoot input").blur(function (i) {
-        if (this.value == "") {
-            this.className = "search_init";
-            this.value = asInitVals[$("tfoot input").index(this)];
-        }
-    });
-
-
+    // Handles the delete silently button
     $('.icon-silent-remove-participant').click(function () {
         return confirm(strings['confirm_silent_remove_participant']);
     });
 
+    // Handles the regular delete button
     $('.icon-remove-participant').click(function () {
         return confirm(strings['confirm_remove_participant']);
     });
