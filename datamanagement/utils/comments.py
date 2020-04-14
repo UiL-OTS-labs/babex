@@ -7,7 +7,7 @@ from comments.models import Comment
 
 def get_old_experiments() -> Iterable[Experiment]:
     return Experiment.objects.filter(
-        comment__datetime=get_threshold_years_ago()
+        comment__datetime__lte=get_threshold_years_ago('comments')
     ).distinct()
 
 

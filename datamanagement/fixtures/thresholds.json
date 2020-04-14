@@ -1,0 +1,13 @@
+[
+  {
+    "model": "datamanagement.thresholds",
+    "pk": 1,
+    "fields": {
+      "participants_with_appointment": 3650,
+      "participants_without_appointment": 3650,
+      "participant_visibility": 61,
+      "comments": 3650,
+      "invites": 61
+    }
+  }
+]

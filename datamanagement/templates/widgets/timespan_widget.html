@@ -1,0 +1,21 @@
+{% load i18n %}
+{# Please see the documentation in timespan_widget.js for an overview of what these fields are and do #}
+{# Mode selector #}
+<select name="{{ widget.name }}_mode" class="w-25">
+    <option value="days" {% if default_selection == 'days' %}selected{% endif %}>
+        {% trans 'datamanagement:widget:threshold:days' %}
+    </option>
+    <option value="weeks" {% if default_selection == 'weeks' %}selected{% endif %}>
+        {% trans 'datamanagement:widget:threshold:weeks' %}
+    </option>
+    <option value="months" {% if default_selection == 'months' %}selected{% endif %}>
+        {% trans 'datamanagement:widget:threshold:months' %}
+    </option>
+    <option value="years" {% if default_selection == 'years' %}selected{% endif %}>
+        {% trans 'datamanagement:widget:threshold:years' %}
+    </option>
+</select>
+{# Real input #}
+<input type="hidden" name="{{ widget.name }}" data-threshold="true" {% if widget.value != None %}value="{{ widget.value|stringformat:'s' }}"{% endif %}{% include "django/forms/widgets/attrs.html" %} />
+{# Fake input #}
+<input type="number" name="{{ widget.name }}_fake" step="0.01" required />

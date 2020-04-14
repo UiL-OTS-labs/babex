@@ -1,20 +1,20 @@
 {% load i18n %}
-<div class="panel panel-default">
+<div class="panel uu-panel panel-default">
     <div class="panel-heading">
         <h5 class="panel-title">
-            <a class="collapsed" data-toggle="collapse" href="#collapse-invites">
-                {% trans 'datamanagement:home:invites:header' %}
-                ({{ invites|length }})
+            <a class="collapsed" data-toggle="collapse" href="#collapse-exp_part_visibility">
+                {% trans 'datamanagement:home:exp_part_visibility:header' %}
+                ({{ exp_part_visible|length }})
             </a>
         </h5>
     </div>
-    <div id="collapse-invites" class="panel-collapse collapse">
+    <div id="collapse-exp_part_visibility" class="panel-collapse collapse">
         <div class="panel-body">
             <h3>
-                {% trans 'datamanagement:home:invites:header' %}
+                {% trans 'datamanagement:home:exp_part_visibility:header' %}
             </h3>
             <p>
-                {% trans 'datamanagement:home:invites:info_text' %}
+                {% trans 'datamanagement:home:exp_part_visibility:info_text' %}
             </p>
             <table class="w-100 dt">
                 <thead>
@@ -23,14 +23,14 @@
                         {% trans 'datamanagement:global:experiment' %}
                     </th>
                     <th class="w-25">
-                        {% trans 'datamanagement:global:num' %}
+                        {% trans 'datamanagement:global:last_appointment' %}
                     </th>
                     <th class="w-25">
                         {% trans 'datamanagement:global:actions' %}
                     </th>
                 </tr>
                 </thead>
-                {% for experiment, num in invites %}
+                {% for experiment, datetime in exp_part_visible %}
                     <tr>
                         <td>
                             <a href="{% url 'experiments:detail' experiment.pk %}">
@@ -38,14 +38,15 @@
                             </a>
                         </td>
                         <td>
-                            {{ num }}
+                            {{ datetime|date:"Y-m-d" }}
                         </td>
                         <td>
-                            <a href="{% url 'datamanagement:delete_invites' experiment.pk %}"
-                               title="{% trans 'datamanagement:home:delete_invites' %}"
-                               class="icon-delete">
-                                
-                            </a>
+                            {# TODO: this #}
+{#                            <a href="{% url 'datamanagement:delete_exp_part_visibility' experiment.pk %}"#}
+{#                               title="{% trans 'datamanagement:home:delete_exp_part_visibility' %}"#}
+{#                               class="icon-delete">#}
+{#                                #}
+{#                            </a>#}
                         </td>
                     </tr>
                 {% endfor %}

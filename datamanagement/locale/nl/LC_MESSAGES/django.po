@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-02 14:52+0000\n"
+"POT-Creation-Date: 2020-04-14 12:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,117 +18,216 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: datamanagement/templates/datamanagement/edit_thresholds.html:9
+#: datamanagement/templates/datamanagement/edit_thresholds.html:20
+#, fuzzy
+#| msgid "widgets:home:header"
+msgid "datamanagement:thresholds:edit:header"
+msgstr "Data management"
+
+#: datamanagement/templates/datamanagement/edit_thresholds.html:23
+#, fuzzy
+#| msgid "widgets:home:header"
+msgid "datamanagement:thresholds:edit:info_text"
+msgstr "Data management"
+
+#: datamanagement/templates/datamanagement/edit_thresholds.html:32
+#, fuzzy
+#| msgid "widgets:home:header"
+msgid "datamanagement:global:save_button"
+msgstr "Data management"
+
 #: datamanagement/templates/datamanagement/index.html:8
-#: datamanagement/templates/datamanagement/index.html:19
-msgid "datamanagement:home:header"
+msgid "widgets:home:header"
 msgstr "Data management"
 
 #: datamanagement/templates/datamanagement/index.html:16
 #, fuzzy
-#| msgid "datamanagement:home:header"
+#| msgid "widgets:home:header"
 msgid "datamanagement:home:edit_thresholds"
 msgstr "Data management"
 
-#: datamanagement/templates/datamanagement/index.html:22
-msgid "datamanagement:home:info_text"
-msgstr ""
-
-#: datamanagement/templates/datamanagement/index_parts/comments.html:4
+#: datamanagement/templates/datamanagement/index.html:20
 #, fuzzy
-#| msgid "datamanagement:home:header"
+#| msgid "widgets:home:header"
+msgid "datamanagement:home:header"
+msgstr "Data management"
+
+#: datamanagement/templates/datamanagement/index.html:23
+#, fuzzy
+#| msgid "widgets:home:header"
+msgid "datamanagement:home:info_text"
+msgstr "Data management"
+
+#: datamanagement/templates/datamanagement/index_parts/comments.html:6
+#: datamanagement/templates/datamanagement/index_parts/comments.html:14
+#, fuzzy
+#| msgid "widgets:home:header"
 msgid "datamanagement:home:comments:header"
 msgstr "Data management"
 
-#: datamanagement/templates/datamanagement/index_parts/comments.html:7
+#: datamanagement/templates/datamanagement/index_parts/comments.html:17
 #, fuzzy
-#| msgid "datamanagement:home:header"
+#| msgid "widgets:home:header"
 msgid "datamanagement:home:comments:info_text"
 msgstr "Data management"
 
-#: datamanagement/templates/datamanagement/index_parts/comments.html:13
-#: datamanagement/templates/datamanagement/index_parts/invites.html:13
+#: datamanagement/templates/datamanagement/index_parts/comments.html:23
+#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:23
+#: datamanagement/templates/datamanagement/index_parts/invites.html:23
 #, fuzzy
-#| msgid "datamanagement:home:header"
+#| msgid "widgets:home:header"
 msgid "datamanagement:global:experiment"
 msgstr "Data management"
 
-#: datamanagement/templates/datamanagement/index_parts/comments.html:16
-#: datamanagement/templates/datamanagement/index_parts/invites.html:16
+#: datamanagement/templates/datamanagement/index_parts/comments.html:26
+#: datamanagement/templates/datamanagement/index_parts/invites.html:26
 #, fuzzy
-#| msgid "datamanagement:home:header"
+#| msgid "widgets:home:header"
 msgid "datamanagement:global:num"
 msgstr "Data management"
 
-#: datamanagement/templates/datamanagement/index_parts/comments.html:19
-#: datamanagement/templates/datamanagement/index_parts/invites.html:19
-#: datamanagement/templates/datamanagement/index_parts/participants.html:22
+#: datamanagement/templates/datamanagement/index_parts/comments.html:29
+#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:29
+#: datamanagement/templates/datamanagement/index_parts/invites.html:29
+#: datamanagement/templates/datamanagement/index_parts/participants.html:32
+#: datamanagement/templates/datamanagement/index_parts/participants.html:77
 #, fuzzy
-#| msgid "datamanagement:home:header"
+#| msgid "widgets:home:header"
 msgid "datamanagement:global:actions"
 msgstr "Data management"
 
-#: datamanagement/templates/datamanagement/index_parts/comments.html:35
+#: datamanagement/templates/datamanagement/index_parts/comments.html:45
 #, fuzzy
-#| msgid "datamanagement:home:header"
+#| msgid "widgets:home:header"
 msgid "datamanagement:home:delete_comments"
 msgstr "Data management"
 
-#: datamanagement/templates/datamanagement/index_parts/invites.html:4
+#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:6
+#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:14
 #, fuzzy
-#| msgid "datamanagement:home:header"
+#| msgid "widgets:home:header"
+msgid "datamanagement:home:exp_part_visibility:header"
+msgstr "Data management"
+
+#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:17
+#, fuzzy
+#| msgid "widgets:home:header"
+msgid "datamanagement:home:exp_part_visibility:info_text"
+msgstr "Data management"
+
+#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:26
+#: datamanagement/templates/datamanagement/index_parts/participants.html:26
+#, fuzzy
+#| msgid "widgets:home:header"
+msgid "datamanagement:global:last_appointment"
+msgstr "Data management"
+
+#: datamanagement/templates/datamanagement/index_parts/invites.html:6
+#: datamanagement/templates/datamanagement/index_parts/invites.html:14
+#, fuzzy
+#| msgid "widgets:home:header"
 msgid "datamanagement:home:invites:header"
 msgstr "Data management"
 
-#: datamanagement/templates/datamanagement/index_parts/invites.html:7
+#: datamanagement/templates/datamanagement/index_parts/invites.html:17
 #, fuzzy
-#| msgid "datamanagement:home:header"
+#| msgid "widgets:home:header"
 msgid "datamanagement:home:invites:info_text"
 msgstr "Data management"
 
-#: datamanagement/templates/datamanagement/index_parts/invites.html:35
+#: datamanagement/templates/datamanagement/index_parts/invites.html:45
 #, fuzzy
-#| msgid "datamanagement:home:header"
+#| msgid "widgets:home:header"
 msgid "datamanagement:home:delete_invites"
 msgstr "Data management"
 
-#: datamanagement/templates/datamanagement/index_parts/participants.html:4
+#: datamanagement/templates/datamanagement/index_parts/participants.html:6
+#: datamanagement/templates/datamanagement/index_parts/participants.html:14
 #, fuzzy
-#| msgid "datamanagement:home:header"
+#| msgid "widgets:home:header"
 msgid "datamanagement:home:participants:header"
 msgstr "Data management"
 
-#: datamanagement/templates/datamanagement/index_parts/participants.html:7
+#: datamanagement/templates/datamanagement/index_parts/participants.html:17
 #, fuzzy
-#| msgid "datamanagement:home:header"
+#| msgid "widgets:home:header"
 msgid "datamanagement:home:participants:info_text"
 msgstr "Data management"
 
-#: datamanagement/templates/datamanagement/index_parts/participants.html:13
+#: datamanagement/templates/datamanagement/index_parts/participants.html:23
+#: datamanagement/templates/datamanagement/index_parts/participants.html:71
 #, fuzzy
-#| msgid "datamanagement:home:header"
+#| msgid "widgets:home:header"
 msgid "datamanagement:global:participant"
 msgstr "Data management"
 
-#: datamanagement/templates/datamanagement/index_parts/participants.html:16
+#: datamanagement/templates/datamanagement/index_parts/participants.html:29
 #, fuzzy
-#| msgid "datamanagement:home:header"
-msgid "datamanagement:home:participants:last_appointment"
-msgstr "Data management"
-
-#: datamanagement/templates/datamanagement/index_parts/participants.html:19
-#, fuzzy
-#| msgid "datamanagement:home:header"
+#| msgid "widgets:home:header"
 msgid "datamanagement:home:participants:num_appointments"
 msgstr "Data management"
 
-#: datamanagement/views.py:46
+#: datamanagement/templates/datamanagement/index_parts/participants.html:62
 #, fuzzy
-#| msgid "datamanagement:home:header"
-msgid "datamanagement:messages:deleted_invites"
+#| msgid "widgets:home:header"
+msgid "datamanagement:home:participants:header2"
 msgstr "Data management"
 
-#: datamanagement/views.py:66
+#: datamanagement/templates/datamanagement/index_parts/participants.html:65
 #, fuzzy
-#| msgid "datamanagement:home:header"
-msgid "datamanagement:messages:deleted_comments"
+#| msgid "widgets:home:header"
+msgid "datamanagement:home:participants:info_text2"
 msgstr "Data management"
+
+#: datamanagement/templates/datamanagement/index_parts/participants.html:74
+#, fuzzy
+#| msgid "widgets:home:header"
+msgid "datamanagement:home:participants:registered"
+msgstr "Data management"
+
+#: datamanagement/templates/widgets/timespan_widget.html:6
+#, fuzzy
+#| msgid "widgets:home:header"
+msgid "datamanagement:widget:threshold:days"
+msgstr "Data management"
+
+#: datamanagement/templates/widgets/timespan_widget.html:9
+#, fuzzy
+#| msgid "widgets:home:header"
+msgid "datamanagement:widget:threshold:weeks"
+msgstr "Data management"
+
+#: datamanagement/templates/widgets/timespan_widget.html:12
+#, fuzzy
+#| msgid "widgets:home:header"
+msgid "datamanagement:widget:threshold:months"
+msgstr "Data management"
+
+#: datamanagement/templates/widgets/timespan_widget.html:15
+#, fuzzy
+#| msgid "widgets:home:header"
+msgid "datamanagement:widget:threshold:years"
+msgstr "Data management"
+
+#: datamanagement/views.py:63
+#, fuzzy
+#| msgid "widgets:home:header"
+msgid "widgets:messages:deleted_invites"
+msgstr "Data management"
+
+#: datamanagement/views.py:83
+#, fuzzy
+#| msgid "widgets:home:header"
+msgid "widgets:messages:deleted_comments"
+msgstr "Data management"
+
+#, fuzzy
+#~| msgid "widgets:home:header"
+#~ msgid "widgets:home:delete_exp_part_visibility"
+#~ msgstr "Data management"
+
+#, fuzzy
+#~| msgid "widgets:home:header"
+#~ msgid "widgets:home:participants:last_appointment"
+#~ msgstr "Data management"

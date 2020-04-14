@@ -5,15 +5,16 @@
 {% load get_field_name %}
 
 {% block header_title %}
-    {% trans 'datamanagement:home:header' %} - {{ block.super }}
+    {% trans 'widgets:home:header' %} - {{ block.super }}
 {% endblock %}
 
 {% block content %}
 <div class="uu-inner-container">
     <div class="col-12">
         <div class="float-right button button-colored">
-            {# TODO: this #}
-            {% trans 'datamanagement:home:edit_thresholds' %}
+            <a href="{% url 'datamanagement:thresholds' %}">
+                {% trans 'datamanagement:home:edit_thresholds' %}
+            </a>
         </div>
         <h1>
             {% trans 'datamanagement:home:header' %}
@@ -21,10 +22,12 @@
         <p>
             {% trans 'datamanagement:home:info_text' %}
         </p>
-
-        {% include 'datamanagement/index_parts/participants.html' %}
-        {% include 'datamanagement/index_parts/comments.html' %}
-        {% include 'datamanagement/index_parts/invites.html' %}
+        <div class="panel-group uu-panel">
+            {% include 'datamanagement/index_parts/participants.html' %}
+            {% include 'datamanagement/index_parts/exp_part_visibility.html' %}
+            {% include 'datamanagement/index_parts/comments.html' %}
+            {% include 'datamanagement/index_parts/invites.html' %}
+        </div>
         <br/>
     </div>
 </div>

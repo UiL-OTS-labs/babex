@@ -8,9 +8,9 @@ from participants.models import Participant
 # TODO: participants who are in the systems but don't have any appointments
 
 
-def get_old_participants() -> List[Tuple[Participant, datetime, int]]:
+def get_participants_with_appointments() -> List[Tuple[Participant, datetime, int]]:
     out = []
-    threshold = get_threshold_years_ago()
+    threshold = get_threshold_years_ago('participants_with_appointment')
 
     for participant in Participant.objects.filter(
         appointments__timeslot__datetime__lte=threshold
@@ -31,3 +31,10 @@ def get_old_participants() -> List[Tuple[Participant, datetime, int]]:
             )
 
     return out
+
+
+def get_participants_without_appointments() -> List[Participant]:
+    return list(Participant.objects.filter(
+        appointments=None,
+        created__lte=get_threshold_years_ago('participants_without_appointment')
+    ))
