@@ -1,3 +1,4 @@
+/** This file housed a custom datatable config and also handles the 'check all' checkbox. */
 $(function () {
     $('.dt_custom').DataTable({
         dom: 'Bfrtip',

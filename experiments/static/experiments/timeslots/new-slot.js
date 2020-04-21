@@ -1,14 +1,22 @@
+/**
+ * This file does the following:
+ * - creates a datetimepicker for the timeslot creation
+ * - Validates the new timeslot data before submitting the form
+ */
 $(function () {
+    // Create a datetimepicker for the datetime field
     $('#id_datetime').datetimepicker({
         format: 'yyyy-mm-dd hh:ii',
         weekStart: 1, // Monday
-        startDate: new Date(),
+        startDate: new Date(), // Today
         autoclose: true,
-        keyboard: false,
+        keyboard: false, // It's buggy
         pickerPosition: 'top-left',
         forceParse: false, // We validate manually, as to provide better feedback to the user
     });
 
+    // Run validation when the submit button is clicked
+    // When it returns false, the form is not submitted.
     $("#save-new-slot").click(function () {
         let datetime = $('#id_datetime');
 
@@ -48,6 +56,7 @@ $(function () {
     });
 });
 
+// This code is lifted from the old application. It's a bit manual, but it works pretty well
 const this_year = new Date().getFullYear();
 
 function validate_date(date) {
