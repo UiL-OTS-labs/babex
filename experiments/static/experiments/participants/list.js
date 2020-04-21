@@ -34,12 +34,12 @@ $(function () {
 
     // Handles the delete silently button
     $('.icon-silent-remove-participant').click(function () {
-        return confirm(strings['confirm_silent_remove_participant']);
+        return confirm(gettext('timeslot:warning:confirm_silent_remove_participant'));
     });
 
     // Handles the regular delete button
     $('.icon-remove-participant').click(function () {
-        return confirm(strings['confirm_remove_participant']);
+        return confirm(gettext('timeslot:warning:confirm_remove_participant'));
     });
 
 });

@@ -12,13 +12,6 @@
 {% endblock %}
 
 {% block html_head %}
-    <script nonce="{{ request.csp_nonce }}">
-        // Because of I18N reasons, we do this stuff here.
-        var strings = {
-            'confirm_silent_remove_participant': "{% trans 'timeslot:warning:confirm_silent_remove_participant' %}",
-            'confirm_remove_participant': "{% trans 'timeslot:warning:confirm_remove_participant' %}",
-        };
-    </script>
     <script src="{% static 'experiments/participants/list.js' %}"></script>
     <link href="{% static 'experiments/participants/table.css' %}" rel="stylesheet" />
 {% endblock %}

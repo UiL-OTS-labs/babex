@@ -26,7 +26,7 @@ $(function () {
             // If we could not split into 2 separate values, something is messed up
             if(dt.length !== 2)
             {
-                alert(strings['invalid_datetime']);
+                alert(gettext('timeslot:error:invalid_date'));
                 return false
             }
 
@@ -35,20 +35,20 @@ $(function () {
 
             if (!validate_date(date))
             {
-                alert(strings['invalid_date']);
+                alert(gettext('timeslot:error:invalid_date'));
                 return false;
             }
 
             if (!validate_time(time))
             {
-                alert(strings['invalid_time']);
+                alert(gettext('timeslot:error:invalid_time'));
                 return false;
             }
 
             return true;
 
         } catch (e) {
-            alert(strings['validation_error']);
+            alert(gettext('timeslot:error:cannot_validate_datetime'));
         }
 
 

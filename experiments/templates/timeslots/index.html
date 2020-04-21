@@ -12,20 +12,6 @@
 {% block html_head %}
     <script src="{% static 'uil.core/js/bootstrap-datetimepicker.min.js' %}"></script>
     <link href="{% static 'uil.core/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet"/>
-
-    <script nonce="{{ request.csp_nonce }}">
-        // Because of I18N reasons, we do this stuff here.
-        var strings = {
-            'validation_error': "{% trans 'timeslot:error:cannot_validate_datetime' %}",
-            'invalid_date': "{% trans 'timeslot:error:invalid_date' %}",
-            'invalid_time': "{% trans 'timeslot:error:invalid_time' %}",
-            'invalid_datetime': "{% trans 'timeslot:error:invalid_datetime' %}",
-            'confirm_delete': "{% trans 'timeslot:warning:deleting_timeslot' %}",
-            'confirm_multi_delete': "{% trans 'timeslot:warning:deleting_timeslots' %}",
-            'confirm_silent_remove_participant': "{% trans 'timeslot:warning:confirm_silent_remove_participant' %}",
-            'confirm_remove_participant': "{% trans 'timeslot:warning:confirm_remove_participant' %}",
-        };
-    </script>
     <script src="{% static 'experiments/timeslots/timeslot_table.js' %}"></script>
     <script src="{% static 'experiments/timeslots/new-slot.js' %}"></script>
 
