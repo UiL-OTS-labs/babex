@@ -8,6 +8,8 @@ from participants.models import Participant
 from uil.core.views import RedirectActionView
 from uil.core.views.mixins import RedirectSuccessMessageMixin
 
+from auditlog.utils.log import log as log_to_auditlog
+from auditlog.enums import Event, UserType
 from datamanagement.forms import ThresholdsEditForm
 from datamanagement.utils.comments import delete_comments, get_comment_counts
 from datamanagement.utils.common import get_thresholds_model
@@ -19,7 +21,7 @@ from datamanagement.utils.participants import \
 from experiments.models import Experiment
 
 
-# TODO: confirmation dialogs, write tests
+# TODO: write tests
 
 
 class OverviewView(braces.LoginRequiredMixin, generic.TemplateView):
@@ -58,6 +60,13 @@ class DeleteParticipantView(braces.LoginRequiredMixin,
         if self.participant not in get_participants_without_appointments():
             self.success_message = _('datamanagement:messages:refused_deletion')
             return
+
+        log_to_auditlog(
+            Event.DELETE_DATA,
+            "Deleted participant '{}'".format(self.participant),
+            self.request.user,
+            UserType.ADMIN,
+        )
 
         # Delete the account as well, unless the account is also a leader
         if self.participant.api_user and not self.participant.api_user.leader:
@@ -106,6 +115,12 @@ class DeleteInvitesView(braces.LoginRequiredMixin,
                         RedirectActionView):
 
     def action(self, request):
+        log_to_auditlog(
+            Event.DELETE_DATA,
+            "Deleted invites for experiment '{}'".format(self.experiment),
+            self.request.user,
+            UserType.ADMIN,
+        )
         delete_invites(self.experiment)
 
     @cached_property
@@ -127,6 +142,12 @@ class DeleteCommentsView(braces.LoginRequiredMixin,
                          RedirectSuccessMessageMixin,
                          RedirectActionView):
     def action(self, request):
+        log_to_auditlog(
+            Event.DELETE_DATA,
+            "Deleted all comments for experiment '{}'".format(self.experiment),
+            self.request.user,
+            UserType.ADMIN,
+        )
         delete_comments(self.experiment)
 
     @cached_property
