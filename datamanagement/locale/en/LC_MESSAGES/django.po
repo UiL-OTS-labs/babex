@@ -2,13 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-24 11:22+0000\n"
+"POT-Creation-Date: 2020-04-24 12:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,16 +36,13 @@ msgid "datamanagement:global:save_button"
 msgstr "Save"
 
 #: datamanagement/templates/datamanagement/index.html:8
-msgid "widgets:home:header"
+#: datamanagement/templates/datamanagement/index.html:24
+msgid "datamanagement:home:header"
 msgstr "Data management"
 
 #: datamanagement/templates/datamanagement/index.html:20
 msgid "datamanagement:home:edit_thresholds"
 msgstr "Edit thresholds"
-
-#: datamanagement/templates/datamanagement/index.html:24
-msgid "datamanagement:home:header"
-msgstr "Data management"
 
 #: datamanagement/templates/datamanagement/index.html:27
 msgid "datamanagement:home:info_text"
@@ -189,23 +184,25 @@ msgstr "months"
 msgid "datamanagement:global:years"
 msgstr "years"
 
-#: datamanagement/views.py:57
+#: datamanagement/views.py:59
 msgid "datamanagement:messages:refused_deletion"
-msgstr "Refused to delete this participant! This participant has not been "
-"marked for deletion and could result in data loss. Please contact a technician if you think this isn't the case."
+msgstr ""
+"Refused to delete this participant! This participant has not been marked for "
+"deletion and could result in data loss. Please contact a technician if you "
+"think this isn't the case."
 
-#: datamanagement/views.py:65
+#: datamanagement/views.py:68
 msgid "datamanagement:messages:deleted_participant"
 msgstr "Participant deleted!"
 
-#: datamanagement/views.py:96
+#: datamanagement/views.py:99
 msgid "datamanagement:messages:hid_participants"
 msgstr "Participant data visibility successfully turned off."
 
-#: datamanagement/views.py:118
+#: datamanagement/views.py:121
 msgid "datamanagement:messages:deleted_invites"
 msgstr "Successfully deleted invites for {}"
 
-#: datamanagement/views.py:139
+#: datamanagement/views.py:142
 msgid "datamanagement:messages:deleted_comments"
 msgstr "Successfully deleted comments for {}"

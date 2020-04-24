@@ -2,6 +2,8 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -19,18 +21,19 @@ msgstr ""
 #: datamanagement/static/datamanagement/js/index.js:9
 msgid "datamanagement:home:warning:hide_participants"
 msgstr ""
-"Are you sure you want to hide the participants from the leader(s) of this "
-"experiment? You can always re-enable them by editing the experiment."
+"Weet u zeker dat u de deelnemers voor de leider(s) van dit experiment wilt "
+"verbergen? Je kunt ze altijd weer inschakelen door het experiment te bewerken."
 
 #: datamanagement/static/datamanagement/js/index.js:13
 msgid "datamanagement:home:warning:delete_invites"
-msgstr "Are you sure you want to delete the trackers from this experiment?"
+msgstr "Weet u zeker dat u de trackers van dit experiment wilt verwijderen?"
 
 #: datamanagement/static/datamanagement/js/index.js:17
 msgid "datamanagement:home:warning:delete_comments"
-msgstr "Are you sure you want to delete all comments from this experiment?"
+msgstr "Weet u zeker dat u de opmerkingen bij dit experiment wilt verwijderen?"
 
 #: datamanagement/static/datamanagement/js/index.js:21
 msgid "datamanagement:home:warning:delete_participant"
 msgstr ""
-"Are you sure you want to delete this participant? This cannot be undone!"
+"Weet u zeker dat u deze deelnemer wilt verwijderen? Dit kan niet ongedaan "
+"gemaakt worden!"

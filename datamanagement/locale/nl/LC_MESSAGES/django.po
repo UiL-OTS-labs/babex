@@ -2,13 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-24 11:22+0000\n"
+"POT-Creation-Date: 2020-04-24 12:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,285 +18,191 @@ msgstr ""
 
 #: datamanagement/templates/datamanagement/edit_thresholds.html:9
 #: datamanagement/templates/datamanagement/edit_thresholds.html:20
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:thresholds:edit:header"
-msgstr "Data management"
+msgstr "Verander drempelwaarden"
 
 #: datamanagement/templates/datamanagement/edit_thresholds.html:23
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:thresholds:edit:info_text"
-msgstr "Data management"
+msgstr ""
+"Hier kunt u de drempel waardes beheren die de applicatie gebruikt voor zijn "
+"controles. Dit drempel bepaalt na welke periode de applicatie moet "
+"waarschuwenvoor oude gegevens, voor elke categorie. Deze kunnen naar "
+"believen wordengewijzigd, het veranderd (nog) niks in de database. <br/> <br/"
+"> In het selectie veld kunt u bepalen of het in dagen, weken, maanden of "
+"jaren wordt gezien. De waarde wordt direct omgerekend naar de nieuwe eenheid."
 
 #: datamanagement/templates/datamanagement/edit_thresholds.html:32
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:global:save_button"
-msgstr "Data management"
+msgstr "Opslaan"
 
 #: datamanagement/templates/datamanagement/index.html:8
-msgid "widgets:home:header"
-msgstr "Data management"
-
-#: datamanagement/templates/datamanagement/index.html:20
-#, fuzzy
-#| msgid "widgets:home:header"
-msgid "datamanagement:home:edit_thresholds"
-msgstr "Data management"
-
 #: datamanagement/templates/datamanagement/index.html:24
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:home:header"
 msgstr "Data management"
 
+#: datamanagement/templates/datamanagement/index.html:20
+msgid "datamanagement:home:edit_thresholds"
+msgstr "Grenswaardes veranderen"
+
 #: datamanagement/templates/datamanagement/index.html:27
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:home:info_text"
-msgstr "Data management"
+msgstr ""
+"Deze pagina is bedoeld om de gegevens in de database bij te houden, en "
+"zaladviseren over welke gegevens mogelijk kunnen worden verwijderd en/of "
+"geanonimiseerd. Dit isbedoeld als hulpmiddel, geen complete oplossing!"
 
 #: datamanagement/templates/datamanagement/index_parts/comments.html:8
 #: datamanagement/templates/datamanagement/index_parts/comments.html:16
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:home:comments:header"
-msgstr "Data management"
+msgstr "Opmerkingen"
 
 #: datamanagement/templates/datamanagement/index_parts/comments.html:20
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:home:comments:info_text"
-msgstr "Data management"
+msgstr ""
+"Deze experimenten hebben opmerkingen die ouder zijn dan {}, het kan een goed "
+"ideezijn om ze te verwijderen. U kunt alle opmerkingen voor dit experiment "
+"bekijken op de experiment details pagina.(klik op de naam van het "
+"experiment). U kunt ze daar ookindividueel verwijderen."
 
 #: datamanagement/templates/datamanagement/index_parts/comments.html:26
 #: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:26
 #: datamanagement/templates/datamanagement/index_parts/invites.html:26
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:global:experiment"
-msgstr "Data management"
+msgstr "Experiment"
 
 #: datamanagement/templates/datamanagement/index_parts/comments.html:29
 #: datamanagement/templates/datamanagement/index_parts/invites.html:29
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:global:num"
-msgstr "Data management"
+msgstr "Aantal"
 
 #: datamanagement/templates/datamanagement/index_parts/comments.html:33
 #: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:33
 #: datamanagement/templates/datamanagement/index_parts/invites.html:33
 #: datamanagement/templates/datamanagement/index_parts/participants.html:38
 #: datamanagement/templates/datamanagement/index_parts/participants.html:90
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:global:actions"
-msgstr "Data management"
+msgstr "Acties"
 
 #: datamanagement/templates/datamanagement/index_parts/comments.html:49
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:home:delete_comments"
-msgstr "Data management"
+msgstr "Verwijder opmerkingen van dit experiment"
 
 #: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:8
 #: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:16
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:home:exp_part_visibility:header"
-msgstr "Data management"
+msgstr "Participant zichtbaarheid"
 
 #: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:20
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:home:exp_part_visibility:info_text"
-msgstr "Data management"
+msgstr ""
+"Deze experimenten hebben de persoonlijke informatie van de participant "
+"zichtbaar voor deleiders, maar hun laatste tijdslot was {} geleden"
 
 #: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:29
 #: datamanagement/templates/datamanagement/index_parts/participants.html:29
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:global:last_appointment"
-msgstr "Data management"
+msgstr "Laatste afspraak"
 
 #: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:49
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:home:delete_exp_part_visibility"
-msgstr "Data management"
+msgstr "Verberg participant gegevens"
 
 #: datamanagement/templates/datamanagement/index_parts/invites.html:8
 #: datamanagement/templates/datamanagement/index_parts/invites.html:16
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:home:invites:header"
-msgstr "Data management"
+msgstr "Experiment uitnodigigen"
 
 #: datamanagement/templates/datamanagement/index_parts/invites.html:20
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:home:invites:info_text"
-msgstr "Data management"
+msgstr ""
+"Hier kunt u 'reeds uitgenodigde' trackers voor participanten verwijderen van "
+"eenexperiment. Huidige drempelwaarde: {}. Hoewel niet nodig voor "
+"gegevensbescherming,het houdt de database wel schoon."
 
 #: datamanagement/templates/datamanagement/index_parts/invites.html:49
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:home:delete_invites"
-msgstr "Data management"
+msgstr "Verwijder trackers voor dit experiment"
 
 #: datamanagement/templates/datamanagement/index_parts/participants.html:8
 #: datamanagement/templates/datamanagement/index_parts/participants.html:16
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:home:participants:header"
-msgstr "Data management"
+msgstr "Participanten"
 
 #: datamanagement/templates/datamanagement/index_parts/participants.html:20
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:home:participants:info_text"
-msgstr "Data management"
+msgstr "Deze participanten hebben {} niet meer meegedaan in een experiment."
 
 #: datamanagement/templates/datamanagement/index_parts/participants.html:26
 #: datamanagement/templates/datamanagement/index_parts/participants.html:81
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:global:participant"
-msgstr "Data management"
+msgstr "Participant"
 
 #: datamanagement/templates/datamanagement/index_parts/participants.html:32
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:home:participants:num_appointments"
-msgstr "Data management"
+msgstr "Aantal afspraken"
 
 #: datamanagement/templates/datamanagement/index_parts/participants.html:35
 #: datamanagement/templates/datamanagement/index_parts/participants.html:87
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:home:participants:has_account"
-msgstr "Data management"
+msgstr "Heeft account"
 
 #: datamanagement/templates/datamanagement/index_parts/participants.html:71
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:home:participants:header2"
-msgstr "Data management"
+msgstr "Participanten zonder afspraak"
 
 #: datamanagement/templates/datamanagement/index_parts/participants.html:75
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:home:participants:info_text2"
-msgstr "Data management"
+msgstr ""
+"Deze participanten hebben nooit aan een experiment mee gedaan en zijn {}"
+"geleden aangemaakt."
 
 #: datamanagement/templates/datamanagement/index_parts/participants.html:84
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:home:participants:registered"
-msgstr "Data management"
+msgstr "Aangemaakt op"
 
 #: datamanagement/templates/datamanagement/index_parts/participants.html:109
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:home:delete_participant"
-msgstr "Data management"
+msgstr "Verwijder participant"
 
 #: datamanagement/templates/widgets/timespan_widget.html:6
 #: datamanagement/templatetags/display_threshold.py:15
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:global:days"
 msgstr "Data management"
 
 #: datamanagement/templates/widgets/timespan_widget.html:9
 #: datamanagement/templatetags/display_threshold.py:14
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:global:weeks"
-msgstr "Data management"
+msgstr "weken"
 
 #: datamanagement/templates/widgets/timespan_widget.html:12
 #: datamanagement/templatetags/display_threshold.py:13
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:global:months"
-msgstr "Data management"
+msgstr "maanden"
 
 #: datamanagement/templates/widgets/timespan_widget.html:15
 #: datamanagement/templatetags/display_threshold.py:12
-#, fuzzy
-#| msgid "widgets:home:header"
 msgid "datamanagement:global:years"
-msgstr "Data management"
+msgstr "jaar"
 
-#: datamanagement/views.py:57
-#, fuzzy
-#| msgid "widgets:home:header"
+#: datamanagement/views.py:59
 msgid "datamanagement:messages:refused_deletion"
-msgstr "Data management"
+msgstr ""
+"Participant NIET verwijderd! Deze deelnemer is niet gemarkeerd "
+"voorverwijdering en kan leiden tot gegevensverlies. Neem contact op met een "
+"technicus als u denk dat dit niet het geval is."
 
-#: datamanagement/views.py:65
-#, fuzzy
-#| msgid "widgets:home:header"
+#: datamanagement/views.py:68
 msgid "datamanagement:messages:deleted_participant"
-msgstr "Data management"
+msgstr "Participant verwijderd!"
 
-#: datamanagement/views.py:96
-#, fuzzy
-#| msgid "widgets:home:header"
+#: datamanagement/views.py:99
 msgid "datamanagement:messages:hid_participants"
-msgstr "Data management"
+msgstr "Gegevens verborgen!"
 
-#: datamanagement/views.py:118
-#, fuzzy
-#| msgid "widgets:home:header"
+#: datamanagement/views.py:121
 msgid "datamanagement:messages:deleted_invites"
-msgstr "Data management"
+msgstr "Trackers successvol verwijderd voor {}!"
 
-#: datamanagement/views.py:139
-#, fuzzy
-#| msgid "widgets:home:header"
+#: datamanagement/views.py:142
 msgid "datamanagement:messages:deleted_comments"
-msgstr "Data management"
-
-#, fuzzy
-#~| msgid "widgets:home:header"
-#~ msgid "widgets:messages:deleted_invites"
-#~ msgstr "Data management"
-
-#, fuzzy
-#~| msgid "widgets:home:header"
-#~ msgid "widgets:messages:deleted_comments"
-#~ msgstr "Data management"
-
-#, fuzzy
-#~| msgid "widgets:home:header"
-#~ msgid "datamanagement:widget:threshold:days"
-#~ msgstr "Data management"
-
-#, fuzzy
-#~| msgid "widgets:home:header"
-#~ msgid "datamanagement:widget:threshold:weeks"
-#~ msgstr "Data management"
-
-#, fuzzy
-#~| msgid "widgets:home:header"
-#~ msgid "datamanagement:widget:threshold:months"
-#~ msgstr "Data management"
-
-#, fuzzy
-#~| msgid "widgets:home:header"
-#~ msgid "datamanagement:widget:threshold:years"
-#~ msgstr "Data management"
-
-#, fuzzy
-#~| msgid "widgets:home:header"
-#~ msgid "widgets:home:delete_exp_part_visibility"
-#~ msgstr "Data management"
-
-#, fuzzy
-#~| msgid "widgets:home:header"
-#~ msgid "widgets:home:participants:last_appointment"
-#~ msgstr "Data management"
+msgstr "Comments verwijderd voor {}!"
