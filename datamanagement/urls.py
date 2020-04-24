@@ -1,14 +1,25 @@
 from django.urls import path
 
-from .views import OverviewView, DeleteInvitesView, DeleteCommentsView, ThresholdsEditView
+from .views import HideParticipantsView, OverviewView, DeleteInvitesView, \
+    DeleteCommentsView, ThresholdsEditView, DeleteParticipantView
 
 app_name = 'datamanagement'
 
 urlpatterns = [
     path('', OverviewView.as_view(), name='overview'),
     path('edit_thresholds/', ThresholdsEditView.as_view(), name='thresholds'),
-    path('delete_invites/<int:experiment>', DeleteInvitesView.as_view(),
+
+    path('<int:participant>/delete/',
+         DeleteParticipantView.as_view(),
+         name="delete_participant"),
+
+    path('<int:experiment>/hide_participants/',
+         HideParticipantsView.as_view(),
+         name='hide_participants'),
+    path('<int:experiment>/delete_invites/',
+         DeleteInvitesView.as_view(),
          name='delete_invites'),
-    path('delete_comments/<int:experiment>', DeleteCommentsView.as_view(),
+    path('<int:experiment>/delete_comments/',
+         DeleteCommentsView.as_view(),
          name='delete_comments'),
 ]

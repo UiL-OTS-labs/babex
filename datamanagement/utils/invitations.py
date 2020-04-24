@@ -16,3 +16,7 @@ def get_invite_counts() -> List[Tuple[Experiment, int]]:
             )
 
     return out
+
+
+def delete_invites(experiment: Experiment) -> None:
+    Invitation.objects.filter(experiment=experiment).delete()

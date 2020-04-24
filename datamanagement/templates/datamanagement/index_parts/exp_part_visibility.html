@@ -1,4 +1,6 @@
 {% load i18n %}
+{% load display_threshold %}
+{% load transformat %}
 <div class="panel uu-panel panel-default">
     <div class="panel-heading">
         <h5 class="panel-title">
@@ -14,7 +16,8 @@
                 {% trans 'datamanagement:home:exp_part_visibility:header' %}
             </h3>
             <p>
-                {% trans 'datamanagement:home:exp_part_visibility:info_text' %}
+                {% threshold participant_visibility as participant_visibility %}
+                {% transformat 'datamanagement:home:exp_part_visibility:info_text' participant_visibility %}
             </p>
             <table class="w-100 dt">
                 <thead>
@@ -22,10 +25,11 @@
                     <th class="w-50">
                         {% trans 'datamanagement:global:experiment' %}
                     </th>
-                    <th class="w-25">
+                    <th class="w-50">
                         {% trans 'datamanagement:global:last_appointment' %}
                     </th>
-                    <th class="w-25">
+                    {# We use 50/50/x width to make the actions column as small as possible #}
+                    <th>
                         {% trans 'datamanagement:global:actions' %}
                     </th>
                 </tr>
@@ -40,13 +44,12 @@
                         <td>
                             {{ datetime|date:"Y-m-d" }}
                         </td>
-                        <td>
-                            {# TODO: this #}
-{#                            <a href="{% url 'datamanagement:delete_exp_part_visibility' experiment.pk %}"#}
-{#                               title="{% trans 'datamanagement:home:delete_exp_part_visibility' %}"#}
-{#                               class="icon-delete">#}
-{#                                #}
-{#                            </a>#}
+                        <td class="text-center">
+                            <a href="{% url 'datamanagement:hide_participants' experiment.pk %}"
+                               title="{% trans 'datamanagement:home:delete_exp_part_visibility' %}"
+                               class="icon-hide hide-participants">
+                                
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}

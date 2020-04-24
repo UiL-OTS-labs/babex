@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from functools import lru_cache
 
 from django.utils import timezone
 from typing import Iterable
@@ -7,6 +8,7 @@ from datamanagement.models import Thresholds
 from experiments.models import Experiment
 
 
+@lru_cache(None)
 def get_thresholds_model() -> Thresholds:
     if Thresholds.objects.count() == 0:
         thresholds = Thresholds()

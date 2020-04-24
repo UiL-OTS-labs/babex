@@ -1,4 +1,6 @@
 {% load i18n %}
+{% load display_threshold %}
+{% load transformat %}
 <div class="panel panel-default">
     <div class="panel-heading">
         <h5 class="panel-title">
@@ -14,7 +16,8 @@
                 {% trans 'datamanagement:home:participants:header' %}
             </h3>
             <p>
-                {% trans 'datamanagement:home:participants:info_text' %}
+                {% threshold participants_with_appointment as participants_with_appointment %}
+                {% transformat 'datamanagement:home:participants:info_text' participants_with_appointment %}
             </p>
             <table class="w-100 dt">
                 <thead>
@@ -28,7 +31,10 @@
                     <th class="w-25">
                         {% trans 'datamanagement:home:participants:num_appointments' %}
                     </th>
-                    <th class="w-25">
+                    <th>
+                        {% trans 'datamanagement:home:participants:has_account' %}
+                    </th>
+                    <th>
                         {% trans 'datamanagement:global:actions' %}
                     </th>
                 </tr>
@@ -37,7 +43,7 @@
                     <tr>
                         <td>
                             <a href="{% url 'participants:detail' participant.pk %}">
-                                {{ participant.name }}
+                                {{ participant.pk }} - {{ participant.name }}
                             </a>
                         </td>
                         <td>
@@ -46,7 +52,10 @@
                         <td>
                             {{ num_appointments }}
                         </td>
-                        <td> {#  TODO: this #}
+                        <td class="icon-yesno text-center">
+                            {{ participant.api_user|yesno:"," }}
+                        </td>
+                        <td class="text-center"> {#  TODO: this #}
                             {#                 <a  href="{% url 'datamanagement:delete_participants' experiment.pk %}"#}
                             {#                        title="{% trans 'datamanagement:home:delete_participants' %}"#}
                             {#                        class="icon-delete">#}
@@ -62,7 +71,8 @@
                 {% trans 'datamanagement:home:participants:header2' %}
             </h4>
             <p>
-                {% trans 'datamanagement:home:participants:info_text2' %}
+                {% threshold participants_without_appointment as participants_without_appointment %}
+                {% transformat 'datamanagement:home:participants:info_text2' participants_without_appointment %}
             </p>
             <table class="w-100 dt">
                 <thead>
@@ -73,7 +83,10 @@
                     <th class="w-50">
                         {% trans 'datamanagement:home:participants:registered' %}
                     </th>
-                    <th class="w-25">
+                    <th>
+                        {% trans 'datamanagement:home:participants:has_account' %}
+                    </th>
+                    <th>
                         {% trans 'datamanagement:global:actions' %}
                     </th>
                 </tr>
@@ -88,12 +101,15 @@
                         <td>
                             {{ participant.created|date:"Y-m-d" }}
                         </td>
-                        <td> {#  TODO: this #}
-                            {#                 <a  href="{% url 'datamanagement:delete_participants' experiment.pk %}"#}
-                            {#                        title="{% trans 'datamanagement:home:delete_participants' %}"#}
-                            {#                        class="icon-delete">#}
-                            {#                        #}
-                            {#                    </a>#}
+                        <td class="icon-yesno text-center">
+                            {{ participant.api_user|yesno:"," }}
+                        </td>
+                        <td class="text-center"> {#  TODO: this #}
+                            <a  href="{% url 'datamanagement:delete_participant' participant.pk %}"
+                                title="{% trans 'datamanagement:home:delete_participant' %}"
+                                class="icon-delete delete-participant">
+                                
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}

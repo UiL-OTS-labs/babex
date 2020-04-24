@@ -5,8 +5,6 @@ from typing import List, Tuple
 from datamanagement.utils.common import get_threshold_years_ago
 from participants.models import Participant
 
-# TODO: participants who are in the systems but don't have any appointments
-
 
 def get_participants_with_appointments() -> List[Tuple[Participant, datetime, int]]:
     out = []

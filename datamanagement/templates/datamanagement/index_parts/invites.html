@@ -1,4 +1,6 @@
 {% load i18n %}
+{% load display_threshold %}
+{% load transformat %}
 <div class="panel panel-default">
     <div class="panel-heading">
         <h5 class="panel-title">
@@ -14,7 +16,8 @@
                 {% trans 'datamanagement:home:invites:header' %}
             </h3>
             <p>
-                {% trans 'datamanagement:home:invites:info_text' %}
+                {% threshold invites as invites_threshold %}
+                {% transformat 'datamanagement:home:invites:info_text' invites_threshold %}
             </p>
             <table class="w-100 dt">
                 <thead>
@@ -22,10 +25,11 @@
                     <th class="w-50">
                         {% trans 'datamanagement:global:experiment' %}
                     </th>
-                    <th class="w-25">
+                    <th class="w-50">
                         {% trans 'datamanagement:global:num' %}
                     </th>
-                    <th class="w-25">
+                    {# We use 50/50/x width to make the actions column as small as possible #}
+                    <th>
                         {% trans 'datamanagement:global:actions' %}
                     </th>
                 </tr>
@@ -43,7 +47,8 @@
                         <td>
                             <a href="{% url 'datamanagement:delete_invites' experiment.pk %}"
                                title="{% trans 'datamanagement:home:delete_invites' %}"
-                               class="icon-delete">
+                               class="icon-delete delete-invites"
+                            >
                                 
                             </a>
                         </td>

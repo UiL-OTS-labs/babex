@@ -23,3 +23,7 @@ def get_comment_counts() -> List[Tuple[Experiment, int]]:
             )
 
     return out
+
+
+def delete_comments(experiment: Experiment) -> None:
+    Comment.objects.filter(experiment=experiment).delete()

@@ -4,20 +4,22 @@ from django.utils.functional import cached_property
 from django.utils.translation import gettext as _
 from django.views import generic
 
+from participants.models import Participant
 from uil.core.views import RedirectActionView
 from uil.core.views.mixins import RedirectSuccessMessageMixin
 
 from datamanagement.forms import ThresholdsEditForm
-from datamanagement.utils.comments import get_comment_counts
+from datamanagement.utils.comments import delete_comments, get_comment_counts
 from datamanagement.utils.common import get_thresholds_model
 from datamanagement.utils.exp_part_visibility import \
-    get_experiments_with_visibility
-from datamanagement.utils.invitations import get_invite_counts
+    get_experiments_with_visibility, hide_part_from_exp
+from datamanagement.utils.invitations import delete_invites, get_invite_counts
 from datamanagement.utils.participants import \
     get_participants_with_appointments, get_participants_without_appointments
 from experiments.models import Experiment
 
-# TODO: confirmation dialogs, settings, write tests
+
+# TODO: confirmation dialogs, write tests
 
 
 class OverviewView(braces.LoginRequiredMixin, generic.TemplateView):
@@ -46,13 +48,42 @@ class ThresholdsEditView(braces.LoginRequiredMixin, generic.UpdateView):
         return get_thresholds_model()
 
 
-class DeleteInvitesView(braces.LoginRequiredMixin,
-                        RedirectSuccessMessageMixin,
-                        RedirectActionView):
-    url = reverse('datamanagement:overview')
+class DeleteParticipantView(braces.LoginRequiredMixin,
+                            RedirectSuccessMessageMixin,
+                            RedirectActionView):
 
     def action(self, request):
-        pass # TODO: actually delete stuff
+        # Only delete a participant if we are sure it's a participant we
+        # can delete
+        if self.participant not in get_participants_without_appointments():
+            self.success_message = _('datamanagement:messages:refused_deletion')
+            return
+
+        # Delete the account as well, unless the account is also a leader
+        if self.participant.api_user and not self.participant.api_user.leader:
+            self.participant.api_user.delete()
+
+        self.participant.delete()
+
+        self.success_message = _('datamanagement:messages:deleted_participant')
+
+    @cached_property
+    def participant(self):
+        pk = self.kwargs.get('participant')
+
+        return Participant.objects.get(pk=pk)
+
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse('datamanagement:overview') + \
+               "#collapse-participants"
+
+
+class HideParticipantsView(braces.LoginRequiredMixin,
+                           RedirectSuccessMessageMixin,
+                           RedirectActionView):
+
+    def action(self, request):
+        hide_part_from_exp(self.experiment)
 
     @cached_property
     def experiment(self):
@@ -60,8 +91,34 @@ class DeleteInvitesView(braces.LoginRequiredMixin,
 
         return Experiment.objects.get(pk=pk)
 
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse('datamanagement:overview') + \
+               "#collapse-exp_part_visibility"
+
     def get_success_message(self):
-        return _('widgets:messages:deleted_invites').format(
+        return _('datamanagement:messages:hid_participants').format(
+            self.experiment
+        )
+
+
+class DeleteInvitesView(braces.LoginRequiredMixin,
+                        RedirectSuccessMessageMixin,
+                        RedirectActionView):
+
+    def action(self, request):
+        delete_invites(self.experiment)
+
+    @cached_property
+    def experiment(self):
+        pk = self.kwargs.get('experiment')
+
+        return Experiment.objects.get(pk=pk)
+
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse('datamanagement:overview') + "#collapse-invites"
+
+    def get_success_message(self):
+        return _('datamanagement:messages:deleted_invites').format(
             self.experiment
         )
 
@@ -69,10 +126,8 @@ class DeleteInvitesView(braces.LoginRequiredMixin,
 class DeleteCommentsView(braces.LoginRequiredMixin,
                          RedirectSuccessMessageMixin,
                          RedirectActionView):
-    url = reverse('datamanagement:overview')
-
     def action(self, request):
-        pass # TODO: actually delete stuff
+        delete_comments(self.experiment)
 
     @cached_property
     def experiment(self):
@@ -80,7 +135,10 @@ class DeleteCommentsView(braces.LoginRequiredMixin,
 
         return Experiment.objects.get(pk=pk)
 
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse('datamanagement:overview') + "#collapse-comments"
+
     def get_success_message(self):
-        return _('widgets:messages:deleted_comments').format(
+        return _('datamanagement:messages:deleted_comments').format(
             self.experiment
         )

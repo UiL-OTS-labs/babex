@@ -3,16 +3,16 @@
 {# Mode selector #}
 <select name="{{ widget.name }}_mode" class="w-25">
     <option value="days" {% if default_selection == 'days' %}selected{% endif %}>
-        {% trans 'datamanagement:widget:threshold:days' %}
+        {% trans 'datamanagement:global:days' %}
     </option>
     <option value="weeks" {% if default_selection == 'weeks' %}selected{% endif %}>
-        {% trans 'datamanagement:widget:threshold:weeks' %}
+        {% trans 'datamanagement:global:weeks' %}
     </option>
     <option value="months" {% if default_selection == 'months' %}selected{% endif %}>
-        {% trans 'datamanagement:widget:threshold:months' %}
+        {% trans 'datamanagement:global:months' %}
     </option>
     <option value="years" {% if default_selection == 'years' %}selected{% endif %}>
-        {% trans 'datamanagement:widget:threshold:years' %}
+        {% trans 'datamanagement:global:years' %}
     </option>
 </select>
 {# Real input #}
