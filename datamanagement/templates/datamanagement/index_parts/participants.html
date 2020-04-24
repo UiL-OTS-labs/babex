@@ -104,7 +104,7 @@
                         <td class="icon-yesno text-center">
                             {{ participant.api_user|yesno:"," }}
                         </td>
-                        <td class="text-center"> {#  TODO: this #}
+                        <td class="text-center">
                             <a  href="{% url 'datamanagement:delete_participant' participant.pk %}"
                                 title="{% trans 'datamanagement:home:delete_participant' %}"
                                 class="icon-delete delete-participant">
