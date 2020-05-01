@@ -56,7 +56,21 @@ class EncryptedBooleanField(EncryptedMixin, django_models.BooleanField):
 
 
 class EncryptedNullBooleanField(EncryptedMixin,
-                                django_models.NullBooleanField):
+                                django_models.BooleanField):
+    """
+    From Django 2.2+, using NullBooleanField is discouraged. Please use
+    EncryptedBooleanField! This class is still present as it is used by
+    migrations.
+    This class has been modified to inherit from BooleanField, with null and
+    blank always to True.
+
+    TODO: Remove this once all migrations have been squashed
+    """
+
+    def __init__(self, *args, **kwargs):
+        kwargs['null'] = True
+        kwargs['blank'] = True
+        super().__init__(*args, **kwargs)
 
     def get_db_prep_save(self, value, connection):
         if value is None:

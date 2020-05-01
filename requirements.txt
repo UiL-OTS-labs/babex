@@ -19,7 +19,7 @@ django-csp==3.5           # via -r requirements.in
 django-debug-toolbar==2.1  # via -r requirements.in
 django-extensions==2.2.5  # via -r requirements.in
 django-simple-menu==1.2.1  # via -r requirements.in
-django==2.1.15            # via -r requirements.in, django-auth-ldap, django-csp, django-debug-toolbar, django-simple-menu
+django==2.2.12            # via -r requirements.in, django-auth-ldap, django-csp, django-debug-toolbar, django-simple-menu
 djangorestframework==3.10.3  # via -r requirements.in
 greenlet==0.4.15          # via bpython
 idna==2.8                 # via requests
@@ -35,7 +35,7 @@ python-ldap==3.2.0        # via django-auth-ldap
 pytz==2019.3              # via django
 requests==2.22.0          # via bpython
 six==1.13.0               # via blessings, bpython, cryptography, django-extensions, pip-tools, python-dateutil
-sqlparse==0.3.0           # via django-debug-toolbar
+sqlparse==0.3.0           # via django, django-debug-toolbar
 typing==3.7.4.1           # via curtsies
 urllib3==1.25.7           # via requests
 wcwidth==0.1.7            # via curtsies

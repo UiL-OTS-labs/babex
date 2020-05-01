@@ -80,9 +80,7 @@ class Participant(models.Model):
         null=True,
     )
 
-    # NOTE: When updating to Django 2.1 you should change this to a regular
-    # BooleanField
-    multilingual = e_fields.EncryptedNullBooleanField(
+    multilingual = e_fields.EncryptedBooleanField(
         _('participant:attribute:multilingual'),
         blank=True,
         null=True,
