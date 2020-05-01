@@ -153,7 +153,7 @@ DATABASES = {
     'old': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-            'user': 'root',
+            'user': 'ppn',
             'password': 'kipsate',
             'db': 'ppn_old',
         }

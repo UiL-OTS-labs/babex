@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-27 16:03+0000\n"
+"POT-Creation-Date: 2020-04-24 12:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,78 +16,78 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: leaders/forms.py:14
+#: leaders/forms.py:15
 msgid "leader:form:password:error:not_equal"
 msgstr "De opgegeven wachtwoorden komen niet overeen!"
 
-#: leaders/forms.py:27 leaders/forms.py:85 leaders/forms.py:141
+#: leaders/forms.py:28 leaders/forms.py:86 leaders/forms.py:142
 #: leaders/forms.py:223
 msgid "leader:form:name"
 msgstr "(Volledige) naam"
 
-#: leaders/forms.py:31 leaders/forms.py:89 leaders/forms.py:145
+#: leaders/forms.py:32 leaders/forms.py:90 leaders/forms.py:146
 #: leaders/forms.py:227
 msgid "leader:form:email"
 msgstr "E-mailadres"
 
-#: leaders/forms.py:35 leaders/forms.py:93 leaders/forms.py:149
+#: leaders/forms.py:36 leaders/forms.py:94 leaders/forms.py:150
 #: leaders/forms.py:231
 msgid "leader:form:phonenumber"
 msgstr "Telefoonnummer"
 
-#: leaders/forms.py:39 leaders/forms.py:161
+#: leaders/forms.py:40 leaders/forms.py:162
 msgid "leader:form:password"
 msgstr "Wachtwoord"
 
-#: leaders/forms.py:40 leaders/forms.py:162
+#: leaders/forms.py:41 leaders/forms.py:163
 msgid "leader:form:password:help_text"
 msgstr ""
 "Dit kan leeg gelaten worden indien je geen wachtwoord wil maken/veranderen"
 
-#: leaders/forms.py:46 leaders/forms.py:168
+#: leaders/forms.py:47 leaders/forms.py:169
 msgid "leader:form:confirm_password:label"
 msgstr "Herhaal wachtwoord"
 
-#: leaders/forms.py:47 leaders/forms.py:169
+#: leaders/forms.py:48 leaders/forms.py:170
 msgid "leader:form:confirm_password:help_text"
 msgstr ""
 "Dit kan leeg gelaten worden indien je geen wachtwoord wil maken/veranderen"
 
-#: leaders/forms.py:53 leaders/forms.py:97
+#: leaders/forms.py:54 leaders/forms.py:98
 msgid "leaders:forms:create_form:notify_user:label"
 msgstr "Informeer proefleider"
 
-#: leaders/forms.py:54
+#: leaders/forms.py:55
 msgid "leaders:forms:create_form:notify_user:help_text"
 msgstr ""
 "Als dit is aangevinkt zal het systeem een email sturen naar de over zijn/"
 "haar nieuwe account. Als er geen wachtwoord is opgegeven zal deze mail ook "
 "uitleggen hoe de proefleider zelf een wachtwoord kan instellen."
 
-#: leaders/forms.py:69 leaders/forms.py:118 leaders/forms.py:185
+#: leaders/forms.py:70 leaders/forms.py:119 leaders/forms.py:186
 #: leaders/forms.py:250
 msgid "leader:form:email:error:user_exists"
 msgstr "Er bestaat al een proefleider met dit email adres!"
 
-#: leaders/forms.py:98
+#: leaders/forms.py:99
 msgid "leaders:forms:create_form:notify_user:help_text:ldap"
 msgstr ""
 "Als dit is aangevinkt zal het systeem een email sturen naar de over zijn/"
 "haar nieuwe account."
 
-#: leaders/forms.py:111 leaders/forms.py:243
+#: leaders/forms.py:112 leaders/forms.py:243
 msgid "leader:form:email:error:not_uu_mail"
 msgstr "Dit is geen geldig UU email adres."
 
-#: leaders/forms.py:136 leaders/forms.py:218
+#: leaders/forms.py:137 leaders/forms.py:218
 msgid "leader:form:active"
 msgstr "Account actief"
 
-#: leaders/forms.py:153
+#: leaders/forms.py:154
 msgid "leaders:forms:create_form:keep_current_password:label"
 msgstr "Behoud huidig wachtwoord"
 
-#: leaders/forms.py:155
+#: leaders/forms.py:156
 msgid "leaders:forms:create_form:keep_current_password:help_text"
 msgstr ""
 "Indien dit is aangevinkt worden de wachtwoord velden genegeerd en het "
