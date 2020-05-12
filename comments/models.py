@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-import main.fields as e_fields
+import uil.core.fields as e_fields
 from experiments.models import Experiment
 from leaders.models import Leader
 from participants.models import Participant
