@@ -185,7 +185,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
-    'main.hashers.PBKDF2WrappedMD5PasswordHasher',
+    'uil.core.hashers.PBKDF2WrappedMD5PasswordHasher',
 ]
 
 # Internationalization

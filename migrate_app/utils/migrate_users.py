@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 
 from api.auth.models import ApiGroup, ApiUser
 from leaders.models import Leader
-from main.hashers import PBKDF2WrappedMD5PasswordHasher
+from uil.core.hashers import PBKDF2WrappedMD5PasswordHasher
 from ..models import Admin, Leaders
 
 
