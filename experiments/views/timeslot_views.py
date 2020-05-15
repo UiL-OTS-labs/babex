@@ -47,13 +47,13 @@ class TimeSlotHomeView(braces.LoginRequiredMixin,
     def get_initial(self):
         initial = super(TimeSlotHomeView, self).get_initial()
 
-        initial['max_places'] = self.experiment.default_max_places
-        initial['datetime'] = self._get_datetime_initial()
+        initial['max_places'] = self._get_initial_max_places()
+        initial['datetime'] = self._get_initial_datetime()
         initial['experiment'] = self.experiment
 
         return initial
 
-    def _get_datetime_initial(self):
+    def _get_initial_datetime(self):
         """If we have post values, we return the datetime from POST,
         otherwise we default to now().
         """
@@ -61,6 +61,15 @@ class TimeSlotHomeView(braces.LoginRequiredMixin,
             return self.request.POST['datetime']
 
         return str(now())[:-3]  # Remove the seconds
+
+    def _get_initial_max_places(self):
+        """If we have post values, we return the max_places from POST,
+        otherwise we default to default_max_places.
+        """
+        if self.request.POST:
+            return self.request.POST['max_places']
+
+        return self.experiment.default_max_places
 
     def get_queryset(self):
         # Only select them for this experiment
