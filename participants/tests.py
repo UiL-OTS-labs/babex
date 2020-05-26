@@ -4,11 +4,13 @@ import pytz
 from django.test import TestCase
 
 from experiments.models import Appointment, Experiment, TimeSlot
+from experiments.tests import _get_or_create_leader, _get_or_create_location
 from .models import Criterion, CriterionAnswer, Participant, SecondaryEmail
 from .utils import merge_participants
 
 
 class MergeParticipantsTest(TestCase):
+    databases = ['default', 'auditlog']
 
     def setUp(self):
         """
@@ -52,7 +54,9 @@ class MergeParticipantsTest(TestCase):
         )
 
         self.e1 = Experiment.objects.create(
-            name='Test experiment 1'
+            name='Test experiment 1',
+            leader=_get_or_create_leader(),
+            location=_get_or_create_location()
         )
 
         self.t1 = TimeSlot.objects.create(
