@@ -242,7 +242,7 @@ MENU_HIDE_EMPTY = False
 
 AUDIT_LOG_ENABLE = True
 
-try:
-    from .ldap_settings import *
-except ImportError:
-    print('Proceeding without LDAP settings')
+# try:
+#     from .ldap_settings import *
+# except ImportError:
+#     print('Proceeding without LDAP settings')

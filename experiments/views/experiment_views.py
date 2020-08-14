@@ -80,16 +80,17 @@ class ExperimentDetailView(braces.LoginRequiredMixin, generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context['appointments'] = self._get_appointments()
+        context['timeslots'] = self._get_timeslots()
+        context['appointments'] = self.object.appointments.all()
         context['comments'] = Comment.objects.filter(experiment=self.object)
 
         return context
 
-    def _get_appointments(self):
+    def _get_timeslots(self):
         timeslots = self.object.timeslot_set.all()
         out = []
 
-        for timeslot in timeslots: # Type: TimeSlot
+        for timeslot in timeslots:  # Type: TimeSlot
             out.append(
                 (timeslot.datetime, timeslot.free_places,
                  timeslot.max_places - timeslot.free_places)
@@ -188,7 +189,7 @@ class ExperimentAppointmentsView(braces.LoginRequiredMixin,
         """
 
         # First, get a QuerySet containing only appointments for this experiment
-        qs = self.model.objects.filter(timeslot__experiment=self.experiment)
+        qs = self.model.objects.filter(experiment=self.experiment)
 
         # Ensure the time slot and participant objects are collected in the
         # initial SELECT query
@@ -198,9 +199,19 @@ class ExperimentAppointmentsView(braces.LoginRequiredMixin,
         # equal creation date
         # (the equal part makes sure we count the appointment in question
         # too, which is a hack to ensure that we display a 1-based place)
-        q_filter = Q(
-            timeslot__appointments__creation_date__lte=F('creation_date')
-        )
+        q_filter = None
+        if self.experiment.use_timeslots:
+            # If we use timeslots, we actually use the timeslot's set of
+            # appointments, to ensure that the counter is for appointments in
+            # that slot
+            q_filter = Q(
+                timeslot__appointments__creation_date__lte=F('creation_date')
+            )
+        else:
+            # If we don't use timeslots, we can just count all appointments
+            q_filter = Q(
+                creation_date__lte=F('creation_date')
+            )
 
         # Make an aggregation object that counts the number of appointments,
         # filtered by the filter we made above

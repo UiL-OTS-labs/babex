@@ -67,7 +67,9 @@
                             </a>
                         </td>
                         <td>
-                            {{ experiment.n_places|default_if_none:0 }}
+                            {% if experiment.use_timeslots %}
+                                 {{ experiment.n_places|default_if_none:0 }}
+                            {% endif %}
                         </td>
                         <td>
                             {{ experiment.n_participants|default_if_none:0 }}

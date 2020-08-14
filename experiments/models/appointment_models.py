@@ -64,6 +64,14 @@ class Appointment(models.Model):
         TimeSlot,
         on_delete=models.CASCADE,
         related_name='appointments',
+        null=True,
+        blank=True,
+    )
+
+    experiment = models.ForeignKey(
+        Experiment,
+        on_delete=models.CASCADE,
+        related_name='appointments',
     )
 
     creation_date = models.DateTimeField(
@@ -83,5 +91,5 @@ class Appointment(models.Model):
     def __str__(self):
         return "{} -> {}".format(
             self.participant,
-            self.timeslot
+            self.experiment.name
         )

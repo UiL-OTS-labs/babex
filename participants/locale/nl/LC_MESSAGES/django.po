@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-24 12:42+0000\n"
+"POT-Creation-Date: 2020-08-14 12:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -80,47 +80,47 @@ msgstr "Dyslexie"
 msgid "participant:attribute:birth_date"
 msgstr "Geboortedatum"
 
-#: participants/models.py:86
+#: participants/models.py:84
 msgid "participant:attribute:multilingual"
 msgstr "Meertalig"
 
-#: participants/models.py:92
+#: participants/models.py:90
 msgid "participant:attribute:phonenumber"
 msgstr "Telefoonnummer"
 
-#: participants/models.py:98
+#: participants/models.py:96
 msgid "participant:attribute:handedness"
 msgstr "Left/rechtshandig"
 
-#: participants/models.py:105
+#: participants/models.py:103
 msgid "participant:attribute:sex"
 msgstr "Geslachte"
 
-#: participants/models.py:112
+#: participants/models.py:110
 msgid "participant:attribute:social_status"
 msgstr "Sociale rol"
 
-#: participants/models.py:119
+#: participants/models.py:117
 msgid "participant:attribute:email_subscription"
 msgstr "Op maillijst"
 
-#: participants/models.py:124
+#: participants/models.py:122
 msgid "participant:attribute:capable"
 msgstr "Bekwaam"
 
-#: participants/models.py:136
+#: participants/models.py:134
 msgid "participant:attribute:created"
 msgstr "Aangemaakt op"
 
-#: participants/models.py:145 participants/models.py:169
+#: participants/models.py:143 participants/models.py:167
 msgid "participant:name:unknown"
 msgstr "naam onbekend"
 
-#: participants/models.py:176
+#: participants/models.py:174
 msgid "secondary_email:attribute:email"
 msgstr "Secundaire e-mailadres"
 
-#: participants/models.py:194
+#: participants/models.py:192
 msgid "criterion_answer:attribute:answer"
 msgstr "Antwoord"
 

@@ -81,5 +81,5 @@ class AppointmentSerializer(serializers.ModelSerializer):
         from .experiment_serializers import ExperimentSerializer
 
         return ExperimentSerializer(
-            o.timeslot.experiment
+            o.experiment
         ).data

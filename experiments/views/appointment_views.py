@@ -1,7 +1,6 @@
 import braces.views as braces
 from django.core.exceptions import SuspiciousOperation
 from django.urls import reverse_lazy as reverse
-from django.utils.functional import cached_property
 from django.utils.text import gettext_lazy as _
 from uil.core.views import RedirectActionView
 from uil.core.views.mixins import RedirectSuccessMessageMixin
@@ -140,12 +139,8 @@ class UnsubscribeParticipantView(braces.LoginRequiredMixin,
 
         return reverse(
             'experiments:timeslots',
-            args=[self.time_slot.experiment.pk]
+            args=[self.kwargs.get('experiment')]
         )
-
-    @cached_property
-    def time_slot(self):
-        return TimeSlot.objects.get(pk=self.kwargs.get('time_slot'))
 
 
 class SilentUnsubscribeParticipantView(UnsubscribeParticipantView):

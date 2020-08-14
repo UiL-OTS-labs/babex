@@ -8,9 +8,7 @@ Steps:
 4. If no, return human friendly explanations why the participant is not eligible
 """
 from typing import List, Tuple
-import urllib.parse as parse
 
-from django.conf import settings
 from django.core.exceptions import SuspiciousOperation
 from django.core.validators import ValidationError, validate_email
 from django.utils.dateparse import parse_date
@@ -20,8 +18,9 @@ from experiments.models import Appointment, DefaultCriteria, Experiment, \
     TimeSlot
 from experiments.utils.exclusion import build_exclusion_filters, \
     check_default_criteria, should_exclude_by_age
-from main.utils import get_supreme_admin, send_template_email
+from main.utils import get_supreme_admin
 from participants.models import CriterionAnswer, Participant
+from .appointment_mail import send_appointment_mail
 from .common import x_or_else
 
 DEFAULT_INVALID_MESSAGES = {
@@ -123,6 +122,7 @@ def register_participant(data: dict, experiment: Experiment) -> Tuple[bool,
     invalid_misc_items, \
     misc_messages = _handle_misc_items(
         data,
+        experiment,
         time_slot,
     )
 
@@ -133,7 +133,7 @@ def register_participant(data: dict, experiment: Experiment) -> Tuple[bool,
         # Save this participant, make the appointment and register any
         # answers to specific criteria we didn't know yet
         participant.save()
-        _make_appointment(participant, time_slot)
+        _make_appointment(participant, experiment, time_slot)
         _add_specific_criteria_answers(participant, experiment, data)
 
         # We set recoverable to false, as there is nothing to recover
@@ -158,6 +158,9 @@ def register_participant(data: dict, experiment: Experiment) -> Tuple[bool,
 
 def get_required_fields(experiment: Experiment, participant: Participant):
     fields = ['name', 'phone', 'social_status']
+
+    if experiment.use_timeslots:
+        fields.append('timeslot')
 
     for field in experiment.defaultcriteria.__dict__.keys():
         if field not in ['experiment', 'experiment_id', 'min_age', 'max_age',
@@ -249,6 +252,7 @@ def _get_participant(data: dict) -> Participant:
         participant.email_subscription = data.get('mailinglist')
 
     return participant
+
 
 def _handle_default_criteria(
         default_criteria: DefaultCriteria,
@@ -408,7 +412,7 @@ def _handle_excluded_experiments(
     """
     invalid_experiments = []
     appointments = participant.appointments.all()
-    participated_experiments = [x.timeslot.experiment for x in appointments]
+    participated_experiments = [x.experiment for x in appointments]
 
     for excluded_experiment in experiment.excluded_experiments.all():
         if excluded_experiment in participated_experiments:
@@ -423,12 +427,18 @@ def _handle_excluded_experiments(
     return invalid_experiments, messages
 
 
-def _handle_misc_items(data: dict, time_slot: TimeSlot) -> Tuple[list, list]:
+def _handle_misc_items(
+        data: dict,
+        experiment: Experiment,
+        time_slot: TimeSlot
+) -> Tuple[list, list]:
     invalid_fields = []
     messages = []
 
-    # Check if the timeslot is still free
-    if not time_slot or not time_slot.has_free_places():
+    # Check if the timeslot is still free, if needed
+    if experiment.use_timeslots and (
+            not time_slot or not time_slot.has_free_places()
+    ):
         invalid_fields.append('timeslot')
         messages.append(MISC_INVALID_MESSAGES['timeslot'])
 
@@ -442,35 +452,22 @@ def _handle_misc_items(data: dict, time_slot: TimeSlot) -> Tuple[list, list]:
     return invalid_fields, messages
 
 
-def _make_appointment(participant: Participant, time_slot: TimeSlot) -> None:
+def _make_appointment(
+        participant: Participant,
+        experiment: Experiment,
+        time_slot: TimeSlot
+) -> None:
     appointment = Appointment()
     appointment.participant = participant
-    appointment.timeslot = time_slot
+    appointment.experiment = experiment
+    if experiment.use_timeslots:
+        appointment.timeslot = time_slot
     appointment.save()
 
-    admin = get_supreme_admin()
-    experiment = appointment.timeslot.experiment
-
-    subject = 'Bevestiging afspraak experiment UiL OTS: {}'.format(
-        experiment.name
-    )
-
-    cancel_link = parse.urljoin(settings.FRONTEND_URI, 'participant/cancel/')
-
-    context = {
-        'participant': participant,
-        'time_slot':   time_slot,
-        'experiment':  experiment,
-        'leader':      experiment.leader,
-        'cancel_link': cancel_link
-    }
-
-    send_template_email(
-        [participant.email],
-        subject,
-        'api/mail/new_appointment',
-        context,
-        admin.email
+    send_appointment_mail(
+        experiment,
+        participant,
+        time_slot
     )
 
 
@@ -519,6 +516,7 @@ def _format_messages(*messages: List[str]) -> list:
     messages = [item for sublist in messages for item in sublist]
 
     return [_format_message(message) for message in messages]
+
 
 def _format_message(message: str) -> str:
     admin = get_supreme_admin()

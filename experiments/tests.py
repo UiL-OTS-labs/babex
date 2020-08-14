@@ -103,7 +103,8 @@ class ExclusionTests(TestCase):
                                             if excluded_experiment:
                                                 Appointment.objects.create(
                                                     participant=p,
-                                                    timeslot=self.time_slot
+                                                    timeslot=self.time_slot,
+                                                    experiment=self.excluded_experiment,
                                                 )
 
                                             i += 1
@@ -325,7 +326,8 @@ class ExclusionTests(TestCase):
         for participant in participants[:len(participants)//2]:
             Appointment.objects.create(
                 timeslot=time_slot,
-                participant=participant
+                participant=participant,
+                experiment=self.experiment,
             )
 
         part = get_eligible_participants_for_experiment(self.experiment)

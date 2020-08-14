@@ -54,10 +54,14 @@ class ParticipantTests(TestCase):
     def test_all_appointments(self):
         for participant, experiment in zip(self.participants, self.experiments):
             timeslot = experiment.timeslot_set.first()
-            Appointment.objects.create(
+            app = Appointment.objects.create(
                 timeslot=timeslot,
                 participant=participant,
+                experiment=experiment,
             )
+            # It checks on creation_date now, so we just copy the TS' datetime
+            app.creation_date = app.timeslot.datetime
+            app.save()
 
         num = get_participants_with_appointments()
 
@@ -84,6 +88,7 @@ class ParticipantTests(TestCase):
         Appointment.objects.create(
             timeslot=timeslot,
             participant=participant_1,
+            experiment=self.experiments[0],
         )
 
         # This should refuse to delete, as there is an appointment

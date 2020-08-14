@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-24 12:42+0000\n"
+"POT-Creation-Date: 2020-08-14 12:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -164,45 +164,45 @@ msgstr "Date created"
 msgid "datamanagement:home:delete_participant"
 msgstr "Delete this participant"
 
-#: datamanagement/templates/widgets/timespan_widget.html:6
+#: datamanagement/templates/widgets/timespan_widget.html:10
 #: datamanagement/templatetags/display_threshold.py:15
 msgid "datamanagement:global:days"
 msgstr "days"
 
-#: datamanagement/templates/widgets/timespan_widget.html:9
+#: datamanagement/templates/widgets/timespan_widget.html:13
 #: datamanagement/templatetags/display_threshold.py:14
 msgid "datamanagement:global:weeks"
 msgstr "weeks"
 
-#: datamanagement/templates/widgets/timespan_widget.html:12
+#: datamanagement/templates/widgets/timespan_widget.html:16
 #: datamanagement/templatetags/display_threshold.py:13
 msgid "datamanagement:global:months"
 msgstr "months"
 
-#: datamanagement/templates/widgets/timespan_widget.html:15
+#: datamanagement/templates/widgets/timespan_widget.html:19
 #: datamanagement/templatetags/display_threshold.py:12
 msgid "datamanagement:global:years"
 msgstr "years"
 
-#: datamanagement/views.py:59
+#: datamanagement/views.py:61
+msgid "datamanagement:messages:deleted_participant"
+msgstr "Participant deleted!"
+
+#: datamanagement/views.py:64
 msgid "datamanagement:messages:refused_deletion"
 msgstr ""
 "Refused to delete this participant! This participant has not been marked for "
 "deletion and could result in data loss. Please contact a technician if you "
 "think this isn't the case."
 
-#: datamanagement/views.py:68
-msgid "datamanagement:messages:deleted_participant"
-msgstr "Participant deleted!"
-
-#: datamanagement/views.py:99
+#: datamanagement/views.py:96
 msgid "datamanagement:messages:hid_participants"
 msgstr "Participant data visibility successfully turned off."
 
-#: datamanagement/views.py:121
+#: datamanagement/views.py:118
 msgid "datamanagement:messages:deleted_invites"
 msgstr "Successfully deleted invites for {}"
 
-#: datamanagement/views.py:142
+#: datamanagement/views.py:139
 msgid "datamanagement:messages:deleted_comments"
 msgstr "Successfully deleted comments for {}"

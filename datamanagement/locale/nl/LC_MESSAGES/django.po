@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-24 12:42+0000\n"
+"POT-Creation-Date: 2020-08-14 12:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -164,45 +164,45 @@ msgstr "Aangemaakt op"
 msgid "datamanagement:home:delete_participant"
 msgstr "Verwijder participant"
 
-#: datamanagement/templates/widgets/timespan_widget.html:6
+#: datamanagement/templates/widgets/timespan_widget.html:10
 #: datamanagement/templatetags/display_threshold.py:15
 msgid "datamanagement:global:days"
 msgstr "Data management"
 
-#: datamanagement/templates/widgets/timespan_widget.html:9
+#: datamanagement/templates/widgets/timespan_widget.html:13
 #: datamanagement/templatetags/display_threshold.py:14
 msgid "datamanagement:global:weeks"
 msgstr "weken"
 
-#: datamanagement/templates/widgets/timespan_widget.html:12
+#: datamanagement/templates/widgets/timespan_widget.html:16
 #: datamanagement/templatetags/display_threshold.py:13
 msgid "datamanagement:global:months"
 msgstr "maanden"
 
-#: datamanagement/templates/widgets/timespan_widget.html:15
+#: datamanagement/templates/widgets/timespan_widget.html:19
 #: datamanagement/templatetags/display_threshold.py:12
 msgid "datamanagement:global:years"
 msgstr "jaar"
 
-#: datamanagement/views.py:59
+#: datamanagement/views.py:61
+msgid "datamanagement:messages:deleted_participant"
+msgstr "Participant verwijderd!"
+
+#: datamanagement/views.py:64
 msgid "datamanagement:messages:refused_deletion"
 msgstr ""
 "Participant NIET verwijderd! Deze deelnemer is niet gemarkeerd "
 "voorverwijdering en kan leiden tot gegevensverlies. Neem contact op met een "
 "technicus als u denk dat dit niet het geval is."
 
-#: datamanagement/views.py:68
-msgid "datamanagement:messages:deleted_participant"
-msgstr "Participant verwijderd!"
-
-#: datamanagement/views.py:99
+#: datamanagement/views.py:96
 msgid "datamanagement:messages:hid_participants"
 msgstr "Gegevens verborgen!"
 
-#: datamanagement/views.py:121
+#: datamanagement/views.py:118
 msgid "datamanagement:messages:deleted_invites"
 msgstr "Trackers successvol verwijderd voor {}!"
 
-#: datamanagement/views.py:142
+#: datamanagement/views.py:139
 msgid "datamanagement:messages:deleted_comments"
 msgstr "Comments verwijderd voor {}!"

@@ -179,12 +179,14 @@ class MergeParticipantsTest(TestCase):
 
         Appointment.objects.create(
             participant=self.old,
-            timeslot=self.t1
+            timeslot=self.t1,
+            experiment=self.e1,
         )
 
         Appointment.objects.create(
             participant=self.new,
             timeslot=self.t1,
+            experiment=self.e1,
         )
 
         self.assertEqual(self.old.appointments.count(), 1)

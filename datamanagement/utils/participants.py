@@ -13,7 +13,7 @@ def get_participants_with_appointments() -> List[Tuple[Participant, datetime, in
     threshold = get_threshold_years_ago('participants_with_appointment')
 
     for participant in Participant.objects.filter(
-        appointments__timeslot__datetime__lte=threshold
+        appointments__creation_date__lte=threshold,
     ).distinct():
         newest_appointment = participant.appointments.order_by(
             '-timeslot__datetime'

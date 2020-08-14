@@ -11,8 +11,8 @@ class ExperimentSerializer(serializers.ModelSerializer):
             'id', 'name', 'duration', 'compensation', 'task_description',
             'additional_instructions', 'open', 'public', 'participants_visible',
             'location', 'leader', 'additional_leaders', 'excluded_experiments',
-            'defaultcriteria', 'specific_criteria', 'timeslots',
-            'default_max_places',
+            'defaultcriteria', 'specific_criteria', 'use_timeslots',
+            'timeslots', 'default_max_places',
         ]
 
     specific_criteria = serializers.SerializerMethodField(

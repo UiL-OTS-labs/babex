@@ -48,10 +48,10 @@ def get_eligible_participants_for_experiment(experiment: Experiment,
     # Exclude all participants with an appointment for an experiment that was
     # marked as an exclusion criteria
     participants = Participant.objects.exclude(
-        appointments__timeslot__experiment__in=experiment
-            .excluded_experiments.all()
+        appointments__experiment__in=experiment.excluded_experiments.all()
     ).exclude(
-        appointments__timeslot__experiment=experiment
+        # Exclude all participants who have already signed up
+        appointments__experiment=experiment
     ).prefetch_related(
         'secondaryemail_set',  # Used in the invite page template!
         'criterionanswer_set'

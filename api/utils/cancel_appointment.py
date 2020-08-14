@@ -10,7 +10,9 @@ from participants.utils import get_mailinglist_unsubscribe_url
 
 
 def cancel_appointment(appointment: Appointment) -> None:
-    _handle_late_comment(appointment)
+    # Only handle late comment if there is a timeslot
+    if appointment.timeslot:
+        _handle_late_comment(appointment)
     _inform_leaders(appointment)
     _send_confirmation(appointment)
 
@@ -36,7 +38,7 @@ def _handle_late_comment(appointment: Appointment) -> None:
 
 
 def _inform_leaders(appointment: Appointment) -> None:
-    experiment = appointment.timeslot.experiment
+    experiment = appointment.experiment
 
     leaders = [experiment.leader]
     if experiment.additional_leaders.exists():
@@ -63,7 +65,7 @@ def _inform_leaders(appointment: Appointment) -> None:
 
 def _send_confirmation(appointment: Appointment) -> None:
     admin = get_supreme_admin()
-    experiment = appointment.timeslot.experiment
+    experiment = appointment.experiment
     time_slot = appointment.timeslot
 
     subject = 'UiL OTS uitschrijven experiment: {}'.format(experiment.name)
