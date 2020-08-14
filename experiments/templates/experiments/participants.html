@@ -50,10 +50,10 @@
                             <th>
                                 {% trans 'timeslots:day' %}
                             </th>
+                            <th>
+                                {% trans 'experiments:participants:place' %}
+                            </th>
                         {% endif %}
-                        <th>
-                            {% trans 'experiments:participants:place' %}
-                        </th>
                         <th>
                             {% get_verbose_field_name "participants" "Participant" "name" %}
                         </th>
@@ -106,10 +106,10 @@
                                 <td>
                                     {{ appointment.timeslot.datetime|date:"l" }}
                                 </td>
+                                <td>
+                                    {{ appointment.n }}
+                                </td>
                             {% endif %}
-                            <td>
-                                {{ appointment.n }}
-                            </td>
                             <td>
                                 {{ appointment.participant.fullname }}
                             </td>
@@ -182,10 +182,10 @@
                             <th>
                                 <input type="text" name="day" placeholder="{% trans 'timeslots:day' %}" class="search_init" />
                             </th>
+                            <th>
+                                <input type="text" name="place" placeholder="{% trans 'experiments:participants:place' %}" class="search_init" />
+                            </th>
                         {% endif %}
-                        <th>
-                            <input type="text" name="place" placeholder="{% trans 'experiments:participants:place' %}" class="search_init" />
-                        </th>
                         <th>
                             <input type="text" name="name" placeholder="{% get_verbose_field_name "participants" "Participant" "name" %}" class="search_init" />
                         </th>

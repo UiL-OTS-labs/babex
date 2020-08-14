@@ -15,8 +15,3 @@
 .criteria-table td:nth-child(2)  {
     color: green;
 }
-
-.disabled-icon {
-    color: #aaa;
-    cursor: not-allowed;
-}

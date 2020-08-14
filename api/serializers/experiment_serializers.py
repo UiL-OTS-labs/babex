@@ -64,6 +64,10 @@ class ExperimentSerializer(serializers.ModelSerializer):
 
 
 class LeaderExperimentSerializer(ExperimentSerializer):
+    appointments = serializers.SerializerMethodField(
+        source='appointments'
+    )
+
     class Meta:
         model = Experiment
         depth = 1
@@ -72,7 +76,7 @@ class LeaderExperimentSerializer(ExperimentSerializer):
             'additional_instructions', 'open', 'public', 'participants_visible',
             'location', 'leader', 'additional_leaders', 'excluded_experiments',
             'defaultcriteria', 'specific_criteria', 'use_timeslots',
-            'timeslots', 'default_max_places',
+            'timeslots', 'default_max_places', 'appointments',
         ]
 
     def get_timeslots(self, o):
@@ -81,5 +85,15 @@ class LeaderExperimentSerializer(ExperimentSerializer):
 
         return LeaderTimeSlotSerializer(
             o.timeslot_set.all(),
+            many=True
+        ).data
+
+    def get_appointments(self, o):
+        print("I'm actually running!")
+        # Local import to prevent import cycles
+        from .timeslot_serializers import LeaderAppointmentSerializer
+
+        return LeaderAppointmentSerializer(
+            o.appointments.all(),
             many=True
         ).data
