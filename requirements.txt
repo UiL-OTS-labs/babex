@@ -6,39 +6,39 @@
 #
 -e git+https://github.com/UiL-OTS-labs/django-shared-core.git@v1.1.0-beta-1#egg=uil-django-core  # via -r requirements.in
 blessings==1.7            # via curtsies
-bpython==0.18             # via -r requirements.in
-certifi==2019.11.28       # via requests
-cffi==1.13.2              # via cryptography
+bpython==0.19             # via -r requirements.in
+certifi==2020.6.20        # via requests
+cffi==1.14.2              # via cryptography
 chardet==3.0.4            # via requests
-click==7.0                # via pip-tools
-cryptography==2.8         # via -r requirements.in
-curtsies==0.3.0           # via bpython
-django-auth-ldap==2.1.0   # via -r requirements.in
-django-braces==1.13.0     # via -r requirements.in
-django-csp==3.5           # via -r requirements.in
-django-debug-toolbar==2.1  # via -r requirements.in
-django-extensions==2.2.5  # via -r requirements.in
+click==7.1.2              # via pip-tools
+cryptography==3.1         # via -r requirements.in
+curtsies==0.3.4           # via bpython
+django-auth-ldap==2.2.0   # via -r requirements.in
+django-braces==1.14.0     # via -r requirements.in
+django-csp==3.7           # via -r requirements.in
+django-debug-toolbar==2.2  # via -r requirements.in
+django-extensions==3.0.8  # via -r requirements.in
 django-simple-menu==1.2.1  # via -r requirements.in
-django==2.2.12            # via -r requirements.in, django-auth-ldap, django-csp, django-debug-toolbar, django-simple-menu
-djangorestframework==3.10.3  # via -r requirements.in
-greenlet==0.4.15          # via bpython
-idna==2.8                 # via requests
-mysqlclient==1.4.6        # via -r requirements.in
-pip-tools==4.3.0          # via -r requirements.in
-pyasn1-modules==0.2.7     # via python-ldap
+django==2.2.16            # via -r requirements.in, django-auth-ldap, django-braces, django-csp, django-debug-toolbar, django-simple-menu, djangorestframework
+djangorestframework==3.11.1  # via -r requirements.in
+greenlet==0.4.16          # via bpython
+idna==2.10                # via requests
+mysqlclient==2.0.1        # via -r requirements.in
+pip-tools==5.3.1          # via -r requirements.in
+pyasn1-modules==0.2.8     # via python-ldap
 pyasn1==0.4.8             # via pyasn1-modules, python-ldap
-pycparser==2.19           # via cffi
-pygments==2.5.2           # via bpython
+pycparser==2.20           # via cffi
+pygments==2.6.1           # via bpython
 pyjwt==1.7.1              # via -r requirements.in
 python-dateutil==2.8.1    # via -r requirements.in
-python-ldap==3.2.0        # via django-auth-ldap
-pytz==2019.3              # via django
-requests==2.22.0          # via bpython
-six==1.13.0               # via blessings, bpython, cryptography, django-extensions, pip-tools, python-dateutil
-sqlparse==0.3.0           # via django, django-debug-toolbar
-typing==3.7.4.1           # via curtsies
-urllib3==1.25.7           # via requests
-wcwidth==0.1.7            # via curtsies
+python-ldap==3.3.1        # via django-auth-ldap
+pytz==2020.1              # via django
+requests==2.24.0          # via bpython
+six==1.15.0               # via blessings, bpython, cryptography, django-braces, pip-tools, python-dateutil
+sqlparse==0.3.1           # via django, django-debug-toolbar
+urllib3==1.25.10          # via requests
+wcwidth==0.2.5            # via curtsies
 
 # The following packages are considered to be unsafe in a requirements file:
+# pip
 # setuptools
