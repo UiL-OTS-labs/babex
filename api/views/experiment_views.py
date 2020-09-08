@@ -62,7 +62,7 @@ class ExperimentsView(rest_mixins.RetrieveModelMixin,  # This default
 
         filtered = []
         for experiment in open_experiments:
-            if not experiment.has_free_timeslots() and experiment.use_timeslots:
+            if not experiment.has_free_places():
                 continue
 
             if filter_personally and not check_participant_eligible(

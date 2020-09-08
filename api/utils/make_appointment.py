@@ -78,7 +78,9 @@ MISC_INVALID_MESSAGES = {
                           "voor zijn; de meest waarschijnlijke is dat je een "
                           "aantal keer niet bent komen opdagen voor een "
                           "afspraak. Als je toch nog mee wilt doen, neem dan "
-                          "contact op met {}"
+                          "contact op met {}",
+    'full':               "Aanmelding mislukt: sorry, dit experiment is "
+                          "inmiddels vol!",
 }
 
 
@@ -86,6 +88,11 @@ def register_participant(data: dict, experiment: Experiment) -> Tuple[bool,
                                                                       bool,
                                                                       list]:
     default_criteria = experiment.defaultcriteria
+
+    if not experiment.has_free_places():
+        return False, False, [
+            _format_message(MISC_INVALID_MESSAGES['full'])
+        ]
 
     try:
         time_slot = experiment.timeslot_set.get(pk=data.get('timeslot'))

@@ -136,7 +136,26 @@ class Experiment(models.Model):
         help_text=_("experiment:attribute:additional_leaders:help_text"),
     )
 
+    def has_free_places(self):
+        """
+        Returns if this experiment is available for new participants. If
+        this experiment uses timeslots, it will return the same as
+        has_free_timeslots. Otherwise, it will check if the number of existing
+        appointments is lower than the number of maximum appointments.
+        :return:
+        """
+        if self.use_timeslots:
+            return self.has_free_timeslots()
+
+        return self.appointments.count() < self.default_max_places
+
     def has_free_timeslots(self):
+        """
+        Returns if this experiment still has free timeslots available for
+        registering. If this experiment does not use timeslots, it will always
+        return False.
+        :return:
+        """
         return self.timeslot_set.annotate(
             num_appointments=Count('appointments')
         ).filter(
