@@ -16,14 +16,14 @@ def get_participants_with_appointments() -> List[Tuple[Participant, datetime, in
         appointments__creation_date__lte=threshold,
     ).distinct():
         newest_appointment = participant.appointments.order_by(
-            '-timeslot__datetime'
+            '-creation_date'
         ).first()
 
-        if newest_appointment.timeslot.datetime < threshold:
+        if newest_appointment.creation_date < threshold:
             out.append(
                 (
                     participant,
-                    newest_appointment.timeslot.datetime,
+                    newest_appointment.creation_date,
                     participant.appointments.count(),
                  )
             )
