@@ -43,15 +43,17 @@
             <table class="dt_custom" width="100%" data-language="{% datatables_lang %}" data-responsive="">
                 <thead>
                     <tr>
-                        <th>
-                            {% get_verbose_field_name "experiments" "TimeSlot" "datetime" %}
-                        </th>
-                        <th>
-                            {% trans 'timeslots:day' %}
-                        </th>
-                        <th>
-                            {% trans 'experiments:participants:place' %}
-                        </th>
+                        {% if experiment.use_timeslots %}
+                            <th>
+                                {% get_verbose_field_name "experiments" "TimeSlot" "datetime" %}
+                            </th>
+                            <th>
+                                {% trans 'timeslots:day' %}
+                            </th>
+                            <th>
+                                {% trans 'experiments:participants:place' %}
+                            </th>
+                        {% endif %}
                         <th>
                             {% get_verbose_field_name "participants" "Participant" "name" %}
                         </th>
@@ -97,15 +99,17 @@
                 <tbody>
                     {% for appointment in object_list %}
                         <tr>
-                            <td>
-                                {{ appointment.timeslot.datetime|date:"Y-m-d H:i" }}
-                            </td>
-                            <td>
-                                {{ appointment.timeslot.datetime|date:"l" }}
-                            </td>
-                            <td>
-                                {{ appointment.n }}
-                            </td>
+                            {% if experiment.use_timeslots %}
+                                <td>
+                                    {{ appointment.timeslot.datetime|date:"Y-m-d H:i" }}
+                                </td>
+                                <td>
+                                    {{ appointment.timeslot.datetime|date:"l" }}
+                                </td>
+                                <td>
+                                    {{ appointment.n }}
+                                </td>
+                            {% endif %}
                             <td>
                                 {{ appointment.participant.fullname }}
                             </td>
@@ -114,14 +118,14 @@
                             </td>
                             <td>
                                 <a
-                                    href="{% url 'experiments:timeslots_unsubscribe' appointment.timeslot.pk appointment.pk %}?next={{ request.path }}"
+                                    href="{% url 'experiments:unsubscribe' appointment.experiment.pk appointment.pk %}?next={{ request.path }}"
                                     class="icon-remove-participant"
                                     title="{% trans 'timeslots:remove_participant:title' %}"
                                 >
                                     
                                 </a>
                                 <a
-                                    href="{% url 'experiments:timeslots_unsubscribe_silent' appointment.timeslot.pk appointment.pk %}?next={{ request.path }}"
+                                    href="{% url 'experiments:unsubscribe_silent' appointment.experiment.pk appointment.pk %}?next={{ request.path }}"
                                     class="icon-silent-remove-participant"
                                     title="{% trans 'timeslots:silent_remove_participant:title' %}"
                                 >
@@ -171,15 +175,17 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>
-                            <input type="text" name="date" placeholder="{% get_verbose_field_name "experiments" "TimeSlot" "datetime" %}" class="search_init" />
-                        </th>
-                        <th>
-                            <input type="text" name="day" placeholder="{% trans 'timeslots:day' %}" class="search_init" />
-                        </th>
-                        <th>
-                            <input type="text" name="place" placeholder="{% trans 'experiments:participants:place' %}" class="search_init" />
-                        </th>
+                        {% if experiment.use_timeslots %}
+                            <th>
+                                <input type="text" name="date" placeholder="{% get_verbose_field_name "experiments" "TimeSlot" "datetime" %}" class="search_init" />
+                            </th>
+                            <th>
+                                <input type="text" name="day" placeholder="{% trans 'timeslots:day' %}" class="search_init" />
+                            </th>
+                            <th>
+                                <input type="text" name="place" placeholder="{% trans 'experiments:participants:place' %}" class="search_init" />
+                            </th>
+                        {% endif %}
                         <th>
                             <input type="text" name="name" placeholder="{% get_verbose_field_name "participants" "Participant" "name" %}" class="search_init" />
                         </th>

@@ -18,14 +18,14 @@ urlpatterns = [
     ),
 
     path(
-        '<int:time_slot>/timeslots/unsubscribe/<int:appointment>)/',
+        '<int:experiment>/unsubscribe/<int:appointment>)/',
         UnsubscribeParticipantView.as_view(),
-        name='timeslots_unsubscribe',
+        name='unsubscribe',
     ),
     path(
-        '<int:time_slot>/timeslots/unsubscribe/silent/<int:appointment>/',
+        '<int:experiment>/unsubscribe/silent/<int:appointment>/',
         SilentUnsubscribeParticipantView.as_view(),
-        name='timeslots_unsubscribe_silent',
+        name='unsubscribe_silent',
     ),
 
     path(

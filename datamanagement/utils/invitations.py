@@ -1,5 +1,7 @@
 from typing import List, Tuple
 
+from auditlog.utils.log import log as log_to_auditlog
+from auditlog.enums import Event, UserType
 from datamanagement.utils.common import get_old_experiments
 from experiments.models import Experiment, Invitation
 
@@ -18,5 +20,12 @@ def get_invite_counts() -> List[Tuple[Experiment, int]]:
     return out
 
 
-def delete_invites(experiment: Experiment) -> None:
+def delete_invites(experiment: Experiment, user) -> None:
+    log_to_auditlog(
+        Event.DELETE_DATA,
+        "Deleted invites for experiment '{}'".format(experiment),
+        user,
+        UserType.ADMIN,
+    )
+
     Invitation.objects.filter(experiment=experiment).delete()

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-06 09:13+0000\n"
+"POT-Creation-Date: 2020-08-14 12:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,18 +18,44 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: api/auth/serializers.py:9
+#: api/auth/admin.py:29
+msgid "Personal info"
+msgstr ""
+
+#: api/auth/admin.py:35
+msgid "Permissions"
+msgstr ""
+
+#: api/auth/admin.py:38
+msgid "Important dates"
+msgstr ""
+
+#: api/auth/admin.py:56
+#, python-format
+msgid "%(name)s object with primary key %(key)r does not exist."
+msgstr ""
+
+#: api/auth/admin.py:67
+msgid "Password changed successfully."
+msgstr ""
+
+#: api/auth/admin.py:89
+#, python-format
+msgid "Change password: %s"
+msgstr ""
+
+#: api/auth/serializers.py:16
 msgid "Username"
 msgstr "Username"
 
-#: api/auth/serializers.py:11
+#: api/auth/serializers.py:18
 msgid "Password"
 msgstr "Password"
 
-#: api/auth/serializers.py:28
+#: api/auth/serializers.py:38
 msgid "api:auth:login_failed"
 msgstr "Unable to log in with provided credentials."
 
-#: api/auth/serializers.py:31
+#: api/auth/serializers.py:41
 msgid "api:auth:missing_values"
 msgstr "Must include \"username\" and \"password\"."

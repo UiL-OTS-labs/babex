@@ -1,3 +1,4 @@
+from django.db.models import Q
 from typing import List, Tuple
 from datetime import datetime
 
@@ -11,7 +12,9 @@ def get_experiments_with_visibility() -> List[Tuple[Experiment, datetime]]:
 
     for experiment in Experiment.objects.filter(
         participants_visible=True,
-        timeslot__datetime__lte=threshold,
+    ).filter(
+        Q(timeslot__datetime__lte=threshold) |
+        Q(appointments__creation_date__lte=threshold),
     ).distinct():
         out.append(
             (experiment, datetime.now())

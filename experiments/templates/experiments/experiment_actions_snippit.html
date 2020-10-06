@@ -1,12 +1,21 @@
 {% load i18n %}
 
-<a
-    href="{% url 'experiments:timeslots' experiment.pk %}"
-    class="icon-timeslots"
-    title="{% trans 'experiments:home:edit_timeslots:title' %}"
->
-    
-</a>
+{% if experiment.use_timeslots %}
+    <a
+        href="{% url 'experiments:timeslots' experiment.pk %}"
+        class="icon-timeslots"
+        title="{% trans 'experiments:home:edit_timeslots:title' %}"
+    >
+        
+    </a>
+{% else %}
+    <span
+        class="icon-timeslots disabled-icon"
+        title="{% trans 'experiments:home:edit_timeslots:title:disabled' %}"
+    >
+        
+    </span>
+{% endif %}
 <a
     href="{% url 'experiments:update' experiment.pk %}"
     class="icon-update"

@@ -1,0 +1,71 @@
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+{% load static %}
+
+<div class="uu-inner-container">
+    <div class="col-12">
+        <h3>
+            {% trans 'experiments:detail:comments' %}
+        </h3>
+        <br/>
+        <table class="w-100 dt">
+            <thead>
+                <tr>
+                    <th>
+                        {% trans 'experiments:detail:comments:participant' %}
+                    </th>
+                    <th>
+                        {% trans 'experiments:detail:comments:email' %}
+                    </th>
+                    <th>
+                        {% trans 'experiments:detail:comments:added_by' %}
+                    </th>
+                    <th>
+                        {% trans 'experiments:detail:comments:added_on' %}
+                    </th>
+                    <th class="w-25">
+                        {% trans 'experiments:detail:comments:comment' %}
+                    </th>
+                    <th>
+                        {% trans 'experiments:globals:actions' %}
+                    </th>
+                </tr>
+            </thead>
+            {% for comment in comments %}
+                <tr>
+                    <td>
+                        {{ comment.participant.name }}
+                    </td>
+                    <td>
+                        {{ comment.participant.email }}
+                    </td>
+                    <td>
+                        {% if comment.system_comment %}
+                                {% trans 'experiments:detail:comment:system_user' %}
+                            {% elif comment.leader %}
+                                {{ comment.leader.name }}
+                            {% else %}
+                                {% trans 'experiments:detail:comment:admin_user' %}
+                            {% endif %}
+                    </td>
+                    <td data-order="{{ comment.datetime|date:'U' }}">
+                        {{ comment.datetime|date:"Y-m-d H:i" }}
+                    </td>
+                    <td>
+                        {{ comment.comment }}
+                    </td>
+                    <td class="text-center">
+                        <a  href="{% url 'comments:delete' comment.pk %}?next={{ request.path }}"
+                            title="{% trans 'experiments:detail:comment:delete' %}"
+                            class="icon-delete">
+                            
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+<br/>

@@ -2,7 +2,7 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-import main.fields.encrypted_fields
+import uil.core.fields.encrypted_fields
 
 
 class Migration(migrations.Migration):

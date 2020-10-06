@@ -199,7 +199,7 @@ class AppointmentsView(rest_mixins.ListModelMixin,
         serializer = self.get_serializer(instance)
 
         message = "Participant viewed appointment for experiment '{}'".format(
-            instance.timeslot.experiment.name
+            instance.experiment.name
         )
 
         event = Event.VIEW_DATA
@@ -245,7 +245,7 @@ class AppointmentsView(rest_mixins.ListModelMixin,
         appointment = self.get_object()
 
         message = "Participant deleted appointment for experiment '{}'".format(
-            appointment.timeslot.experiment.name
+            appointment.experiment.name
         )
 
         event = Event.DELETE_DATA

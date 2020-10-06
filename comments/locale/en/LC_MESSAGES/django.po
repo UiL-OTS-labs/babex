@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-15 11:16+0000\n"
+"POT-Creation-Date: 2020-08-14 12:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,11 +76,11 @@ msgstr "System"
 msgid "comments:home:admin_user"
 msgstr "Administrator user"
 
-#: comments/templates/comments/index.html:75
+#: comments/templates/comments/index.html:77
 msgid "comments:home:no_experiment"
 msgstr "N/A"
 
-#: comments/templates/comments/index.html:86
+#: comments/templates/comments/index.html:88
 msgid "comments:home:delete"
 msgstr "Delete comment"
 
@@ -97,10 +97,10 @@ msgstr " "
 msgid "comments:globals:add_button"
 msgstr "Add"
 
-#: comments/views.py:27
+#: comments/views.py:29
 msgid "comments:messages:created"
 msgstr "Comment added!"
 
-#: comments/views.py:52
+#: comments/views.py:55
 msgid "comments:messages:deleted"
 msgstr "Delete deleted!"

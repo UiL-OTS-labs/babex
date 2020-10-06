@@ -4,7 +4,7 @@ from typing import List
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-import main.fields as e_fields
+import uil.core.fields as e_fields
 from api.auth.models import ApiUser
 from experiments.models.criteria_models import Criterion
 
@@ -80,9 +80,7 @@ class Participant(models.Model):
         null=True,
     )
 
-    # NOTE: When updating to Django 2.1 you should change this to a regular
-    # BooleanField
-    multilingual = e_fields.EncryptedNullBooleanField(
+    multilingual = e_fields.EncryptedBooleanField(
         _('participant:attribute:multilingual'),
         blank=True,
         null=True,

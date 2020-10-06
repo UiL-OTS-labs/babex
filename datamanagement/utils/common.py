@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from functools import lru_cache
 
+from django.db.models import Q
 from django.utils import timezone
 from typing import Iterable
 
@@ -26,5 +27,6 @@ def get_threshold_years_ago(category: str) -> datetime:
 
 def get_old_experiments(category: str) -> Iterable[Experiment]:
     return Experiment.objects.filter(
-        timeslot__datetime__lte=get_threshold_years_ago(category)
+        Q(timeslot__datetime__lte=get_threshold_years_ago(category)) |
+        Q(appointments__creation_date__lte=get_threshold_years_ago(category))
     ).distinct()
