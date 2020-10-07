@@ -19,7 +19,7 @@ urlpatterns = [
 
     # Experiment timeslot views
 
-    path('', include('experiments.urls.timeslots_urls')),
+    path('', include('experiments.urls.appointment_urls')),
 
     # Experiment related criteria views
 

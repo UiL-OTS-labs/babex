@@ -1,7 +1,6 @@
 import braces.views as braces
 from django.core.exceptions import SuspiciousOperation
 from django.urls import reverse_lazy as reverse
-from django.utils.functional import cached_property
 from django.utils.text import gettext_lazy as _
 from uil.core.views import RedirectActionView
 from uil.core.views.mixins import RedirectSuccessMessageMixin
@@ -47,13 +46,13 @@ class TimeSlotHomeView(braces.LoginRequiredMixin,
     def get_initial(self):
         initial = super(TimeSlotHomeView, self).get_initial()
 
-        initial['max_places'] = self.experiment.default_max_places
-        initial['datetime'] = self._get_datetime_initial()
+        initial['max_places'] = self._get_initial_max_places()
+        initial['datetime'] = self._get_initial_datetime()
         initial['experiment'] = self.experiment
 
         return initial
 
-    def _get_datetime_initial(self):
+    def _get_initial_datetime(self):
         """If we have post values, we return the datetime from POST,
         otherwise we default to now().
         """
@@ -61,6 +60,15 @@ class TimeSlotHomeView(braces.LoginRequiredMixin,
             return self.request.POST['datetime']
 
         return str(now())[:-3]  # Remove the seconds
+
+    def _get_initial_max_places(self):
+        """If we have post values, we return the max_places from POST,
+        otherwise we default to default_max_places.
+        """
+        if self.request.POST:
+            return self.request.POST['max_places']
+
+        return self.experiment.default_max_places
 
     def get_queryset(self):
         # Only select them for this experiment
@@ -131,12 +139,8 @@ class UnsubscribeParticipantView(braces.LoginRequiredMixin,
 
         return reverse(
             'experiments:timeslots',
-            args=[self.time_slot.experiment.pk]
+            args=[self.kwargs.get('experiment')]
         )
-
-    @cached_property
-    def time_slot(self):
-        return TimeSlot.objects.get(pk=self.kwargs.get('time_slot'))
 
 
 class SilentUnsubscribeParticipantView(UnsubscribeParticipantView):

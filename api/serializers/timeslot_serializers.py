@@ -16,13 +16,13 @@ class LeaderTimeSlotSerializer(serializers.ModelSerializer):
         ]
 
     def get_appointments(self, o):
-        return LeaderTimeSlotAppointmentSerializer(
+        return LeaderAppointmentSerializer(
             o.appointments.all(),
             many=True,
         ).data
 
 
-class LeaderTimeSlotAppointmentSerializer(serializers.ModelSerializer):
+class LeaderAppointmentSerializer(serializers.ModelSerializer):
     participant = serializers.SerializerMethodField()
 
     class Meta:
@@ -33,7 +33,7 @@ class LeaderTimeSlotAppointmentSerializer(serializers.ModelSerializer):
         ]
 
     def get_participant(self, o):
-        return  LeaderParticipantSerializer(o.participant).data
+        return LeaderParticipantSerializer(o.participant).data
 
 
 class TimeSlotSerializer(serializers.ModelSerializer):
@@ -81,5 +81,5 @@ class AppointmentSerializer(serializers.ModelSerializer):
         from .experiment_serializers import ExperimentSerializer
 
         return ExperimentSerializer(
-            o.timeslot.experiment
+            o.experiment
         ).data

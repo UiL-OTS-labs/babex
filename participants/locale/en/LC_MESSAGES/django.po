@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-18 10:25+0000\n"
+"POT-Creation-Date: 2020-08-14 12:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,91 +36,91 @@ msgstr "To be merged participant"
 msgid "participants:merge_form:validation:are_equal"
 msgstr "This is the same participant as the one picked above!"
 
-#: participants/models.py:14
+#: participants/models.py:45
 msgid "participant:attribute:handedness:lefthanded"
 msgstr "Left handed"
 
-#: participants/models.py:15
+#: participants/models.py:46
 msgid "participant:attribute:handedness:righthanded"
 msgstr "Right handed"
 
-#: participants/models.py:20
+#: participants/models.py:50
 msgid "participant:attribute:sex:male"
 msgstr "Male"
 
-#: participants/models.py:21
+#: participants/models.py:51
 msgid "participant:attribute:sex:female"
 msgstr "Female"
 
-#: participants/models.py:25
+#: participants/models.py:55
 msgid "participant:attribute:social_role:student"
 msgstr "Student"
 
-#: participants/models.py:26
+#: participants/models.py:56
 msgid "participant:attribute:social_role:other"
 msgstr "Other"
 
-#: participants/models.py:30
+#: participants/models.py:60
 msgid "participant:attribute:email"
 msgstr "E-mail address"
 
-#: participants/models.py:34
+#: participants/models.py:64
 msgid "participant:attribute:name"
 msgstr "Name"
 
-#: participants/models.py:40
+#: participants/models.py:70
 msgid "participant:attribute:language"
 msgstr "Language"
 
-#: participants/models.py:44
+#: participants/models.py:74
 msgid "participant:attribute:dyslexic"
 msgstr "Dyslexic?"
 
-#: participants/models.py:48
+#: participants/models.py:78
 msgid "participant:attribute:birth_date"
 msgstr "Birth date"
 
-#: participants/models.py:56
+#: participants/models.py:84
 msgid "participant:attribute:multilingual"
 msgstr "Multilingual"
 
-#: participants/models.py:62
+#: participants/models.py:90
 msgid "participant:attribute:phonenumber"
 msgstr "Phone number"
 
-#: participants/models.py:68
+#: participants/models.py:96
 msgid "participant:attribute:handedness"
 msgstr "Handedness"
 
-#: participants/models.py:75
+#: participants/models.py:103
 msgid "participant:attribute:sex"
 msgstr "Sex"
 
-#: participants/models.py:82
+#: participants/models.py:110
 msgid "participant:attribute:social_status"
 msgstr "Social role"
 
-#: participants/models.py:89
+#: participants/models.py:117
 msgid "participant:attribute:email_subscription"
 msgstr "On mailing list"
 
-#: participants/models.py:94
+#: participants/models.py:122
 msgid "participant:attribute:capable"
 msgstr "Capable"
 
-#: participants/models.py:106
+#: participants/models.py:134
 msgid "participant:attribute:created"
 msgstr "Created on"
 
-#: participants/models.py:115 participants/models.py:138
+#: participants/models.py:143 participants/models.py:167
 msgid "participant:name:unknown"
 msgstr "name unknown"
 
-#: participants/models.py:145
+#: participants/models.py:174
 msgid "secondary_email:attribute:email"
 msgstr "Secondary e-mail address"
 
-#: participants/models.py:164
+#: participants/models.py:192
 msgid "criterion_answer:attribute:answer"
 msgstr "Answer"
 
@@ -256,14 +256,14 @@ msgstr "Specific criteria for '{}'"
 msgid "participants:specific_criteria:info_text"
 msgstr " "
 
-#: participants/views.py:34
+#: participants/views.py:48
 msgid "participants:messages:updated_participant"
 msgstr "Participant updated!"
 
-#: participants/views.py:44
+#: participants/views.py:69
 msgid "participants:messages:deleted_participant"
 msgstr "Participant deleted!"
 
-#: participants/views.py:77
+#: participants/views.py:112
 msgid "participants:messages:merged_participants"
 msgstr "Participant merged!"

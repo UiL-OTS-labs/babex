@@ -56,12 +56,20 @@ class Appointment(models.Model):
 
     participant = models.ForeignKey(
         Participant,
-        on_delete=models.CASCADE,
+        on_delete=models.PROTECT,
         related_name='appointments',
     )
 
     timeslot = models.ForeignKey(
         TimeSlot,
+        on_delete=models.CASCADE,
+        related_name='appointments',
+        null=True,
+        blank=True,
+    )
+
+    experiment = models.ForeignKey(
+        Experiment,
         on_delete=models.CASCADE,
         related_name='appointments',
     )
@@ -83,5 +91,5 @@ class Appointment(models.Model):
     def __str__(self):
         return "{} -> {}".format(
             self.participant,
-            self.timeslot
+            self.experiment.name
         )

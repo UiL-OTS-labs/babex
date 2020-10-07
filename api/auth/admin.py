@@ -24,7 +24,7 @@ class ApiGroupAdmin(auth_admin.GroupAdmin):
 class ApiUserAdmin(auth_admin.UserAdmin):
     fieldsets = (
         (None, {
-            'fields': ('email', 'password')
+            'fields': ('password', )
         }),
         (_('Personal info'), {
             'fields': ('email',)

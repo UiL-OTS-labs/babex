@@ -8,8 +8,7 @@ from participants.models import Participant
 from uil.core.views import RedirectActionView
 from uil.core.views.mixins import RedirectSuccessMessageMixin
 
-from auditlog.utils.log import log as log_to_auditlog
-from auditlog.enums import Event, UserType
+
 from datamanagement.forms import ThresholdsEditForm
 from datamanagement.utils.comments import delete_comments, get_comment_counts
 from datamanagement.utils.common import get_thresholds_model
@@ -17,7 +16,8 @@ from datamanagement.utils.exp_part_visibility import \
     get_experiments_with_visibility, hide_part_from_exp
 from datamanagement.utils.invitations import delete_invites, get_invite_counts
 from datamanagement.utils.participants import \
-    get_participants_with_appointments, get_participants_without_appointments
+    delete_participant, get_participants_with_appointments, \
+    get_participants_without_appointments
 from experiments.models import Experiment
 
 
@@ -55,26 +55,14 @@ class DeleteParticipantView(braces.LoginRequiredMixin,
                             RedirectActionView):
 
     def action(self, request):
-        # Only delete a participant if we are sure it's a participant we
-        # can delete
-        if self.participant not in get_participants_without_appointments():
+
+        if delete_participant(self.participant, self.request.user):
+            self.success_message = _(
+                'datamanagement:messages:deleted_participant'
+            )
+        else:
             self.success_message = _('datamanagement:messages:refused_deletion')
-            return
 
-        log_to_auditlog(
-            Event.DELETE_DATA,
-            "Deleted participant '{}'".format(self.participant),
-            self.request.user,
-            UserType.ADMIN,
-        )
-
-        # Delete the account as well, unless the account is also a leader
-        if self.participant.api_user and not self.participant.api_user.leader:
-            self.participant.api_user.delete()
-
-        self.participant.delete()
-
-        self.success_message = _('datamanagement:messages:deleted_participant')
 
     @cached_property
     def participant(self):
@@ -115,13 +103,7 @@ class DeleteInvitesView(braces.LoginRequiredMixin,
                         RedirectActionView):
 
     def action(self, request):
-        log_to_auditlog(
-            Event.DELETE_DATA,
-            "Deleted invites for experiment '{}'".format(self.experiment),
-            self.request.user,
-            UserType.ADMIN,
-        )
-        delete_invites(self.experiment)
+        delete_invites(self.experiment, self.request.user)
 
     @cached_property
     def experiment(self):
@@ -142,13 +124,7 @@ class DeleteCommentsView(braces.LoginRequiredMixin,
                          RedirectSuccessMessageMixin,
                          RedirectActionView):
     def action(self, request):
-        log_to_auditlog(
-            Event.DELETE_DATA,
-            "Deleted all comments for experiment '{}'".format(self.experiment),
-            self.request.user,
-            UserType.ADMIN,
-        )
-        delete_comments(self.experiment)
+        delete_comments(self.experiment, self.request.user)
 
     @cached_property
     def experiment(self):

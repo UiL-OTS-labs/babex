@@ -153,7 +153,7 @@ DATABASES = {
     'old': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-            'user': 'root',
+            'user': 'ppn',
             'password': 'kipsate',
             'db': 'ppn_old',
         }
@@ -185,7 +185,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
-    'main.hashers.PBKDF2WrappedMD5PasswordHasher',
+    'uil.core.hashers.PBKDF2WrappedMD5PasswordHasher',
 ]
 
 # Internationalization
@@ -242,7 +242,7 @@ MENU_HIDE_EMPTY = False
 
 AUDIT_LOG_ENABLE = True
 
-try:
-    from .ldap_settings import *
-except ImportError:
-    print('Proceeding without LDAP settings')
+# try:
+#     from .ldap_settings import *
+# except ImportError:
+#     print('Proceeding without LDAP settings')

@@ -168,10 +168,12 @@
             {% for appointment in participant.appointments.all %}
                 <tr>
                     <td>
-                        {{ appointment.timeslot.experiment }}
+                        {{ appointment.experiment }}
                     </td>
                     <td>
-                        {{ appointment.timeslot.datetime|date:"Y-m-d H:i" }}
+                        {% if appointment.timeslot %}
+                            {{ appointment.timeslot.datetime|date:"Y-m-d H:i" }}
+                        {% endif %}
                     </td>
                     <td>
                         {{ appointment.place }}

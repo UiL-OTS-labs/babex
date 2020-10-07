@@ -4,6 +4,8 @@ from typing import List, Tuple
 
 from datamanagement.utils.common import get_threshold_years_ago
 from participants.models import Participant
+from auditlog.utils.log import log as log_to_auditlog
+from auditlog.enums import Event, UserType
 
 
 def get_participants_with_appointments() -> List[Tuple[Participant, datetime, int]]:
@@ -11,19 +13,17 @@ def get_participants_with_appointments() -> List[Tuple[Participant, datetime, in
     threshold = get_threshold_years_ago('participants_with_appointment')
 
     for participant in Participant.objects.filter(
-        appointments__timeslot__datetime__lte=threshold
+        appointments__creation_date__lte=threshold,
     ).distinct():
         newest_appointment = participant.appointments.order_by(
-            '-timeslot__datetime'
+            '-creation_date'
         ).first()
 
-        print(newest_appointment)
-
-        if newest_appointment.timeslot.datetime < threshold:
+        if newest_appointment.creation_date < threshold:
             out.append(
                 (
                     participant,
-                    newest_appointment.timeslot.datetime,
+                    newest_appointment.creation_date,
                     participant.appointments.count(),
                  )
             )
@@ -36,3 +36,23 @@ def get_participants_without_appointments() -> List[Participant]:
         appointments=None,
         created__lte=get_threshold_years_ago('participants_without_appointment')
     ))
+
+
+def delete_participant(participant: Participant, user) -> bool:
+    if participant not in get_participants_without_appointments():
+        return False
+
+    log_to_auditlog(
+        Event.DELETE_DATA,
+        "Deleted participant '{}'".format(participant),
+        user,
+        UserType.ADMIN,
+    )
+
+    # Delete the account as well, unless the account is also a leader
+    if participant.api_user and not participant.api_user.leader:
+        participant.api_user.delete()
+
+    participant.delete()
+
+    return True
