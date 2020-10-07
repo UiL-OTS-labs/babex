@@ -1,12 +1,14 @@
 from enum import Enum
 
 from django.conf import settings
+from uil.core.utils.mail import send_template_email
+
 from api.auth.models import ApiUser, ApiGroup, UserToken
 from api.utils import get_reset_links
 from comments.utils import add_system_comment
 from leaders.utils import _get_tomorrow
 from participants.models import Participant
-from main.utils import send_template_email, get_supreme_admin
+from main.utils import get_supreme_admin
 from participants.utils import get_mailinglist_unsubscribe_url
 
 SYSTEM_MESSAGES = {

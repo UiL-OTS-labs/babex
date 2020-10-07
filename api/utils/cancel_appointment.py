@@ -1,11 +1,11 @@
 from datetime import datetime, timedelta
 
 from django.conf import settings
+from uil.core.utils.mail import send_template_email
 
 from comments.utils import add_system_comment
 from experiments.models import Appointment
-from main.utils import get_supreme_admin, send_template_email, \
-    get_register_link
+from main.utils import get_supreme_admin, get_register_link
 from participants.utils import get_mailinglist_unsubscribe_url
 
 

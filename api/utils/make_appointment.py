@@ -14,13 +14,14 @@ from django.conf import settings
 from django.core.exceptions import SuspiciousOperation
 from django.core.validators import ValidationError, validate_email
 from django.utils.dateparse import parse_date
+from uil.core.utils.mail import send_template_email
 
 from comments.utils import add_system_comment
 from experiments.models import Appointment, DefaultCriteria, Experiment, \
     TimeSlot
 from experiments.utils.exclusion import build_exclusion_filters, \
     check_default_criteria, should_exclude_by_age
-from main.utils import get_supreme_admin, send_template_email
+from main.utils import get_supreme_admin
 from participants.models import CriterionAnswer, Participant
 from .common import x_or_else
 

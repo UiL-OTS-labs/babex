@@ -2,9 +2,9 @@ from typing import Tuple
 import urllib.parse as parse
 
 from django.conf import settings
+from uil.core.utils.mail import send_template_email
 
 from api.auth.models import ApiUser
-from main.utils import send_template_email
 from participants.models import Participant
 
 

@@ -5,10 +5,10 @@ import urllib.parse as parse
 from django.conf import settings
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
+from uil.core.utils.mail import send_personalised_mass_mail
 
 from experiments.models import Experiment, Invitation
-from main.utils import get_supreme_admin, send_personalised_mass_mail, \
-    get_register_link
+from main.utils import get_supreme_admin, get_register_link
 from participants.models import Participant
 from participants.utils import get_mailinglist_unsubscribe_url
 

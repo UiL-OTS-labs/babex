@@ -2,13 +2,13 @@ import urllib.parse as parse
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from uil.core.utils.mail import send_template_email
 
 import auditlog.utils.log as auditlog
 from api.auth.models import ApiUser
 from auditlog.enums import Event, UserType
 from experiments.models import Appointment, Experiment
-from main.utils import get_supreme_admin, send_template_email, \
-    get_register_link
+from main.utils import get_supreme_admin, get_register_link
 
 
 def unsubscribe_participant(appointment_pk: int,
