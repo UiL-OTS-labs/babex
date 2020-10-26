@@ -5,8 +5,10 @@ from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 import urllib.parse as parse
 
+from uil.core.utils.mail import send_template_email
+
 from experiments.models import Experiment, TimeSlot
-from main.utils import get_supreme_admin, send_template_email
+from main.utils import get_supreme_admin
 from participants.models import Participant
 
 CANCEL_LINK_REGEX = r'{cancel_link(?::\"(.*)\")?}'
