@@ -1,4 +1,5 @@
 Django>=2.2,<3.0
+django-axes
 django-braces
 django-csp
 django-simple-menu

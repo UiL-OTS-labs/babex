@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'axes',
 
     # Django extensions
     'django_extensions',
@@ -75,9 +76,15 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'axes.middleware.AxesMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'csp.middleware.CSPMiddleware',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesBackend',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 if DEBUG and ENABLE_DEBUG_TOOLBAR:
@@ -221,6 +228,11 @@ SECURE_SSL_REDIRECT = not DEBUG
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 60 * 60 * 12  # 12 hours
+
+AXES_LOCKOUT_TEMPLATE = 'main/login_lockout.html'
+AXES_RESET_ON_SUCCESS = True
+AXES_USE_USER_AGENT = True
+AXES_COOLOFF_TIME = 1
 
 # Django CSP
 # http://django-csp.readthedocs.io/en/latest/index.html

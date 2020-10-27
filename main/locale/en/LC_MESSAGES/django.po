@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-14 12:59+0000\n"
+"POT-Creation-Date: 2020-10-27 11:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -105,6 +105,17 @@ msgstr "Actions"
 #: main/templates/main/index.html:43
 msgid "main:home:menu"
 msgstr "Menu"
+
+#: main/templates/main/login_lockout.html:9
+#: main/templates/main/login_lockout.html:17
+msgid "main:login_lockout:header"
+msgstr "Login disabled"
+
+#: main/templates/main/login_lockout.html:20
+msgid "main:login_lockout:info_text"
+msgstr ""
+"Due to many failed login attempts, logging in has been disabled for this "
+"computer for one hour."
 
 #: main/templates/registration/logged_out.html:8
 msgid "main:logged_out_title"
