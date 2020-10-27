@@ -71,13 +71,17 @@ class ParticipantDeleteView(braces.LoginRequiredMixin,
     model = Participant
 
     def delete(self, request, *args, **kwargs):
-        message = "Admin deleted participant '{}'".format(self.get_object())
+        participant = self.get_object()
+
+        message = "Admin deleted participant '{}'".format(participant)
         auditlog.log(
             Event.DELETE_DATA,
             message,
             self.request.user,
             UserType.ADMIN
         )
+
+        participant.appointments.all().delete()
 
         return super().delete(request, *args, **kwargs)
 
