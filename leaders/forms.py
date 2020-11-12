@@ -65,7 +65,7 @@ class LeaderCreateForm(forms.Form):
 
         existing_user = ApiUser.objects.get_by_email(data)
 
-        if existing_user:
+        if existing_user and existing_user.is_leader:
             raise forms.ValidationError(
                 _('leader:form:email:error:user_exists'))
 
