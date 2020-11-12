@@ -82,6 +82,9 @@ MISC_INVALID_MESSAGES = {
                           "contact op met {}",
     'full':               "Aanmelding mislukt: sorry, dit experiment is "
                           "inmiddels vol!",
+    'already_registered': "Volgens onze gegevens heb je je al opgegeven voor "
+                          "dit experiment. Als je denkt dat dit niet klopt, "
+                          "neem dan even contact op met {}."
 }
 
 
@@ -106,6 +109,12 @@ def register_participant(data: dict, experiment: Experiment) -> Tuple[bool,
     if not participant.capable:
         return False, False, [
             _format_message(MISC_INVALID_MESSAGES['incapable'])
+        ]
+
+    # Participants should not be allowed to register twice
+    if experiment.appointments.filter(participant=participant).exists():
+        return False, False, [
+            _format_message(MISC_INVALID_MESSAGES['already_registered'])
         ]
 
     invalid_default_criteria, \
