@@ -8,14 +8,13 @@ register = Library()
 
 
 class ThresholdNode(Node):
-    _thresholds = get_thresholds_model()
     _years = _('datamanagement:global:years')
     _months = _('datamanagement:global:months')
     _weeks = _('datamanagement:global:weeks')
     _days = _('datamanagement:global:days')
 
     def __init__(self, threshold, asvar):
-        self.threshold = getattr(self._thresholds, str(threshold), None)
+        self.threshold = getattr(get_thresholds_model(), str(threshold), None)
         self.asvar = asvar
 
     def render(self, context):
