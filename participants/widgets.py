@@ -32,6 +32,9 @@ class ParticipantSexWidget(Widget):
     def value_from_datadict(self, data, files, name):
         value = data.get(name)
 
+        if value == 'None':
+            return None
+
         if value == "OTHER":
             value = data.get(name + '_other')
 
