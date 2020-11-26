@@ -80,6 +80,9 @@ class Appointment(models.Model):
 
     @cached_property
     def place(self):
+        if not self.timeslot:
+            return None
+
         places = self.timeslot.places
 
         for place in places:

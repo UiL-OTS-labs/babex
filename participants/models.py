@@ -46,11 +46,6 @@ class Participant(models.Model):
         ('R', _('participant:attribute:handedness:righthanded')),
     )
 
-    SEX = (
-        ('M', _('participant:attribute:sex:male')),
-        ('F', _('participant:attribute:sex:female')),
-    )
-
     SOCIAL_STATUS = (
         ('S', _('participant:attribute:social_role:student')),
         ('O', _('participant:attribute:social_role:other')),
@@ -101,7 +96,6 @@ class Participant(models.Model):
 
     sex = e_fields.EncryptedTextField(
         _('participant:attribute:sex'),
-        choices=SEX,
         blank=True,
         null=True,
     )
@@ -159,6 +153,19 @@ class Participant(models.Model):
             self.birth_date.month, self.birth_date.day))
 
         return -1
+
+    def get_sex_display(self):
+        mappings = {
+            "M": _('participant:attribute:sex:male'),
+            "F": _('participant:attribute:sex:female'),
+            "PNTA": _('participant:attribute:sex:prefer_not_to_answer'),
+            None: None
+        }
+
+        if self.sex in mappings:
+            return mappings[self.sex]
+
+        return self.sex
 
     def __str__(self):
         name = self.fullname

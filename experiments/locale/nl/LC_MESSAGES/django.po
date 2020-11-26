@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-14 12:59+0000\n"
+"POT-Creation-Date: 2020-11-26 13:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -171,58 +171,57 @@ msgstr "Extra instructies"
 msgid "experiment:attribute:confirmation_email"
 msgstr "Bevestigingsmail text"
 
-#: experiments/models/experiment_models.py:71
+#: experiments/models/experiment_models.py:70
 msgid "experiment:attribute:confirmation_email:help_text"
 msgstr ""
-"Er zijn enkele variabelen:<br/>"
-"<code>{experiment_name}</code> De naam van het experiment<br/>"
-"<code>{experiment_location}</code> De locatie van het experiment (indien ingesteld)<br/>"
-"<code>{participant_name}</code> De naam van de participant<br/>"
-"<code>{date}</code> De datum van het gekozen timeslot<br/>"
-"<code>{time}</code> De tijd van het gekozen timeslot<br/>"
-"<code>{leader_name}</code> De naam van de proefleider<br/>"
-"<code>{leader_email}</code> De e-mail van de proefleider<br/>"
-"<code>{leader_phonenumber}</code> Het telefoonnummer van de proefleider<br/>"
+"Er zijn enkele variabelen:<br/><code>{experiment_name}</code> De naam van "
+"het experiment<br/><code>{experiment_location}</code> De locatie van het "
+"experiment (indien ingesteld)<br/><code>{participant_name}</code> De naam "
+"van de participant<br/><code>{date}</code> De datum van het gekozen "
+"timeslot<br/><code>{time}</code> De tijd van het gekozen timeslot<br/"
+"><code>{leader_name}</code> De naam van de proefleider<br/"
+"><code>{leader_email}</code> De e-mail van de proefleider<br/"
+"><code>{leader_phonenumber}</code> Het telefoonnummer van de proefleider<br/>"
 
-#: experiments/models/experiment_models.py:78
+#: experiments/models/experiment_models.py:76
 msgid "experiment:attribute:location"
 msgstr "Locatie"
 
-#: experiments/models/experiment_models.py:85
+#: experiments/models/experiment_models.py:83
 msgid "experiment:attribute:use_timeslots"
 msgstr "Gebruik timeslots"
 
-#: experiments/models/experiment_models.py:87
+#: experiments/models/experiment_models.py:85
 msgid "experiment:attribute:use_timeslots:help_text"
 msgstr ""
 "Indien dit aan staat, moeten participanten voor een tijdslot inschrijven.Als "
 "dit uit staat, schrijven participanten alleen in voor een experiment. Dit is "
 "bedoeld voor web-experimenten, die een participant thuis kan uitvoeren."
 
-#: experiments/models/experiment_models.py:91
+#: experiments/models/experiment_models.py:89
 msgid "experiment:attribute:default_max_places"
 msgstr "Standaard aantal plekken. "
 
-#: experiments/models/experiment_models.py:95
+#: experiments/models/experiment_models.py:93
 msgid "experiment:attribute:default_max_places:help_text"
 msgstr ""
 "Standaard aantal plekken in een timeslot. Dit kan later per slot veranderd "
 "worden. Als een experiment geen timeslots gebruikt, is dit het max aantal "
 "participanten voor dit experiment."
 
-#: experiments/models/experiment_models.py:100
+#: experiments/models/experiment_models.py:98
 msgid "experiment:attribute:open"
 msgstr "Open voor participanten"
 
-#: experiments/models/experiment_models.py:102
+#: experiments/models/experiment_models.py:100
 msgid "experiment:attribute:open:help_text"
 msgstr "Bepaald of participanten zich kunnen opgeven voor dit experiment."
 
-#: experiments/models/experiment_models.py:106
+#: experiments/models/experiment_models.py:104
 msgid "experiment:attribute:public"
 msgstr "Openbaar"
 
-#: experiments/models/experiment_models.py:108
+#: experiments/models/experiment_models.py:106
 msgid "experiment:attribute:public:help_text"
 msgstr ""
 "Bepaald of dit experiment op de voorpagina komt te staan. Indien dit is "
@@ -230,42 +229,42 @@ msgstr ""
 "link hebben. Dit is voornamelijk bedoeld voor vervolg experimenten waarbij "
 "alleen participanten uit de originele studie mee mogen doen.."
 
-#: experiments/models/experiment_models.py:112
+#: experiments/models/experiment_models.py:110
 msgid "experiment:attribute:participants_visible"
 msgstr "Participanten zichtbaar"
 
-#: experiments/models/experiment_models.py:114
+#: experiments/models/experiment_models.py:112
 msgid "experiment:attribute:participants_visible:help_text"
 msgstr ""
 "Bepaald of proefleiders de persoonlijke informatie van participanten kunnen "
 "zien."
 
-#: experiments/models/experiment_models.py:119
+#: experiments/models/experiment_models.py:117
 msgid "experiment:attribute:excluded_experiments"
 msgstr "Buitengesloten experimenten"
 
-#: experiments/models/experiment_models.py:121
+#: experiments/models/experiment_models.py:119
 msgid "experiment:attribute:excluded_experiments:help_text"
 msgstr ""
 "Experimenten waar een participant niet aan mee heeft mogen doen voor dit "
 "experiment. <br/>Je kan zoeken door de lijst door in dit veld te typen, als "
 "je een experiment selecteert zal hij als een blokje verschijnen in het veld."
 
-#: experiments/models/experiment_models.py:126
+#: experiments/models/experiment_models.py:124
 msgid "experiment:attribute:leader"
 msgstr "Proefleider"
 
-#: experiments/models/experiment_models.py:130
+#: experiments/models/experiment_models.py:128
 msgid "experiment:attribute:leader:help_text"
 msgstr ""
 "De hoofd-proefleider. Deze proefleider zal getoond worden als het "
 "contactpersoon op de experiment pagina."
 
-#: experiments/models/experiment_models.py:135
+#: experiments/models/experiment_models.py:133
 msgid "experiment:attribute:additional_leaders"
 msgstr "Extra proefleiders"
 
-#: experiments/models/experiment_models.py:138
+#: experiments/models/experiment_models.py:136
 msgid "experiment:attribute:additional_leaders:help_text"
 msgstr ""
 "Enige andere proefleiders van dit experiment. Indien opgegeven kunnen deze "
@@ -764,8 +763,8 @@ msgstr " "
 msgid "timeslots:day"
 msgstr "Dag"
 
-#: experiments/templates/experiments/participants.html:55
-#: experiments/templates/experiments/participants.html:187
+#: experiments/templates/experiments/participants.html:54
+#: experiments/templates/experiments/participants.html:186
 msgid "experiments:participants:place"
 msgstr "WP"
 

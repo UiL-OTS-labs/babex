@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-14 12:59+0000\n"
+"POT-Creation-Date: 2020-11-26 13:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,82 +45,89 @@ msgid "participant:attribute:handedness:righthanded"
 msgstr "Rechtshandig"
 
 #: participants/models.py:50
-msgid "participant:attribute:sex:male"
-msgstr "Man"
-
-#: participants/models.py:51
-msgid "participant:attribute:sex:female"
-msgstr "Vrouw"
-
-#: participants/models.py:55
 msgid "participant:attribute:social_role:student"
 msgstr "Student"
 
-#: participants/models.py:56
+#: participants/models.py:51
 msgid "participant:attribute:social_role:other"
 msgstr "Anders"
 
-#: participants/models.py:60
+#: participants/models.py:55
 msgid "participant:attribute:email"
 msgstr "E-mailadres"
 
-#: participants/models.py:64
+#: participants/models.py:59
 msgid "participant:attribute:name"
 msgstr "Naam"
 
-#: participants/models.py:70
+#: participants/models.py:65
 msgid "participant:attribute:language"
 msgstr "Taal"
 
-#: participants/models.py:74
+#: participants/models.py:69
 msgid "participant:attribute:dyslexic"
 msgstr "Dyslexie"
 
-#: participants/models.py:78
+#: participants/models.py:73
 msgid "participant:attribute:birth_date"
 msgstr "Geboortedatum"
 
-#: participants/models.py:84
+#: participants/models.py:79
 msgid "participant:attribute:multilingual"
 msgstr "Meertalig"
 
-#: participants/models.py:90
+#: participants/models.py:85
 msgid "participant:attribute:phonenumber"
 msgstr "Telefoonnummer"
 
-#: participants/models.py:96
+#: participants/models.py:91
 msgid "participant:attribute:handedness"
 msgstr "Left/rechtshandig"
 
-#: participants/models.py:103
+#: participants/models.py:98
 msgid "participant:attribute:sex"
 msgstr "Geslachte"
 
-#: participants/models.py:110
+#: participants/models.py:104
 msgid "participant:attribute:social_status"
 msgstr "Sociale rol"
 
-#: participants/models.py:117
+#: participants/models.py:111
 msgid "participant:attribute:email_subscription"
 msgstr "Op maillijst"
 
-#: participants/models.py:122
+#: participants/models.py:116
 msgid "participant:attribute:capable"
 msgstr "Bekwaam"
 
-#: participants/models.py:134
+#: participants/models.py:128
 msgid "participant:attribute:created"
 msgstr "Aangemaakt op"
 
-#: participants/models.py:143 participants/models.py:167
+#: participants/models.py:137 participants/models.py:174
 msgid "participant:name:unknown"
 msgstr "naam onbekend"
 
-#: participants/models.py:174
+#: participants/models.py:159
+#: participants/templates/widgets/participant_sex_widget.html:17
+msgid "participant:attribute:sex:male"
+msgstr "Man"
+
+#: participants/models.py:160
+#: participants/templates/widgets/participant_sex_widget.html:23
+msgid "participant:attribute:sex:female"
+msgstr "Vrouw"
+
+#: participants/models.py:161
+#: participants/templates/widgets/participant_sex_widget.html:35
+msgid "participant:attribute:sex:prefer_not_to_answer"
+msgstr "Antwoordde liever niet"
+
+#: participants/models.py:181
 msgid "secondary_email:attribute:email"
 msgstr "Secundaire e-mailadres"
 
-#: participants/models.py:192
+#: participants/models.py:199
 msgid "criterion_answer:attribute:answer"
 msgstr "Antwoord"
 
@@ -264,6 +271,6 @@ msgstr "Participant aangepast!"
 msgid "participants:messages:deleted_participant"
 msgstr "Participant verwijderd!"
 
-#: participants/views.py:112
+#: participants/views.py:116
 msgid "participants:messages:merged_participants"
 msgstr "Participanten samengevoegd!"

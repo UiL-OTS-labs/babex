@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from django.utils.text import gettext_lazy as _
 
 from .models import CriterionAnswer, Participant
-from .widgets import ParticipantLanguageWidget
+from .widgets import ParticipantLanguageWidget, ParticipantSexWidget
 
 
 class ParticipantForm(forms.ModelForm):
@@ -19,7 +19,7 @@ class ParticipantForm(forms.ModelForm):
             'language': ParticipantLanguageWidget,
             'phonenumber': forms.TextInput,
             'handedness': forms.RadioSelect,
-            'sex': forms.RadioSelect,
+            'sex': ParticipantSexWidget,
             'social_status': forms.RadioSelect,
 
         }

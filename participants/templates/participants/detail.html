@@ -176,7 +176,9 @@
                         {% endif %}
                     </td>
                     <td>
-                        {{ appointment.place }}
+                        {% if appointment.timeslot %}
+                            {{ appointment.place }}
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}

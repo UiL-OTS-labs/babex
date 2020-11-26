@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-14 12:59+0000\n"
+"POT-Creation-Date: 2020-11-26 13:32+0000\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -173,58 +173,57 @@ msgstr "Additional Instructions"
 msgid "experiment:attribute:confirmation_email"
 msgstr "Confirmation mail text"
 
-#: experiments/models/experiment_models.py:71
+#: experiments/models/experiment_models.py:70
 msgid "experiment:attribute:confirmation_email:help_text"
 msgstr ""
-"There are several variables you can use:<br/>"
-"<code>{experiment_name}</code> The name of the experiment<br/>"
-"<code>{experiment_location}</code> The location of the experiment (if set)<br/>"
-"<code>{participant_name}</code> The name of the participant<br/>"
-"<code>{date}</code> The date of the chosen timeslot<br/>"
-"<code>{time}</code> The time of the chosen timeslot<br/>"
-"<code>{leader_name}</code> The name of the leader<br/>"
-"<code>{leader_email}</code> The e-mail of the leader<br/>"
-"<code>{leader_phonenumber}</code> The phonenumber of the leader<br/>"
+"There are several variables you can use:<br/><code>{experiment_name}</code> "
+"The name of the experiment<br/><code>{experiment_location}</code> The "
+"location of the experiment (if set)<br/><code>{participant_name}</code> The "
+"name of the participant<br/><code>{date}</code> The date of the chosen "
+"timeslot<br/><code>{time}</code> The time of the chosen timeslot<br/"
+"><code>{leader_name}</code> The name of the leader<br/><code>{leader_email}</"
+"code> The e-mail of the leader<br/><code>{leader_phonenumber}</code> The "
+"phonenumber of the leader<br/>"
 
-#: experiments/models/experiment_models.py:78
+#: experiments/models/experiment_models.py:76
 msgid "experiment:attribute:location"
 msgstr "Location"
 
-#: experiments/models/experiment_models.py:85
+#: experiments/models/experiment_models.py:83
 msgid "experiment:attribute:use_timeslots"
 msgstr "Use timeslots"
 
-#: experiments/models/experiment_models.py:87
+#: experiments/models/experiment_models.py:85
 msgid "experiment:attribute:use_timeslots:help_text"
 msgstr ""
 "If checked, a participant must choose a timeslot when registering for an "
 "experiment. When unchecked, they only have to register for the experiment.  "
 "This is intended for experiments that a participant can do from home."
 
-#: experiments/models/experiment_models.py:91
+#: experiments/models/experiment_models.py:89
 msgid "experiment:attribute:default_max_places"
 msgstr "Default number of places."
 
-#: experiments/models/experiment_models.py:95
+#: experiments/models/experiment_models.py:93
 msgid "experiment:attribute:default_max_places:help_text"
 msgstr ""
 "Determines the default number of places for the timeslots. Can be overridden "
 "on a per-slot basis. If the experiment doesn't use timeslots, this is the "
 "max number of participants that can take part in this experiment."
 
-#: experiments/models/experiment_models.py:100
+#: experiments/models/experiment_models.py:98
 msgid "experiment:attribute:open"
 msgstr "Open"
 
-#: experiments/models/experiment_models.py:102
+#: experiments/models/experiment_models.py:100
 msgid "experiment:attribute:open:help_text"
 msgstr "Determines if the experiment is open for new participants."
 
-#: experiments/models/experiment_models.py:106
+#: experiments/models/experiment_models.py:104
 msgid "experiment:attribute:public"
 msgstr "Public"
 
-#: experiments/models/experiment_models.py:108
+#: experiments/models/experiment_models.py:106
 msgid "experiment:attribute:public:help_text"
 msgstr ""
 "Determines if the experiment should be advertised on the front page. If not, "
@@ -232,20 +231,20 @@ msgstr ""
 "used for follow-up experiments where only participants who have participated "
 "in the original experiment should register."
 
-#: experiments/models/experiment_models.py:112
+#: experiments/models/experiment_models.py:110
 msgid "experiment:attribute:participants_visible"
 msgstr "Participants Visible"
 
-#: experiments/models/experiment_models.py:114
+#: experiments/models/experiment_models.py:112
 msgid "experiment:attribute:participants_visible:help_text"
 msgstr ""
 "If unchecked, participant data will be hidden from the experiment leader(s)."
 
-#: experiments/models/experiment_models.py:119
+#: experiments/models/experiment_models.py:117
 msgid "experiment:attribute:excluded_experiments"
 msgstr "Excluded experiment"
 
-#: experiments/models/experiment_models.py:121
+#: experiments/models/experiment_models.py:119
 msgid "experiment:attribute:excluded_experiments:help_text"
 msgstr ""
 "Any experiments that should exclude a participant if they have been a "
@@ -253,21 +252,21 @@ msgstr ""
 "search through the list. Once selected, the experiment should show up in the "
 "field as a box."
 
-#: experiments/models/experiment_models.py:126
+#: experiments/models/experiment_models.py:124
 msgid "experiment:attribute:leader"
 msgstr "Leader"
 
-#: experiments/models/experiment_models.py:130
+#: experiments/models/experiment_models.py:128
 msgid "experiment:attribute:leader:help_text"
 msgstr ""
 "The main experiment leader, who will be displayed as the contact on the "
 "experiment page."
 
-#: experiments/models/experiment_models.py:135
+#: experiments/models/experiment_models.py:133
 msgid "experiment:attribute:additional_leaders"
 msgstr "Additional leaders"
 
-#: experiments/models/experiment_models.py:138
+#: experiments/models/experiment_models.py:136
 msgid "experiment:attribute:additional_leaders:help_text"
 msgstr ""
 "Any additional leaders for this experiment. They will be able to login and "
@@ -765,8 +764,8 @@ msgstr " "
 msgid "timeslots:day"
 msgstr "Day"
 
-#: experiments/templates/experiments/participants.html:55
-#: experiments/templates/experiments/participants.html:187
+#: experiments/templates/experiments/participants.html:54
+#: experiments/templates/experiments/participants.html:186
 msgid "experiments:participants:place"
 msgstr "WP"
 

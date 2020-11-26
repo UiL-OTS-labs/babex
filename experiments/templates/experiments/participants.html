@@ -162,7 +162,7 @@
                                 {{ appointment.participant.handedness|default_if_none:"" }}
                             </td>
                             <td>
-                                {{ appointment.participant.sex|default_if_none:"" }}
+                                {{ appointment.participant.get_sex_display|default_if_none:"" }}
                             </td>
                             <td>
                                 {{ appointment.participant.get_social_status_display|default_if_none:"" }}

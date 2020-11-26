@@ -79,6 +79,7 @@ MIDDLEWARE = [
     'axes.middleware.AxesMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'uil.core.middleware.ThreadLocalUserMiddleware',
     'csp.middleware.CSPMiddleware',
 ]
 
@@ -237,6 +238,8 @@ AXES_COOLOFF_TIME = 1
 # Django CSP
 # http://django-csp.readthedocs.io/en/latest/index.html
 CSP_REPORT_ONLY = False
+CSP_UPGRADE_INSECURE_REQUESTS = not DEBUG
+CSP_INCLUDE_NONCE_IN = ['script-src']
 
 CSP_DEFAULT_SRC = ["'self'", ]
 CSP_SCRIPT_SRC = ["'self'", ]

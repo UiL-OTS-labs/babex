@@ -1,0 +1,39 @@
+{% load i18n %}
+<script nonce="{{ request.csp_nonce }}">
+    $(function () {
+        $('input[name="{{ widget.name }}_other"]').click(function () {
+            $('#id_sex_2').prop('checked', true);
+        });
+        $('input[name="{{ widget.name }}"]').click(function () {
+            $('input[name="{{ widget.name }}_other"]').val('');
+        });
+    });
+</script>
+<ul id="id_sex">
+
+    <li>
+        <label for="id_sex_0">
+            <input type="radio" name="{{ widget.name }}" value="M" id="id_sex_0" required="" {% if widget.value == 'M' %}checked="checked"{% endif %}>
+            {% trans 'participant:attribute:sex:male' %}
+        </label>
+    </li>
+    <li>
+        <label for="id_sex_1">
+            <input type="radio" name="{{ widget.name }}" value="F" id="id_sex_1" required="" {% if widget.value == 'F' %}checked="checked"{% endif %}>
+            {% trans 'participant:attribute:sex:female' %}
+        </label>
+    </li>
+    <li>
+        <label for="id_sex_2">
+            <input type="radio" name="{{ widget.name }}" value="OTHER" id="id_sex_2" required="" {% if widget.value == 'OTHER' %}checked="checked"{% endif %}>
+            <input name="{{ widget.name }}_other" id="id_sex_2_other" value="{{ widget.other_value|default_if_none:"" }}">
+        </label>
+    </li>
+    <li>
+        <label for="id_sex_3">
+            <input type="radio" name="{{ widget.name }}" value="PNTA" id="id_sex_3" required="" {% if widget.value == 'PNTA' %}checked="checked"{% endif %}>
+            {% trans 'participant:attribute:sex:prefer_not_to_answer' %}
+        </label>
+    </li>
+
+</ul>
