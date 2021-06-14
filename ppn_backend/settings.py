@@ -53,6 +53,7 @@ INSTALLED_APPS = [
 
     # local apps
     'uil.core',
+    'uil.vue',
     'api',
     'api.auth',
     'main',
@@ -158,15 +159,18 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME':   os.path.join(BASE_DIR, 'auditlog.sqlite3'),
     },
-    'old': {
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-            'user': 'ppn',
-            'password': 'kipsate',
-            'db': 'ppn_old',
-        }
-    }
+    # 'old': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'OPTIONS': {
+    #         'user': 'ppn',
+    #         'password': 'kipsate',
+    #         'db': 'ppn_old',
+    #     }
+    # }
 }
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 
 DATABASE_ROUTERS = [
     'ppn_backend.db_router.DatabaseRouter',

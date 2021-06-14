@@ -5,7 +5,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count, Q
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy as reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
 from main.utils import is_ldap_enabled

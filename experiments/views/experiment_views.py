@@ -5,7 +5,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count, F, Q, Sum
 from django.urls import reverse_lazy as reverse
 from django.utils.http import is_safe_url
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views import generic
 from uil.core.views import RedirectActionView
 from uil.core.views.mixins import DeleteSuccessMessageMixin, \

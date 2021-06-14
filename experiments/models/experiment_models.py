@@ -1,8 +1,7 @@
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.db.models import Count, F, Func, fields
-from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from leaders.models import Leader
 from .location_models import Location
