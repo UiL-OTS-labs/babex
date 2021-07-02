@@ -42,7 +42,7 @@ def create_leader(name: str, email: str, phonenumber: str,
     leader.name = name
     leader.phonenumber = phonenumber
 
-    existing_api_user = ApiUser.objects.filter(email=email)
+    existing_api_user = ApiUser.objects.get_by_email(email)
 
     if existing_api_user:
         api_user = existing_api_user[0]
@@ -96,7 +96,7 @@ def create_ldap_leader(name: str, email: str, phonenumber: str) -> Leader:
     leader.name = name
     leader.phonenumber = phonenumber
 
-    existing_api_user = ApiUser.objects.filter(email=email)
+    existing_api_user = ApiUser.objects.get_by_email(email)
 
     if existing_api_user:
         api_user = existing_api_user[0]

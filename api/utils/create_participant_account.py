@@ -69,7 +69,7 @@ def create_participant_account(email: str,
             _switch_main_email(participant, email)
 
     # Create a queryset to check if this email is already used
-    api_user_queryset = ApiUser.objects.filter(email=email)
+    api_user = ApiUser.objects.get_by_email(email)
 
     # If this participant already has an attached account
     if participant.api_user:
@@ -78,9 +78,9 @@ def create_participant_account(email: str,
 
     # Check if we have an existing api user with the same email (can happen
     # with leaders for example)
-    elif api_user_queryset.exists():
+    elif api_user:
         # If there already is an account with this email
-        user = api_user_queryset.get()
+        user = api_user
 
         # Check if this account is already a participant
         if user.is_participant:
