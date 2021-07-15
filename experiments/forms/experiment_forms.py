@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from ..models import Experiment
 
@@ -11,6 +12,10 @@ class ExperimentForm(forms.ModelForm):
             'name':         forms.TextInput,
             'duration':     forms.TextInput,
             'compensation': forms.TextInput,
+            'use_timeslots': forms.RadioSelect(choices=(
+                (True, _("experiment:form:use_timeslots:true")),
+                (False, _("experiment:form:use_timeslots:false")),
+            )),
             'task_description': forms.Textarea({
                 'rows': 7,
             }),

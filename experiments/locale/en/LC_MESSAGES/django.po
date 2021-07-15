@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-26 13:32+0000\n"
+"POT-Creation-Date: 2021-07-15 08:47+0000\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -49,6 +49,14 @@ msgstr "Correct value"
 #: experiments/templates/criteria/specific_list.html:143
 msgid "experiment_criterion:attribute:message_failed"
 msgstr "Message when failed"
+
+#: experiments/forms/experiment_forms.py:16
+msgid "experiment:form:use_timeslots:true"
+msgstr "On location"
+
+#: experiments/forms/experiment_forms.py:17
+msgid "experiment:form:use_timeslots:false"
+msgstr "Online"
 
 #: experiments/models/appointment_models.py:18
 msgid "time_slot:attribute:datetime"
@@ -149,31 +157,31 @@ msgstr "What should the upper bound of the participant's age be?"
 msgid "default_criteria:attribute:max_age:help_text"
 msgstr "Set to -1 if this criterion doesn't matter"
 
-#: experiments/models/experiment_models.py:48
+#: experiments/models/experiment_models.py:47
 msgid "experiment:attribute:name"
 msgstr "Name"
 
-#: experiments/models/experiment_models.py:52
+#: experiments/models/experiment_models.py:51
 msgid "experiment:attribute:duration"
 msgstr "Duration"
 
-#: experiments/models/experiment_models.py:56
+#: experiments/models/experiment_models.py:55
 msgid "experiment:attribute:compensation"
 msgstr "Compensation"
 
-#: experiments/models/experiment_models.py:60
+#: experiments/models/experiment_models.py:59
 msgid "experiment:attribute:task_description"
 msgstr "Task description"
 
-#: experiments/models/experiment_models.py:64
+#: experiments/models/experiment_models.py:63
 msgid "experiment:attribute:additional_instructions"
 msgstr "Additional Instructions"
 
-#: experiments/models/experiment_models.py:69
+#: experiments/models/experiment_models.py:68
 msgid "experiment:attribute:confirmation_email"
 msgstr "Confirmation mail text"
 
-#: experiments/models/experiment_models.py:70
+#: experiments/models/experiment_models.py:69
 msgid "experiment:attribute:confirmation_email:help_text"
 msgstr ""
 "There are several variables you can use:<br/><code>{experiment_name}</code> "
@@ -185,45 +193,45 @@ msgstr ""
 "code> The e-mail of the leader<br/><code>{leader_phonenumber}</code> The "
 "phonenumber of the leader<br/>"
 
-#: experiments/models/experiment_models.py:76
+#: experiments/models/experiment_models.py:75
 msgid "experiment:attribute:location"
 msgstr "Location"
 
-#: experiments/models/experiment_models.py:83
+#: experiments/models/experiment_models.py:82
 msgid "experiment:attribute:use_timeslots"
-msgstr "Use timeslots"
+msgstr "Type"
 
-#: experiments/models/experiment_models.py:85
+#: experiments/models/experiment_models.py:84
 msgid "experiment:attribute:use_timeslots:help_text"
 msgstr ""
-"If checked, a participant must choose a timeslot when registering for an "
-"experiment. When unchecked, they only have to register for the experiment.  "
-"This is intended for experiments that a participant can do from home."
+"If 'on location' is selected, a participant must choose a timeslot when "
+"registering for an experiment. When 'online' is selected, they only have to "
+"register for the experiment.  "
 
-#: experiments/models/experiment_models.py:89
+#: experiments/models/experiment_models.py:88
 msgid "experiment:attribute:default_max_places"
 msgstr "Default number of places."
 
-#: experiments/models/experiment_models.py:93
+#: experiments/models/experiment_models.py:92
 msgid "experiment:attribute:default_max_places:help_text"
 msgstr ""
 "Determines the default number of places for the timeslots. Can be overridden "
 "on a per-slot basis. If the experiment doesn't use timeslots, this is the "
 "max number of participants that can take part in this experiment."
 
-#: experiments/models/experiment_models.py:98
+#: experiments/models/experiment_models.py:97
 msgid "experiment:attribute:open"
 msgstr "Open"
 
-#: experiments/models/experiment_models.py:100
+#: experiments/models/experiment_models.py:99
 msgid "experiment:attribute:open:help_text"
 msgstr "Determines if the experiment is open for new participants."
 
-#: experiments/models/experiment_models.py:104
+#: experiments/models/experiment_models.py:103
 msgid "experiment:attribute:public"
 msgstr "Public"
 
-#: experiments/models/experiment_models.py:106
+#: experiments/models/experiment_models.py:105
 msgid "experiment:attribute:public:help_text"
 msgstr ""
 "Determines if the experiment should be advertised on the front page. If not, "
@@ -231,20 +239,20 @@ msgstr ""
 "used for follow-up experiments where only participants who have participated "
 "in the original experiment should register."
 
-#: experiments/models/experiment_models.py:110
+#: experiments/models/experiment_models.py:109
 msgid "experiment:attribute:participants_visible"
 msgstr "Participants Visible"
 
-#: experiments/models/experiment_models.py:112
+#: experiments/models/experiment_models.py:111
 msgid "experiment:attribute:participants_visible:help_text"
 msgstr ""
 "If unchecked, participant data will be hidden from the experiment leader(s)."
 
-#: experiments/models/experiment_models.py:117
+#: experiments/models/experiment_models.py:116
 msgid "experiment:attribute:excluded_experiments"
 msgstr "Excluded experiment"
 
-#: experiments/models/experiment_models.py:119
+#: experiments/models/experiment_models.py:118
 msgid "experiment:attribute:excluded_experiments:help_text"
 msgstr ""
 "Any experiments that should exclude a participant if they have been a "
@@ -252,21 +260,21 @@ msgstr ""
 "search through the list. Once selected, the experiment should show up in the "
 "field as a box."
 
-#: experiments/models/experiment_models.py:124
+#: experiments/models/experiment_models.py:123
 msgid "experiment:attribute:leader"
 msgstr "Leader"
 
-#: experiments/models/experiment_models.py:128
+#: experiments/models/experiment_models.py:127
 msgid "experiment:attribute:leader:help_text"
 msgstr ""
 "The main experiment leader, who will be displayed as the contact on the "
 "experiment page."
 
-#: experiments/models/experiment_models.py:133
+#: experiments/models/experiment_models.py:132
 msgid "experiment:attribute:additional_leaders"
 msgstr "Additional leaders"
 
-#: experiments/models/experiment_models.py:136
+#: experiments/models/experiment_models.py:135
 msgid "experiment:attribute:additional_leaders:help_text"
 msgstr ""
 "Any additional leaders for this experiment. They will be able to login and "
@@ -528,7 +536,7 @@ msgstr "Additional Instructions"
 
 #: experiments/templates/experiments/detail_parts/info.html:53
 msgid "experiments:detail:info:use_timeslots"
-msgstr "Uses timeslots"
+msgstr "Location study"
 
 #: experiments/templates/experiments/detail_parts/info.html:56
 #: experiments/templates/experiments/detail_parts/info.html:72
