@@ -1,5 +1,5 @@
 import uuid
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from django.contrib.auth.hashers import check_password, make_password
 from django.db import models
@@ -109,9 +109,7 @@ class ApiUser(models.Model):
 
 def _get_date_2hours():
     tz = timezone(settings.TIME_ZONE)
-    dt = datetime.now(tz)
-    hour = dt.hour + 2
-    return dt.replace(hour=hour)
+    return datetime.now(tz) + timedelta(hours=2)
 
 
 class UserToken(models.Model):
