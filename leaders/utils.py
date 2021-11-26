@@ -165,6 +165,7 @@ def notify_new_ldap_leader(leader: Leader) -> None:
     context = {
         'name':             leader.name,
         'email':            leader.api_user.email,
+        'login_link':       get_login_link(),
     }
 
     send_template_email(
