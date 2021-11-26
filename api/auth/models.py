@@ -1,6 +1,7 @@
 import uuid
 from datetime import datetime, timedelta
 
+from django.contrib.auth import password_validation
 from django.contrib.auth.hashers import check_password, make_password
 from django.db import models
 
@@ -63,6 +64,17 @@ class ApiUser(models.Model):
         null=True
     )
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self._password = None
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self._password is not None:
+            password_validation.password_changed(self._password, self)
+            self._password = None
+
     @property
     def is_leader(self):
         return hasattr(self, 'leader')
@@ -77,6 +89,7 @@ class ApiUser(models.Model):
 
     def set_password(self, raw_password):
         self.password = make_password(raw_password)
+        self._password = raw_password
 
     def check_password(self, raw_password):
         """
