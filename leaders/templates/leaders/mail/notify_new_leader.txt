@@ -9,7 +9,7 @@ Login: {{ email }}>
 Klik op de volgende link om uw wachtwoord in te stellen:
 {{ link }}
 {% else %}
-Het wachtwoord dient u te krijgen van de adminstrator.
+Het wachtwoord krijg je van de adminstrator. Je kunt dan hier inloggen: {{ login_link }}
 {% endif %}
 
 {% if not has_password %}
@@ -22,13 +22,13 @@ Indien de bovenstaande link niet werkt, klik op de onderstaande link en vul uw t
 
 Dear {{ name }},
 
-An administrator has created an account for you!
+An administrator has created an account for you for the UiL OTS participant recruitment system!
 
 Login: {{ email }}><br/>
 {% if not has_password %}
 Click on the following link to set a password: {{ link }}
 {% else %}
-The password will be given to you by the administrator.
+The password will be given to you by the administrator. You will then be able to login here: {{ login_link }}
 {% endif %}
 
 {% if not has_password %}

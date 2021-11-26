@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+import urllib.parse as parse
 
 from django.conf import settings
 from pytz import timezone
@@ -115,6 +116,13 @@ def create_ldap_leader(name: str, email: str, phonenumber: str) -> Leader:
     return leader
 
 
+def get_login_link() -> str:
+    return parse.urljoin(
+        settings.FRONTEND_URI,
+        "login/"
+    )
+
+
 def notify_new_leader(leader: Leader) -> None:
     has_password = leader.api_user.has_password
 
@@ -140,6 +148,7 @@ def notify_new_leader(leader: Leader) -> None:
         'email':            leader.api_user.email,
         'link':             link,
         'alternative_link': alternative_link,
+        'login_link':       get_login_link(),
     }
 
     send_template_email(

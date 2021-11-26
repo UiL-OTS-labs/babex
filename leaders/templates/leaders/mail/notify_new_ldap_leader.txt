@@ -2,7 +2,7 @@
 
 Beste {{ name }},
 
-Een administrator heeft een account voor u aangemaakt!
+Een administrator heeft een account voor je aangemaakt voor het UiL OTS proefpersoonwervingssyteem!
 
 Login: {{ email }}>
 Wachtwoord: Uw Solis wachtwoord
@@ -11,7 +11,7 @@ Wachtwoord: Uw Solis wachtwoord
 
 Dear {{ name }},
 
-An administrator has created an account for you!
+An administrator has created an account for you for the UiL OTS participant recruitment system!
 
 Login: {{ email }}><br/>
 Password: Your Solis password

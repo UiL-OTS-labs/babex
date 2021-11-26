@@ -11,14 +11,14 @@
         Beste {{ name }},
     </p>
     <p>
-        Een administrator heeft een account voor u aangemaakt!
+        Een administrator heeft een account voor je aangemaakt voor het UiL OTS proefpersoonwervingssyteem!
     </p>
     <p>
         Login: {{ email }}<br/>
         {% if not has_password %}
             <a href="{{ link }}">Klik hier om uw wachtwoord in te stellen.</a>
         {% else %}
-            Het wachtwoord dient u te krijgen van de adminstrator.
+            Het wachtwoord krijg je van de adminstrator. Je kunt dan <a href="{{ login_link }}">hier</a> inloggen.
         {% endif %}
     </p>
     {% if not has_password %}
@@ -34,14 +34,14 @@
         Dear {{ name }},
     </p>
     <p>
-        An administrator has created an account for you!
+        An administrator has created an account for you for the UiL OTS participant recruitment system!
     </p>
     <p>
         Login: {{ email }}<br/>
         {% if not has_password %}
             <a href="{{ link }}">Click here to set a password</a>
         {% else %}
-            The password will be given to you by the administrator.
+            The password will be given to you by the administrator. You will then be able to login <a href="{{ login_link }}">here</a>.
         {% endif %}
     </p>
     {% if not has_password %}
