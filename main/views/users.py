@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
 from main.auth import PpnLdapBackend
-from main.forms.user_forms import LDAPUserCreationForm
+from main.forms.user_forms import LDAPUserCreationForm, UserUpdateForm
 from main.utils import is_ldap_enabled
 from ..forms import UserCreationForm
 from ..models import User
@@ -32,8 +32,7 @@ class UserUpdateView(braces.LoginRequiredMixin,
                      generic.UpdateView):
     model = User
     template_name = 'users/update.html'
-    fields = ['username', 'first_name', 'last_name', 'email', 'is_active',
-              'is_supreme_admin']
+    form_class = UserUpdateForm
     success_url = reverse_lazy('main:users_home')
     success_message = _('users:message:updated')
 
@@ -43,7 +42,7 @@ class LDAPUserUpdateView(braces.LoginRequiredMixin,
                          generic.UpdateView):
     model = User
     template_name = 'users/update.html'
-    fields = ['username', 'is_active', 'is_supreme_admin']
+    form_class = LDAPUserCreationForm
     success_url = reverse_lazy('main:users_home')
     success_message = _('users:message:updated')
 

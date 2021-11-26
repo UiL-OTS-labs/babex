@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-26 13:32+0000\n"
+"POT-Creation-Date: 2021-11-26 11:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: main/forms/user_forms.py:26 main/forms/user_forms.py:52
+#: main/forms/user_forms.py:83
+msgid "main:forms:error:no_supreme_admin"
+msgstr ""
+"Disabling main admin status for this user will result in no main admins "
+"being set. Please make a different user main admin before disabling this "
+"user's main admin status."
 
 #: main/menus.py:6
 msgid "mainmenu:home"
@@ -228,14 +236,14 @@ msgstr " "
 msgid "Empty list and '%(class_name)s.allow_empty' is False."
 msgstr ""
 
-#: main/views/users.py:38 main/views/users.py:48
+#: main/views/users.py:37 main/views/users.py:47
 msgid "users:message:updated"
 msgstr "Account updated!"
 
-#: main/views/users.py:58 main/views/users.py:68
+#: main/views/users.py:57 main/views/users.py:67
 msgid "users:message:created"
 msgstr "New account created!"
 
-#: main/views/users.py:85
+#: main/views/users.py:84
 msgid "users:message:changed_password"
 msgstr "Password changed!"

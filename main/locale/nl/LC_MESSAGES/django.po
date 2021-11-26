@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-26 13:32+0000\n"
+"POT-Creation-Date: 2021-11-26 11:26+0000\n"
 "PO-Revision-Date: 2018-11-23 08:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,6 +17,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7.1\n"
+
+#: main/forms/user_forms.py:26 main/forms/user_forms.py:52
+#: main/forms/user_forms.py:83
+msgid "main:forms:error:no_supreme_admin"
+msgstr ""
+"Als u de hoofd-admin-status voor deze gebruiker uitschakelt, zijn er geen "
+"hoof admins meer ingesteld. Maak een andere gebruiker hoofd admin voordat je "
+"de hoofd admin status van deze gebruiker uitschakelt. "
 
 #: main/menus.py:6
 msgid "mainmenu:home"
@@ -228,14 +236,14 @@ msgstr " "
 msgid "Empty list and '%(class_name)s.allow_empty' is False."
 msgstr ""
 
-#: main/views/users.py:38 main/views/users.py:48
+#: main/views/users.py:37 main/views/users.py:47
 msgid "users:message:updated"
 msgstr "Account aangepast!"
 
-#: main/views/users.py:58 main/views/users.py:68
+#: main/views/users.py:57 main/views/users.py:67
 msgid "users:message:created"
 msgstr "Nieuw admin account aangemaakt!"
 
-#: main/views/users.py:85
+#: main/views/users.py:84
 msgid "users:message:changed_password"
 msgstr "Wachtwoord gewijzigd!"
