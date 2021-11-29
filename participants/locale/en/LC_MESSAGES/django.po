@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-26 13:32+0000\n"
+"POT-Creation-Date: 2021-11-26 11:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -109,17 +109,17 @@ msgid "participant:name:unknown"
 msgstr "name unknown"
 
 #: participants/models.py:159
-#: participants/templates/widgets/participant_sex_widget.html:17
+#: participants/templates/widgets/participant_sex_widget.html:22
 msgid "participant:attribute:sex:male"
 msgstr "Male"
 
 #: participants/models.py:160
-#: participants/templates/widgets/participant_sex_widget.html:23
+#: participants/templates/widgets/participant_sex_widget.html:28
 msgid "participant:attribute:sex:female"
 msgstr "Female"
 
 #: participants/models.py:161
-#: participants/templates/widgets/participant_sex_widget.html:35
+#: participants/templates/widgets/participant_sex_widget.html:40
 msgid "participant:attribute:sex:prefer_not_to_answer"
 msgstr "Preferred not to answer"
 
