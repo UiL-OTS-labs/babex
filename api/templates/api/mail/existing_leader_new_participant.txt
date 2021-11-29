@@ -1,13 +1,13 @@
 Beste {{ participant.name|default:"proefpersoon" }},
 
-Welkom! Je hebt je aangemeld als (potentiel) participant op {% now "d-m-Y, H:i" %}.
+Welkom! Je hebt je aangemeld als (potentieel) proefpersoon op {% now "d-m-Y, H:i" %}.
 
 {% if participant.email_subscription %}
 Je kunt vanaf nu bij nieuwe experimenten een mailtje ontvangen met een uitnodiging om mee te doen. Wil je deze niet meer ontvangen? Dan kun je je uitschrijven voor de mail lijst via de volgende link:
 {{ unsub_link }}
 {% endif %}
 
-Aangezien je eerder al een proefleider account hebt gekregen, kun je hetzelfde account gebruiken om in te loggen als participant.
+Aangezien je eerder al een proefleider account hebt gekregen, kun je hetzelfde account gebruiken om in te loggen als proefpersoon.
 {% if is_ldap_user %}
 Je login gegevens bestaan uit je UU-mail en je UU-wachtwoord.
 {% else %}
