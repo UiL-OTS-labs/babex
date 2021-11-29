@@ -1,0 +1,24 @@
+Beste {{ participant.name|default:"proefpersoon" }},
+
+Welkom! Je hebt je aangemeld als (potentiele) participant op {% now "d-m-Y, H:i" %}.
+
+{% if participant.email_subscription %}
+Je kan vanaf nu bij nieuwe experimenten een mailtje ontvangen met een uitnodiging om mee te doen. Wil je deze niet meer ontvangen? Dan kan je je uitschrijven voor de mail lijst via de volgende link:
+{{ unsub_link }}
+{% endif %}
+
+Aangezien je eerder al een proefleider account hebt gekregen, kan je hetzelfde account gebruiken om in te loggen als participant.
+{% if is_ldap_user %}
+Je login gegevens bestaan uit je UU-mail en je UU-wachtwoord.
+{% else %}
+Inloggen kan je met je email adres en je bestaande wachtwoord.
+Ben je je wachtwoord vergeten? Dan kan je met de volgende link je wachtwoord veranderen: {{ set_password_link }}
+
+Deze link blijft 24 uur geldig. Daarna kan je een nieuwe link aanvragen via 'wachtwoord vergeten?' op het inlog scherm.
+{% endif %}
+
+Met vriendelijke groet,
+het UiL OTS lab
+
+
+Dit bericht is automatisch verzonden omdat je een account hebt aangemaakt.

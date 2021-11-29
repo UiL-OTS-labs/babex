@@ -97,6 +97,7 @@ def create_participant_account(email: str,
             _add_participant_group(user)
             participant.api_user = user
             participant.save()
+            _send_existing_account_mail(participant, user)
 
     # If there's no account associated in any way, create one!
     else:
@@ -171,6 +172,44 @@ def _create_new_account(participant: Participant, password: str = None) -> None:
         [participant.email],
         "UiL OTS: Account aangemaakt",
         'api/mail/new_account',
+        context,
+        get_supreme_admin().email
+    )
+
+
+def _send_existing_account_mail(
+        participant: Participant,
+        user: ApiUser
+) -> None:
+    """This method sends an e-mail to users which are already known as a
+    leader, but have now created a participant. It informs them of the fact
+    that they can use their existing account.
+
+    Previously, this case resulted in no mail at all, which is confusing.
+    """
+
+    link = None
+
+    if not user.is_ldap_account:
+        token = UserToken.objects.create(
+            user=user,
+            expiration=_get_tomorrow(),
+            type=UserToken.PASSWORD_RESET,
+        )
+
+        link, alternative_link = get_reset_links(token.token)
+
+    context = {
+        'participant': participant,
+        'unsub_link': get_mailinglist_unsubscribe_url(participant),
+        'set_password_link': link,
+        'is_ldap_user': user.is_ldap_account,
+    }
+
+    send_template_email(
+        [participant.email],
+        "UiL OTS: Account aangemaakt",
+        'api/mail/existing_leader_new_participant',
         context,
         get_supreme_admin().email
     )
