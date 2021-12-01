@@ -12,9 +12,9 @@ ppn_backend/ldap_settings.py
 *.mo
 
 ### Virtual environments ###
-venv
-env
-.env
+venv*
+env*
+.env*
 
 ### IDE ###
 .idea
