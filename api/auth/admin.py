@@ -24,7 +24,7 @@ class ApiGroupAdmin(auth_admin.GroupAdmin):
 class ApiUserAdmin(auth_admin.UserAdmin):
     fieldsets = (
         (None, {
-            'fields': ('password', )
+            'fields': ('is_ldap_account', 'password', 'passwords_needs_change')
         }),
         (_('Personal info'), {
             'fields': ('email',)
@@ -33,7 +33,7 @@ class ApiUserAdmin(auth_admin.UserAdmin):
             'fields': ('participant', 'leader',)
         }),
         (_('Permissions'), {
-            'fields': ('is_frontend_admin', 'groups',)
+            'fields': ('is_active', 'is_frontend_admin', 'groups',)
         }),
         (_('Important dates'), {
             'fields': ('last_login', 'date_joined')
@@ -42,7 +42,7 @@ class ApiUserAdmin(auth_admin.UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields':  ('email', 'password1', 'password2'),
+            'fields':  ('email', 'is_ldap_account', 'password1', 'password2'),
         }),
     )
     filter_horizontal = ('groups',)
