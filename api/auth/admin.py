@@ -42,7 +42,7 @@ class ApiUserAdmin(auth_admin.UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields':  ('password1', 'password2'),
+            'fields':  ('email', 'password1', 'password2'),
         }),
     )
     filter_horizontal = ('groups',)
