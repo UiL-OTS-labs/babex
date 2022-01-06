@@ -44,6 +44,7 @@ class ApiUserAdmin(auth_admin.UserAdmin):
     add_form = ApiUserCreationForm
     list_display = ('email', 'is_frontend_admin')
     list_filter = ('is_frontend_admin', 'is_active', 'groups')
+    search_fields = ('email', )
     readonly_fields = ["date_joined", "participant", "leader"]
 
     @sensitive_post_parameters_m
