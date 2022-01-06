@@ -39,6 +39,12 @@ class ApiUserAdmin(auth_admin.UserAdmin):
             'fields': ('last_login', 'date_joined')
         }),
     )
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields':  ('password1', 'password2'),
+        }),
+    )
     filter_horizontal = ('groups',)
     ordering = ('email',)
     add_form = ApiUserCreationForm
