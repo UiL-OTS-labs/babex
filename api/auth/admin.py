@@ -23,7 +23,7 @@ class ApiGroupAdmin(auth_admin.GroupAdmin):
 @admin.register(ApiUser)
 class ApiUserAdmin(auth_admin.UserAdmin):
     fieldsets = (
-        (None, {
+        (_('Authentication'), {
             'fields': ('is_ldap_account', 'password', 'passwords_needs_change')
         }),
         (_('Personal info'), {
