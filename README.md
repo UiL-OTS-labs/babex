@@ -33,8 +33,17 @@ Development instructions:
 * You can now run a development server with ``python manage.py runserver``
 
 Note: you probably also want to set your new super user as the main admin, 
-otherwise the frontend probably wont't like you. 
+otherwise the frontend probably won't like you. (Read: it will error without a 
+Main Admin)
 (You can change this in the 'Admin' section in the menu).
+
+Note 2:
+As the ``runserver`` command defaults to using ``localhost:8000`` you will need 
+to specify a different port for either the frontend or backend. If you're using
+the default settings, the backend should run at port 9000. You can change 
+the port the application will listen on by specifying it as an argument.
+
+For example: ``python manage.py runserver 9000`` will set the port used to 9000
 
 ## A note on dependencies
 We use pip-tools to manage our dependencies (mostly to freeze the versions 
