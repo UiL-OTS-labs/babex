@@ -12,7 +12,7 @@ administrators only.
 
 ## Requirements
 
-* Python 3.4+
+* Python 3.9+ (3.8 might work, untested)
 * Pip (for installing dependencies, see requirements.txt for details)
 * A WSGI capable web server (not needed for development)
 * A SQL database (tested with SQLite and MySQL)
@@ -26,7 +26,7 @@ Development instructions:
 * Clone this repository
 * Install the dependencies using pip (it is recommended to use a virtual 
   environment!). ``pip install -r requirements.txt``
-* Run all DB migrations ``python manage.py migrate``
+* Run all DB migrations ``python manage.py migrate`` and ``python manage.py migrate --database auditlog``
 * Edit ``ppn_backend/settings.py`` to suit your needs.
 * Create a super user using ``python manage.py createsuperuser``
 * Compile the translation files using ``python manage.py compilemessages``
