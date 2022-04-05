@@ -9,17 +9,17 @@
         Beste {{ participant.name|default:"proefpersoon" }},
     </p>
     <p>
-        Welkom! Je hebt een nieuw account aangemaakt op {% now "d-m-Y, H:i" %}. Hiermee kun je ten alle tijden inloggen om jouw afspraken te zien/af te zeggen. Ook zullen wij tijdens het inschrijven enkele gegevens voor jou invullen.<br/>
+        Welkom! Je hebt een nieuw account aangemaakt op {% now "d-m-Y, H:i" %}. Hiermee kun je altijd inloggen om jouw afspraken te zien/af te zeggen. Ook zullen wij tijdens het inschrijven enkele gegevens voor jou invullen.<br/>
     </p>
     {% if participant.email_subscription %}
         <p>
-            Je kunt vanaf nu bij nieuwe experimenten een mailtje ontvangen met een uitnodiging om mee te doen. Wil je deze niet meer ontvangen? Dan kun je je <a href="{{ unsub_link }}">hier</a> uitschrijven voor de mail lijst.
+            Je kunt vanaf nu bij nieuwe experimenten een mailtje ontvangen met een uitnodiging om mee te doen. Wil je deze niet meer ontvangen? Dan kun je je <a href="{{ unsub_link }}">hier</a> uitschrijven voor de mailing list.
         </p>
     {% endif %}
     {% if not has_password %}
         <p>
             Voordat je kunt inloggen, moet je <a href="{{ set_password_link }}">hier</a> een wachtwoord instellen. <br/>
-            Deze link blijft 24 uur geldig. Daarna kun je een nieuwe link aanvragen via 'wachtwoord vergeten?' op het inlog scherm.
+            Deze link blijft 24 uur geldig. Daarna kun je een nieuwe link aanvragen via 'wachtwoord vergeten?' op het <a href="{{ login_link }}">inlogscherm</a>.
         </p>
     {% endif %}
     <p>

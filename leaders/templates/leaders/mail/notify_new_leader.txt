@@ -13,7 +13,7 @@ Het wachtwoord krijg je van de adminstrator. Je kunt dan hier inloggen: {{ login
 {% endif %}
 
 {% if not has_password %}
-Deze link blijft 24 uur geldig. Daarna kunt u een nieuwe link krijgen via 'wachtwoord vergeten?' op het inlog scherm.
+Deze link blijft 24 uur geldig. Daarna kunt u een nieuwe link krijgen via 'wachtwoord vergeten?' op het inlogscherm.
 
 Indien de bovenstaande link niet werkt, klik op de onderstaande link en vul uw token in: {{ token }}
 {{ alternative_link }}

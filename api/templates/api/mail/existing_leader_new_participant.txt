@@ -3,7 +3,7 @@ Beste {{ participant.name|default:"proefpersoon" }},
 Welkom! Je hebt je aangemeld als (potentieel) proefpersoon op {% now "d-m-Y, H:i" %}.
 
 {% if participant.email_subscription %}
-Je kunt vanaf nu bij nieuwe experimenten een mailtje ontvangen met een uitnodiging om mee te doen. Wil je deze niet meer ontvangen? Dan kun je je uitschrijven voor de mail lijst via de volgende link:
+Je kunt vanaf nu bij nieuwe experimenten een mailtje ontvangen met een uitnodiging om mee te doen. Wil je deze niet meer ontvangen? Dan kun je je uitschrijven voor de mailing list via de volgende link:
 {{ unsub_link }}
 {% endif %}
 
@@ -14,7 +14,7 @@ Je login gegevens bestaan uit je UU-mail en je UU-wachtwoord.
 Inloggen kun je met je email adres en je bestaande wachtwoord.
 Ben je je wachtwoord vergeten? Dan kun je met de volgende link je wachtwoord veranderen: {{ set_password_link }}
 
-Deze link blijft 24 uur geldig. Daarna kun je een nieuwe link aanvragen via 'wachtwoord vergeten?' op het inlog scherm.
+Deze link blijft 24 uur geldig. Daarna kun je een nieuwe link aanvragen via 'wachtwoord vergeten?' op het inlogscherm.
 {% endif %}
 
 Met vriendelijke groet,

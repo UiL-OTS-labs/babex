@@ -31,3 +31,10 @@ def get_mailinglist_unsubscribe_url(participant: Participant):
             token.token
         )
     )
+
+
+def get_login_page_url():
+    return parse.urljoin(
+        settings.FRONTEND_URI,
+        'login/'
+    )

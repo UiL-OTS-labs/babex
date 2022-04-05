@@ -1,6 +1,8 @@
 from enum import Enum
 
 from django.conf import settings
+
+from participants.utils.mailinglist_unsubscribe import get_login_page_url
 from uil.core.utils.mail import send_template_email
 
 from api.auth.models import ApiUser, ApiGroup, UserToken
@@ -159,6 +161,7 @@ def _create_new_account(participant: Participant, password: str = None) -> None:
     context = {
         'participant': participant,
         'unsub_link': get_mailinglist_unsubscribe_url(participant),
+        'login_link': get_login_page_url(),
         'set_password_link': link,
         'has_password': False,
     }
@@ -203,6 +206,7 @@ def _send_existing_account_mail(
         'participant': participant,
         'unsub_link': get_mailinglist_unsubscribe_url(participant),
         'set_password_link': link,
+        'login_link': get_login_page_url(),
         'is_ldap_user': user.is_ldap_account,
     }
 
