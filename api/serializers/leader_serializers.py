@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from api.auth.serializers import ApiUserSerializer
 from leaders.models import Leader
 
 
@@ -13,5 +14,10 @@ class LeaderSerializer(serializers.ModelSerializer):
 
     email = serializers.SerializerMethodField()
 
+    api_user = serializers.SerializerMethodField()
+
     def get_email(self, object):
         return object.api_user.email
+
+    def get_api_user(self, object):
+        return ApiUserSerializer(object.api_user).data

@@ -3,6 +3,16 @@ from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 
 from .authenticators import PostAuthenticator
+from .models import ApiUser
+
+
+class ApiUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ApiUser
+        fields = [
+            'email', 'date_joined', 'groups', 'id', 'is_active',
+            'is_frontend_admin', 'last_login', 'passwords_needs_change'
+        ]
 
 
 class AuthTokenSerializer(serializers.Serializer):
