@@ -77,6 +77,7 @@ def migrate_appointments(
         new_appointment = NewAppointment()
         new_appointment.participant = new_participant_pk
         new_appointment.timeslot = new_slot
+        new_appointment.experiment = new_slot.experiment
         new_appointment.save()
 
 
