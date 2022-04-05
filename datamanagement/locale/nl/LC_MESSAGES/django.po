@@ -24,11 +24,11 @@ msgstr "Verander drempelwaarden"
 #: datamanagement/templates/datamanagement/edit_thresholds.html:23
 msgid "datamanagement:thresholds:edit:info_text"
 msgstr ""
-"Hier kunt u de drempel waardes beheren die de applicatie gebruikt voor zijn "
+"Hier kun je de drempel waardes beheren die de applicatie gebruikt voor zijn "
 "controles. Dit drempel bepaalt na welke periode de applicatie moet "
 "waarschuwenvoor oude gegevens, voor elke categorie. Deze kunnen naar "
 "believen wordengewijzigd, het veranderd (nog) niks in de database. <br/> <br/"
-"> In het selectie veld kunt u bepalen of het in dagen, weken, maanden of "
+"> In het selectie veld kun je bepalen of het in dagen, weken, maanden of "
 "jaren wordt gezien. De waarde wordt direct omgerekend naar de nieuwe eenheid."
 
 #: datamanagement/templates/datamanagement/edit_thresholds.html:32
@@ -60,9 +60,9 @@ msgstr "Opmerkingen"
 msgid "datamanagement:home:comments:info_text"
 msgstr ""
 "Deze experimenten hebben opmerkingen die ouder zijn dan {}, het kan een goed "
-"ideezijn om ze te verwijderen. U kunt alle opmerkingen voor dit experiment "
+"ideezijn om ze te verwijderen. Je kunt alle opmerkingen voor dit experiment "
 "bekijken op de experiment details pagina.(klik op de naam van het "
-"experiment). U kunt ze daar ookindividueel verwijderen."
+"experiment). Je kunt ze daar ookindividueel verwijderen."
 
 #: datamanagement/templates/datamanagement/index_parts/comments.html:26
 #: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:26
@@ -115,7 +115,7 @@ msgstr "Experiment uitnodigigen"
 #: datamanagement/templates/datamanagement/index_parts/invites.html:20
 msgid "datamanagement:home:invites:info_text"
 msgstr ""
-"Hier kunt u 'reeds uitgenodigde' trackers voor participanten verwijderen van "
+"Hier kun je 'reeds uitgenodigde' trackers voor participanten verwijderen van "
 "eenexperiment. Huidige drempelwaarde: {}. Hoewel niet nodig voor "
 "gegevensbescherming,het houdt de database wel schoon."
 
@@ -193,7 +193,7 @@ msgid "datamanagement:messages:refused_deletion"
 msgstr ""
 "Participant NIET verwijderd! Deze deelnemer is niet gemarkeerd "
 "voorverwijdering en kan leiden tot gegevensverlies. Neem contact op met een "
-"technicus als u denk dat dit niet het geval is."
+"technicus als je denkt dat dit niet het geval is."
 
 #: datamanagement/views.py:96
 msgid "datamanagement:messages:hid_participants"

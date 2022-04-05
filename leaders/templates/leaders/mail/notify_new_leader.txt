@@ -2,20 +2,20 @@
 
 Beste {{ name }},
 
-Een administrator heeft een account voor u aangemaakt!
+Een administrator heeft een account voor je aangemaakt!
 
 Login: {{ email }}>
 {% if not has_password %}
-Klik op de volgende link om uw wachtwoord in te stellen:
+Klik op de volgende link om je wachtwoord in te stellen:
 {{ link }}
 {% else %}
 Het wachtwoord krijg je van de adminstrator. Je kunt dan hier inloggen: {{ login_link }}
 {% endif %}
 
 {% if not has_password %}
-Deze link blijft 24 uur geldig. Daarna kunt u een nieuwe link krijgen via 'wachtwoord vergeten?' op het inlogscherm.
+Deze link blijft 24 uur geldig. Daarna kun je een nieuwe link krijgen via 'wachtwoord vergeten?' op het inlogscherm.
 
-Indien de bovenstaande link niet werkt, klik op de onderstaande link en vul uw token in: {{ token }}
+Indien de bovenstaande link niet werkt, klik op de onderstaande link en vul je token in: {{ token }}
 {{ alternative_link }}
 {% endif %}
 -------------

@@ -22,7 +22,7 @@ msgstr ""
 #: experiments/static/experiments/timeslots/timeslot_table.js:143
 msgid "timeslot:warning:confirm_silent_remove_participant"
 msgstr ""
-"Weet u zeker dat u deze participant wilt verwijderen uit dit timeslot? "
+"Weet je zeker dat je deze participant wilt verwijderen uit dit timeslot? "
 "WAARSCHUWING! Deze actie verstuurd GEEN automatische bevestigingsmail! (Je "
 "kan de knop naast deze gebruiken als je wel een automatische mail wilt laten "
 "sturen)."
@@ -31,7 +31,7 @@ msgstr ""
 #: experiments/static/experiments/timeslots/timeslot_table.js:147
 msgid "timeslot:warning:confirm_remove_participant"
 msgstr ""
-"Weet u zeker dat u deze participant wilt verwijderen uit dit timeslot? (Er "
+"Weet je zeker dat je deze participant wilt verwijderen uit dit timeslot? (Er "
 "zal een bevestigingsmail naar de participant worden gestuurd, maar stuur "
 "toch nog een persoonlijke mail als je dit nog niet hebt gedaan."
 

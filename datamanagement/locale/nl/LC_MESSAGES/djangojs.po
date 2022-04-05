@@ -21,19 +21,19 @@ msgstr ""
 #: datamanagement/static/datamanagement/js/index.js:9
 msgid "datamanagement:home:warning:hide_participants"
 msgstr ""
-"Weet u zeker dat u de deelnemers voor de leider(s) van dit experiment wilt "
+"Weet je zeker dat je de deelnemers voor de leider(s) van dit experiment wilt "
 "verbergen? Je kunt ze altijd weer inschakelen door het experiment te bewerken."
 
 #: datamanagement/static/datamanagement/js/index.js:13
 msgid "datamanagement:home:warning:delete_invites"
-msgstr "Weet u zeker dat u de trackers van dit experiment wilt verwijderen?"
+msgstr "Weet je zeker dat je de trackers van dit experiment wilt verwijderen?"
 
 #: datamanagement/static/datamanagement/js/index.js:17
 msgid "datamanagement:home:warning:delete_comments"
-msgstr "Weet u zeker dat u de opmerkingen bij dit experiment wilt verwijderen?"
+msgstr "Weet je zeker dat je de opmerkingen bij dit experiment wilt verwijderen?"
 
 #: datamanagement/static/datamanagement/js/index.js:21
 msgid "datamanagement:home:warning:delete_participant"
 msgstr ""
-"Weet u zeker dat u deze deelnemer wilt verwijderen? Dit kan niet ongedaan "
+"Weet je zeker dat je deze deelnemer wilt verwijderen? Dit kan niet ongedaan "
 "gemaakt worden!"

@@ -16,17 +16,17 @@
     <p>
         Login: {{ email }}<br/>
         {% if not has_password %}
-            <a href="{{ link }}">Klik hier om uw wachtwoord in te stellen.</a>
+            <a href="{{ link }}">Klik hier om je wachtwoord in te stellen.</a>
         {% else %}
             Het wachtwoord krijg je van de adminstrator. Je kunt dan <a href="{{ login_link }}">hier</a> inloggen.
         {% endif %}
     </p>
     {% if not has_password %}
         <p>
-            Deze link blijft 24 uur geldig. Daarna kunt u een nieuwe link krijgen via 'wachtwoord vergeten?' op het inlogscherm.
+            Deze link blijft 24 uur geldig. Daarna kun je een nieuwe link krijgen via 'wachtwoord vergeten?' op het inlogscherm.
         </p>
         <p>
-            Indien de bovenstaande link niet werkt, klik <a href="{{ alternative_link }}">hier</a> en vul uw token in: {{ token }}
+            Indien de bovenstaande link niet werkt, klik <a href="{{ alternative_link }}">hier</a> en vul je token in: {{ token }}
         </p>
     {% endif %}
     <hr>

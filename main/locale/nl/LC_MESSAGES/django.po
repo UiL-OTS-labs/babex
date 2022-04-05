@@ -22,7 +22,7 @@ msgstr ""
 #: main/forms/user_forms.py:83
 msgid "main:forms:error:no_supreme_admin"
 msgstr ""
-"Als u de hoofd-admin-status voor deze gebruiker uitschakelt, zijn er geen "
+"Als je de hoofd-admin-status voor deze gebruiker uitschakelt, zijn er geen "
 "hoof admins meer ingesteld. Maak een andere gebruiker hoofd admin voordat je "
 "de hoofd admin status van deze gebruiker uitschakelt. "
 
