@@ -151,9 +151,11 @@ def check_default_criteria(participant: Participant, filters: dict) -> list:
 
     # Loop over the defined filters
     for attr, expected_value in filters.items():
-        # If we the actual value is not the same as the expected,
-        # mark this participant as 'to exclude'
-        if getattr(participant, attr) != expected_value:
+        found_value = getattr(participant, attr, None)
+        # If we the found value is not the same as the expected,
+        # mark this participant as 'to exclude'. None means we don't have this
+        # value, so we give it the benifit of the doubt and allow it anyways
+        if found_value != expected_value and found_value is not None:
             failed_criteria.append(attr)
 
     return failed_criteria
@@ -211,6 +213,10 @@ def should_exclude_by_age(participant: Participant, default_criteria) -> bool:
     :param default_criteria:
     :return:
     """
+    # If we don't know the age, assume it's allowed
+    if participant.age is None:
+        return False
+
     if participant.age < default_criteria.min_age:
         return True
 
