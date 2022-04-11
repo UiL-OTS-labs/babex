@@ -1,6 +1,6 @@
 Beste {{ name }},
 
-Je hebt aangegeven dat je een afspraak wil afzeggen. Om jouw afspraken te zien en af te zeggen, ga naar de volgende link:
+Je hebt aangegeven dat je een afspraak wil afzeggen. Om je afspraken te zien en af te zeggen, ga naar de volgende link:
 {{ link }}
 
 Deze link blijft 2 uur geldig.
