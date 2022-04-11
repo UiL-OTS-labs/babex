@@ -181,7 +181,7 @@ class GetRequiredFields(views.APIView):
             fields = get_required_fields(experiment, participant)
 
         if not fields:
-            fields.append('__all__')
+            fields = ['__all__']
 
         return Response({
             'fields': fields
