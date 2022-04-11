@@ -144,9 +144,11 @@ def _create_new_account(participant: Participant, password: str = None) -> None:
     """
     user = ApiUser()
 
-    user.participant = participant
     user.email = participant.email
     user.save()
+
+    participant.api_user = user
+    participant.save()
 
     _add_participant_group(user)
 
