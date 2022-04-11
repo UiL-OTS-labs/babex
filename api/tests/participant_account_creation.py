@@ -51,6 +51,13 @@ class ParticipantAccountCreationTests(TestCase):
             1
         )
 
+        user = ApiUser.objects.first()
+        participant = Participant.objects.first()
+
+        self.assertTrue(user.is_participant)
+        self.assertEqual(user.participant, participant)
+        self.assertEqual(participant.api_user, user)
+
     def test_existing_participant(self):
         """
         This testcase tests creating an account for a participant that
@@ -58,7 +65,7 @@ class ParticipantAccountCreationTests(TestCase):
         :return:
         """
 
-        Participant.objects.create(
+        participant = Participant.objects.create(
             email='test@test.nl',
             dyslexic=False
         )
@@ -99,6 +106,12 @@ class ParticipantAccountCreationTests(TestCase):
         # This should not be modifiable by any action on the users part
         p = Participant.objects.get(pk=1)
         self.assertEqual(p.dyslexic, False)
+
+        user = ApiUser.objects.first()
+
+        self.assertTrue(user.is_participant)
+        self.assertEqual(user.participant, participant)
+        self.assertEqual(p.api_user, user)
 
     def test_multiple_existing_participants(self):
         """
@@ -206,6 +219,7 @@ class ParticipantAccountCreationTests(TestCase):
             Participant.objects.count(),
             1
         )
+        self.assertTrue(u.is_participant)
 
     def test_multiple_existing_participants_with_account(self):
         """
@@ -271,6 +285,11 @@ class ParticipantAccountCreationTests(TestCase):
             ApiUser.objects.count(),
             2
         )
+
+        self.assertTrue(u1.is_participant)
+        self.assertTrue(u2.is_participant)
+        self.assertEqual(u1.participant, p1)
+        self.assertEqual(u2.participant, p2)
 
     def test_existing_leader_account(self):
         """
