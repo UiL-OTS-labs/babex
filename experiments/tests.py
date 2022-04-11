@@ -62,12 +62,12 @@ class ExclusionTests(TestCase):
         # We have less dyslexics to simulate real life (and the first two tests
         # are equal otherwise)
         self.dyslexic_options = [True, False, False]
-        self.age_options = [self.dt_18, self.dt_20, self.dt_30]
-        self.multilingual_options = [True, False]
-        self.handedness_options = ['L', 'R']
+        self.age_options = [self.dt_18, self.dt_20, self.dt_30, None]
+        self.multilingual_options = [True, False, None]
+        self.handedness_options = ['L', 'R', None]
         self.language_options = ['nl', 'Elvish']
-        self.sex_options = ['M', 'F']
-        self.social_status_options = ['S', 'O']
+        self.sex_options = ['M', 'F', None]
+        self.social_status_options = ['S', 'O', None]
         self.criterion_answers_options = ['yes', 'no']
         self.excluded_experiment_options = [False, True]
 
@@ -195,7 +195,7 @@ class ExclusionTests(TestCase):
 
         part = get_eligible_participants_for_experiment(self.experiment)
 
-        self._leave_options('age', self.dt_20)
+        self._leave_options('age', [self.dt_20, None])
         self._remove_options('dyslexic', True)
         self.assertEqual(self.num_options, len(part))
 
@@ -222,7 +222,7 @@ class ExclusionTests(TestCase):
 
         part = get_eligible_participants_for_experiment(self.experiment)
         self._remove_options('dyslexic', True)
-        self._leave_options('multilingual', False)
+        self._leave_options('multilingual', [False, None])
         self.assertEqual(self.num_options, len(part))
 
     def test_exclude_singlelinguals(self):
@@ -231,7 +231,7 @@ class ExclusionTests(TestCase):
         part = get_eligible_participants_for_experiment(self.experiment)
 
         self._remove_options('dyslexic', True)
-        self._leave_options('multilingual', True)
+        self._leave_options('multilingual', [True, None])
         self.assertEqual(self.num_options, len(part))
 
     def test_exclude_elvish(self):
@@ -258,7 +258,7 @@ class ExclusionTests(TestCase):
         part = get_eligible_participants_for_experiment(self.experiment)
 
         self._remove_options('dyslexic', True)
-        self._leave_options('sex', 'F')
+        self._leave_options('sex', ['F', None])
         self.assertEqual(self.num_options, len(part))
 
     def test_exclude_females(self):
@@ -267,7 +267,7 @@ class ExclusionTests(TestCase):
         part = get_eligible_participants_for_experiment(self.experiment)
 
         self._remove_options('dyslexic', True)
-        self._leave_options('sex', 'M')
+        self._leave_options('sex', ['M', None])
         self.assertEqual(self.num_options, len(part))
 
     def test_exclude_students(self):
@@ -276,16 +276,16 @@ class ExclusionTests(TestCase):
         part = get_eligible_participants_for_experiment(self.experiment)
 
         self._remove_options('dyslexic', True)
-        self._leave_options('social_status', 'S')
+        self._leave_options('social_status', ['S', None])
         self.assertEqual(self.num_options, len(part))
 
-    def test_exclude_others(self):
+    def test_exclude_non_students(self):
         self.experiment.defaultcriteria.social_status = 'O'
 
         part = get_eligible_participants_for_experiment(self.experiment)
 
         self._remove_options('dyslexic', True)
-        self._leave_options('social_status', 'O')
+        self._leave_options('social_status', ['O', None])
         self.assertEqual(self.num_options, len(part))
 
     def test_specific_criteria_exclusion(self):
