@@ -1,5 +1,5 @@
 from datetime import date
-from typing import List
+from typing import List, Optional
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -144,7 +144,7 @@ class Participant(models.Model):
         return 'proefpersoon'
 
     @property
-    def age(self) -> int:
+    def age(self) -> Optional[int]:
         if self.birth_date:
             today = date.today()
 
@@ -152,7 +152,7 @@ class Participant(models.Model):
                     (today.month, today.day) < (
             self.birth_date.month, self.birth_date.day))
 
-        return -1
+        return None
 
     def get_sex_display(self):
         mappings = {
