@@ -20,11 +20,15 @@ from .migrate_timeslots import migrate_timeslots
 
 def migrate_experiments(pp_mappings: Dict[int, Participant]) -> \
         Dict[int, NewExperiment]:
+    print("\tMigrating experiments")
     experiment_pairs = _migrate_experiments()
+    print("\tMigrating exclusions")
     _migrate_other_experiment_exclusions(experiment_pairs)
+    print("\tMigrating default criteria")
     _migrate_default_criteria(experiment_pairs)
+    print("\tMigrating specific criteria")
     _migrate_specific_criteria(experiment_pairs)
-
+    print("\tMigrating appointments")
     migrate_timeslots(experiment_pairs, pp_mappings)
 
     return {old.pk: new for old, new in experiment_pairs}
