@@ -269,10 +269,13 @@ class AppointmentsView(rest_mixins.ListModelMixin,
             return self.request.user.participant
 
         if 'user_token' in self.request.GET:
-            token = UserToken.objects.get(
-                type=UserToken.CANCEL_APPOINTMENTS,
-                token=self.request.GET.get('user_token'),
-            )
+            try:
+                token = UserToken.objects.get(
+                    type=UserToken.CANCEL_APPOINTMENTS,
+                    token=self.request.GET.get('user_token'),
+                )
+            except UserToken.DoesNotExist:
+                raise PermissionDenied
 
             if token.is_valid():
                 return token.participant
