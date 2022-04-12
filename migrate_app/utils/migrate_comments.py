@@ -12,6 +12,11 @@ def migrate_comments(
 ):
     for old_comment in OldComment.objects.all():
 
+        if old_comment.experiment_id not in exp_mappings.keys():
+            print(f"Comment {old_comment.pk} not attached to existing "
+                  f"experiment")
+            continue
+
         experiment = exp_mappings[old_comment.experiment_id]  # type: Experiment
 
         new_comment = NewComment()
