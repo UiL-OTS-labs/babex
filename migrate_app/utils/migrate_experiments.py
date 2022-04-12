@@ -90,10 +90,16 @@ def _migrate_other_experiment_exclusions(
     for old_experiment, new_experiment in experiment_pairs:
 
         for exclusion_id in _get_exclusions_from_experiment(old_experiment):
-            # Get the old experiment for this link
-            old_excluded_experiment = OldExperiment.objects.get(
-                pk=exclusion_id
-            )
+            try:
+                # Get the old experiment for this link
+                old_excluded_experiment = OldExperiment.objects.get(
+                    pk=exclusion_id
+                )
+            except:
+                print(f"\tCould not find {exclusion_id} for {new_experiment}")
+                print('\tSkipping..')
+                continue
+
 
             # Get it's corresponding experiment in the new application
             new_excluded_experiment = NewExperiment.objects.get(
