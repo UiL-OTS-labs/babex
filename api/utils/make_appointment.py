@@ -217,11 +217,6 @@ def _get_participant(data: dict) -> Participant:
     # dyslexia has been developed. In which case, please do tell)
     # However, we might not know them yet. x_or_else will keep the existing
     # data, but if the existing data is None it will update with the given data.
-    participant.name = x_or_else(
-        participant.name,
-        data.get('name')
-    )
-
     participant.multilingual = x_or_else(
         participant.multilingual,
         data.get('multilingual') == 'Y'
@@ -255,6 +250,11 @@ def _get_participant(data: dict) -> Participant:
 
     # Update/set all variables that can be changed
     # But only if provided
+    participant.name = x_or_else(
+        data.get('name', None),
+        participant.name
+    )
+
     participant.social_status = x_or_else(
         data.get('social_status', None),
         participant.social_status
