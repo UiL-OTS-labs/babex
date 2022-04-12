@@ -507,25 +507,39 @@ Experiment, data: dict) -> None:
         if name_form not in data:
             continue
 
-        # Check if we have an existing answer. If so, we are going to ignore
-        # this criterion
-        answer_exists = participant.criterionanswer_set.filter(
-            criterion=specific_criterion.criterion
-        ).exists()
+        value = data.get(name_form)
+        value = specific_criterion.criterion.values_list[value]
 
-        if not answer_exists:
-            value = data.get(name_form)
-            # The value sent is actually an integer index corresponding to a
-            # value in values_list, so we extract the chosen value from that
-            # list.
-            value = specific_criterion.criterion.values_list[value]
+        # Check if we have an existing answer. If not, create a new one.
+        try:
+            answer = participant.criterionanswer_set.filter(
+                criterion=specific_criterion.criterion
+            )
 
+            # Log if participant changed their answer. It might be okay as
+            # some questions do have answers that change over time,
+            # but they also might be lying about something that shouldn't
+            # change over time
+            if answer.answer != value:
+                add_system_comment(
+                    participant,
+                    "Participant changed their answer "
+                    "for '{}' from '{}' to '{}'".format(
+                        specific_criterion.criterion.name_natural,
+                        answer.answer,
+                        value
+                    ),
+                    experiment,
+                )
+
+        except CriterionAnswer.DoesNotExist:
             answer = CriterionAnswer()
             answer.participant = participant
             answer.criterion = specific_criterion.criterion
-            answer.answer = value
 
-            answer.save()
+        answer.answer = value
+
+        answer.save()
 
 
 def _format_messages(*messages: List[str]) -> list:
