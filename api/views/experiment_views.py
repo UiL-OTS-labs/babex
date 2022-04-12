@@ -287,6 +287,12 @@ class RegisterView(views.APIView):
         data = request.data
         experiment = Experiment.objects.get(pk=experiment)
 
+        # If full == False, we're dealing with a logged in user and we should
+        # retrieve the email from the account (as it's not provided by the
+        # client app)
+        if 'full' in data and not data['full']:
+            data['email'] = request.user.participant.email
+
         success, recoverable, messages = register_participant(data, experiment)
 
         return Response({
