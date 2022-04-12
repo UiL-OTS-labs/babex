@@ -33,11 +33,13 @@ def migrate_participants() -> Dict[int, Participant]:
 
         new_participant.email_subscription = _yes_no_null_mapper(
             old_participant,
-            'email_subscription'
+            'email_subscription',
+            False
         )
         new_participant.capable = _yes_no_null_mapper(
             old_participant,
-            'capable'
+            'capable',
+            True
         )
 
         new_participant.save()
@@ -53,7 +55,7 @@ def migrate_participants() -> Dict[int, Participant]:
     return mapping
 
 
-def _yes_no_null_mapper(old_participant, attribute):
+def _yes_no_null_mapper(old_participant, attribute, none_value=None):
     value = getattr(old_participant, attribute)
 
     if value == 'yes':
@@ -61,7 +63,7 @@ def _yes_no_null_mapper(old_participant, attribute):
     elif value == 'no':
         return False
     else:
-        return None
+        return none_value
 
 
 def _get_handedness(old_participant):
