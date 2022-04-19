@@ -10,9 +10,13 @@
     </p>
     <p>
         Je hebt je uitgeschreven voor experiment: <strong>{{ experiment.name }}</strong><br/><br/>
+        {% if time_slot %}
         Datum: <strong>{{ time_slot.datetime|date:"l d-m-Y" }}</strong><br/>
         Tijd: <strong>{{ time_slot.datetime|date:"H:i" }} uur</strong><br/>
+        {% endif %}
+        {% if experiment.location %}
         Locatie: <strong>{{ experiment.location }}</strong><br/>
+        {% endif %}
         Uitgeschreven op: <strong>{% now "d-m-Y, H:i" %}</strong>
     </p>
     <p>

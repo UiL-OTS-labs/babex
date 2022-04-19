@@ -10,9 +10,13 @@
     </p>
     <p>
         The particicipant {{ participant.mail_name }} ({{ participant.email }}) unsubscribed for your experiment: <strong>{{ experiment.name }}</strong><br/><br/>
+        {% if time_slot %}
         Date: <strong>{{ time_slot.datetime|date:"l d-m-Y" }}</strong><br/>
         Time: <strong>{{ time_slot.datetime|date:"H:i" }} uur</strong><br/>
+        {% endif %}
+        {% if experiment.location %}
         Location: <strong>{{ experiment.location }}</strong><br/>
+        {% endif %}
         Unsubscribed on: <strong>{% now "d-m-Y, H:i" %}</strong>
     </p>
     <p>

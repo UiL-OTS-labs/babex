@@ -2,9 +2,13 @@ Dear {{ leader.name }},
 
 The particicipant {{ participant.mail_name }} ({{ participant.email }}) unsubscribed for your experiment: {{ experiment.name }}
 
+{% if time_slot %}
 Date: {{ time_slot.datetime|date:"l d-m-Y" }}
 Time: {{ time_slot.datetime|date:"H:i" }} uur
+{% endif %}
+{% if experiment.location %}
 Location: {{ experiment.location }}
+{% endif %}
 Unsubscribed on: {% now "d-m-Y, H:i" %}
 
 If you would still like to give another participant the opportunity to sign up for this timeslot, please make sure that the experiment is open for subscriptions.

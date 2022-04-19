@@ -2,9 +2,13 @@ Beste {{ participant.mail_name }},
 
 Je hebt je uitgeschreven voor experiment: {{ experiment.name }}
 
+{% if time_slot %}
 Datum: {{ time_slot.datetime|date:"l d-m-Y" }}
 Tijd: {{ time_slot.datetime|date:"H:i" }} uur
+{% endif %}
+{% if experiment.location %}
 Locatie: {{ experiment.location }}
+{% endif %}
 Uitgeschreven op: {% now "d-m-Y, H:i" %}
 
 Je kunt je opnieuw inschrijven voor een ander tijdstip via de volgende link:
