@@ -15,6 +15,31 @@ from participants.utils import get_mailinglist_unsubscribe_url
 link_to_subscribe_regex = r'{link_to_subscribe(?::\"(.*)\")?}'
 
 
+def get_invite_mail_content(experiment: Experiment) -> str:
+    content = experiment.invite_email
+
+    replacements = {
+        '{duration}':                experiment.duration,
+        '{compensation}':            experiment.compensation,
+        '{task_description}':        experiment.task_description,
+        '{additional_instructions}': experiment.additional_instructions,
+        '{experiment_name}':         experiment.name,
+        '{experiment_location}':     '',
+        '{leader_name}':             experiment.leader.name,
+        '{leader_email}':            experiment.leader.api_user.email,
+        '{leader_phonenumber}':      experiment.leader.phonenumber,
+        '{admin}':                   get_supreme_admin().get_full_name(),
+    }
+
+    if experiment.location:
+        replacements['{experiment_location}'] = experiment.location.name
+
+    for key, value in replacements.items():
+        content = content.replace(key, value)
+
+    return content
+
+
 def mail_invite(
         participant_ids: List[str],
         content: str,
@@ -108,4 +133,3 @@ def _parse_contents_plain(content: str, experiment: Experiment) -> str:
     )
 
     return mark_safe(content.replace(match.group(0), replacement))
-

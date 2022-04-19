@@ -87,34 +87,15 @@
     </div>
     <div class="uu-inner-container mt-2">
         <div class="col-6">
-            <textarea name="content" rows="25" style="width: 100%">
-<p>Je kunt je weer opgeven voor een nieuw experiment: <strong>{{ experiment.name }}</strong>.</p>
-
-            {% if experiment.additional_leaders.exists %}
-<p>De proefleiders zijn <strong>{{ experiment.leader.name }}</strong>,
-{% for leader in experiment.additional_leaders.all %}
-    <strong>{{ leader.name }}</strong>,
-{% endfor %}
-</p>
-            {% else %}
-<p>De proefleider is <strong>{{ experiment.leader.name }}</strong>,
-            {% endif %}
-<ul>
-    <li>Duur: {{ experiment.duration }}.</li>
-    <li>Vergoeding: {{ experiment.compensation }}.</li>
-    <li>{{ experiment.task_description }}</li>
-    {% if experiment.additional_instructions %}<li>{{ experiment.additional_instructions }}</li>{% endif %}
-</ul>
-
-<p>Je kunt via {link_to_subscribe:"deze link"} inschrijven.</p>
-
-<p>Bedankt!</p>
-
-<p>{{ admin }}</p>
+            <textarea name="content" rows="25" style="width: 100%">{{ invite_text }}
             </textarea>
 
         </div>
         <div class="col-6">
+            {% url 'experiments:update' experiment.pk as edit_url %}
+            <p>
+                {% transformat "experiments:invite:text:help" edit_url %}
+            </p>
             <button type="submit" formaction="{% url 'experiments:mail_preview' experiment.pk %}" formtarget="_blank" class="button-black">
                 {% trans 'experiments:invite:preview_button' %}
             </button>

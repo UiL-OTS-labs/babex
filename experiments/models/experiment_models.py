@@ -43,6 +43,25 @@ class Experiment(models.Model):
         het UiL OTS lab
     </p>"""
 
+    DEFAULT_INVITE_MAIL = """<p>Je kunt je weer opgeven voor een nieuw 
+    experiment: <strong>{experiment_name}</strong>.</p>
+<p>De proefleider is <strong>{leader_name}</strong>.
+<ul>
+    <li>Duur: {duration}.</li>
+    <li>Vergoeding: {compensation}.</li>
+    <li>{task_description}</li>
+    <li>{additional_instructions}</li>
+</ul>
+
+<p>Je kunt via {link_to_subscribe:"deze link"} inschrijven.</p>
+
+<p>Bedankt!</p>
+
+<p>
+Met vriendelijke groet,<br/>
+{admin}
+</p>"""
+
     name = models.TextField(
         _('experiment:attribute:name')
     )
@@ -68,6 +87,12 @@ class Experiment(models.Model):
         _('experiment:attribute:confirmation_email'),
         help_text=_('experiment:attribute:confirmation_email:help_text'),
         default=DEFAULT_CONFIRMATION_MAIL,
+    )
+
+    invite_email = models.TextField(
+        _('experiment:attribute:invite_email'),
+        help_text=_('experiment:attribute:invite_email:help_text'),
+        default=DEFAULT_INVITE_MAIL,
     )
 
     location = models.ForeignKey(
