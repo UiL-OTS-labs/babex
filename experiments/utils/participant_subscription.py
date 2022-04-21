@@ -1,5 +1,3 @@
-import urllib.parse as parse
-
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from uil.core.utils.mail import send_template_email
@@ -7,7 +5,7 @@ from uil.core.utils.mail import send_template_email
 import auditlog.utils.log as auditlog
 from api.auth.models import ApiUser
 from auditlog.enums import Event, UserType
-from experiments.models import Appointment, Experiment
+from experiments.models import Appointment
 from main.utils import get_supreme_admin, get_register_link
 
 
@@ -16,7 +14,7 @@ def unsubscribe_participant(appointment_pk: int,
                             deleting_user=None) -> None:
     appointment = Appointment.objects.get(pk=appointment_pk)
     time_slot = appointment.timeslot
-    experiment = time_slot.experiment
+    experiment = appointment.experiment
 
     # Always delete first, the data in it will still be available for the
     # next bit
