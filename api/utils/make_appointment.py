@@ -182,7 +182,8 @@ def get_required_fields(experiment: Experiment, participant: Participant):
     for field in experiment.defaultcriteria.__dict__.keys():
         if field not in ['experiment', 'experiment_id', 'min_age', 'max_age',
                          'dyslexia', '_state', 'social_status']:
-            if getattr(participant, field) is None:
+            found_value = getattr(participant, field, None)
+            if found_value is None or found_value == '':
                 fields.append(field)
 
     if getattr(participant, 'birth_date') is None:
