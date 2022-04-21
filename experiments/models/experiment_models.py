@@ -1,22 +1,17 @@
+from datetime import datetime, timedelta
+
 from django.core.validators import MinValueValidator
 from django.db import models
-from django.db.models import Count, F, Func, fields
+from django.db.models import Count, F
 from django.utils.translation import gettext_lazy as _
+from django.utils.timezone import get_current_timezone
 
 from leaders.models import Leader
 from .location_models import Location
 
 
-class TwoHoursAgo(Func):
-    template = 'NOW() - INTERVAL 2 HOUR'
-    output_field = fields.DateTimeField()
-
-    def as_sqlite(self, compiler, connection, **extra_context):
-        return self.as_sql(
-            compiler,
-            connection,
-            template='date(\'now\', \'-2 hours\')'
-        )
+def _get_dt_2_hours_ago() -> datetime:
+    return datetime.now(tz=get_current_timezone()) - timedelta(hours=2)
 
 
 class Experiment(models.Model):
@@ -183,7 +178,7 @@ Met vriendelijke groet,<br/>
         return self.timeslot_set.annotate(
             num_appointments=Count('appointments')
         ).filter(
-            datetime__gt=TwoHoursAgo(),
+            datetime__gt=_get_dt_2_hours_ago(),
             max_places__gt=F('num_appointments')
         ).exists()
 
