@@ -115,7 +115,7 @@ msgstr "Student"
 
 #: experiments/models/criteria_models.py:35
 msgid "default_criteria:attribute:social_status:other"
-msgstr "Other"
+msgstr "Not student"
 
 #: experiments/models/criteria_models.py:45
 msgid "default_criteria:attribute:language"
