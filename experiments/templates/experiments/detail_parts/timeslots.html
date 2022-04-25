@@ -35,7 +35,7 @@
             {% for datetime, free_places, taken_places in timeslots %}
                 <tr>
                     <td data-order="{{ datetime|date:'U' }}">
-                        {{ datetime }}
+                        {{ datetime|date:"l d M Y, H:i"|capfirst }}
                     </td>
                     <td>
                         {{ free_places }}
