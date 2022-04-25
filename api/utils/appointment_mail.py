@@ -1,6 +1,7 @@
 import re
 
 from django.conf import settings
+from django.template import defaultfilters
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 import urllib.parse as parse
@@ -39,9 +40,12 @@ def send_appointment_mail(
         replacements['{experiment_location}'] = experiment.location.name
 
     if experiment.use_timeslots:
+        # We don't use strftime because that's not _always_ timezone aware
+        # Also, using the template filter is a neat hack to have the same format
+        # string syntax everywhere
         replacements.update({
-            '{date}': time_slot.datetime.strftime('%d-%m-%Y'),
-            '{time}': time_slot.datetime.strftime('%-H:%I'),
+            '{date}': defaultfilters.date(time_slot.datetime, 'd-m-Y'),
+            '{time}': defaultfilters.date(time_slot.datetime, 'H:i'),
         })
 
     send_template_email(
