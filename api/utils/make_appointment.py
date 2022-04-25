@@ -12,7 +12,6 @@ from typing import List, Tuple
 from django.core.exceptions import SuspiciousOperation
 from django.core.validators import ValidationError, validate_email
 from django.utils.dateparse import parse_date
-from uil.core.utils.mail import send_template_email
 
 from comments.utils import add_system_comment
 from experiments.models import Appointment, DefaultCriteria, Experiment, \
@@ -93,11 +92,6 @@ def register_participant(data: dict, experiment: Experiment) -> Tuple[bool,
                                                                       list]:
     default_criteria = experiment.defaultcriteria
 
-    if not experiment.has_free_places():
-        return False, False, [
-            _format_message(MISC_INVALID_MESSAGES['full'])
-        ]
-
     try:
         time_slot = experiment.timeslot_set.get(pk=data.get('timeslot'))
     except TimeSlot.DoesNotExist:
@@ -105,16 +99,21 @@ def register_participant(data: dict, experiment: Experiment) -> Tuple[bool,
 
     participant = _get_participant(data)
 
-    # Incapable participants get direct rejection
-    if not participant.capable:
-        return False, False, [
-            _format_message(MISC_INVALID_MESSAGES['incapable'])
-        ]
-
     # Participants should not be allowed to register twice
     if experiment.appointments.filter(participant=participant).exists():
         return False, False, [
             _format_message(MISC_INVALID_MESSAGES['already_registered'])
+        ]
+
+    if not experiment.has_free_places():
+        return False, False, [
+            _format_message(MISC_INVALID_MESSAGES['full'])
+        ]
+
+    # Incapable participants get direct rejection
+    if not participant.capable:
+        return False, False, [
+            _format_message(MISC_INVALID_MESSAGES['incapable'])
         ]
 
     invalid_default_criteria, \
