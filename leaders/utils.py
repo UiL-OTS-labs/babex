@@ -46,7 +46,7 @@ def create_leader(name: str, email: str, phonenumber: str,
     existing_api_user = ApiUser.objects.get_by_email(email)
 
     if existing_api_user:
-        api_user = existing_api_user[0]
+        api_user = existing_api_user
     else:
         api_user = ApiUser()
         api_user.email = email
@@ -100,7 +100,7 @@ def create_ldap_leader(name: str, email: str, phonenumber: str) -> Leader:
     existing_api_user = ApiUser.objects.get_by_email(email)
 
     if existing_api_user:
-        api_user = existing_api_user[0]
+        api_user = existing_api_user
     else:
         # Create an empty account first, before we populate
         ApiUser.objects.create(email=email)
