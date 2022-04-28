@@ -4,6 +4,7 @@ from django.conf import settings
 from django.template import defaultfilters
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
+from django.utils.timezone import localtime
 import urllib.parse as parse
 
 from uil.core.utils.mail import send_template_email
@@ -44,8 +45,8 @@ def send_appointment_mail(
         # Also, using the template filter is a neat hack to have the same format
         # string syntax everywhere
         replacements.update({
-            '{date}': defaultfilters.date(time_slot.datetime, 'd-m-Y'),
-            '{time}': defaultfilters.date(time_slot.datetime, 'H:i'),
+            '{date}': defaultfilters.date(localtime(time_slot.datetime), 'd-m-Y'),
+            '{time}': defaultfilters.date(localtime(time_slot.datetime), 'H:i'),
         })
 
     send_template_email(
