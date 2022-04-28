@@ -512,7 +512,7 @@ Experiment, data: dict) -> None:
 
         # Check if we have an existing answer. If not, create a new one.
         try:
-            answer = participant.criterionanswer_set.filter(
+            answer = participant.criterionanswer_set.get(
                 criterion=specific_criterion.criterion
             )
 
