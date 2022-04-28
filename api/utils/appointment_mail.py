@@ -45,7 +45,7 @@ def send_appointment_mail(
         # Also, using the template filter is a neat hack to have the same format
         # string syntax everywhere
         replacements.update({
-            '{date}': defaultfilters.date(localtime(time_slot.datetime), 'd-m-Y'),
+            '{date}': defaultfilters.date(localtime(time_slot.datetime), 'l d-m-Y'),
             '{time}': defaultfilters.date(localtime(time_slot.datetime), 'H:i'),
         })
 
