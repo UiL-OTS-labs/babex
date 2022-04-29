@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-19 09:51+0000\n"
+"POT-Creation-Date: 2022-04-29 07:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -104,7 +104,7 @@ msgstr "Capable"
 msgid "participant:attribute:created"
 msgstr "Created on"
 
-#: participants/models.py:137 participants/models.py:174
+#: participants/models.py:137 participants/models.py:178
 msgid "participant:name:unknown"
 msgstr "name unknown"
 
@@ -123,11 +123,11 @@ msgstr "Female"
 msgid "participant:attribute:sex:prefer_not_to_answer"
 msgstr "Preferred not to answer"
 
-#: participants/models.py:181
+#: participants/models.py:185
 msgid "secondary_email:attribute:email"
 msgstr "Secondary e-mail address"
 
-#: participants/models.py:199
+#: participants/models.py:203
 msgid "criterion_answer:attribute:answer"
 msgstr "Answer"
 
@@ -170,27 +170,32 @@ msgstr "Unknown"
 msgid "participants:detail:secondary_emails"
 msgstr "Secondary e-mail(s)"
 
-#: participants/templates/participants/detail.html:84
-#: participants/templates/participants/detail.html:140
+#: participants/templates/participants/detail.html:73
+msgid "participants:detail:has_account"
+msgstr "Has account"
+
+#: participants/templates/participants/detail.html:76
+#: participants/templates/participants/detail.html:92
 #: participants/templates/participants/detail.html:148
+#: participants/templates/participants/detail.html:156
 #: participants/templates/participants/index.html:95
 msgid "yes,no"
 msgstr "yes,no"
 
-#: participants/templates/participants/detail.html:100
+#: participants/templates/participants/detail.html:108
 #: participants/templates/participants/index.html:92
 msgid "options:many,one"
 msgstr "many,one"
 
-#: participants/templates/participants/detail.html:158
+#: participants/templates/participants/detail.html:166
 msgid "participants:detail:experiments"
 msgstr "Experiment"
 
-#: participants/templates/participants/detail.html:161
+#: participants/templates/participants/detail.html:169
 msgid "participants:detail:datetime"
 msgstr "Date & Time"
 
-#: participants/templates/participants/detail.html:164
+#: participants/templates/participants/detail.html:172
 msgid "participants:detail:place"
 msgstr "Place"
 

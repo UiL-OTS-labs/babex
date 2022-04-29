@@ -70,6 +70,14 @@
             </tr>
             <tr>
                 <td>
+                    {% transformat 'participants:detail:has_account' %}
+                </td>
+                <td>
+                    {{ participant.has_account|yesno:_("yes,no") }}
+                </td>
+            </tr>
+            <tr>
+                <td>
                     {% get_verbose_field_name "participants" "Participant" "language" %}
                 </td>
                 <td>

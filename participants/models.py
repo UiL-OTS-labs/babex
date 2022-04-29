@@ -167,6 +167,10 @@ class Participant(models.Model):
 
         return self.sex
 
+    @property
+    def has_account(self):
+        return self.api_user is not None
+
     def __str__(self):
         name = self.fullname
 
