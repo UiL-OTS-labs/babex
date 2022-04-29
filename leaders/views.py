@@ -56,7 +56,7 @@ class LeaderCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
 
         data = form.cleaned_data
 
-        leader = create_leader(
+        leader, existing = create_leader(
             data['name'],
             data['email'],
             data['phonenumber'],
@@ -64,7 +64,7 @@ class LeaderCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
         )
 
         if data['notify_user']:
-            notify_new_leader(leader)
+            notify_new_leader(leader, existing)
 
         return super(LeaderCreateView, self).form_valid(form)
 

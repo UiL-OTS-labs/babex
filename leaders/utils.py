@@ -12,7 +12,7 @@ from .models import Leader
 
 
 def create_leader(name: str, email: str, phonenumber: str,
-                  password: str = None) -> Leader:
+                  password: str = None) -> (Leader, bool):
     """
     This function creates a new Leader object.
 
@@ -37,15 +37,17 @@ def create_leader(name: str, email: str, phonenumber: str,
     existing_leader = Leader.objects.filter(api_user__email=email)
 
     if existing_leader:
-        return existing_leader[0]
+        return existing_leader[0], True
 
     leader = Leader()
     leader.name = name
     leader.phonenumber = phonenumber
 
     existing_api_user = ApiUser.objects.get_by_email(email)
+    existing = False
 
     if existing_api_user:
+        existing = True
         api_user = existing_api_user
     else:
         api_user = ApiUser()
@@ -64,7 +66,7 @@ def create_leader(name: str, email: str, phonenumber: str,
     leader.api_user = api_user
     leader.save()
 
-    return leader
+    return leader, existing
 
 
 def create_ldap_leader(name: str, email: str, phonenumber: str) -> Leader:
@@ -123,8 +125,12 @@ def get_login_link() -> str:
     )
 
 
-def notify_new_leader(leader: Leader) -> None:
+def notify_new_leader(leader: Leader, existing=False) -> None:
     has_password = leader.api_user.has_password
+
+    template = 'leaders/mail/notify_new_leader'
+    if existing:
+        template = 'leaders/mail/notify_new_leader_existing_account'
 
     if not has_password:
         token_model = UserToken.objects.create(
@@ -154,7 +160,7 @@ def notify_new_leader(leader: Leader) -> None:
     send_template_email(
         [leader.api_user.email],
         subject,
-        'leaders/mail/notify_new_leader',
+        template,
         context,
         'no-reply@uu.nl'
     )
