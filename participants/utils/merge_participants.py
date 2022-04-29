@@ -58,6 +58,12 @@ def merge_participants(old: Participant,
             criterion_answer.participant = old
             criterion_answer.save()
 
+    # Transfer account if 'old' does not have one but 'new' does.
+    # If both have an account, 'old' should take priority
+    # If old has an account, but new does not, no steps are needed ;)
+    if not old.api_user and new.api_user:
+        old.api_user = new.api_user
+
     # Update attributes
     old.name = new.name
     old.phonenumber = new.phonenumber
