@@ -177,7 +177,12 @@ class Participant(models.Model):
         if not name:
             name = _('participant:name:unknown').__str__()
 
-        return "[{}] {}".format(self.pk, name)
+        return "[{}] {} ({}, {})".format(
+            self.pk,
+            name,
+            self.birth_date,
+            self.phonenumber
+        )
 
 
 class SecondaryEmail(models.Model):
