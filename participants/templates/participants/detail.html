@@ -74,6 +74,9 @@
                 </td>
                 <td>
                     {{ participant.has_account|yesno:_("yes,no") }}
+                    {% if participant.has_account %}
+                    ({{ participant.api_user.email }})
+                    {% endif %}
                 </td>
             </tr>
             <tr>
