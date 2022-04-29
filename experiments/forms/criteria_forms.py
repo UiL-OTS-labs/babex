@@ -37,6 +37,12 @@ class CriterionForm(forms.ModelForm):
             'values':        forms.TextInput,
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if self.instance.criterionanswer_set.count() != 0:
+            self.fields['values'].disabled = True
+
     def clean_name_form(self):
         """Slugifies the form name"""
         return slugify(self.cleaned_data['name_form'])
