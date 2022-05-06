@@ -32,7 +32,7 @@ def _handle_late_comment(appointment: Appointment) -> None:
     if now > deadline:
         add_system_comment(
             appointment.participant,
-            "Cancelled less than 24 before experiment",
+            "Cancelled less than 24h before experiment",
             appointment.timeslot.experiment
         )
 
