@@ -20,7 +20,7 @@ class UserCreationForm(auth_forms.UserCreationForm):
         print(value)
 
         if not value:
-            if User.objects.filter(is_supreme_admin=True).count() <= 1:
+            if User.objects.filter(is_supreme_admin=True).count() < 1:
                 self.add_error(
                     'is_supreme_admin',
                     _("main:forms:error:no_supreme_admin")
@@ -77,7 +77,7 @@ class LDAPUserCreationForm(forms.ModelForm):
         value = self.cleaned_data['is_supreme_admin']
 
         if not value:
-            if User.objects.filter(is_supreme_admin=True).count() <= 1:
+            if User.objects.filter(is_supreme_admin=True).count() < 1:
                 self.add_error(
                     'is_supreme_admin',
                     _("main:forms:error:no_supreme_admin")
