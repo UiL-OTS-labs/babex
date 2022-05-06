@@ -30,7 +30,6 @@ class ExperimentForm(forms.ModelForm):
         self.fields['default_max_places'].widget.attrs.update(
             {
                 'min': 1,
-                'max': 10,
             }
         )
 
