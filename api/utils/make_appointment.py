@@ -396,8 +396,8 @@ def _handle_specific_criteria(
                 # We are not going to fail this directly, as some criteria
                 # answers can actually change over time. (For example: has
                 # lived in Utrecht in the past month).
-                comment = "Gave a different answer to a criteria " \
-                          "he/she answered before: {}, old answer: " \
+                comment = "Gave a different answer to a criterion " \
+                          "they answered before: {}, old answer: " \
                           "{}, new answer: {}"
                 comment = comment.format(
                     specific_criterion.criterion.name_natural,
