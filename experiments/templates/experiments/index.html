@@ -32,6 +32,9 @@
                         {% get_verbose_field_name "experiments" "Experiment" "name" %}
                     </th>
                     <th>
+                        {% get_verbose_field_name "experiments" "Experiment" "leader" %}
+                    </th>
+                    <th>
                         {% trans "experiments:global:slots" %}
                     </th>
                     <th>
@@ -65,6 +68,9 @@
                             <a href="{% url 'experiments:detail' experiment.pk %}">
                                 {{ experiment }}
                             </a>
+                        </td>
+                        <td>
+                            {{ experiment.leader.name }}
                         </td>
                         <td>
                             {% if experiment.use_timeslots %}
