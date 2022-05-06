@@ -62,7 +62,13 @@ def merge_participants(old: Participant,
     # If both have an account, 'old' should take priority
     # If old has an account, but new does not, no steps are needed ;)
     if not old.api_user and new.api_user:
-        old.api_user = new.api_user
+        api_user = new.api_user
+        api_user.participant = old
+        api_user.save()
+        new.api_user = None
+
+    # Finally, delete the new object
+    new.delete()
 
     # Update attributes
     old.name = new.name
@@ -70,8 +76,6 @@ def merge_participants(old: Participant,
     old.social_status = new.social_status
     old.save()
 
-    # Finally, delete the new object
-    new.delete()
 
     # Log the modification
     _log(old, new, performing_user)
