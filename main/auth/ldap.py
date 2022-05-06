@@ -1,3 +1,4 @@
+from django.core.exceptions import PermissionDenied
 from django_auth_ldap.backend import LDAPBackend
 
 
@@ -39,6 +40,6 @@ class PpnLdapBackend(LDAPBackend):
                 lookup: query_value
             })
         except model.DoesNotExist:
-            user = None
+            raise PermissionDenied
 
         return user
