@@ -915,8 +915,8 @@ msgstr ""
 "checkbox van de plaats eronder geactiveerd. Op deze manier zijn meerdere "
 "plaatsen in een timeslot te verwijderen.<br/><br/>Met de knop 'group rows by "
 "slot' kun je plaatsen onder het tijdstip groeperen. Het is bedoeld om de "
-"leesbaarheid te verbeteren als uw tijdsloten meerdere plaatsen hebben, maar "
-"het kan het tegenovergestelde effect hebben als de meeste van uw tijdsloten "
+"leesbaarheid te verbeteren als je tijdsloten meerdere plaatsen hebben, maar "
+"het kan het tegenovergestelde effect hebben als de meeste van je tijdsloten "
 "slechts 1 plaats heeft."
 
 #: experiments/templates/timeslots/index.html:44
