@@ -6,6 +6,7 @@ Een administrator heeft een account voor je aangemaakt voor het UiL OTS proefper
 
 Login: {{ email }}>
 Wachtwoord: Uw Solis wachtwoord
+Inlog pagina: {{ login_link }}
 
 -------------
 
@@ -15,3 +16,4 @@ An administrator has created an account for you for the UiL OTS participant recr
 
 Login: {{ email }}><br/>
 Password: Your Solis password
+Login page: {{ login_link }}
