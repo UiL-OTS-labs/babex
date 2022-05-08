@@ -95,6 +95,8 @@ class LeaderExperimentsView(viewsets.GenericViewSet):
 
         qs = qs.select_related('leader', 'location')
         qs = qs.prefetch_related('additional_leaders', 'excluded_experiments')
+        
+        qs = qs.distinct()
 
         self.queryset = qs
 
