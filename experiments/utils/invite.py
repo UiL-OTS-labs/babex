@@ -108,7 +108,7 @@ def _parse_contents_html(content: str, experiment: Experiment) -> str:
     match = re.search(link_to_subscribe_regex, content)
 
     if not match:
-        return content
+        return mark_safe(content)
 
     replacement = "<a href=\"{}\">{}</a>".format(
         get_register_link(experiment),
@@ -125,7 +125,7 @@ def _parse_contents_plain(content: str, experiment: Experiment) -> str:
     match = re.search(link_to_subscribe_regex, content)
 
     if not match:
-        return content
+        return mark_safe(content)
 
     replacement = "{} ({})".format(
         match.group(1),
