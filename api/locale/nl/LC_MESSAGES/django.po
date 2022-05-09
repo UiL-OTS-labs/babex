@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-26 11:26+0000\n"
+"POT-Creation-Date: 2022-04-29 07:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: api/auth/admin.py:26
+msgid "Authentication"
+msgstr ""
 
 #: api/auth/admin.py:29
 msgid "Personal info"
@@ -30,32 +34,32 @@ msgstr ""
 msgid "Important dates"
 msgstr ""
 
-#: api/auth/admin.py:56
+#: api/auth/admin.py:63
 #, python-format
 msgid "%(name)s object with primary key %(key)r does not exist."
 msgstr ""
 
-#: api/auth/admin.py:67
+#: api/auth/admin.py:74
 msgid "Password changed successfully."
 msgstr ""
 
-#: api/auth/admin.py:89
+#: api/auth/admin.py:96
 #, python-format
 msgid "Change password: %s"
 msgstr ""
 
-#: api/auth/serializers.py:16
+#: api/auth/serializers.py:26
 msgid "Username"
 msgstr "Gebruikersnaam"
 
-#: api/auth/serializers.py:18
+#: api/auth/serializers.py:28
 msgid "Password"
 msgstr "Wachtwoord"
 
-#: api/auth/serializers.py:38
+#: api/auth/serializers.py:48
 msgid "api:auth:login_failed"
 msgstr "Authenticatie mislukt met de verstrekte inloggegevens "
 
-#: api/auth/serializers.py:41
+#: api/auth/serializers.py:51
 msgid "api:auth:missing_values"
 msgstr "Moet \"username\" en \"password\" bevatten."

@@ -222,6 +222,8 @@ def _migrate_default_criteria(
         new_crit.min_age = min_age
         new_crit.max_age = max_age
 
+        new_crit.save()
+
 
 def _migrate_specific_criteria(
         experiment_pairs: List[Tuple[OldExperiment, NewExperiment]]

@@ -230,7 +230,7 @@ msgstr ""
 
 #: experiments/models/experiment_models.py:108
 msgid "experiment:attribute:default_max_places"
-msgstr "Standaard aantal plekken. "
+msgstr "Standaard aantal plekken"
 
 #: experiments/models/experiment_models.py:112
 msgid "experiment:attribute:default_max_places:help_text"
@@ -271,7 +271,7 @@ msgstr ""
 
 #: experiments/models/experiment_models.py:136
 msgid "experiment:attribute:excluded_experiments"
-msgstr "Buitengesloten experimenten"
+msgstr "Uitgesloten experimenten"
 
 #: experiments/models/experiment_models.py:138
 msgid "experiment:attribute:excluded_experiments:help_text"
@@ -758,7 +758,7 @@ msgstr "Al eens uitgenodigd"
 #: experiments/templates/experiments/invite.html:97
 msgid "experiments:invite:text:help"
 msgstr ""
-" Deze tekst is gegenereerd aan de hand van het uitnodigingsmail sjabloon van "
+" Deze tekst is gegenereerd aan de hand van het uitnodigingsmail-sjabloon van "
 "dit experiment. Dit sjabloon kan aangepast worden op de <a href="
 "\"{}\">'Verander experiment' pagina</a>."
 

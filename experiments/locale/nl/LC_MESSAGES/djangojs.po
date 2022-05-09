@@ -23,8 +23,8 @@ msgstr ""
 msgid "timeslot:warning:confirm_silent_remove_participant"
 msgstr ""
 "Weet je zeker dat je deze participant wilt verwijderen uit dit timeslot? "
-"WAARSCHUWING! Deze actie verstuurd GEEN automatische bevestigingsmail! (Je "
-"kan de knop naast deze gebruiken als je wel een automatische mail wilt laten "
+"WAARSCHUWING! Deze actie verstuurt GEEN automatische bevestigingsmail! (Je "
+"kunt de knop naast deze gebruiken als je wel een automatische mail wilt laten "
 "sturen)."
 
 #: experiments/static/experiments/participants/list.js:42
