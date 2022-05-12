@@ -3,7 +3,7 @@ from django.urls import include, path
 import api.auth.views as auth_views
 from api.views import AddCommentView, ForgotPasswordView, RegisterView, \
     ResetPasswordView, ValidateTokenView
-from api.views.experiment_views import DeleteAppointment
+from api.views.experiment_views import DeleteAppointment, RemindParticipantsView
 from api.views.participant_views import UnsubscribeFromMailinglistView, \
     ValidateMailinglistTokenView
 from .router import router
@@ -25,6 +25,8 @@ urlpatterns = [
          DeleteTimeSlots.as_view()),
     path('experiment/<int:experiment>/delete_appointment/',
          DeleteAppointment.as_view()),
+    path('experiment/<int:experiment>/remind_participants/',
+         RemindParticipantsView.as_view()),
 
     path('leader/', include([
         path('', LeaderView.as_view()),

@@ -89,7 +89,6 @@ class LeaderExperimentSerializer(ExperimentSerializer):
         ).data
 
     def get_appointments(self, o):
-        print("I'm actually running!")
         # Local import to prevent import cycles
         from .timeslot_serializers import LeaderAppointmentSerializer
 

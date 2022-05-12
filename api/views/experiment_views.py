@@ -11,9 +11,10 @@ from api.serializers.experiment_serializers import LeaderExperimentSerializer
 from api.utils import register_participant
 from auditlog.enums import Event, UserType
 import auditlog.utils.log as auditlog
-from experiments.models import Experiment
+from experiments.models import Appointment, Experiment
 from experiments.utils import delete_timeslot, unsubscribe_participant
 from experiments.utils.exclusion import check_participant_eligible
+from experiments.utils.remind_participant import remind_participant
 from experiments.utils.timeslot_create import add_timeslot
 
 
@@ -179,6 +180,34 @@ class SwitchExperimentOpenView(views.APIView):
             'success': True,
             'open':    experiment_object.open
         })
+
+
+class RemindParticipantsView(views.APIView):
+    permission_classes = (IsPermittedClient, IsAuthenticated, IsLeader)
+    authentication_classes = (JwtAuthentication,)
+
+    def post(self, request, experiment):
+        if not hasattr(request.user, 'leader'):
+            raise PermissionDenied
+
+        leader = request.user.leader
+
+        experiment_object = Experiment.objects.get(pk=experiment)
+
+        if not leader == experiment_object.leader and leader not in \
+                experiment_object.additional_leaders.all():
+            raise PermissionDenied
+
+        pks = request.data.getlist('appointments')
+
+        try:
+            for pk in pks:
+                appointment = Appointment.objects.get(pk=pk)
+                remind_participant(appointment)
+        except Exception as e:  # NoQA
+            pass
+
+        return Response(True)
 
 
 class AddTimeSlotView(views.APIView):
