@@ -86,7 +86,7 @@ msgstr "Left/rechtshandig"
 
 #: participants/models.py:98
 msgid "participant:attribute:sex"
-msgstr "Geslachte"
+msgstr "Geslacht"
 
 #: participants/models.py:104
 msgid "participant:attribute:social_status"
