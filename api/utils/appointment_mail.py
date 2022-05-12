@@ -34,8 +34,24 @@ def send_appointment_mail(
         '{participant_name}': participant.name,
         '{leader_name}': experiment.leader.name,
         '{leader_email}': experiment.leader.api_user.email,
-        '{leader_phonenumber}': experiment.leader.phonenumber
+        '{leader_phonenumber}': experiment.leader.phonenumber,
+        '{all_leaders_name_list}': experiment.leader.name,
     }
+
+    num_additional_leaders = experiment.additional_leaders.count()
+
+    if num_additional_leaders > 0:
+        last_leader = experiment.additional_leaders.last()
+        others = experiment.additional_leaders.exclude(pk=last_leader.pk)
+
+        # If there's one additional, don't add the comma as it looks weird
+        if num_additional_leaders > 1:
+            replacements['{all_leaders_name_list}'] += ", "
+
+        replacements['{all_leaders_name_list}'] += ", ".join(
+            [x.name for x in others]
+        )
+        replacements['{all_leaders_name_list}'] += f" en {last_leader.name}"
 
     if experiment.location:
         replacements['{experiment_location}'] = experiment.location.name

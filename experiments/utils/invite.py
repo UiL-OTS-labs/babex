@@ -28,8 +28,24 @@ def get_invite_mail_content(experiment: Experiment) -> str:
         '{leader_name}':             experiment.leader.name,
         '{leader_email}':            experiment.leader.api_user.email,
         '{leader_phonenumber}':      experiment.leader.phonenumber,
+        '{all_leaders_name_list}':   experiment.leader.name,
         '{admin}':                   get_supreme_admin().get_full_name(),
     }
+
+    num_additional_leaders = experiment.additional_leaders.count()
+
+    if num_additional_leaders > 0:
+        last_leader = experiment.additional_leaders.last()
+        others = experiment.additional_leaders.exclude(pk=last_leader.pk)
+
+        # If there's one additional, don't add the comma as it looks weird
+        if num_additional_leaders > 1:
+            replacements['{all_leaders_name_list}'] += ", "
+
+        replacements['{all_leaders_name_list}'] += ", ".join(
+            [x.name for x in others]
+        )
+        replacements['{all_leaders_name_list}'] += f" en {last_leader.name}"
 
     if experiment.location:
         replacements['{experiment_location}'] = experiment.location.name
