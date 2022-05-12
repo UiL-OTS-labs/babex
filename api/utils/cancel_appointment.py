@@ -42,7 +42,7 @@ def _inform_leaders(appointment: Appointment) -> None:
 
     leaders = [experiment.leader]
     if experiment.additional_leaders.exists():
-        leaders.append(*experiment.additional_leaders.all())
+        leaders.extend(experiment.additional_leaders.all())
 
     for leader in leaders:
         subject = 'UiL OTS participant deregistered for experiment: {}'.format(
