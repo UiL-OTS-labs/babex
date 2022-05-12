@@ -1,4 +1,5 @@
 import braces.views as braces
+from django import forms
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy as reverse
 from django.utils.functional import cached_property
@@ -8,7 +9,7 @@ from uil.core.views import FormSetUpdateView
 from uil.core.views.mixins import DeleteSuccessMessageMixin
 
 from .forms import CriterionAnswerForm, ParticipantForm, ParticipantMergeForm
-from .models import CriterionAnswer, Participant
+from .models import CriterionAnswer, Participant, SecondaryEmail
 from .utils import merge_participants
 
 from auditlog.enums import Event, UserType
@@ -47,8 +48,41 @@ class ParticipantUpdateView(braces.LoginRequiredMixin,
     template_name = 'participants/edit.html'
     success_message = _('participants:messages:updated_participant')
     form_class = ParticipantForm
+    secondary_email_formset = forms.inlineformset_factory(
+        Participant,
+        SecondaryEmail,
+        fields=('email',),
+        can_delete=True,
+        extra=4
+    )
 
-    def form_valid(self, form):
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['secondary_email_formset'] = kwargs.get(
+            'secondary_email_formset',
+            self.secondary_email_formset(instance=self.get_object())
+        )
+
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.form_class(request.POST, instance=self.object)
+        formset = self.secondary_email_formset(request.POST, instance=self.object)
+
+        if form.is_valid() and formset.is_valid():
+            return self.form_valid(form, formset)
+        elif not form.is_valid():
+            return self.form_invalid(form)
+
+        return self.render_to_response(
+            self.get_context_data(
+                form=form,
+                secondary_email_formset=formset
+            )
+        )
+
+    def form_valid(self, form, formset):
         message = "Admin updated participant '{}'".format(self.object)
         auditlog.log(
             Event.MODIFY_DATA,
@@ -56,7 +90,7 @@ class ParticipantUpdateView(braces.LoginRequiredMixin,
             self.request.user,
             UserType.ADMIN
         )
-
+        formset.save()
         return super().form_valid(form)
 
     def get_success_url(self):

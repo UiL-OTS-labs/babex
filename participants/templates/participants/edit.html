@@ -8,6 +8,55 @@
     {% trans 'participants:update:header' %} - {{ block.super }}
 {% endblock %}
 
+{% block html_head %}
+    <script nonce="{{ request.csp_nonce }}">
+        function hideExtraForms(numExisting) {
+            $('.se-form').each((idx, el) => {
+                if (idx >= numExisting) {
+                    $(el).hide();
+                }
+            });
+        }
+
+        $(function() {
+            $('#add_se').click((event) => {
+                event.preventDefault();
+                let hidden = $('.se-form:hidden');
+                hidden.last().show();
+
+                if (hidden.length - 1 <= 0) {
+                    $('#add_se').hide();
+                }
+            });
+
+            hideExtraForms({{ object.secondaryemail_set.count }});
+        });
+    </script>
+
+    <style>
+        .se-form {
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-start;
+            column-gap: 20px;
+            box-sizing: border-box;
+            justify-content: center;
+        }
+        .se-form p {
+            display: flex;
+            gap: 10px;
+        }
+
+        .se-form label {
+            font-weight: bold;
+        }
+
+        .se-form label, .se-form input {
+            display: inline-block;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
 <div class="uu-inner-container">
     <div class="col-12">
@@ -23,6 +72,16 @@
                 {{ form.as_table }}
             </table>
             <br/>
+            <h4 class="mb-4">{% trans 'participants:update:header:secondary_email' %}</h4>
+            {{ secondary_email_formset.management_form }}
+            {% for se_form in secondary_email_formset %}
+                <div class="se-form">
+                    <table width="100%">
+                      {{ se_form.as_p }}
+                    </table>
+                </div>
+            {% endfor %}
+            <a href="#" id="add_se">+ {% trans 'participants:update:add_secondary_email' %}</a>
             <div class="float-right">
                 <button type="submit">{% trans 'participants:globals:save_button' %}</button>
             </div>

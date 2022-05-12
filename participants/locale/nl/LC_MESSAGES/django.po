@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-29 07:53+0000\n"
+"POT-Creation-Date: 2022-05-12 11:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,11 +123,11 @@ msgstr "Vrouw"
 msgid "participant:attribute:sex:prefer_not_to_answer"
 msgstr "Antwoordde liever niet"
 
-#: participants/models.py:185
+#: participants/models.py:190
 msgid "secondary_email:attribute:email"
 msgstr "Secundaire e-mailadres"
 
-#: participants/models.py:203
+#: participants/models.py:208
 msgid "criterion_answer:attribute:answer"
 msgstr "Antwoord"
 
@@ -175,40 +175,48 @@ msgid "participants:detail:has_account"
 msgstr "Heeft account"
 
 #: participants/templates/participants/detail.html:76
-#: participants/templates/participants/detail.html:92
-#: participants/templates/participants/detail.html:148
-#: participants/templates/participants/detail.html:156
+#: participants/templates/participants/detail.html:95
+#: participants/templates/participants/detail.html:151
+#: participants/templates/participants/detail.html:159
 #: participants/templates/participants/index.html:95
 msgid "yes,no"
 msgstr "ja,nee"
 
-#: participants/templates/participants/detail.html:108
+#: participants/templates/participants/detail.html:111
 #: participants/templates/participants/index.html:92
 msgid "options:many,one"
 msgstr "meerdere,een"
 
-#: participants/templates/participants/detail.html:166
+#: participants/templates/participants/detail.html:169
 msgid "participants:detail:experiments"
 msgstr "Experimenten"
 
-#: participants/templates/participants/detail.html:169
+#: participants/templates/participants/detail.html:172
 msgid "participants:detail:datetime"
 msgstr "Datum & tijd"
 
-#: participants/templates/participants/detail.html:172
+#: participants/templates/participants/detail.html:175
 msgid "participants:detail:place"
 msgstr "Plaats"
 
 #: participants/templates/participants/edit.html:8
-#: participants/templates/participants/edit.html:15
+#: participants/templates/participants/edit.html:64
 msgid "participants:update:header"
 msgstr "Participant aanpassen"
 
-#: participants/templates/participants/edit.html:18
+#: participants/templates/participants/edit.html:67
 msgid "participants:update:info_text"
 msgstr "<br/>"
 
-#: participants/templates/participants/edit.html:27
+#: participants/templates/participants/edit.html:75
+msgid "participants:update:header:secondary_email"
+msgstr "Secundaire emails"
+
+#: participants/templates/participants/edit.html:84
+msgid "participants:update:add_secondary_email"
+msgstr "Nieuw secundair email"
+
+#: participants/templates/participants/edit.html:86
 #: participants/templates/participants/specific_criteria.html:32
 msgid "participants:globals:save_button"
 msgstr "Save"
@@ -268,14 +276,14 @@ msgstr "Specifieke criteria voor '{}'"
 msgid "participants:specific_criteria:info_text"
 msgstr " "
 
-#: participants/views.py:48
+#: participants/views.py:49
 msgid "participants:messages:updated_participant"
 msgstr "Participant aangepast!"
 
-#: participants/views.py:69
+#: participants/views.py:103
 msgid "participants:messages:deleted_participant"
 msgstr "Participant verwijderd!"
 
-#: participants/views.py:116
+#: participants/views.py:150
 msgid "participants:messages:merged_participants"
 msgstr "Participanten samengevoegd!"
