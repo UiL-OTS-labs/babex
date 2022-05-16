@@ -757,7 +757,7 @@ msgstr "Secundaire emails"
 
 #: experiments/templates/experiments/invite.html:52
 msgid "experiments:invite:already_invited"
-msgstr "Al eens uitgenodigd"
+msgstr "Uitgenodigd op"
 
 #: experiments/templates/experiments/invite.html:97
 msgid "experiments:invite:text:help"

@@ -98,16 +98,11 @@ def mail_invite(
         plain_context=plain_text_context
     )
 
-    # Make sure we only create new invitation objects if there wasn't one
-    # already
-    existing_invitations = Invitation.objects.filter(experiment=experiment)
-    existing_invitations = [i.participant for i in existing_invitations]
-
     # Create a new invitation object for all participants, so we see a nice
     # checkbox
     Invitation.objects.bulk_create(
         [Invitation(experiment=experiment, participant=participant) for
-         participant in participants if participant not in existing_invitations]
+         participant in participants if participant]
     )
 
 

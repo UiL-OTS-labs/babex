@@ -5,8 +5,6 @@ from .experiment_models import Experiment
 
 
 class Invitation(models.Model):
-    class Meta:
-        unique_together = ('experiment', 'participant')
 
     experiment = models.ForeignKey(
         Experiment,

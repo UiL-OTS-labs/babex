@@ -1,6 +1,6 @@
 import braces.views as braces
 from django.contrib.messages import error, success
-from django.core.exceptions import ViewDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, ViewDoesNotExist
 from django.utils.translation import ugettext as _
 from django.views import generic
 
@@ -25,14 +25,28 @@ class InviteParticipantsForExperimentView(braces.LoginRequiredMixin,
         context = super(InviteParticipantsForExperimentView,
                         self).get_context_data(**kwargs)
 
-        context['object_list'] = get_eligible_participants_for_experiment(
-            self.experiment
-        )
+        context['object_list'] = self.get_object_list()
         context['experiment'] = self.experiment
         context['admin'] = get_supreme_admin().get_full_name()
         context['invite_text'] = get_invite_mail_content(self.experiment)
 
         return context
+
+    def get_object_list(self):
+        particitants = get_eligible_participants_for_experiment(
+            self.experiment
+        )
+
+        for participant in particitants:
+            try:
+                invite = participant.invitation_set.filter(
+                    experiment=self.experiment
+                ).order_by('-creation_date').first()
+                participant.invite = invite
+            except ObjectDoesNotExist:
+                participant.invite = None
+
+        return particitants
 
     def post(self, request, *args, **kwargs):
         data = request.POST

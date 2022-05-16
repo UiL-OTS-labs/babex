@@ -73,8 +73,14 @@
                                     <a href="mailto:{{ email.email }}">{{ email.email }}</a>,
                                 {% endfor %}
                             </td>
-                            <td class="icon-invited">
-                                {{ participant.has_invitation|yesno:"," }}
+                            <td data-order="{{ participant.invite.creation_date|date:'U' }}">
+                                {% if not participant.invite %}
+                                    <span class="icon-invited">
+                                        
+                                    </span>
+                                {% else %}
+                                    {{ participant.invite.creation_date|date:"Y-m-d H:i" }}
+                                {% endif %}
                             </td>
                             <td>
                                 <input class="invite-checkbox" type="checkbox" name="participants[]" value="{{ participant.pk }}">
