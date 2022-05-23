@@ -8,6 +8,7 @@ from uil.core.utils.mail import send_template_email
 from api.auth.ldap_backend import ApiLdapBackend
 from api.auth.models import ApiGroup, ApiUser, UserToken
 from api.utils import get_reset_links
+from main.utils import is_ldap_enabled
 from .models import Leader
 
 
@@ -241,3 +242,26 @@ def delete_leader(leader: Leader) -> None:
             api_user.save()
 
     leader.delete()
+
+
+def convert_leader_to_ldap(leader: Leader) -> None:
+    """All hail the mighty LDAP!
+    Oh wait, it's not that kind of conversion... bummer
+
+    Changes an eligible non-ldap-enabled leader account to use ldap for
+    authentication
+    """
+    api_user = leader.api_user
+
+    if not is_ldap_enabled() or api_user.is_ldap_account:
+        return
+
+    if not api_user.email.endswith("uu.nl"):
+        return
+
+    api_user.set_password(None)
+    api_user.passwords_needs_change = False
+    api_user.is_ldap_account = True
+    api_user.save()
+
+    ApiLdapBackend().populate_user(api_user.email)

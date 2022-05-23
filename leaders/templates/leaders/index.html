@@ -85,8 +85,19 @@
                             {{ leader.active|yesno:"," }}
                         </td>
                         {% if ldap %}
-                            <td class="icon-yesno">
-                                {{ leader.api_user.is_ldap_account|yesno:"," }}
+                            <td>
+                                <span class="icon-yesno">
+                                    {{ leader.api_user.is_ldap_account|yesno:"," }}
+                                </span>
+                                {% if not leader.api_user.is_ldap_account and leader.email.lower|slice:"-5:" == "uu.nl" %}
+                                    <a
+                                        href="{% url 'leaders:convert_to_ldap' leader.pk %}"
+                                        class="icon-convert"
+                                        title="{% trans 'leaders:home:convert_to_ldap' %}"
+                                    >
+                                        
+                                    </a>
+                                {% endif %}
                             </td>
                         {% endif %}
                         <td>

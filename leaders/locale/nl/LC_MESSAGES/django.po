@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-12 11:10+0000\n"
+"POT-Creation-Date: 2022-05-23 14:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -103,6 +103,27 @@ msgstr ""
 msgid "leader:inactive"
 msgstr "{} (inactief)"
 
+#: leaders/templates/leaders/convert.html:8
+#: leaders/templates/leaders/convert.html:16
+msgid "leaders:convert:header"
+msgstr "Account omzetten naar Solis-ID account"
+
+#: leaders/templates/leaders/convert.html:19
+msgid "leaders:convert:text"
+msgstr ""
+"Weet je zeker dat je {}'s account wilt omzetten naar een Solis account? <br/"
+"> Hiermee wordt het ingestelde wachtwoord verwijderd en moet de gebruiker "
+"diens UU-inloggegevens gebruiken! De gebruiker wordt niet automatisch op de "
+"hoogte gebracht van deze wijziging."
+
+#: leaders/templates/leaders/convert.html:22
+msgid "leaders:convert:cancel"
+msgstr "Annuleer"
+
+#: leaders/templates/leaders/convert.html:25
+msgid "leaders:convert:confirm"
+msgstr "Converteer"
+
 #: leaders/templates/leaders/delete.html:8
 #: leaders/templates/leaders/delete.html:16
 msgid "leaders:delete:header"
@@ -174,7 +195,11 @@ msgstr "Solis account"
 msgid "leaders:home:actions"
 msgstr "Acties"
 
-#: leaders/templates/leaders/index.html:105
+#: leaders/templates/leaders/index.html:96
+msgid "leaders:home:convert_to_ldap"
+msgstr "Zet account om naar Solis account"
+
+#: leaders/templates/leaders/index.html:116
 msgid "leaders:home:delete:title"
 msgstr "Proefleider verwijderen"
 
@@ -200,14 +225,18 @@ msgstr "Proefleider '{}' aanpassen"
 msgid "leaders:update:info_text"
 msgstr "<br/>"
 
-#: leaders/views.py:50 leaders/views.py:77
+#: leaders/views.py:51 leaders/views.py:78
 msgid "leaders:create:success_message"
 msgstr "Nieuwe proefleider aangemaakt!"
 
-#: leaders/views.py:103 leaders/views.py:141
+#: leaders/views.py:104 leaders/views.py:142
 msgid "leaders:update:success_message"
 msgstr "Proefleider aangepast!"
 
-#: leaders/views.py:179
+#: leaders/views.py:180
 msgid "leaders:messages:deleted"
 msgstr "Proefleider verwijderd!"
+
+#: leaders/views.py:192
+msgid "leaders:messages:converted"
+msgstr "Account omgezet!"

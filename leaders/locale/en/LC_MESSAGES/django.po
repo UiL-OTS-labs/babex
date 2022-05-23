@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-12 11:10+0000\n"
+"POT-Creation-Date: 2022-05-23 14:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,6 +97,26 @@ msgstr "This field cannot be empty when 'Keep current password' is unchecked!"
 msgid "leader:inactive"
 msgstr "{} (inactive)"
 
+#: leaders/templates/leaders/convert.html:8
+#: leaders/templates/leaders/convert.html:16
+msgid "leaders:convert:header"
+msgstr "Convert account to Solis-ID account"
+
+#: leaders/templates/leaders/convert.html:19
+msgid "leaders:convert:text"
+msgstr ""
+"Are you sure you want to convert {}'s account to a Solis-ID based account? "
+"<br/> This will remove any set password and require the user to use their UU "
+"credentials! The user won't be automatically informed of this change."
+
+#: leaders/templates/leaders/convert.html:22
+msgid "leaders:convert:cancel"
+msgstr "Cancel"
+
+#: leaders/templates/leaders/convert.html:25
+msgid "leaders:convert:confirm"
+msgstr "Convert"
+
 #: leaders/templates/leaders/delete.html:8
 #: leaders/templates/leaders/delete.html:16
 msgid "leaders:delete:header"
@@ -167,7 +187,11 @@ msgstr "Solis Account"
 msgid "leaders:home:actions"
 msgstr "Actions"
 
-#: leaders/templates/leaders/index.html:105
+#: leaders/templates/leaders/index.html:96
+msgid "leaders:home:convert_to_ldap"
+msgstr "Convert account to solis account"
+
+#: leaders/templates/leaders/index.html:116
 msgid "leaders:home:delete:title"
 msgstr "Delete leader"
 
@@ -193,14 +217,18 @@ msgstr "Update leader '{}'"
 msgid "leaders:update:info_text"
 msgstr "<br/>"
 
-#: leaders/views.py:50 leaders/views.py:77
+#: leaders/views.py:51 leaders/views.py:78
 msgid "leaders:create:success_message"
 msgstr "Leader successfully created!"
 
-#: leaders/views.py:103 leaders/views.py:141
+#: leaders/views.py:104 leaders/views.py:142
 msgid "leaders:update:success_message"
 msgstr "Leader successfully updated!"
 
-#: leaders/views.py:179
+#: leaders/views.py:180
 msgid "leaders:messages:deleted"
 msgstr "Leader deleted!"
+
+#: leaders/views.py:192
+msgid "leaders:messages:converted"
+msgstr "Leader converted!"
