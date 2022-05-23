@@ -110,7 +110,7 @@ msgstr "Verberg participant gegevens"
 #: datamanagement/templates/datamanagement/index_parts/invites.html:8
 #: datamanagement/templates/datamanagement/index_parts/invites.html:16
 msgid "datamanagement:home:invites:header"
-msgstr "Experiment uitnodigigen"
+msgstr "Experiment uitnodigingen"
 
 #: datamanagement/templates/datamanagement/index_parts/invites.html:20
 msgid "datamanagement:home:invites:info_text"
