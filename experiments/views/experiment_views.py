@@ -2,7 +2,7 @@ import braces.views as braces
 from django.contrib import messages
 from django.contrib.auth.views import SuccessURLAllowedHostsMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.db.models import Count, F, Q, Sum
+from django.db.models import Count, F, Q
 from django.urls import reverse_lazy as reverse
 from django.utils.http import is_safe_url
 from django.utils.translation import gettext_lazy as _
@@ -31,13 +31,11 @@ class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         qs = self.model.objects.select_related('location')
 
-        sum_places = Sum('timeslot__max_places')
         count_participants = Count('timeslot__appointments', distinct=True)
         count_excluded_experiments = Count('excluded_experiments',
                                            distinct=True)
 
         return qs.annotate(
-            n_places=sum_places,
             n_participants=count_participants,
             n_excluded_experiments=count_excluded_experiments,
         )

@@ -155,6 +155,17 @@ Met vriendelijke groet,<br/>
         help_text=_("experiment:attribute:additional_leaders:help_text"),
     )
 
+    def n_timeslot_places(self):
+        """Returns the sum of all timeslot places this experiment has.
+        Used for experiment index page. Used to be an aggregate method in
+        that view, but it turns out it was not playing well with the other
+        aggregates (it was taking those as a multiply number, due to weird
+        join behaviour).
+
+        This function is basically me giving up....
+        """
+        return sum([x.max_places for x in self.timeslot_set.all()])
+
     def has_free_places(self):
         """
         Returns if this experiment is available for new participants. If

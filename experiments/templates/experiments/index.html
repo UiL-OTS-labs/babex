@@ -74,7 +74,7 @@
                         </td>
                         <td>
                             {% if experiment.use_timeslots %}
-                                 {{ experiment.n_places|default_if_none:0 }}
+                                 {{ experiment.n_timeslot_places|default_if_none:0 }}
                             {% endif %}
                         </td>
                         <td>
