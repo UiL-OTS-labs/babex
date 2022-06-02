@@ -58,6 +58,11 @@ def merge_participants(old: Participant,
             criterion_answer.participant = old
             criterion_answer.save()
 
+    # Move comments
+    for comment in new.comment_set.all():
+        comment.participant = old
+        comment.save()
+
     # Transfer account if 'old' does not have one but 'new' does.
     # If both have an account, 'old' should take priority
     # If old has an account, but new does not, no steps are needed ;)
