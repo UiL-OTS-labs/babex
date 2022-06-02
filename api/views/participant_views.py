@@ -42,12 +42,14 @@ class SubscribeToEmaillistView(views.APIView):
             participant.language = post_data.get('language')
             participant.multilingual = post_data.get('multilingual')
             participant.dyslexic = post_data.get('dyslexic')
-            participant.email_subscription = True
 
         try:
-            participant.email_subscription = True
-            participant.save()
-            success = True
+            # If it's already true, we don't do anything. Leaving success on
+            # False ensures the frontend will display a 'already known' message
+            if not participant.email_subscription:
+                participant.email_subscription = True
+                participant.save()
+                success = True
         except (DatabaseError, AttributeError):
             pass
 
