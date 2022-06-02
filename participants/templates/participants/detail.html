@@ -11,7 +11,9 @@
 {% block html_head %}
     <script nonce="{{ request.csp_nonce }}">
         $(function () {
-            $('.dt_custom').DataTable();
+            $('.dt_custom').DataTable({
+                order: [[1, 'desc']]
+            });
         });
     </script>
 {% endblock %}
