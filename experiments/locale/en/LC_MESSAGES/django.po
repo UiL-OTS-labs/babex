@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-12 11:42+0000\n"
+"POT-Creation-Date: 2022-06-23 10:16+0200\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -759,18 +759,18 @@ msgstr "Secondary emails"
 msgid "experiments:invite:already_invited"
 msgstr "Invited on"
 
-#: experiments/templates/experiments/invite.html:97
+#: experiments/templates/experiments/invite.html:103
 msgid "experiments:invite:text:help"
 msgstr ""
 "The invite text has been generated from this experiment's invite mail "
 "template. This template can be edited on the <a href=\"{}\">experiment edit "
 "page</a>."
 
-#: experiments/templates/experiments/invite.html:100
+#: experiments/templates/experiments/invite.html:106
 msgid "experiments:invite:preview_button"
 msgstr "Preview"
 
-#: experiments/templates/experiments/invite.html:103
+#: experiments/templates/experiments/invite.html:109
 msgid "experiments:invite:invite_button"
 msgstr "Invite participants"
 
@@ -986,59 +986,59 @@ msgstr "Criterion successfully added to experiment!"
 msgid "criteria:messages:removed_from_experiment"
 msgstr "Criterion successfully removed from experiment!"
 
-#: experiments/views/experiment_views.py:50
+#: experiments/views/experiment_views.py:48
 msgid "experiments:message:create:success"
 msgstr "Successfully created experiment"
 
-#: experiments/views/experiment_views.py:63
+#: experiments/views/experiment_views.py:61
 msgid "experiments:message:update:success"
 msgstr "Successfully updated experiment"
 
-#: experiments/views/experiment_views.py:108
+#: experiments/views/experiment_views.py:106
 msgid "experiments:message:deleted_experiment"
 msgstr "Experiment deleted!"
 
-#: experiments/views/experiment_views.py:154
+#: experiments/views/experiment_views.py:152
 msgid "experiments:message:exclude:included"
 msgstr "Successfully included experiment"
 
-#: experiments/views/experiment_views.py:157
+#: experiments/views/experiment_views.py:155
 msgid "experiments:message:exclude:excluded"
 msgstr "Successfully excluded experiment"
 
-#: experiments/views/experiment_views.py:240
+#: experiments/views/experiment_views.py:238
 msgid "experiments:message:switch_open:closed"
 msgstr "Successfully closed experiment"
 
-#: experiments/views/experiment_views.py:243
+#: experiments/views/experiment_views.py:241
 msgid "experiments:message:switch_open:opened"
 msgstr "Successfully opened experiment"
 
-#: experiments/views/experiment_views.py:258
+#: experiments/views/experiment_views.py:256
 msgid "experiments:message:switch_public:closed"
 msgstr "Successfully hid experiment"
 
-#: experiments/views/experiment_views.py:261
+#: experiments/views/experiment_views.py:259
 msgid "experiments:message:switch_public:opened"
 msgstr "Successfully made experiment public"
 
-#: experiments/views/experiment_views.py:277
+#: experiments/views/experiment_views.py:275
 msgid "experiments:message:switch_visible:invisible"
 msgstr "Successfully hid participants from leaders"
 
-#: experiments/views/experiment_views.py:282
+#: experiments/views/experiment_views.py:280
 msgid "experiments:message:switch_visible:visible"
 msgstr "Successfully changed participant visibility to visible"
 
-#: experiments/views/experiment_views.py:305
+#: experiments/views/experiment_views.py:303
 msgid "experiments:message:sent_reminders"
 msgstr "Sent reminders to {} participant(s)"
 
-#: experiments/views/invite_views.py:51
+#: experiments/views/invite_views.py:65
 msgid "experiments:message:invite_failure"
 msgstr "Something went wrong!"
 
-#: experiments/views/invite_views.py:53
+#: experiments/views/invite_views.py:67
 msgid "experiments:message:invite_success"
 msgstr "Successfully invited participants!"
 

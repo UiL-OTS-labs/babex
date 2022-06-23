@@ -8,6 +8,11 @@ Menu.add_item("home", MenuItem(_('mainmenu:home'),
                                exact_url=True
                                ))
 
+Menu.add_item("main", MenuItem(_('mainmenu:agenda'),
+                               reverse('agenda:home'),
+                               check=lambda x: x.user.is_authenticated
+                               ))
+
 Menu.add_item("main", MenuItem(_('mainmenu:experiments'),
                                reverse('experiments:home'),
                                check=lambda x: x.user.is_authenticated
@@ -33,10 +38,10 @@ Menu.add_item("main", MenuItem(_('mainmenu:participants'),
                                check=lambda x: x.user.is_authenticated
                                ))
 
-Menu.add_item("main", MenuItem(_('mainmenu:comments'),
-                               reverse('comments:home'),
-                               check=lambda x: x.user.is_authenticated
-                               ))
+# Menu.add_item("main", MenuItem(_('mainmenu:comments'),
+#                                reverse('comments:home'),
+#                                check=lambda x: x.user.is_authenticated
+#                                ))
 
 Menu.add_item("main", MenuItem(_('mainmenu:admins'),
                                reverse('main:users_home'),

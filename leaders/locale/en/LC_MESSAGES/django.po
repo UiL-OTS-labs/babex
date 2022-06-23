@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-23 14:52+0200\n"
+"POT-Creation-Date: 2022-06-23 10:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -187,13 +187,13 @@ msgstr "Solis Account"
 msgid "leaders:home:actions"
 msgstr "Actions"
 
-#: leaders/templates/leaders/index.html:96
-msgid "leaders:home:convert_to_ldap"
-msgstr "Convert account to solis account"
-
-#: leaders/templates/leaders/index.html:116
+#: leaders/templates/leaders/index.html:107
 msgid "leaders:home:delete:title"
 msgstr "Delete leader"
+
+#: leaders/templates/leaders/index.html:115
+msgid "leaders:home:convert_to_ldap"
+msgstr "Convert account to solis account"
 
 #: leaders/templates/leaders/new.html:8 leaders/templates/leaders/new.html:15
 msgid "leaders:new:header"

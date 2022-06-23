@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-12 11:10+0000\n"
+"POT-Creation-Date: 2022-06-23 10:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,42 +31,42 @@ msgid "mainmenu:home"
 msgstr "Home"
 
 #: main/menus.py:11
+msgid "mainmenu:agenda"
+msgstr "Agenda"
+
+#: main/menus.py:16
 msgid "mainmenu:experiments"
 msgstr "Experiments"
 
-#: main/menus.py:16
+#: main/menus.py:21
 msgid "mainmenu:locations"
 msgstr "Locations"
 
-#: main/menus.py:21
+#: main/menus.py:26
 msgid "mainmenu:criteria"
 msgstr "Criteria"
 
-#: main/menus.py:26
+#: main/menus.py:31
 msgid "mainmenu:leaders"
 msgstr "Leaders"
 
-#: main/menus.py:31
+#: main/menus.py:36
 msgid "mainmenu:participants"
 msgstr "Participants"
 
-#: main/menus.py:36
-msgid "mainmenu:comments"
-msgstr "Comments"
-
-#: main/menus.py:41
+#: main/menus.py:46
 msgid "mainmenu:admins"
 msgstr "Admins"
 
-#: main/menus.py:47
+#: main/menus.py:52
 msgid "mainmenu:datamanagement"
 msgstr "Data management"
 
-#: main/menus.py:53
+#: main/menus.py:58
 msgid "footermenu:login"
 msgstr "Log in"
 
-#: main/menus.py:58 main/templates/base/login_header.html:7
+#: main/menus.py:63 main/templates/base/login_header.html:7
 msgid "main:globals:logout"
 msgstr "Log out"
 
@@ -247,3 +247,6 @@ msgstr "New account created!"
 #: main/views/users.py:84
 msgid "users:message:changed_password"
 msgstr "Password changed!"
+
+#~ msgid "mainmenu:comments"
+#~ msgstr "Comments"

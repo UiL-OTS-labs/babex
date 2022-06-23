@@ -26,6 +26,7 @@ urlpatterns = [
     path('leaders/', include('leaders.urls')),
     path('participants/', include('participants.urls')),
     path('comments/', include('comments.urls')),
+    path('agenda/', include('agenda.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     path('uilcore/', include('uil.core.urls')),

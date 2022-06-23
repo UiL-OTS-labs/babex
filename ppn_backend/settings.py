@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'comments',
     'auditlog',
     'datamanagement',
+    'agenda',
 
     'django.contrib.admin',
 
