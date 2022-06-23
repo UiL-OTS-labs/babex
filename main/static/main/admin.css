@@ -19,3 +19,7 @@
 h1, h2, h3, h4 {
     font-weight: normal;
 }
+
+.uu-inner-container, .nav-container {
+  max-width: unset;
+}
