@@ -13,24 +13,35 @@ Menu.add_item("main", MenuItem(_('mainmenu:agenda'),
                                check=lambda x: x.user.is_authenticated
                                ))
 
+experiments_menu = [
+    MenuItem(_('mainmenu:experiments:overview'),
+             reverse('experiments:home')),
+    MenuItem(_('mainmenu:locations'),
+             reverse('experiments:location_home')),
+    MenuItem(_('mainmenu:criteria'),
+             reverse('experiments:criteria_home')),
+]
+
 Menu.add_item("main", MenuItem(_('mainmenu:experiments'),
-                               reverse('experiments:home'),
-                               check=lambda x: x.user.is_authenticated
+                               url=None,
+                               check=lambda x: x.user.is_authenticated,
+                               children=experiments_menu
                                ))
 
-Menu.add_item("main", MenuItem(_('mainmenu:locations'),
-                               reverse('experiments:location_home'),
-                               check=lambda x: x.user.is_authenticated
-                               ))
 
-Menu.add_item("main", MenuItem(_('mainmenu:criteria'),
-                               reverse('experiments:criteria_home'),
-                               check=lambda x: x.user.is_authenticated
-                               ))
+users_menu = [
+    MenuItem(_('mainmenu:leaders'),
+             reverse('leaders:home'),
+             check=lambda x: x.user.is_authenticated),
+    MenuItem(_('mainmenu:admins'),
+             reverse('main:users_home'),
+             check=lambda x: x.user.is_authenticated)
+]
 
-Menu.add_item("main", MenuItem(_('mainmenu:leaders'),
-                               reverse('leaders:home'),
-                               check=lambda x: x.user.is_authenticated
+Menu.add_item("main", MenuItem(_('mainmenu:users'),
+                               check=lambda x: x.user.is_authenticated,
+                               children=users_menu,
+                               url=None
                                ))
 
 Menu.add_item("main", MenuItem(_('mainmenu:participants'),
@@ -43,10 +54,6 @@ Menu.add_item("main", MenuItem(_('mainmenu:participants'),
 #                                check=lambda x: x.user.is_authenticated
 #                                ))
 
-Menu.add_item("main", MenuItem(_('mainmenu:admins'),
-                               reverse('main:users_home'),
-                               check=lambda x: x.user.is_authenticated
-                               ))
 
 if 'datamanagement' in settings.INSTALLED_APPS:
     Menu.add_item("main", MenuItem(_('mainmenu:datamanagement'),
