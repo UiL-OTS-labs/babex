@@ -1,0 +1,145 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+
+{% block header_title %}
+    {% trans 'users:home:header' %} - {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <div class="float-right ">
+            <div class="button button-colored">
+                <a href="{% url 'main:user_create' %}">
+                    {% if ldap %}
+                        {% trans 'users:home:create_user:local' %}
+                    {% else %}
+                        {% trans 'users:home:create_user' %}
+                    {% endif %}
+                </a>
+            </div>
+            {% if ldap %}
+            <br/>
+            <div class="button button-colored mt-1">
+                <a href="{% url 'main:user_create_ldap' %}">
+                    {% trans 'users:home:create_user:ldap' %}
+                </a>
+            </div>
+            {% endif %}
+        </div>
+        <h1>
+            {% trans 'users:home:header' %}
+        </h1>
+        <p>
+            {% trans 'users:home:info_text' %}
+        </p>
+        <table class="dt" width="100%" data-language="{% datatables_lang %}">
+            <thead>
+                <tr>
+                    <th>
+                        {% get_verbose_field_name 'main' 'User' 'id' %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name 'main' 'User' 'username' as username %}
+                        {{ username|capfirst }}
+                    </th>
+                    <th>
+                        {% trans 'users:home:name' %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name 'main' 'User' 'email' as email %}
+                        {{ email|capfirst }}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name 'main' 'User' 'is_supreme_admin' %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name 'main' 'User' 'is_active' as active %}
+                        {{ active|capfirst }}
+                    </th>
+                    {% if ldap %}
+                        <th>
+                            {% get_verbose_field_name 'main' 'User' 'is_ldap_account' %}
+                        </th>
+                    {% endif %}
+                    <th>
+                        {% trans 'users:home:actions' %}
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for user in object_list %}
+                    <tr>
+                        <td>
+                            {{ user.pk }}
+                        </td>
+                        <td>
+                            {{ user.username }}
+                        </td>
+                        <td>
+                            {{ user.get_full_name }}
+                        </td>
+                        <td>
+                            {{ user.email }}
+                        </td>
+                        <td class="icon-supreme">
+                            {{ user.is_supreme_admin|yesno:"," }}
+                        </td>
+                        <td class="icon-yesno">
+                            {{ user.is_active|yesno:"," }}
+                        </td>
+                        {% if ldap %}
+                            <td class="icon-ldap">
+                                {{ user.is_ldap_account|yesno:"," }}
+                            </td>
+                        {% endif %}
+                        <td>
+                        {% if user.is_ldap_account %}
+                            <a
+                                href="{% url 'main:user_edit_ldap' user.pk %}"
+                                title="{% trans 'users:home:edit:title' %}"
+                                class="icon-edit"
+                            >
+                                <span class="behind-icon">U</span> 
+                            </a>
+                        {% else %}
+                            <a
+                                href="{% url 'main:user_edit' user.pk %}"
+                                title="{% trans 'users:home:edit:title' %}"
+                                class="icon-edit"
+                            >
+                                <span class="behind-icon">U</span> 
+                            </a>
+                            <a
+                                href="{% url 'main:user_password' user.pk %}"
+                                title="{% trans 'users:home:change_password:title' %}"
+                                class="icon-edit"
+                            >
+                                <span class="behind-icon">P</span> 
+                            </a>
+                        {% endif %}
+                            {# We should not allow a user to delete their own account, that will we AWKWARD #}
+                            {# https://www.youtube.com/watch?v=q9kDT44DBXs #}
+                            {% if not request.user == user %}
+                            <a
+                                href="{% url 'main:user_delete' user.pk %}"
+                                title="{% trans 'users:home:delete:title' %}"
+                                class="icon-delete"
+                            >
+                                
+                            </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br/>
+    </div>
+</div>
+{% endblock %}

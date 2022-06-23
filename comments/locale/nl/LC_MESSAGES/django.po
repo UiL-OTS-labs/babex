@@ -1,0 +1,106 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-12 11:10+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: comments/models.py:18
+msgid "comment:attribute:participant"
+msgstr "Participant"
+
+#: comments/models.py:24
+msgid "comment:attribute:leader"
+msgstr "Toegevoegd door"
+
+#: comments/models.py:31
+msgid "comment:attribute:experiment"
+msgstr "Experiment"
+
+#: comments/models.py:36
+msgid "comment:attribute:comment"
+msgstr "Opmerking"
+
+#: comments/models.py:40 comments/models.py:47
+msgid "comment:attribute:datetime"
+msgstr "Toegevoegd op"
+
+#: comments/templates/comments/delete.html:8
+#: comments/templates/comments/delete.html:15
+msgid "comments:delete:header"
+msgstr "Opmerking verwijderen"
+
+#: comments/templates/comments/delete.html:18
+msgid "comments:delete:text"
+msgstr "Weet je zeker dat je deze opmerking wilt verwijderen?"
+
+#: comments/templates/comments/delete.html:21
+msgid "comments:delete:cancel"
+msgstr "Annuleren"
+
+#: comments/templates/comments/delete.html:24
+msgid "comments:delete:confirm"
+msgstr "Verwijder"
+
+#: comments/templates/comments/index.html:8
+#: comments/templates/comments/index.html:15
+msgid "comments:home:header"
+msgstr "Opmerkingen"
+
+#: comments/templates/comments/index.html:18
+msgid "comments:home:info_text"
+msgstr "<br/>"
+
+#: comments/templates/comments/index.html:45
+msgid "comments:home:table:actions"
+msgstr "Acties"
+
+#: comments/templates/comments/index.html:64
+msgid "comments:home:system_user"
+msgstr "Applicatie"
+
+#: comments/templates/comments/index.html:68
+msgid "comments:home:admin_user"
+msgstr "Administrator account"
+
+#: comments/templates/comments/index.html:77
+msgid "comments:home:no_experiment"
+msgstr "N.v.t."
+
+#: comments/templates/comments/index.html:88
+msgid "comments:home:delete"
+msgstr "Opmerking verwijderen"
+
+#: comments/templates/comments/new.html:8
+#: comments/templates/comments/new.html:15
+msgid "comments:new:header"
+msgstr "Nieuwe opmerking"
+
+#: comments/templates/comments/new.html:18
+msgid "comments:new:info_text"
+msgstr " "
+
+#: comments/templates/comments/new.html:27
+msgid "comments:globals:add_button"
+msgstr "Toevoegen"
+
+#: comments/views.py:29
+msgid "comments:messages:created"
+msgstr "Opmerking toegevoegd!"
+
+#: comments/views.py:55
+msgid "comments:messages:deleted"
+msgstr "Opmerking verwijderd!"

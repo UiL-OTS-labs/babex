@@ -1,0 +1,33 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+{% load transformat %}
+
+{% block header_title %}
+     {% transformat 'criteria:new_default_criteria:header' form.instance.experiment.name %} - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <h1>
+            {% transformat 'criteria:new_default_criteria:header' form.instance.experiment.name %}
+        </h1>
+        <p>
+            {% trans 'criteria:new_default_criteria:info_text' %}
+        </p>
+        <form method="post">
+            {% csrf_token %}
+            <table width="100%">
+                {{ form.as_table }}
+            </table>
+            <br/>
+            <div class="float-right">
+                <button type="submit">{% trans 'experiments:globals:save_button' %}</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

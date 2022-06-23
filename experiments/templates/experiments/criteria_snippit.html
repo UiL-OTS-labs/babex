@@ -1,0 +1,92 @@
+{# WARNING! This view has a twin in the frontend! Please check if any changes you made here also need to be made there! #}
+{# Also, the frotend should not show any dyslexia information. The leader should already know this, and this way we don't have medical information in the frontend (#SecurityClassificationWorkaround) #}
+{% load get_field_name %}
+{% load i18n %}
+
+<div class="d-inline-block">
+    Default criteria:
+    <table class="criteria-table mt-1">
+        <tr>
+            <td>
+                {% trans 'criteria_snippit:dyslexia' %}
+            </td>
+            <td>
+                {{ experiment.defaultcriteria.get_dyslexia_display }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% trans 'criteria_snippit:language' %}
+            </td>
+            <td>
+                {{ experiment.defaultcriteria.get_language_display }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% trans 'criteria_snippit:multilingual' %}
+            </td>
+            <td>
+                {{ experiment.defaultcriteria.get_multilingual_display }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% trans 'criteria_snippit:handedness' %}
+            </td>
+            <td>
+                {{ experiment.defaultcriteria.get_handedness_display }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% trans 'criteria_snippit:sex' %}
+            </td>
+            <td>
+                {{ experiment.defaultcriteria.get_sex_display }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% trans 'criteria_snippit:social_status' %}
+            </td>
+            <td>
+                {{ experiment.defaultcriteria.get_social_status_display }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% trans 'criteria_snippit:min_age' %}
+            </td>
+            <td>
+                {{ experiment.defaultcriteria.get_min_age_display }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% trans 'criteria_snippit:max_age' %}
+            </td>
+            <td>
+                {{ experiment.defaultcriteria.get_max_age_display }}
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="d-inline-block">
+    Specific criteria:
+    <table class="criteria-table mt-1">
+        {% for exp_criterion in experiment.experimentcriterion_set.all %}
+            <tr>
+                {% with criterion=exp_criterion.criterion %}
+                    <td>
+                        {{ criterion.name_natural }}:
+                    </td>
+                    <td>
+                        {{ exp_criterion.correct_value }}
+                    </td>
+                {% endwith %}
+            </tr>
+        {% endfor %}
+    </table>
+</div>

@@ -1,0 +1,123 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+
+{% block header_title %}
+    {% trans 'experiments:home:header' %} - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="">
+    <div class="col-12">
+        <div class="float-right button button-colored">
+            <a href="{% url 'experiments:create' %}">
+                {% trans 'experiments:home:create_experiment' %}
+            </a>
+        </div>
+        <h1>
+            {% trans 'experiments:home:header' %}
+        </h1>
+        <p>
+            {% trans 'experiments:home:info_text' %}
+        </p>
+        <table class="dt" width="100%" data-language="{% datatables_lang %}">
+            <thead>
+                <tr>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Experiment" "id" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Experiment" "name" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Experiment" "leader" %}
+                    </th>
+                    <th>
+                        {% trans "experiments:global:slots" %}
+                    </th>
+                    <th>
+                        {% trans "experiments:global:participants" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Experiment" "excluded_experiments" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Experiment" "open" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Experiment" "public" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Experiment" "participants_visible" %}
+                    </th>
+                    <th data-priority="100">
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for experiment in object_list %}
+                    <tr>
+                        <td>
+                            {{ experiment.pk }}
+                        </td>
+                        <td>
+                            <a href="{% url 'experiments:detail' experiment.pk %}">
+                                {{ experiment }}
+                            </a>
+                        </td>
+                        <td>
+                            {{ experiment.leader.name }}
+                        </td>
+                        <td>
+                            {% if experiment.use_timeslots %}
+                                 {{ experiment.n_timeslot_places|default_if_none:0 }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ experiment.n_participants|default_if_none:0 }}
+                        </td>
+                        <td>
+                            {{ experiment.n_excluded_experiments|default_if_none:0 }}
+                        </td>
+                        <td>
+                            <a
+                                href="{% url 'experiments:switch_open' experiment.pk %}"
+                                class="icon-yesno"
+                                title="{% trans 'experiments:home:switch_open:title' %}"
+                            >
+                                {{ experiment.open|yesno:"," }}
+                            </a>
+                        </td>
+                        <td >
+                            <a
+                                href="{% url 'experiments:switch_public' experiment.pk %}"
+                                class="icon-yesno"
+                                title="{% trans 'experiments:home:switch_public:title' %}"
+                            >
+                                {{ experiment.public|yesno:"," }}
+                            </a>
+                        </td>
+                        <td>
+                            <a
+                                href="{% url 'experiments:switch_visible' experiment.pk %}"
+                                class="icon-yesno"
+                                title="{% trans 'experiments:home:switch_visible:title' %}"
+                            >
+                                {{ experiment.participants_visible|yesno:"," }}
+                            </a>
+                        </td>
+                        <td>
+                            {% include 'experiments/experiment_actions_snippit.html' %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br/>
+    </div>
+</div>
+{% endblock %}

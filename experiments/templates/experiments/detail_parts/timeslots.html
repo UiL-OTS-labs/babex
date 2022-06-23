@@ -1,0 +1,50 @@
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+{% load static %}
+
+<div class="uu-inner-container">
+    <div class="col-12">
+        <h3 class="d-inline">
+            {% trans 'experiments:detail:timeslots' %}
+        </h3>
+        <a href="{% url 'experiments:timeslots' experiment.pk %}">
+            {% trans 'experiments:detail:timeslots:edit_timeslots' %}
+        </a>
+        -
+        <a href="{% url 'experiments:participants' experiment.pk %}">
+            {% trans 'experiments:detail:timeslots:view_participants' %}
+        </a>
+        <br/>
+        <br/>
+        <table class="w-100 dt">
+            <thead>
+                <tr>
+                    <th class="w-50">
+                        {% trans 'experiments:detail:timeslots:datetime' %}
+                    </th>
+                    <th class="w-25">
+                        {% trans 'experiments:detail:timeslots:free_places' %}
+                    </th>
+                    <th class="w-25">
+                        {% trans 'experiments:detail:timeslots:taken_places' %}
+                    </th>
+                </tr>
+            </thead>
+            {% for datetime, free_places, taken_places in timeslots %}
+                <tr>
+                    <td data-order="{{ datetime|date:'U' }}">
+                        {{ datetime|date:"l d M Y, H:i"|capfirst }}
+                    </td>
+                    <td>
+                        {{ free_places }}
+                    </td>
+                    <td>
+                        {{ taken_places }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>

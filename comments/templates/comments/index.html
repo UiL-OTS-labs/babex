@@ -1,0 +1,100 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+
+{% block header_title %}
+    {% trans 'comments:home:header' %} - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <h1>
+            {% trans 'comments:home:header' %}
+        </h1>
+        <p>
+            {% trans 'comments:home:info_text' %}
+        </p>
+        <table class="dt" width="100%" data-language="{% datatables_lang %}">
+            <thead>
+                <tr>
+                    <th>
+                        {% get_verbose_field_name "comments" "Comment" "id" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "comments" "Comment" "participant" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "participants" "Participant" "email" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "comments" "Comment" "leader" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "comments" "Comment" "experiment" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "comments" "Comment" "datetime" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "comments" "Comment" "comment" %}
+                    </th>
+                    <th>
+                        {% trans 'comments:home:table:actions' %}
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for comment in object_list %}
+                    <tr>
+                        <td>
+                            {{ comment.pk }}
+                        </td>
+                        <td>
+                            {{ comment.participant.name }}
+                        </td>
+                        <td>
+                            {{ comment.participant.email }}
+                        </td>
+                        <td>
+                            {% if comment.system_comment %}
+                                {% trans 'comments:home:system_user' %}
+                            {% elif comment.leader %}
+                                {{ comment.leader.name }}
+                            {% else %}
+                                {% trans 'comments:home:admin_user' %}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if comment.experiment %}
+                                <a href="{% url 'experiments:detail' comment.experiment.pk %}">
+                                    {{ comment.experiment }}
+                                </a>
+                            {% else %}
+                                {% trans 'comments:home:no_experiment' %}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ comment.datetime|date:"Y-m-d H:i" }}
+                        </td>
+                        <td>
+                            {{ comment.comment }}
+                        </td>
+                        <td>
+                            <a  href="{% url 'comments:delete' comment.pk %}"
+                                title="{% trans 'comments:home:delete' %}"
+                                class="icon-delete">
+                                
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br/>
+    </div>
+</div>
+{% endblock %}

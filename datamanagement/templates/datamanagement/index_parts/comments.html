@@ -1,0 +1,59 @@
+{% load i18n %}
+{% load display_threshold %}
+{% load transformat %}
+<div class="panel uu-panel panel-default">
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            <a class="collapsed" data-toggle="collapse" href="#collapse-comments">
+                {% trans 'datamanagement:home:comments:header' %}
+                ({{ comments|length }})
+            </a>
+        </h5>
+    </div>
+    <div id="collapse-comments" class="panel-collapse collapse">
+        <div class="panel-body">
+            <h3>
+                {% trans 'datamanagement:home:comments:header' %}
+            </h3>
+            <p>
+                {% threshold comments as comments_threshold %}
+                {% transformat 'datamanagement:home:comments:info_text' comments_threshold %}
+            </p>
+            <table class="w-100 dt">
+                <thead>
+                <tr>
+                    <th class="w-50">
+                        {% trans 'datamanagement:global:experiment' %}
+                    </th>
+                    <th class="w-50">
+                        {% trans 'datamanagement:global:num' %}
+                    </th>
+                    {# We use 50/50/x width to make the actions column as small as possible #}
+                    <th>
+                        {% trans 'datamanagement:global:actions' %}
+                    </th>
+                </tr>
+                </thead>
+                {% for experiment, num in comments %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'experiments:detail' experiment.pk %}">
+                                {{ experiment }}
+                            </a>
+                        </td>
+                        <td>
+                            {{ num }}
+                        </td>
+                        <td class="text-center">
+                            <a href="{% url 'datamanagement:delete_comments' experiment.pk %}"
+                               title="{% trans 'datamanagement:home:delete_comments' %}"
+                               class="icon-delete delete-comments">
+                                
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>

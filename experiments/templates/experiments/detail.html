@@ -1,0 +1,34 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+{% load static %}
+
+{% block header_title %}
+   {% transformat 'experiments:detail:header' experiment.name %} - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <div class="button button-colored float-right" id="back_to_prev">
+            <a href="{% url 'experiments:home' %}">
+                {% trans 'experiments:detail:all_experiments' %}
+            </a>
+        </div>
+        <h1>
+            {% transformat 'experiments:detail:header' experiment.name %}
+        </h1>
+    </div>
+</div>
+{% include 'experiments/detail_parts/info.html' %}
+
+{% if experiment.use_timeslots %}
+    {% include 'experiments/detail_parts/timeslots.html' %}
+{% endif %}
+
+{% include 'experiments/detail_parts/participants.html' %}
+{% include 'experiments/detail_parts/comments.html' %}
+
+{% endblock %}

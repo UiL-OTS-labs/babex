@@ -1,0 +1,32 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+
+{% block header_title %}
+    {% trans 'experiments:new:header' %} - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <h1>
+            {% trans 'experiments:new:header' %}
+        </h1>
+        <p>
+            {% trans 'experiments:new:info_text' %}
+        </p>
+        <form method="post">
+            {% csrf_token %}
+            <table width="100%">
+                {{ form.as_table }}
+            </table>
+            <br/>
+            <div class="float-right">
+                <button type="submit">{% trans 'experiments:globals:next_button' %}</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+Beste {{ participant.mail_name }},
+
+Dit is een reminder!
+
+Je hebt een afspraak gemaakt om mee te doen met het experiment: {{ experiment.name }}.
+
+We verwachten je op:
+Datum: {{ time_slot.datetime|date:"l d-m-Y" }}
+Tijd: {{ time_slot.datetime|date:"H:i" }} uur
+Locatie: {{ experiment.location }}
+
+Als je deze afspraak wilt afzeggen, kun je dat doen via de volgende link:
+{{ cancel_link }}
+
+Doe dat alsjeblieft minstens 24 uur vantevoren. Als je vlak vantevoren ontdekt dat je verhinderd bent, neem dan svp even
+persoonlijk contact op met de proefleider ({{ experiment.leader.name }}, email: {{ experiment.leader.email }}
+tel.: {{ experiment.leader.phonenumber }}).
+
+Dit bericht is automatisch verzonden omdat je je hebt ingeschreven voor een experiment.

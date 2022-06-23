@@ -1,0 +1,21 @@
+/* How dare you call this a CSS Hack! It's not a CSS hack, it's a horrible CSS hack! */
+.behind-icon {
+    margin-right: -15px;
+    font-weight: bold;
+}
+
+.criteria-table {
+    font-size: 0.7rem;
+}
+
+.criteria-table td {
+    padding: 1px 5px;
+}
+
+.criteria-table td:nth-child(2)  {
+    color: green;
+}
+
+h1, h2, h3, h4 {
+    font-weight: normal;
+}

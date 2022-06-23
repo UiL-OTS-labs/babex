@@ -1,0 +1,11 @@
+Beste {{ name }},
+
+Je hebt aangegeven dat je een afspraak wil afzeggen. Om je afspraken te zien en af te zeggen, ga naar de volgende link:
+{{ link }}
+
+Deze link blijft 2 uur geldig.
+
+Met vriendelijke groet,
+het UiL OTS lab
+
+Deze mail is automatisch gegenereerd.

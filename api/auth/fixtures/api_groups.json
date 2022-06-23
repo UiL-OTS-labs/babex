@@ -1,0 +1,16 @@
+[
+  {
+    "model": "apiauth.apigroup",
+    "pk": 1,
+    "fields": {
+      "name": "leader"
+    }
+  },
+  {
+    "model": "apiauth.apigroup",
+    "pk": 2,
+    "fields": {
+      "name": "participant"
+    }
+  }
+]

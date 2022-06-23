@@ -1,0 +1,6 @@
+Beste {{ participant.mail_name|default:"proefpersoon" }},
+
+{{ content }}
+
+Je ontvangt deze e-mail omdat je je e-mailadres hebt opgegeven om informatie te ontvangen over nieuwe experimenten in het UiL OTS. Indien je deze e-mails niet meer wilt ontvangen klik dan op de volgende link:
+{{ unsub_link }}

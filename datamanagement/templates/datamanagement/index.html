@@ -1,0 +1,38 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+{% load static %}
+{% block header_title %}
+    {% trans 'datamanagement:home:header' %} - {{ block.super }}
+{% endblock %}
+
+{% block html_head %}
+    <script src="{% static 'datamanagement/js/index.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <div class="float-right button button-colored">
+            <a href="{% url 'datamanagement:thresholds' %}">
+                {% trans 'datamanagement:home:edit_thresholds' %}
+            </a>
+        </div>
+        <h1>
+            {% trans 'datamanagement:home:header' %}
+        </h1>
+        <p>
+            {% trans 'datamanagement:home:info_text' %}
+        </p>
+        <div class="panel-group uu-panel">
+            {% include 'datamanagement/index_parts/participants.html' %}
+            {% include 'datamanagement/index_parts/exp_part_visibility.html' %}
+            {% include 'datamanagement/index_parts/comments.html' %}
+            {% include 'datamanagement/index_parts/invites.html' %}
+        </div>
+        <br/>
+    </div>
+</div>
+{% endblock %}

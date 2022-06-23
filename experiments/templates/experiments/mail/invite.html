@@ -1,0 +1,31 @@
+{% extends 'mail/base.html' %}
+
+{% block subtitle %}
+    Uitnodiging deelname experiment: <strong>{{ experiment.name }}</strong>
+{% endblock %}
+
+{% block content %}
+    {% if preview %}
+        <p>
+            <strong>This is a preview! Styling may not work correctly!</strong>
+        </p>
+    {% endif %}
+    <p>
+        Beste {{ participant.mail_name|default:"proefpersoon" }},
+    </p>
+    <p>
+        {{ content }}
+    </p>
+{% endblock %}
+
+
+{% block footer %}
+    {% if participant.api_user %}
+        <p>
+        Tip! Gebruik <a href="{{ reg_through_login_link }}">deze link</a> om in te loggen en dan direct naar de inschrijf pagina te gaan! Indien je ingelogt bent hoef je niet alle gegevens meer in te vullen die wij al hebben.
+        </p>
+    {% endif %}
+    <p>
+        Je ontvangt deze e-mail omdat je je e-mailadres hebt opgegeven om informatie te ontvangen over nieuwe experimenten in het UiL OTS. Indien je deze e-mails niet meer wilt ontvangen klik dan <a href="{{ unsub_link }}">hier</a>.
+    </p>
+{% endblock %}

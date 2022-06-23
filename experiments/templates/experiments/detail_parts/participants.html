@@ -1,0 +1,40 @@
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+{% load static %}
+
+<div class="uu-inner-container">
+    <div class="col-12">
+        <h3 class="d-inline">
+            {% trans 'experiments:detail:participants' %}
+        </h3>
+        <a href="{% url 'experiments:participants' experiment.pk %}">
+            {% trans 'experiments:detail:participants:view_details' %}
+        </a>
+        <br/>
+        <br/>
+        <table class="w-100 dt">
+            <thead>
+                <tr>
+                    <th class="w-75">
+                        {% trans 'experiments:detail:participants:name' %}
+                    </th>
+                    <th class="w-25">
+                        {% trans 'experiments:detail:participants:date_added' %}
+                    </th>
+                </tr>
+            </thead>
+            {% for appointment in appointments %}
+                <tr>
+                    <td>
+                        {{ appointment.participant.name }}
+                    </td>
+                    <td data-order="{{ appointment.creation_date|date:'U' }}">
+                        {{ appointment.creation_date|date:"l d M Y, H:i"|capfirst }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>

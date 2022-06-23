@@ -1,0 +1,16 @@
+{% extends 'mail/base.html' %}
+
+{% block subtitle %}
+    Bevestiging inschrijving experiment {{ experiment.name }}
+{% endblock %}
+
+{% block content %}
+    {{ html_content }}
+{% endblock %}
+
+
+{% block footer %}
+     <p>
+        <i>Dit bericht is automatisch verzonden omdat je je hebt ingeschreven voor een experiment.</i>
+     </p>
+{% endblock %}

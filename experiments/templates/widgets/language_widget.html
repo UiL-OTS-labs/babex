@@ -1,0 +1,37 @@
+{% load i18n %}
+<script nonce="{{ request.csp_nonce }}">
+    $(function () {
+        $('input[name="{{ widget.name }}_other"]').click(function () {
+            $('#id_language_1').prop('checked', true);
+        });
+        $('#id_language_0').click(function () {
+            $('input[name="{{ widget.name }}_other"]').val('');
+        });
+        $('#id_language_2').click(function () {
+            $('input[name="{{ widget.name }}_other"]').val('');
+        });
+    });
+</script>
+
+<ul id="id_language">
+
+    <li>
+        <label for="id_language_0">
+            <input type="radio" name="{{ widget.name }}" value="nl" id="id_language_0" required="" {% if widget.value == 'nl' %}checked="checked"{% endif %}>
+            Nederlands
+        </label>
+    </li>
+    <li>
+        <label for="id_language_1">
+            <input type="radio" name="{{ widget.name }}" value="OTHER" id="id_language_1" required="" {% if widget.value != 'nl' and widget.value != 'I' %}checked="checked"{% endif %}>
+            <input name="{{ widget.name }}_other" id="id_language_1_other" value="{{ widget.other_value }}">
+        </label>
+    </li>
+    <li>
+        <label for="id_language_2">
+            <input type="radio" name="{{ widget.name }}" value="I" id="id_language_2" required="" {% if widget.value == 'I' %}checked="checked"{% endif %}>
+            {% trans 'experiments:globals:indifferent' %}
+        </label>
+    </li>
+
+</ul>

@@ -1,0 +1,86 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+
+{% block header_title %}
+    {% trans 'experiments:excluded_experiments:header' %} - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <h1>
+            {% trans 'experiments:excluded_experiments:header' %}
+        </h1>
+        <p>
+            {% trans 'experiments:excluded_experiments:info_text' %}
+        </p>
+        <table class="dt" width="100%" data-language="{% datatables_lang %}">
+            <thead>
+                <tr>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Experiment" "id" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Experiment" "name" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Experiment" "leader" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Experiment" "additional_leaders" %}
+                    </th>
+                    <th>
+                        {% trans 'experiments:excluded_experiments:toggle_header' %}
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% with excluded_experiments=current_experiment.excluded_experiments.all %}
+                    {% for experiment in object_list %}
+                        <tr>
+                            <td>
+                                {{ experiment.pk }}
+                            </td>
+                            <td>
+                                {{ experiment.name }}
+                            </td>
+                            <td>
+                                {{ experiment.leader.name }}
+                            </td>
+                            <td>
+                                {% for leader in experiment.additional_leaders.all %}
+                                    {{ leader.name }}
+                                {% endfor %}
+                            </td>
+                            <td>
+                                {% if experiment in excluded_experiments %}
+                                    <a
+                                        href="{% url 'experiments:exclude_experiment' current_experiment.pk experiment.pk %}"
+                                        title="{% trans 'experiments:excluded_experiments:excluded:title' %}"
+                                        class="icon-excluded"
+                                    >
+                                        
+                                    </a>
+                                {% else %}
+                                    <a
+                                        href="{% url 'experiments:exclude_experiment' current_experiment.pk experiment.pk %}"
+                                        title="{% trans 'experiments:excluded_experiments:included:title' %}"
+                                        class="icon-included"
+                                    >
+                                        
+                                    </a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endwith %}
+            </tbody>
+        </table>
+        <br/>
+    </div>
+</div>
+{% endblock %}

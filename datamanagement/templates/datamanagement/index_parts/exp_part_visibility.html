@@ -1,0 +1,59 @@
+{% load i18n %}
+{% load display_threshold %}
+{% load transformat %}
+<div class="panel uu-panel panel-default">
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            <a class="collapsed" data-toggle="collapse" href="#collapse-exp_part_visibility">
+                {% trans 'datamanagement:home:exp_part_visibility:header' %}
+                ({{ exp_part_visible|length }})
+            </a>
+        </h5>
+    </div>
+    <div id="collapse-exp_part_visibility" class="panel-collapse collapse">
+        <div class="panel-body">
+            <h3>
+                {% trans 'datamanagement:home:exp_part_visibility:header' %}
+            </h3>
+            <p>
+                {% threshold participant_visibility as participant_visibility %}
+                {% transformat 'datamanagement:home:exp_part_visibility:info_text' participant_visibility %}
+            </p>
+            <table class="w-100 dt">
+                <thead>
+                <tr>
+                    <th class="w-50">
+                        {% trans 'datamanagement:global:experiment' %}
+                    </th>
+                    <th class="w-50">
+                        {% trans 'datamanagement:global:last_appointment' %}
+                    </th>
+                    {# We use 50/50/x width to make the actions column as small as possible #}
+                    <th>
+                        {% trans 'datamanagement:global:actions' %}
+                    </th>
+                </tr>
+                </thead>
+                {% for experiment, datetime in exp_part_visible %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'experiments:detail' experiment.pk %}">
+                                {{ experiment }}
+                            </a>
+                        </td>
+                        <td>
+                            {{ datetime|date:"Y-m-d" }}
+                        </td>
+                        <td class="text-center">
+                            <a href="{% url 'datamanagement:hide_participants' experiment.pk %}"
+                               title="{% trans 'datamanagement:home:delete_exp_part_visibility' %}"
+                               class="icon-hide hide-participants">
+                                
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>

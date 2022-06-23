@@ -1,0 +1,128 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+
+{% block header_title %}
+    {% trans 'leaders:home:header' %} - {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <div class="float-right">
+            <div class="button button-colored">
+                <a href="{% url 'leaders:create' %}">
+                    {% if ldap %}
+                        {% trans 'leaders:home:create_leader:local' %}
+                    {% else %}
+                        {% trans 'leaders:home:create_leader' %}
+                    {% endif %}
+                </a>
+            </div>
+            {% if ldap %}
+                <br/>
+                <div class="button button-colored mt-1">
+                    <a href="{% url 'leaders:create_ldap' %}">
+                        {% trans 'leaders:home:create_leader:ldap' %}
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+
+        <h1>
+            {% trans 'leaders:home:header' %}
+        </h1>
+        <p>
+            {% trans 'leaders:home:info_text' %}
+        </p>
+        <table class="dt" width="100%" data-language="{% datatables_lang %}">
+            <thead>
+                <tr>
+                    <th>
+                        {% trans 'leaders:home:id' %}
+                    </th>
+                    <th>
+                        {% trans 'leaders:home:name' %}
+                    </th>
+                    <th>
+                        {% trans 'leaders:home:email' %}
+                    </th>
+                    <th>
+                        {% trans 'leaders:home:phone' %}
+                    </th>
+                    <th>
+                        {% trans 'leaders:home:active' %}
+                    </th>
+                    {% if ldap %}
+                        <th>
+                            {% trans 'leaders:home:is_ldap' %}
+                        </th>
+                    {% endif %}
+                    <th>
+                        {% trans 'leaders:home:actions' %}
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for leader in object_list %}
+                    <tr>
+                        <td>
+                            {{ leader.pk }}
+                        </td>
+                        <td>
+                            {{ leader.name }}
+                        </td>
+                        <td>
+                            {{ leader.api_user.email }}
+                        </td>
+                        <td>
+                            {{ leader.phonenumber }}
+                        </td>
+                        <td class="icon-yesno">
+                            {{ leader.active|yesno:"," }}
+                        </td>
+                        {% if ldap %}
+                            <td>
+                                <span class="icon-yesno">
+                                    {{ leader.api_user.is_ldap_account|yesno:"," }}
+                                </span>
+                            </td>
+                        {% endif %}
+                        <td>
+                            {% if leader.api_user.is_ldap_account %}
+                                <a href="{% url 'leaders:update_ldap' leader.pk %}" class="icon-update">
+                                    
+                                </a>
+                            {% else %}
+                                <a href="{% url 'leaders:update' leader.pk %}" class="icon-update">
+                                    
+                                </a>
+                            {% endif %}
+                            <a
+                                href="{% url 'leaders:delete' leader.pk %}"
+                                class="icon-delete"
+                                title="{% trans 'leaders:home:delete:title' %}"
+                            >
+                                
+                            </a>
+                            {% if ldap and not leader.api_user.is_ldap_account and leader.email.lower|slice:"-5:" == "uu.nl" %}
+                                    <a
+                                        href="{% url 'leaders:convert_to_ldap' leader.pk %}"
+                                        class="icon-convert"
+                                        title="{% trans 'leaders:home:convert_to_ldap' %}"
+                                    >
+                                        
+                                    </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br/>
+    </div>
+</div>
+{% endblock %}

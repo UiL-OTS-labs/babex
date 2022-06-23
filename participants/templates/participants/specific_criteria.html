@@ -1,0 +1,37 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+
+{% block header_title %}
+    {% transformat 'participants:specific_criteria:header' participant.fullname %} - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <h1>
+            {% transformat 'participants:specific_criteria:header' participant.fullname %}
+        </h1>
+        <p>
+            {% trans 'participants:specific_criteria:info_text' %}
+        </p>
+
+        <form method="post" enctype="multipart/form-data">{% csrf_token %}
+            {{ formset.management_form }}
+
+
+            <table width="100%">
+                {% for form in formset %}
+                    {{ form.as_table }}
+                {% endfor %}
+            </table>
+
+            <div class="float-right">
+                <button type="submit">{% trans 'participants:globals:save_button' %}</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

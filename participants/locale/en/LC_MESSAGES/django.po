@@ -1,0 +1,289 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-23 14:52+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: participants/forms.py:32
+msgid "participants:multilingual:many"
+msgstr "Many"
+
+#: participants/forms.py:33
+msgid "participants:multilingual:one"
+msgstr "One"
+
+#: participants/forms.py:57
+msgid "participants:merge_form:field:old_participant"
+msgstr "Old participant"
+
+#: participants/forms.py:62
+msgid "participants:merge_form:field:new_participant"
+msgstr "To be merged participant"
+
+#: participants/forms.py:71
+msgid "participants:merge_form:validation:are_equal"
+msgstr "This is the same participant as the one picked above!"
+
+#: participants/models.py:45
+msgid "participant:attribute:handedness:lefthanded"
+msgstr "Left handed"
+
+#: participants/models.py:46
+msgid "participant:attribute:handedness:righthanded"
+msgstr "Right handed"
+
+#: participants/models.py:50
+msgid "participant:attribute:social_role:student"
+msgstr "Student"
+
+#: participants/models.py:51
+msgid "participant:attribute:social_role:other"
+msgstr "Not student"
+
+#: participants/models.py:55
+msgid "participant:attribute:email"
+msgstr "E-mail address"
+
+#: participants/models.py:59
+msgid "participant:attribute:name"
+msgstr "Name"
+
+#: participants/models.py:65
+msgid "participant:attribute:language"
+msgstr "Language"
+
+#: participants/models.py:69
+msgid "participant:attribute:dyslexic"
+msgstr "Dyslexic?"
+
+#: participants/models.py:73
+msgid "participant:attribute:birth_date"
+msgstr "Birth date"
+
+#: participants/models.py:79
+msgid "participant:attribute:multilingual"
+msgstr "Multilingual"
+
+#: participants/models.py:85
+msgid "participant:attribute:phonenumber"
+msgstr "Phone number"
+
+#: participants/models.py:91
+msgid "participant:attribute:handedness"
+msgstr "Handedness"
+
+#: participants/models.py:98
+msgid "participant:attribute:sex"
+msgstr "Sex"
+
+#: participants/models.py:104
+msgid "participant:attribute:social_status"
+msgstr "Social role"
+
+#: participants/models.py:111
+msgid "participant:attribute:email_subscription"
+msgstr "On mailing list"
+
+#: participants/models.py:116
+msgid "participant:attribute:capable"
+msgstr "Capable"
+
+#: participants/models.py:128
+msgid "participant:attribute:created"
+msgstr "Created on"
+
+#: participants/models.py:137 participants/models.py:178
+msgid "participant:name:unknown"
+msgstr "name unknown"
+
+#: participants/models.py:159
+#: participants/templates/widgets/participant_sex_widget.html:22
+msgid "participant:attribute:sex:male"
+msgstr "Male"
+
+#: participants/models.py:160
+#: participants/templates/widgets/participant_sex_widget.html:28
+msgid "participant:attribute:sex:female"
+msgstr "Female"
+
+#: participants/models.py:161
+#: participants/templates/widgets/participant_sex_widget.html:40
+msgid "participant:attribute:sex:prefer_not_to_answer"
+msgstr "Preferred not to answer"
+
+#: participants/models.py:190
+msgid "secondary_email:attribute:email"
+msgstr "Secondary e-mail address"
+
+#: participants/models.py:208
+msgid "criterion_answer:attribute:answer"
+msgstr "Answer"
+
+#: participants/templates/participants/delete.html:8
+#: participants/templates/participants/delete.html:16
+msgid "participants:delete:header"
+msgstr "Delete participant"
+
+#: participants/templates/participants/delete.html:19
+msgid "participants:delete:text"
+msgstr "Are you sure you want to delete participant '{}'?"
+
+#: participants/templates/participants/delete.html:22
+msgid "participants:delete:cancel"
+msgstr "Cancel"
+
+#: participants/templates/participants/delete.html:25
+msgid "participants:delete:confirm"
+msgstr "Delete participant"
+
+#: participants/templates/participants/detail.html:8
+#: participants/templates/participants/detail.html:28
+msgid "participants:detail:header"
+msgstr "Details of '{}'"
+
+#: participants/templates/participants/detail.html:24
+msgid "participants:detail:edit_participant"
+msgstr "Edit"
+
+#: participants/templates/participants/detail.html:36
+msgid "participant:detail:table_header"
+msgstr "Participant Details"
+
+#: participants/templates/participants/detail.html:48
+msgid "Unknown"
+msgstr "Unknown"
+
+#: participants/templates/participants/detail.html:63
+#: participants/templates/participants/index.html:38
+msgid "participants:detail:secondary_emails"
+msgstr "Secondary e-mail(s)"
+
+#: participants/templates/participants/detail.html:73
+msgid "participants:detail:has_account"
+msgstr "Has account"
+
+#: participants/templates/participants/detail.html:76
+#: participants/templates/participants/detail.html:95
+#: participants/templates/participants/detail.html:151
+#: participants/templates/participants/detail.html:159
+#: participants/templates/participants/index.html:95
+msgid "yes,no"
+msgstr "yes,no"
+
+#: participants/templates/participants/detail.html:111
+#: participants/templates/participants/index.html:92
+msgid "options:many,one"
+msgstr "many,one"
+
+#: participants/templates/participants/detail.html:169
+msgid "participants:detail:experiments"
+msgstr "Experiment"
+
+#: participants/templates/participants/detail.html:172
+msgid "participants:detail:datetime"
+msgstr "Date & Time"
+
+#: participants/templates/participants/detail.html:175
+msgid "participants:detail:place"
+msgstr "Place"
+
+#: participants/templates/participants/edit.html:8
+#: participants/templates/participants/edit.html:64
+msgid "participants:update:header"
+msgstr "Edit participant"
+
+#: participants/templates/participants/edit.html:67
+msgid "participants:update:info_text"
+msgstr "<br/>"
+
+#: participants/templates/participants/edit.html:75
+msgid "participants:update:header:secondary_email"
+msgstr "Secondary e-mail(s)"
+
+#: participants/templates/participants/edit.html:84
+msgid "participants:update:add_secondary_email"
+msgstr "New secondary email"
+
+#: participants/templates/participants/edit.html:86
+#: participants/templates/participants/specific_criteria.html:32
+msgid "participants:globals:save_button"
+msgstr "Save"
+
+#: participants/templates/participants/index.html:8
+#: participants/templates/participants/index.html:20
+msgid "participants:home:header"
+msgstr "Participants"
+
+#: participants/templates/participants/index.html:16
+msgid "participants:home:merge_participants"
+msgstr "Merge participants"
+
+#: participants/templates/participants/index.html:23
+msgid "participants:home:info_text"
+msgstr "<br/>"
+
+#: participants/templates/participants/index.html:60
+msgid "participants:globals:actions"
+msgstr "Actions"
+
+#: participants/templates/participants/index.html:104
+msgid "participants:home:detail:title"
+msgstr "View details"
+
+#: participants/templates/participants/index.html:111
+msgid "participants:home:update:title"
+msgstr "Edit participant"
+
+#: participants/templates/participants/index.html:118
+msgid "participants:home:update_specific_criteria:title"
+msgstr "Edit specific criteria"
+
+#: participants/templates/participants/index.html:125
+msgid "participants:home:delete:title"
+msgstr "Delete this participant"
+
+#: participants/templates/participants/merge.html:8
+#: participants/templates/participants/merge.html:15
+msgid "participants:merge:header"
+msgstr "Merge participants"
+
+#: participants/templates/participants/merge.html:18
+msgid "participants:merge:info_text"
+msgstr " "
+
+#: participants/templates/participants/merge.html:27
+msgid "participants:merge:merge_button"
+msgstr "Merge participants"
+
+#: participants/templates/participants/specific_criteria.html:8
+#: participants/templates/participants/specific_criteria.html:15
+msgid "participants:specific_criteria:header"
+msgstr "Specific criteria for '{}'"
+
+#: participants/templates/participants/specific_criteria.html:18
+msgid "participants:specific_criteria:info_text"
+msgstr " "
+
+#: participants/views.py:49
+msgid "participants:messages:updated_participant"
+msgstr "Participant updated!"
+
+#: participants/views.py:103
+msgid "participants:messages:deleted_participant"
+msgstr "Participant deleted!"
+
+#: participants/views.py:150
+msgid "participants:messages:merged_participants"
+msgstr "Participant merged!"

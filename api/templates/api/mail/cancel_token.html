@@ -1,0 +1,28 @@
+{% extends 'mail/base.html' %}
+
+{% block subtitle %}
+    Afspraak afzeggen
+{% endblock %}
+
+{% block content %}
+    <p>
+        Beste {{ name }},
+    </p>
+    <p>
+        Je hebt aangegeven dat je een afspraak wil afzeggen. Om je afspraken te zien en af te zeggen, klik <a href="{{ link }}">hier.</a>
+    </p>
+    <p>
+        Deze link blijft 2 uur geldig.
+    </p>
+    <p>
+        Met vriendelijke groet,<br/>
+        het UiL OTS lab
+    </p>
+{% endblock %}
+
+
+{% block footer %}
+     <p>
+        <i>Dit is een automatisch gegenereerde mail.</i>
+     </p>
+{% endblock %}

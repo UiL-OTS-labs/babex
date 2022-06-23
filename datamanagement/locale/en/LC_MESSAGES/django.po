@@ -1,0 +1,208 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-12 11:10+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: datamanagement/templates/datamanagement/edit_thresholds.html:9
+#: datamanagement/templates/datamanagement/edit_thresholds.html:20
+msgid "datamanagement:thresholds:edit:header"
+msgstr "Edit thresholds"
+
+#: datamanagement/templates/datamanagement/edit_thresholds.html:23
+msgid "datamanagement:thresholds:edit:info_text"
+msgstr ""
+"Here you can manage the thresholds the application uses for it's checks. The "
+"threshold dictates after what time period the application should warn for "
+"old data, for each category. These can be changed at will, it will not "
+"affect any data stored in the database. <br/><br/>You can select the unit "
+"(days, weeks, months or years) in the select box, it will automatically "
+"convert the value to the new unit when you change it."
+
+#: datamanagement/templates/datamanagement/edit_thresholds.html:32
+msgid "datamanagement:global:save_button"
+msgstr "Save"
+
+#: datamanagement/templates/datamanagement/index.html:8
+#: datamanagement/templates/datamanagement/index.html:24
+msgid "datamanagement:home:header"
+msgstr "Data management"
+
+#: datamanagement/templates/datamanagement/index.html:20
+msgid "datamanagement:home:edit_thresholds"
+msgstr "Edit thresholds"
+
+#: datamanagement/templates/datamanagement/index.html:27
+msgid "datamanagement:home:info_text"
+msgstr ""
+"This page is intended to keep track of data stored in the database, and will "
+"advise you on what data may need to be deleted and/or anonymised. This is "
+"intended as a tool, not a complete solution!"
+
+#: datamanagement/templates/datamanagement/index_parts/comments.html:8
+#: datamanagement/templates/datamanagement/index_parts/comments.html:16
+msgid "datamanagement:home:comments:header"
+msgstr "Comments"
+
+#: datamanagement/templates/datamanagement/index_parts/comments.html:20
+msgid "datamanagement:home:comments:info_text"
+msgstr ""
+"These experiments have comments that are older than {}, it might be a good "
+"idea to remove them. You can view all comments for this experiment by going "
+"to the experiment details page. (Click on the experiment name). You can also "
+"delete them individually there."
+
+#: datamanagement/templates/datamanagement/index_parts/comments.html:26
+#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:26
+#: datamanagement/templates/datamanagement/index_parts/invites.html:26
+msgid "datamanagement:global:experiment"
+msgstr "Experiment"
+
+#: datamanagement/templates/datamanagement/index_parts/comments.html:29
+#: datamanagement/templates/datamanagement/index_parts/invites.html:29
+msgid "datamanagement:global:num"
+msgstr "Number"
+
+#: datamanagement/templates/datamanagement/index_parts/comments.html:33
+#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:33
+#: datamanagement/templates/datamanagement/index_parts/invites.html:33
+#: datamanagement/templates/datamanagement/index_parts/participants.html:38
+#: datamanagement/templates/datamanagement/index_parts/participants.html:90
+msgid "datamanagement:global:actions"
+msgstr "Actions"
+
+#: datamanagement/templates/datamanagement/index_parts/comments.html:49
+msgid "datamanagement:home:delete_comments"
+msgstr "Delete comments from this experiment"
+
+#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:8
+#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:16
+msgid "datamanagement:home:exp_part_visibility:header"
+msgstr "Participant visibility"
+
+#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:20
+msgid "datamanagement:home:exp_part_visibility:info_text"
+msgstr ""
+"These experiments have the personal info of the participants visible to the "
+"leaders, but their last time slot was {} ago"
+
+#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:29
+#: datamanagement/templates/datamanagement/index_parts/participants.html:29
+msgid "datamanagement:global:last_appointment"
+msgstr "Last appointment"
+
+#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:49
+msgid "datamanagement:home:delete_exp_part_visibility"
+msgstr "Hide participants from leader(s)"
+
+#: datamanagement/templates/datamanagement/index_parts/invites.html:8
+#: datamanagement/templates/datamanagement/index_parts/invites.html:16
+msgid "datamanagement:home:invites:header"
+msgstr "Experiment invites"
+
+#: datamanagement/templates/datamanagement/index_parts/invites.html:20
+msgid "datamanagement:home:invites:info_text"
+msgstr ""
+"Here you can delete 'already invited' trackers for participants from an "
+"experiment. Current threshold: {}. While not necessary for data protection, "
+"it does keep the database clean."
+
+#: datamanagement/templates/datamanagement/index_parts/invites.html:49
+msgid "datamanagement:home:delete_invites"
+msgstr "Delete invite trackers from this experiment"
+
+#: datamanagement/templates/datamanagement/index_parts/participants.html:8
+#: datamanagement/templates/datamanagement/index_parts/participants.html:16
+msgid "datamanagement:home:participants:header"
+msgstr "Participants"
+
+#: datamanagement/templates/datamanagement/index_parts/participants.html:20
+msgid "datamanagement:home:participants:info_text"
+msgstr "These participants haven't participated in an experiment for {}."
+
+#: datamanagement/templates/datamanagement/index_parts/participants.html:26
+#: datamanagement/templates/datamanagement/index_parts/participants.html:81
+msgid "datamanagement:global:participant"
+msgstr "Participant"
+
+#: datamanagement/templates/datamanagement/index_parts/participants.html:32
+msgid "datamanagement:home:participants:num_appointments"
+msgstr "Number of appointments"
+
+#: datamanagement/templates/datamanagement/index_parts/participants.html:35
+#: datamanagement/templates/datamanagement/index_parts/participants.html:87
+msgid "datamanagement:home:participants:has_account"
+msgstr "Has account"
+
+#: datamanagement/templates/datamanagement/index_parts/participants.html:71
+msgid "datamanagement:home:participants:header2"
+msgstr "Participants without appointments"
+
+#: datamanagement/templates/datamanagement/index_parts/participants.html:75
+msgid "datamanagement:home:participants:info_text2"
+msgstr ""
+"These participants haven't ever participated in an experiment and were "
+"created {} ago"
+
+#: datamanagement/templates/datamanagement/index_parts/participants.html:84
+msgid "datamanagement:home:participants:registered"
+msgstr "Date created"
+
+#: datamanagement/templates/datamanagement/index_parts/participants.html:109
+msgid "datamanagement:home:delete_participant"
+msgstr "Delete this participant"
+
+#: datamanagement/templates/widgets/timespan_widget.html:10
+#: datamanagement/templatetags/display_threshold.py:14
+msgid "datamanagement:global:days"
+msgstr "days"
+
+#: datamanagement/templates/widgets/timespan_widget.html:13
+#: datamanagement/templatetags/display_threshold.py:13
+msgid "datamanagement:global:weeks"
+msgstr "weeks"
+
+#: datamanagement/templates/widgets/timespan_widget.html:16
+#: datamanagement/templatetags/display_threshold.py:12
+msgid "datamanagement:global:months"
+msgstr "months"
+
+#: datamanagement/templates/widgets/timespan_widget.html:19
+#: datamanagement/templatetags/display_threshold.py:11
+msgid "datamanagement:global:years"
+msgstr "years"
+
+#: datamanagement/views.py:61
+msgid "datamanagement:messages:deleted_participant"
+msgstr "Participant deleted!"
+
+#: datamanagement/views.py:64
+msgid "datamanagement:messages:refused_deletion"
+msgstr ""
+"Refused to delete this participant! This participant has not been marked for "
+"deletion and could result in data loss. Please contact a technician if you "
+"think this isn't the case."
+
+#: datamanagement/views.py:96
+msgid "datamanagement:messages:hid_participants"
+msgstr "Participant data visibility successfully turned off."
+
+#: datamanagement/views.py:118
+msgid "datamanagement:messages:deleted_invites"
+msgstr "Successfully deleted invites for {}"
+
+#: datamanagement/views.py:139
+msgid "datamanagement:messages:deleted_comments"
+msgstr "Successfully deleted comments for {}"

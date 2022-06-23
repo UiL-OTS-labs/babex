@@ -1,0 +1,33 @@
+{% extends 'mail/base.html' %}
+
+{% block subtitle %}
+{% endblock %}
+
+{% block content %}
+    <p>
+        <strong>English below</strong>
+    </p>
+    <p>
+        Beste {{ name }},
+    </p>
+    <p>
+        Een administrator heeft een proefleider profiel voor je aangemaakt voor het UiL OTS proefpersoonwervingssyteem!
+    </p>
+    <p>
+        Je kunt <a href="{{ login_link }}">hier</a> met je bestaande (participant) account inloggen, gekoppeld aan het volgende e-mail adres: {{ email }}.
+    </p>
+    <hr>
+    <p>
+        Dear {{ name }},
+    </p>
+    <p>
+        An administrator has created a test leader profile for your account for the UiL OTS participant recruitment system!
+    </p>
+    <p>
+        You can log in <a href="{{ login_link }}">here</a> using your existing (participant) account, using the following email address: {{ email }}.
+    </p>
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

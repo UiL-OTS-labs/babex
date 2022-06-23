@@ -1,0 +1,36 @@
+{% extends 'mail/base.html' %}
+
+{% block subtitle %}
+   Account aangemaakt
+{% endblock %}
+
+{% block content %}
+    <p>
+        Beste {{ participant.name|default:"proefpersoon" }},
+    </p>
+    <p>
+        Welkom! Je hebt een nieuw account aangemaakt op {% now "d-m-Y, H:i" %}. Hiermee kun je altijd inloggen om je afspraken te zien/af te zeggen. Log ook in als je je opgeeft voor een experiment, dan hoef je niet al je gegevens telkens helemaal opnieuw in te vullen.<br/>
+    </p>
+    {% if participant.email_subscription %}
+        <p>
+            Je kunt vanaf nu bij nieuwe experimenten een mailtje ontvangen met een uitnodiging om mee te doen. Wil je deze niet meer ontvangen? Dan kun je je <a href="{{ unsub_link }}">hier</a> uitschrijven voor de mailing list.
+        </p>
+    {% endif %}
+    {% if not has_password %}
+        <p>
+            Voordat je kunt inloggen, moet je <a href="{{ set_password_link }}">hier</a> een wachtwoord instellen. <br/>
+            Deze link blijft 24 uur geldig. Daarna kun je een nieuwe link aanvragen via 'wachtwoord vergeten?' op het <a href="{{ login_link }}">inlogscherm</a>.
+        </p>
+    {% endif %}
+    <p>
+        Met vriendelijke groet,<br/>
+        het UiL OTS lab
+    </p>
+{% endblock %}
+
+
+{% block footer %}
+     <p>
+        <i>Dit bericht is automatisch verzonden omdat je een account hebt aangemaakt.</i>
+     </p>
+{% endblock %}

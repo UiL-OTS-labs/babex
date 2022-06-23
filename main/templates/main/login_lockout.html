@@ -1,0 +1,25 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+{% load static %}
+
+{% block header_title %}
+    {% trans 'main:login_lockout:header' %} - {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <h1>
+            {% trans 'main:login_lockout:header' %}
+        </h1>
+        <p>
+            {% trans 'main:login_lockout:info_text' %}
+        </p>
+        <br/>
+    </div>
+</div>
+{% endblock %}
