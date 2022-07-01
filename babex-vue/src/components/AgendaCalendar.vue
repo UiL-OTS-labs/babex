@@ -1,11 +1,20 @@
-<script>
-    import '@fullcalendar/core/vdom' // solves problem with Vite
-    import FullCalendar from '@fullcalendar/vue3'
-    import dayGridPlugin from '@fullcalendar/daygrid'
-    import timeGridPlugin from '@fullcalendar/timegrid'
-    import interactionPlugin from '@fullcalendar/interaction'
+<script lang="ts" setup>
+    import FullCalendar from '@fullcalendar/vue3';
+    import dayGridPlugin from '@fullcalendar/daygrid';
+    import timeGridPlugin from '@fullcalendar/timegrid';
+    import interactionPlugin from '@fullcalendar/interaction';
+    import type {EventInput} from '@fullcalendar/core';
+    import {defineProps} from 'vue';
 
-    function formatEvent(event) {
+    interface Appointment {
+        start: Date,
+        end: Date,
+        experiment: string,
+        leader: string,
+        location: string
+    }
+
+    function formatEvent(event: Appointment) : EventInput {
         return {
             start: event.start,
             end: event.end,
@@ -14,36 +23,27 @@
         };
     }
 
-    export default {
-        props: {
-            events: [Object]
-        },
-        components: {
-            FullCalendar // make the <FullCalendar> tag available
-        },
-        data() {
-            return {
-                calendarOptions: {
-                    plugins: [ dayGridPlugin, timeGridPlugin, interactionPlugin ],
-                    initialView: 'dayGridMonth',
-                    headerToolbar: {
-                        end: 'dayGridMonth timeGridWeek today prev,next',
-                    },
-                    allDaySlot: false,
-                    slotMinTime: "05:00:00",
-                    slotMaxTime: "22:00:00",
+    const props = defineProps<{
+        events: [Appointment]
+        }>();
 
-                    events: this.formatEvents(),
-                }
-            }
+    const calendarOptions = {
+        plugins: [ dayGridPlugin, timeGridPlugin, interactionPlugin ],
+        initialView: 'dayGridMonth',
+        headerToolbar: {
+            end: 'dayGridMonth timeGridWeek today prev,next',
         },
-        methods: {
-            formatEvents() {
-                return this.events.map(formatEvent);
-            }
-        }
+        allDaySlot: false,
+        slotMinTime: "05:00:00",
+        slotMaxTime: "22:00:00",
+        events: formatEvents(),
+    };
+
+    function formatEvents(): EventInput[] {
+        return props.events.map(formatEvent);
     }
 </script>
+
 <template>
   <FullCalendar ref="calendar" :options="calendarOptions" />
 </template>
