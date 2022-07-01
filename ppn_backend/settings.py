@@ -82,8 +82,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'uil.core.middleware.ThreadLocalUserMiddleware',
-    'csp.middleware.CSPMiddleware',
 ]
+if not DEBUG:
+    MIDDLEWARE += [
+        'csp.middleware.CSPMiddleware',
+    ]
 
 AUTHENTICATION_BACKENDS = [
     'axes.backends.AxesBackend',
