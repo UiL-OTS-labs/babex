@@ -1,9 +1,9 @@
 from django.urls import path
 
-from .views import home
+from .views import AgendaHomeView
 
 app_name = 'agenda'
 
 urlpatterns = [
-    path('', home, name='home')
+    path('', AgendaHomeView.as_view(), name='home')
 ]

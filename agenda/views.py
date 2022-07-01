@@ -1,5 +1,8 @@
+import braces.views as braces
+
 from django.shortcuts import render
+from django.views.generic import TemplateView
 
 
-def home(request):
-    return render(request, 'agenda/home.html')
+class AgendaHomeView(braces.LoginRequiredMixin, TemplateView):
+    template_name = 'agenda/home.html'
