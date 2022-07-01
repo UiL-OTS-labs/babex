@@ -24,8 +24,8 @@
     }
 
     const props = defineProps<{
-        events: [Appointment]
-        }>();
+        events: Appointment[]
+    }>();
 
     const calendarOptions = {
         plugins: [ dayGridPlugin, timeGridPlugin, interactionPlugin ],
