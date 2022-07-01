@@ -1,5 +1,6 @@
-{% extends 'base/base.html' %}
+{% extends 'vue/base.html' %}
+{% load vue3 %}
 
 {% block content %}
-<p>This page should contain an agenda of all lab activities (with participant info hidden or visible according to permissions).</p>
+{% vue 'babex.AgendaCalendar' events=timeslots %}
 {% endblock %}

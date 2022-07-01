@@ -1,0 +1,8 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load vue3 %}
+
+{% block html_head %}
+<script src="{% static 'vue/js/chunk-vendors.js' %}"></script>
+<script src="{% static 'vue/js/app.js' %}"></script>
+{% endblock %}
