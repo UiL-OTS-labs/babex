@@ -198,6 +198,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+if DEBUG:
+    AUTH_PASSWORD_VALIDATORS = []
 
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
@@ -263,7 +265,7 @@ MENU_HIDE_EMPTY = False
 
 # Auditlog
 
-AUDIT_LOG_ENABLE = True
+AUDIT_LOG_ENABLE = not DEBUG
 
 # try:
 #     from .ldap_settings import *
