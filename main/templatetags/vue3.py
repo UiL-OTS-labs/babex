@@ -10,9 +10,15 @@ register = template.Library()
 
 
 class VueJSONEncoder(json.JSONEncoder):
+    def encode(self, obj):
+        if hasattr(obj, '_wrapped'):
+            return super().encode(obj._wrapped)
+        return super().encode(obj)
+
     def default(self, obj):
         if isinstance(obj, (datetime.datetime, datetime.date, datetime.time)):
             return obj.isoformat()
+        return super().default(obj)
 
 
 @register.simple_tag(takes_context=True)

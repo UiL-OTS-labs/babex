@@ -1,3 +1,17 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
-# Create your models here.
+from experiments.models import Location
+
+
+class Closing(models.Model):
+    start = models.DateTimeField(_('closing:attribute:start'), db_index=True)
+    end = models.DateTimeField(_('closing:attribute:end'), db_index=True)
+
+    # SET_NULL will let us keep closings history if for some reason a location is removed
+    location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
+
+    # used to indicate entire lab is closed
+    is_global = models.BooleanField()
+
+    comment = models.TextField()

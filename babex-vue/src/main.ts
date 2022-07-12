@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import AgendaCalendar from './components/AgendaCalendar.vue'
+import AgendaCalendar from './components/agenda/AgendaCalendar.vue'
 
 
 // using object.defineProperty instead of window.foo to satisfy typescript
