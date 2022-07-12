@@ -61,7 +61,6 @@
         appointments: Appointment[],
         closings: Closing[],
         locations: Location[],
-        csrf: string,
     }>();
 
     let actionContext = ref({});
@@ -143,7 +142,7 @@
       <FullCalendar ref="calendar" :options="calendarOptions" />
     </div>
     <div class="col-2">
-      <AgendaActions :context="actionContext" :csrf="csrf" />
+      <AgendaActions :context="actionContext" />
     </div>
   </div>
 </template>
