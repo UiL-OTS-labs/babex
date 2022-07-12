@@ -8,6 +8,7 @@
 
     import AgendaActions from './AgendaActions.vue';
     import {ActionContext} from './AgendaActions.vue';
+    import {urls} from '../../urls';
 
     interface Appointment {
         start: Date,
@@ -80,18 +81,23 @@
             hour12: false
         },
         displayEventEnd: true,
-        events: formatEvents(),
+        events: fetchEvents,
         eventContent: eventRender,
         selectable: true,
         select: onSelect,
         eventClick: onEventClick,
     };
 
-    function formatEvents(): EventInput[] {
-        return [].concat(
-            props.appointments.map(formatAppointment),
-            props.closings.map(formatClosing));
-
+    function fetchEvents(fetchInfo, success, failure): EventInput[] {
+        let from = fetchInfo.start.toISOString();
+        let to = fetchInfo.end.toISOString();
+        fetch(`${urls.agenda.feed}?from=${from}&to=${to}`).then((response) => {
+            response.json().then((feed) => {
+                success([].concat(
+                    feed.appointments.map(formatAppointment),
+                    feed.closings.map(formatClosing)))
+                })
+        }).catch(failure);
     }
 
     function eventRender(arg: EventContentArg) {
@@ -123,8 +129,7 @@
 
     function onEventClick(eventInfo) {
         deselectEvents();
-        console.log(eventInfo);
-        let element  = eventInfo.el;
+        let element = eventInfo.el;
         element.classList.add('event-selected');
 
         let event = eventInfo.event;

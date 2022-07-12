@@ -1,18 +1,19 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
+import dateutil.parser
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
+from django.http.response import JsonResponse
 
 from experiments.models import Appointment, Location
 from .models import Closing
 
 
-@login_required
-def agenda_home(request):
+def agenda_context(from_date, to_date):
     context = dict()
-    appointments = Appointment.objects.all()
-    closings = Closing.objects.all()
-    locations = Location.objects.all()
+    appointments = Appointment.objects.filter(timeslot__datetime__gte=from_date, timeslot__datetime__lt=to_date)
+    closings = Closing.objects.filter(end__gte=from_date, start__lt=to_date)
+
 
     # TODO: these format methods don't belong here, they should be more generic
     def format_appointment(appointment):
@@ -34,13 +35,31 @@ def agenda_home(request):
             location=closing.location.name if closing.location else None,
             comment=closing.comment)
 
+
+    context['appointments'] = [format_appointment(x) for x in appointments]
+    context['closings'] = [format_closing(x) for x in closings]
+    context['from'] = from_date
+    context['to'] = to_date
+    return context
+
+
+@login_required
+def agenda_feed(request):
+    from_date = dateutil.parser.parse(request.GET['from'])
+    to_date = dateutil.parser.parse(request.GET['to'])
+    return JsonResponse(agenda_context(from_date, to_date))
+
+
+@login_required
+def agenda_home(request):
+    locations = Location.objects.all()
+
     def format_location(location):
         return dict(
             id=location.id,
             name=location.name)
 
-    context['appointments'] = [format_appointment(x) for x in appointments]
-    context['closings'] = [format_closing(x) for x in closings]
+    context = dict()
     context['locations'] = [format_location(x) for x in locations]
 
     return render(request, 'agenda/home.html', context)

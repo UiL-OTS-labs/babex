@@ -2,6 +2,6 @@
 {% load vue3 %}
 
 {% block content %}
-{% vue 'babex.AgendaCalendar' appointments=appointments closings=closings locations=locations csrf=csrf_token %}
+{% vue 'babex.AgendaCalendar' locations=locations %}
 
 {% endblock %}
