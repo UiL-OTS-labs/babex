@@ -1,7 +1,7 @@
 from django.urls import path
 from django.views.generic import TemplateView
 
-from .views import agenda_home
+from .views import agenda_home, agenda_success
 from .views import AppointmentFeed, AppointmentInfo
 from .views import ClosingFeed, ClosingAddView, ClosingEditView, ClosingDeleteView
 
@@ -17,5 +17,5 @@ urlpatterns = [
     path('closing/<pk>/', ClosingEditView.as_view(), name='closing.edit'),
     path('closing/<pk>/delete', ClosingDeleteView.as_view(), name='closing.delete'),
 
-    path('success', TemplateView.as_view(template_name='agenda/success.html'), name='success')
+    path('success', agenda_success, name='success')
 ]

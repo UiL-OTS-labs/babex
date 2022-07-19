@@ -2,6 +2,7 @@ import dateutil.parser
 
 from django.contrib.auth.decorators import login_required
 from django import forms
+from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import gettext as _
@@ -90,3 +91,7 @@ class ClosingEditView(UpdateView):
 class ClosingDeleteView(DeleteView):
     model = Closing
     success_url = reverse('agenda:success')
+
+
+def agenda_success(request):
+    return HttpResponse('OK', headers={'HX-Trigger': 'agendaRefresh'})

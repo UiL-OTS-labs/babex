@@ -169,5 +169,7 @@
         calendar = new FullCalendar.Calendar(calendarEl, calendarOptions);
         calendar.render();
     });
+
+    document.body.addEventListener('agendaRefresh', agendaRefresh);
 </script>
 {% endblock %}
