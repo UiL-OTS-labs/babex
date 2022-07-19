@@ -1,0 +1,48 @@
+<div class="closing-form" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <div class="action-panel">
+    <h5>Add closing</h5>
+    <form
+    {% if object.pk %}
+        hx-post="{% url 'agenda:closing.edit' object.pk %}"
+    {% else %}
+        hx-post="{% url 'agenda:closing.add' %}"
+    {% endif %}
+        hx-target=".closing-form">
+    {{ form.as_p }}
+      <div><button cls="btn save">Save</button></div>
+    </form>
+    {% if object.pk %}
+    <form hx-post="{% url 'agenda:closing.delete' object.pk %}" hx-target=".closing-form">
+      <button cls="btn btn-danger">Remove</button>
+    </form>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+    .closing-form p {
+        margin: 0;
+    }
+
+    .closing-form
+    input[type="text"], select, textarea {
+        width: 100%;
+    }
+
+    .closing-form
+    select {
+        margin-bottom: 6px;
+    }
+
+    .closing-form
+    button {
+        width: 100%;
+        margin-top: 2px;
+        margin-bottom: 4px;
+    }
+
+    .closing-form
+    .btn.save {
+        margin-top: 6px;
+    }
+</style>

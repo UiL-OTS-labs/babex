@@ -1,4 +1,5 @@
 import braces.views as braces
+from django.views.generic.detail import DetailView
 from django.core.exceptions import SuspiciousOperation
 from django.urls import reverse_lazy as reverse
 from django.utils.text import gettext_lazy as _
@@ -9,7 +10,7 @@ from experiments.utils.timeslot_create import add_timeslot
 from main.views import ModelFormListView
 from .mixins import ExperimentObjectMixin
 from ..forms import TimeSlotForm
-from ..models import TimeSlot
+from ..models import Appointment, TimeSlot
 from ..utils import delete_timeslot, delete_timeslots, now, \
     unsubscribe_participant
 
@@ -151,3 +152,7 @@ class SilentUnsubscribeParticipantView(UnsubscribeParticipantView):
         unsubscribe_participant(appointment_pk,
                                 False,
                                 deleting_user=request.user)
+
+
+class AppointmentDetailView(DetailView):
+    model = Appointment

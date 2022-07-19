@@ -1,0 +1,11 @@
+<div class="action-panel">
+  <h5>Appointment</h5>
+  <div>{{ object.start | date }}</div>
+  <div>
+  {{ object.start | time }} - {{ object.end | time }}
+  </div>
+
+  <div>Participant: {{ object.participant.name }}</div>
+  <div>Leader: {{ object.leader }}</div>
+  <div><a href="{% url 'experiments:appointment' object.pk %}">Go to appointment</a></div>
+</div>

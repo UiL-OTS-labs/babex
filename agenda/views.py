@@ -1,53 +1,32 @@
-from datetime import timedelta, datetime
 import dateutil.parser
 
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
-from django.http.response import JsonResponse
+from django import forms
+from django.shortcuts import render
+from django.urls import reverse_lazy as reverse
+from django.utils.translation import gettext as _
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
+from rest_framework import generics
 
 from experiments.models import Appointment, Location
-from .models import Closing
+from experiments.models.appointment_models import AppointmentSerializer
+from .models import Closing, ClosingSerializer
 
 
-def agenda_context(from_date, to_date):
-    context = dict()
-    appointments = Appointment.objects.filter(timeslot__datetime__gte=from_date, timeslot__datetime__lt=to_date)
-    closings = Closing.objects.filter(end__gte=from_date, start__lt=to_date)
+class AppointmentFeed(generics.ListAPIView):
+    serializer_class = AppointmentSerializer
+
+    def get_queryset(self):
+        from_date = dateutil.parser.parse(self.request.GET['start'])
+        to_date = dateutil.parser.parse(self.request.GET['end'])
+        return Appointment.objects.filter(timeslot__datetime__gte=from_date, timeslot__datetime__lt=to_date)
 
 
-    # TODO: these format methods don't belong here, they should be more generic
-    def format_appointment(appointment):
-        return dict(
-            id=appointment.id,
-            start=appointment.timeslot.datetime,
-            end=appointment.timeslot.datetime + timedelta(hours=1),
-            experiment=appointment.experiment.name,
-            leader=appointment.timeslot.experiment.leader.name,
-            participant=appointment.participant.name,
-            location=appointment.timeslot.experiment.location.name)
-
-    def format_closing(closing):
-        return dict(
-            id=closing.id,
-            start=closing.start,
-            end=closing.end,
-            is_global=closing.is_global,
-            location=closing.location.name if closing.location else None,
-            comment=closing.comment)
-
-
-    context['appointments'] = [format_appointment(x) for x in appointments]
-    context['closings'] = [format_closing(x) for x in closings]
-    context['from'] = from_date
-    context['to'] = to_date
-    return context
-
-
-@login_required
-def agenda_feed(request):
-    from_date = dateutil.parser.parse(request.GET['from'])
-    to_date = dateutil.parser.parse(request.GET['to'])
-    return JsonResponse(agenda_context(from_date, to_date))
+class AppointmentInfo(DetailView):
+    model = Appointment
+    template_name = 'agenda/appointment_info.html'
 
 
 @login_required
@@ -65,30 +44,49 @@ def agenda_home(request):
     return render(request, 'agenda/home.html', context)
 
 
-# TODO: only for admins
-@login_required
-def closing_post(request):
-    location = None
-    if 'location' in request.POST:
-        location = Location.objects.get(pk=request.POST['location'])
+class ClosingFeed(generics.ListAPIView):
+    serializer_class = ClosingSerializer
 
-    values = dict(
-        start=request.POST['start'],
-        end=request.POST['end'],
-        location=location,
-        is_global=(request.POST['is_global'] == 'true'),
-        comment=request.POST['comment'])
-
-    if 'id' in request.POST:
-        Closing.objects.filter(pk=request.POST['id']).update(**values)
-    else:
-        Closing.objects.create(**values)
-
-    return redirect('agenda:home')
+    def get_queryset(self):
+        from_date = dateutil.parser.parse(self.request.GET['start'])
+        to_date = dateutil.parser.parse(self.request.GET['end'])
+        return Closing.objects.filter(end__gte=from_date, start__lt=to_date)
 
 
-# TODO: only for admins
-@login_required
-def closing_delete(request):
-    Closing.objects.get(pk=request.POST['id']).delete()
-    return redirect('agenda:home')
+class ClosingForm(forms.ModelForm):
+    class Meta:
+        model = Closing
+        fields = ['start', 'end', 'location', 'comment']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['location'].required = False
+        self.fields['location'].empty_label = _('Entire building')
+        self.fields['comment'].required = False
+
+    def save(self, *args, **kwargs):
+        self.instance.is_global = self.instance.location is None
+        return super().save(*args, **kwargs)
+
+
+class ClosingAddView(CreateView):
+    model = Closing
+    form_class = ClosingForm
+    success_url = reverse('agenda:success')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['initial']['start'] = self.request.GET.get('start')
+        kwargs['initial']['end'] = self.request.GET.get('end')
+        return kwargs
+
+
+class ClosingEditView(UpdateView):
+    model = Closing
+    form_class = ClosingForm
+    success_url = reverse('agenda:success')
+
+
+class ClosingDeleteView(DeleteView):
+    model = Closing
+    success_url = reverse('agenda:success')

@@ -2,7 +2,7 @@ from django.urls import path
 
 from ..views import (SilentUnsubscribeParticipantView, TimeSlotBulkDeleteView,
                      TimeSlotDeleteView, TimeSlotHomeView,
-                     UnsubscribeParticipantView, )
+                     UnsubscribeParticipantView, AppointmentDetailView)
 
 urlpatterns = [
     path(
@@ -33,4 +33,6 @@ urlpatterns = [
         TimeSlotBulkDeleteView.as_view(),
         name='timeslots_bulk_delete',
     ),
+
+    path('appointment/<pk>/', AppointmentDetailView.as_view(), name='appointment'),
 ]
