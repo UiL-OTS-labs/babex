@@ -64,6 +64,8 @@ class ClosingForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['start'].widget.format = '%Y-%m-%d %H:%M'
+        self.fields['end'].widget.format = '%Y-%m-%d %H:%M'
         self.fields['location'].required = False
         self.fields['location'].empty_label = _('Entire building')
         self.fields['comment'].required = False
@@ -80,8 +82,8 @@ class ClosingAddView(CreateView):
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        kwargs['initial']['start'] = self.request.GET.get('start')
-        kwargs['initial']['end'] = self.request.GET.get('end')
+        kwargs['initial']['start'] = dateutil.parser.parse(self.request.GET.get('start')).strftime('%Y-%m-%d %H:%M')
+        kwargs['initial']['end'] = dateutil.parser.parse(self.request.GET.get('end')).strftime('%Y-%m-%d %H:%M')
         return kwargs
 
 
