@@ -11,7 +11,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from rest_framework import generics
 
-from experiments.models import Appointment, Location
+from experiments.models import Appointment, Experiment, Location, TimeSlot
 from experiments.models.appointment_models import AppointmentSerializer
 from .models import Closing, ClosingSerializer
 
@@ -42,7 +42,10 @@ def agenda_home(request):
     context = dict()
     context['locations'] = [format_location(x) for x in locations]
 
-    return render(request, 'agenda/home.html', context)
+    if request.headers.get('HX-Request'):
+        return render(request, 'agenda/calendar_fragment.html', context)
+    else:
+        return render(request, 'agenda/home.html', context)
 
 
 class ClosingFeed(generics.ListAPIView):
@@ -94,4 +97,22 @@ class ClosingDeleteView(DeleteView):
 
 
 def agenda_success(request):
-    return HttpResponse('OK', headers={'HX-Trigger': 'agendaRefresh'})
+    return HttpResponse('', headers={'HX-Trigger': 'agendaRefresh'})
+
+
+class AppointmentAddView(CreateView):
+    def get(self, request, experiment):
+        experiment = Experiment.objects.get(pk=experiment)
+        return render(request, 'agenda/calendar_modal.html', dict(experiment=experiment))
+
+    # only adding a timeslot for now as a lazy placeholder for real
+    # appointment management
+    def post(self, request, experiment):
+        experiment = Experiment.objects.get(pk=experiment)
+        experiment = Experiment.objects.first()
+        TimeSlot.objects.create(
+            experiment=experiment,
+            datetime=request.POST['start'],
+            max_places=1)
+        success_url = reverse('experiments:timeslots', args=[experiment.pk])
+        return HttpResponse(status=204, headers={'HX-Redirect': success_url})

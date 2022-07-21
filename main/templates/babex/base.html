@@ -1,0 +1,66 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block html_head %}
+<script src="{% static 'js/htmx.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () =>  {
+        document.body.addEventListener('htmx:configRequest', (evt) => {
+            evt.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+        });
+    });
+</script>
+
+<script src="{% static 'js/fullcalendar.min.js' %}"></script>
+<link rel="stylesheet" href="{%static 'css/fullcalendar.min.css' %}"/>
+<style>
+    #calendar
+    /* clear UU styling */
+    table thead th {
+        border-bottom: unset;
+    }
+
+    #calendar
+    table tfoot th {
+        border-top: unset;
+    }
+
+    #calendar
+    table tbody tr:nth-of-type(odd) {
+        background: unset;
+    }
+
+    #calendar
+    table tbody tr:hover {
+        background: unset;
+    }
+
+    #calendar
+    table tbody tr.no-background:hover, table tbody tr.no-background {
+        background: unset;
+    }
+
+    #calendar
+    table tbody td, table thead th, table tfoot th {
+        padding: unset;
+    }
+
+    #calendar
+    .fc-event {
+        cursor: pointer;
+    }
+
+    #calendar
+    .event-selected {
+        background: #8ac4fd;
+        border-color: #8ac4fd;
+    }
+
+    .action-panel {
+        background: #eee;
+        padding: 8px;
+
+    }
+</style>
+
+{% endblock %}

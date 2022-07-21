@@ -1,0 +1,63 @@
+<div id="modal-backdrop" class="modal-backdrop fade show" style="display:block;"></div>
+<div id="modal" class="modal fade show" tabindex="-1" style="display:block;">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                {% include 'agenda/calendar_fragment.html' %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Apply</button>
+                <button type="button" class="btn btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        let event;
+
+        function closeModal() {
+            var backdrop = document.getElementById("modal-backdrop");
+            var modal = document.getElementById("modal");
+
+            modal.classList.remove("show");
+            backdrop.classList.remove("show");
+
+            setTimeout(function() {
+                backdrop.remove();
+                modal.remove();
+            }, 200);
+        }
+
+        function apply() {
+            htmx.ajax('POST', "{% url 'agenda:appointment.add' experiment.id %}", {
+                values: {
+                    start: event.start.toISOString(),
+                    end: event.end.toISOString()
+                }
+            });
+            closeModal();
+        }
+
+        function onSelect(selectionInfo) {
+            let calendar = getCalendar();
+            if (selectionInfo.view.type === 'timeGridDay') {
+                if (event) {
+                    event.remove();
+                }
+                event = calendar.addEvent({
+                    start: selectionInfo.start,
+                    end: selectionInfo.end
+                });
+            }
+            else {
+                calendar.changeView('timeGridDay', selectionInfo.start);
+            }
+        }
+
+        getCalendar().setOption('select', onSelect);
+        document.querySelector('.modal-footer .btn-primary').addEventListener('click', apply);
+        document.querySelector('.modal-footer .btn-secondary').addEventListener('click', closeModal);
+    })();
+</script>

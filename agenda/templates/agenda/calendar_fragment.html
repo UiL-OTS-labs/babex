@@ -1,0 +1,85 @@
+<div id="calendar"></div>
+
+<script>
+    (function() {
+        const calendarOptions = {
+            initialView: 'dayGridMonth',
+            headerToolbar: {
+                end: 'dayGridMonth timeGridWeek today prev,next',
+            },
+            allDaySlot: false,
+            slotMinTime: "05:00:00",
+            slotMaxTime: "22:00:00",
+            eventTimeFormat: {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            },
+            displayEventEnd: true,
+            eventSources: [
+                {
+                    url: '{% url 'agenda:feed' %}',
+                    eventDataTransform: formatAppointment
+                },
+                {
+                    url: '/agenda/closing',
+                    eventDataTransform: formatClosing,
+                    color: 'gray'
+                },
+            ],
+            eventContent: eventRender,
+            selectable: true,
+        };
+
+        function eventRender(arg) {
+            // override built-in template with multiline support
+            return {
+                html: `<div class="fc-event-main-frame"><div class="fc-event-time">${arg.timeText}</div>
+                    <div class="fc-event-title-container">
+                        <div class="fc-event-title fc-sticky">${arg.event.title}</div>
+                    </div></div>
+                <div>${arg.event.extendedProps.extra}</div>`
+            }
+        }
+
+        function formatAppointment(event) {
+            return {
+                id: event.id,
+                start: event.start,
+                end: event.end,
+                title: event.participant,
+                // extra field will be displayed in a separate line
+                extra: `${event.location} (${event.leader})`,
+                display: 'block',
+                category: 'appointment'
+            };
+        }
+
+        function formatClosing(event) {
+            return {
+                id: event.id,
+                start: event.start,
+                end: event.end,
+                title:'Closed',
+                extra: event.is_global ? 'Entire building' : event.location,
+                display: 'block',
+                category: 'closing',
+                comment: event.comment
+            };
+        }
+
+        let calendar;
+
+        function agendaRefresh() {
+            calendar.getEventSources().forEach((source) => source.refetch());
+        }
+
+        document.body.addEventListener('agendaRefresh', agendaRefresh);
+
+        var calendarEl = document.getElementById('calendar');
+        calendar = new FullCalendar.Calendar(calendarEl, calendarOptions);
+        calendar.render();
+
+        window.getCalendar = () => calendar;
+    })();
+</script>
