@@ -2,7 +2,7 @@ from django.urls import path
 
 from rest_framework.routers import DefaultRouter
 
-from .views import agenda_home, closing_post, closing_delete
+from .views import agenda_home
 from .views import AppointmentFeed, ClosingViewSet
 
 app_name = 'agenda'
