@@ -3,7 +3,7 @@
 -->
 
 <script lang="ts" setup>
-    import {defineProps, ref, watch} from 'vue';
+    import {defineEmits, defineProps, ref, watch} from 'vue';
 
     function formatDate(date: Date) : string {
         let options = {
@@ -30,23 +30,24 @@
     }
 
     function onChange(event: any) {
-        innerDate.value = parseDate(event.target.value)
+        // innerDate.value = parseDate(event.target.value)
     }
 
     let props = defineProps<{
-        date: Date,
-        name: string
+        modelValue: Date,
     }>();
 
-    let innerDate = ref(props.date);
-    watch(() => props.date, (newDate) => {innerDate.value = newDate});
+    const emits = defineEmits(['update:modelValue']);
+
+
+    // let innerDate = ref(props.date);
+    // watch(() => props.date, (newDate) => {innerDate.value = newDate});
 
 </script>
 
 <template>
   <div>
-    <input type="text" :value="formatDate(innerDate)" @change="onChange" />
-    <input type="hidden" :name="name" :value="serializeDate(innerDate)"/>
+    <input type="text" :value="formatDate(modelValue)" @change="$emit('update:modelValue', $event.target.value)" />
   </div>
 </template>
 

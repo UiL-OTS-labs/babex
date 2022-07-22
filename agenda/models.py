@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from rest_framework import serializers
+
 from experiments.models import Location
 
 
@@ -14,4 +16,12 @@ class Closing(models.Model):
     # used to indicate entire lab is closed
     is_global = models.BooleanField()
 
-    comment = models.TextField()
+    comment = models.TextField(null=True)
+
+
+class ClosingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Closing
+        fields = ['id', 'start', 'end', 'is_global', 'comment', 'location']
+
+    location = serializers.StringRelatedField()

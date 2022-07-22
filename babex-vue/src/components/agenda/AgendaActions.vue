@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import {defineProps, ref} from 'vue';
+    import {defineEmits, defineProps, ref} from 'vue';
     import {urls} from '../../urls';
     import ClosingForm from './ClosingForm.vue';
 
@@ -16,6 +16,8 @@
         context: ActionContext,
     }>();
 
+    const emit = defineEmits(['update']);
+
     const formAction = urls.agenda.closing;
     let isGlobal = ref('true');
 </script>
@@ -26,11 +28,11 @@
   <div v-if="context.type=='event-select' && context.event.extendedProps.category == 'closing'" class="action-panel">
     <h5>Edit closing</h5>
     <ClosingForm :key="context.event.id" :id="context.event.id" :start="context.event.start" :end="context.event.end"
-       :comment="context.event.extendedProps.comment" :locations="context.locations" />
+       :comment="context.event.extendedProps.comment" :locations="context.locations" @update="$emit('update')" />
   </div>
   <div v-if="context.type=='date-range'" class="action-panel">
     <h5>Add closing</h5>
-    <ClosingForm :start="context.start" :end="context.end" :locations="context.locations" />
+    <ClosingForm :start="context.start" :end="context.end" :locations="context.locations" @update="$emit('update')" />
   </div>
   </div>
 </template>

@@ -9,28 +9,7 @@
     import AgendaActions from './AgendaActions.vue';
     import {ActionContext} from './AgendaActions.vue';
     import {urls} from '../../urls';
-
-    interface Appointment {
-        start: Date,
-        end: Date,
-        experiment: string,
-        leader: string,
-        participant: string,
-        location: string,
-    }
-
-    interface Closing {
-        start: Date,
-        end: Date,
-        is_global: boolean,
-        location: string,
-        comment: string
-    }
-
-    interface Location {
-        id: number,
-        name: string
-    }
+    import type {Appointment, Closing, Location} from '../../types';
 
     function formatAppointment(event: Appointment) : EventInput {
         return {
@@ -59,12 +38,11 @@
     }
 
     const props = defineProps<{
-        appointments: Appointment[],
-        closings: Closing[],
         locations: Location[],
     }>();
 
     let actionContext = ref({});
+    let calendar = ref(null);
 
     const calendarOptions = {
         plugins: [ dayGridPlugin, timeGridPlugin, interactionPlugin ],
@@ -81,24 +59,21 @@
             hour12: false
         },
         displayEventEnd: true,
-        events: fetchEvents,
+        eventSources: [
+            {
+                url: urls.agenda.feed,
+                eventDataTransform: formatAppointment
+            },
+            {
+                url: urls.agenda.closing.list,
+                eventDataTransform: formatClosing
+            },
+        ],
         eventContent: eventRender,
         selectable: true,
         select: onSelect,
         eventClick: onEventClick,
     };
-
-    function fetchEvents(fetchInfo, success, failure): EventInput[] {
-        let from = fetchInfo.start.toISOString();
-        let to = fetchInfo.end.toISOString();
-        fetch(`${urls.agenda.feed}?from=${from}&to=${to}`).then((response) => {
-            response.json().then((feed) => {
-                success([].concat(
-                    feed.appointments.map(formatAppointment),
-                    feed.closings.map(formatClosing)))
-                })
-        }).catch(failure);
-    }
 
     function eventRender(arg: EventContentArg) {
         // override built-in template with multiline support
@@ -139,6 +114,11 @@
             locations: props.locations
         };
     }
+
+    function refreshFeeds() {
+        let calendarApi = calendar.value.getApi();
+        calendarApi.getEventSources().forEach((src) => src.refetch());
+    }
 </script>
 
 <template>
@@ -147,7 +127,7 @@
       <FullCalendar ref="calendar" :options="calendarOptions" />
     </div>
     <div class="col-2">
-      <AgendaActions :context="actionContext" />
+      <AgendaActions :context="actionContext" @update="refreshFeeds" />
     </div>
   </div>
 </template>
