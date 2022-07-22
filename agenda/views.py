@@ -48,32 +48,3 @@ class ClosingViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(end__gte=from_date, start__lt=to_date)
 
         return queryset
-
-
-# TODO: only for admins
-@login_required
-def closing_post(request):
-    location = None
-    if 'location' in request.POST:
-        location = Location.objects.get(pk=request.POST['location'])
-
-    values = dict(
-        start=request.POST['start'],
-        end=request.POST['end'],
-        location=location,
-        is_global=(request.POST['is_global'] == 'true'),
-        comment=request.POST['comment'])
-
-    if 'id' in request.POST:
-        Closing.objects.filter(pk=request.POST['id']).update(**values)
-    else:
-        Closing.objects.create(**values)
-
-    return redirect('agenda:home')
-
-
-# TODO: only for admins
-@login_required
-def closing_delete(request):
-    Closing.objects.get(pk=request.POST['id']).delete()
-    return redirect('agenda:home')
