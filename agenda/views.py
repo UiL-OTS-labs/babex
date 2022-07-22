@@ -1,10 +1,11 @@
 import dateutil.parser
 
 from django.contrib.auth.decorators import login_required
-from django import forms
 from django.http.response import HttpResponse
+from django import forms
 from django.shortcuts import render
 from django.urls import reverse_lazy as reverse
+from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -20,8 +21,8 @@ class AppointmentFeed(generics.ListAPIView):
     serializer_class = AppointmentSerializer
 
     def get_queryset(self):
-        from_date = dateutil.parser.parse(self.request.GET['start'])
-        to_date = dateutil.parser.parse(self.request.GET['end'])
+        from_date = dateutil.parser.isoparse(self.request.GET['start'])
+        to_date = dateutil.parser.isoparse(self.request.GET['end'])
         return Appointment.objects.filter(timeslot__datetime__gte=from_date, timeslot__datetime__lt=to_date)
 
 
@@ -52,8 +53,8 @@ class ClosingFeed(generics.ListAPIView):
     serializer_class = ClosingSerializer
 
     def get_queryset(self):
-        from_date = dateutil.parser.parse(self.request.GET['start'])
-        to_date = dateutil.parser.parse(self.request.GET['end'])
+        from_date = dateutil.parser.isoparse(self.request.GET['start'])
+        to_date = dateutil.parser.isoparse(self.request.GET['end'])
         return Closing.objects.filter(end__gte=from_date, start__lt=to_date)
 
 
@@ -82,8 +83,11 @@ class ClosingAddView(CreateView):
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        kwargs['initial']['start'] = dateutil.parser.parse(self.request.GET.get('start')).strftime('%Y-%m-%d %H:%M')
-        kwargs['initial']['end'] = dateutil.parser.parse(self.request.GET.get('end')).strftime('%Y-%m-%d %H:%M')
+        if self.request.method == 'GET':
+            start = timezone.localtime(dateutil.parser.isoparse(self.request.GET.get('start')))
+            end = timezone.localtime(dateutil.parser.isoparse(self.request.GET.get('end')))
+            kwargs['initial']['start'] = start.strftime('%Y-%m-%d %H:%M')
+            kwargs['initial']['end'] = end.strftime('%Y-%m-%d %H:%M')
         return kwargs
 
 

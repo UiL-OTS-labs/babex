@@ -17,4 +17,4 @@ def test_agenda_add_closing(sb, as_admin, agenda):
     end = (date.today() + timedelta(days=1)).strftime('%Y-%m-%d 00:00')
 
     sb.assert_attribute('#id_start', 'value', start)
-    sb.assert_attribute('#id_start', 'value', end)
+    sb.assert_attribute('#id_end', 'value', end)
