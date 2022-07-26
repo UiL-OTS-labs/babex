@@ -30,7 +30,6 @@
     }
 
     function onChange(event: any) {
-        // innerDate.value = parseDate(event.target.value)
         emits('update:modelValue', parseDate(event.target.value));
     }
 
@@ -39,11 +38,6 @@
     }>();
 
     const emits = defineEmits(['update:modelValue']);
-
-
-    // let innerDate = ref(props.date);
-    // watch(() => props.date, (newDate) => {innerDate.value = newDate});
-
 </script>
 
 <template>
