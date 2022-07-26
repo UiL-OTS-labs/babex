@@ -31,6 +31,7 @@
 
     function onChange(event: any) {
         // innerDate.value = parseDate(event.target.value)
+        emits('update:modelValue', parseDate(event.target.value));
     }
 
     let props = defineProps<{
@@ -47,7 +48,7 @@
 
 <template>
   <div>
-    <input type="text" :value="formatDate(modelValue)" @change="$emit('update:modelValue', $event.target.value)" />
+      <input type="text" :value="formatDate(modelValue)" @change="onChange">
   </div>
 </template>
 

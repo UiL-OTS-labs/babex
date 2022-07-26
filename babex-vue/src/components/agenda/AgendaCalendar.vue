@@ -4,10 +4,9 @@
     import timeGridPlugin from '@fullcalendar/timegrid';
     import interactionPlugin from '@fullcalendar/interaction';
     import type {EventInput, EventContentArg} from '@fullcalendar/core';
-    import {defineProps, ref} from 'vue';
+    import {defineEmits, defineExpose, defineProps, ref} from 'vue';
 
     import AgendaActions from './AgendaActions.vue';
-    import {ActionContext} from './AgendaActions.vue';
     import {urls} from '../../urls';
     import type {Appointment, Closing, Location} from '../../types';
 
@@ -30,18 +29,16 @@
             start: event.start,
             end: event.end,
             title:'Closed',
-            extra: event.is_global ? 'Entire building' : event.location,
+            extra: event.is_global ? 'Entire building' : event.location_name,
             display: 'block',
             category: 'closing',
             comment: event.comment
         };
     }
 
-    const props = defineProps<{
-        locations: Location[],
-    }>();
 
-    let actionContext = ref({});
+    const emit = defineEmits(['select', 'eventClick']);
+
     let calendar = ref(null);
 
     const calendarOptions = {
@@ -65,14 +62,15 @@
                 eventDataTransform: formatAppointment
             },
             {
-                url: urls.agenda.closing.list,
-                eventDataTransform: formatClosing
+                url: urls.agenda.closing,
+                eventDataTransform: formatClosing,
+                color: 'gray'
             },
         ],
         eventContent: eventRender,
         selectable: true,
-        select: onSelect,
-        eventClick: onEventClick,
+        select: (info) => emit('select', info),
+        eventClick: (info) => emit('eventClick', info)
     };
 
     function eventRender(arg: EventContentArg) {
@@ -86,50 +84,20 @@
         }
     }
 
-    function deselectEvents() {
-        document.querySelectorAll('.event-selected').forEach(
-            (el) => {el.classList.remove('event-selected');}
-        );
-    }
-
-    function onSelect(selectionInfo) {
-        deselectEvents();
-        actionContext.value = {
-            type: 'date-range',
-            start: selectionInfo.start,
-            end: selectionInfo.end,
-            locations: props.locations
-        };
-    }
-
-    function onEventClick(eventInfo) {
-        deselectEvents();
-        let element = eventInfo.el;
-        element.classList.add('event-selected');
-
-        let event = eventInfo.event;
-        actionContext.value = {
-            type: 'event-select',
-            event: event,
-            locations: props.locations
-        };
-    }
-
-    function refreshFeeds() {
+    function refresh() {
         let calendarApi = calendar.value.getApi();
         calendarApi.getEventSources().forEach((src) => src.refetch());
     }
+
+    function changeView(view) {
+        calendar.value.getApi().changeView(view);
+    }
+
+    defineExpose({calendar, refresh});
 </script>
 
 <template>
-  <div class="row">
-    <div class="col-10">
-      <FullCalendar ref="calendar" :options="calendarOptions" />
-    </div>
-    <div class="col-2">
-      <AgendaActions :context="actionContext" @update="refreshFeeds" />
-    </div>
-  </div>
+  <FullCalendar ref="calendar" :options="calendarOptions" />
 </template>
 
 <style>

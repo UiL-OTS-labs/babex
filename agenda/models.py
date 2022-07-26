@@ -22,6 +22,9 @@ class Closing(models.Model):
 class ClosingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Closing
-        fields = ['id', 'start', 'end', 'is_global', 'comment', 'location']
+        fields = ['id', 'start', 'end', 'is_global', 'comment', 'location',
+                  'location_name']
 
-    location = serializers.StringRelatedField()
+    location_name = serializers.StringRelatedField(source='location')
+    location = serializers.PrimaryKeyRelatedField(queryset=Location.objects.all(),
+                                                  allow_null=True)

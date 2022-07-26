@@ -85,29 +85,38 @@ class ApiPart {
     }
 }
 
-class ClosingApi extends ApiPart {
-    async list(): Promise<Closing[]> {
-        return this.client.get(urls.agenda.closing.list);
+
+class GenericApiPart<T> extends ApiPart {
+    protected endpoint: string;
+
+    constructor(client: ApiClient, endpoint: string) {
+        super(client);
+        this.endpoint = endpoint;
+    }
+
+    async list(): Promise<T[]> {
+        return this.client.get(this.endpoint);
     }
 
     async delete(id: string) {
-        return this.client.delete(urls.agenda.closing.delete, id);
+        return this.client.delete(this.endpoint, id);
     }
 
-    async update(id: string, values: Closing) {
-        return this.client.put(urls.agenda.closing.add, id, values);
+    async update(id: string, values: T) {
+        return this.client.put(this.endpoint, id, values);
     }
 
-    async create(values: Closing) {
-        return this.client.post(urls.agenda.closing.add, values);
+    async create(values: T) {
+        return this.client.post(this.endpoint, values);
     }
 }
+
 
 class BabexApi {
     protected client = new ApiClient();
 
     agenda = {
-        closing: new ClosingApi(this.client)
+        closing: new GenericApiPart<Closing>(this.client, urls.agenda.closing),
     }
 }
 

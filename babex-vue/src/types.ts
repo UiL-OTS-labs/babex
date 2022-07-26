@@ -11,7 +11,8 @@ interface Closing {
     start: Date,
     end: Date,
     is_global: boolean,
-    location: string,
+    location: number,
+    location_name: string,
     comment: string
 }
 

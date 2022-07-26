@@ -14,7 +14,7 @@
         comment?: string,
     }>();
 
-    const emit = defineEmits(['update']);
+    const emit = defineEmits(['done']);
 
     const formAction = urls.agenda.closing.add;
     let form = ref({
@@ -27,7 +27,7 @@
 
     async function remove(id: number) {
         babexApi.agenda.closing.delete(id).then(() => {
-            emit('update');
+            emit('done');
         });
     }
 
@@ -41,7 +41,7 @@
             promise = babexApi.agenda.closing.create(form.value);
         }
 
-        promise.then(() => emit('update'));
+        promise.then(() => emit('done'));
 
         event.preventDefault();
         event.stopPropagation();
