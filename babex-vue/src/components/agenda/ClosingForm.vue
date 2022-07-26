@@ -3,7 +3,6 @@
     import {urls} from '../../urls';
     import {babexApi} from '../../api';
 
-    import CsrfToken from '../CsrfToken.vue';
     import DateTimePicker from '../DateTimePicker.vue';
 
     let props = defineProps<{
