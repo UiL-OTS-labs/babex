@@ -11,5 +11,6 @@ Object.defineProperty(window, 'babex', {
     value:
     {
         AgendaCalendar,
+        AgendaHome
     }
 });

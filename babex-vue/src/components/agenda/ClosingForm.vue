@@ -52,9 +52,9 @@
 <template>
   <form @submit="onSubmit">
     <div>From:</div>
-    <DateTimePicker v-model="form.start" />
+    <DateTimePicker class="closing-start" v-model="form.start" />
     <div>To:</div>
-    <DateTimePicker v-model="form.end" />
+    <DateTimePicker class="closing-end" v-model="form.end" />
     <div>
       <label><input v-model="form.is_global" type="radio" value="true" />Entire building</label>
       <label><input v-model="form.is_global" type="radio" value="false" />Location:</label>
