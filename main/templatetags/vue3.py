@@ -26,11 +26,12 @@ def prop_const(const, context):
     return json.dumps(const, cls=VueJSONEncoder)
 
 
-def prop_variable(name, context):
-    return json.dumps(context[name], cls=VueJSONEncoder)
+def prop_variable(expr, context):
+    var = template.Variable(expr)
+    return json.dumps(var.resolve(context), cls=VueJSONEncoder)
 
 
-def prop_code(code, context):
+def prop_js(code, context):
     return code
 
 
@@ -62,10 +63,10 @@ def vue(parser, token):
                 if value[0] in ['"', "'"]:
                     props[name] = partial(prop_const, value[1:-1])
                 else:
-                    props[name] = partial(prop_variable, name)
+                    props[name] = partial(prop_variable, value)
         elif args[i][0] == '@':
             (name, value) = args[i][1:].split('=')
-            props[event_prop(name)] = partial(prop_code, value[1:-1])
+            props[event_prop(name)] = partial(prop_js, value[1:-1])
 
     return VueRenderer(component, props, inline)
 
