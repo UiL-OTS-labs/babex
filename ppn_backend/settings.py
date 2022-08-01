@@ -66,9 +66,6 @@ INSTALLED_APPS = [
     'agenda',
 
     'django.contrib.admin',
-
-    # Temp
-    'migrate_app',
 ]
 
 MIDDLEWARE = [
@@ -178,7 +175,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 DATABASE_ROUTERS = [
     'ppn_backend.db_router.DatabaseRouter',
-    'ppn_backend.db_router.MigrationAppRouter', # TEMP!
 ]
 
 # Password validation
