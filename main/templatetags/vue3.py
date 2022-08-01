@@ -50,23 +50,31 @@ def vue(parser, token):
 
     component = args[1]
     props = dict()
-    for i in range(len(args)):
+    for i in range(2, len(args)):
+        print(args[i])
         if args[i][0] == ':':
             # prop binding
-            rest = args[i][1:]
-            if '=' not in rest:
-                # treat :thing the same as :thing=thing
-                name = rest
-                props[name] = partial(prop_variable, name)
-            else:
-                (name, value) = args[i][1:].split('=')
+            if '=' in args:
+                (name, value) = args[i][1:].split('=', 1)
                 if value[0] in ['"', "'"]:
-                    props[name] = partial(prop_const, value[1:-1])
+                    # :prop="thing", treat thing as a javascript value
+                    props[name] = partial(prop_js, value[1:-1])
                 else:
+                    # :prop=thing, treat thing as a python value
                     props[name] = partial(prop_variable, value)
+            else:
+                name = args[i][1:]
+                # :prop, is the smae as :prop=prop (treat prop as a python value)
+                props[name] = partial(prop_variable, name)
+
         elif args[i][0] == '@':
-            (name, value) = args[i][1:].split('=')
+            (name, value) = args[i][1:].split('=', 1)
+            # @event=thing
             props[event_prop(name)] = partial(prop_js, value[1:-1])
+        else:
+            (name, value) = args[i].split('=', 1)
+            if value[0] in ['"', "'"]:
+                props[name] = partial(prop_const, value[1:-1])
 
     return VueRenderer(component, props, inline)
 
