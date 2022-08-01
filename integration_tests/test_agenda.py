@@ -10,8 +10,7 @@ def agenda(sb):
 
 
 def test_agenda_add_closing(sb, as_admin, agenda):
-    today_aria = date.today().strftime('%B %d, %Y')
-    sb.click(f'a[aria-label="{today_aria}"]')
+    sb.click(f'td[data-date="{date.today()}"]')
 
     start = date.today().strftime('%d-%m-%Y 00:00')
     end = (date.today() + timedelta(days=1)).strftime('%d-%m-%Y 00:00')

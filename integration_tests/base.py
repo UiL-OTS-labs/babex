@@ -3,7 +3,7 @@ import pytest
 
 from seleniumbase import BaseCase
 
-URL = 'http://localhost:' + os.getenv('TEST_PORT', 9000)
+URL = 'http://localhost:' + os.getenv('TEST_PORT', '9000')
 
 
 @pytest.fixture
