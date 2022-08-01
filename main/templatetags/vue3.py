@@ -51,10 +51,9 @@ def vue(parser, token):
     component = args[1]
     props = dict()
     for i in range(2, len(args)):
-        print(args[i])
         if args[i][0] == ':':
             # prop binding
-            if '=' in args:
+            if '=' in args[i]:
                 (name, value) = args[i][1:].split('=', 1)
                 if value[0] in ['"', "'"]:
                     # :prop="thing", treat thing as a javascript value
