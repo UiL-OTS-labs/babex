@@ -29,7 +29,7 @@ urlpatterns = [
     path('agenda/', include('agenda.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
-    path('cdh.ore/', include('cdh.core.urls')),
+    path('cdhcore/', include('cdh.core.urls')),
     path('vue/', include('cdh.vue.urls')),
 ]
 
