@@ -5,8 +5,8 @@ from django.urls import reverse_lazy as reverse
 from django.utils.functional import cached_property
 from django.utils.text import gettext_lazy as _
 from django.views import generic
-from uil.core.views import FormSetUpdateView
-from uil.core.views.mixins import DeleteSuccessMessageMixin
+from cdh.core.views import FormSetUpdateView
+from cdh.core.views.mixins import DeleteSuccessMessageMixin
 
 from .forms import CriterionAnswerForm, ParticipantForm
 from .models import CriterionAnswer, Participant, SecondaryEmail

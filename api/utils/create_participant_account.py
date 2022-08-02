@@ -3,7 +3,7 @@ from enum import Enum
 from django.conf import settings
 
 from participants.utils.mailinglist_unsubscribe import get_login_page_url
-from uil.core.utils.mail import send_template_email
+from cdh.core.utils.mail import send_template_email
 
 from api.auth.models import ApiUser, ApiGroup, UserToken
 from api.utils import get_reset_links

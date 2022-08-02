@@ -1,6 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.http import QueryDict
-from uil.core.utils import set_model_field_value
+from cdh.core.utils import set_model_field_value
 
 from ..models import Criterion, ExperimentCriterion
 

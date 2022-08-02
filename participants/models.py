@@ -4,7 +4,7 @@ from typing import List, Optional
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-import uil.core.fields as e_fields
+import cdh.core.fields as e_fields
 from api.auth.models import ApiUser
 from experiments.models.criteria_models import Criterion
 

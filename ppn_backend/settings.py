@@ -52,8 +52,8 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # local apps
-    'uil.core',
-    'uil.vue',
+    'cdh.core',
+    'cdh.vue',
     'api',
     'api.auth',
     'main',
@@ -78,7 +78,7 @@ MIDDLEWARE = [
     'axes.middleware.AxesMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'uil.core.middleware.ThreadLocalUserMiddleware',
+    'cdh.core.middleware.ThreadLocalUserMiddleware',
 ]
 if not DEBUG:
     MIDDLEWARE += [
@@ -199,7 +199,7 @@ if DEBUG:
 
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
-    'uil.core.hashers.PBKDF2WrappedMD5PasswordHasher',
+    'cdh.core.hashers.PBKDF2WrappedMD5PasswordHasher',
 ]
 
 # Internationalization

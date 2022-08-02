@@ -1,6 +1,6 @@
 from django.forms.widgets import Widget
 
-from uil.core.middleware import get_current_request
+from cdh.core.middleware import get_current_request
 
 
 class LanguageWidget(Widget):
