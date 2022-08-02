@@ -1,185 +1,197 @@
-{% extends "base/base.html" %}
+{% extends "vue/base.html" %}
+{% load vue3 %}
 {% load i18n %}
 {% load transformat %}
 {% load datatables %}
 {% load get_field_name %}
 
 {% block header_title %}
-    {% transformat 'participants:detail:header' participant.fullname %} - {{ block.super }}
+{% transformat 'participants:detail:header' participant.fullname %} - {{ block.super }}
 {% endblock %}
 
 {% block html_head %}
-    <script nonce="{{ request.csp_nonce }}">
-        $(function () {
-            $('.dt_custom').DataTable({
-                order: [[1, 'desc']]
-            });
+{{ block.super }}
+<script nonce="{{ request.csp_nonce }}">
+    $(function () {
+        $('.dt_custom').DataTable({
+            order: [[1, 'desc']],
+            searching: false,
+            lengthChange: false,
         });
-    </script>
+    });
+</script>
+<style>
+    .list-group a {
+        text-decoration: none;
+    }
+
+    section {
+        margin-top: 2em;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-<div class="uu-inner-container">
-    <div class="col-12">
-        <div class="float-right button button-colored">
-            <a href="{% url 'participants:edit' participant.pk %}">
-                {% trans 'participants:detail:edit_participant' %}
-            </a>
+<div class="uu-inner-container row gx-4">
+    <div class="col-3">
+        <div class="list-group">
+            <a href="#participant-general" class="list-group-item list-group-item-action">General information</a>
+            <a href="#participant-contact" class="list-group-item list-group-item-action">Contact details</a>
+            <a href="#participant-appointments" class="list-group-item list-group-item-action">Appointments</a>
         </div>
-        <h1>
-            {% transformat 'participants:detail:header' participant.fullname %}
-        </h1>
     </div>
-    <div class="col-5">
-        <table width="100%">
-            <thead>
+    <div class="col-9">
+        <h1>{{ participant.name }}</h1>
+        <section class="participant-general">
+            <h2>General information</h2>
+            <table class="table">
                 <tr>
-                    <th>
-                        {% trans 'participant:detail:table_header' %}
-                    </th>
-                    <th>
-
-                    </th>
+                    <td width="40%">
+                        {% get_verbose_field_name "participants" "Participant" "name" %}
+                    </td>
+                    <td width="60%">
+                        {{ participant.name|default_if_none:_('Unknown') }}
+                    </td>
                 </tr>
-            </thead>
-            <tr>
-                <td width="40%">
-                    {% get_verbose_field_name "participants" "Participant" "name" %}
-                </td>
-                <td width="60%">
-                    {{ participant.name|default_if_none:_('Unknown') }}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    {% get_verbose_field_name "participants" "Participant" "email" %}
-                </td>
-                <td>
-                    <a href="mailto:{{ participant.email }}">
-                        {{ participant.email }}
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    {% transformat 'participants:detail:secondary_emails' %}
-                </td>
-                <td>
-                    {% for email in participant.secondaryemail_set.all %}
+                <tr>
+                    <td>
+                        {% transformat 'participants:detail:secondary_emails' %}
+                    </td>
+                    <td>
+                        {% for email in participant.secondaryemail_set.all %}
                         <a href="mailto:{{ email.email }}">{{ email.email }}</a>,
-                    {% endfor %}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    {% transformat 'participants:detail:has_account' %}
-                </td>
-                <td>
-                    {{ participant.has_account|yesno:_("yes,no") }}
-                    {% if participant.has_account %}
-                    ({{ participant.api_user.email }})
-                    {% endif %}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    {% get_verbose_field_name "participants" "Participant" "language" %}
-                </td>
-                <td>
-                    {{ participant.language }}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    {% get_verbose_field_name "participants" "Participant" "dyslexic" %}
-                </td>
-                <td>
-                    {{ participant.dyslexic|yesno:_("yes,no") }}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    {% get_verbose_field_name "participants" "Participant" "birth_date" %}
-                </td>
-                <td>
-                    {{ participant.birth_date|date:"Y-m-d"|default_if_none:"" }}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    {% get_verbose_field_name "participants" "Participant" "multilingual" %}
-                </td>
-                <td>
-                    {{ participant.multilingual|yesno:_("options:many,one")|default_if_none:"" }}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    {% get_verbose_field_name "participants" "Participant" "phonenumber" %}
-                </td>
-                <td>
-                    {{ participant.phonenumber|default_if_none:"" }}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    {% get_verbose_field_name "participants" "Participant" "sex" %}
-                </td>
-                <td>
-                    {{ participant.get_sex_display|default_if_none:"" }}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    {% get_verbose_field_name "participants" "Participant" "email_subscription" %}
-                </td>
-                <td>
-                    {{ participant.email_subscription|yesno:_("yes,no") }}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    {% get_verbose_field_name "participants" "Participant" "capable" %}
-                </td>
-                <td>
-                    {{ participant.capable|yesno:_("yes,no") }}
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="col-7">
-        <table class="dt_custom" width="100%">
-            <thead>
-                <tr>
-                    <th>
-                        {% trans 'participants:detail:experiments' %}
-                    </th>
-                    <th>
-                        {% trans 'participants:detail:datetime' %}
-                    </th>
-                    <th>
-                        {% trans 'participants:detail:place' %}
-                    </th>
+                        {% endfor %}
+                    </td>
                 </tr>
-            </thead>
-            {% for appointment in participant.appointments.all %}
+                <tr>
+                    <td>
+                        {% transformat 'participants:detail:has_account' %}
+                    </td>
+                    <td>
+                        {{ participant.has_account|yesno:_("yes,no") }}
+                        {% if participant.has_account %}
+                        ({{ participant.api_user.email }})
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {% get_verbose_field_name "participants" "Participant" "language" %}
+                    </td>
+                    <td>
+                        {{ participant.language }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {% get_verbose_field_name "participants" "Participant" "dyslexic" %}
+                    </td>
+                    <td>
+                        {{ participant.dyslexic|yesno:_("yes,no") }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {% get_verbose_field_name "participants" "Participant" "birth_date" %}
+                    </td>
+                    <td>
+                        {{ participant.birth_date|date:"Y-m-d"|default_if_none:"" }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {% get_verbose_field_name "participants" "Participant" "multilingual" %}
+                    </td>
+                    <td>
+                        {{ participant.multilingual|yesno:_("options:many,one")|default_if_none:"" }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {% get_verbose_field_name "participants" "Participant" "sex" %}
+                    </td>
+                    <td>
+                        {{ participant.get_sex_display|default_if_none:"" }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {% get_verbose_field_name "participants" "Participant" "email_subscription" %}
+                    </td>
+                    <td>
+                        {{ participant.email_subscription|yesno:_("yes,no") }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {% get_verbose_field_name "participants" "Participant" "capable" %}
+                    </td>
+                    <td>
+                        {{ participant.capable|yesno:_("yes,no") }}
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="participant-contact">
+            <h2>Contact details</h2>
+            <table class="table">
+                <tr>
+                    <td width="40%">
+                        {% get_verbose_field_name "participants" "Participant" "phonenumber" %}
+                    </td>
+                    <td width="60%">
+                        {{ participant.phonenumber|default_if_none:"" }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {% get_verbose_field_name "participants" "Participant" "email" %}
+                    </td>
+                    <td>
+                        <a href="mailto:{{ participant.email }}">
+                            {{ participant.email }}
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="participant-appointments">
+            <h2>Appointments</h2>
+            <table class="dt_custom" width="100%">
+                <thead>
+                    <tr>
+                        <th width="40%">
+                            {% trans 'participants:detail:experiments' %}
+                        </th>
+                        <th>
+                            {% trans 'participants:detail:datetime' %}
+                        </th>
+                        <th>
+                            {% trans 'participants:detail:place' %}
+                        </th>
+                    </tr>
+                </thead>
+                {% for appointment in participant.appointments.all %}
                 <tr>
                     <td>
                         {{ appointment.experiment }}
                     </td>
                     <td>
                         {% if appointment.timeslot %}
-                            {{ appointment.timeslot.datetime|date:"Y-m-d H:i" }}
+                        {{ appointment.timeslot.datetime|date:"Y-m-d H:i" }}
                         {% endif %}
                     </td>
                     <td>
                         {% if appointment.timeslot %}
-                            {{ appointment.place }}
+                        {{ appointment.place }}
                         {% endif %}
                     </td>
                 </tr>
-            {% endfor %}
-        </table>
+                {% endfor %}
+            </table>
+        </section>
     </div>
 </div>
 {% endblock %}

@@ -160,6 +160,11 @@ class Participant(models.Model):
             self.phonenumber
         )
 
+    def age(self):
+        # not a definitive version
+        delta = date.today() - self.birth_date
+        return '{};{}'.format(delta.days // 30, delta.days % 30)
+
 
 class SecondaryEmail(models.Model):
     email = e_fields.EncryptedEmailField(

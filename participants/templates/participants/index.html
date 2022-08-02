@@ -1,4 +1,5 @@
-{% extends "base/base.html" %}
+{% extends "vue/base.html" %}
+{% load vue3 %}
 {% load i18n %}
 {% load transformat %}
 {% load datatables %}
@@ -20,36 +21,14 @@
         <table class="dt" width="100%" data-language="{% datatables_lang %}">
             <thead>
                 <tr>
-                    <th>
-                        {% get_verbose_field_name "participants" "Participant" "id" %}
-                    </th>
-                    <th>
-                        {% get_verbose_field_name "participants" "Participant" "name" %}
-                    </th>
-                    <th>
-                        {% get_verbose_field_name "participants" "Participant" "email" %}
-                    </th>
-                    <th>
-                        {% transformat 'participants:detail:secondary_emails' %}
-                    </th>
-                    <th>
-                        {% get_verbose_field_name "participants" "Participant" "sex" %}
-                    </th>
-                    <th>
-                        {% get_verbose_field_name "participants" "Participant" "phonenumber" %}
-                    </th>
-                    <th>
-                        {% get_verbose_field_name "participants" "Participant" "language" %}
-                    </th>
-                    <th>
-                        {% get_verbose_field_name "participants" "Participant" "multilingual" %}
-                    </th>
-                    <th>
-                        {% get_verbose_field_name "participants" "Participant" "dyslexic" %}
-                    </th>
-                    <th>
-                        {% get_verbose_field_name "participants" "Participant" "created" %}
-                    </th>
+                    <th> {% get_verbose_field_name "participants" "Participant" "name" %} </th>
+                    <th> {% get_verbose_field_name "participants" "Participant" "birth_date" %} </th>
+                    <th> {% trans 'participants:age' %} </th>
+                    <th> {% get_verbose_field_name "participants" "Participant" "sex" %} </th>
+                    <th> {% get_verbose_field_name "participants" "Participant" "phonenumber" %} </th>
+                    <th> {% get_verbose_field_name "participants" "Participant" "language" %} </th>
+                    <th> {% get_verbose_field_name "participants" "Participant" "multilingual" %} </th>
+                    <th> {% get_verbose_field_name "participants" "Participant" "dyslexic" %} </th>
                     {# The data-priority makes sure this column is always visible #}
                     <th data-priority="1">
                         {% trans 'participants:globals:actions' %}
@@ -61,45 +40,17 @@
                 {% for participant in object_list %}
                     <tr>
                         <td>
-                            {{ participant.pk }}
+                          <a href="{% url 'participants:detail' participant.pk %}">{{ participant.fullname }}</a>
                         </td>
+                        <td> {{ participant.birth_date|date:'Y-m-d' }} </td>
+                        <td> {{ participant.age }} </td>
+                        <td> {{ participant.get_sex_display|default_if_none:"" }} </td>
+                        <td> {{ participant.phonenumber }} </td>
+                        <td> {{ participant.language }} </td>
+                        <td> {{ participant.multilingual|yesno:_('options:many,one') }} </td>
+                        <td> {{ participant.dyslexic|yesno:_('yes,no') }} </td>
                         <td>
-                            {{ participant.fullname }}
-                        </td>
-                        <td>
-                            <a href="mailto:{{ participant.email }}">{{ participant.email }}</a>
-                        </td>
-                        <td>
-                            {% for email in participant.secondaryemail_set.all %}
-                                <a href="mailto:{{ email.email }}">{{ email.email }}</a>,
-                            {% endfor %}
-                        </td>
-                        <td>
-                            {{ participant.get_sex_display|default_if_none:"" }}
-                        </td>
-                        <td>
-                            {{ participant.phonenumber }}
-                        </td>
-                        <td>
-                            {{ participant.language }}
-                        </td>
-                        <td>
-                            {{ participant.multilingual|yesno:_('options:many,one') }}
-                        </td>
-                        <td>
-                            {{ participant.dyslexic|yesno:_('yes,no') }}
-                        </td>
-                        <td>
-                            {{ participant.created|date:"Y-m-d" }}
-                        </td>
-                        <td>
-                            <a
-                                href="{% url 'participants:detail' participant.pk %}"
-                                class="icon-detail"
-                                title="{% trans 'participants:home:detail:title'  %}"
-                            >
-                                
-                            </a>
+                          {% vue babex.ParticipantActions inline %}
                             <a
                                 href="{% url 'participants:edit' participant.pk %}"
                                 class="icon-update"
