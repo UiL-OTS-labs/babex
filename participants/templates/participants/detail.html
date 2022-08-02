@@ -123,26 +123,10 @@
             </tr>
             <tr>
                 <td>
-                    {% get_verbose_field_name "participants" "Participant" "handedness" %}
-                </td>
-                <td>
-                    {{ participant.get_handedness_display|default_if_none:"" }}
-                </td>
-            </tr>
-            <tr>
-                <td>
                     {% get_verbose_field_name "participants" "Participant" "sex" %}
                 </td>
                 <td>
                     {{ participant.get_sex_display|default_if_none:"" }}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    {% get_verbose_field_name "participants" "Participant" "social_status" %}
-                </td>
-                <td>
-                    {{ participant.get_social_status_display|default_if_none:"" }}
                 </td>
             </tr>
             <tr>

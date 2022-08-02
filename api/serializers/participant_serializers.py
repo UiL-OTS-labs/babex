@@ -20,6 +20,6 @@ class LeaderParticipantSerializer(serializers.ModelSerializer):
         depth = 1
         fields = [
             'id', 'name', 'email', 'phonenumber', 'language', 'multilingual',
-            'birth_date', 'handedness', 'sex', 'social_status',
+            'birth_date', 'sex',
             'email_subscription',
         ]

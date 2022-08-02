@@ -91,14 +91,6 @@ msgstr "Man"
 msgid "default_criteria:attribute:sex:female"
 msgstr "Vrouw"
 
-#: experiments/models/criteria_models.py:22
-msgid "default_criteria:attribute:handedness:lefthanded"
-msgstr "Links"
-
-#: experiments/models/criteria_models.py:23
-msgid "default_criteria:attribute:handedness:righthanded"
-msgstr "Rechts"
-
 #: experiments/models/criteria_models.py:28
 msgid "default_criteria:attribute:dyslexia:yes"
 msgstr "Ja"
@@ -106,14 +98,6 @@ msgstr "Ja"
 #: experiments/models/criteria_models.py:29
 msgid "default_criteria:attribute:dyslexia:no"
 msgstr "Nee"
-
-#: experiments/models/criteria_models.py:34
-msgid "default_criteria:attribute:social_status:student"
-msgstr "Student"
-
-#: experiments/models/criteria_models.py:35
-msgid "default_criteria:attribute:social_status:other"
-msgstr "Geen student"
 
 #: experiments/models/criteria_models.py:45
 msgid "default_criteria:attribute:language"
@@ -127,17 +111,9 @@ msgstr "Moet de participant een of meerdere talen spreken?"
 msgid "default_criteria:attribute:sex"
 msgstr "Moet de participant man of vrouw zijn?"
 
-#: experiments/models/criteria_models.py:66
-msgid "default_criteria:attribute:handedness"
-msgstr "Moet de participant links- of rechtshandig zijn?"
-
 #: experiments/models/criteria_models.py:74
 msgid "default_criteria:attribute:dyslexia"
 msgstr "Moet de participant dyslectisch zijn?"
-
-#: experiments/models/criteria_models.py:82
-msgid "default_criteria:attribute:social_status"
-msgstr "Wat moet de sociale status van de participant zijn?"
 
 #: experiments/models/criteria_models.py:90
 msgid "default_criteria:attribute:min_age"
@@ -452,17 +428,9 @@ msgstr "Taal:"
 msgid "criteria_snippit:multilingual"
 msgstr "Meertalig:"
 
-#: experiments/templates/experiments/criteria_snippit.html:35
-msgid "criteria_snippit:handedness"
-msgstr "Links/rechts handig:"
-
 #: experiments/templates/experiments/criteria_snippit.html:43
 msgid "criteria_snippit:sex"
 msgstr "Geslacht:"
-
-#: experiments/templates/experiments/criteria_snippit.html:51
-msgid "criteria_snippit:social_status"
-msgstr "Sociale rol:"
 
 #: experiments/templates/experiments/criteria_snippit.html:59
 msgid "criteria_snippit:min_age"
@@ -842,11 +810,6 @@ msgstr "Taal"
 #: experiments/templates/experiments/participants.html:216
 msgid "experiments:participants:multilingual"
 msgstr "Meerdere talen"
-
-#: experiments/templates/experiments/participants.html:85
-#: experiments/templates/experiments/participants.html:219
-msgid "experiments:participants:handedness"
-msgstr "Links-/ Rechts handig"
 
 #: experiments/templates/experiments/participants.html:88
 #: experiments/templates/experiments/participants.html:222

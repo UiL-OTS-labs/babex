@@ -93,14 +93,6 @@ msgstr "Male"
 msgid "default_criteria:attribute:sex:female"
 msgstr "Female"
 
-#: experiments/models/criteria_models.py:22
-msgid "default_criteria:attribute:handedness:lefthanded"
-msgstr "Left"
-
-#: experiments/models/criteria_models.py:23
-msgid "default_criteria:attribute:handedness:righthanded"
-msgstr "Right"
-
 #: experiments/models/criteria_models.py:28
 msgid "default_criteria:attribute:dyslexia:yes"
 msgstr "Yes"
@@ -108,14 +100,6 @@ msgstr "Yes"
 #: experiments/models/criteria_models.py:29
 msgid "default_criteria:attribute:dyslexia:no"
 msgstr "No"
-
-#: experiments/models/criteria_models.py:34
-msgid "default_criteria:attribute:social_status:student"
-msgstr "Student"
-
-#: experiments/models/criteria_models.py:35
-msgid "default_criteria:attribute:social_status:other"
-msgstr "Not student"
 
 #: experiments/models/criteria_models.py:45
 msgid "default_criteria:attribute:language"
@@ -129,17 +113,9 @@ msgstr "Does the participant have to speak one or many languages? "
 msgid "default_criteria:attribute:sex"
 msgstr "Should the participant be Male or Female?"
 
-#: experiments/models/criteria_models.py:66
-msgid "default_criteria:attribute:handedness"
-msgstr "Should the participant be left- or righthanded? "
-
 #: experiments/models/criteria_models.py:74
 msgid "default_criteria:attribute:dyslexia"
 msgstr "Should the participant be dyslectic?"
-
-#: experiments/models/criteria_models.py:82
-msgid "default_criteria:attribute:social_status"
-msgstr "What should the social role of the participant be? "
 
 #: experiments/models/criteria_models.py:90
 msgid "default_criteria:attribute:min_age"
@@ -452,17 +428,9 @@ msgstr "Language:"
 msgid "criteria_snippit:multilingual"
 msgstr "Multilingual:"
 
-#: experiments/templates/experiments/criteria_snippit.html:35
-msgid "criteria_snippit:handedness"
-msgstr "Handedness:"
-
 #: experiments/templates/experiments/criteria_snippit.html:43
 msgid "criteria_snippit:sex"
 msgstr "Sex:"
-
-#: experiments/templates/experiments/criteria_snippit.html:51
-msgid "criteria_snippit:social_status"
-msgstr "Social Role:"
 
 #: experiments/templates/experiments/criteria_snippit.html:59
 msgid "criteria_snippit:min_age"
@@ -841,11 +809,6 @@ msgstr "Lang."
 #: experiments/templates/experiments/participants.html:216
 msgid "experiments:participants:multilingual"
 msgstr "Multiple Lang. (one/many)"
-
-#: experiments/templates/experiments/participants.html:85
-#: experiments/templates/experiments/participants.html:219
-msgid "experiments:participants:handedness"
-msgstr "Handedness (L/R)"
 
 #: experiments/templates/experiments/participants.html:88
 #: experiments/templates/experiments/participants.html:222

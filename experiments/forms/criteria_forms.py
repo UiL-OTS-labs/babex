@@ -17,7 +17,6 @@ class DefaultCriteriaForm(forms.ModelForm):
             'sex':           forms.RadioSelect,
             'handedness':    forms.RadioSelect,
             'dyslexia':      forms.RadioSelect,
-            'social_status': forms.RadioSelect,
         }
 
     def __init__(self, *args, **kwargs):

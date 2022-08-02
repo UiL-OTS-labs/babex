@@ -17,8 +17,6 @@ from participants.models import CriterionAnswer, Participant
 indifferentable_vars = [
     'language',
     'sex',
-    'handedness',
-    'social_status',
 ]
 
 
@@ -80,7 +78,7 @@ def get_eligible_participants_for_experiment(experiment: Experiment,
 def check_participant_eligible(experiment: Experiment, participant:
 Participant) -> bool:
     """
-    This function checks if a given participant can participate in a given 
+    This function checks if a given participant can participate in a given
     experiment
     """
 

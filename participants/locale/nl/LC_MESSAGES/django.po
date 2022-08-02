@@ -36,14 +36,6 @@ msgstr "Participant om mee samen te voegen"
 msgid "participants:merge_form:validation:are_equal"
 msgstr "Dit is dezelfde participant als hierboven gekozen!"
 
-#: participants/models.py:45
-msgid "participant:attribute:handedness:lefthanded"
-msgstr "Linkshandig"
-
-#: participants/models.py:46
-msgid "participant:attribute:handedness:righthanded"
-msgstr "Rechtshandig"
-
 #: participants/models.py:50
 msgid "participant:attribute:social_role:student"
 msgstr "Student"
@@ -80,17 +72,9 @@ msgstr "Meertalig"
 msgid "participant:attribute:phonenumber"
 msgstr "Telefoonnummer"
 
-#: participants/models.py:91
-msgid "participant:attribute:handedness"
-msgstr "Left/rechtshandig"
-
 #: participants/models.py:98
 msgid "participant:attribute:sex"
 msgstr "Geslacht"
-
-#: participants/models.py:104
-msgid "participant:attribute:social_status"
-msgstr "Sociale rol"
 
 #: participants/models.py:111
 msgid "participant:attribute:email_subscription"

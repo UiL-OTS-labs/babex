@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .views import ParticipantDeleteView, ParticipantDetailView, \
-    ParticipantMergeView, ParticipantSpecificCriteriaUpdateView, \
+    ParticipantSpecificCriteriaUpdateView, \
     ParticipantUpdateView, ParticipantsHomeView
 
 app_name = 'participants'
@@ -16,5 +16,4 @@ urlpatterns = [
         ParticipantSpecificCriteriaUpdateView.as_view(),
         name='update_specific_criteria'
     ),
-    path('merge/', ParticipantMergeView.as_view(), name='merge'),
 ]

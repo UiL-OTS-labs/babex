@@ -41,16 +41,6 @@ class ParticipantManager(models.Manager):
 class Participant(models.Model):
     objects = ParticipantManager()
 
-    HANDEDNESS = (
-        ('L', _('participant:attribute:handedness:lefthanded')),
-        ('R', _('participant:attribute:handedness:righthanded')),
-    )
-
-    SOCIAL_STATUS = (
-        ('S', _('participant:attribute:social_role:student')),
-        ('O', _('participant:attribute:social_role:other')),
-    )
-
     email = e_fields.EncryptedEmailField(
         _('participant:attribute:email'),
     )
@@ -87,22 +77,8 @@ class Participant(models.Model):
         null=True,
     )
 
-    handedness = e_fields.EncryptedTextField(
-        _('participant:attribute:handedness'),
-        choices=HANDEDNESS,
-        blank=True,
-        null=True,
-    )
-
     sex = e_fields.EncryptedTextField(
         _('participant:attribute:sex'),
-        blank=True,
-        null=True,
-    )
-
-    social_status = e_fields.EncryptedTextField(
-        _('participant:attribute:social_status'),
-        choices=SOCIAL_STATUS,
         blank=True,
         null=True,
     )

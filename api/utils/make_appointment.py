@@ -56,13 +56,6 @@ DEFAULT_INVALID_MESSAGES = {
     'dyslexic_no':      'Je kunt niet meedoen met het experiment omdat je '
                         'volgens onze gegevens dyslectisch bent. Als je denkt '
                         'dat dit niet klopt, neem dan even contact op met {}.',
-    'social_status_S':  'Je kunt niet meedoen met het experiment omdat je '
-                        'volgens onze gegevens niet student bent. Als je '
-                        'denkt dat dit niet klopt, neem dan even contact op '
-                        'met {}.',
-    'social_status_O':  'Je kunt niet meedoen met het experiment omdat je '
-                        'volgens onze gegevens student bent. Als je denkt '
-                        'dat dit niet klopt, neem dan even contact op met {}.',
 }
 
 MISC_INVALID_MESSAGES = {
@@ -173,14 +166,14 @@ def register_participant(data: dict, experiment: Experiment) -> Tuple[bool,
 
 
 def get_required_fields(experiment: Experiment, participant: Participant):
-    fields = ['name', 'phone', 'social_status']
+    fields = ['name', 'phone']
 
     if experiment.use_timeslots:
         fields.append('timeslot')
 
     for field in experiment.defaultcriteria.__dict__.keys():
         if field not in ['experiment', 'experiment_id', 'min_age', 'max_age',
-                         'dyslexia', '_state', 'social_status']:
+                         'dyslexia', '_state']:
             found_value = getattr(participant, field, None)
             if found_value is None or found_value == '':
                 fields.append(field)
@@ -227,11 +220,6 @@ def _get_participant(data: dict) -> Participant:
         data.get('language')
     )
 
-    participant.handedness = x_or_else(
-        participant.handedness,
-        data.get('handedness')
-    )
-
     participant.sex = x_or_else(
         participant.sex,
         data.get('sex')
@@ -253,11 +241,6 @@ def _get_participant(data: dict) -> Participant:
     participant.name = x_or_else(
         data.get('name', None),
         participant.name
-    )
-
-    participant.social_status = x_or_else(
-        data.get('social_status', None),
-        participant.social_status
     )
 
     participant.phonenumber = x_or_else(
@@ -284,7 +267,7 @@ def _handle_default_criteria(
 
         # These fields have different error messages depending on the
         # expected value
-        if failed_criterion in ['multilingual', 'dyslexic', 'social_status']:
+        if failed_criterion in ['multilingual', 'dyslexic']:
 
             # Map booleans to yes,no
             if isinstance(filters[failed_criterion], bool):

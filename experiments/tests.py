@@ -64,57 +64,49 @@ class ExclusionTests(TestCase):
         self.dyslexic_options = [True, False, False]
         self.age_options = [self.dt_18, self.dt_20, self.dt_30, None]
         self.multilingual_options = [True, False, None]
-        self.handedness_options = ['L', 'R', None]
         self.language_options = ['nl', 'Elvish']
         self.sex_options = ['M', 'F', None]
-        self.social_status_options = ['S', 'O', None]
         self.criterion_answers_options = ['yes', 'no']
         self.excluded_experiment_options = [False, True]
 
         for dyslexic in self.dyslexic_options:
             for age in self.age_options:
                 for multilingual in self.multilingual_options:
-                    for handedness in self.handedness_options:
-                        for language in self.language_options:
-                            for sex in self.sex_options:
-                                for social_status in self.social_status_options:
-                                    for criterion_answer in \
-                                            self.criterion_answers_options:
-                                        for excluded_experiment in \
-                                                self.excluded_experiment_options:
-                                            p = Participant.objects.create(
-                                                name="test {}".format(i),
-                                                dyslexic=dyslexic,
-                                                birth_date=age,
-                                                multilingual=multilingual,
-                                                handedness=handedness,
-                                                language=language,
-                                                sex=sex,
-                                                social_status=social_status,
-                                                email_subscription=True,
-                                            )
+                    for language in self.language_options:
+                        for sex in self.sex_options:
+                            for criterion_answer in \
+                                    self.criterion_answers_options:
+                                for excluded_experiment in \
+                                        self.excluded_experiment_options:
+                                    p = Participant.objects.create(
+                                        name="test {}".format(i),
+                                        dyslexic=dyslexic,
+                                        birth_date=age,
+                                        multilingual=multilingual,
+                                        language=language,
+                                        sex=sex,
+                                        email_subscription=True,
+                                    )
 
-                                            CriterionAnswer.objects.create(
-                                                participant=p,
-                                                criterion=self.criterion,
-                                                answer=criterion_answer,
-                                            )
+                                    CriterionAnswer.objects.create(
+                                        participant=p,
+                                        criterion=self.criterion,
+                                        answer=criterion_answer,
+                                    )
 
-                                            if excluded_experiment:
-                                                Appointment.objects.create(
-                                                    participant=p,
-                                                    timeslot=self.time_slot,
-                                                    experiment=self.excluded_experiment,
-                                                )
+                                    if excluded_experiment:
+                                        Appointment.objects.create(
+                                            participant=p,
+                                            timeslot=self.time_slot,
+                                            experiment=self.excluded_experiment,
+                                        )
 
-                                            i += 1
+                                    i += 1
 
     @property
     def num_options(self):
-        return len(self.handedness_options) * \
-               len(self.multilingual_options) * len(self.age_options) * \
+        return len(self.multilingual_options) * len(self.age_options) * \
                len(self.language_options) * len(self.sex_options) * \
-               len(self.social_status_options) * len(self.dyslexic_options) * \
                len(self.criterion_answers_options) * \
                len(self.excluded_experiment_options)
 
@@ -199,24 +191,6 @@ class ExclusionTests(TestCase):
         self._remove_options('dyslexic', True)
         self.assertEqual(self.num_options, len(part))
 
-    def test_exclude_right_handed(self):
-        self.experiment.defaultcriteria.handedness = 'L'
-
-        part = get_eligible_participants_for_experiment(self.experiment)
-
-        self._remove_options('dyslexic', True)
-        self._remove_options('handedness', 'R')
-        self.assertEqual(self.num_options, len(part))
-
-    def test_exclude_left_handed(self):
-        self.experiment.defaultcriteria.handedness = 'R'
-
-        part = get_eligible_participants_for_experiment(self.experiment)
-
-        self._remove_options('dyslexic', True)
-        self._remove_options('handedness', 'L')
-        self.assertEqual(self.num_options, len(part))
-
     def test_exclude_multilinguals(self):
         self.experiment.defaultcriteria.multilingual = 'N'
 
@@ -268,24 +242,6 @@ class ExclusionTests(TestCase):
 
         self._remove_options('dyslexic', True)
         self._leave_options('sex', ['M', None])
-        self.assertEqual(self.num_options, len(part))
-
-    def test_exclude_students(self):
-        self.experiment.defaultcriteria.social_status = 'S'
-
-        part = get_eligible_participants_for_experiment(self.experiment)
-
-        self._remove_options('dyslexic', True)
-        self._leave_options('social_status', ['S', None])
-        self.assertEqual(self.num_options, len(part))
-
-    def test_exclude_non_students(self):
-        self.experiment.defaultcriteria.social_status = 'O'
-
-        part = get_eligible_participants_for_experiment(self.experiment)
-
-        self._remove_options('dyslexic', True)
-        self._leave_options('social_status', ['O', None])
         self.assertEqual(self.num_options, len(part))
 
     def test_specific_criteria_exclusion(self):
