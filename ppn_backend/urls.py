@@ -29,8 +29,8 @@ urlpatterns = [
     path('agenda/', include('agenda.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
-    path('uilcore/', include('uil.core.urls')),
-    path('vue/', include('uil.vue.urls')),
+    path('cdh.ore/', include('cdh.core.urls')),
+    path('vue/', include('cdh.vue.urls')),
 ]
 
 admin.site.site_header = 'Proefpersonen systeem BACKEND'

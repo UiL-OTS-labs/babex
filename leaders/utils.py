@@ -3,7 +3,7 @@ import urllib.parse as parse
 
 from django.conf import settings
 from pytz import timezone
-from uil.core.utils.mail import send_template_email
+from cdh.core.utils.mail import send_template_email
 
 from api.auth.ldap_backend import ApiLdapBackend
 from api.auth.models import ApiGroup, ApiUser, UserToken

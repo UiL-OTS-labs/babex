@@ -5,7 +5,7 @@ from django.urls import reverse_lazy as reverse
 from django.utils.http import is_safe_url
 from django.utils.text import gettext_lazy as _
 from django.views import generic
-from uil.core.views.mixins import DeleteSuccessMessageMixin
+from cdh.core.views.mixins import DeleteSuccessMessageMixin
 
 from .forms import CommentForm
 from .models import Comment

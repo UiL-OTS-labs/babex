@@ -1,7 +1,7 @@
 import urllib.parse as parse
 
 from django.conf import settings
-from uil.core.utils.mail import send_template_email
+from cdh.core.utils.mail import send_template_email
 
 from experiments.models import Appointment
 from main.utils import get_supreme_admin

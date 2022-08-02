@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
 from django.conf import settings
-from uil.core.utils.mail import send_template_email
+from cdh.core.utils.mail import send_template_email
 
 from comments.utils import add_system_comment
 from experiments.models import Appointment
