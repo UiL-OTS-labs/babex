@@ -66,7 +66,7 @@
       <label>Comments:</label>
       <textarea v-model="form.comment"></textarea>
     </div>
-    <div><button class="btn save">Save</button></div>
+    <div><button class="btn btn-primary save">Save</button></div>
   </form>
 
   <div v-if="id">

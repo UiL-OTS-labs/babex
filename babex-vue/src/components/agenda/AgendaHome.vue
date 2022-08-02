@@ -49,11 +49,11 @@
 </script>
 
 <template>
-  <div class="row">
-    <div class="col-10">
+  <div class="uu-inner-container row">
+    <div class="col-10 gx-4">
       <AgendaCalendar ref="calendar" @select="onSelect" @eventClick="onEventClick" />
     </div>
-    <div class="col-2">
+    <div class="col-2 gx-4">
       <AgendaActions :context="actionContext" @done="actionDone" />
     </div>
   </div>
