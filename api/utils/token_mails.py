@@ -2,7 +2,7 @@ from typing import Tuple
 import urllib.parse as parse
 
 from django.conf import settings
-from uil.core.utils.mail import send_template_email
+from cdh.core.utils.mail import send_template_email
 
 from api.auth.models import ApiUser
 from participants.models import Participant

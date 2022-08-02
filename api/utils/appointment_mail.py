@@ -7,7 +7,7 @@ from django.utils.safestring import mark_safe
 from django.utils.timezone import localtime
 import urllib.parse as parse
 
-from uil.core.utils.mail import send_template_email
+from cdh.core.utils.mail import send_template_email
 
 from experiments.models import Experiment, TimeSlot
 from main.utils import get_supreme_admin

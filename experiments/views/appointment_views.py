@@ -2,8 +2,8 @@ import braces.views as braces
 from django.core.exceptions import SuspiciousOperation
 from django.urls import reverse_lazy as reverse
 from django.utils.text import gettext_lazy as _
-from uil.core.views import RedirectActionView
-from uil.core.views.mixins import RedirectSuccessMessageMixin
+from cdh.core.views import RedirectActionView
+from cdh.core.views.mixins import RedirectSuccessMessageMixin
 
 from experiments.utils.timeslot_create import add_timeslot
 from main.views import ModelFormListView

@@ -4,7 +4,7 @@ from django.db.models.functions import Now
 from auditlog import fields as auditlog_fields
 from auditlog.enums import Event, UserType
 from auditlog.utils.get_choices import get_choices_from_enum
-import uil.core.fields as encrypted_models
+import cdh.core.fields as encrypted_models
 
 
 class LogEntry(models.Model):

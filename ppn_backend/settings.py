@@ -52,8 +52,8 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # local apps
-    'uil.core',
-    'uil.vue',
+    'cdh.core',
+    'cdh.vue',
     'api',
     'api.auth',
     'main',
@@ -66,9 +66,6 @@ INSTALLED_APPS = [
     'agenda',
 
     'django.contrib.admin',
-
-    # Temp
-    'migrate_app',
 ]
 
 MIDDLEWARE = [
@@ -81,7 +78,7 @@ MIDDLEWARE = [
     'axes.middleware.AxesMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'uil.core.middleware.ThreadLocalUserMiddleware',
+    'cdh.core.middleware.ThreadLocalUserMiddleware',
 ]
 if not DEBUG:
     MIDDLEWARE += [
@@ -178,7 +175,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 DATABASE_ROUTERS = [
     'ppn_backend.db_router.DatabaseRouter',
-    'ppn_backend.db_router.MigrationAppRouter', # TEMP!
 ]
 
 # Password validation
@@ -203,7 +199,7 @@ if DEBUG:
 
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
-    'uil.core.hashers.PBKDF2WrappedMD5PasswordHasher',
+    'cdh.core.hashers.PBKDF2WrappedMD5PasswordHasher',
 ]
 
 # Internationalization

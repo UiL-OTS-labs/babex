@@ -7,7 +7,7 @@ from rest_framework import serializers
 
 from participants.models import Participant
 from .experiment_models import Experiment
-from uil.core.utils import enumerate_to
+from cdh.core.utils import enumerate_to
 
 
 class TimeSlot(models.Model):

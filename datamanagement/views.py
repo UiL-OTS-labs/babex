@@ -5,8 +5,8 @@ from django.utils.translation import gettext as _
 from django.views import generic
 
 from participants.models import Participant
-from uil.core.views import RedirectActionView
-from uil.core.views.mixins import RedirectSuccessMessageMixin
+from cdh.core.views import RedirectActionView
+from cdh.core.views.mixins import RedirectSuccessMessageMixin
 
 
 from datamanagement.forms import ThresholdsEditForm

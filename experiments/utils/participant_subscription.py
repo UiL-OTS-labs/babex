@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from uil.core.utils.mail import send_template_email
+from cdh.core.utils.mail import send_template_email
 
 import auditlog.utils.log as auditlog
 from api.auth.models import ApiUser
