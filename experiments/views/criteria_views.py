@@ -1,10 +1,10 @@
 import braces.views as braces
-from django.contrib.auth.views import SuccessURLAllowedHostsMixin
+from django.contrib.auth.views import RedirectURLMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count
 from django.http import Http404
 from django.urls import reverse_lazy as reverse
-from django.utils.http import is_safe_url
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
 from cdh.core.views import RedirectActionView
@@ -65,7 +65,7 @@ class CriteriaDeleteView(braces.LoginRequiredMixin,
 
 class DefaultCriteriaUpdateView(
     braces.LoginRequiredMixin,
-    SuccessURLAllowedHostsMixin,
+    RedirectURLMixin,
     generic.UpdateView
 ):
     template_name = 'criteria/update_default.html'
@@ -109,7 +109,7 @@ class DefaultCriteriaUpdateView(
         url = reverse('experiments:home')
         redirect_to = self.request.GET.get('next', url)
 
-        url_is_safe = is_safe_url(
+        url_is_safe = url_has_allowed_host_and_scheme(
             url=redirect_to,
             allowed_hosts=self.get_success_url_allowed_hosts(),
             require_https=self.request.is_secure(),
@@ -118,7 +118,7 @@ class DefaultCriteriaUpdateView(
 
 
 class CriteriaListView(braces.LoginRequiredMixin,
-                       SuccessURLAllowedHostsMixin,
+                       RedirectURLMixin,
                        SuccessMessageMixin,
                        ExperimentObjectMixin,
                        FormListView):
@@ -171,7 +171,7 @@ class CriteriaListView(braces.LoginRequiredMixin,
         )
         redirect_to = self.request.GET.get('next', url)
 
-        url_is_safe = is_safe_url(
+        url_is_safe = url_has_allowed_host_and_scheme(
             url=redirect_to,
             allowed_hosts=self.get_success_url_allowed_hosts(),
             require_https=self.request.is_secure(),

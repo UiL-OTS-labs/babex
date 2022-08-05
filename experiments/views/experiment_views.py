@@ -1,10 +1,10 @@
 import braces.views as braces
 from django.contrib import messages
-from django.contrib.auth.views import SuccessURLAllowedHostsMixin
+from django.contrib.auth.views import RedirectURLMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count, F, Q
 from django.urls import reverse_lazy as reverse
-from django.utils.http import is_safe_url
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
 from cdh.core.views import RedirectActionView
@@ -52,7 +52,7 @@ class ExperimentCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
 
 
 class ExperimentUpdateView(braces.LoginRequiredMixin,
-                           SuccessURLAllowedHostsMixin,
+                           RedirectURLMixin,
                            SuccessMessageMixin,
                            generic.UpdateView):
     template_name = 'experiments/edit.html'
@@ -64,7 +64,7 @@ class ExperimentUpdateView(braces.LoginRequiredMixin,
         url = reverse('experiments:home')
         redirect_to = self.request.GET.get('next', url)
 
-        url_is_safe = is_safe_url(
+        url_is_safe = url_has_allowed_host_and_scheme(
             url=redirect_to,
             allowed_hosts=self.get_success_url_allowed_hosts(),
             require_https=self.request.is_secure(),

@@ -6,7 +6,7 @@
 #
 -e git+https://github.com/DH-IT-Portal-Development/django-shared-core@develop#egg=cdh-django-core
     # via -r requirements.in
-asgiref==3.5.0
+asgiref==3.5.2
     # via django
 blessings==1.7
     # via curtsies
@@ -30,7 +30,7 @@ cwcwidth==0.1.6
     # via
     #   bpython
     #   curtsies
-django==3.2.13
+django==4.1
     # via
     #   -r requirements.in
     #   cdh-django-core
@@ -106,9 +106,7 @@ python-ldap==3.4.0
 python-magic==0.4.27
     # via cdh-django-core
 pytz==2022.1
-    # via
-    #   django
-    #   djangorestframework
+    # via djangorestframework
 pyxdg==0.27
     # via bpython
 requests==2.27.1
