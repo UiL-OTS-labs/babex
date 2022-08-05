@@ -49,7 +49,7 @@
 </script>
 
 <template>
-  <div class="uu-sidebar-container uu-sidebar-right">
+  <div class="uu-sidebar-container uu-sidebar-right compact-sidebar">
     <aside class="uu-sidebar">
       <AgendaActions :context="actionContext" @done="actionDone" />
     </aside>
@@ -60,4 +60,8 @@
 </template>
 
 <style>
+    .compact-sidebar {
+        --bs-uu-sidebar-width: 250px;
+        --bs-uu-sidebar-gap: 40px;
+    }
 </style>
