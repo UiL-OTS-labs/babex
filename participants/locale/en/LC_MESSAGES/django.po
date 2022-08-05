@@ -165,10 +165,6 @@ msgstr "Age"
 msgid "yes,no"
 msgstr "yes,no"
 
-#: participants/templates/participants/detail.html:82
-msgid "emoji:yes_no"
-msgstr "✔️,❌"
-
 #: participants/templates/participants/detail.html:127
 msgid "participants:detail:experiments"
 msgstr "Experiment"

@@ -79,7 +79,7 @@
                 </tr>
                 <tr>
                     <td> {% get_verbose_field_name "participants" "Participant" "multilingual" %} </td>
-                    <td> {{ participant.multilingual|yesno:_("emoji:yes_no")|default_if_none:"" }} </td>
+                    <td> {{ participant.multilingual|yesno:_("yes,no")|default_if_none:"" }} </td>
                 </tr>
                 <tr>
                     <td> {% get_verbose_field_name "participants" "Participant" "sex" %} </td>
