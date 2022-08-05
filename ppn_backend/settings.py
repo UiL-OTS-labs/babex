@@ -163,14 +163,6 @@ DATABASES = {
     'auditlog': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME':   os.path.join(BASE_DIR, 'auditlog.sqlite3'),
-    },
-    'old': {
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-            'user': 'exp',
-            'password': 'exp',
-            'db': 'exp',
-        }
     }
 }
 
