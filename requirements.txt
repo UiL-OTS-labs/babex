@@ -57,6 +57,8 @@ django-extensions==3.1.5
     # via -r requirements.in
 django-filter==22.1
     # via cdh-django-core
+django-impersonate==1.8.2
+    # via -r requirements.in
 django-ipware==4.0.2
     # via django-axes
 django-simple-menu==1.2.1

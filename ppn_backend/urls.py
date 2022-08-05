@@ -31,6 +31,7 @@ urlpatterns = [
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     path('cdhcore/', include('cdh.core.urls')),
     path('vue/', include('cdh.vue.urls')),
+    path('impersonate/', include('impersonate.urls')),
 ]
 
 admin.site.site_header = 'Proefpersonen systeem BACKEND'
