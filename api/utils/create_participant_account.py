@@ -35,7 +35,7 @@ def create_participant_account(email: str,
                                name: str,
                                multilingual: bool = None,
                                language: str = None,
-                               dyslexic: bool = None,
+                               dyslexic_parent: bool = None,
                                mailing_list: bool = False,
                                password: str = None) -> 'ReturnValues':
 
@@ -50,7 +50,7 @@ def create_participant_account(email: str,
     # comment for the admins
     if num_found_participants > 1:
         participant = _create_new_participant(email, name, multilingual,
-                                              language, dyslexic, mailing_list)
+                                              language, dyslexic_parent, mailing_list)
 
         message = SYSTEM_MESSAGES['multiple_participants'].format(
             ", ".join([str(x) for x in participants])
@@ -62,7 +62,7 @@ def create_participant_account(email: str,
     # If we found none, just create a new one
     elif num_found_participants < 1:  # or == 0, doesn't matter
         participant = _create_new_participant(email, name, multilingual,
-                                              language, dyslexic, mailing_list)
+                                              language, dyslexic_parent, mailing_list)
         new_participant = True
     else:
         # If we found 1, we can use that one
@@ -116,7 +116,7 @@ def _create_new_participant(email: str,
                             name: str,
                             multilingual: bool = None,
                             language: str = None,
-                            dyslexic: bool = None,
+                            dyslexic_parent: bool = None,
                             mailing_list: bool = False) -> Participant:
     """
     This function creates (and saves) a new participant object based upon
@@ -128,7 +128,7 @@ def _create_new_participant(email: str,
     participant.name = name
     participant.multilingual = multilingual
     participant.language = language
-    participant.dyslexic = dyslexic
+    participant.dyslexic_parent = dyslexic_parent
     participant.email_subscription = mailing_list
 
     participant.save()

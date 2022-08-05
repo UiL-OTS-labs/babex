@@ -120,7 +120,7 @@ def build_exclusion_filters(default_criteria, filters=None) -> dict:
 
     # Dyslexia is always a filter
     expected_value = default_criteria.dyslexia == 'Y'
-    filters['dyslexic'] = expected_value
+    filters['dyslexic_parent'] = expected_value
 
     # Rewrite this expected to a boolean value, as it's stored as a boolean
     if default_criteria.multilingual != 'I':

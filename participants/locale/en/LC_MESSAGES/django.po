@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-05 11:25+0200\n"
+"POT-Creation-Date: 2022-08-05 11:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,8 +37,8 @@ msgid "participant:attribute:language"
 msgstr "Language"
 
 #: participants/models.py:47
-msgid "participant:attribute:dyslexic"
-msgstr "Dyslexic?"
+msgid "participant:attribute:dyslexic_parent"
+msgstr "Dyslexic parent"
 
 #: participants/models.py:48
 msgid "participant:attribute:birth_date"
@@ -165,18 +165,19 @@ msgstr "Age"
 msgid "yes,no"
 msgstr "yes,no"
 
+#: participants/templates/participants/detail.html:82
 msgid "emoji:yes_no"
 msgstr "✔️,❌"
 
-#: participants/templates/participants/detail.html:128
+#: participants/templates/participants/detail.html:127
 msgid "participants:detail:experiments"
 msgstr "Experiment"
 
-#: participants/templates/participants/detail.html:131
+#: participants/templates/participants/detail.html:130
 msgid "participants:detail:datetime"
 msgstr "Date & Time"
 
-#: participants/templates/participants/detail.html:134
+#: participants/templates/participants/detail.html:133
 msgid "participants:detail:place"
 msgstr "Place"
 

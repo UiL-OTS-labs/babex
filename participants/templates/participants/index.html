@@ -28,7 +28,7 @@
                     <th> {% get_verbose_field_name "participants" "Participant" "phonenumber" %} </th>
                     <th> {% get_verbose_field_name "participants" "Participant" "language" %} </th>
                     <th> {% get_verbose_field_name "participants" "Participant" "multilingual" %} </th>
-                    <th> {% get_verbose_field_name "participants" "Participant" "dyslexic" %} </th>
+                    <th> {% get_verbose_field_name "participants" "Participant" "dyslexic_parent" %} </th>
                     {# The data-priority makes sure this column is always visible #}
                     <th data-priority="1">
                         {% trans 'participants:globals:actions' %}
@@ -48,7 +48,7 @@
                         <td> {{ participant.phonenumber }} </td>
                         <td> {{ participant.language }} </td>
                         <td> {{ participant.multilingual|yesno:_('options:many,one') }} </td>
-                        <td> {{ participant.dyslexic|yesno:_('yes,no') }} </td>
+                        <td> {{ participant.dyslexic_parent|yesno:_('yes,no') }} </td>
                         <td>
                           {% vue babex.ParticipantActions inline %}
                             <a

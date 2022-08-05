@@ -181,7 +181,7 @@ def get_required_fields(experiment: Experiment, participant: Participant):
     if getattr(participant, 'birth_date') is None:
         fields.append('birth_date')
 
-    if participant.dyslexic is None:
+    if participant.dyslexic_parent is None:
         fields.append('dyslexia')
 
     # All specific criteria should be answered, even if we already have the
@@ -231,9 +231,9 @@ def _get_participant(data: dict) -> Participant:
             parse_date(data.get('birth_date'))
         )
 
-    participant.dyslexic = x_or_else(
-        participant.dyslexic,
-        data.get('dyslexic') == 'Y'
+    participant.dyslexic_parent = x_or_else(
+        participant.dyslexic_parent,
+        data.get('dyslexic_parent') == 'Y'
     )
 
     # Update/set all variables that can be changed
@@ -267,7 +267,7 @@ def _handle_default_criteria(
 
         # These fields have different error messages depending on the
         # expected value
-        if failed_criterion in ['multilingual', 'dyslexic']:
+        if failed_criterion in ['multilingual', 'dyslexic_parent']:
 
             # Map booleans to yes,no
             if isinstance(filters[failed_criterion], bool):

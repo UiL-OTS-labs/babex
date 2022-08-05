@@ -44,7 +44,7 @@ class Participant(models.Model):
     email = e_fields.EncryptedEmailField(_('participant:attribute:email'),)
     name = e_fields.EncryptedTextField(_('participant:attribute:name'), blank=True, null=True,)
     language = e_fields.EncryptedTextField(_('participant:attribute:language'),)
-    dyslexic = e_fields.EncryptedBooleanField(_('participant:attribute:dyslexic'),)
+    dyslexic_parent = e_fields.EncryptedBooleanField(_('participant:attribute:dyslexic_parent'),)
     birth_date = e_fields.EncryptedDateField(_('participant:attribute:birth_date'), blank=True, null=True,)
     multilingual = e_fields.EncryptedBooleanField(_('participant:attribute:multilingual'), blank=True, null=True,)
     phonenumber = e_fields.EncryptedTextField(_('participant:attribute:phonenumber'), blank=True, null=True,)

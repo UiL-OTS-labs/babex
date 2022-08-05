@@ -69,7 +69,7 @@ class ExclusionTests(TestCase):
         self.criterion_answers_options = ['yes', 'no']
         self.excluded_experiment_options = [False, True]
 
-        for dyslexic in self.dyslexic_options:
+        for dyslexic_parent in self.dyslexic_options:
             for age in self.age_options:
                 for multilingual in self.multilingual_options:
                     for language in self.language_options:
@@ -80,7 +80,7 @@ class ExclusionTests(TestCase):
                                         self.excluded_experiment_options:
                                     p = Participant.objects.create(
                                         name="test {}".format(i),
-                                        dyslexic=dyslexic,
+                                        dyslexic_parent=dyslexic_parent,
                                         birth_date=age,
                                         multilingual=multilingual,
                                         language=language,
@@ -149,7 +149,7 @@ class ExclusionTests(TestCase):
         # Override the default value for language
         part = get_eligible_participants_for_experiment(self.experiment)
 
-        self._remove_options('dyslexic', True)
+        self._remove_options('dyslexic_parent', True)
 
         self.assertEqual(self.num_options, len(part))
 
@@ -160,7 +160,7 @@ class ExclusionTests(TestCase):
 
         part = get_eligible_participants_for_experiment(self.experiment)
 
-        self._remove_options('dyslexic', False)
+        self._remove_options('dyslexic_parent', False)
         self.assertEqual(self.num_options, len(part))
 
     def test_exclude_min_age(self):
@@ -169,7 +169,7 @@ class ExclusionTests(TestCase):
         part = get_eligible_participants_for_experiment(self.experiment)
 
         self._remove_options('age', self.dt_18)
-        self._remove_options('dyslexic', True)
+        self._remove_options('dyslexic_parent', True)
         self.assertEqual(self.num_options, len(part))
 
     def test_exclude_max_age(self):
@@ -178,7 +178,7 @@ class ExclusionTests(TestCase):
         part = get_eligible_participants_for_experiment(self.experiment)
 
         self._remove_options('age', self.dt_30)
-        self._remove_options('dyslexic', True)
+        self._remove_options('dyslexic_parent', True)
         self.assertEqual(self.num_options, len(part))
 
     def test_exclude_min_max_age(self):
@@ -188,14 +188,14 @@ class ExclusionTests(TestCase):
         part = get_eligible_participants_for_experiment(self.experiment)
 
         self._leave_options('age', [self.dt_20, None])
-        self._remove_options('dyslexic', True)
+        self._remove_options('dyslexic_parent', True)
         self.assertEqual(self.num_options, len(part))
 
     def test_exclude_multilinguals(self):
         self.experiment.defaultcriteria.multilingual = 'N'
 
         part = get_eligible_participants_for_experiment(self.experiment)
-        self._remove_options('dyslexic', True)
+        self._remove_options('dyslexic_parent', True)
         self._leave_options('multilingual', [False, None])
         self.assertEqual(self.num_options, len(part))
 
@@ -204,7 +204,7 @@ class ExclusionTests(TestCase):
 
         part = get_eligible_participants_for_experiment(self.experiment)
 
-        self._remove_options('dyslexic', True)
+        self._remove_options('dyslexic_parent', True)
         self._leave_options('multilingual', [True, None])
         self.assertEqual(self.num_options, len(part))
 
@@ -213,7 +213,7 @@ class ExclusionTests(TestCase):
 
         part = get_eligible_participants_for_experiment(self.experiment)
 
-        self._remove_options('dyslexic', True)
+        self._remove_options('dyslexic_parent', True)
         self._leave_options('language', 'nl')
         self.assertEqual(self.num_options, len(part))
 
@@ -222,7 +222,7 @@ class ExclusionTests(TestCase):
 
         part = get_eligible_participants_for_experiment(self.experiment)
 
-        self._remove_options('dyslexic', True)
+        self._remove_options('dyslexic_parent', True)
         self._leave_options('language', 'Elvish')
         self.assertEqual(self.num_options, len(part))
 
@@ -231,7 +231,7 @@ class ExclusionTests(TestCase):
 
         part = get_eligible_participants_for_experiment(self.experiment)
 
-        self._remove_options('dyslexic', True)
+        self._remove_options('dyslexic_parent', True)
         self._leave_options('sex', ['F', None])
         self.assertEqual(self.num_options, len(part))
 
@@ -240,7 +240,7 @@ class ExclusionTests(TestCase):
 
         part = get_eligible_participants_for_experiment(self.experiment)
 
-        self._remove_options('dyslexic', True)
+        self._remove_options('dyslexic_parent', True)
         self._leave_options('sex', ['M', None])
         self.assertEqual(self.num_options, len(part))
 
@@ -254,7 +254,7 @@ class ExclusionTests(TestCase):
         part = get_eligible_participants_for_experiment(self.experiment)
 
         self._leave_options('criterion_answers', 'yes')
-        self._remove_options('dyslexic', True)
+        self._remove_options('dyslexic_parent', True)
         self.assertEqual(self.num_options, len(part))
 
     def test_experiment_exclusion(self):
@@ -262,7 +262,7 @@ class ExclusionTests(TestCase):
 
         part = get_eligible_participants_for_experiment(self.experiment)
 
-        self._remove_options('dyslexic', True)
+        self._remove_options('dyslexic_parent', True)
         self._leave_options('excluded_experiment', False)
         self.assertEqual(self.num_options, len(part))
 
@@ -270,7 +270,7 @@ class ExclusionTests(TestCase):
         # Do a manual filter, because encrypted fields don't like filters
         participants = Participant.objects.all()
         participants = [participant for participant in participants if not
-                        participant.dyslexic]
+                        participant.dyslexic_parent]
 
         time_slot = TimeSlot.objects.create(
             experiment=self.experiment,
@@ -288,6 +288,6 @@ class ExclusionTests(TestCase):
 
         part = get_eligible_participants_for_experiment(self.experiment)
 
-        self._remove_options('dyslexic', True)
+        self._remove_options('dyslexic_parent', True)
         # manually calculate half of num_options
         self.assertEqual(self.num_options//2, len(part))

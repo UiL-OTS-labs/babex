@@ -10,7 +10,7 @@ class ParticipantForm(forms.ModelForm):
     class Meta:
         model = Participant
         fields = [
-            'name', 'email', 'language', 'dyslexic', 'birth_date',
+            'name', 'email', 'language', 'dyslexic_parent', 'birth_date',
             'multilingual', 'phonenumber', 'sex',
             'email_subscription', 'capable'
         ]

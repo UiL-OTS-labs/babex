@@ -41,7 +41,7 @@ class SubscribeToEmaillistView(views.APIView):
             participant.email = email
             participant.language = post_data.get('language')
             participant.multilingual = post_data.get('multilingual')
-            participant.dyslexic = post_data.get('dyslexic')
+            participant.dyslexic_parent = post_data.get('dyslexic_parent')
 
         try:
             # If it's already true, we don't do anything. Leaving success on

@@ -74,8 +74,8 @@
                     <td> {{ participant.language }} </td>
                 </tr>
                 <tr>
-                    <td> {% get_verbose_field_name "participants" "Participant" "dyslexic" %} </td>
-                    <td> {{ participant.dyslexic|yesno:_("yes,no") }} </td>
+                    <td> {% get_verbose_field_name "participants" "Participant" "dyslexic_parent" %} </td>
+                    <td> {{ participant.dyslexic_parent|yesno:_("yes,no") }} </td>
                 </tr>
                 <tr>
                     <td> {% get_verbose_field_name "participants" "Participant" "multilingual" %} </td>
