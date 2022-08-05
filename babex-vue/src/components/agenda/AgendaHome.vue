@@ -49,14 +49,14 @@
 </script>
 
 <template>
-  <div class="uu-inner-container row">
-    <div class="col-10 gx-4">
+  <div class="uu-sidebar-container uu-sidebar-right">
+    <aside class="uu-sidebar">
+      <AgendaActions :context="actionContext" @done="actionDone" />
+    </aside>
+    <div class="uu-sidebar-content">
       <AgendaCalendar ref="calendar" @select="onSelect" @eventClick="onEventClick" />
     </div>
-    <div class="col-2 gx-4">
-      <AgendaActions :context="actionContext" @done="actionDone" />
-    </div>
-  </div>
+</div>
 </template>
 
 <style>

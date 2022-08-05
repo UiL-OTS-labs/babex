@@ -95,7 +95,7 @@ class VueRenderer(template.Node):
         suffix = ''.join(random.sample(string.ascii_lowercase, 5))
         container = '_'.join(self.component.split('.') + [suffix])
 
-        style = 'display:inline' if self.inline else ''
+        style = 'display:inline' if self.inline else 'width:100%'
 
         return format_html('''
         <div id="{container}" style="{style}"></div>

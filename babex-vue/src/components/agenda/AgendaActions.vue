@@ -24,7 +24,6 @@
 
 <template>
   <div v-if="context.type">
-  <h3>Actions</h3>
   <div v-if="context.type=='event-select' && context.event.extendedProps.category == 'closing'" class="action-panel">
     <h5>Edit closing</h5>
     <ClosingForm :key="context.event.id" :id="context.event.id" :start="context.event.start" :end="context.event.end"
@@ -38,10 +37,4 @@
 </template>
 
 <style scoped>
-    .action-panel {
-        background: #eee;
-        padding: 8px;
-
-    }
-
 </style>

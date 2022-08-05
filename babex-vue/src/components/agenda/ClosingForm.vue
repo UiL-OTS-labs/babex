@@ -55,16 +55,20 @@
     <div>To:</div>
     <DateTimePicker class="closing-end" v-model="form.end" />
     <div>
-      <label><input v-model="form.is_global" type="radio" value="true" />Entire building</label>
-      <label><input v-model="form.is_global" type="radio" value="false" />Location:</label>
-      <select :disabled="form.is_global === 'true'" v-model="form.location">
+        <div class="form-check">
+            <label><input class="form-check-input" v-model="form.is_global" type="radio" value="true" />Entire building</label>
+        </div>
+        <div class="form-check">
+            <label><input class="form-check-input" v-model="form.is_global" type="radio" value="false" />Location:</label>
+        </div>
+        <select class="form-select" :disabled="form.is_global === 'true'" v-model="form.location">
         <option v-for="location in locations"
                 :key="location.id" :value="location.id">{{ location.name }}</option>
       </select>
     </div>
     <div>
       <label>Comments:</label>
-      <textarea v-model="form.comment"></textarea>
+      <textarea class="form-control" v-model="form.comment"></textarea>
     </div>
     <div><button class="btn btn-primary save">Save</button></div>
   </form>

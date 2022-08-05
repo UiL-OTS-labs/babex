@@ -42,7 +42,7 @@
 
 <template>
   <div>
-      <input type="text" :value="formatDate(modelValue)" @change="onChange">
+      <input class="form-control" type="text" :value="formatDate(modelValue)" @change="onChange">
   </div>
 </template>
 
