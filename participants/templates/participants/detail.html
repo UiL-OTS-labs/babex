@@ -24,14 +24,17 @@
         text-decoration: none;
     }
 
-    section {
+    section:not(:first-of-type) {
         margin-top: 2em;
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="uu-inner-container row gx-4">
+<div class="uu-hero">
+    <h1>{{ participant.name }}</h1>
+</div>
+<div class="uu-inner-container row">
     <div class="col-3">
         <div class="list-group">
             <a href="#participant-general" class="list-group-item list-group-item-action">General information</a>
@@ -40,8 +43,7 @@
             <a href="#participant-comments" class="list-group-item list-group-item-action">Comments</a>
         </div>
     </div>
-    <div class="col-9">
-        <h1>{{ participant.name }}</h1>
+    <div class="col-9 ps-3">
         <section id="participant-general">
             <h2>General information</h2>
             <table class="table">
