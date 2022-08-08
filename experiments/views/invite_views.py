@@ -1,7 +1,7 @@
 import braces.views as braces
 from django.contrib.messages import error, success
 from django.core.exceptions import ObjectDoesNotExist, ViewDoesNotExist
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.views import generic
 
 from experiments.utils.invite import _parse_contents_html as parse_contents, \

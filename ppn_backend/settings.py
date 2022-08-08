@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'agenda',
 
     'django.contrib.admin',
+    'django.forms'
 ]
 
 MIDDLEWARE = [
@@ -263,3 +264,5 @@ AUDIT_LOG_ENABLE = not DEBUG
 #     from .ldap_settings import *
 # except ImportError:
 #     print('Proceeding without LDAP settings')
+
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
