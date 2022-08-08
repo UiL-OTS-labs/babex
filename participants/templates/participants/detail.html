@@ -14,7 +14,6 @@
 <script nonce="{{ request.csp_nonce }}">
     $(function () {
         $('.dt_custom').DataTable({
-            order: [[1, 'desc']],
             searching: false,
             lengthChange: false,
         });
@@ -38,6 +37,7 @@
             <a href="#participant-general" class="list-group-item list-group-item-action">General information</a>
             <a href="#participant-contact" class="list-group-item list-group-item-action">Contact details</a>
             <a href="#participant-appointments" class="list-group-item list-group-item-action">Appointments</a>
+            <a href="#participant-comments" class="list-group-item list-group-item-action">Comments</a>
         </div>
     </div>
     <div class="col-9">
@@ -151,6 +151,69 @@
                     </td>
                 </tr>
                 {% endfor %}
+            </table>
+        </section>
+
+        <section id="participant-comments">
+            <h2>Comments</h2>
+            <table class="dt_custom" width="100%" data-language="{% datatables_lang %}">
+                <thead>
+                    <tr>
+                        <th>
+                            {% get_verbose_field_name "comments" "Comment" "leader" %}
+                        </th>
+                        <th>
+                            {% get_verbose_field_name "comments" "Comment" "experiment" %}
+                        </th>
+                        <th>
+                            {% get_verbose_field_name "comments" "Comment" "datetime" %}
+                        </th>
+                        <th>
+                            {% get_verbose_field_name "comments" "Comment" "comment" %}
+                        </th>
+                        <th>
+                            {% trans 'comments:home:table:actions' %}
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for comment in participant.comment_set.all %}
+                    <tr>
+                        <td>
+                            {% if comment.system_comment %}
+                            {% trans 'comments:home:system_user' %}
+                            {% elif comment.leader %}
+                            {{ comment.leader.name }}
+                            {% else %}
+                            {% trans 'comments:home:admin_user' %}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if comment.experiment %}
+                            <a href="{% url 'experiments:detail' comment.experiment.pk %}">
+                                {{ comment.experiment }}
+                            </a>
+                            {% else %}
+                            {% trans 'comments:home:no_experiment' %}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ comment.datetime|date:"Y-m-d H:i" }}
+                        </td>
+                        <td>
+                            {{ comment.comment }}
+                        </td>
+                        <td>
+                            <a  href="{% url 'comments:delete' comment.pk %}"
+                                title="{% trans 'comments:home:delete' %}"
+                                class="icon-delete">
+                                
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
             </table>
         </section>
     </div>
