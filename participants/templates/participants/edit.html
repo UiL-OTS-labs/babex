@@ -68,25 +68,13 @@
         </p>
         <form method="post">
             {% csrf_token %}
-            <table width="100%">
-                {{ form.as_table }}
-            </table>
-            <br/>
-            <h4 class="mb-4">{% trans 'participants:update:header:secondary_email' %}</h4>
-            {{ secondary_email_formset.management_form }}
-            {% for se_form in secondary_email_formset %}
-                <div class="se-form">
-                    <table width="100%">
-                      {{ se_form.as_p }}
-                    </table>
+            {{ form }}
+            <div class="row justify-content-center">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-6">
+                    <button class="btn btn-primary" type="submit">{% trans 'participants:globals:save_button' %}</button>
                 </div>
-            {% endfor %}
-            <a href="#" id="add_se">+ {% trans 'participants:update:add_secondary_email' %}</a>
-            <div class="float-right">
-                <button type="submit">{% trans 'participants:globals:save_button' %}</button>
             </div>
-            <br/>
-            <br/>
         </form>
     </div>
 </div>
