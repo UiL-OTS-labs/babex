@@ -12,7 +12,7 @@ class ParticipantForm(forms.ModelForm):
         fields = [
             'name', 'email', 'language', 'dyslexic_parent', 'birth_date',
             'multilingual', 'phonenumber', 'sex',
-            'email_subscription', 'capable'
+            'email_subscription'
         ]
         widgets = {
             'name': forms.TextInput,
