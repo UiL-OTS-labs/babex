@@ -25,6 +25,7 @@
 
     function formatClosing(event: Closing) : EventInput {
         return {
+            original: event,
             id: event.id,
             start: event.start,
             end: event.end,
