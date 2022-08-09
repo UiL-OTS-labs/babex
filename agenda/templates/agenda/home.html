@@ -2,5 +2,7 @@
 {% load vue3 %}
 
 {% block content %}
-{% vue 'babex.AgendaCalendar' events=events %}
+<div class="uu-content">
+    {% vue babex.AgendaHome :locations %}
+</div>
 {% endblock %}

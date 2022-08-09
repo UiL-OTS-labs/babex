@@ -1,26 +1,50 @@
-from datetime import timedelta
-import braces.views as braces
+from datetime import timedelta, datetime
+import dateutil.parser
 
-from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render
+from django.http.response import JsonResponse
 
-from experiments.models import Appointment
+from rest_framework import generics, views, serializers, viewsets
+from rest_framework.response import Response
+
+from experiments.models import Appointment, Location
+from experiments.models.appointment_models import AppointmentSerializer
+from .models import Closing, ClosingSerializer
 
 
-class AgendaHomeView(braces.LoginRequiredMixin, TemplateView):
-    template_name = 'agenda/home.html'
+class AppointmentFeed(generics.ListAPIView):
+    serializer_class = AppointmentSerializer
 
-    def format_appointment(self, appointment):
+    def get_queryset(self):
+        from_date = dateutil.parser.parse(self.request.GET['start'])
+        to_date = dateutil.parser.parse(self.request.GET['end'])
+        return Appointment.objects.filter(timeslot__datetime__gte=from_date, timeslot__datetime__lt=to_date)
+
+
+@login_required
+def agenda_home(request):
+    locations = Location.objects.all()
+
+    def format_location(location):
         return dict(
-            start=appointment.timeslot.datetime,
-            end=appointment.timeslot.datetime + timedelta(hours=1),
-            experiment=appointment.experiment.name,
-            leader=appointment.timeslot.experiment.leader.name,
-            participant=appointment.participant.name,
-            location=appointment.timeslot.experiment.location.name)
+            id=location.id,
+            name=location.name)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    context = dict()
+    context['locations'] = [format_location(x) for x in locations]
 
-        context['events'] = [self.format_appointment(x)
-                             for x in Appointment.objects.all()]
-        return context
+    return render(request, 'agenda/home.html', context)
+
+
+class ClosingViewSet(viewsets.ModelViewSet):
+    serializer_class = ClosingSerializer
+
+    def get_queryset(self):
+        queryset = Closing.objects.all()
+        if self.request.method == 'GET':
+            from_date = dateutil.parser.parse(self.request.GET['start'])
+            to_date = dateutil.parser.parse(self.request.GET['end'])
+            queryset = queryset.filter(end__gte=from_date, start__lt=to_date)
+
+        return queryset

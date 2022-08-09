@@ -4,31 +4,42 @@
     import timeGridPlugin from '@fullcalendar/timegrid';
     import interactionPlugin from '@fullcalendar/interaction';
     import type {EventInput, EventContentArg} from '@fullcalendar/core';
-    import {defineProps} from 'vue';
+    import {defineEmits, defineExpose, defineProps, ref} from 'vue';
 
-    interface Appointment {
-        start: Date,
-        end: Date,
-        experiment: string,
-        leader: string,
-        participant: string,
-        location: string
-    }
+    import AgendaActions from './AgendaActions.vue';
+    import {urls} from '../../urls';
+    import type {Appointment, Closing, Location} from '../../types';
 
-    function formatEvent(event: Appointment) : EventInput {
+    function formatAppointment(event: Appointment) : EventInput {
         return {
+            id: event.id,
             start: event.start,
             end: event.end,
             title: event.participant,
             // extra field will be displayed in a separate line
-            extra: `${event.leader} (${event.location})`,
+            extra: `${event.location} (${event.leader})`,
             display: 'block',
+            category: 'appointment'
         };
     }
 
-    const props = defineProps<{
-        events: Appointment[]
-    }>();
+    function formatClosing(event: Closing) : EventInput {
+        return {
+            id: event.id,
+            start: event.start,
+            end: event.end,
+            title:'Closed',
+            extra: event.is_global ? 'Entire building' : event.location_name,
+            display: 'block',
+            category: 'closing',
+            comment: event.comment
+        };
+    }
+
+
+    const emit = defineEmits(['select', 'eventClick']);
+
+    let calendar = ref(null);
 
     const calendarOptions = {
         plugins: [ dayGridPlugin, timeGridPlugin, interactionPlugin ],
@@ -44,13 +55,23 @@
             minute: '2-digit',
             hour12: false
         },
-        events: formatEvents(),
+        displayEventEnd: true,
+        eventSources: [
+            {
+                url: urls.agenda.feed,
+                eventDataTransform: formatAppointment
+            },
+            {
+                url: urls.agenda.closing,
+                eventDataTransform: formatClosing,
+                color: 'gray'
+            },
+        ],
         eventContent: eventRender,
+        selectable: true,
+        select: (info) => emit('select', info),
+        eventClick: (info) => emit('eventClick', info)
     };
-
-    function formatEvents(): EventInput[] {
-        return props.events.map(formatEvent);
-    }
 
     function eventRender(arg: EventContentArg) {
         // override built-in template with multiline support
@@ -62,6 +83,17 @@
               <div>${arg.event.extendedProps.extra}</div>`
         }
     }
+
+    function refresh() {
+        let calendarApi = calendar.value.getApi();
+        calendarApi.getEventSources().forEach((src) => src.refetch());
+    }
+
+    function changeView(view) {
+        calendar.value.getApi().changeView(view);
+    }
+
+    defineExpose({calendar, refresh});
 </script>
 
 <template>
@@ -93,5 +125,14 @@
 
     table tbody td, table thead th, table tfoot th {
         padding: unset;
+    }
+
+    .fc-event {
+        cursor: pointer;
+    }
+
+    .event-selected {
+        background: #8ac4fd;
+        border-color: #8ac4fd;
     }
 </style>
