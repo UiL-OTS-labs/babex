@@ -45,7 +45,7 @@ def _create_experiment(timeslot_dts=None) -> Experiment:
 def _create_participant(name="dummy", creation_dt=None) -> Participant:
     participant = Participant.objects.create(
         name=name,
-        dyslexic=False
+        dyslexic_parent=False
     )
 
     if creation_dt:

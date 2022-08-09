@@ -13,7 +13,7 @@ class AccountDeleteTests(TestCase):
             email='text@test.test2',
             phonenumber='654321',
             # required for the model
-            dyslexic=False,
+            dyslexic_parent=False,
             language='nl'
         )
 
@@ -46,7 +46,7 @@ class AccountDeleteTests(TestCase):
             email='text@test.test2',
             phonenumber='654321',
             # required for the model
-            dyslexic=False,
+            dyslexic_parent=False,
             language='nl'
         )
         api_user = ApiUser.objects.create()
@@ -72,7 +72,7 @@ class AccountDeleteTests(TestCase):
             email='text@test.test2',
             phonenumber='654321',
             # required for the model
-            dyslexic=False,
+            dyslexic_parent=False,
             language='nl'
         )
         api_user = ApiUser.objects.create()

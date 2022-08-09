@@ -10,17 +10,15 @@ class ParticipantForm(forms.ModelForm):
     class Meta:
         model = Participant
         fields = [
-            'name', 'email', 'language', 'dyslexic', 'birth_date',
-            'multilingual', 'phonenumber', 'handedness', 'sex',
-            'social_status', 'email_subscription', 'capable'
+            'name', 'email', 'language', 'dyslexic_parent', 'birth_date',
+            'multilingual', 'phonenumber', 'sex',
+            'email_subscription'
         ]
         widgets = {
             'name': forms.TextInput,
             'language': ParticipantLanguageWidget,
             'phonenumber': forms.TextInput,
-            'handedness': forms.RadioSelect,
             'sex': ParticipantSexWidget,
-            'social_status': forms.RadioSelect,
 
         }
 
@@ -48,27 +46,3 @@ class CriterionAnswerForm(forms.ModelForm):
         self.fields['answer'].label = self.instance.criterion.name_natural
         self.fields['answer'].widget.choices = \
             self.instance.criterion.choices_tuple
-
-
-class ParticipantMergeForm(forms.Form):
-
-    old_participant = forms.ModelChoiceField(
-        Participant.objects.all(),
-        label=_('participants:merge_form:field:old_participant'),
-    )
-
-    new_participant = forms.ModelChoiceField(
-        Participant.objects.all(),
-        label=_('participants:merge_form:field:new_participant'),
-    )
-
-    def clean_new_participant(self):
-        """This checks if two unique participants have been chosen"""
-        data = self.cleaned_data
-
-        if data['old_participant'] == data['new_participant']:
-            raise ValidationError(
-                _('participants:merge_form:validation:are_equal')
-            )
-
-        return data['new_participant']

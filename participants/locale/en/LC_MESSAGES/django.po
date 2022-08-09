@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-23 10:32+0200\n"
+"POT-Creation-Date: 2022-08-05 11:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,118 +16,118 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: participants/forms.py:32
+#: participants/forms.py:30
 msgid "participants:multilingual:many"
 msgstr "Many"
 
-#: participants/forms.py:33
+#: participants/forms.py:31
 msgid "participants:multilingual:one"
 msgstr "One"
 
-#: participants/forms.py:57
-msgid "participants:merge_form:field:old_participant"
-msgstr "Old participant"
-
-#: participants/forms.py:62
-msgid "participants:merge_form:field:new_participant"
-msgstr "To be merged participant"
-
-#: participants/forms.py:71
-msgid "participants:merge_form:validation:are_equal"
-msgstr "This is the same participant as the one picked above!"
-
-#: participants/models.py:45
-msgid "participant:attribute:handedness:lefthanded"
-msgstr "Left handed"
-
-#: participants/models.py:46
-msgid "participant:attribute:handedness:righthanded"
-msgstr "Right handed"
-
-#: participants/models.py:50
-msgid "participant:attribute:social_role:student"
-msgstr "Student"
-
-#: participants/models.py:51
-msgid "participant:attribute:social_role:other"
-msgstr "Not student"
-
-#: participants/models.py:55
+#: participants/models.py:44
 msgid "participant:attribute:email"
 msgstr "E-mail address"
 
-#: participants/models.py:59
+#: participants/models.py:45
 msgid "participant:attribute:name"
 msgstr "Name"
 
-#: participants/models.py:65
+#: participants/models.py:46
 msgid "participant:attribute:language"
 msgstr "Language"
 
-#: participants/models.py:69
-msgid "participant:attribute:dyslexic"
-msgstr "Dyslexic?"
+#: participants/models.py:47
+msgid "participant:attribute:dyslexic_parent"
+msgstr "Dyslexic parent"
 
-#: participants/models.py:73
+#: participants/models.py:48
 msgid "participant:attribute:birth_date"
 msgstr "Birth date"
 
-#: participants/models.py:79
+#: participants/models.py:49
 msgid "participant:attribute:multilingual"
 msgstr "Multilingual"
 
-#: participants/models.py:85
+#: participants/models.py:50
 msgid "participant:attribute:phonenumber"
 msgstr "Phone number"
 
-#: participants/models.py:91
-msgid "participant:attribute:handedness"
-msgstr "Handedness"
-
-#: participants/models.py:98
+#: participants/models.py:51
 msgid "participant:attribute:sex"
 msgstr "Sex"
 
-#: participants/models.py:104
-msgid "participant:attribute:social_status"
-msgstr "Social role"
-
-#: participants/models.py:111
+#: participants/models.py:52
 msgid "participant:attribute:email_subscription"
 msgstr "On mailing list"
 
-#: participants/models.py:116
+#: participants/models.py:53
+msgid "participant:attribute:birth_weight"
+msgstr "Weight at birth"
+
+#: participants/models.py:54
+msgid "participant:attribute:pregnancy_weeks"
+msgstr "Gestation weeks"
+
+#: participants/models.py:55
+msgid "participant:attribute:pregnancy_days"
+msgstr "Gestation days"
+
+#: participants/models.py:56
+msgid "participant:attribute:phonenumber_alt"
+msgstr "Phone number (secondary)"
+
+#: participants/models.py:57
+msgid "participant:attribute:parent_name"
+msgstr "Parent name"
+
+#: participants/models.py:58
+msgid "participant:attribute:city"
+msgstr "City"
+
+#: participants/models.py:60
+msgid "participant:attribute:created"
+msgstr "Registered on"
+
+#: participants/models.py:69
 msgid "participant:attribute:capable"
 msgstr "Capable"
 
-#: participants/models.py:128
-msgid "participant:attribute:created"
-msgstr "Created on"
-
-#: participants/models.py:137 participants/models.py:178
+#: participants/models.py:77 participants/models.py:107
 msgid "participant:name:unknown"
 msgstr "name unknown"
 
-#: participants/models.py:159
+#: participants/models.py:88
 #: participants/templates/widgets/participant_sex_widget.html:22
 msgid "participant:attribute:sex:male"
 msgstr "Male"
 
-#: participants/models.py:160
+#: participants/models.py:89
 #: participants/templates/widgets/participant_sex_widget.html:28
 msgid "participant:attribute:sex:female"
 msgstr "Female"
 
-#: participants/models.py:161
+#: participants/models.py:90
 #: participants/templates/widgets/participant_sex_widget.html:40
 msgid "participant:attribute:sex:prefer_not_to_answer"
 msgstr "Preferred not to answer"
 
-#: participants/models.py:190
+#: participants/models.py:127
+msgid "participants:age:years"
+msgstr "years"
+
+#: participants/models.py:128
+msgid "participants:age:months"
+msgstr "months"
+
+#: participants/models.py:129
+msgid "participants:age:days"
+msgstr "days"
+
+#: participants/models.py:143
 msgid "secondary_email:attribute:email"
 msgstr "Secondary e-mail address"
 
-#: participants/models.py:208
+#: participants/models.py:161
 msgid "criterion_answer:attribute:answer"
 msgstr "Answer"
 
@@ -148,54 +148,32 @@ msgstr "Cancel"
 msgid "participants:delete:confirm"
 msgstr "Delete participant"
 
-#: participants/templates/participants/detail.html:8
-#: participants/templates/participants/detail.html:30
+#: participants/templates/participants/detail.html:9
 msgid "participants:detail:header"
 msgstr "Details of '{}'"
 
-#: participants/templates/participants/detail.html:26
-msgid "participants:detail:edit_participant"
-msgstr "Edit"
-
-#: participants/templates/participants/detail.html:38
-msgid "participant:detail:table_header"
-msgstr "Participant Details"
-
-#: participants/templates/participants/detail.html:50
-msgid "Unknown"
-msgstr "Unknown"
-
 #: participants/templates/participants/detail.html:65
-#: participants/templates/participants/index.html:38
-msgid "participants:detail:secondary_emails"
-msgstr "Secondary e-mail(s)"
+msgid "participants:attribute:getational_age"
+msgstr "Gestational age"
 
-#: participants/templates/participants/detail.html:75
-msgid "participants:detail:has_account"
-msgstr "Has account"
+#: participants/templates/participants/detail.html:69
+msgid "participants:attribute:age"
+msgstr "Age"
 
 #: participants/templates/participants/detail.html:78
-#: participants/templates/participants/detail.html:97
-#: participants/templates/participants/detail.html:153
-#: participants/templates/participants/detail.html:161
-#: participants/templates/participants/index.html:95
+#: participants/templates/participants/index.html:51
 msgid "yes,no"
 msgstr "yes,no"
 
-#: participants/templates/participants/detail.html:113
-#: participants/templates/participants/index.html:92
-msgid "options:many,one"
-msgstr "many,one"
-
-#: participants/templates/participants/detail.html:171
+#: participants/templates/participants/detail.html:127
 msgid "participants:detail:experiments"
 msgstr "Experiment"
 
-#: participants/templates/participants/detail.html:174
+#: participants/templates/participants/detail.html:130
 msgid "participants:detail:datetime"
 msgstr "Date & Time"
 
-#: participants/templates/participants/detail.html:177
+#: participants/templates/participants/detail.html:133
 msgid "participants:detail:place"
 msgstr "Place"
 
@@ -221,36 +199,36 @@ msgstr "New secondary email"
 msgid "participants:globals:save_button"
 msgstr "Save"
 
-#: participants/templates/participants/index.html:8
-#: participants/templates/participants/index.html:20
+#: participants/templates/participants/index.html:9
+#: participants/templates/participants/index.html:16
 msgid "participants:home:header"
 msgstr "Participants"
 
-#: participants/templates/participants/index.html:16
-msgid "participants:home:merge_participants"
-msgstr "Merge participants"
-
-#: participants/templates/participants/index.html:23
+#: participants/templates/participants/index.html:19
 msgid "participants:home:info_text"
 msgstr "<br/>"
 
-#: participants/templates/participants/index.html:60
+#: participants/templates/participants/index.html:26
+msgid "participants:age"
+msgstr "Age"
+
+#: participants/templates/participants/index.html:34
 msgid "participants:globals:actions"
 msgstr "Actions"
 
-#: participants/templates/participants/index.html:104
-msgid "participants:home:detail:title"
-msgstr "View details"
+#: participants/templates/participants/index.html:50
+msgid "options:many,one"
+msgstr "many,one"
 
-#: participants/templates/participants/index.html:111
+#: participants/templates/participants/index.html:57
 msgid "participants:home:update:title"
 msgstr "Edit participant"
 
-#: participants/templates/participants/index.html:118
+#: participants/templates/participants/index.html:64
 msgid "participants:home:update_specific_criteria:title"
 msgstr "Edit specific criteria"
 
-#: participants/templates/participants/index.html:125
+#: participants/templates/participants/index.html:71
 msgid "participants:home:delete:title"
 msgstr "Delete this participant"
 
@@ -276,14 +254,31 @@ msgstr "Specific criteria for '{}'"
 msgid "participants:specific_criteria:info_text"
 msgstr " "
 
-#: participants/views.py:49
+#: participants/views.py:48
 msgid "participants:messages:updated_participant"
 msgstr "Participant updated!"
 
-#: participants/views.py:103
+#: participants/views.py:102
 msgid "participants:messages:deleted_participant"
 msgstr "Participant deleted!"
 
-#: participants/views.py:150
-msgid "participants:messages:merged_participants"
-msgstr "Participant merged!"
+#~ msgid "Unknown"
+#~ msgstr "Unknown"
+
+#~ msgid "participants:detail:edit_participant"
+#~ msgstr "Edit"
+
+#~ msgid "participant:detail:table_header"
+#~ msgstr "Participant Details"
+
+#~ msgid "participants:detail:secondary_emails"
+#~ msgstr "Secondary e-mail(s)"
+
+#~ msgid "participants:detail:has_account"
+#~ msgstr "Has account"
+
+#~ msgid "participants:home:detail:title"
+#~ msgstr "View details"
+
+#~ msgid "participants:messages:merged_participants"
+#~ msgstr "Participant merged!"

@@ -41,93 +41,33 @@ class ParticipantManager(models.Manager):
 class Participant(models.Model):
     objects = ParticipantManager()
 
-    HANDEDNESS = (
-        ('L', _('participant:attribute:handedness:lefthanded')),
-        ('R', _('participant:attribute:handedness:righthanded')),
-    )
+    email = e_fields.EncryptedEmailField(_('participant:attribute:email'),)
+    name = e_fields.EncryptedTextField(_('participant:attribute:name'), blank=True, null=True,)
+    language = e_fields.EncryptedTextField(_('participant:attribute:language'),)
+    dyslexic_parent = e_fields.EncryptedBooleanField(_('participant:attribute:dyslexic_parent'),)
+    birth_date = e_fields.EncryptedDateField(_('participant:attribute:birth_date'), blank=True, null=True,)
+    multilingual = e_fields.EncryptedBooleanField(_('participant:attribute:multilingual'), blank=True, null=True,)
+    phonenumber = e_fields.EncryptedTextField(_('participant:attribute:phonenumber'), blank=True, null=True,)
+    sex = e_fields.EncryptedTextField(_('participant:attribute:sex'), blank=True, null=True,)
+    email_subscription = e_fields.EncryptedBooleanField(_('participant:attribute:email_subscription'), default=False,)
+    birth_weight = e_fields.EncryptedIntegerField(_('participant:attribute:birth_weight'), null=True)
+    pregnancy_weeks = e_fields.EncryptedIntegerField(_('participant:attribute:pregnancy_weeks'), null=True)
+    pregnancy_days = e_fields.EncryptedIntegerField(_('participant:attribute:pregnancy_days'), null=True)
+    phonenumber_alt = e_fields.EncryptedTextField(_('participant:attribute:phonenumber_alt'), blank=True, null=True,)
+    parent_name = e_fields.EncryptedTextField(_('participant:attribute:parent_name'), null=True)
+    city = e_fields.EncryptedTextField(_('participant:attribute:city'), null=True)
 
-    SOCIAL_STATUS = (
-        ('S', _('participant:attribute:social_role:student')),
-        ('O', _('participant:attribute:social_role:other')),
-    )
+    created = models.DateTimeField(verbose_name=_('participant:attribute:created'), auto_now_add=True,)
 
-    email = e_fields.EncryptedEmailField(
-        _('participant:attribute:email'),
-    )
-
-    name = e_fields.EncryptedTextField(
-        _('participant:attribute:name'),
-        blank=True,
-        null=True,
-    )
-
-    language = e_fields.EncryptedTextField(
-        _('participant:attribute:language'),
-    )
-
-    dyslexic = e_fields.EncryptedBooleanField(
-        _('participant:attribute:dyslexic'),
-    )
-
-    birth_date = e_fields.EncryptedDateField(
-        _('participant:attribute:birth_date'),
-        blank=True,
-        null=True,
-    )
-
-    multilingual = e_fields.EncryptedBooleanField(
-        _('participant:attribute:multilingual'),
-        blank=True,
-        null=True,
-    )
-
-    phonenumber = e_fields.EncryptedTextField(
-        _('participant:attribute:phonenumber'),
-        blank=True,
-        null=True,
-    )
-
-    handedness = e_fields.EncryptedTextField(
-        _('participant:attribute:handedness'),
-        choices=HANDEDNESS,
-        blank=True,
-        null=True,
-    )
-
-    sex = e_fields.EncryptedTextField(
-        _('participant:attribute:sex'),
-        blank=True,
-        null=True,
-    )
-
-    social_status = e_fields.EncryptedTextField(
-        _('participant:attribute:social_status'),
-        choices=SOCIAL_STATUS,
-        blank=True,
-        null=True,
-    )
-
-    email_subscription = e_fields.EncryptedBooleanField(
-        _('participant:attribute:email_subscription'),
-        default=False,
-    )
-
-    capable = e_fields.EncryptedBooleanField(
-        _('participant:attribute:capable'),
-        default=True,
-    )
-
+    # TODO: probably get rid of these
     api_user = models.OneToOneField(
         ApiUser,
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
     )
+    capable = e_fields.EncryptedBooleanField(_('participant:attribute:capable'), default=True,)
 
-    created = models.DateTimeField(
-        verbose_name=_('participant:attribute:created'),
-        auto_now_add=True,
-    )
 
     @property
     def fullname(self) -> str:
@@ -142,17 +82,6 @@ class Participant(models.Model):
             return self.name
 
         return 'proefpersoon'
-
-    @property
-    def age(self) -> Optional[int]:
-        if self.birth_date:
-            today = date.today()
-
-            return today.year - self.birth_date.year - (
-                    (today.month, today.day) < (
-            self.birth_date.month, self.birth_date.day))
-
-        return None
 
     def get_sex_display(self):
         mappings = {
@@ -183,6 +112,30 @@ class Participant(models.Model):
             self.birth_date,
             self.phonenumber
         )
+
+    @property
+    def age(self):
+        # not a definitive version
+        delta = date.today() - self.birth_date
+        return '{};{}'.format(delta.days // 30, delta.days % 30)
+
+    @property
+    def age_long(self):
+        # not a definitive version
+        delta = date.today() - self.birth_date
+        return '{years} {years_str}; {months} {months_str}; {days} {days_str}'.format(
+            years_str=_('participants:age:years'),
+            months_str=_('participants:age:months'),
+            days_str=_('participants:age:days'),
+            years=delta.days // 365,
+            months=delta.days // 30,
+            days=delta.days % 30)
+
+    @property
+    def gestational_age(self):
+        if None not in [self.pregnancy_days, self.pregnancy_weeks]:
+            return f'{self.pregnancy_weeks}; {self.pregnancy_days}'
+        return ''
 
 
 class SecondaryEmail(models.Model):

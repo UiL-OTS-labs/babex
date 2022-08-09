@@ -17,8 +17,6 @@ from participants.models import CriterionAnswer, Participant
 indifferentable_vars = [
     'language',
     'sex',
-    'handedness',
-    'social_status',
 ]
 
 
@@ -80,7 +78,7 @@ def get_eligible_participants_for_experiment(experiment: Experiment,
 def check_participant_eligible(experiment: Experiment, participant:
 Participant) -> bool:
     """
-    This function checks if a given participant can participate in a given 
+    This function checks if a given participant can participate in a given
     experiment
     """
 
@@ -122,7 +120,7 @@ def build_exclusion_filters(default_criteria, filters=None) -> dict:
 
     # Dyslexia is always a filter
     expected_value = default_criteria.dyslexia == 'Y'
-    filters['dyslexic'] = expected_value
+    filters['dyslexic_parent'] = expected_value
 
     # Rewrite this expected to a boolean value, as it's stored as a boolean
     if default_criteria.multilingual != 'I':

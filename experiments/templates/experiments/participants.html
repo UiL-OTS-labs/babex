@@ -73,7 +73,7 @@
                             {% trans 'experiments:participants:birth_date' %}
                         </th>
                         <th>
-                            {% trans 'experiments:participants:dyslexic' %}
+                            {% trans 'experiments:participants:dyslexic_parent' %}
                         </th>
                         <th>
                             {% trans 'experiments:participants:language' %}
@@ -82,13 +82,7 @@
                             {% trans 'experiments:participants:multilingual' %}
                         </th>
                         <th>
-                            {% trans 'experiments:participants:handedness' %}
-                        </th>
-                        <th>
                             {% trans 'experiments:participants:sex' %}
-                        </th>
-                        <th>
-                            {% get_verbose_field_name "participants" "Participant" "social_status" %}
                         </th>
                         <th>
                             {% get_verbose_field_name "participants" "Participant" "email_subscription" %}
@@ -150,7 +144,7 @@
                                 {{ appointment.participant.birth_date|date:"Y-m-d" }}
                             </td>
                             <td>
-                                {{ appointment.participant.dyslexic|yesno:_('yes,no') }}
+                                {{ appointment.participant.dyslexic_parent|yesno:_('yes,no') }}
                             </td>
                             <td>
                                 {{ appointment.participant.language }}
@@ -159,13 +153,7 @@
                                 {{ appointment.participant.multilingual|yesno:_('many,one') }}
                             </td>
                             <td>
-                                {{ appointment.participant.handedness|default_if_none:"" }}
-                            </td>
-                            <td>
                                 {{ appointment.participant.get_sex_display|default_if_none:"" }}
-                            </td>
-                            <td>
-                                {{ appointment.participant.get_social_status_display|default_if_none:"" }}
                             </td>
                             <td>
                                 {{ appointment.participant.email_subscription|yesno:_('yes,no') }}
@@ -207,7 +195,7 @@
                             <input type="text" name="birth_date" placeholder="{% trans 'experiments:participants:birth_date' %}" class="search_init" />
                         </th>
                         <th>
-                            <input type="text" name="birth_date" placeholder="{% trans 'experiments:participants:dyslexic' %}" class="search_init" />
+                            <input type="text" name="birth_date" placeholder="{% trans 'experiments:participants:dyslexic_parent' %}" class="search_init" />
                         </th>
                         <th>
                             <input type="text" name="language" placeholder="{% trans 'experiments:participants:language' %}" class="search_init" />
@@ -216,13 +204,7 @@
                             <input type="text" name="multilingual" placeholder="{% trans 'experiments:participants:multilingual' %}" class="search_init" />
                         </th>
                         <th>
-                            <input type="text" name="handedness" placeholder="{% trans 'experiments:participants:handedness' %}" class="search_init" />
-                        </th>
-                        <th>
                             <input type="text" name="sex" placeholder="{% trans 'experiments:participants:sex' %}" class="search_init" />
-                        </th>
-                        <th>
-                            <input type="text" name="social_status" placeholder="{% get_verbose_field_name "participants" "Participant" "social_status" %}" class="search_init" />
                         </th>
                         <th>
                             <input type="text" name="email_subscription" placeholder="{% get_verbose_field_name "participants" "Participant" "email_subscription" %}" class="search_init" />

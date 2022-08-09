@@ -33,7 +33,7 @@ class ParticipantAccountCreationTests(TestCase):
             name='Test',
             multilingual=True,
             language='nl',
-            dyslexic=True,
+            dyslexic_parent=True,
             mailing_list=True
         )
 
@@ -67,7 +67,7 @@ class ParticipantAccountCreationTests(TestCase):
 
         participant = Participant.objects.create(
             email='test@test.nl',
-            dyslexic=False
+            dyslexic_parent=False
         )
 
         self.assertEqual(
@@ -84,7 +84,7 @@ class ParticipantAccountCreationTests(TestCase):
             name='Test',
             multilingual=True,
             language='nl',
-            dyslexic=True,
+            dyslexic_parent=True,
             mailing_list=True
         )
 
@@ -102,10 +102,10 @@ class ParticipantAccountCreationTests(TestCase):
             1
         )
 
-        # Check if dyslexic is still the same
+        # Check if dyslexic_parent is still the same
         # This should not be modifiable by any action on the users part
         p = Participant.objects.get(pk=1)
-        self.assertEqual(p.dyslexic, False)
+        self.assertEqual(p.dyslexic_parent, False)
 
         user = ApiUser.objects.first()
 
@@ -124,12 +124,12 @@ class ParticipantAccountCreationTests(TestCase):
         """
         Participant.objects.create(
             email='test@test.nl',
-            dyslexic=False
+            dyslexic_parent=False
         )
 
         p = Participant.objects.create(
             email='test@test.be',
-            dyslexic=False
+            dyslexic_parent=False
         )
 
         SecondaryEmail.objects.create(
@@ -156,7 +156,7 @@ class ParticipantAccountCreationTests(TestCase):
             name='Test',
             multilingual=True,
             language='nl',
-            dyslexic=True,
+            dyslexic_parent=True,
             mailing_list=True
         )
 
@@ -185,7 +185,7 @@ class ParticipantAccountCreationTests(TestCase):
 
         p1 = Participant.objects.create(
             email='test@test.nl',
-            dyslexic=False,
+            dyslexic_parent=False,
             api_user=u
         )
 
@@ -203,7 +203,7 @@ class ParticipantAccountCreationTests(TestCase):
             name='Test',
             multilingual=True,
             language='nl',
-            dyslexic=True,
+            dyslexic_parent=True,
             mailing_list=True
         )
 
@@ -239,13 +239,13 @@ class ParticipantAccountCreationTests(TestCase):
 
         p1 = Participant.objects.create(
             email='test@test.nl',
-            dyslexic=False,
+            dyslexic_parent=False,
             api_user=u1,
         )
 
         p2 = Participant.objects.create(
             email='test@test.be',
-            dyslexic=False,
+            dyslexic_parent=False,
             api_user=u2,
         )
 
@@ -268,7 +268,7 @@ class ParticipantAccountCreationTests(TestCase):
             name='Test',
             multilingual=True,
             language='nl',
-            dyslexic=True,
+            dyslexic_parent=True,
             mailing_list=True
         )
 
@@ -334,7 +334,7 @@ class ParticipantAccountCreationTests(TestCase):
             name='Test',
             multilingual=True,
             language='nl',
-            dyslexic=True,
+            dyslexic_parent=True,
             mailing_list=True
         )
 
@@ -376,7 +376,7 @@ class ParticipantAccountCreationTests(TestCase):
         """
         p = Participant.objects.create(
             email='test@test.be',
-            dyslexic=False
+            dyslexic_parent=False
         )
 
         SecondaryEmail.objects.create(
@@ -398,7 +398,7 @@ class ParticipantAccountCreationTests(TestCase):
             name='Test',
             multilingual=True,
             language='nl',
-            dyslexic=True,
+            dyslexic_parent=True,
             mailing_list=True
         )
 
