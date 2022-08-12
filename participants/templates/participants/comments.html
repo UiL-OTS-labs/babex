@@ -17,6 +17,12 @@
             <span>
                 {{ comment.comment }}
             </span>
+            <div class="float-end">
+                <form method="post" action="{% url 'comments:delete' comment.pk %}">
+                    {% csrf_token %}
+                    <button href="#" class="btn btn-link icon-delete" title="delete"></button>
+                </form>
+            </div>
         </div>
     {% endfor %}
 
@@ -30,6 +36,6 @@
             {{ comment_form.comment }}
         </div>
         {{ comment_form.participant }}
-        <button class="btn btn-primary">{% trans 'participants:detail:comments:submit' %}</button>
+        <button class="btn btn-primary float-end">{% trans 'participants:detail:comments:submit' %}</button>
     </form>
 </div>

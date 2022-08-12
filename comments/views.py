@@ -32,7 +32,7 @@ class CommentCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
         return reverse('participants:detail', args=(self.object.participant.pk,))
 
 
-class CommentsDeleteView(braces.LoginRequiredMixin,
+class CommentsDeleteView(braces.UserPassesTestMixin,
                          RedirectURLMixin,
                          DeleteSuccessMessageMixin,
                          generic.DeleteView):
@@ -41,12 +41,7 @@ class CommentsDeleteView(braces.LoginRequiredMixin,
     template_name = 'comments/delete.html'
 
     def get_success_url(self):
-        url = reverse('comments:home')
-        redirect_to = self.request.GET.get('next', url)
+        return reverse('participants:detail', args=(self.object.participant.pk,))
 
-        url_is_safe = url_has_allowed_host_and_scheme(
-            url=redirect_to,
-            allowed_hosts=self.get_success_url_allowed_hosts(),
-            require_https=self.request.is_secure(),
-        )
-        return redirect_to if url_is_safe else ''
+    def test_func(self, user):
+        return user.is_superuser or user == self.object.leader
