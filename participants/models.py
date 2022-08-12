@@ -114,6 +114,12 @@ class Participant(models.Model):
         )
 
     @property
+    def age_in_days(self):
+        # not a definitive version
+        delta = date.today() - self.birth_date
+        return delta.days
+
+    @property
     def age(self):
         # not a definitive version
         delta = date.today() - self.birth_date

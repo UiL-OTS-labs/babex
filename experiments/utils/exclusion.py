@@ -204,20 +204,18 @@ def should_exclude_by_age(participant: Participant, default_criteria) -> bool:
     :param default_criteria:
     :return:
     """
+
     # If we don't know the age, assume it's allowed
     if participant.age is None:
         return False
 
-    if participant.age < default_criteria.min_age:
+    max_age = default_criteria.max_age
+    min_age = default_criteria.min_age
+
+    if min_age != -1 and participant.age_in_days < default_criteria.min_age:
         return True
 
-    # We could do this with a different if statement in the loop, but this
-    # makes the loop look cleaner
-    max_age = default_criteria.max_age
-    if max_age == -1:
-        max_age = 9000  # we assume no-one is older than 9000 years old....
-
-    if participant.age > max_age:
+    if max_age != -1 and participant.age_in_days > max_age:
         return True
 
     return False
