@@ -11,7 +11,6 @@ from cdh.core.views import RedirectActionView
 from cdh.core.views.mixins import DeleteSuccessMessageMixin, \
     RedirectSuccessMessageMixin
 
-from comments.models import Comment
 from experiments.utils.remind_participant import remind_participant
 from .mixins import ExperimentObjectMixin
 from ..forms import ExperimentForm
@@ -81,7 +80,6 @@ class ExperimentDetailView(braces.LoginRequiredMixin, generic.DetailView):
 
         context['timeslots'] = self._get_timeslots()
         context['appointments'] = self.object.appointments.all()
-        context['comments'] = Comment.objects.filter(experiment=self.object)
 
         return context
 
