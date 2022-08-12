@@ -1,0 +1,35 @@
+{% load i18n %}
+<h2>Comments</h2>
+    {% for comment in participant.comment_set.all %}
+        <div class="border p-3 mb-2">
+            <h5>
+                {% if comment.system_comment %}
+                    {% trans 'comments:home:system_user' %}
+                {% elif comment.leader %}
+                    {{ comment.leader.name }}
+                {% else %}
+                    {% trans 'comments:home:admin_user' %}
+                {% endif %}
+                <small class="text-muted">
+                    {{ comment.datetime|date:"Y-m-d H:i" }}
+                </small>
+            </h5>
+            <span>
+                {{ comment.comment }}
+            </span>
+        </div>
+    {% endfor %}
+
+<div class="mb-2">
+    <a href="#new_comment" data-bs-toggle="collapse">{% trans 'participants:detail:comments:new' %}</a>
+</div>
+<div class="collapse" id="new_comment">
+    <form method="post" action="{% url 'comments:new' %}">
+        {% csrf_token %}
+        <div class="mb-2">
+            {{ comment_form.comment }}
+        </div>
+        {{ comment_form.participant }}
+        <button class="btn btn-primary">{% trans 'participants:detail:comments:submit' %}</button>
+    </form>
+</div>
