@@ -25,13 +25,6 @@ class Comment(models.Model):
         null=True,
     )
 
-    experiment = models.ForeignKey(
-        Experiment,
-        on_delete=models.CASCADE,
-        verbose_name=_('comment:attribute:experiment'),
-        null=True,
-    )
-
     comment = e_fields.EncryptedTextField(
         verbose_name=_('comment:attribute:comment'),
     )

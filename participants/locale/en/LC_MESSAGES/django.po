@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-05 11:52+0200\n"
+"POT-Creation-Date: 2022-08-12 11:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -152,30 +152,47 @@ msgstr "Delete participant"
 msgid "participants:detail:header"
 msgstr "Details of '{}'"
 
-#: participants/templates/participants/detail.html:65
+#: participants/templates/participants/detail.html:72
 msgid "participants:attribute:getational_age"
 msgstr "Gestational age"
 
-#: participants/templates/participants/detail.html:69
+#: participants/templates/participants/detail.html:76
 msgid "participants:attribute:age"
 msgstr "Age"
 
-#: participants/templates/participants/detail.html:78
+#: participants/templates/participants/detail.html:85
+#: participants/templates/participants/detail.html:89
 #: participants/templates/participants/index.html:51
 msgid "yes,no"
 msgstr "yes,no"
 
-#: participants/templates/participants/detail.html:127
+#: participants/templates/participants/detail.html:134
 msgid "participants:detail:experiments"
 msgstr "Experiment"
 
-#: participants/templates/participants/detail.html:130
+#: participants/templates/participants/detail.html:137
 msgid "participants:detail:datetime"
 msgstr "Date & Time"
 
-#: participants/templates/participants/detail.html:133
+#: participants/templates/participants/detail.html:140
 msgid "participants:detail:place"
 msgstr "Place"
+
+#: participants/templates/participants/detail.html:170
+msgid "comments:home:system_user"
+msgstr ""
+
+#: participants/templates/participants/detail.html:174
+msgid "comments:home:admin_user"
+msgstr ""
+
+#: participants/templates/participants/detail.html:187
+msgid "participants:detail:comments:new"
+msgstr "+ new comment"
+
+#: participants/templates/participants/detail.html:196
+msgid "participants:detail:comments:submit"
+msgstr "Send"
 
 #: participants/templates/participants/edit.html:8
 #: participants/templates/participants/edit.html:64
@@ -187,14 +204,6 @@ msgid "participants:update:info_text"
 msgstr "<br/>"
 
 #: participants/templates/participants/edit.html:75
-msgid "participants:update:header:secondary_email"
-msgstr "Secondary e-mail(s)"
-
-#: participants/templates/participants/edit.html:84
-msgid "participants:update:add_secondary_email"
-msgstr "New secondary email"
-
-#: participants/templates/participants/edit.html:86
 #: participants/templates/participants/specific_criteria.html:32
 msgid "participants:globals:save_button"
 msgstr "Save"
@@ -225,10 +234,6 @@ msgid "participants:home:update:title"
 msgstr "Edit participant"
 
 #: participants/templates/participants/index.html:64
-msgid "participants:home:update_specific_criteria:title"
-msgstr "Edit specific criteria"
-
-#: participants/templates/participants/index.html:71
 msgid "participants:home:delete:title"
 msgstr "Delete this participant"
 
@@ -254,13 +259,26 @@ msgstr "Specific criteria for '{}'"
 msgid "participants:specific_criteria:info_text"
 msgstr " "
 
-#: participants/views.py:48
+#: participants/templates/widgets/participant_language_widget.html:24
+msgid "Other"
+msgstr ""
+
+#: participants/views.py:54
 msgid "participants:messages:updated_participant"
 msgstr "Participant updated!"
 
-#: participants/views.py:102
+#: participants/views.py:108
 msgid "participants:messages:deleted_participant"
 msgstr "Participant deleted!"
+
+#~ msgid "participants:update:header:secondary_email"
+#~ msgstr "Secondary e-mail(s)"
+
+#~ msgid "participants:update:add_secondary_email"
+#~ msgstr "New secondary email"
+
+#~ msgid "participants:home:update_specific_criteria:title"
+#~ msgstr "Edit specific criteria"
 
 #~ msgid "Unknown"
 #~ msgstr "Unknown"

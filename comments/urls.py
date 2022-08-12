@@ -8,7 +8,7 @@ urlpatterns = [
     path('', CommentsHomeView.as_view(), name='home'),
     path('<int:pk>/delete/', CommentsDeleteView.as_view(), name='delete'),
     path(
-        'new/<int:participant>/<int:experiment>/',
+        'new/',
         CommentCreateView.as_view(),
         name='new',
     ),

@@ -10,6 +10,7 @@ from cdh.core.views.mixins import DeleteSuccessMessageMixin
 
 from .forms import CriterionAnswerForm, ParticipantForm
 from .models import CriterionAnswer, Participant, SecondaryEmail
+from comments.forms import CommentForm
 
 from auditlog.enums import Event, UserType
 import auditlog.utils.log as auditlog
@@ -38,6 +39,11 @@ class ParticipantDetailView(braces.LoginRequiredMixin,
         )
 
         return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['comment_form'] = CommentForm(initial=dict(participant=self.get_object()))
+        return context
 
 
 class ParticipantUpdateView(braces.LoginRequiredMixin,

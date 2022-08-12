@@ -28,23 +28,8 @@ class CommentCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
     form_class = CommentForm
     success_message = _('comments:messages:created')
 
-    def get_initial(self):
-        initial = super(CommentCreateView, self).get_initial()
-
-        initial['experiment'] = self.kwargs.get('experiment')
-        initial['participant'] = self.kwargs.get('participant')
-
-        return initial
-
-    def form_valid(self, form):
-        form.instance.experiment_id = self.kwargs.get('experiment')
-        form.instance.participant_id = self.kwargs.get('participant')
-
-        return super(CommentCreateView, self).form_valid(form)
-
     def get_success_url(self):
-        args = [self.kwargs.get('experiment'), ]
-        return reverse('experiments:participants', args=args)
+        return reverse('participants:detail', args=(self.object.participant.pk,))
 
 
 class CommentsDeleteView(braces.LoginRequiredMixin,
