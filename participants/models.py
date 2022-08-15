@@ -134,7 +134,7 @@ class Participant(models.Model):
             months_str=_('participants:age:months'),
             days_str=_('participants:age:days'),
             years=delta.days // 365,
-            months=delta.days // 30,
+            months=(delta.days % 365) // 30,
             days=delta.days % 30)
 
     @property
