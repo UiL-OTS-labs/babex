@@ -33,6 +33,7 @@ class ApiClient {
 
     async get<T>(url: string): Promise<T> {
         const result = await fetch(url, {
+            credentials: 'include',
             method: 'GET',
             headers: this.headers()
         });
@@ -42,6 +43,7 @@ class ApiClient {
 
     async post<T>(url: string, values: T): Promise<T> {
         const result = await fetch(url, {
+            credentials: 'include',
             method: 'POST',
             headers: this.headers(),
             body: JSON.stringify(values),
@@ -52,6 +54,7 @@ class ApiClient {
 
     async put<T>(url: string, id: string, values: T): Promise<T> {
         const result = await fetch(`${url}${id}/`, {
+            credentials: 'include',
             method: 'PUT',
             headers: this.headers(),
             body: JSON.stringify(values),
@@ -62,6 +65,7 @@ class ApiClient {
 
     async delete(url: string, id: string): Promise<void> {
         const result = await fetch(url + id, {
+            credentials: 'include',
             method: 'DELETE',
             headers: this.headers()
         });
