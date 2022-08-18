@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-12 11:12+0200\n"
+"POT-Creation-Date: 2022-08-15 09:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -111,25 +111,41 @@ msgstr "Female"
 msgid "participant:attribute:sex:prefer_not_to_answer"
 msgstr "Preferred not to answer"
 
-#: participants/models.py:127
+#: participants/models.py:133
 msgid "participants:age:years"
 msgstr "years"
 
-#: participants/models.py:128
+#: participants/models.py:134
 msgid "participants:age:months"
 msgstr "months"
 
-#: participants/models.py:129
+#: participants/models.py:135
 msgid "participants:age:days"
 msgstr "days"
 
-#: participants/models.py:143
+#: participants/models.py:149
 msgid "secondary_email:attribute:email"
 msgstr "Secondary e-mail address"
 
-#: participants/models.py:161
+#: participants/models.py:167
 msgid "criterion_answer:attribute:answer"
 msgstr "Answer"
+
+#: participants/templates/participants/comments.html:7
+msgid "comments:home:system_user"
+msgstr ""
+
+#: participants/templates/participants/comments.html:11
+msgid "comments:home:admin_user"
+msgstr ""
+
+#: participants/templates/participants/comments.html:30
+msgid "participants:detail:comments:new"
+msgstr "+ new comment"
+
+#: participants/templates/participants/comments.html:39
+msgid "participants:detail:comments:submit"
+msgstr "Send"
 
 #: participants/templates/participants/delete.html:8
 #: participants/templates/participants/delete.html:16
@@ -177,22 +193,6 @@ msgstr "Date & Time"
 #: participants/templates/participants/detail.html:140
 msgid "participants:detail:place"
 msgstr "Place"
-
-#: participants/templates/participants/detail.html:170
-msgid "comments:home:system_user"
-msgstr ""
-
-#: participants/templates/participants/detail.html:174
-msgid "comments:home:admin_user"
-msgstr ""
-
-#: participants/templates/participants/detail.html:187
-msgid "participants:detail:comments:new"
-msgstr "+ new comment"
-
-#: participants/templates/participants/detail.html:196
-msgid "participants:detail:comments:submit"
-msgstr "Send"
 
 #: participants/templates/participants/edit.html:8
 #: participants/templates/participants/edit.html:64

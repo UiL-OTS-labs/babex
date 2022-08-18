@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-05 11:52+0200\n"
+"POT-Creation-Date: 2022-08-15 13:43+0200\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -351,7 +351,7 @@ msgstr "Number of linked experiments"
 #: experiments/templates/criteria/index.html:44
 #: experiments/templates/criteria/specific_list.html:44
 #: experiments/templates/experiments/detail_parts/comments.html:32
-#: experiments/templates/experiments/participants.html:64
+#: experiments/templates/experiments/participants.html:69
 #: experiments/templates/locations/index.html:39
 #: experiments/templates/timeslots/index.html:59
 msgid "experiments:globals:actions"
@@ -532,8 +532,8 @@ msgstr "Location study"
 #: experiments/templates/experiments/detail_parts/info.html:72
 #: experiments/templates/experiments/detail_parts/info.html:80
 #: experiments/templates/experiments/detail_parts/info.html:88
-#: experiments/templates/experiments/participants.html:147
-#: experiments/templates/experiments/participants.html:159
+#: experiments/templates/experiments/participants.html:146
+#: experiments/templates/experiments/participants.html:158
 msgid "yes,no"
 msgstr "yes,no"
 
@@ -639,39 +639,19 @@ msgstr "Exclude experiment"
 msgid "experiments:excluded_experiments:included:title"
 msgstr "Include experiment"
 
-#: experiments/templates/experiments/experiment_actions_snippit.html:7
-msgid "experiments:home:edit_timeslots:title"
-msgstr "Edit timeslots"
-
-#: experiments/templates/experiments/experiment_actions_snippit.html:14
-msgid "experiments:home:edit_timeslots:title:disabled"
-msgstr "This experiment does not use timeslots."
-
-#: experiments/templates/experiments/experiment_actions_snippit.html:22
+#: experiments/templates/experiments/experiment_actions_snippit.html:5
 msgid "experiments:home:edit_experiment:title"
 msgstr "Edit experiment"
 
-#: experiments/templates/experiments/experiment_actions_snippit.html:29
-msgid "experiments:home:edit_default_criteria:title"
-msgstr "Edit default criteria"
-
-#: experiments/templates/experiments/experiment_actions_snippit.html:36
-msgid "experiments:home:edit_specific_criteria:title"
-msgstr "Edit specific criteria"
-
-#: experiments/templates/experiments/experiment_actions_snippit.html:43
-msgid "experiments:home:exclude_experiments:title"
-msgstr "Exclude experiments"
-
-#: experiments/templates/experiments/experiment_actions_snippit.html:50
+#: experiments/templates/experiments/experiment_actions_snippit.html:10
 msgid "experiments:home:invite:title"
 msgstr "Invite participants"
 
-#: experiments/templates/experiments/experiment_actions_snippit.html:57
+#: experiments/templates/experiments/experiment_actions_snippit.html:15
 msgid "experiments:home:participants:title"
 msgstr "Participants"
 
-#: experiments/templates/experiments/experiment_actions_snippit.html:64
+#: experiments/templates/experiments/experiment_actions_snippit.html:21
 msgid "experiments:home:delete:title"
 msgstr "Delete experiment"
 
@@ -717,28 +697,29 @@ msgstr "Invite Participants - Experiment: {}"
 msgid "experiments:invite:info_text"
 msgstr " "
 
-#: experiments/templates/experiments/invite.html:49
-msgid "experiments:invite:secondary_emails"
-msgstr "Secondary emails"
+#: experiments/templates/experiments/invite.html:36
+msgid "experiments:invite:participants"
+msgstr "Eligible participants"
 
-#: experiments/templates/experiments/invite.html:52
-msgid "experiments:invite:already_invited"
-msgstr "Invited on"
+#: experiments/templates/experiments/invite.html:51
+msgid "experiments:invite:last_call"
+msgstr "Last called"
 
-#: experiments/templates/experiments/invite.html:103
-msgid "experiments:invite:text:help"
-msgstr ""
-"The invite text has been generated from this experiment's invite mail "
-"template. This template can be edited on the <a href=\"{}\">experiment edit "
-"page</a>."
+#: experiments/templates/experiments/invite.html:54
+msgid "experiments:invite:last_email"
+msgstr "Last mailed"
 
-#: experiments/templates/experiments/invite.html:106
-msgid "experiments:invite:preview_button"
-msgstr "Preview"
+#: experiments/templates/experiments/invite.html:57
+msgid "experiments:invite:actions"
+msgstr "Actions"
 
-#: experiments/templates/experiments/invite.html:109
-msgid "experiments:invite:invite_button"
-msgstr "Invite participants"
+#: experiments/templates/experiments/invite.html:84
+msgid "experiments:invite:call_participant"
+msgstr "Call parent"
+
+#: experiments/templates/experiments/invite.html:85
+msgid "experiments:invite:mail_participant"
+msgstr "Mail parent"
 
 #: experiments/templates/experiments/new.html:8
 #: experiments/templates/experiments/new.html:15
@@ -755,82 +736,82 @@ msgid "experiments:globals:next_button"
 msgstr "Next >>"
 
 #: experiments/templates/experiments/participants.html:11
-#: experiments/templates/experiments/participants.html:24
+#: experiments/templates/experiments/participants.html:29
 msgid "experiments:participants:header"
 msgstr "participants - Experiment '{}'"
 
-#: experiments/templates/experiments/participants.html:34
+#: experiments/templates/experiments/participants.html:39
 msgid "experiments:participants:info_text"
 msgstr " "
 
-#: experiments/templates/experiments/participants.html:51
-#: experiments/templates/experiments/participants.html:171
+#: experiments/templates/experiments/participants.html:56
+#: experiments/templates/experiments/participants.html:170
 #: experiments/templates/timeslots/index.html:41
 msgid "timeslots:day"
 msgstr "Day"
 
-#: experiments/templates/experiments/participants.html:54
-#: experiments/templates/experiments/participants.html:174
+#: experiments/templates/experiments/participants.html:59
+#: experiments/templates/experiments/participants.html:173
 msgid "experiments:participants:place"
 msgstr "WP"
 
-#: experiments/templates/experiments/participants.html:61
+#: experiments/templates/experiments/participants.html:66
 msgid "experiments:participants:reminder"
 msgstr "Reminder"
 
-#: experiments/templates/experiments/participants.html:67
-#: experiments/templates/experiments/participants.html:189
+#: experiments/templates/experiments/participants.html:72
+#: experiments/templates/experiments/participants.html:188
 msgid "experiments:participants:email"
 msgstr "Email"
 
-#: experiments/templates/experiments/participants.html:70
-#: experiments/templates/experiments/participants.html:192
+#: experiments/templates/experiments/participants.html:75
+#: experiments/templates/experiments/participants.html:191
 msgid "experiments:participants:phone_number"
 msgstr "Phone number"
 
-#: experiments/templates/experiments/participants.html:73
-#: experiments/templates/experiments/participants.html:195
+#: experiments/templates/experiments/participants.html:78
+#: experiments/templates/experiments/participants.html:194
 msgid "experiments:participants:birth_date"
 msgstr "Birth date"
 
-#: experiments/templates/experiments/participants.html:76
-#: experiments/templates/experiments/participants.html:198
+#: experiments/templates/experiments/participants.html:81
+#: experiments/templates/experiments/participants.html:197
 #, fuzzy
 #| msgid "experiments:participants:dyslexic"
 msgid "experiments:participants:dyslexic_parent"
 msgstr "Dysl. (Y/N)"
 
-#: experiments/templates/experiments/participants.html:79
-#: experiments/templates/experiments/participants.html:201
+#: experiments/templates/experiments/participants.html:84
+#: experiments/templates/experiments/participants.html:200
 msgid "experiments:participants:language"
 msgstr "Lang."
 
-#: experiments/templates/experiments/participants.html:82
-#: experiments/templates/experiments/participants.html:204
+#: experiments/templates/experiments/participants.html:87
+#: experiments/templates/experiments/participants.html:203
 msgid "experiments:participants:multilingual"
 msgstr "Multiple Lang. (one/many)"
 
-#: experiments/templates/experiments/participants.html:85
-#: experiments/templates/experiments/participants.html:207
+#: experiments/templates/experiments/participants.html:90
+#: experiments/templates/experiments/participants.html:206
 msgid "experiments:participants:sex"
 msgstr "Sex (M/F)"
 
-#: experiments/templates/experiments/participants.html:117
+#: experiments/templates/experiments/participants.html:122
 #: experiments/templates/timeslots/index.html:123
 msgid "timeslots:remove_participant:title"
 msgstr "Unsubscribe participant"
 
-#: experiments/templates/experiments/participants.html:124
+#: experiments/templates/experiments/participants.html:129
 #: experiments/templates/timeslots/index.html:130
 msgid "timeslots:silent_remove_participant:title"
 msgstr ""
 "Unsubscribe participant (without sending an automatic confirmation email)"
 
-#: experiments/templates/experiments/participants.html:153
+#: experiments/templates/experiments/participants.html:152
 msgid "many,one"
 msgstr "many,one"
 
-#: experiments/templates/experiments/participants.html:182
+#: experiments/templates/experiments/participants.html:181
 msgid "experiments:participants:send"
 msgstr "Send"
 
@@ -949,61 +930,91 @@ msgstr "Criterion successfully added to experiment!"
 msgid "criteria:messages:removed_from_experiment"
 msgstr "Criterion successfully removed from experiment!"
 
-#: experiments/views/experiment_views.py:48
+#: experiments/views/experiment_views.py:47
 msgid "experiments:message:create:success"
 msgstr "Successfully created experiment"
 
-#: experiments/views/experiment_views.py:61
+#: experiments/views/experiment_views.py:60
 msgid "experiments:message:update:success"
 msgstr "Successfully updated experiment"
 
-#: experiments/views/experiment_views.py:106
+#: experiments/views/experiment_views.py:104
 msgid "experiments:message:deleted_experiment"
 msgstr "Experiment deleted!"
 
-#: experiments/views/experiment_views.py:152
+#: experiments/views/experiment_views.py:150
 msgid "experiments:message:exclude:included"
 msgstr "Successfully included experiment"
 
-#: experiments/views/experiment_views.py:155
+#: experiments/views/experiment_views.py:153
 msgid "experiments:message:exclude:excluded"
 msgstr "Successfully excluded experiment"
 
-#: experiments/views/experiment_views.py:238
+#: experiments/views/experiment_views.py:236
 msgid "experiments:message:switch_open:closed"
 msgstr "Successfully closed experiment"
 
-#: experiments/views/experiment_views.py:241
+#: experiments/views/experiment_views.py:239
 msgid "experiments:message:switch_open:opened"
 msgstr "Successfully opened experiment"
 
-#: experiments/views/experiment_views.py:256
+#: experiments/views/experiment_views.py:254
 msgid "experiments:message:switch_public:closed"
 msgstr "Successfully hid experiment"
 
-#: experiments/views/experiment_views.py:259
+#: experiments/views/experiment_views.py:257
 msgid "experiments:message:switch_public:opened"
 msgstr "Successfully made experiment public"
 
-#: experiments/views/experiment_views.py:275
+#: experiments/views/experiment_views.py:273
 msgid "experiments:message:switch_visible:invisible"
 msgstr "Successfully hid participants from leaders"
 
-#: experiments/views/experiment_views.py:280
+#: experiments/views/experiment_views.py:278
 msgid "experiments:message:switch_visible:visible"
 msgstr "Successfully changed participant visibility to visible"
 
-#: experiments/views/experiment_views.py:303
+#: experiments/views/experiment_views.py:301
 msgid "experiments:message:sent_reminders"
 msgstr "Sent reminders to {} participant(s)"
 
-#: experiments/views/invite_views.py:65
+#: experiments/views/invite_views.py:63
 msgid "experiments:message:invite_failure"
 msgstr "Something went wrong!"
 
-#: experiments/views/invite_views.py:67
+#: experiments/views/invite_views.py:65
 msgid "experiments:message:invite_success"
 msgstr "Successfully invited participants!"
+
+#~ msgid "experiments:invite:already_invited"
+#~ msgstr "Invited on"
+
+#~ msgid "experiments:invite:text:help"
+#~ msgstr ""
+#~ "The invite text has been generated from this experiment's invite mail "
+#~ "template. This template can be edited on the <a href=\"{}\">experiment "
+#~ "edit page</a>."
+
+#~ msgid "experiments:invite:preview_button"
+#~ msgstr "Preview"
+
+#~ msgid "experiments:invite:invite_button"
+#~ msgstr "Invite participants"
+
+#~ msgid "experiments:home:edit_timeslots:title"
+#~ msgstr "Edit timeslots"
+
+#~ msgid "experiments:home:edit_timeslots:title:disabled"
+#~ msgstr "This experiment does not use timeslots."
+
+#~ msgid "experiments:home:edit_default_criteria:title"
+#~ msgstr "Edit default criteria"
+
+#~ msgid "experiments:home:edit_specific_criteria:title"
+#~ msgstr "Edit specific criteria"
+
+#~ msgid "experiments:home:exclude_experiments:title"
+#~ msgstr "Exclude experiments"
 
 #~ msgid "experiments:detail:appointments"
 #~ msgstr "Appointments"
