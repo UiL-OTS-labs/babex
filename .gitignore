@@ -21,3 +21,7 @@ env*
 
 # compiled vue app
 main/static/vue
+
+
+# emacs stuff
+.dir-locals.el
