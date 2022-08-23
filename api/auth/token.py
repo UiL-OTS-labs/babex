@@ -1,4 +1,5 @@
 import enum
+from typing import Optional
 
 import jwt
 from django.conf import settings
@@ -13,9 +14,9 @@ class Algorithms(enum.Enum):
 class JwtToken:
 
     def __init__(self):
-        self._algorithm = None
-        self._encode_key = None
-        self._decode_key = None
+        self._algorithm: Optional[enum.Enum] = None
+        self._encode_key: Optional[str] = None
+        self._decode_key: Optional[str] = None
 
         if hasattr(settings, 'JWT_ALGORITHM'):
             self._algorithm = Algorithms(settings.JWT_ALGORITHM)
@@ -34,19 +35,25 @@ class JwtToken:
             self._decode_key = settings.SECRET_KEY
 
     def validate_token(self, token):
+        if self._decode_key is None:
+            raise exceptions.ImproperlyConfigured('no decode key!')
+
         try:
-            decoded = jwt.decode(token, self._decode_key, algorithms=[self._algorithm.value])
+            decoded = jwt.decode(token, self._decode_key, algorithms=[self._algorithm.value] if self._algorithm else [])
         except jwt.DecodeError:
             return None
 
         return decoded
 
     def make_token(self, user):
+        if self._encode_key is None:
+            raise exceptions.ImproperlyConfigured('no encode key!')
+
         payload = {
             "pk": user.pk
         }
 
-        return jwt.encode(payload, self._encode_key, algorithm=self._algorithm.value)
+        return jwt.encode(payload, self._encode_key, algorithm=self._algorithm.value if self._algorithm else None)
 
 
 jwt_token = JwtToken()
