@@ -30,7 +30,7 @@ def get_comment_counts() -> List[Tuple[Experiment, int]]:
     return out
 
 
-def delete_comments(experiment: Experiment, user=None) -> None:
+def delete_comments(experiment: Experiment, user) -> None:
     log_to_auditlog(
         Event.DELETE_DATA,
         "Deleted all comments for experiment '{}'".format(experiment),

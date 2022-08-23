@@ -21,7 +21,7 @@ class ExperimentObjectMixin:
     experiment_select_related = []
     experiment_prefetch_related = []
 
-    @cached_property
+    @property
     def experiment(self):
         pk = self.kwargs.get(self.experiment_kwargs_name)
 

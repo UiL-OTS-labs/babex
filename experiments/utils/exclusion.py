@@ -6,7 +6,7 @@ straightforward as you'd expect.
 Also, because we use application-level database encryption, we cannot compare
 inside the database. This is why everything is done in python.
 """
-from typing import List
+from typing import List, Optional
 from django.db.models.expressions import RawSQL
 
 from experiments.models import Experiment, ExperimentCriterion
@@ -184,7 +184,7 @@ def _should_exclude_by_specific_criteria(participant: Participant,
 
 
 def _get_specific_criterion(specific_experiment_criteria, criterion) -> \
-        ExperimentCriterion:
+        Optional[ExperimentCriterion]:
     """
     Gets the experimentCriterion object for a criterion object
     :param specific_experiment_criteria:

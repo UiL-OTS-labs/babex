@@ -7,7 +7,7 @@ from experiments.models import Experiment, TimeSlot
 
 def add_timeslot(
         experiment: Experiment,
-        date_time: Union[str, datetime],
+        date_time: datetime,
         places: int) -> TimeSlot:
 
     existing = TimeSlot.objects.filter(
