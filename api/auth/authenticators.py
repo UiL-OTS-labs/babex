@@ -3,14 +3,14 @@ from rest_framework import authentication
 
 from api.auth.ldap_backend import ApiLdapBackend
 from .models import ApiUser
-from .token import JwtToken
+from .token import jwt_token
 
 
 class JwtAuthentication(authentication.TokenAuthentication):
     keyword = "Bearer"
 
     def authenticate_credentials(self, key):
-        decoded = JwtToken.validate_token(key)
+        decoded = jwt_token.validate_token(key)
 
         user = ApiUser.objects.get(pk=decoded['pk'])
 

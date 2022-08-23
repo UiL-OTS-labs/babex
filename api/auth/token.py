@@ -49,4 +49,4 @@ class JwtToken:
         return jwt.encode(payload, self._encode_key, algorithm=self._algorithm.value)
 
 
-JwtToken = JwtToken()
+jwt_token = JwtToken()
