@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from api.auth.models import ApiUser
+from main.models import User
 
 
 class Leader(models.Model):
@@ -11,15 +12,15 @@ class Leader(models.Model):
 
     phonenumber = models.TextField()
 
-    api_user = models.OneToOneField(ApiUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
 
     @property
     def email(self):
-        return self.api_user.email
+        return self.user.email
 
     def is_active_leader(self) -> bool:
-        if self.api_user.groups.filter(name=settings.LEADER_GROUP):
-            return self.api_user.is_active
+        if self.user.groups.filter(name=settings.LEADER_GROUP):
+            return self.user.is_active
 
         return False
 

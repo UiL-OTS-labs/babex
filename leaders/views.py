@@ -23,14 +23,14 @@ class LeaderHomeView(braces.LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         return self.model.objects.select_related(
-            'api_user'
+            'user'
         ).annotate(
             # This will either be 0 or 1, thus a boolean. Annotating like
             # this saves a lot of DB queries
             active=Count(
-                'api_user__groups',
+                'user__groups',
                 filter=Q(
-                    api_user__groups__name=settings.LEADER_GROUP
+                    user__groups__name=settings.LEADER_GROUP
                 )
             )
         )
