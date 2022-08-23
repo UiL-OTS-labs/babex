@@ -1,6 +1,6 @@
 import braces.views as braces
 from django.contrib import messages
-from django.contrib.auth.views import RedirectURLMixin
+from django.contrib.auth.views import SuccessURLAllowedHostsMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count, F, Q
 from django.urls import reverse_lazy as reverse
@@ -51,7 +51,7 @@ class ExperimentCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
 
 
 class ExperimentUpdateView(braces.LoginRequiredMixin,
-                           RedirectURLMixin,
+                           SuccessURLAllowedHostsMixin,
                            SuccessMessageMixin,
                            generic.UpdateView):
     template_name = 'experiments/edit.html'
