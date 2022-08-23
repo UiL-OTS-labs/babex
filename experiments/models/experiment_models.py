@@ -18,7 +18,7 @@ class Experiment(models.Model):
 
     DEFAULT_CONFIRMATION_MAIL = """<p>Beste {participant_name},</p>
     <p>
-        Je hebt een afspraak gemaakt om mee te doen met het experiment: 
+        Je hebt een afspraak gemaakt om mee te doen met het experiment:
         <strong>{experiment_name}</strong><br/><br/>
         We verwachten je op:<br/><br/>
         Datum: <strong>{date}</strong><br/>
@@ -26,11 +26,11 @@ class Experiment(models.Model):
         Locatie: <strong>{experiment_location}</strong><br/>
     </p>
     <p>
-        Als je deze afspraak wilt afzeggen, kun je dat doen via 
+        Als je deze afspraak wilt afzeggen, kun je dat doen via
         {cancel_link:"deze link"}.
-        Doe dat alsjeblieft minstens 24 uur vantevoren. Als je vlak vantevoren 
-        ontdekt dat je verhinderd bent, neem dan svp even persoonlijk contact 
-        op met de proefleider 
+        Doe dat alsjeblieft minstens 24 uur vantevoren. Als je vlak vantevoren
+        ontdekt dat je verhinderd bent, neem dan svp even persoonlijk contact
+        op met de proefleider
         ({leader_name}, email: {leader_email} tel.: {leader_phonenumber}).
     </p>
     <p>
@@ -38,7 +38,7 @@ class Experiment(models.Model):
         het UiL OTS lab
     </p>"""
 
-    DEFAULT_INVITE_MAIL = """<p>Je kunt je weer opgeven voor een nieuw 
+    DEFAULT_INVITE_MAIL = """<p>Je kunt je weer opgeven voor een nieuw
     experiment: <strong>{experiment_name}</strong>.</p>
 <p>De proefleider is <strong>{leader_name}</strong>.
 <ul>
