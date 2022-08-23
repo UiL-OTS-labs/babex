@@ -1,6 +1,5 @@
 import braces.views as braces
 from django.urls import reverse_lazy as reverse
-from django.utils.functional import cached_property
 from django.utils.translation import gettext as _
 from django.views import generic
 
@@ -63,8 +62,7 @@ class DeleteParticipantView(braces.LoginRequiredMixin,
         else:
             self.success_message = _('datamanagement:messages:refused_deletion')
 
-
-    @cached_property
+    @property
     def participant(self):
         pk = self.kwargs.get('participant')
 
@@ -82,8 +80,8 @@ class HideParticipantsView(braces.LoginRequiredMixin,
     def action(self, request):
         hide_part_from_exp(self.experiment)
 
-    @cached_property
-    def experiment(self):
+    @property
+    def experiment(self) -> Experiment:
         pk = self.kwargs.get('experiment')
 
         return Experiment.objects.get(pk=pk)
@@ -105,7 +103,7 @@ class DeleteInvitesView(braces.LoginRequiredMixin,
     def action(self, request):
         delete_invites(self.experiment, self.request.user)
 
-    @cached_property
+    @property
     def experiment(self):
         pk = self.kwargs.get('experiment')
 
@@ -126,7 +124,7 @@ class DeleteCommentsView(braces.LoginRequiredMixin,
     def action(self, request):
         delete_comments(self.experiment, self.request.user)
 
-    @cached_property
+    @property
     def experiment(self):
         pk = self.kwargs.get('experiment')
 
