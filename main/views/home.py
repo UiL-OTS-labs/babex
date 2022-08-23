@@ -13,8 +13,6 @@ class HomeView(braces.LoginRequiredMixin, generic.TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
 
-
-        context['num_free_places'] = self._get_free_slots()
         context['experiments'] = self._get_experiments()
 
         return context
@@ -40,4 +38,3 @@ class HomeView(braces.LoginRequiredMixin, generic.TemplateView):
 
     def _get_experiments(self):
         return Experiment.objects.filter(open=True)
-
