@@ -9,7 +9,6 @@ from cdh.core.views.mixins import RedirectSuccessMessageMixin
 
 
 from datamanagement.forms import ThresholdsEditForm
-from datamanagement.utils.comments import delete_comments, get_comment_counts
 from datamanagement.utils.common import get_thresholds_model
 from datamanagement.utils.exp_part_visibility import \
     get_experiments_with_visibility, hide_part_from_exp
@@ -30,7 +29,6 @@ class OverviewView(braces.LoginRequiredMixin, generic.TemplateView):
         context = super().get_context_data(**kwargs)
 
         context['invites'] = get_invite_counts()
-        context['comments'] = get_comment_counts()
         context['participants'] = get_participants_with_appointments()
         context['participants_no_app'] = get_participants_without_appointments()
         context['participants_num'] = len(context['participants']) + \
@@ -114,26 +112,5 @@ class DeleteInvitesView(braces.LoginRequiredMixin,
 
     def get_success_message(self):
         return _('datamanagement:messages:deleted_invites').format(
-            self.experiment
-        )
-
-
-class DeleteCommentsView(braces.LoginRequiredMixin,
-                         RedirectSuccessMessageMixin,
-                         RedirectActionView):
-    def action(self, request):
-        delete_comments(self.experiment, self.request.user)
-
-    @property
-    def experiment(self):
-        pk = self.kwargs.get('experiment')
-
-        return Experiment.objects.get(pk=pk)
-
-    def get_redirect_url(self, *args, **kwargs):
-        return reverse('datamanagement:overview') + "#collapse-comments"
-
-    def get_success_message(self):
-        return _('datamanagement:messages:deleted_comments').format(
             self.experiment
         )
