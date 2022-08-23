@@ -1,3 +1,4 @@
+from typing import List
 from django.utils.functional import cached_property
 
 from ..models import Experiment
@@ -18,8 +19,8 @@ class ExperimentObjectMixin:
     """
     experiment_kwargs_name = 'experiment'
 
-    experiment_select_related = []
-    experiment_prefetch_related = []
+    experiment_select_related: List[str] = []
+    experiment_prefetch_related: List[str] = []
 
     @property
     def experiment(self):

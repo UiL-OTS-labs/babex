@@ -195,6 +195,8 @@ def _get_specific_criterion(specific_experiment_criteria, criterion) -> \
         if x.criterion == criterion:
             return x
 
+    return None
+
 
 def should_exclude_by_age(participant: Participant, default_criteria) -> bool:
     """

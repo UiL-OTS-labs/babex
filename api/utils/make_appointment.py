@@ -9,8 +9,8 @@ Steps:
 """
 from typing import List, Tuple, Optional
 
-from django.core.exceptions import SuspiciousOperation
-from django.core.validators import ValidationError, validate_email
+from django.core.exceptions import SuspiciousOperation, ValidationError
+from django.core.validators import validate_email
 from django.utils.dateparse import parse_date
 
 from comments.utils import add_system_comment
@@ -86,7 +86,7 @@ def register_participant(data: dict, experiment: Experiment) -> Tuple[bool,
     default_criteria = experiment.defaultcriteria
 
     try:
-        time_slot = experiment.timeslot_set.get(pk=data.get('timeslot'))
+        time_slot = experiment.timeslot_set.get(pk=data['timeslot'])
     except TimeSlot.DoesNotExist:
         time_slot = None
 
@@ -228,7 +228,7 @@ def _get_participant(data: dict) -> Participant:
     if data.get('birth_date'):
         participant.birth_date = x_or_else(
             participant.birth_date,
-            parse_date(data.get('birth_date'))
+            parse_date(data['birth_date'])
         )
 
     participant.dyslexic_parent = x_or_else(

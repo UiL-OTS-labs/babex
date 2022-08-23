@@ -3,7 +3,7 @@ from django.contrib.auth.views import SuccessURLAllowedHostsMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy as reverse
 from django.utils.http import url_has_allowed_host_and_scheme
-from django.utils.text import gettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views import generic
 from cdh.core.views.mixins import DeleteSuccessMessageMixin
 

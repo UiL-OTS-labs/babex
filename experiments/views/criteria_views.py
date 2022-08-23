@@ -1,5 +1,5 @@
 import braces.views as braces
-from django.contrib.auth.views import RedirectURLMixin
+from django.contrib.auth.views import SuccessURLAllowedHostsMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count
 from django.http import Http404
@@ -63,11 +63,9 @@ class CriteriaDeleteView(braces.LoginRequiredMixin,
 #
 
 
-class DefaultCriteriaUpdateView(
-    braces.LoginRequiredMixin,
-    RedirectURLMixin,
-    generic.UpdateView
-):
+class DefaultCriteriaUpdateView(braces.LoginRequiredMixin,
+                                SuccessURLAllowedHostsMixin,
+                                generic.UpdateView):
     template_name = 'criteria/update_default.html'
     form_class = DefaultCriteriaForm
     model = DefaultCriteria
@@ -118,7 +116,7 @@ class DefaultCriteriaUpdateView(
 
 
 class CriteriaListView(braces.LoginRequiredMixin,
-                       RedirectURLMixin,
+                       SuccessURLAllowedHostsMixin,
                        SuccessMessageMixin,
                        ExperimentObjectMixin,
                        FormListView):

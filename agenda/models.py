@@ -25,6 +25,6 @@ class ClosingSerializer(serializers.ModelSerializer):
         fields = ['id', 'start', 'end', 'is_global', 'comment', 'location',
                   'location_name']
 
-    location_name = serializers.StringRelatedField(source='location')
+    location_name = serializers.StringRelatedField(source='location')  # type: ignore
     location = serializers.PrimaryKeyRelatedField(queryset=Location.objects.all(),
                                                   allow_null=True)

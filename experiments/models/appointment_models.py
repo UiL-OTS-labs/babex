@@ -120,8 +120,8 @@ class AppointmentSerializer(serializers.ModelSerializer):
         model = Appointment
         fields = ['id', 'experiment', 'leader', 'participant', 'location', 'start', 'end']
 
-    experiment = serializers.StringRelatedField()
-    participant = serializers.SlugRelatedField('name', read_only=True)
+    experiment = serializers.StringRelatedField()  # type: ignore
+    participant = serializers.SlugRelatedField('name', read_only=True)  # type: ignore
 
     location = serializers.ReadOnlyField()
     leader = serializers.ReadOnlyField()

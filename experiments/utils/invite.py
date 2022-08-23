@@ -36,6 +36,7 @@ def get_invite_mail_content(experiment: Experiment) -> str:
 
     if num_additional_leaders > 0:
         last_leader = experiment.additional_leaders.last()
+        assert last_leader is not None
         others = experiment.additional_leaders.exclude(pk=last_leader.pk)
 
         # If there's one additional, don't add the comma as it looks weird
@@ -73,7 +74,7 @@ def mail_invite(
     # Generate the datatuple list for send_personalised_mass_mail
     # Please see that function's docstring for info
     data = [(subject, {'participant': participant, 'unsub_link':
-        get_mailinglist_unsubscribe_url(participant)}, [participant.email]) for
+                       get_mailinglist_unsubscribe_url(participant)}, [participant.email]) for
             participant in participants]
 
     # Technically html_content should be passed in a seperate html context,

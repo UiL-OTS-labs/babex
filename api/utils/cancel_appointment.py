@@ -23,6 +23,9 @@ def _handle_late_comment(appointment: Appointment) -> None:
     """Helper function that adds a comment for this participant if he/she/it
     cancelled within 24 prior to the appointment.
     """
+    if not appointment.timeslot:
+        return
+
     dt = appointment.timeslot.datetime
 
     now = datetime.now(tz=dt.tzinfo)

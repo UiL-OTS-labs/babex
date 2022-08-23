@@ -1,9 +1,10 @@
+from typing import Any
 import braces.views as braces
 from django import forms
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy as reverse
 from django.utils.functional import cached_property
-from django.utils.text import gettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views import generic
 from cdh.core.views import FormSetUpdateView
 from cdh.core.views.mixins import DeleteSuccessMessageMixin
@@ -53,7 +54,7 @@ class ParticipantUpdateView(braces.LoginRequiredMixin,
     template_name = 'participants/edit.html'
     success_message = _('participants:messages:updated_participant')
     form_class = ParticipantForm
-    secondary_email_formset = forms.inlineformset_factory(
+    secondary_email_formset: Any = forms.inlineformset_factory(
         Participant,
         SecondaryEmail,
         fields=('email',),

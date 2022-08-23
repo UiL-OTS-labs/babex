@@ -25,7 +25,6 @@ def add_system_comment(
     for participant in participants:
         c = Comment()
         c.participant = participant
-        c.experiment = experiment
         c.comment = comment
         c.system_comment = True
         c.save()

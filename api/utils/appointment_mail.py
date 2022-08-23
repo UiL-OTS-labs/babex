@@ -1,4 +1,5 @@
 import re
+from typing import Optional
 
 from django.conf import settings
 from django.template import defaultfilters
@@ -19,7 +20,7 @@ CANCEL_LINK_REGEX = r'{cancel_link(?::\"(.*)\")?}'
 def send_appointment_mail(
         experiment: Experiment,
         participant: Participant,
-        time_slot: TimeSlot,
+        time_slot: Optional[TimeSlot],
 ) -> None:
     admin = get_supreme_admin()
     template = 'api/mail/new_appointment'
@@ -42,6 +43,7 @@ def send_appointment_mail(
 
     if num_additional_leaders > 0:
         last_leader = experiment.additional_leaders.last()
+        assert last_leader is not None
         others = experiment.additional_leaders.exclude(pk=last_leader.pk)
 
         # If there's one additional, don't add the comma as it looks weird
@@ -56,7 +58,7 @@ def send_appointment_mail(
     if experiment.location:
         replacements['{experiment_location}'] = experiment.location.name
 
-    if experiment.use_timeslots:
+    if experiment.use_timeslots and time_slot is not None:
         # We don't use strftime because that's not _always_ timezone aware
         # Also, using the template filter is a neat hack to have the same format
         # string syntax everywhere
@@ -129,4 +131,3 @@ def _apply_replacements(content: str, replacements: dict) -> str:
         content = content.replace(key, value)
 
     return content
-

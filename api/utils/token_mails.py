@@ -4,6 +4,7 @@ import urllib.parse as parse
 from django.conf import settings
 from cdh.core.utils.mail import send_template_email
 
+from main.typing import StrLike
 from api.auth.models import ApiUser
 from participants.models import Participant
 
@@ -61,7 +62,7 @@ def _get_name(user: ApiUser) -> str:
     return 'proefpersoon'
 
 
-def get_reset_links(token: str) -> Tuple[str, str]:
+def get_reset_links(token: StrLike) -> Tuple[str, str]:
     if not isinstance(token, str):
         token = str(token)
 

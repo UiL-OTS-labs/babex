@@ -19,6 +19,7 @@ def get_participants_with_appointments() -> List[Tuple[Participant, datetime, in
             '-creation_date'
         ).first()
 
+        assert newest_appointment is not None
         if newest_appointment.creation_date < threshold:
             out.append(
                 (

@@ -15,7 +15,7 @@ from ..utils.participants import delete_participant, \
 
 
 class ParticipantTests(TestCase):
-    databases = ['default', 'auditlog']
+    databases = {'default', 'auditlog'}
 
     def setUp(self) -> None:
         _create_thresholds()

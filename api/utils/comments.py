@@ -9,7 +9,6 @@ def add_comment(experiment: Experiment,
                 leader: Leader,
                 comment: str) -> None:
     c = Comment()
-    c.experiment = experiment
     c.participant = participant
     c.leader = leader
     c.comment = comment

@@ -14,7 +14,7 @@ def get_thresholds_model() -> Thresholds:
     if Thresholds.objects.count() == 0:
         thresholds = Thresholds()
     else:
-        thresholds = Thresholds.objects.first()
+        thresholds = Thresholds.objects.first()  # type: ignore
 
     return thresholds
 

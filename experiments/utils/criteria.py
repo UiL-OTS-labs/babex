@@ -1,3 +1,5 @@
+from typing import TypedDict
+
 from django.core.exceptions import ValidationError
 from django.http import QueryDict
 from cdh.core.utils import set_model_field_value
@@ -42,24 +44,31 @@ def attach_criterion(experiment, criterion, correct_value, message_failed):
     experiment_criterion.save()
 
 
-def clean_form_existing_criterion(post_data: QueryDict) -> dict:
+def clean_form_existing_criterion(data: QueryDict) -> dict:
     """Cleans the form data from the manual specific criteria form."""
-    cleaned_data = {}
-    # Get a proper dict, as the QueryDict is ****
-    post_data = post_data.dict()
+    class Cleaned(TypedDict):
+        criterion: int
+        correct_value: str
+        message_failed: str
 
-    criterion = post_data.get('criterion')
-    cleaned_data['criterion'] = int(criterion)
+    criterion = data.get('criterion')
+    correct_value_str = data.get('correct_value')
+    message_failed = data.get('message_failed')
+
+    assert criterion is not None
+    assert correct_value_str is not None
+    assert message_failed is not None
+
 
     # Split the criterion_pk and the value, and check if the criterion_pk
     # matches the selected criterion value sent in POST
-    check_pk, correct_value = post_data.get('correct_value').split('-', 2)
+    check_pk, correct_value = correct_value_str.split('-', 2)
 
     if check_pk != criterion:
-        raise ValidationError
+        raise ValidationError('check pk')
 
-    cleaned_data['correct_value'] = correct_value.strip()
-
-    cleaned_data['message_failed'] = post_data.get('message_failed').strip()
-
-    return cleaned_data
+    return dict(
+        criterion=int(criterion),
+        correct_value=correct_value.strip(),
+        message_failed=message_failed.strip(),
+    )
