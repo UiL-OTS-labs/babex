@@ -291,6 +291,82 @@ class ParticipantAccountCreationTests(TestCase):
         self.assertEqual(u1.participant, p1)
         self.assertEqual(u2.participant, p2)
 
+    def test_existing_leader_account(self):
+        """
+        This testcase tests adding a participant profile to an existing
+        leader account.
+        :return:
+        """
+        u = ApiUser.objects.create(
+            email='test@test.nl',
+        )
+
+        Leader.objects.create(
+            name='Test',
+            phonenumber='00-0000000',
+            api_user=u
+        )
+
+        self.assertEqual(
+            Participant.objects.count(),
+            0
+        )
+        self.assertEqual(
+            ApiUser.objects.count(),
+            1
+        )
+        self.assertEqual(
+            Leader.objects.count(),
+            1
+        )
+
+        self.assertEqual(
+            u.is_participant,
+            False
+        )
+        self.assertEqual(
+            u.is_leader,
+            True
+        )
+
+        ret = create_participant_account(
+            email="test@test.nl",
+            name='Test',
+            multilingual=True,
+            language='nl',
+            dyslexic_parent=True,
+            mailing_list=True
+        )
+
+        self.assertEqual(
+            ret,
+            ReturnValues.OK
+        )
+
+        self.assertEqual(
+            Participant.objects.count(),
+            1
+        )
+        self.assertEqual(
+            ApiUser.objects.count(),
+            1
+        )
+        self.assertEqual(
+            Leader.objects.count(),
+            1
+        )
+
+        # Refetch to make sure we have the latest data
+        u = ApiUser.objects.get(email='test@test.nl')
+
+        self.assertEqual(
+            u.is_participant,
+            True
+        )
+        self.assertEqual(
+            u.is_leader,
+            True
+        )
 
     def test_email_switch(self):
         """

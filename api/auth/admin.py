@@ -51,7 +51,7 @@ class ApiUserAdmin(auth_admin.UserAdmin):
     list_display = ('email', 'is_frontend_admin')
     list_filter = ('is_frontend_admin', 'is_active', 'groups')
     search_fields = ('email', )
-    readonly_fields = ["date_joined", "participant"]
+    readonly_fields = ["date_joined", "participant", "leader"]
 
     @sensitive_post_parameters_m
     def user_change_password(self, request, id, form_url=''):

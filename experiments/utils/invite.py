@@ -26,7 +26,7 @@ def get_invite_mail_content(experiment: Experiment) -> str:
         '{experiment_name}':         experiment.name,
         '{experiment_location}':     '',
         '{leader_name}':             experiment.leader.name,
-        '{leader_email}':            experiment.leader.user.email,
+        '{leader_email}':            experiment.leader.api_user.email,
         '{leader_phonenumber}':      experiment.leader.phonenumber,
         '{all_leaders_name_list}':   experiment.leader.name,
         '{admin}':                   get_supreme_admin().get_full_name(),
