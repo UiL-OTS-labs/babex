@@ -47,7 +47,7 @@ def create_leader(name: str, email: str, phonenumber: str,
     leader.name = name
     leader.phonenumber = phonenumber
 
-    existing_user = User.objects.get_by_email(email)
+    existing_user = User.objects.get(email=email)
     existing = False
 
     if existing_user:
@@ -59,7 +59,6 @@ def create_leader(name: str, email: str, phonenumber: str,
 
         if password:
             user.set_password(password)
-            user.passwords_needs_change = True
 
         user.save()
 
@@ -103,7 +102,7 @@ def create_ldap_leader(name: str, email: str, phonenumber: str) -> Leader:
     leader.name = name
     leader.phonenumber = phonenumber
 
-    existing_user = User.objects.get_by_email(email)
+    existing_user = User.objects.get(email=email)
 
     if existing_user:
         user = existing_user
@@ -130,44 +129,7 @@ def get_login_link() -> str:
 
 
 def notify_new_leader(leader: Leader, existing=False) -> None:
-    has_password = leader.user.has_password
-
-    template = 'leaders/mail/notify_new_leader'
-    if existing:
-        template = 'leaders/mail/notify_new_leader_existing_account'
-
-    if not has_password:
-        token_model = UserToken.objects.create(
-            user=leader.user,
-            expiration=_get_tomorrow(),
-            type=UserToken.PASSWORD_RESET,
-        )
-        token = token_model.token
-
-        link, alternative_link = get_reset_links(token_model.token)
-    else:
-        token = None
-        link = None
-        alternative_link = None
-
-    subject = 'UiL OTS Experimenten: new account'
-    context = {
-        'has_password':     has_password,
-        'token':            token,
-        'name':             leader.name,
-        'email':            leader.user.email,
-        'link':             link,
-        'alternative_link': alternative_link,
-        'login_link':       get_login_link(),
-    }
-
-    send_template_email(
-        [leader.user.email],
-        subject,
-        template,
-        context,
-        'no-reply@uu.nl'
-    )
+    ...
 
 
 def notify_new_ldap_leader(leader: Leader) -> None:
@@ -179,7 +141,7 @@ def notify_new_ldap_leader(leader: Leader) -> None:
     }
 
     send_template_email(
-        [leader._user.email],
+        [leader.user.email],
         subject,
         'leaders/mail/notify_new_ldap_leader',
         context,
@@ -217,7 +179,6 @@ def update_leader(leader: Leader, name: str, email: str, phonenumber: str,
         user.is_active = _participant_group in user.groups.all()
 
     if password:
-        user.passwords_needs_change = True
         user.set_password(password)
 
     user.save()
@@ -263,7 +224,6 @@ def convert_leader_to_ldap(leader: Leader) -> None:
         return
 
     user.set_password(None)
-    user.passwords_needs_change = False
     user.is_ldap_account = True
     user.save()
 

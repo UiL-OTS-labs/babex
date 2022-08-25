@@ -34,7 +34,7 @@ def send_appointment_mail(
         '{experiment_location}': '',
         '{participant_name}': participant.name,
         '{leader_name}': experiment.leader.name,
-        '{leader_email}': experiment.leader.api_user.email,
+        '{leader_email}': experiment.leader.user.email,
         '{leader_phonenumber}': experiment.leader.phonenumber,
         '{all_leaders_name_list}': experiment.leader.name,
     }

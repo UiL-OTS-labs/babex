@@ -56,9 +56,6 @@ def _get_name(user: ApiUser) -> str:
     if hasattr(user, 'participant'):
         return user.participant.mail_name
 
-    if hasattr(user, 'leader'):
-        return user.leader.name
-
     return 'proefpersoon'
 
 

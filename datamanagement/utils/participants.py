@@ -50,10 +50,6 @@ def delete_participant(participant: Participant, user) -> bool:
         UserType.ADMIN,
     )
 
-    # Delete the account as well, unless the account is also a leader
-    if participant.api_user and not participant.api_user.leader:
-        participant.api_user.delete()
-
     participant.delete()
 
     return True

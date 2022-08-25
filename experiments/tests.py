@@ -14,7 +14,7 @@ from .utils.exclusion import get_eligible_participants_for_experiment
 
 def _get_or_create_leader() -> Leader:
     if Leader.objects.exists():
-        return Leader.objects.first()
+        return Leader.objects.first()  # type: ignore
     user = User.objects.create()
     return Leader.objects.create(user=user)
 
