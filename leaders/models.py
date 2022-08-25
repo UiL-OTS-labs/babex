@@ -12,7 +12,7 @@ class Leader(models.Model):
 
     phonenumber = models.TextField()
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     @property
     def email(self):
