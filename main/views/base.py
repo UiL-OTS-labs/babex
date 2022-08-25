@@ -4,7 +4,9 @@ from django.views import generic
 from django.views.generic.edit import FormMixin, ModelFormMixin
 
 
-class ModelFormListView(ModelFormMixin, generic.ListView):
+class ModelFormListView(ModelFormMixin, generic.ListView):  # type: ignore
+    # TODO: figure out the silenced mypy error here about
+    # collision between SingleObjectMixin and MultipleObjectMixin
 
     def __init__(self, *args, **kwargs):
         super(ModelFormListView, self).__init__(*args, **kwargs)

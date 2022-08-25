@@ -14,8 +14,10 @@ from ..utils import delete_timeslot, delete_timeslots, now, \
     unsubscribe_participant
 
 
-class TimeSlotHomeView(braces.LoginRequiredMixin,
+class TimeSlotHomeView(braces.LoginRequiredMixin,  # type: ignore
                        ExperimentObjectMixin, ModelFormListView):
+    # TODO: figure out the silenced mypy error here about
+    # collision between SingleObjectMixin and MultipleObjectMixin
     template_name = 'timeslots/index.html'
     model = TimeSlot
     form_class = TimeSlotForm
