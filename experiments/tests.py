@@ -4,7 +4,7 @@ from pytz import timezone
 from dateutil.relativedelta import relativedelta
 from django.test import TestCase
 
-from api.auth.models import ApiUser
+from main.models import User
 from leaders.models import Leader
 from participants.models import Participant, CriterionAnswer
 from .models import Experiment, Criterion, ExperimentCriterion, Appointment, \
@@ -14,9 +14,9 @@ from .utils.exclusion import get_eligible_participants_for_experiment
 
 def _get_or_create_leader() -> Leader:
     if Leader.objects.exists():
-        return Leader.objects.first()  # type: ignore
-    user = ApiUser.objects.create()
-    return Leader.objects.create(api_user=user)
+        return Leader.objects.first()
+    user = User.objects.create()
+    return Leader.objects.create(user=user)
 
 
 def _get_or_create_location() -> Location:
