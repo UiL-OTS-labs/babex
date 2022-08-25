@@ -43,11 +43,11 @@ admin.site.index_title = 'Proefpersonen systeem BACKEND'
 if 'datamanagement' in settings.INSTALLED_APPS:
     urlpatterns = [
         path('datamanagement/', include('datamanagement.urls')),
-    ] + urlpatterns
+    ] + urlpatterns  # type: ignore
 
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns = [
         path('__debug__/', include(debug_toolbar.urls)),
 
-    ] + urlpatterns
+    ] + urlpatterns  # type: ignore

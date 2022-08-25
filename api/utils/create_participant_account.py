@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import Optional
 
 from django.conf import settings
 
@@ -33,11 +34,11 @@ def _to_lower(string: str) -> str:
 
 def create_participant_account(email: str,
                                name: str,
-                               multilingual: bool = None,
-                               language: str = None,
-                               dyslexic_parent: bool = None,
+                               multilingual: Optional[bool] = None,
+                               language: Optional[str] = None,
+                               dyslexic_parent: Optional[bool] = None,
                                mailing_list: bool = False,
-                               password: str = None) -> 'ReturnValues':
+                               password: Optional[str] = None) -> 'ReturnValues':
 
     email = email.strip()
     # Get a list of participants that use this email
@@ -114,10 +115,10 @@ def create_participant_account(email: str,
 
 def _create_new_participant(email: str,
                             name: str,
-                            multilingual: bool = None,
-                            language: str = None,
-                            dyslexic_parent: bool = None,
-                            mailing_list: bool = False) -> Participant:
+                            multilingual: Optional[bool] = None,
+                            language: Optional[str] = None,
+                            dyslexic_parent: Optional[bool] = None,
+                            mailing_list: Optional[bool] = False) -> Participant:
     """
     This function creates (and saves) a new participant object based upon
     the parameters.
@@ -136,7 +137,7 @@ def _create_new_participant(email: str,
     return participant
 
 
-def _create_new_account(participant: Participant, password: str = None) -> None:
+def _create_new_account(participant: Participant, password: Optional[str] = None) -> None:
     """
     This function creates (and saves) a new ApiUser and attaches it to the
     given participant. If no password is specified, the user will receive an
@@ -172,7 +173,7 @@ def _create_new_account(participant: Participant, password: str = None) -> None:
         'has_password': False,
     }
 
-    if password:
+    if password is not None:
         user.set_password(password)
         user.save()
         context['has_password'] = True
@@ -251,8 +252,7 @@ def _switch_main_email(participant: Participant, new_email: str) -> None:
     secondary_emails = participant.secondaryemail_set.all()
     try:
         existing_new_email = next(
-            iter([x for x in secondary_emails if _to_lower(x.email) ==
-                  _to_lower(new_email)])
+            iter([x for x in secondary_emails if _to_lower(x.email) == _to_lower(new_email)])
         )
     except StopIteration:
         # Should not happen, but if it happens it can ruin one's day so we

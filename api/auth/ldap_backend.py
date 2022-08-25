@@ -11,6 +11,10 @@ class ApiLdapBackend(PpnLdapBackend):
         return ApiUser
 
     def authenticate(self, username=None, password=None, **kwargs):
+        if username is None:
+            logger.debug('Rejecting empty password for {}'.format(username))
+            return None
+
         if password or self.settings.PERMIT_EMPTY_PASSWORD:
             ldap_user = _LDAPUser(self, username=username.strip())
             user = self.authenticate_ldap_user(ldap_user, password)

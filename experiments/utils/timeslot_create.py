@@ -7,13 +7,13 @@ from experiments.models import Experiment, TimeSlot
 
 def add_timeslot(
         experiment: Experiment,
-        date_time: Union[str, datetime],
+        date_time: datetime,
         places: int) -> TimeSlot:
 
-    existing = TimeSlot.objects.filter(
+    existing = list(TimeSlot.objects.filter(
         datetime=date_time,
         experiment=experiment
-    )
+    ))
 
     if existing:
         return _add_to_existing_timeslot(existing, places)
@@ -51,15 +51,13 @@ def _merge_existing_timeslots(existing: List[TimeSlot]):
 def _add_to_existing_timeslot(existing: List[TimeSlot],
                               places: int) -> TimeSlot:
     if len(existing) > 1:
-        existing = _merge_existing_timeslots(existing)
+        timeslot = _merge_existing_timeslots(existing)
     else:
-        existing = existing[0]
+        timeslot = existing[0]
 
-    existing.max_places = existing.max_places + places
-
-    existing.save()
-
-    return existing
+    timeslot.max_places += places
+    timeslot.save()
+    return timeslot
 
 
 def _create_new_timeslot(experiment: Experiment, date_time: datetime,

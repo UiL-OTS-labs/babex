@@ -14,4 +14,4 @@ urlpatterns = [
 
 router = DefaultRouter()
 router.register('closing', ClosingViewSet, basename='closing')
-urlpatterns += router.urls
+urlpatterns += router.urls  # type: ignore

@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .views import HideParticipantsView, OverviewView, DeleteInvitesView, \
-    DeleteCommentsView, ThresholdsEditView, DeleteParticipantView
+    ThresholdsEditView, DeleteParticipantView
 
 app_name = 'datamanagement'
 
@@ -19,7 +19,4 @@ urlpatterns = [
     path('<int:experiment>/delete_invites/',
          DeleteInvitesView.as_view(),
          name='delete_invites'),
-    path('<int:experiment>/delete_comments/',
-         DeleteCommentsView.as_view(),
-         name='delete_comments'),
 ]

@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
+from typing import List
 import os
 
 from django.urls import reverse_lazy
@@ -28,7 +29,7 @@ SECRET_KEY = 'hk+83s0m6j8(ei)gxgy)e59b@^n77y_bmd4(#yyknr#whcrf^#'
 DEBUG = True
 ENABLE_DEBUG_TOOLBAR = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS: List[str] = []
 
 INTERNAL_IPS = ['127.0.0.1']
 

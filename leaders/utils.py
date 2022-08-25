@@ -1,3 +1,4 @@
+from typing import Optional, Tuple
 from datetime import datetime, timedelta
 import urllib.parse as parse
 
@@ -13,7 +14,7 @@ from .models import Leader
 
 
 def create_leader(name: str, email: str, phonenumber: str,
-                  password: str = None) -> (Leader, bool):
+                  password: Optional[str] = None) -> Tuple[Leader, bool]:
     """
     This function creates a new Leader object.
 

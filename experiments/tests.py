@@ -14,12 +14,12 @@ from .utils.exclusion import get_eligible_participants_for_experiment
 
 def _get_or_create_leader() -> Leader:
     if Leader.objects.exists():
-        return Leader.objects.first()
+        return Leader.objects.first()  # type: ignore
     user = ApiUser.objects.create()
     return Leader.objects.create(api_user=user)
 
 
 def _get_or_create_location() -> Location:
     if Location.objects.exists():
-        return Location.objects.first()
+        return Location.objects.first()  # type: ignore
     return Location.objects.create(name="Cyberspace")

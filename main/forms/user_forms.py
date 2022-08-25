@@ -30,7 +30,7 @@ class UserCreationForm(auth_forms.UserCreationForm):
 
 
 class UserUpdateForm(auth_forms.UserChangeForm):
-    password = None
+    password = None  # type: ignore
 
     class Meta:
         fields = ('username', 'first_name', 'last_name', 'is_supreme_admin',

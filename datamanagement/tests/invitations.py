@@ -11,7 +11,7 @@ from ..utils.invitations import delete_invites, get_invite_counts
 
 
 class InvitationTests(TestCase):
-    databases = ['default', 'auditlog']
+    databases = {'default', 'auditlog'}
 
     def setUp(self) -> None:
         _create_thresholds()

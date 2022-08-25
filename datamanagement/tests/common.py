@@ -57,7 +57,7 @@ def _create_participant(name="dummy", creation_dt=None) -> Participant:
 
 def _create_dummy_user() -> User:
     if User.objects.exists():
-        return User.objects.first()
+        return User.objects.first()  # type: ignore
 
     return User.objects.create(
         username="dummy"
@@ -123,4 +123,3 @@ class CommonUtilsTests(TestCase):
         user2 = _create_dummy_user()
         self.assertEqual(user, user2)
         self.assertEqual(User.objects.count(), 1)
-

@@ -1,16 +1,18 @@
 from django.core.exceptions import ObjectDoesNotExist
-from rest_framework import authentication
+from rest_framework import authentication, exceptions
 
 from api.auth.ldap_backend import ApiLdapBackend
 from .models import ApiUser
-from .token import JwtToken
+from .token import jwt_token
 
 
 class JwtAuthentication(authentication.TokenAuthentication):
     keyword = "Bearer"
 
     def authenticate_credentials(self, key):
-        decoded = JwtToken.validate_token(key)
+        decoded = jwt_token.validate_token(key)
+        if decoded is None:
+            raise exceptions.AuthenticationFailed()
 
         user = ApiUser.objects.get(pk=decoded['pk'])
 
@@ -46,4 +48,3 @@ class PostAuthenticator:
             return user
         else:
             return None
-

@@ -63,11 +63,9 @@ class CriteriaDeleteView(braces.LoginRequiredMixin,
 #
 
 
-class DefaultCriteriaUpdateView(
-    braces.LoginRequiredMixin,
-    SuccessURLAllowedHostsMixin,
-    generic.UpdateView
-):
+class DefaultCriteriaUpdateView(braces.LoginRequiredMixin,
+                                SuccessURLAllowedHostsMixin,
+                                generic.UpdateView):
     template_name = 'criteria/update_default.html'
     form_class = DefaultCriteriaForm
     model = DefaultCriteria

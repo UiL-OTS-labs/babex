@@ -7,10 +7,10 @@ Steps:
 3. If yes, create the appointment
 4. If no, return human friendly explanations why the participant is not eligible
 """
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 
-from django.core.exceptions import SuspiciousOperation
-from django.core.validators import ValidationError, validate_email
+from django.core.exceptions import SuspiciousOperation, ValidationError
+from django.core.validators import validate_email
 from django.utils.dateparse import parse_date
 
 from comments.utils import add_system_comment
@@ -86,7 +86,7 @@ def register_participant(data: dict, experiment: Experiment) -> Tuple[bool,
     default_criteria = experiment.defaultcriteria
 
     try:
-        time_slot = experiment.timeslot_set.get(pk=data.get('timeslot'))
+        time_slot = experiment.timeslot_set.get(pk=data['timeslot'])
     except TimeSlot.DoesNotExist:
         time_slot = None
 
@@ -194,7 +194,7 @@ def get_required_fields(experiment: Experiment, participant: Participant):
 
 
 def _get_participant(data: dict) -> Participant:
-    email = data.get('email').strip()
+    email = data['email'].strip()
     participants = Participant.objects.find_by_email(email)
 
     # If we have a participant, get the first one that matches
@@ -228,7 +228,7 @@ def _get_participant(data: dict) -> Participant:
     if data.get('birth_date'):
         participant.birth_date = x_or_else(
             participant.birth_date,
-            parse_date(data.get('birth_date'))
+            parse_date(data['birth_date'])
         )
 
     participant.dyslexic_parent = x_or_else(
@@ -430,7 +430,7 @@ def _handle_excluded_experiments(
 def _handle_misc_items(
         data: dict,
         experiment: Experiment,
-        time_slot: TimeSlot
+        time_slot: Optional[TimeSlot]
 ) -> Tuple[list, list]:
     invalid_fields = []
     messages = []
@@ -455,12 +455,12 @@ def _handle_misc_items(
 def _make_appointment(
         participant: Participant,
         experiment: Experiment,
-        time_slot: TimeSlot
+        time_slot: Optional[TimeSlot]
 ) -> None:
     appointment = Appointment()
     appointment.participant = participant
     appointment.experiment = experiment
-    if experiment.use_timeslots:
+    if experiment.use_timeslots and time_slot is not None:
         appointment.timeslot = time_slot
     appointment.save()
 
@@ -527,9 +527,9 @@ Experiment, data: dict) -> None:
 
 def _format_messages(*messages: List[str]) -> list:
     # Flatten the list of lists
-    messages = [item for sublist in messages for item in sublist]
+    out = [item for sublist in messages for item in sublist]
 
-    return [_format_message(message) for message in messages]
+    return [_format_message(message) for message in out]
 
 
 def _format_message(message: str) -> str:

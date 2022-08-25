@@ -31,6 +31,10 @@ class ThresholdNode(Node):
             return val
 
     def _get_display_values(self):
+        if self.threshold is None:
+            # TODO: is this the right thing to do here?
+            raise RuntimeError('threshold is None')
+
         modulo_years = self.threshold % 365
         # Display in years if the threshold is in full years
         # (A margin is provided of 15 days below and 15 days above)

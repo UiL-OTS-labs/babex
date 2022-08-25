@@ -2,7 +2,7 @@ from rest_framework.authtoken import views
 from rest_framework.response import Response
 
 from .serializers import AuthTokenSerializer
-from .token import JwtToken
+from .token import jwt_token
 from ..permissions import IsPermittedClient
 
 
@@ -17,7 +17,7 @@ class ApiLoginView(views.ObtainAuthToken):
         serializer.is_valid(raise_exception=True)
 
         user = serializer.validated_data['user']
-        token = JwtToken.make_token(user)
+        token = jwt_token.make_token(user)
 
         groups = [
             {'pk': group.pk, 'name': group.name} for group in user.groups.all()
