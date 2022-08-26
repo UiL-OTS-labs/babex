@@ -1,1 +1,4 @@
 seleniumbase
+mypy
+django-stubs
+djangorestframework-stubs

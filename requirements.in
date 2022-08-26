@@ -1,4 +1,4 @@
-Django>=4.0
+Django>=4.0,<4.1
 django-axes
 django-braces
 django-csp
