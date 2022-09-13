@@ -1,7 +1,6 @@
 from datetime import date, timedelta
 
 import pytest
-from base import as_admin
 
 
 @pytest.fixture

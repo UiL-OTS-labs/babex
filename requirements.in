@@ -16,3 +16,4 @@ python-dateutil
 mysqlclient
 django-auth-ldap
 django-impersonate
+pytest-django
