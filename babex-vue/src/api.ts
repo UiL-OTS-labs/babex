@@ -17,6 +17,12 @@ function getCookie(name: string): string | null {
     return cookieValue;
 }
 
+class ApiError extends Error {
+    constructor(code: number, message: string) {
+        super(`${code} ${message}`);
+    }
+}
+
 class ApiClient {
     csrfToken: string;
 
@@ -38,6 +44,10 @@ class ApiClient {
             headers: this.headers()
         });
 
+        if (result.status >= 400) {
+            throw new ApiError(result.status, result.statusText);
+        }
+
         return await result.json();
     }
 
@@ -49,6 +59,10 @@ class ApiClient {
             body: JSON.stringify(values),
         });
 
+        if (result.status >= 400) {
+            throw new ApiError(result.status, result.statusText);
+        }
+
         return await result.json();
     }
 
@@ -59,6 +73,10 @@ class ApiClient {
             headers: this.headers(),
             body: JSON.stringify(values),
         });
+
+        if (result.status >= 400) {
+            throw new ApiError(result.status, result.statusText);
+        }
 
         return await result.json();
     }

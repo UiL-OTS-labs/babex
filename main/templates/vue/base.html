@@ -14,3 +14,9 @@
 <style>
 </style>
 {% endblock %}
+
+{% block uu-content %}
+{{ block.super }}
+<div id="toast_container" class="position-fixed toast-container bottom-0 end-0 p-3">
+</div>
+{% endblock %}
