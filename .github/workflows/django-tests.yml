@@ -42,6 +42,15 @@ jobs:
       # - name: Run Tests
       #   run: |
       #     python manage.py test
+      - name: Build Vue app
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        run: |
+          cd babex-vue
+          npm ci
+          npm run build --mode development
       - name: Integration tests
         run: |
           cd integration_tests
