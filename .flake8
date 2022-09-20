@@ -2,3 +2,6 @@
 ignore =
     E501,
     E241
+
+per-file-ignores=
+    integration_tests/*:F401,F811
