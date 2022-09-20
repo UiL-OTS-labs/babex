@@ -1,0 +1,4 @@
+.uu-root-container {
+    --bs-uu-hero-color: white !important;
+    --bs-uu-hero-bg: var(--bs-purple) !important;
+}

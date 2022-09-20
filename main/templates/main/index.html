@@ -1,4 +1,4 @@
-{% extends "base/base.html" %}
+{% extends "base/babex_base.html" %}
 {% load i18n %}
 {% load transformat %}
 
@@ -7,49 +7,14 @@
 {% endblock %}
 
 {% block content %}
+    <div class="uu-hero">
+        <h1>
+            {% trans 'main:home:header' %}
+        </h1>
+    </div>
     <div class="uu-inner-container">
         <div class="col-10">
-            <h1>
-                {% trans 'main:home:header' %}
-            </h1>
-            <table class="w-100">
-                <thead>
-                    <tr>
-                        <th class="w-75">
-                            {% trans 'main:home:experiments:name' %}
-                        </th>
-                        <th>
-                            {% trans 'main:globals:actions' %}
-                        </th>
-                    </tr>
-                </thead>
-                {% for experiment in experiments %}
-                    <tr>
-                        <td>
-                            <a href="{% url 'experiments:detail' experiment.pk %}">
-                                {{ experiment }}
-                            </a>
-                        </td>
-                        <td>
-                            {% include 'experiments/experiment_actions_snippit.html' %}
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
-        <div class="col-2">
-            <h3>
-                {% trans 'main:home:menu' %}
-            </h3>
-            <ul>
-                {% for item in menus.main %}
-                    <li>
-                        <a href="{{ item.url }}">
-                            {{ item.title }}
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
+            There's nothing here yet.
         </div>
     </div>
 {% endblock %}
