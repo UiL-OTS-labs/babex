@@ -46,7 +46,6 @@ jobs:
   buildjs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
