@@ -42,10 +42,9 @@ jobs:
       - name: Compile 18n
         run: |
           python manage.py compilemessages
-      # skip django tests for now
-      # - name: Run Tests
-      #   run: |
-      #     python manage.py test
+      - name: Run django tests
+        run: |
+          python manage.py test
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
