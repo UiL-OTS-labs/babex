@@ -17,4 +17,4 @@ mysqlclient
 django-auth-ldap
 django-impersonate
 pytest-django
--e git+ssh://git@github.com/UiL-OTS-labs/ageutil@develop#egg=ageutil
+-e git+https://github.com/UiL-OTS-labs/ageutil@main#egg=ageutil
