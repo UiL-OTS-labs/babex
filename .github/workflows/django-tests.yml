@@ -47,6 +47,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+          cache-dependency-path: 'babex-vue/package-lock.json'
       - name: Build Vue app
         run: |
           cd babex-vue
