@@ -122,10 +122,6 @@ msgstr "Should the participant be dyslectic?"
 msgid "default_criteria:attribute:min_age"
 msgstr "What should the lower bound of the participant's age be?"
 
-#: experiments/models/criteria_models.py:65
-msgid "default_criteria:attribute:min_age:help_text"
-msgstr "Set to -1 if this criterion doesn't matter."
-
 #: experiments/models/criteria_models.py:69
 msgid "default_criteria:attribute:max_age"
 msgstr "What should the upper bound of the participant's age be?"

@@ -70,7 +70,9 @@
                         </tr>
                         <tr>
                             <td> {% trans 'experiment:attribute:age_range' %} </td>
-                            <td> TODO </td>
+                            <td>{{ experiment.defaultcriteria.get_min_age_display }} -
+                                {{ experiment.defaultcriteria.get_max_age_display }}
+                            </td>
                         </tr>
                     </table>
                 </section>
@@ -79,7 +81,13 @@
 
         {% if participation_range %}
             <p>
-                {{ participant.name }} can participate in this experiment from {{ participation_range.0|date:"Y-m-d" }} to {{ participation_range.1|date:"Y-m-d" }}.
+                {{ participant.name }} can participate in this experiment
+                {% if participation_range.0 %}
+                from {{ participation_range.0|date:"Y-m-d" }}
+                {% endif %}
+                {% if participation_range.1 %}
+                until {{ participation_range.1|date:"Y-m-d" }}
+                {% endif %}
             </p>
         {% endif %}
 

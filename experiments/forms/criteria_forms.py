@@ -9,13 +9,16 @@ from ..widgets import LanguageWidget
 class DefaultCriteriaForm(forms.ModelForm):
     class Meta:
         model = DefaultCriteria
-        fields = '__all__'
+        fields = [
+            'experiment', 'language', 'multilingual', 'sex', 'dyslexia',
+            'min_age_months', 'min_age_days', 'max_age_months', 'max_age_days'
+        ]
+
         widgets = {
             'experiment':    forms.HiddenInput,
             'language':      LanguageWidget,
             'multilingual':  forms.RadioSelect,
             'sex':           forms.RadioSelect,
-            'handedness':    forms.RadioSelect,
             'dyslexia':      forms.RadioSelect,
         }
 
@@ -24,6 +27,12 @@ class DefaultCriteriaForm(forms.ModelForm):
         # inconsistent in it's use, so we just remove it
         kwargs.setdefault('label_suffix', '')
         super(DefaultCriteriaForm, self).__init__(*args, **kwargs)
+
+    def is_valid(self):
+        valid = super().is_valid()
+
+        # TODO: check that max age is greater than min age
+        return valid
 
 
 class CriterionForm(forms.ModelForm):

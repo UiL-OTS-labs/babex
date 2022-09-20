@@ -7,10 +7,11 @@ Also, because we use application-level database encryption, we cannot compare
 inside the database. This is why everything is done in python.
 """
 from typing import List, Optional
-from django.db.models.expressions import RawSQL
 
-from experiments.models import Experiment, ExperimentCriterion
-from participants.models import CriterionAnswer, Participant
+from ageutil import age
+
+from experiments.models import Experiment, ExperimentCriterion, DefaultCriteria
+from participants.models import Participant
 
 # List of vars that can have the same values as the participant model
 # variables, with an indifferent option
@@ -198,7 +199,7 @@ def _get_specific_criterion(specific_experiment_criteria, criterion) -> \
     return None
 
 
-def should_exclude_by_age(participant: Participant, default_criteria) -> bool:
+def should_exclude_by_age(participant: Participant, criteria: DefaultCriteria) -> bool:
     """
     Determines if a participant should be excluded based upon their age
 
@@ -211,13 +212,7 @@ def should_exclude_by_age(participant: Participant, default_criteria) -> bool:
     if participant.age is None:
         return False
 
-    max_age = default_criteria.max_age
-    min_age = default_criteria.min_age
+    age_pred = age(months=criteria.min_age_months, days=criteria.min_age_days)\
+        .to(months=criteria.max_age_months, days=criteria.max_age_days)
 
-    if min_age != -1 and participant.age_in_days < default_criteria.min_age:
-        return True
-
-    if max_age != -1 and participant.age_in_days > max_age:
-        return True
-
-    return False
+    return not age_pred.check(participant.birth_date)

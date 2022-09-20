@@ -4,6 +4,7 @@ from typing import List, Optional
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+import ageutil
 import cdh.core.fields as e_fields
 from api.auth.models import ApiUser
 from experiments.models.criteria_models import Criterion
@@ -114,28 +115,17 @@ class Participant(models.Model):
         )
 
     @property
-    def age_in_days(self):
-        # not a definitive version
-        delta = date.today() - self.birth_date
-        return delta.days
-
-    @property
     def age(self):
-        # not a definitive version
-        delta = date.today() - self.birth_date
-        return '{};{}'.format(delta.days // 30, delta.days % 30)
+        return '{};{};{}'.format(*ageutil.dob(self.birth_date).age_ymd())
 
     @property
     def age_long(self):
-        # not a definitive version
-        delta = date.today() - self.birth_date
+        years, months, days = ageutil.dob(self.birth_date).age_ymd()
         return '{years} {years_str}; {months} {months_str}; {days} {days_str}'.format(
             years_str=_('participants:age:years'),
             months_str=_('participants:age:months'),
             days_str=_('participants:age:days'),
-            years=delta.days // 365,
-            months=(delta.days % 365) // 30,
-            days=delta.days % 30)
+            years=years, months=months, days=days)
 
     @property
     def gestational_age(self):

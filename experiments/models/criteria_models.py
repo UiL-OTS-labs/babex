@@ -58,19 +58,11 @@ class DefaultCriteria(models.Model):
         default='N',
     )
 
-    min_age = models.IntegerField(
-        _('default_criteria:attribute:min_age'),
-        validators=[MinValueValidator(-1)],
-        default=-1,
-        help_text=_('default_criteria:attribute:min_age:help_text'),
-    )
-
-    max_age = models.IntegerField(
-        _('default_criteria:attribute:max_age'),
-        validators=[MinValueValidator(-1)],
-        default=-1,
-        help_text=_('default_criteria:attribute:max_age:help_text'),
-    )
+    # age limits will be stored internally in two fields: months and days
+    min_age_days = models.IntegerField(validators=[MinValueValidator(0)], null=True, blank=True)
+    min_age_months = models.IntegerField(validators=[MinValueValidator(0)], null=True, blank=True)
+    max_age_days = models.IntegerField(validators=[MinValueValidator(0)], null=True, blank=True)
+    max_age_months = models.IntegerField(validators=[MinValueValidator(0)], null=True, blank=True)
 
     def get_language_display(self):
         if self.language == 'I':
@@ -79,16 +71,16 @@ class DefaultCriteria(models.Model):
         return self.language
 
     def get_min_age_display(self):
-        if self.min_age == -1:
+        if self.min_age_days is None and self.min_age_months is None:
             return _('experiments:globals:indifferent')
 
-        return self.min_age
+        return '{}; {}'.format(self.min_age_months or 0, self.min_age_days or 0)
 
     def get_max_age_display(self):
-        if self.max_age == -1:
+        if self.max_age_days is None and self.max_age_months is None:
             return _('experiments:globals:indifferent')
 
-        return self.max_age
+        return '{}; {}'.format(self.max_age_months or 0, self.max_age_days or 0)
 
     def __str__(self):
         return "Default criteria for {}".format(self.experiment.name)
