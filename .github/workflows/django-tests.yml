@@ -52,7 +52,7 @@ jobs:
         run: |
           cd babex-vue
           npm ci
-          npm run build --mode development
+          npm run dev
       - name: Integration tests
         run: |
           cd integration_tests
