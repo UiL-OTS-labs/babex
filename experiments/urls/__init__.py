@@ -42,4 +42,6 @@ urlpatterns = [
     # Stand-alone criteria views
 
     path('criteria/', include('experiments.urls.criteria_urls.standalone')),
+
+    path('', include('experiments.urls.call_urls')),
 ]

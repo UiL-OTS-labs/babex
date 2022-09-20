@@ -14,6 +14,11 @@
 {% block html_head %}
     <script src="{% static 'experiments/participants/list.js' %}"></script>
     <link href="{% static 'experiments/participants/table.css' %}" rel="stylesheet" />
+    <style>
+        tfoot th {
+            padding-top: 15px;
+        }
+    </style>
 {% endblock %}
 
 
@@ -45,7 +50,7 @@
                     <tr>
                         {% if experiment.use_timeslots %}
                             <th>
-                                {% get_verbose_field_name "experiments" "TimeSlot" "datetime" %}
+                                {% get_verbose_field_name "experiments" "TimeSlot" "start" %}
                             </th>
                             <th>
                                 {% trans 'timeslots:day' %}
@@ -95,10 +100,10 @@
                         <tr>
                             {% if experiment.use_timeslots %}
                                 <td>
-                                    {{ appointment.timeslot.datetime|date:"Y-m-d H:i" }}
+                                    {{ appointment.timeslot.start|date:"Y-m-d H:i" }}
                                 </td>
                                 <td>
-                                    {{ appointment.timeslot.datetime|date:"l" }}
+                                    {{ appointment.timeslot.start|date:"l" }}
                                 </td>
                                 <td>
                                     {{ appointment.n }}
@@ -159,7 +164,7 @@
                     <tr>
                         {% if experiment.use_timeslots %}
                             <th>
-                                <input type="text" name="date" placeholder="{% get_verbose_field_name "experiments" "TimeSlot" "datetime" %}" class="search_init" />
+                                <input type="text" name="date" placeholder="{% get_verbose_field_name "experiments" "TimeSlot" "start" %}" class="search_init" />
                             </th>
                             <th>
                                 <input type="text" name="day" placeholder="{% trans 'timeslots:day' %}" class="search_init" />

@@ -4,6 +4,7 @@
 {% load transformat %}
 {% load datatables %}
 {% load get_field_name %}
+{% load messages %}
 
 {% block header_title %}
 {% transformat 'participants:detail:header' participant.fullname %} - {{ block.super }}
@@ -30,7 +31,7 @@
 </style>
 {% endblock %}
 
-{% block content %}
+{% block uu-content %}
 <div class="uu-hero" id="hero">
     <h1>{{ participant.name }}</h1>
 </div>
@@ -49,6 +50,7 @@
             </div>
         </aside>
         <div class="uu-sidebar-content" >
+{% display_messages messages False %}
         <section id="participant-general">
             <h2>General information</h2>
             <table class="table">
@@ -100,29 +102,7 @@
         </section>
 
         <section id="participant-contact">
-            <h2>Contact details</h2>
-            <table class="table">
-                <tr>
-                    <td width="40%"> {% get_verbose_field_name "participants" "Participant" "parent_name" %} </td>
-                    <td width="60%"> {{ participant.parent_name|default_if_none:'' }} </td>
-                </tr>
-                <tr>
-                    <td> {% get_verbose_field_name "participants" "Participant" "phonenumber" %} </td>
-                    <td> {{ participant.phonenumber|default_if_none:"" }} </td>
-                </tr>
-                <tr>
-                    <td> {% get_verbose_field_name "participants" "Participant" "phonenumber_alt" %} </td>
-                    <td> {{ participant.phonenumber_alt|default_if_none:"" }} </td>
-                </tr>
-                <tr>
-                    <td> {% get_verbose_field_name "participants" "Participant" "email" %} </td>
-                    <td>
-                        <a href="mailto:{{ participant.email }}">
-                            {{ participant.email }}
-                        </a>
-                    </td>
-                </tr>
-            </table>
+            {% include 'participants/contact.html' %}
         </section>
 
         <section id="participant-appointments">

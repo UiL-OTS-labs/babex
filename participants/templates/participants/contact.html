@@ -1,0 +1,25 @@
+{% load get_field_name %}
+
+<h2>Contact details</h2>
+<table class="table">
+    <tr>
+        <td width="40%"> {% get_verbose_field_name "participants" "Participant" "parent_name" %} </td>
+        <td width="60%"> {{ participant.parent_name|default_if_none:'' }} </td>
+    </tr>
+    <tr>
+        <td> {% get_verbose_field_name "participants" "Participant" "phonenumber" %} </td>
+        <td> {{ participant.phonenumber|default_if_none:"" }} </td>
+    </tr>
+    <tr>
+        <td> {% get_verbose_field_name "participants" "Participant" "phonenumber_alt" %} </td>
+        <td> {{ participant.phonenumber_alt|default_if_none:"" }} </td>
+    </tr>
+    <tr>
+        <td> {% get_verbose_field_name "participants" "Participant" "email" %} </td>
+        <td>
+            <a href="mailto:{{ participant.email }}">
+                {{ participant.email }}
+            </a>
+        </td>
+    </tr>
+</table>

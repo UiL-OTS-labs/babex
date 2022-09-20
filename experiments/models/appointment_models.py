@@ -16,9 +16,14 @@ class TimeSlot(models.Model):
         on_delete=models.CASCADE
     )
 
-    datetime = models.DateTimeField(
-        _('time_slot:attribute:datetime')
-    )
+    start = models.DateTimeField(
+        _('time_slot:attribute:start'))
+    end = models.DateTimeField(
+        _('time_slot:attribute:start'))
+
+    @property
+    def datetime(self):
+        return self.start  # temporarily keep compatability
 
     max_places = models.PositiveSmallIntegerField(
         _('time_slot:attribute:max_places'),
@@ -100,16 +105,14 @@ class Appointment(models.Model):
         )
 
     def start(self):
-        return self.timeslot.datetime
+        return self.timeslot.start
 
     def end(self):
-        # TODO: this is just a placeholder value, should be replaced with a real
-        # end time
-        from datetime import timedelta
-        return self.timeslot.datetime + timedelta(hours=1)
+        return self.timeslot.end
 
     def location(self):
-        return self.experiment.location.name
+        # TODO: temporary workaround for missing locations
+        return self.experiment.location.name if self.experiment.location else 'Unknown'
 
     def leader(self):
         return self.experiment.leader.name

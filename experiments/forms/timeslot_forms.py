@@ -7,7 +7,7 @@ class TimeSlotForm(forms.ModelForm):
 
     class Meta:
         model = TimeSlot
-        fields = ['datetime', 'max_places', 'experiment']
+        fields = ['start', 'end', 'max_places', 'experiment']
         widgets = {
             'experiment': forms.HiddenInput,
         }
@@ -21,5 +21,3 @@ class TimeSlotForm(forms.ModelForm):
                 'max': 10,
             }
         )
-
-

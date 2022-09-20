@@ -13,7 +13,7 @@ def get_experiments_with_visibility() -> List[Tuple[Experiment, datetime]]:
     for experiment in Experiment.objects.filter(
         participants_visible=True,
     ).filter(
-        Q(timeslot__datetime__lte=threshold) |
+        Q(timeslot__start__lte=threshold) |
         Q(appointments__creation_date__lte=threshold),
     ).distinct():
         out.append(

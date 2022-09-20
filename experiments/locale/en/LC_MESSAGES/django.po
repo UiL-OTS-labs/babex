@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-15 13:43+0200\n"
+"POT-Creation-Date: 2022-09-12 15:02+0200\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -59,10 +59,13 @@ msgid "experiment:form:use_timeslots:false"
 msgstr "Online"
 
 #: experiments/models/appointment_models.py:20
-msgid "time_slot:attribute:datetime"
+#: experiments/models/appointment_models.py:22
+#, fuzzy
+#| msgid "time_slot:attribute:datetime"
+msgid "time_slot:attribute:start"
 msgstr "Date & Time"
 
-#: experiments/models/appointment_models.py:24
+#: experiments/models/appointment_models.py:29
 msgid "time_slot:attribute:max_places"
 msgstr "Places in this slot"
 
@@ -280,6 +283,34 @@ msgstr ""
 "search through the list. Once selected, the leader should show up in the "
 "field as a box."
 
+#: experiments/models/invite_models.py:24
+msgid "experiments:call:status:started"
+msgstr "Started"
+
+#: experiments/models/invite_models.py:25
+msgid "experiments:call:status:noreply"
+msgstr "No reply"
+
+#: experiments/models/invite_models.py:26
+msgid "experiments:call:status:callback"
+msgstr "Call back"
+
+#: experiments/models/invite_models.py:27
+msgid "experiments:call:status:voicemail"
+msgstr "Voicemail"
+
+#: experiments/models/invite_models.py:28
+msgid "experiments:call:status:email"
+msgstr "Prefer email"
+
+#: experiments/models/invite_models.py:29
+msgid "experiments:call:status:confirmed"
+msgstr "Confirmed"
+
+#: experiments/models/invite_models.py:30
+msgid "experiments:call:status:cancelled"
+msgstr "Cancel"
+
 #: experiments/models/location_models.py:8
 msgid "location:attribute:name"
 msgstr "Name"
@@ -287,6 +318,14 @@ msgstr "Name"
 #: experiments/models/location_models.py:12
 msgid "location:attribute:route_url"
 msgstr "Routedescription URL"
+
+#: experiments/templates/call/home.html:72
+msgid "experiment:attribute:age_range"
+msgstr "Age range"
+
+#: experiments/templates/call/home.html:85
+msgid "experiments:call:home:actions"
+msgstr "After you've made the call, please select one of the following:"
 
 #: experiments/templates/criteria/delete.html:8
 #: experiments/templates/criteria/delete.html:16
@@ -640,18 +679,22 @@ msgid "experiments:excluded_experiments:included:title"
 msgstr "Include experiment"
 
 #: experiments/templates/experiments/experiment_actions_snippit.html:5
+#: experiments/templates/experiments/experiment_actions_snippit.html:6
 msgid "experiments:home:edit_experiment:title"
 msgstr "Edit experiment"
 
 #: experiments/templates/experiments/experiment_actions_snippit.html:10
+#: experiments/templates/experiments/experiment_actions_snippit.html:11
 msgid "experiments:home:invite:title"
 msgstr "Invite participants"
 
 #: experiments/templates/experiments/experiment_actions_snippit.html:15
+#: experiments/templates/experiments/experiment_actions_snippit.html:16
 msgid "experiments:home:participants:title"
 msgstr "Participants"
 
 #: experiments/templates/experiments/experiment_actions_snippit.html:21
+#: experiments/templates/experiments/experiment_actions_snippit.html:22
 msgid "experiments:home:delete:title"
 msgstr "Delete experiment"
 
@@ -889,15 +932,15 @@ msgstr "Participant email"
 msgid "timeslots:home:new_timeslots:header"
 msgstr "New timeslot"
 
-#: experiments/views/appointment_views.py:96
+#: experiments/views/appointment_views.py:98
 msgid "timeslots:message:deleted_timeslot"
 msgstr "Timeslot removed!"
 
-#: experiments/views/appointment_views.py:114
+#: experiments/views/appointment_views.py:116
 msgid "timeslots:message:deleted_timeslots"
 msgstr "Timeslots removed!"
 
-#: experiments/views/appointment_views.py:129
+#: experiments/views/appointment_views.py:131
 msgid "timeslots:message:unsubscribed_participant"
 msgstr "Unsubscribed participant!"
 
@@ -913,20 +956,20 @@ msgstr "Criterion successfully updated"
 msgid "criteria:messages:deleted"
 msgstr "Criterion successfully deleted"
 
-#: experiments/views/criteria_views.py:102
+#: experiments/views/criteria_views.py:100
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr ""
 
-#: experiments/views/criteria_views.py:137
+#: experiments/views/criteria_views.py:135
 msgid "criteria:messages:created_and_added"
 msgstr "Criterion successfully created and added to the experiment!"
 
-#: experiments/views/criteria_views.py:203
+#: experiments/views/criteria_views.py:201
 msgid "criteria:messages:added_to_experiment"
 msgstr "Criterion successfully added to experiment!"
 
-#: experiments/views/criteria_views.py:226
+#: experiments/views/criteria_views.py:224
 msgid "criteria:messages:removed_from_experiment"
 msgstr "Criterion successfully removed from experiment!"
 

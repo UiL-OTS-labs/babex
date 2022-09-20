@@ -4,15 +4,7 @@
 
 <script lang="ts" setup>
     import {defineEmits, defineProps, ref, watch} from 'vue';
-
-    function formatDate(date: Date) : string {
-        let options = {
-            timeStyle: 'short',
-            dateStyle: 'short'
-        };
-        let formatter = new Intl.DateTimeFormat('nl-NL', options);
-        return formatter.format(date);
-    }
+    import {formatDateTime} from '../util';
 
     function serializeDate(date: Date) : string {
         return date.toISOString();
@@ -42,7 +34,7 @@
 
 <template>
   <div>
-      <input class="form-control" type="text" :value="formatDate(modelValue)" @change="onChange">
+      <input class="form-control" type="text" :value="formatDateTime(modelValue)" @change="onChange">
   </div>
 </template>
 

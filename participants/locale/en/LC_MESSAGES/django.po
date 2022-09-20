@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-15 09:46+0200\n"
+"POT-Creation-Date: 2022-08-22 09:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -182,15 +182,15 @@ msgstr "Age"
 msgid "yes,no"
 msgstr "yes,no"
 
-#: participants/templates/participants/detail.html:134
+#: participants/templates/participants/detail.html:112
 msgid "participants:detail:experiments"
 msgstr "Experiment"
 
-#: participants/templates/participants/detail.html:137
+#: participants/templates/participants/detail.html:115
 msgid "participants:detail:datetime"
 msgstr "Date & Time"
 
-#: participants/templates/participants/detail.html:140
+#: participants/templates/participants/detail.html:118
 msgid "participants:detail:place"
 msgstr "Place"
 

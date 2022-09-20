@@ -21,4 +21,12 @@ interface Location {
     name: string
 }
 
-export {Appointment, Closing, Location};
+interface Call {
+    id: number,
+    experiment: number,
+    participant: number,
+    status: string,
+    comment: string
+}
+
+export {Appointment, Closing, Location, Call};

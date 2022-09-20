@@ -33,9 +33,7 @@ class InviteParticipantsForExperimentView(braces.LoginRequiredMixin,
         return context
 
     def get_object_list(self):
-        particitants = get_eligible_participants_for_experiment(
-            self.experiment
-        )
+        particitants = get_eligible_participants_for_experiment(self.experiment)
 
         for participant in particitants:
             try:

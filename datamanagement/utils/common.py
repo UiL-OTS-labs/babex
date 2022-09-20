@@ -27,6 +27,6 @@ def get_threshold_years_ago(category: str) -> datetime:
 
 def get_old_experiments(category: str) -> Iterable[Experiment]:
     return Experiment.objects.filter(
-        Q(timeslot__datetime__lte=get_threshold_years_ago(category)) |
+        Q(timeslot__start__lte=get_threshold_years_ago(category)) |
         Q(appointments__creation_date__lte=get_threshold_years_ago(category))
     ).distinct()

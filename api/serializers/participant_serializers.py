@@ -9,7 +9,8 @@ class ParticipantSerializer(serializers.ModelSerializer):
         model = Participant
         depth = 1
         fields = [
-            'id', 'name', 'email',
+            'id', 'name', 'email', 'parent_name', 'phonenumber',
+            'phonenumber_alt', 'city', 'created'
         ]
 
 

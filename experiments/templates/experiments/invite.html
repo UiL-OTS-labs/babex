@@ -31,85 +31,67 @@
         </p>
     </div>
 </div>
-<br/>
-<form method="post">
-    <div class="uu-inner-container">
-        <div class="col-12">
-            {% csrf_token %}
-            <table class="dt_custom" width="100%" data-language="{% datatables_lang %}" data-responsive="">
-                <thead>
-                    <tr>
-                        <th>
-                            {% get_verbose_field_name "participants" "Participant" "name" %}
-                        </th>
-                        <th>
-                            {% get_verbose_field_name "participants" "Participant" "email" %}
-                        </th>
-                        <th>
-                            {% trans 'experiments:invite:secondary_emails' %}
-                        </th>
-                        <th>
-                            {% trans 'experiments:invite:already_invited' %}
-                        </th>
-                        <th>
-                            <input type="checkbox" id="master_checkbox">
-                        </th>
-                    </tr>
-                </thead>
 
-                <tbody>
-                    {% for participant in object_list %}
+<div class="uu-inner-container">
+    <h2 class="mt-4">{% trans 'experiments:invite:participants' %}</h2>
+    <form class="w-100" method="post">
+        <div>
+            <div class="col-12">
+                {% csrf_token %}
+                <table class="dt_custom" width="100%" data-language="{% datatables_lang %}" data-responsive="">
+                    <thead>
                         <tr>
-                            <td>
-                                <a href="{% url 'participants:detail' participant.pk %}">
-                                    {{ participant.fullname }}
-                                </a>
-                            </td>
-                            <td>
-                                {{ participant.email }}
-                            </td>
-                            <td>
-                                {% for email in participant.secondaryemail_set.all %}
-                                    <a href="mailto:{{ email.email }}">{{ email.email }}</a>,
-                                {% endfor %}
-                            </td>
-                            <td data-order="{{ participant.invite.creation_date|date:'U' }}">
-                                {% if not participant.invite %}
-                                    <span class="icon-invited">
-                                        
-                                    </span>
-                                {% else %}
-                                    {{ participant.invite.creation_date|date:"Y-m-d H:i" }}
-                                {% endif %}
-                            </td>
-                            <td>
-                                <input class="invite-checkbox" type="checkbox" name="participants[]" value="{{ participant.pk }}">
-                            </td>
+                            <th>
+                                {% get_verbose_field_name "participants" "Participant" "name" %}
+                            </th>
+                            <th>
+                                {% get_verbose_field_name "participants" "Participant" "email" %}
+                            </th>
+                            <th>
+                                {% trans 'experiments:invite:last_call' %}
+                            </th>
+                            <th>
+                                {% trans 'experiments:invite:last_email' %}
+                            </th>
+                            <th>
+                                {% trans 'experiments:invite:actions' %}
+                            </th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="uu-inner-container mt-2">
-        <div class="col-6">
-            <textarea name="content" rows="25" style="width: 100%">{{ invite_text }}
-            </textarea>
+                    </thead>
 
+                    <tbody>
+                        {% for participant in object_list %}
+                            <tr>
+                                <td>
+                                    <!-- name -->
+                                    <a href="{% url 'participants:detail' participant.pk %}">
+                                        {{ participant.fullname }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <!-- email -->
+                                    {{ participant.email }}
+                                </td>
+                                <td>
+                                    <!-- last call -->
+                                    {{ participant.last_call.creation_date }}
+                                </td>
+                                <td>
+                                    <!-- last email -->
+
+                                </td>
+                                <td>
+                                    <!-- actions -->
+                                    <a class="icon-phone" title="{% trans 'experiments:invite:call_participant' %}" href="{% url 'experiments:call' experiment.pk participant.pk %}"><a>
+                                    <a class="icon-mail" title="{% trans 'experiments:invite:mail_participant' %}" href="#"><a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="col-6">
-            {% url 'experiments:update' experiment.pk as edit_url %}
-            <p>
-                {% transformat "experiments:invite:text:help" edit_url %}
-            </p>
-            <button type="submit" formaction="{% url 'experiments:mail_preview' experiment.pk %}" formtarget="_blank" class="button-black">
-                {% trans 'experiments:invite:preview_button' %}
-            </button>
-            <button type="submit">
-                {% trans 'experiments:invite:invite_button' %}
-            </button>
-        </div>
-    </div>
-</form>
+    </form>
+</div>
 
 {% endblock %}
