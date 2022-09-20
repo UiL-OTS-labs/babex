@@ -2,13 +2,15 @@ name: Django Tests
 
 on:
   push:
-    branches: [ develop, main ]
+    branches: [ develop, main, ]
   pull_request:
-    branches: [ develop, main ]
+    branches: [ develop, main, ]
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
+    continue-on-error: true
     strategy:
       max-parallel: 2
       matrix:
@@ -43,9 +45,6 @@ jobs:
       # - name: Run Tests
       #   run: |
       #     python manage.py test
-  buildjs:
-    runs-on: ubuntu-latest
-    steps:
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
@@ -57,11 +56,6 @@ jobs:
           cd babex-vue
           npm ci
           npm run dev
-
-  test:
-    runs-on: ubuntu-latest
-    needs: [build, buildjs]
-    steps:
       - name: Integration tests
         run: |
           cd integration_tests
