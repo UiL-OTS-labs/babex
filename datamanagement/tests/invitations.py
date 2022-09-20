@@ -37,7 +37,8 @@ class InvitationTests(TestCase):
         timeslot = TimeSlot()
         timeslot.experiment = self.experiment
         timeslot.max_places = 1
-        timeslot.datetime = datetime.now(tz=get_current_timezone())
+        timeslot.start = datetime.now(tz=get_current_timezone())
+        timeslot.end = timeslot.start + timedelta(hours=1)
         timeslot.save()
 
         self.assertEqual(len(get_invite_counts()), 0)
@@ -48,8 +49,8 @@ class InvitationTests(TestCase):
         timeslot = TimeSlot()
         timeslot.experiment = self.experiment
         timeslot.max_places = 1
-        timeslot.datetime = datetime.now(tz=get_current_timezone()) - \
-                            timedelta(days=20)
+        timeslot.start = datetime.now(tz=get_current_timezone()) - timedelta(days=20)
+        timeslot.end = timeslot.start + timedelta(hours=1)
         timeslot.save()
 
         counts = get_invite_counts()

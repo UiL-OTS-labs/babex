@@ -36,7 +36,9 @@ def _create_experiment(timeslot_dts=None) -> Experiment:
         tm = TimeSlot()
         tm.experiment = exp
         tm.max_places = 100
-        tm.datetime = timeslot_datetime
+        # TODO: is this good enough?
+        tm.start = timeslot_datetime
+        tm.end = tm.start + timedelta(hours=1)
         tm.save()
 
     return exp

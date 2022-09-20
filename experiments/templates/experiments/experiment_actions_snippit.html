@@ -1,67 +1,26 @@
 {% load i18n %}
 
-{% if experiment.use_timeslots %}
-    <a
-        href="{% url 'experiments:timeslots' experiment.pk %}"
-        class="icon-timeslots"
-        title="{% trans 'experiments:home:edit_timeslots:title' %}"
-    >
-        
-    </a>
-{% else %}
-    <span
-        class="icon-timeslots disabled-icon"
-        title="{% trans 'experiments:home:edit_timeslots:title:disabled' %}"
-    >
-        
-    </span>
-{% endif %}
-<a
-    href="{% url 'experiments:update' experiment.pk %}"
-    class="icon-update"
-    title="{% trans 'experiments:home:edit_experiment:title' %}"
->
-    
-</a>
-<a
-    href="{% url 'experiments:default_criteria' experiment.pk %}"
-    class="icon-update"
-    title="{% trans 'experiments:home:edit_default_criteria:title' %}"
->
-    <span class="behind-icon">D</span> 
-</a>
-<a
-    href="{% url 'experiments:specific_criteria' experiment.pk %}"
-    class="icon-update"
-    title="{% trans 'experiments:home:edit_specific_criteria:title' %}"
->
-    <span class="behind-icon">S</span> 
-</a>
-<a
-    href="{% url 'experiments:excluded_experiments' experiment.pk %}"
-    class="icon-exclude"
-    title="{% trans 'experiments:home:exclude_experiments:title' %}"
->
-     
-</a>
-<a
-    href="{% url 'experiments:invite' experiment.pk %}"
-    class="icon-invite"
-    title="{% trans 'experiments:home:invite:title' %}"
->
-    
-</a>
-<a
-    href="{% url 'experiments:participants' experiment.pk %}"
-    class="icon-participants"
-    title="{% trans 'experiments:home:participants:title' %}"
->
-    
-</a>
-<a
-    href="{% url 'experiments:delete' experiment.pk %}"
-    class="icon-delete"
-    title="{% trans 'experiments:home:delete:title' %}"
->
-    
-</a>
+<ul>
+    <li>
+        <a href="{% url 'experiments:update' experiment.pk %}" title="{% trans 'experiments:home:edit_experiment:title' %}">
+            {% trans 'experiments:home:edit_experiment:title' %}
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'experiments:invite' experiment.pk %}" title="{% trans 'experiments:home:invite:title' %}">
+            {% trans 'experiments:home:invite:title' %}
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'experiments:participants' experiment.pk %}" title="{% trans 'experiments:home:participants:title' %}">
+            {% trans 'experiments:home:participants:title' %}
+        </a>
+    </li>
+    {% if user.is_superuser %}
+    <li>
+        <a href="{% url 'experiments:delete' experiment.pk %}" title="{% trans 'experiments:home:delete:title' %}">
+            {% trans 'experiments:home:delete:title' %}
+        </a>
+    </li>
+    {% endif %}
+</ul>

@@ -131,7 +131,11 @@ SESSION_COOKIE_NAME = "sessionid_admin"
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'api.permissions.IsPermittedClient',
-    )
+    ),
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+    ]
 }
 
 REST_PERMITTED_CLIENTS = ['127.0.0.1']

@@ -143,6 +143,10 @@ class Participant(models.Model):
             return f'{self.pregnancy_weeks}; {self.pregnancy_days}'
         return ''
 
+    @property
+    def last_call(self):
+        return self.call_set.order_by('-creation_date').first()
+
 
 class SecondaryEmail(models.Model):
     email = e_fields.EncryptedEmailField(

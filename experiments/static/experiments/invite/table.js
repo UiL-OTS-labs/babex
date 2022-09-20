@@ -3,10 +3,10 @@ $(function () {
     $('.dt_custom').DataTable({
         dom: 'Bfrtip',
         buttons : [
-            'copyHtml5',
-            'csvHtml5',
-            'pdfHtml5',
-            'print',
+            // 'copyHtml5',
+            // 'csvHtml5',
+            // 'pdfHtml5',
+            // 'print',
             'pageLength'
         ],
         order: [[3, 'asc'], [0, 'asc']],

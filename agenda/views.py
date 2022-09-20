@@ -19,7 +19,7 @@ class AppointmentFeed(generics.ListAPIView):
     def get_queryset(self):
         from_date = dateutil.parser.parse(self.request.GET['start'])
         to_date = dateutil.parser.parse(self.request.GET['end'])
-        return Appointment.objects.filter(timeslot__datetime__gte=from_date, timeslot__datetime__lt=to_date)
+        return Appointment.objects.filter(timeslot__start__gte=from_date, timeslot__end__lt=to_date)
 
 
 @login_required

@@ -1,0 +1,94 @@
+{% extends 'vue/base.html' %}
+{% load i18n %}
+{% load vue3 %}
+{% load get_field_name %}
+
+{% block content %}
+<div class="uu-container">
+    <div class="col-12">
+        <p>You are about to call the parents of {{ participant.name }}</p>
+        {% if call_open %}
+            <p class="alert alert-warning">
+                Currently ({{ call_open.creation_date|date:"Y-m-d" }} {{ call_open.creation_date|time }}) called by {{ call_open.leader }}!
+            </p>
+        {% endif %}
+
+
+        {% if previous_calls %}
+            <details class="mb-3">
+                <summary>Previously called {{ previous_calls|length }} time{{ previous_calls|length|pluralize}} for this experiment:</summary>
+                <ul>
+                    {% for call in previous_calls %}
+                        <li>{{ call.creation_date|date:"Y-m-d" }} ({{ call.leader }}): {{ call.get_status_display }}
+                            {% if call.comment %}
+                            <p>{{ call.comment }}</p>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </details>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-6 pe-5">
+                <section>
+                    {% include 'participants/contact.html' %}
+                </section>
+
+                <section>
+                    <table class="table">
+                        <tr>
+                            <td width="40%"> {% get_verbose_field_name "participants" "Participant" "city" %} </td>
+                            <td width="60%"> {{ participant.city|default_if_none:'' }} </td>
+                        </tr>
+                        <tr>
+                            <td> {% get_verbose_field_name "participants" "Participant" "created" %} </td>
+                            <td> {{ participant.created|date:"Y-m-d" }} </td>
+                        </tr>
+                    </table>
+                </section>
+            </div>
+            <div class="col-6 pe-5">
+                <section>
+                    <h2>Experiment details</h2>
+                    <table class="table">
+                        <tr>
+                            <td width="40%"> {% get_verbose_field_name "experiments" "Experiment" "name" %} </td>
+                            <td width="60%"> {{ experiment.name }} </td>
+                        </tr>
+                        <tr>
+                            <td> {% get_verbose_field_name "experiments" "Experiment" "task_description" %} </td>
+                            <td> {{ experiment.task_description }} </td>
+                        </tr>
+                        <tr>
+                            <td> {% get_verbose_field_name "experiments" "Experiment" "duration" %} </td>
+                            <td> {{ experiment.duration }} </td>
+                        </tr>
+                        <tr>
+                            <td> {% get_verbose_field_name "experiments" "Experiment" "location" %} </td>
+                            <td> {{ experiment.location.name }} </td>
+                        </tr>
+                        <tr>
+                            <td> {% trans 'experiment:attribute:age_range' %} </td>
+                            <td> TODO </td>
+                        </tr>
+                    </table>
+                </section>
+            </div>
+        </div>
+
+        {% if participation_range %}
+            <p>
+                {{ participant.name }} can participate in this experiment from {{ participation_range.0|date:"Y-m-d" }} to {{ participation_range.1|date:"Y-m-d" }}.
+            </p>
+        {% endif %}
+
+        <div class="mb-3">
+            {% trans "experiments:call:home:actions" %}
+        </div>
+        {% url 'experiments:invite' experiment.pk as completeUrl %}
+        {% vue babex.CallHome :experiment=experiment_serialized :participant=participant_serialized :leaders :statuses :call :completeUrl %}
+    </div>
+</div>
+
+{% endblock %}

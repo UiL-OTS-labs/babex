@@ -1,5 +1,5 @@
 import {urls} from './urls';
-import type {Appointment, Closing, Location} from './types';
+import type {Appointment, Closing, Call} from './types';
 
 function getCookie(name: string): string | null {
     let cookieValue = null;
@@ -139,6 +139,11 @@ class BabexApi {
 
     agenda = {
         closing: new GenericApiPart<Closing>(this.client, urls.agenda.closing),
+    }
+
+    call = {
+        appointment: new GenericApiPart<Appointment>(this.client, urls.call.appointment),
+        log: new GenericApiPart<Call>(this.client, urls.call.log),
     }
 }
 

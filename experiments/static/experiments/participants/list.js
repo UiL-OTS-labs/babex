@@ -6,11 +6,11 @@ $(function () {
     let oTable = $('.dt_custom').DataTable({
         dom: 'Bfrtip',
         buttons: [
-            'copyHtml5',
-            'csvHtml5',
-            'pdfHtml5',
-            'print',
-            'pageLength'
+            // 'copyHtml5',
+            // 'csvHtml5',
+            // 'pdfHtml5',
+            // 'print',
+            // 'pageLength'
         ],
         order: [[0, 'asc'], [2, 'asc']],
         lengthMenu: [
