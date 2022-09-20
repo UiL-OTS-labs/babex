@@ -5,6 +5,10 @@
 {% load menu %}
 {% load transformat %}
 
+{% block html_head %}
+    <link href="{%  static 'babex.css' %}" rel="stylesheet" />
+{% endblock %}
+
 {% block uu-header %}
 {% get_current_language as LANGUAGE_CODE %}
     <div class="uu-header-row">
