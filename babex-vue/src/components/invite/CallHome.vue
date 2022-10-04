@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import {defineProps, onMounted, ref} from 'vue';
+    import {defineProps, ref} from 'vue';
     import AgendaCalendar from '../agenda/AgendaCalendar.vue';
     import {babexApi} from '../../api';
     import {Call} from '../../types';
