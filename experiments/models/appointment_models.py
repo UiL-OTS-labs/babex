@@ -3,8 +3,6 @@ from django.db import models
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 
-from rest_framework import serializers
-
 from participants.models import Participant
 from .experiment_models import Experiment
 from leaders.models import Leader
@@ -116,17 +114,3 @@ class Appointment(models.Model):
     def location(self):
         # TODO: temporary workaround for missing locations
         return self.experiment.location.name if self.experiment.location else 'Unknown'
-
-
-class AppointmentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Appointment
-        fields = ['id', 'experiment', 'leader', 'participant', 'location', 'start', 'end']
-
-    experiment = serializers.StringRelatedField()  # type: ignore
-    participant = serializers.SlugRelatedField('name', read_only=True)  # type: ignore
-
-    location = serializers.ReadOnlyField()
-    leader = serializers.ReadOnlyField()
-    start = serializers.ReadOnlyField()
-    end = serializers.ReadOnlyField()

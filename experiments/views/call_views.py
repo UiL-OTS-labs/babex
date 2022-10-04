@@ -1,4 +1,5 @@
 import braces.views as braces
+from django.db.models import Q
 from django.views.generic import TemplateView
 from django.http.response import JsonResponse
 
@@ -7,11 +8,12 @@ from rest_framework import generics, serializers
 from rest_framework.permissions import IsAdminUser
 
 
-from experiments.models import Experiment, Appointment, TimeSlot
-from experiments.models.invite_models import Call
 from api.serializers.experiment_serializers import ExperimentSerializer
 from api.serializers.leader_serializers import LeaderSerializer
 from api.serializers.participant_serializers import ParticipantSerializer
+from experiments.models import Experiment, Appointment, TimeSlot
+from experiments.models.invite_models import Call
+from leaders.models import Leader
 from participants.models import Participant
 
 
@@ -80,11 +82,18 @@ class AppointmentConfirm(generics.CreateAPIView):
             max_places=1
         )
 
+        leader = Leader.objects.filter(
+            # make sure leader belongs to experiment
+            Q(experiments=experiment.pk) | Q(secondary_experiments=experiment.pk)
+        ).get(
+            pk=request.data['leader'],
+        )
+
         Appointment.objects.create(
             participant=Participant.objects.get(pk=request.data['participant']),
             timeslot=timeslot,
             experiment=experiment,
-        )
+            leader=leader)
 
         return JsonResponse({})
 
