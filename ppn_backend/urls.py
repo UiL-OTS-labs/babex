@@ -34,9 +34,9 @@ urlpatterns = [
     path('impersonate/', include('impersonate.urls')),
 ]
 
-admin.site.site_header = 'Proefpersonen systeem BACKEND'
-admin.site.site_title = 'Proefpersonen systeem BACKEND'
-admin.site.index_title = 'Proefpersonen systeem BACKEND'
+admin.site.site_header = 'Babex BACKEND'
+admin.site.site_title = 'Babex BACKEND'
+admin.site.index_title = 'Babex BACKEND'
 
 # Added separately because at the time DM wasn't finished and only included
 # in test environments

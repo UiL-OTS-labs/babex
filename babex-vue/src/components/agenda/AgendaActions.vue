@@ -1,24 +1,23 @@
 <script lang="ts" setup>
-    import {defineEmits, defineProps, ref} from 'vue';
-    import {urls} from '../../urls';
+    import {defineEmits, defineProps} from 'vue';
     import ClosingForm from './ClosingForm.vue';
 
     interface ActionContext {
         type: string
     }
 
+    /*
     interface DateRangeContext extends ActionContext {
         start: Date,
         end: Date
     }
+    */
 
-    const props = defineProps<{
+    defineProps<{
         context: ActionContext,
     }>();
 
-    const emit = defineEmits(['done']);
-
-    const formAction = urls.agenda.closing;
+    defineEmits(['done']);
 </script>
 
 <template>

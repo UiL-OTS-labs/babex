@@ -3,12 +3,8 @@
 -->
 
 <script lang="ts" setup>
-    import {defineEmits, defineProps, ref, watch} from 'vue';
+    import {defineEmits, defineProps } from 'vue';
     import {formatDateTime} from '../util';
-
-    function serializeDate(date: Date) : string {
-        return date.toISOString();
-    }
 
     function parseDate(dateStr: string) : Date {
         // unfortunately, the Intl date api doesn't provide a paring function,
@@ -21,11 +17,11 @@
         );
     }
 
-    function onChange(event: any) {
+    function onChange(event) {
         emits('update:modelValue', parseDate(event.target.value));
     }
 
-    let props = defineProps<{
+    defineProps<{
         modelValue: Date,
     }>();
 

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import {defineEmits, defineProps, onMounted, ref} from 'vue';
+    import {defineEmits, defineProps, ref} from 'vue';
     import {babexApi} from '../../api';
 
     import DateTimePicker from '../DateTimePicker.vue';
@@ -8,6 +8,7 @@
         start?: Date,
         end?: Date,
         locations: {id: number, name: string}[],
+        // eslint-disable-next-line
         event?: any
     }>();
 
@@ -21,7 +22,7 @@
         comment: props.event ? props.event.extendedProps.original.comment : null
     });
 
-    async function remove(id: number) {
+    async function remove() {
         babexApi.agenda.closing.delete(props.event.id).then(() => {
             emit('done');
         });
@@ -72,7 +73,7 @@
   </form>
 
   <div v-if="event">
-    <button class="btn btn-danger" @click="remove(event.id)">Remove</button>
+    <button class="btn btn-danger" @click="remove()">Remove</button>
   </div>
 </template>
 

@@ -4,11 +4,10 @@
     import timeGridPlugin from '@fullcalendar/timegrid';
     import interactionPlugin from '@fullcalendar/interaction';
     import type {EventInput, EventContentArg} from '@fullcalendar/core';
-    import {defineEmits, defineExpose, defineProps, ref} from 'vue';
+    import {defineEmits, defineExpose, ref} from 'vue';
 
-    import AgendaActions from './AgendaActions.vue';
     import {urls} from '../../urls';
-    import type {Appointment, Closing, Location} from '../../types';
+    import type {Appointment, Closing} from '../../types';
 
     function formatAppointment(event: Appointment) : EventInput {
         return {
@@ -88,10 +87,6 @@
     function refresh() {
         let calendarApi = calendar.value.getApi();
         calendarApi.getEventSources().forEach((src) => src.refetch());
-    }
-
-    function changeView(view) {
-        calendar.value.getApi().changeView(view);
     }
 
     defineExpose({calendar, refresh});

@@ -1,17 +1,21 @@
 import braces.views as braces
+from django.db.models import Q
 from django.views.generic import TemplateView
 from django.http.response import JsonResponse
+from django.utils.dateparse import parse_datetime
 
 import ageutil
 from rest_framework import generics, serializers
 from rest_framework.permissions import IsAdminUser
 
 
-from experiments.models import Experiment, Appointment, TimeSlot
-from experiments.models.invite_models import Call
 from api.serializers.experiment_serializers import ExperimentSerializer
 from api.serializers.leader_serializers import LeaderSerializer
 from api.serializers.participant_serializers import ParticipantSerializer
+from api.utils.appointment_mail import send_appointment_mail
+from experiments.models import Experiment, Appointment, TimeSlot
+from experiments.models.invite_models import Call
+from leaders.models import Leader
 from participants.models import Participant
 
 
@@ -66,17 +70,25 @@ class AppointmentConfirm(generics.CreateAPIView):
         experiment = Experiment.objects.get(pk=request.data['experiment'])
 
         timeslot = TimeSlot.objects.create(
-            start=request.data['start'],
-            end=request.data['end'],
+            start=parse_datetime(request.data['start']),
+            end=parse_datetime(request.data['end']),
             experiment=experiment,
             max_places=1
         )
 
-        Appointment.objects.create(
-            participant=Participant.objects.get(pk=request.data['participant']),
-            timeslot=timeslot,
-            experiment=experiment,
+        leader = Leader.objects.filter(
+            # make sure leader belongs to experiment
+            Q(experiments=experiment.pk) | Q(secondary_experiments=experiment.pk)
+        ).get(
+            pk=request.data['leader'],
         )
+
+        participant = Participant.objects.get(pk=request.data['participant'])
+        appointment = Appointment.objects.create(
+            participant=participant, timeslot=timeslot, experiment=experiment, leader=leader)
+
+        if request.data['emailParticipant']:
+            send_appointment_mail(appointment)
 
         return JsonResponse({})
 

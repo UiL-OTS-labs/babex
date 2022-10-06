@@ -22,6 +22,10 @@
 
     let callStatus = ref(null);
     let comment = ref('');
+    let confirmationForm = ref({
+        leader: props.leaders[0].id,
+        emailParticipant: true,
+    });
 
     function confirm() {
         babexApi.call.appointment.create({
@@ -29,6 +33,8 @@
             end: event.value.end,
             experiment: props.experiment.id,
             participant: props.participant.id,
+            leader: confirmationForm.value.leader,
+            emailParticipant: confirmationForm.value.emailParticipant
         }).then( () => {
             complete();
         });
@@ -131,13 +137,14 @@
                             <form>
                                 <div class="row mb-3 justift-content-center">
                                     <label class="form-label">Leader:</label>
-                                    <select class="form-select">
-                                        <option v-for="leader in leaders" :key="leader.pk">{{ leader.name }}</option>
+                                    <select class="form-select" v-model="confirmationForm.leader">
+                                        <option v-for="leader in leaders" :value="leader.id" :key="leader.id">{{ leader.name }}</option>
                                     </select>
                                 </div>
                                 <div class="row mb-3 justift-content-center">
                                     <label class="form-label">
-                                        <input class="me-2 form-check-input" type="checkbox" checked/>Send confirmation email
+                                        <input class="me-2 form-check-input" type="checkbox"
+                                               v-model="confirmationForm.emailParticipant"/>Send confirmation email
                                     </label>
                                 </div>
                             </form>
