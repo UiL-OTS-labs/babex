@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('experiments', '0029_remove_timeslot_datetime_and_more'),
+        ('experiments', '0031_alter_appointment_leader'),
     ]
 
     operations = [
