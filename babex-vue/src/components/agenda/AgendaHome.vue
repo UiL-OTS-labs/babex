@@ -1,7 +1,6 @@
 <script lang="ts" setup>
     import AgendaActions from './AgendaActions.vue';
     import AgendaCalendar from './AgendaCalendar.vue';
-    import {ActionContext} from './AgendaActions.vue';
     import {defineProps, ref} from 'vue';
 
     let calendar = ref(null);
