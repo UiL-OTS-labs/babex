@@ -54,19 +54,11 @@ class CallHomeView(braces.LoginRequiredMixin, TemplateView):
         if not created:
             context['call_open'] = call
 
-        min_age, max_age = experiment.defaultcriteria.min_age, experiment.defaultcriteria.max_age
-        if min_age == -1 and max_age == -1:
-            # no age limits, unlikely but still supported
-            age_pred = None
-        elif min_age != -1 and max_age == -1:
-            age_pred = ageutil.age(months=min_age).or_older()
-        elif min_age == -1 and max_age != -1:
-            age_pred = ageutil.age(months=max_age).or_younger()
-        else:
-            age_pred = ageutil.age(months=min_age).to(months=max_age)
+        dc = experiment.defaultcriteria
+        age_pred = ageutil.age(months=dc.min_age_months, days=dc.min_age_days)\
+                          .to(months=dc.max_age_months, days=dc.max_age_days)
 
-        if age_pred is not None:
-            context['participation_range'] = ageutil.dob(participant.birth_date).range_for(age_pred)
+        context['participation_range'] = ageutil.date_of_birth(participant.birth_date).range_for(age_pred)
 
         return context
 

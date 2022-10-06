@@ -1,4 +1,4 @@
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -58,19 +58,22 @@ class DefaultCriteria(models.Model):
         default='N',
     )
 
-    min_age = models.IntegerField(
-        _('default_criteria:attribute:min_age'),
-        validators=[MinValueValidator(-1)],
-        default=-1,
-        help_text=_('default_criteria:attribute:min_age:help_text'),
-    )
-
-    max_age = models.IntegerField(
-        _('default_criteria:attribute:max_age'),
-        validators=[MinValueValidator(-1)],
-        default=-1,
-        help_text=_('default_criteria:attribute:max_age:help_text'),
-    )
+    # age limits will be stored internally in two fields: months and days
+    min_age_days = models.IntegerField(validators=[
+        MinValueValidator(0),
+        # 'months;days' age definitions are a bit wonky.
+        # theoretically speaking, an experiment with a 0;30 to 1;0 age range is not well defined
+        # (for example, a child born on February 1st will be 1 month old on March 1st, but less than 30 days old)
+        # in practice, such undefined ranges should never happen, so we can safely limit days to max 28,
+        # making sure the comparison between max and min ages is always well defined.
+        MaxValueValidator(28),
+    ], null=True, blank=True)
+    min_age_months = models.IntegerField(validators=[MinValueValidator(0)], null=True, blank=True)
+    max_age_days = models.IntegerField(validators=[
+        MinValueValidator(0),
+        MaxValueValidator(28),
+    ], null=True, blank=True)
+    max_age_months = models.IntegerField(validators=[MinValueValidator(0)], null=True, blank=True)
 
     def get_language_display(self):
         if self.language == 'I':
@@ -79,16 +82,16 @@ class DefaultCriteria(models.Model):
         return self.language
 
     def get_min_age_display(self):
-        if self.min_age == -1:
+        if self.min_age_days is None and self.min_age_months is None:
             return _('experiments:globals:indifferent')
 
-        return self.min_age
+        return '{}; {}'.format(self.min_age_months or 0, self.min_age_days or 0)
 
     def get_max_age_display(self):
-        if self.max_age == -1:
+        if self.max_age_days is None and self.max_age_months is None:
             return _('experiments:globals:indifferent')
 
-        return self.max_age
+        return '{}; {}'.format(self.max_age_months or 0, self.max_age_days or 0)
 
     def __str__(self):
         return "Default criteria for {}".format(self.experiment.name)
