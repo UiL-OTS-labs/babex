@@ -116,11 +116,11 @@ class Participant(models.Model):
 
     @property
     def age(self):
-        return '{};{};{}'.format(*ageutil.dob(self.birth_date).age_ymd())
+        return '{};{};{}'.format(*ageutil.date_of_birth(self.birth_date).age_ymd())
 
     @property
     def age_long(self):
-        years, months, days = ageutil.dob(self.birth_date).age_ymd()
+        years, months, days = ageutil.date_of_birth(self.birth_date).age_ymd()
         return '{years} {years_str}; {months} {months_str}; {days} {days_str}'.format(
             years_str=_('participants:age:years'),
             months_str=_('participants:age:months'),

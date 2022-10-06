@@ -58,7 +58,7 @@ class CallHomeView(braces.LoginRequiredMixin, TemplateView):
         age_pred = ageutil.age(months=dc.min_age_months, days=dc.min_age_days)\
                           .to(months=dc.max_age_months, days=dc.max_age_days)
 
-        context['participation_range'] = ageutil.dob(participant.birth_date).range_for(age_pred)
+        context['participation_range'] = ageutil.date_of_birth(participant.birth_date).range_for(age_pred)
 
         return context
 
