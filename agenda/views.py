@@ -9,7 +9,7 @@ from rest_framework import generics, views, serializers, viewsets
 from rest_framework.response import Response
 
 from experiments.models import Appointment, Location
-from experiments.models.appointment_models import AppointmentSerializer
+from experiments.serializers import AppointmentSerializer
 from .models import Closing, ClosingSerializer
 
 

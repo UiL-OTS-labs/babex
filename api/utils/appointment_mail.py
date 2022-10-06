@@ -10,18 +10,18 @@ import urllib.parse as parse
 
 from cdh.core.utils.mail import send_template_email
 
-from experiments.models import Experiment, TimeSlot
+from experiments.models import Appointment, Experiment, TimeSlot
 from main.utils import get_supreme_admin
 from participants.models import Participant
 
 CANCEL_LINK_REGEX = r'{cancel_link(?::\"(.*)\")?}'
 
 
-def send_appointment_mail(
-        experiment: Experiment,
-        participant: Participant,
-        time_slot: Optional[TimeSlot],
-) -> None:
+def send_appointment_mail(appointment: Appointment) -> None:
+    experiment = appointment.experiment
+    participant = appointment.participant
+    time_slot = appointment.timeslot
+
     admin = get_supreme_admin()
     template = 'api/mail/new_appointment'
 
@@ -63,8 +63,8 @@ def send_appointment_mail(
         # Also, using the template filter is a neat hack to have the same format
         # string syntax everywhere
         replacements.update({
-            '{date}': defaultfilters.date(localtime(time_slot.datetime), 'l d-m-Y'),
-            '{time}': defaultfilters.date(localtime(time_slot.datetime), 'H:i'),
+            '{date}': defaultfilters.date(localtime(time_slot.start), 'l d-m-Y'),
+            '{time}': defaultfilters.date(localtime(time_slot.start), 'H:i'),
         })
 
     send_template_email(
