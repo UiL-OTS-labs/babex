@@ -6,7 +6,7 @@
     import {formatDate, formatTime} from '../../util';
     import {EventApi, DateSelectArg} from '@fullcalendar/core';
 
-    let props = defineProps<{
+    const props = defineProps<{
         participant: {id: number, name: string},
         experiment: {id: number, name: string},
         leaders: {id: number, name: string}[],
@@ -15,15 +15,15 @@
         completeUrl: string
     }>();
 
-    let calendar = ref<typeof AgendaCalendar|null>(null);
-    let modalVisible = ref(false);
-    let step = ref(0);
-    let event = ref<EventApi|null>(null);
-    let saving = ref(false);
+    const calendar = ref<typeof AgendaCalendar|null>(null);
+    const modalVisible = ref(false);
+    const step = ref(0);
+    const event = ref<EventApi|null>(null);
+    const saving = ref(false);
 
-    let callStatus = ref<string|null>(null);
-    let comment = ref('');
-    let confirmationForm = ref({
+    const callStatus = ref<string|null>(null);
+    const comment = ref('');
+    const confirmationForm = ref({
         leader: props.leaders[0].id,
         emailParticipant: true,
     });
@@ -123,7 +123,7 @@
                             <button @click="modalVisible = false" type="button" class="btn btn-secondary">Cancel</button>
                         </div>
                     </div>
-                    <div v-if="step === 1" class="modal-content">
+                    <div v-if="step === 1 && event?.start && event?.end" class="modal-content">
                         <div class="modal-body">
                             <h2>Appointment details</h2>
                             <table class="table mt-3">

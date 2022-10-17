@@ -1,20 +1,20 @@
 <script lang="ts" setup>
     import {defineEmits, defineProps, ref} from 'vue';
     import {babexApi} from '../../api';
-
+    import {Location} from '@/types';
     import DateTimePicker from '../DateTimePicker.vue';
 
-    let props = defineProps<{
+    const props = defineProps<{
         start?: Date,
         end?: Date,
-        locations: {id: number, name: string}[],
+        locations: Location[],
         // eslint-disable-next-line
         event?: any
     }>();
 
     const emit = defineEmits(['done']);
 
-    let form = ref({
+    const form = ref({
         start: props.event ? props.event.start : props.start,
         end: props.event ? props.event.end : props.end,
         is_global: props.event ? props.event.extendedProps.original.is_global : true,
@@ -28,7 +28,7 @@
         });
     }
 
-    function onSubmit(event) {
+    function onSubmit(event: Event) {
         let promise;
 
         if (props.event) {
