@@ -3,13 +3,12 @@
     import dayGridPlugin from '@fullcalendar/daygrid';
     import timeGridPlugin from '@fullcalendar/timegrid';
     import interactionPlugin from '@fullcalendar/interaction';
-    import type {EventInput, EventContentArg} from '@fullcalendar/core';
+    import type {EventInput, EventContentArg, CalendarOptions, EventSourceApi} from '@fullcalendar/core';
     import {defineEmits, defineExpose, ref} from 'vue';
 
     import {urls} from '../../urls';
-    import type {Appointment, Closing} from '../../types';
 
-    function formatAppointment(event: Appointment) : EventInput {
+    function formatAppointment(event: EventInput) : EventInput {
         return {
             id: event.id,
             start: event.start,
@@ -22,7 +21,7 @@
         };
     }
 
-    function formatClosing(event: Closing) : EventInput {
+    function formatClosing(event: EventInput) : EventInput {
         return {
             original: event,
             id: event.id,
@@ -39,9 +38,9 @@
 
     const emit = defineEmits(['select', 'eventClick']);
 
-    let calendar = ref(null);
+    let calendar = ref<typeof FullCalendar|null>(null);
 
-    const calendarOptions = {
+    const calendarOptions: CalendarOptions = {
         plugins: [ dayGridPlugin, timeGridPlugin, interactionPlugin ],
         initialView: 'dayGridMonth',
         headerToolbar: {
@@ -85,8 +84,8 @@
     }
 
     function refresh() {
-        let calendarApi = calendar.value.getApi();
-        calendarApi.getEventSources().forEach((src) => src.refetch());
+        let calendarApi = calendar.value!.getApi();
+        calendarApi.getEventSources().forEach((src: EventSourceApi) => src.refetch());
     }
 
     defineExpose({calendar, refresh});
