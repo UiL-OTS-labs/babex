@@ -1,4 +1,5 @@
 interface Appointment {
+    id: number,
     start: Date,
     end: Date,
     experiment: string,
@@ -8,6 +9,7 @@ interface Appointment {
 }
 
 interface Closing {
+    id: number,
     start: Date,
     end: Date,
     is_global: boolean,
@@ -22,11 +24,11 @@ interface Location {
 }
 
 interface Call {
-    id: number,
-    experiment: number,
-    participant: number,
-    status: string,
-    comment: string
+    id?: number,
+    experiment?: number,
+    participant?: number,
+    status?: string,
+    comment?: string
 }
 
 export {Appointment, Closing, Location, Call};

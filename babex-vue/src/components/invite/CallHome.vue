@@ -4,23 +4,24 @@
     import {babexApi} from '../../api';
     import {Call} from '../../types';
     import {formatDate, formatTime} from '../../util';
+    import {EventApi, DateSelectArg} from '@fullcalendar/core';
 
     let props = defineProps<{
         participant: {id: number, name: string},
         experiment: {id: number, name: string},
-        leaders: string[],
+        leaders: {id: number, name: string}[],
         statuses: { [id: string]: string},
         call: Call,
         completeUrl: string
     }>();
 
-    let calendar = ref(null);
+    let calendar = ref<typeof AgendaCalendar|null>(null);
     let modalVisible = ref(false);
     let step = ref(0);
-    let event = ref(null);
+    let event = ref<EventApi|null>(null);
     let saving = ref(false);
 
-    let callStatus = ref(null);
+    let callStatus = ref<string|null>(null);
     let comment = ref('');
     let confirmationForm = ref({
         leader: props.leaders[0].id,
@@ -28,6 +29,10 @@
     });
 
     function confirm() {
+        if(!event.value || !event.value.start || !event.value.end) {
+            return;
+        }
+
         babexApi.call.appointment.create({
             start: event.value.start,
             end: event.value.end,
@@ -40,18 +45,18 @@
         });
     }
 
-    function onSelect(selectionInfo) {
+    function onSelect(selectionInfo: DateSelectArg) {
         if (selectionInfo.view.type === 'timeGridDay') {
             if (event.value) {
                 event.value.remove();
             }
-            event.value = calendar.value.calendar.getApi().addEvent({
+            event.value = calendar.value?.calendar.getApi().addEvent({
                 start: selectionInfo.start,
                 end: selectionInfo.end
             });
         }
         else {
-            calendar.value.calendar.getApi().changeView('timeGridDay', selectionInfo.start);
+            calendar.value?.calendar.getApi().changeView('timeGridDay', selectionInfo.start);
         }
     }
 
@@ -62,8 +67,12 @@
     }
 
     function saveStatus() {
+        if (callStatus.value == null || !props.call.id) {
+            return;
+        }
+
         saving.value = true;
-        babexApi.call.log.update(props.call.id, {
+        babexApi.call.log.update(props.call.id.toString(), {
             status: callStatus.value,
             comment: comment.value,
         }).then( () => {
@@ -97,7 +106,7 @@
         <textarea class="form-control" v-model="comment"> </textarea>
     </div>
     <div class="mb-3">
-        <button class="btn btn-primary" :class="{'btn-loading': saving}" @click="saveStatus">Save</button>
+        <button class="btn btn-primary" :class="{'btn-loading': saving}" @click="saveStatus" :disabled="callStatus==null">Save</button>
     </div>
 
     <Teleport to="body">
