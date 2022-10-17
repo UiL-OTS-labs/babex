@@ -1,17 +1,6 @@
 <script lang="ts" setup>
+    import { ActionContext } from '@/types';
     import {defineEmits, defineProps} from 'vue';
-    import ClosingForm from './ClosingForm.vue';
-
-    interface ActionContext {
-        type: string
-    }
-
-    /*
-    interface DateRangeContext extends ActionContext {
-        start: Date,
-        end: Date
-    }
-    */
 
     defineProps<{
         context: ActionContext,
@@ -22,7 +11,7 @@
 
 <template>
     <div v-if="context.type">
-        <div v-if="context.type=='event-select' && context.event.extendedProps.category == 'closing'" class="action-panel">
+        <div v-if="context.type=='event-select' && context.event?.extendedProps?.category == 'closing'" class="action-panel">
             <h5>Edit closing</h5>
             <ClosingForm :key="context.event.id" :event="context.event"  :locations="context.locations" @done="$emit('done')" />
         </div>

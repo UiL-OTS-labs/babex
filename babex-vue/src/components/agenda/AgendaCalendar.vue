@@ -38,7 +38,7 @@
 
     const emit = defineEmits(['select', 'eventClick']);
 
-    let calendar = ref<typeof FullCalendar|null>(null);
+    const calendar = ref<typeof FullCalendar|null>(null);
 
     const calendarOptions: CalendarOptions = {
         plugins: [ dayGridPlugin, timeGridPlugin, interactionPlugin ],
@@ -84,7 +84,7 @@
     }
 
     function refresh() {
-        let calendarApi = calendar.value!.getApi();
+        const calendarApi = calendar.value!.getApi();
         calendarApi.getEventSources().forEach((src: EventSourceApi) => src.refetch());
     }
 

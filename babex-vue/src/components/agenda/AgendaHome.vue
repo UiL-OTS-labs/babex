@@ -1,15 +1,17 @@
 <script lang="ts" setup>
     import AgendaActions from './AgendaActions.vue';
     import AgendaCalendar from './AgendaCalendar.vue';
+    import {ActionContext, Location} from '@/types';
     import {defineProps, ref} from 'vue';
+    import { DateSelectArg, EventClickArg } from '@fullcalendar/common';
 
-    let calendar = ref(null);
+    const calendar = ref<typeof AgendaCalendar|null>(null);
 
     const props = defineProps<{
         locations: Location[],
     }>();
 
-    let actionContext = ref({});
+    const actionContext = ref<ActionContext>({});
 
     function deselectEvents() {
         document.querySelectorAll('.event-selected').forEach(
@@ -18,7 +20,7 @@
     }
 
 
-    function onSelect(selectionInfo) {
+    function onSelect(selectionInfo: DateSelectArg) {
         deselectEvents();
         actionContext.value = {
             type: 'date-range',
@@ -28,21 +30,21 @@
         };
     }
 
-    function onEventClick(eventInfo) {
+    function onEventClick(eventInfo: EventClickArg) {
         deselectEvents();
-        let element = eventInfo.el;
+        const element = eventInfo.el;
         element.classList.add('event-selected');
 
-        let event = eventInfo.event;
+        const event = eventInfo.event;
         actionContext.value = {
             type: 'event-select',
-            event: event,
+            event: event.toJSON(),
             locations: props.locations
         };
     }
 
     function actionDone() {
-        calendar.value.refresh();
+        calendar.value?.refresh();
         actionContext.value = {};
     }
 </script>

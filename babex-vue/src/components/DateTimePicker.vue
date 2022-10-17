@@ -17,8 +17,9 @@
         );
     }
 
-    function onChange(event) {
-        emits('update:modelValue', parseDate(event.target.value));
+    function onChange(event: Event) {
+        const element = event.target as HTMLInputElement;
+        emits('update:modelValue', parseDate(element.value));
     }
 
     defineProps<{
