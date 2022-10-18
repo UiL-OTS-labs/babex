@@ -7,6 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from django.utils.timezone import get_current_timezone
 
 from leaders.models import Leader
+from ..email import AppointmentConfirmEmail
 from .location_models import Location
 
 
@@ -16,22 +17,22 @@ def _get_dt_2_hours_ago() -> datetime:
 
 class Experiment(models.Model):
 
-    DEFAULT_CONFIRMATION_MAIL = """<p>Beste {participant_name},</p>
+    DEFAULT_CONFIRMATION_MAIL = """<p>Beste {{participant_name}},</p>
     <p>
         Je hebt een afspraak gemaakt om mee te doen met het experiment:
-        <strong>{experiment_name}</strong><br/><br/>
+        <strong>{{experiment_name}}</strong><br/><br/>
         We verwachten je op:<br/><br/>
-        Datum: <strong>{date}</strong><br/>
-        Tijd: <strong>{time} uur</strong><br/>
-        Locatie: <strong>{experiment_location}</strong><br/>
+        Datum: <strong>{{date}}</strong><br/>
+        Tijd: <strong>{{time}} uur</strong><br/>
+        Locatie: <strong>{{experiment_location}}</strong><br/>
     </p>
     <p>
         Als je deze afspraak wilt afzeggen, kun je dat doen via
-        {cancel_link:"deze link"}.
+        <a href="{{cancel_link}}">deze link</a>.
         Doe dat alsjeblieft minstens 24 uur vantevoren. Als je vlak vantevoren
         ontdekt dat je verhinderd bent, neem dan svp even persoonlijk contact
         op met de proefleider
-        ({leader_name}, email: {leader_email} tel.: {leader_phonenumber}).
+        ({{leader_name}}, email: {{leader_email}} tel.: {{leader_phonenumber}}).
     </p>
     <p>
         Met vriendelijke groet,<br/>
@@ -80,7 +81,7 @@ Met vriendelijke groet,<br/>
 
     confirmation_email = models.TextField(
         _('experiment:attribute:confirmation_email'),
-        help_text=_('experiment:attribute:confirmation_email:help_text'),
+        help_text=AppointmentConfirmEmail.help_text,
         default=DEFAULT_CONFIRMATION_MAIL,
     )
 

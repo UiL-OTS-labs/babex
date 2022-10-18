@@ -1,6 +1,9 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
+from cdh.core.forms import TemplatedModelForm
+from cdh.core.mail.widgets import EmailContentEditWidget
+
 from ..models import Experiment
 
 
@@ -40,3 +43,20 @@ class ExperimentForm(forms.ModelForm):
             self.fields['excluded_experiments'].choices = [
                 (x.pk, x.name) for x in other_experiments
             ]
+
+
+class ExperimentEmailTemplatesForm(TemplatedModelForm):
+    class Meta:
+        model = Experiment
+        fields = [
+            'confirmation_email'
+        ]
+
+        widgets = {
+            'confirmation_email': EmailContentEditWidget(None),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['confirmation_email'].widget.preview_url = 'todo'
