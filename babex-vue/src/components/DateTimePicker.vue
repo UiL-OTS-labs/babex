@@ -9,9 +9,9 @@
     function parseDate(dateStr: string) : Date {
         // unfortunately, the Intl date api doesn't provide a paring function,
         // so this is manually written to parse nl-NL date strings
-        let parts = dateStr.split(' ');
-        let datePart = parts[0];
-        let timePart = parts[1];
+        const parts = dateStr.split(' ');
+        const datePart = parts[0];
+        const timePart = parts[1];
         return new Date(
             datePart.split('-').reverse().join('-') + 'T' + timePart
         );
