@@ -54,7 +54,7 @@ jobs:
       - name: Lint Vue app
         run: |
           cd babex-vue
-          npm lint
+          npm run lint
       - name: Build Vue app
         if: always()  # continue with build when linting fails
         run: |
