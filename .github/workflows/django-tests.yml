@@ -51,6 +51,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
           cache-dependency-path: 'babex-vue/package-lock.json'
+      - name: Install node deps
+        run: |
+          cd babex-vue
+          npm ci
       - name: Lint Vue app
         run: |
           cd babex-vue
@@ -59,7 +63,6 @@ jobs:
         if: always()  # continue with build when linting fails
         run: |
           cd babex-vue
-          npm ci
           npm run dev
       - name: Integration tests
         run: |
