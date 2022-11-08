@@ -40,22 +40,22 @@ class Experiment(models.Model):
     </p>"""
 
     DEFAULT_INVITE_MAIL = """<p>Je kunt je weer opgeven voor een nieuw
-    experiment: <strong>{experiment_name}</strong>.</p>
-<p>De proefleider is <strong>{leader_name}</strong>.
+    experiment: <strong>{{experiment_name}}</strong>.</p>
+<p>De proefleider is <strong>{{leader_name}}</strong>.
 <ul>
-    <li>Duur: {duration}.</li>
-    <li>Vergoeding: {compensation}.</li>
-    <li>{task_description}</li>
-    <li>{additional_instructions}</li>
+    <li>Duur: {{duration}}.</li>
+    <li>Vergoeding: {{compensation}}.</li>
+    <li>{{task_description}}</li>
+    <li>{{additional_instructions}}</li>
 </ul>
 
-<p>Je kunt via {link_to_subscribe:"deze link"} inschrijven.</p>
+<p>Je kunt via {{link_to_subscribe:"deze link"}} inschrijven.</p>
 
 <p>Bedankt!</p>
 
 <p>
 Met vriendelijke groet,<br/>
-{admin}
+{{admin}}
 </p>"""
 
     name = models.TextField(
