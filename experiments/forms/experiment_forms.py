@@ -7,7 +7,7 @@ from cdh.core.mail.widgets import EmailContentEditWidget
 from ..models import Experiment
 
 
-class ExperimentForm(forms.ModelForm):
+class ExperimentForm(TemplatedModelForm):
     class Meta:
         model = Experiment
         fields = '__all__'
@@ -24,7 +24,9 @@ class ExperimentForm(forms.ModelForm):
             }),
             'additional_instructions': forms.Textarea({
                 'rows': 7
-            })
+            }),
+            'confirmation_email': EmailContentEditWidget(None),
+            'invite_email': EmailContentEditWidget(None),
         }
 
     def __init__(self, *args, **kwargs):
