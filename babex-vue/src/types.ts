@@ -5,6 +5,7 @@ interface Appointment {
     leader: string,
     participant: string,
     location: string,
+    comment: string
 }
 
 interface Closing {
@@ -16,6 +17,7 @@ interface Closing {
     comment: string
 }
 
+// TODO Move this in the interface of Appointment and Closing
 interface Location {
     id: number,
     name: string
