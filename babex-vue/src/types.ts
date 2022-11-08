@@ -1,14 +1,14 @@
 import { Dictionary } from "@fullcalendar/core";
 
 interface Appointment {
-    id: number,
+    id?: number,
     start: Date,
     end: Date,
-    experiment: string,
-    leader: string,
     participant: string,
     location: string,
     comment: string
+    experiment?: string,
+    leader?: string,
 }
 
 interface Closing {

@@ -1,5 +1,5 @@
 import {urls} from './urls';
-import type {Closing, Call} from './types';
+import type {Appointment, Closing, Call} from './types';
 
 function getCookie(name: string): string | null {
     let cookieValue = null;
