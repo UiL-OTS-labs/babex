@@ -3,6 +3,7 @@
 {% load vue3 %}
 
 {% block html_head %}
+{{ block.super }}
 <!-- load vue app from static folder (run 'yarn watch') -->
 <script src="{% static 'vue/js/chunk-vendors.js' %}"></script>
 <script src="{% static 'vue/js/app.js' %}"></script>

@@ -8,17 +8,21 @@
     {% trans 'experiments:home:header' %} - {{ block.super }}
 {% endblock %}
 
+{% block pre-messages-content %}
+    <div class="uu-hero justify-content-between align-items-center">
+        <h1 class="h2">
+            {% trans 'experiments:home:header' %}
+        </h1>
+
+        <a href="{% url 'experiments:create' %}" class="btn btn-secondary">
+            {% trans 'experiments:home:create_experiment' %}
+        </a>
+    </div>
+{% endblock %}
+
 {% block content %}
 <div class="">
     <div class="col-12">
-        <div class="float-right button button-colored">
-            <a href="{% url 'experiments:create' %}">
-                {% trans 'experiments:home:create_experiment' %}
-            </a>
-        </div>
-        <h1>
-            {% trans 'experiments:home:header' %}
-        </h1>
         <p>
             {% trans 'experiments:home:info_text' %}
         </p>

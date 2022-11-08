@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="uu-inner-container">
+<div class="uu-container">
     <div class="col-12">
         <h1>
             {% trans 'experiments:edit:header' %}
@@ -17,14 +17,13 @@
         <p>
             {% trans 'experiments:edit:info_text' %}
         </p>
-        <form method="post">
+        <form method="post" class="uu-form">
             {% csrf_token %}
-            <table width="100%">
-                {{ form.as_table }}
-            </table>
-            <br/>
-            <div class="float-right">
-                <button type="submit">{% trans 'experiments:globals:save_button' %}</button>
+            {{ form }}
+            <div class="float-end mt-2">
+                <button type="submit" class="btn btn-primary">
+                    {% trans 'experiments:globals:save_button' %}
+                </button>
             </div>
         </form>
     </div>
