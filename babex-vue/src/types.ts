@@ -1,19 +1,23 @@
+import { Dictionary } from "@fullcalendar/core";
+
 interface Appointment {
+    id?: number,
     start: Date,
     end: Date,
-    experiment: string,
-    leader: string,
     participant: string,
     location: string,
     comment: string
+    experiment?: string,
+    leader?: string,
 }
 
 interface Closing {
+    id?: number,
     start: Date,
     end: Date,
     is_global: boolean,
     location: number,
-    location_name: string,
+    location_name?: string,
     comment: string
 }
 
@@ -24,11 +28,20 @@ interface Location {
 }
 
 interface Call {
-    id: number,
-    experiment: number,
-    participant: number,
-    status: string,
-    comment: string
+    id?: number,
+    experiment?: number,
+    participant?: number,
+    status?: string,
+    comment?: string
 }
 
-export {Appointment, Closing, Location, Call};
+interface ActionContext {
+    type?: string,
+    event?: Dictionary,
+    locations?: Location[],
+
+    start?: Date,
+    end?: Date
+}
+
+export {Appointment, Closing, Location, Call, ActionContext};

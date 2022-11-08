@@ -134,6 +134,15 @@ class GenericApiPart<T> extends ApiPart {
 }
 
 
+interface AppointmentCreate {
+    start: Date,
+    end: Date,
+    experiment: number,
+    leader: number,
+    participant: number,
+    emailParticipant: boolean
+}
+
 class BabexApi {
     protected client = new ApiClient();
 
@@ -143,7 +152,11 @@ class BabexApi {
     }
 
     call = {
-        appointment: new GenericApiPart<Appointment>(this.client, urls.call.appointment),
+        appointment: {
+            create: (data: AppointmentCreate) => {
+                return this.client.post(urls.call.appointment, data);
+            }
+        },
         log: new GenericApiPart<Call>(this.client, urls.call.log),
     }
 }
