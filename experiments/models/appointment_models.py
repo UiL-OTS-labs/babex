@@ -88,6 +88,10 @@ class Appointment(models.Model):
 
     comment = models.CharField(max_length=100, default="")
 
+    def save(self):
+        self.timeslot.save()
+        super().save()
+
     @cached_property
     def place(self):
         if not self.timeslot:
@@ -114,7 +118,6 @@ class Appointment(models.Model):
     @start.setter
     def start(self, starttime):
         self.timeslot.start = starttime 
-        self.timeslot.save()
 
     @property
     def end(self):
@@ -123,7 +126,6 @@ class Appointment(models.Model):
     @end.setter
     def end(self, end_time):
         self.timeslot.end = end_time 
-        self.timeslot.save()
 
     def location(self):
         # TODO: temporary workaround for missing locations
