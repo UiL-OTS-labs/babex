@@ -17,14 +17,13 @@
         <p>
             {% trans 'experiments:new:info_text' %}
         </p>
-        <form method="post">
+        <form method="post" class="uu-form">
             {% csrf_token %}
-            <table width="100%">
-                {{ form.as_table }}
-            </table>
-            <br/>
-            <div class="float-right">
-                <button type="submit">{% trans 'experiments:globals:next_button' %}</button>
+            {{ form }}
+            <div class="float-end mt-2">
+                <button type="submit" class="btn btn-primary">
+                    {% trans 'experiments:globals:next_button' %}
+                </button>
             </div>
         </form>
     </div>

@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 
 from experiments.models import Location
-
+from experiments.models import Appointment
 
 class Closing(models.Model):
     start = models.DateTimeField(_('closing:attribute:start'), db_index=True)

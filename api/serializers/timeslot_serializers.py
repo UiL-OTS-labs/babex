@@ -70,7 +70,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
         model = Appointment
         depth = 1
         fields = [
-            'id', 'creation_date', 'timeslot', 'experiment', 'participant'
+            'id', 'creation_date', 'timeslot', 'experiment', 'participant', 'start', 'end'
         ]
 
     def get_participant(self, o):

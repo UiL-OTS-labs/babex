@@ -3,7 +3,7 @@ from django.urls import path
 from rest_framework.routers import DefaultRouter
 
 from .views import agenda_home
-from .views import AppointmentFeed, ClosingViewSet
+from .views import AppointmentFeed, ClosingViewSet, AppointmentViewSet
 
 app_name = 'agenda'
 
@@ -14,4 +14,5 @@ urlpatterns = [
 
 router = DefaultRouter()
 router.register('closing', ClosingViewSet, basename='closing')
+router.register('appointment', AppointmentViewSet, basename='appointment')
 urlpatterns += router.urls  # type: ignore

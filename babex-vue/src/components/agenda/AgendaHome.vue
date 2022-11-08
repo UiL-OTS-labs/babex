@@ -20,6 +20,7 @@
     }
 
 
+    // Called when a day is selected.
     function onSelect(selectionInfo: DateSelectArg) {
         deselectEvents();
         actionContext.value = {
@@ -30,6 +31,7 @@
         };
     }
 
+    // Called when a specific event (appointment, closing, ...) is selected.
     function onEventClick(eventInfo: EventClickArg) {
         deselectEvents();
         const element = eventInfo.el;

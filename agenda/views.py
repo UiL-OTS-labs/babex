@@ -48,3 +48,11 @@ class ClosingViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(end__gte=from_date, start__lt=to_date)
 
         return queryset
+
+class AppointmentViewSet(viewsets.ModelViewSet):
+    serializer_class = AppointmentSerializer
+
+    def get_queryset(self):
+        queryset = Appointment.objects.all()
+        return queryset
+

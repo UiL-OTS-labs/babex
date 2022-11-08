@@ -16,6 +16,10 @@
             <h5>Edit closing</h5>
             <ClosingForm :key="context.event.id" :event="context.event"  :locations="context.locations ?? []" @done="$emit('done')" />
         </div>
+        <div v-if="context.type=='event-select' && context.event.extendedProps.category == 'appointment'" class="action-panel">
+            <h5> Edit appointment </h5>
+            <AppointmentForm :key="context.event.id" :event="context.event"  :locations="context.locations" @done="$emit('done')" />
+        </div>
         <div v-if="context.type=='date-range'" class="action-panel">
             <h5>Add closing</h5>
             <ClosingForm :key="Math.random()" :start="context.start" :end="context.end" :locations="context.locations ?? []" @done="$emit('done')" />
