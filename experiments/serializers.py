@@ -21,5 +21,3 @@ class AppointmentSerializer(serializers.ModelSerializer):
     start = serializers.DateTimeField()
     end = serializers.DateTimeField()
 
-#    start = serializers.ReadOnlyField()
-#    end = serializers.ReadOnlyField()
