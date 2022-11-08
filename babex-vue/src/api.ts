@@ -148,6 +148,7 @@ class BabexApi {
 
     agenda = {
         closing: new GenericApiPart<Closing>(this.client, urls.agenda.closing),
+        appointment: new GenericApiPart<Appointment>(this.client, urls.agenda.appointment),
     }
 
     call = {

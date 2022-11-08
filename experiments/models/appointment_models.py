@@ -86,6 +86,8 @@ class Appointment(models.Model):
         auto_now_add=True,
     )
 
+    comment = models.CharField(max_length=100, default="")
+
     @cached_property
     def place(self):
         if not self.timeslot:
@@ -105,12 +107,26 @@ class Appointment(models.Model):
             self.experiment.name
         )
 
+    @property
     def start(self):
         return self.timeslot.start
 
+    @start.setter
+    def start(self, starttime):
+        self.timeslot.start = starttime 
+        self.timeslot.save()
+
+    @property
     def end(self):
         return self.timeslot.end
+    
+    @end.setter
+    def end(self, end_time):
+        self.timeslot.end = end_time 
+        self.timeslot.save()
 
     def location(self):
         # TODO: temporary workaround for missing locations
         return self.experiment.location.name if self.experiment.location else 'Unknown'
+
+
