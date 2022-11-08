@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
-from cdh.core.forms import TemplatedModelForm
+from cdh.core.forms import TemplatedModelForm, BootstrapCheckboxInput, BootstrapRadioSelect
 from cdh.core.mail.widgets import EmailContentEditWidget
 
 from ..models import Experiment
@@ -15,7 +15,7 @@ class ExperimentForm(TemplatedModelForm):
             'name':         forms.TextInput,
             'duration':     forms.TextInput,
             'compensation': forms.TextInput,
-            'use_timeslots': forms.RadioSelect(choices=(
+            'use_timeslots': BootstrapRadioSelect(choices=(
                 (True, _("experiment:form:use_timeslots:true")),
                 (False, _("experiment:form:use_timeslots:false")),
             )),
@@ -27,6 +27,9 @@ class ExperimentForm(TemplatedModelForm):
             }),
             'confirmation_email': EmailContentEditWidget(None),
             'invite_email': EmailContentEditWidget(None),
+            'open': BootstrapCheckboxInput,
+            'public': BootstrapCheckboxInput,
+            'participants_visible': BootstrapCheckboxInput,
         }
 
     def __init__(self, *args, **kwargs):
