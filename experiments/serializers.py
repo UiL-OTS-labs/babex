@@ -18,5 +18,8 @@ class AppointmentSerializer(serializers.ModelSerializer):
     location = serializers.ReadOnlyField()
     leader = serializers.ReadOnlyField(source='leader.name')
 
+    start = serializers.DateTimeField()
+    end = serializers.DateTimeField()
+
 #    start = serializers.ReadOnlyField()
 #    end = serializers.ReadOnlyField()
