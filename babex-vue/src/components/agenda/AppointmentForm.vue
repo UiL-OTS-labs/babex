@@ -4,7 +4,7 @@
 
     import DateTimePicker from '../DateTimePicker.vue';
 
-    let props = defineProps<{
+    const props = defineProps<{
         start?: Date,
         end?: Date,
         locations: {id: number, name: string}[],
@@ -16,7 +16,7 @@
     const emit = defineEmits(['done']);
 
 
-    let form = ref({
+    const form = ref({
         start: props.event ? props.event.start : props.start,
         end: props.event ? props.event.end : props.end,
         participant: props.event.title,
