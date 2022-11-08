@@ -88,9 +88,9 @@ class Appointment(models.Model):
 
     comment = models.CharField(max_length=100, default="")
 
-    def save(self):
+    def save(self, *args, **kwargs):
         self.timeslot.save()
-        super().save()
+        super().save(*args, **kwargs)
 
     @cached_property
     def place(self):
