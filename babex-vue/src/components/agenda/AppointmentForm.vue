@@ -22,11 +22,7 @@
         participant: props.event ? props.event.title : props.title,
         comment: props.event ? props.event.extendedProps.comment : null,
         location: props.event.extendedProps.location,
-
-//        is_global: props.event ? props.event.extendedProps.original.is_global : true,
-//        location: props.event ? props.event.extendedProps.original.location : null,
     });
-    console.log("form = " + form.value);
 
     async function remove() {
         babexApi.agenda.appointment.delete(props.event.id).then(() => {
@@ -38,7 +34,6 @@
         let promise;
 
         if (props.event) {
-            console.log(form);
             promise = babexApi.agenda.appointment.update(props.event.id, form.value);
         }
         else {
