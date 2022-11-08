@@ -7,33 +7,28 @@
     {% trans 'leaders:home:header' %} - {{ block.super }}
 {% endblock %}
 
+{% block pre-messages-content %}
+    <div class="uu-hero justify-content-between align-items-center">
+        <h1 class="h2">
+            {% trans 'leaders:home:header' %}
+        </h1>
+
+        <div class="btn-group btn-group-sm" role="group">
+            {% if ldap %}
+                <a href="{% url 'leaders:create_ldap' %}" class="btn btn-secondary">
+                    {% trans 'leaders:home:create_leader' %}
+                </a>
+            {% endif %}
+            <a href="{% url 'leaders:create' %}" class="btn btn-secondary">
+                {% trans 'leaders:home:create_leader:local' %}
+            </a>
+        </div>
+    </div>
+{% endblock %}
 
 {% block content %}
 <div class="uu-inner-container">
     <div class="col-12">
-        <div class="float-right">
-            <div class="button button-colored">
-                <a href="{% url 'leaders:create' %}">
-                    {% if ldap %}
-                        {% trans 'leaders:home:create_leader:local' %}
-                    {% else %}
-                        {% trans 'leaders:home:create_leader' %}
-                    {% endif %}
-                </a>
-            </div>
-            {% if ldap %}
-                <br/>
-                <div class="button button-colored mt-1">
-                    <a href="{% url 'leaders:create_ldap' %}">
-                        {% trans 'leaders:home:create_leader:ldap' %}
-                    </a>
-                </div>
-            {% endif %}
-        </div>
-
-        <h1>
-            {% trans 'leaders:home:header' %}
-        </h1>
         <p>
             {% trans 'leaders:home:info_text' %}
         </p>
