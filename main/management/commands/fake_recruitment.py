@@ -1,0 +1,47 @@
+
+from django.core.management.base import BaseCommand, CommandError
+
+from participants.models import Participant
+
+import argparse as ap
+
+def _positive_int(value):
+    intval = int(value)
+    if intval < 0:
+        raise ValueError("Expected value larger than 0")
+        raise ap.ArgumentError(message="Expected value larger than 0")
+    return intval
+
+class Command(BaseCommand):
+    """
+    Allow mangage.py to generate participants for debug purposes.
+    """
+    help = 'Generate participants for testing purposes, NOT for production'
+
+    def add_arguments(self, parser):
+        parser.add_argument(
+                'year',
+                help="The year of the test recruitment",
+                type=int
+                )
+        parser.add_argument(
+                'month',
+                help="The month of the test recruitment",
+                choices=list(range(1,13)),
+                type=int
+                )
+        parser.add_argument(
+                "-n", "--number",
+                help="The number of participant that are recruited",
+                type=_positive_int,
+                default=100
+                )
+
+    def handle(self, *args, **options):
+        """Validates provided arguments"""
+        year = options['year']
+        month = options['month']
+        number = options['number']
+        print(f"year = {year}\tmonth = {month}\tnum={number}")
+
+
