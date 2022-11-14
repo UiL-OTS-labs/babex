@@ -25,3 +25,6 @@ main/static/vue
 
 # emacs stuff
 .dir-locals.el
+
+# vim temporary files
+*.sw[op]
