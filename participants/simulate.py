@@ -110,7 +110,6 @@ def remove_simulated_participants(prefix: str= DEFAULT_PREFIX):
     simulate_recruitment
     """
     rm_pps = _get_simulated_participants(prefix)
-    print(len(rm_pps))
     for pp in rm_pps:
         pp.delete()
 
