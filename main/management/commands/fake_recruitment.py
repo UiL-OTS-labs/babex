@@ -1,9 +1,9 @@
 
 from django.core.management.base import BaseCommand, CommandError
 
-from participants.models import Participant
+from participants.simulate import simulate_recruitment
 
-import argparse as ap
+import datetime as dt
 
 def _positive_int(value):
     intval = int(value)
@@ -31,6 +31,12 @@ class Command(BaseCommand):
                 type=int
                 )
         parser.add_argument(
+                '--day',
+                help="The month of the test recruitment",
+                type=int,
+                default=1
+                )
+        parser.add_argument(
                 "-n", "--number",
                 help="The number of participant that are recruited",
                 type=_positive_int,
@@ -41,7 +47,12 @@ class Command(BaseCommand):
         """Validates provided arguments"""
         year = options['year']
         month = options['month']
+        day = options['day']
         number = options['number']
-        print(f"year = {year}\tmonth = {month}\tnum={number}")
+
+        date = dt.datetime(year=year, month=month, day=day)
+
+        simulate_recruitment(number, date)
+
 
 
