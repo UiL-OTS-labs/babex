@@ -6,12 +6,15 @@ from django.urls import reverse_lazy as reverse
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
+from django.http import HttpRequest, HttpResponse
 from cdh.core.views import FormSetUpdateView
 from cdh.core.views.mixins import DeleteSuccessMessageMixin
 
 from .forms import CriterionAnswerForm, ParticipantForm
 from .models import CriterionAnswer, Participant, SecondaryEmail
 from comments.forms import CommentForm
+
+from . import graphs
 
 from auditlog.enums import Event, UserType
 import auditlog.utils.log as auditlog
@@ -126,3 +129,21 @@ class ParticipantSpecificCriteriaUpdateView(braces.LoginRequiredMixin,
         participant_pk = self.kwargs.get('pk')
 
         return Participant.objects.get(pk=participant_pk)
+
+
+class ParticipantsDemographicsView(generic.TemplateView,
+                                   braces.LoginRequiredMixin):
+
+    template_name = 'participants/demographics.html'
+
+    def get_context_data(self, **kwargs):
+        """Add path to image data to context"""
+        context = super().get_context_data(**kwargs)
+        context['png_demographics'] = reverse('png')
+        return context
+
+
+def render_demograhpics(request:HttpRequest):
+    img_bytes = graphs.render_demograhpics()
+    return HttpResponse(img_bytes, content_type="image/png")
+

@@ -95,6 +95,7 @@ def _get_simulated_participants(prefix) -> List[Participant]:
     pps = Participant.objects.all()
     city = "".join(reversed("Utrecht-City"))
     start = prefix[0].upper() + prefix[1:]
+
     def check_pp(pp: Participant):
         if pp.name[:len(prefix)] == prefix and \
            pp.phonenumber == DEFAULT_PHONE and \
