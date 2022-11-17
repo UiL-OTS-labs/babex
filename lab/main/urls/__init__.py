@@ -6,4 +6,6 @@ urlpatterns = [
     path('', include('main.urls.root_urls')),
 
     path('admins/', include('main.urls.users_urls')),
+
+    path('gateway/', include('gateway.urls')),
 ]

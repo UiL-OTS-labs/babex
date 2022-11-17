@@ -69,6 +69,8 @@ INSTALLED_APPS = [
     'datamanagement',
     'agenda',
 
+    'signups',
+
     'django.contrib.admin',
     'django.forms'
 ]
