@@ -40,7 +40,7 @@
         const event = eventInfo.event;
         actionContext.value = {
             type: 'event-select',
-            event: event.toJSON(),
+            event: event,
             locations: props.locations
         };
     }
