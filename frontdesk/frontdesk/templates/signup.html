@@ -1,0 +1,19 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="uu-container">
+    Welcome to the frontdesk app.
+</div>
+
+<div class="uu-container">
+    <div class="col-12">
+    <h1>Sign up:</h1>
+    <form method="post" class="uu-form">
+        {% csrf_token %}
+        {{ form }}
+
+        <input class="btn btn-primary" type="submit" value="Send"/>
+    </form>
+    </div>
+</div>
+{% endblock %}
