@@ -1,5 +1,6 @@
 <script lang="ts" setup>
     import { ActionContext } from '@/types';
+    import AppointmentForm from './AppointmentForm.vue';
     import ClosingForm from './ClosingForm.vue';
     import {defineEmits, defineProps} from 'vue';
     import AppointmentForm from './AppointmentForm.vue';
