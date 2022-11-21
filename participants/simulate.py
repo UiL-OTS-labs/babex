@@ -1,5 +1,6 @@
 '''This module is added to simulate a recruitment, it's main purpose is to
-fill the database with participants for testing this app.
+fill the database with participants for testing this app. Also the utilities
+to undo the changes are provided.
 '''
 
 from .models import Participant
@@ -24,7 +25,7 @@ def _generate_name(prefix: str, num: int) -> str:
 
 
 def _generate_parent_dylexia(chance=.05) -> bool:
-    """gives a chance of haveing a parent with dyslexia"""
+    """gives a chance of having a parent with dyslexia"""
     return random.random() < chance
 
 
@@ -37,7 +38,7 @@ def simulate_recruitment(
     """Simulate a recruitment this will add participant to the database. It's
     useful for generating participants to give some body to the database.
 
-    The name_prefix gives a unlikely name for a baby in order to remvove it
+    The name_prefix gives a unlikely name for a baby in order to remove it
     from the database.
 
     The baby's are born roughly in a uniform interval of day_range around date
@@ -56,7 +57,7 @@ def simulate_recruitment(
     for i in range(number):
 
         name = _generate_name(name_prefix, i)
-        email = "generated-{}@gen.mars".format(random.randint(1e6,1e7))
+        email = "generated-{}@gen.mars".format(random.randint(int(1e6),int(1e7)))
         dyslexic_parent = _generate_parent_dylexia()
         multilingual = _generate_parent_dylexia()
         pweeks = int(round(random.normalvariate(WEEK_MU, WEEK_SIGMA)))
