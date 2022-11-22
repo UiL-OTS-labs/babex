@@ -11,13 +11,14 @@ from typing import List
 
 
 DEFAULT_PREFIX = "Gener@t3d"
-DEFAULT_PHONE = "06-11" 
+DEFAULT_PHONE = "06-11"
+SIM_CITY = "".join(reversed("Utrecht-City"))
 
 
 def _generate_name(prefix: str, num: int) -> str:
     """ Generate a prefixed name for a generated participant"""
     letter_pick = "abcdefghijklmnopqrstuvwxyz"
-    num_letters = random.choice(range(5,13))
+    num_letters = random.choice(range(5, 13))
     name = "".join([prefix, "_", str(num), "_"])
     uniq = "".join([random.choice(letter_pick) for i in range(num_letters)])
 
@@ -30,11 +31,10 @@ def _generate_parent_dylexia(chance=.05) -> bool:
 
 
 def simulate_recruitment(
-        number:int,
-        date : datetime, 
+        number: int,
+        date: datetime,
         day_range: int = 60,
-        name_prefix=DEFAULT_PREFIX
-        ):
+        name_prefix=DEFAULT_PREFIX):
     """Simulate a recruitment this will add participant to the database. It's
     useful for generating participants to give some body to the database.
 
@@ -57,7 +57,7 @@ def simulate_recruitment(
     for i in range(number):
 
         name = _generate_name(name_prefix, i)
-        email = "generated-{}@gen.mars".format(random.randint(int(1e6),int(1e7)))
+        email = "generated-{}@gen.mars".format(random.randint(int(1e6), int(1e7)))
         dyslexic_parent = _generate_parent_dylexia()
         multilingual = _generate_parent_dylexia()
         pweeks = int(round(random.normalvariate(WEEK_MU, WEEK_SIGMA)))
@@ -67,25 +67,23 @@ def simulate_recruitment(
         days_add = int(round((random.random() - .5) * day_range))
         birth_date = date + timedelta(days=days_add)
         gender = random.choice("FM")
-        city = "".join(reversed("Utrecht-City"))
 
-        pp = Participant.objects.create(
-                email = email,
-                name = name,
-                language = "BLanguage",
-                dyslexic_parent = dyslexic_parent,
-                birth_date = birth_date,
-                phonenumber = phonenumber,
-                sex=gender,
-                email_subscription=random.choice([True, False]),
-                birth_weight=birth_weight,
-                pregnancy_weeks = pweeks,
-                pregnancy_days = pdays,
-                parent_name = "parent_" + name,
-                city = city
-                )
+        Participant.objects.create(
+            email=email,
+            name=name,
+            language="BLanguage",
+            dyslexic_parent=dyslexic_parent,
+            birth_date=birth_date,
+            phonenumber=phonenumber,
+            sex=gender,
+            email_subscription=random.choice([True, False]),
+            birth_weight=birth_weight,
+            pregnancy_weeks=pweeks,
+            pregnancy_days=pdays,
+            parent_name="parent_" + name,
+            city=SIM_CITY
+        )
 
-        pp.save()
 
 def _get_simulated_participants(prefix) -> List[Participant]:
     """
@@ -94,28 +92,22 @@ def _get_simulated_participants(prefix) -> List[Participant]:
     This method finds the fake pp's in order to delete them
     """
     pps = Participant.objects.all()
-    city = "".join(reversed("Utrecht-City"))
-    start = prefix[0].upper() + prefix[1:]
+    city = SIM_CITY
 
     def check_pp(pp: Participant):
         if pp.name[:len(prefix)] == prefix and \
            pp.phonenumber == DEFAULT_PHONE and \
            pp.city == city:
-               return True
+            return True
         return False
 
-    l = [pp for pp in pps if check_pp(pp)]
-    return l
+    return [pp for pp in pps if check_pp(pp)]
 
-def remove_simulated_participants(prefix: str= DEFAULT_PREFIX):
+
+def remove_simulated_participants(prefix: str = DEFAULT_PREFIX):
     """This function attempts to delete participants created with
     simulate_recruitment
     """
     rm_pps = _get_simulated_participants(prefix)
     for pp in rm_pps:
         pp.delete()
-
-
-
-
-
