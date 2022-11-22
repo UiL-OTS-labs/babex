@@ -6,7 +6,7 @@ from django.urls import reverse_lazy as reverse
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, Http404
 from cdh.core.views import FormSetUpdateView
 from cdh.core.views.mixins import DeleteSuccessMessageMixin
 
@@ -136,14 +136,44 @@ class ParticipantsDemographicsView(generic.TemplateView,
 
     template_name = 'participants/demographics.html'
 
-    def get_context_data(self, **kwargs):
-        """Add path to image data to context"""
-        context = super().get_context_data(**kwargs)
-        context['png_demographics'] = reverse('png')
-        return context
+
+def render_demograhpics(
+        request: HttpRequest,
+        img_format: str = "png",
+        width: int = 850,
+        height: int = 0):
+    """Renders the histograms for the
+    render_demograhpics_png and render_demograhpics_svg views
+    """
+
+    supported_formats = ["png", "svg"]
+    if img_format not in supported_formats:
+        return Http404("Unsupported image format")
+
+    if not height:
+        height = (width * 9) // 16
+
+    if img_format == "png":
+        # Keep returned png small
+        width = min(1920, width)
+        height = min(1080, height)
+
+    img_bytes = graphs.render_demograhpics(width, height, img_format)
+    content_type = "image/"
+    content_type += img_format if img_format == "png" else "svg+xml"
+
+    return HttpResponse(img_bytes, content_type=content_type)
 
 
-def render_demograhpics(request:HttpRequest):
-    img_bytes = graphs.render_demograhpics()
-    return HttpResponse(img_bytes, content_type="image/png")
+def render_demograhpics_png(
+        request: HttpRequest,
+        width: int = 850,
+        height: int = 0):
+    return render_demograhpics(request, "png", width, height)
 
+
+def render_demograhpics_svg(
+        request: HttpRequest,
+        width: int = 850,
+        height: int = 0):
+    return render_demograhpics(request, "svg", width, height)

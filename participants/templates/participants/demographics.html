@@ -5,21 +5,41 @@
 {% load datatables %}
 {% load get_field_name %}
 
+
 {% block header_title %}
     {% trans 'participants:home:header' %} - {{ block.super }}
 {% endblock %}
 
 {% block content %}
 <div class="uu-inner-container">
-    <div class="col-12">
+
+    <script type="text/javascript">
+        // Get desired width of the graph
+        function onPageLoad() {
+            let col12_div= document.getElementsByClassName("col-12")[0];
+            let histogram = document.getElementById('histogram');
+            let width = col12_div.clientWidth;
+            let base_url = "{% url 'participants:histo-svg' %}";
+            histogram.src = base_url + width;
+            histogram.width = width;
+            histogram.height = width * 9 / 16; // Returned image is 9:16 ratio
+        }
+
+        // once the body is loaded.
+        window.addEventListener('load', onPageLoad);
+
+    </script>
+
+    <div class="col-12" onload="divLoaded()">
         <h1>
             {% trans 'participants:demographics:header' %}
         </h1>
         <p>
             A brief overview of the age's of the current participants.
         </p>
-        <img src="{% url 'participants:png' %}" width=800 height=450 alt="Unable to load graph"></img>
+        <img id="histogram" width=800 height=450 alt="loading graph"></img>
         <br/>
     </div>
 </div>
 {% endblock %}
+
