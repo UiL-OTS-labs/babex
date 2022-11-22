@@ -3,15 +3,13 @@ from django.urls import path
 from .views import ParticipantDeleteView, ParticipantDetailView, \
     ParticipantSpecificCriteriaUpdateView, \
     ParticipantUpdateView, ParticipantsHomeView, \
-    ParticipantsDemographicsView, render_demograhpics
+    ParticipantsDemographicsView, render_demograhpics_png, render_demograhpics_svg
 
 app_name = 'participants'
 
-DEMO_PATH = "demographics/"
-
 urlpatterns = [
     path('', ParticipantsHomeView.as_view(), name='home'),
-    path(DEMO_PATH, ParticipantsDemographicsView.as_view(), name='demographics'), #temporary stub in order to render the menu. Needs new view!
+    path("demographics/", ParticipantsDemographicsView.as_view(), name='demographics'),
     path('<int:pk>/', ParticipantDetailView.as_view(), name='detail'),
     path('<int:pk>/edit/', ParticipantUpdateView.as_view(), name='edit'),
     path('<int:pk>/del/', ParticipantDeleteView.as_view(), name='delete'),
@@ -24,7 +22,10 @@ urlpatterns = [
 
 # paths for the demographics graph urls these render image/png or similar
 graphpatterns = [
-    path(DEMO_PATH + "png/", render_demograhpics, name='png'),
+    path("demographics/png/", render_demograhpics_png, name='histo-png'),
+    path("demographics/png/<int:width>/", render_demograhpics_png, name='histo-png'),
+    path("demographics/svg/", render_demograhpics_svg, name='histo-svg'),
+    path("demographics/svg/<int:width>/", render_demograhpics_svg, name='histo-svg'),
 ]
 
 urlpatterns += graphpatterns
