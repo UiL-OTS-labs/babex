@@ -42,9 +42,11 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       - name: Compile 18n
         run: |
+          cd lab
           python manage.py compilemessages
       - name: Run django tests
         run: |
+          cd lab
           python manage.py test
       - name: Set up Node
         uses: actions/setup-node@v3
