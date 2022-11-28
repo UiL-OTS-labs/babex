@@ -1,0 +1,31 @@
+{% extends "vue/base.html" %}
+{% load vue3 %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+
+
+{% block header_title %}
+    {% trans 'participants:home:header' %} - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <h1>
+            {% trans 'participants:demographics:header' %}
+        </h1>
+        <p>
+            A brief overview of the age's of the current participants.
+        </p>
+        <img id="histogram"
+             src="{% url 'participants:histo-svg' %}"
+             class="w-100"
+             alt="loading graph">
+        </img>
+        <br/>
+    </div>
+</div>
+{% endblock %}
+
