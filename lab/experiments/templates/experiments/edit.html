@@ -8,6 +8,16 @@
     {% trans 'experiments:edit:header' %} - {{ block.super }}
 {% endblock %}
 
+{% block html_head %}
+{{ block.super }}
+<script nonce="{{ request.csp_nonce }}">
+ $(function() {
+     $('#id_excluded_experiments').select2();
+     $('#id_additional_leaders').select2();
+ });
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="uu-container">
     <div class="col-12">
