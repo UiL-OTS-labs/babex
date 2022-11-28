@@ -1,0 +1,5 @@
+Django>=4.0,<4.1
+django-simple-menu
+djangorestframework
+django-debug-toolbar
+-e git+https://github.com/DH-IT-Portal-Development/django-shared-core@develop#egg=cdh-django-core
