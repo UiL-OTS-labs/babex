@@ -69,5 +69,5 @@ jobs:
           npm run dev
       - name: Integration tests
         run: |
-          cd integration_tests
+          cd lab/integration_tests
           pytest
