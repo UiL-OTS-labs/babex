@@ -7,11 +7,7 @@ from django.contrib.auth.models import Group
 from pytz import timezone
 from cdh.core.utils.mail import send_template_email
 
-from api.auth.ldap_backend import ApiLdapBackend
-from api.auth.models import UserToken
 from main.models import User
-from api.utils import get_reset_links
-from main.utils import is_ldap_enabled
 from .models import Leader
 
 
@@ -70,55 +66,6 @@ def create_leader(name: str, email: str, phonenumber: str,
     leader.save()
 
     return leader, existing
-
-
-def create_ldap_leader(name: str, email: str, phonenumber: str) -> Leader:
-    """
-    This function creates a new Leader object, which will log in through the
-    LDAP.
-
-    If the email specified is already used, it will return the Leader object for
-    that email.
-
-    If there already is a User object with that email, that one will be
-    retrieved and used in the Leader object. That account will NOT be
-    updated to use ldap. This can happen if someone who already made an account
-     as a participant is added as a leader.
-
-    If no User object exists, one will be created.
-
-    In both cases the User object is added to the leader group.
-
-    :param email:
-    :return:
-    """
-    _leader_group = Group.objects.get(name=settings.LEADER_GROUP)
-    existing_leader = Leader.objects.filter(user__email=email)
-
-    if existing_leader:
-        return existing_leader[0]
-
-    leader = Leader()
-    leader.name = name
-    leader.phonenumber = phonenumber
-
-    existing_user = User.objects.get(email=email)
-
-    if existing_user:
-        user = existing_user
-    else:
-        # Create an empty account first, before we populate
-        User.objects.create(email=email)
-        user = ApiLdapBackend().populate_user(email)
-
-    if _leader_group not in user.groups.all():
-        user.groups.add(_leader_group)
-        user.save()
-
-    leader.user = user
-    leader.save()
-
-    return leader
 
 
 def get_login_link() -> str:
@@ -208,23 +155,5 @@ def delete_leader(leader: Leader) -> None:
     leader.delete()
 
 
-def convert_leader_to_ldap(leader: Leader) -> None:
-    """All hail the mighty LDAP!
-    Oh wait, it's not that kind of conversion... bummer
-
-    Changes an eligible non-ldap-enabled leader account to use ldap for
-    authentication
-    """
-    user = leader.user
-
-    if not is_ldap_enabled() or user.is_ldap_account:
-        return
-
-    if not user.email.endswith("uu.nl"):
-        return
-
-    user.set_password(None)
-    user.is_ldap_account = True
-    user.save()
-
-    ApiLdapBackend().populate_user(user.email)
+def create_ldap_leader(*args, **kwargs):
+    ...

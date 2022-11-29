@@ -1,8 +1,8 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
-from api.auth.models import ApiUser
 from .models import Leader
+from .models import User
 
 
 def _clean_confirm_password(self):
@@ -63,7 +63,7 @@ class LeaderCreateForm(forms.Form):
                     """
         data = self.cleaned_data['email']
 
-        existing_user = ApiUser.objects.get_by_email(data)
+        existing_user = User.objects.get_by_email(data)
 
         if existing_user and existing_user.is_leader:
             raise forms.ValidationError(
@@ -112,7 +112,7 @@ class LDAPLeaderCreateForm(forms.Form):
                 _('leader:form:email:error:not_uu_mail')
             )
 
-        existing_user = ApiUser.objects.get_by_email(data)
+        existing_user = User.objects.get_by_email(data)
 
         if existing_user:
             raise forms.ValidationError(
@@ -179,7 +179,7 @@ class LeaderUpdateForm(forms.Form):
         data = self.cleaned_data['email']
         current_leader = self.cleaned_data['leader']
 
-        existing_user = ApiUser.objects.get_by_email(data)
+        existing_user = User.objects.get_by_email(data)
 
         if existing_user and current_leader != existing_user.leader:
             raise forms.ValidationError(
@@ -243,7 +243,7 @@ class LDAPLeaderUpdateForm(forms.Form):
                 _('leader:form:email:error:not_uu_mail')
             )
 
-        existing_user = ApiUser.objects.get_by_email(data)
+        existing_user = User.objects.get_by_email(data)
 
         if existing_user and current_leader != existing_user.leader:
             raise forms.ValidationError(

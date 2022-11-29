@@ -1,18 +1,14 @@
-from datetime import date
-from typing import List, Optional
-
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 import ageutil
 import cdh.core.fields as e_fields
-from api.auth.models import ApiUser
 from experiments.models.criteria_models import Criterion
 
 
 class ParticipantManager(models.Manager):
 
-    def find_by_email(self, email: str) -> List['Participant']:
+    def find_by_email(self, email: str):
         """This function will return a list of Participants that have the
         given email address as a primary or secondary email.
 
@@ -32,11 +28,7 @@ class ParticipantManager(models.Manager):
         # This LC filters by checking if the email is the same, or appears in
         # the secondary email set.
         return [x for x in queryset if
-                to_lower(x.email) == email
-                or
-                email in [
-                    to_lower(y.email) for y in x.secondaryemail_set.all()]
-                ]
+                to_lower(x.email) == email or email in [to_lower(y.email) for y in x.secondaryemail_set.all()]]
 
 
 class Participant(models.Model):
@@ -60,15 +52,7 @@ class Participant(models.Model):
 
     created = models.DateTimeField(verbose_name=_('participant:attribute:created'), auto_now_add=True,)
 
-    # TODO: probably get rid of these
-    api_user = models.OneToOneField(
-        ApiUser,
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-    )
     capable = e_fields.EncryptedBooleanField(_('participant:attribute:capable'), default=True,)
-
 
     @property
     def fullname(self) -> str:
@@ -99,7 +83,7 @@ class Participant(models.Model):
 
     @property
     def has_account(self):
-        return self.api_user is not None
+        return False
 
     def __str__(self):
         name = self.fullname

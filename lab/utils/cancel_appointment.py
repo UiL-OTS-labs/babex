@@ -6,7 +6,6 @@ from cdh.core.utils.mail import send_template_email
 from comments.utils import add_system_comment
 from experiments.models import Appointment
 from main.utils import get_supreme_admin, get_register_link
-from participants.utils import get_mailinglist_unsubscribe_url
 
 
 def cancel_appointment(appointment: Appointment) -> None:
@@ -80,9 +79,6 @@ def _send_confirmation(appointment: Appointment) -> None:
         'admin_email':             admin.email,
         'other_time_link':         get_register_link(experiment),
         'home_link':               settings.FRONTEND_URI,
-        'mailinglist_unsubscribe': get_mailinglist_unsubscribe_url(
-            appointment.participant
-        )
     }
 
     send_template_email(

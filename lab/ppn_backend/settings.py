@@ -58,8 +58,6 @@ INSTALLED_APPS = [
     # local apps
     'cdh.core',
     'cdh.vue',
-    'api',
-    'api.auth',
     'main',
     'experiments',
     'leaders',
@@ -132,7 +130,6 @@ SESSION_COOKIE_NAME = "sessionid_admin"
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'api.permissions.IsPermittedClient',
     ),
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
