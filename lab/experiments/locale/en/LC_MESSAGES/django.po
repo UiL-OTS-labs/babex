@@ -714,10 +714,6 @@ msgstr "Open/close experiment"
 msgid "experiments:home:switch_public:title"
 msgstr "Make experiment public/private"
 
-#: experiments/templates/experiments/index.html:108
-msgid "experiments:home:switch_visible:title"
-msgstr "Toggle participant details visibility"
-
 #: experiments/templates/experiments/invite.html:13
 #: experiments/templates/experiments/invite.html:20
 msgid "experiments:invite:header"
@@ -995,14 +991,6 @@ msgstr "Successfully hid experiment"
 #: experiments/views/experiment_views.py:257
 msgid "experiments:message:switch_public:opened"
 msgstr "Successfully made experiment public"
-
-#: experiments/views/experiment_views.py:273
-msgid "experiments:message:switch_visible:invisible"
-msgstr "Successfully hid participants from leaders"
-
-#: experiments/views/experiment_views.py:278
-msgid "experiments:message:switch_visible:visible"
-msgstr "Successfully changed participant visibility to visible"
 
 #: experiments/views/experiment_views.py:301
 msgid "experiments:message:sent_reminders"
