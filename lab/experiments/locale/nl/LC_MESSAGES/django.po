@@ -541,10 +541,6 @@ msgstr "Open"
 msgid "experiments:detail:info:public"
 msgstr "Openbaar"
 
-#: experiments/templates/experiments/detail_parts/info.html:85
-msgid "experiments:detail:info:participants_visible"
-msgstr "Participanten zichtbaar"
-
 #: experiments/templates/experiments/detail_parts/info.html:93
 msgid "experiments:detail:info:leader"
 msgstr "Hoofd proefleider"
@@ -695,10 +691,6 @@ msgstr "Open/sluit experiment"
 #: experiments/templates/experiments/index.html:99
 msgid "experiments:home:switch_public:title"
 msgstr "Maak experiment openbaar/verborgen"
-
-#: experiments/templates/experiments/index.html:108
-msgid "experiments:home:switch_visible:title"
-msgstr "Maak participant data openbaar/verborgen voor proefleiders"
 
 #: experiments/templates/experiments/invite.html:13
 #: experiments/templates/experiments/invite.html:20
@@ -976,14 +968,6 @@ msgstr "Experiment ge-opent"
 #: experiments/views/experiment_views.py:261
 msgid "experiments:message:switch_public:opened"
 msgstr "Experiment gesloten"
-
-#: experiments/views/experiment_views.py:277
-msgid "experiments:message:switch_visible:invisible"
-msgstr "Participant informatie verborgen voor proefleiders"
-
-#: experiments/views/experiment_views.py:282
-msgid "experiments:message:switch_visible:visible"
-msgstr "Participant informatie zichtbaar gemaakt voor proefleiders"
 
 #: experiments/views/experiment_views.py:305
 msgid "experiments:message:sent_reminders"
