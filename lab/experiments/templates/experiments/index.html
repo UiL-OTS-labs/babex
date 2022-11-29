@@ -103,15 +103,6 @@
                             </a>
                         </td>
                         <td>
-                            <a
-                                href="{% url 'experiments:switch_visible' experiment.pk %}"
-                                class="icon-yesno"
-                                title="{% trans 'experiments:home:switch_visible:title' %}"
-                            >
-                                {{ experiment.participants_visible|yesno:"," }}
-                            </a>
-                        </td>
-                        <td>
                             {% include 'experiments/experiment_actions_snippit.html' %}
                         </td>
                     </tr>
