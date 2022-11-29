@@ -9,7 +9,6 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('apiauth', '0002_auto_20181115_1420'),
     ]
 
     operations = [
@@ -29,7 +28,6 @@ class Migration(migrations.Migration):
                 ('social_role', models.TextField(choices=[('student', 'participant:attribute:social_role:student'), ('other', 'participant:attribute:social_role:other')])),
                 ('email_subscription', models.BooleanField(default=False)),
                 ('capable', models.BooleanField(default=True)),
-                ('api_user', models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='apiauth.ApiUser')),
             ],
         ),
         migrations.CreateModel(

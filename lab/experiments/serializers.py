@@ -1,7 +1,6 @@
 from rest_framework import serializers
 
-from api.serializers.leader_serializers import LeaderSerializer
-from .models import Appointment
+from .models import Appointment, Experiment
 
 
 class AppointmentSerializer(serializers.ModelSerializer):
@@ -9,7 +8,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
         model = Appointment
         fields = [
             'id', 'experiment', 'leader', 'participant', 'location',
-            'start', 'end' ,'comment'
+            'start', 'end', 'comment'
         ]
 
     experiment = serializers.StringRelatedField()  # type: ignore
@@ -21,3 +20,14 @@ class AppointmentSerializer(serializers.ModelSerializer):
     start = serializers.DateTimeField()
     end = serializers.DateTimeField()
 
+
+class ExperimentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Experiment
+        depth = 1
+        fields = [
+            'id', 'name', 'duration', 'compensation', 'task_description',
+            'additional_instructions', 'open', 'public',
+            'location', 'leader', 'additional_leaders', 'excluded_experiments',
+            'defaultcriteria', 'default_max_places'
+        ]

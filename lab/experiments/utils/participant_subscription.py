@@ -3,7 +3,6 @@ from django.contrib.auth import get_user_model
 from cdh.core.utils.mail import send_template_email
 
 import auditlog.utils.log as auditlog
-from api.auth.models import ApiUser
 from auditlog.enums import Event, UserType
 from experiments.models import Appointment
 from main.utils import get_supreme_admin, get_register_link
@@ -58,8 +57,6 @@ def _log_deletions(message, deleting_user):
     # Determine user_type from deleting_user
     if isinstance(deleting_user, get_user_model()):
         user_type = UserType.ADMIN
-    elif isinstance(deleting_user, ApiUser):
-        user_type = UserType.LEADER
 
     auditlog.log(
         Event.DELETE_DATA,
@@ -67,4 +64,3 @@ def _log_deletions(message, deleting_user):
         deleting_user,
         user_type,
     )
-

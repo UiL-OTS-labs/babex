@@ -12,7 +12,7 @@ from main.utils import is_ldap_enabled
 from .forms import LDAPLeaderCreateForm, LeaderCreateForm, LeaderUpdateForm, \
     LDAPLeaderUpdateForm
 from .models import Leader
-from .utils import convert_leader_to_ldap, create_ldap_leader, create_leader, \
+from .utils import create_ldap_leader, create_leader, \
     delete_leader, \
     notify_new_ldap_leader, notify_new_leader, update_leader
 
@@ -178,17 +178,5 @@ class LeaderDeleteView(braces.LoginRequiredMixin, generic.DetailView):
         delete_leader(object)
 
         messages.success(request, _('leaders:messages:deleted'))
-
-        return HttpResponseRedirect(reverse('leaders:home'))
-
-
-class LeaderConvertToLdap(braces.LoginRequiredMixin, generic.DetailView):
-    template_name = 'leaders/convert.html'
-    model = Leader
-
-    def post(self, request, *args, **kwargs):
-        convert_leader_to_ldap(self.get_object())
-
-        messages.success(request, _('leaders:messages:converted'))
 
         return HttpResponseRedirect(reverse('leaders:home'))

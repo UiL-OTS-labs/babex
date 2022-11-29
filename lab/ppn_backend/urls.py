@@ -20,7 +20,6 @@ from django.views.i18n import JavaScriptCatalog
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('api.urls')),
     path('', include('main.urls')),
     path('experiments/', include('experiments.urls')),
     path('leaders/', include('leaders.urls')),

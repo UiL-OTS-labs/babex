@@ -3,7 +3,6 @@ from json import JSONEncoder
 
 from auditlog import settings
 
-from api.auth.models import ApiUser
 from auditlog.enums import Event, UserType
 from auditlog.models import LogEntry
 from main.models import User
@@ -12,7 +11,7 @@ from main.models import User
 def log(
         event: Event,
         message: str,
-        user: Union[User, ApiUser, str] = None,
+        user: Union[User, str] = None,
         user_type: UserType = None,
         extra: dict = None,
 ) -> None:
@@ -79,7 +78,7 @@ def _encode_extra_data(extra: dict) -> str:
     return extra
 
 
-def _get_formatted_user(user: Union[User, ApiUser, str]) -> str:
+def _get_formatted_user(user: Union[User, str]) -> str:
     """
     This function tries to get a loggable string from the value in the
     `user` parameter. It will be formatted as '<type: info>
