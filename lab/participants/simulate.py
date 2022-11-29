@@ -73,6 +73,7 @@ def simulate_recruitment(
             name=name,
             language="BLanguage",
             dyslexic_parent=dyslexic_parent,
+            multilingual=multilingual,
             birth_date=birth_date,
             phonenumber=phonenumber,
             sex=gender,
