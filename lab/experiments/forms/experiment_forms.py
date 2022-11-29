@@ -29,7 +29,6 @@ class ExperimentForm(TemplatedModelForm):
             'invite_email': EmailContentEditWidget(None),
             'open': BootstrapCheckboxInput,
             'public': BootstrapCheckboxInput,
-            'participants_visible': BootstrapCheckboxInput,
         }
 
     def __init__(self, *args, **kwargs):

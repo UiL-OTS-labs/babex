@@ -96,7 +96,7 @@ class LeaderExperimentsView(viewsets.GenericViewSet):
 
         qs = qs.select_related('leader', 'location')
         qs = qs.prefetch_related('additional_leaders', 'excluded_experiments')
-        
+
         qs = qs.distinct()
 
         self.queryset = qs
@@ -108,10 +108,9 @@ class LeaderExperimentsView(viewsets.GenericViewSet):
         serializer = self.get_serializer(instance)
 
         message = "Leader accessed '{}' data (pk: {}), which includes " \
-                  "participant data. Participant contact info shown: {}".format(
+                  "participant data.".format(
             instance.name,
             instance.pk,
-            instance.participants_visible
         )
 
         event = Event.VIEW_SENSITIVE_DATA

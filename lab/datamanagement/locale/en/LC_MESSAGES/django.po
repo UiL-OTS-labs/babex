@@ -65,7 +65,6 @@ msgstr ""
 "delete them individually there."
 
 #: datamanagement/templates/datamanagement/index_parts/comments.html:26
-#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:26
 #: datamanagement/templates/datamanagement/index_parts/invites.html:26
 msgid "datamanagement:global:experiment"
 msgstr "Experiment"
@@ -76,7 +75,6 @@ msgid "datamanagement:global:num"
 msgstr "Number"
 
 #: datamanagement/templates/datamanagement/index_parts/comments.html:33
-#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:33
 #: datamanagement/templates/datamanagement/index_parts/invites.html:33
 #: datamanagement/templates/datamanagement/index_parts/participants.html:38
 #: datamanagement/templates/datamanagement/index_parts/participants.html:90
@@ -87,25 +85,9 @@ msgstr "Actions"
 msgid "datamanagement:home:delete_comments"
 msgstr "Delete comments from this experiment"
 
-#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:8
-#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:16
-msgid "datamanagement:home:exp_part_visibility:header"
-msgstr "Participant visibility"
-
-#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:20
-msgid "datamanagement:home:exp_part_visibility:info_text"
-msgstr ""
-"These experiments have the personal info of the participants visible to the "
-"leaders, but their last time slot was {} ago"
-
-#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:29
 #: datamanagement/templates/datamanagement/index_parts/participants.html:29
 msgid "datamanagement:global:last_appointment"
 msgstr "Last appointment"
-
-#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:49
-msgid "datamanagement:home:delete_exp_part_visibility"
-msgstr "Hide participants from leader(s)"
 
 #: datamanagement/templates/datamanagement/index_parts/invites.html:8
 #: datamanagement/templates/datamanagement/index_parts/invites.html:16
@@ -194,10 +176,6 @@ msgstr ""
 "Refused to delete this participant! This participant has not been marked for "
 "deletion and could result in data loss. Please contact a technician if you "
 "think this isn't the case."
-
-#: datamanagement/views.py:96
-msgid "datamanagement:messages:hid_participants"
-msgstr "Participant data visibility successfully turned off."
 
 #: datamanagement/views.py:118
 msgid "datamanagement:messages:deleted_invites"

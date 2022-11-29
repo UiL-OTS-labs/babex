@@ -236,15 +236,6 @@ msgstr ""
 "used for follow-up experiments where only participants who have participated "
 "in the original experiment should register."
 
-#: experiments/models/experiment_models.py:129
-msgid "experiment:attribute:participants_visible"
-msgstr "Participants Visible"
-
-#: experiments/models/experiment_models.py:131
-msgid "experiment:attribute:participants_visible:help_text"
-msgstr ""
-"If unchecked, participant data will be hidden from the experiment leader(s)."
-
 #: experiments/models/experiment_models.py:136
 msgid "experiment:attribute:excluded_experiments"
 msgstr "Excluded experiment"

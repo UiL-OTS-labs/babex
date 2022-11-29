@@ -259,28 +259,6 @@ class ExperimentSwitchPublicView(braces.LoginRequiredMixin,
         self.experiment.save()
 
 
-class ExperimentSwitchVisibleView(braces.LoginRequiredMixin,
-                                  RedirectSuccessMessageMixin,
-                                  ExperimentObjectMixin,
-                                  RedirectActionView):
-    experiment_kwargs_name = 'pk'
-    url = reverse('experiments:home')
-
-    def action(self, request):
-        if self.experiment.participants_visible:
-            self.experiment.participants_visible = False
-            self.success_message = _(
-                'experiments:message:switch_visible:invisible'
-            )
-        else:
-            self.experiment.participants_visible = True
-            self.success_message = _(
-                'experiments:message:switch_visible:visible'
-            )
-
-        self.experiment.save()
-
-
 class RemindParticipantsView(braces.LoginRequiredMixin,
                              ExperimentObjectMixin,
                              RedirectActionView):

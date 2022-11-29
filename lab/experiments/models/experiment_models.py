@@ -126,12 +126,6 @@ Met vriendelijke groet,<br/>
         help_text=_('experiment:attribute:public:help_text'),
     )
 
-    participants_visible = models.BooleanField(
-        _('experiment:attribute:participants_visible'),
-        default=True,
-        help_text=_('experiment:attribute:participants_visible:help_text'),
-    )
-
     excluded_experiments = models.ManyToManyField(
         "self",
         verbose_name=_('experiment:attribute:excluded_experiments'),

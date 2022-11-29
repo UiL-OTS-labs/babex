@@ -65,7 +65,6 @@ msgstr ""
 "experiment). Je kunt ze daar ookindividueel verwijderen."
 
 #: datamanagement/templates/datamanagement/index_parts/comments.html:26
-#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:26
 #: datamanagement/templates/datamanagement/index_parts/invites.html:26
 msgid "datamanagement:global:experiment"
 msgstr "Experiment"
@@ -76,7 +75,6 @@ msgid "datamanagement:global:num"
 msgstr "Aantal"
 
 #: datamanagement/templates/datamanagement/index_parts/comments.html:33
-#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:33
 #: datamanagement/templates/datamanagement/index_parts/invites.html:33
 #: datamanagement/templates/datamanagement/index_parts/participants.html:38
 #: datamanagement/templates/datamanagement/index_parts/participants.html:90
@@ -87,25 +85,9 @@ msgstr "Acties"
 msgid "datamanagement:home:delete_comments"
 msgstr "Verwijder opmerkingen van dit experiment"
 
-#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:8
-#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:16
-msgid "datamanagement:home:exp_part_visibility:header"
-msgstr "Participant zichtbaarheid"
-
-#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:20
-msgid "datamanagement:home:exp_part_visibility:info_text"
-msgstr ""
-"Deze experimenten hebben de persoonlijke informatie van de participant "
-"zichtbaar voor deleiders, maar hun laatste tijdslot was {} geleden"
-
-#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:29
 #: datamanagement/templates/datamanagement/index_parts/participants.html:29
 msgid "datamanagement:global:last_appointment"
 msgstr "Laatste afspraak"
-
-#: datamanagement/templates/datamanagement/index_parts/exp_part_visibility.html:49
-msgid "datamanagement:home:delete_exp_part_visibility"
-msgstr "Verberg participant gegevens"
 
 #: datamanagement/templates/datamanagement/index_parts/invites.html:8
 #: datamanagement/templates/datamanagement/index_parts/invites.html:16

@@ -239,16 +239,6 @@ msgstr ""
 "link hebben. Dit is voornamelijk bedoeld voor vervolg experimenten waarbij "
 "alleen participanten uit de originele studie mee mogen doen.."
 
-#: experiments/models/experiment_models.py:129
-msgid "experiment:attribute:participants_visible"
-msgstr "Participanten zichtbaar"
-
-#: experiments/models/experiment_models.py:131
-msgid "experiment:attribute:participants_visible:help_text"
-msgstr ""
-"Bepaald of proefleiders de persoonlijke informatie van participanten kunnen "
-"zien."
-
 #: experiments/models/experiment_models.py:136
 msgid "experiment:attribute:excluded_experiments"
 msgstr "Uitgesloten experimenten"

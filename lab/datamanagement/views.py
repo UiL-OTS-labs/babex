@@ -10,8 +10,6 @@ from cdh.core.views.mixins import RedirectSuccessMessageMixin
 
 from datamanagement.forms import ThresholdsEditForm
 from datamanagement.utils.common import get_thresholds_model
-from datamanagement.utils.exp_part_visibility import \
-    get_experiments_with_visibility, hide_part_from_exp
 from datamanagement.utils.invitations import delete_invites, get_invite_counts
 from datamanagement.utils.participants import \
     delete_participant, get_participants_with_appointments, \
@@ -32,8 +30,7 @@ class OverviewView(braces.LoginRequiredMixin, generic.TemplateView):
         context['participants'] = get_participants_with_appointments()
         context['participants_no_app'] = get_participants_without_appointments()
         context['participants_num'] = len(context['participants']) + \
-                                      len(context['participants_no_app'])
-        context['exp_part_visible'] = get_experiments_with_visibility()
+            len(context['participants_no_app'])
 
         return context
 
@@ -67,31 +64,7 @@ class DeleteParticipantView(braces.LoginRequiredMixin,
         return Participant.objects.get(pk=pk)
 
     def get_redirect_url(self, *args, **kwargs):
-        return reverse('datamanagement:overview') + \
-               "#collapse-participants"
-
-
-class HideParticipantsView(braces.LoginRequiredMixin,
-                           RedirectSuccessMessageMixin,
-                           RedirectActionView):
-
-    def action(self, request):
-        hide_part_from_exp(self.experiment)
-
-    @property
-    def experiment(self) -> Experiment:
-        pk = self.kwargs.get('experiment')
-
-        return Experiment.objects.get(pk=pk)
-
-    def get_redirect_url(self, *args, **kwargs):
-        return reverse('datamanagement:overview') + \
-               "#collapse-exp_part_visibility"
-
-    def get_success_message(self):
-        return _('datamanagement:messages:hid_participants').format(
-            self.experiment
-        )
+        return reverse('datamanagement:overview') + "#collapse-participants"
 
 
 class DeleteInvitesView(braces.LoginRequiredMixin,
