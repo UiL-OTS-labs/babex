@@ -26,7 +26,6 @@ class ExperimentForm(TemplatedModelForm):
             }),
             'open': BootstrapCheckboxInput,
             'public': BootstrapCheckboxInput,
-            'participants_visible': BootstrapCheckboxInput,
         }
 
     def __init__(self, *args, **kwargs):
