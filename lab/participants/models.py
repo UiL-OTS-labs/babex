@@ -83,6 +83,7 @@ class Participant(models.Model):
 
     @property
     def has_account(self):
+        # TODO: is this needed?
         return False
 
     def __str__(self):

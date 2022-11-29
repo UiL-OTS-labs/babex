@@ -156,4 +156,5 @@ def delete_leader(leader: Leader) -> None:
 
 
 def create_ldap_leader(*args, **kwargs):
+    # TODO: implement (but note that all leaders should actually be ldap users)
     ...
