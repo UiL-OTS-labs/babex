@@ -11,13 +11,11 @@ class DefaultCriteriaForm(forms.ModelForm):
     class Meta:
         model = DefaultCriteria
         fields = [
-            #'experiment',
             'language', 'multilingual', 'sex', 'dyslexia',
             'min_age_months', 'min_age_days', 'max_age_months', 'max_age_days'
         ]
 
         widgets = {
-            #'experiment':    forms.HiddenInput,
             'language':      LanguageWidget,
             'multilingual':  forms.RadioSelect,
             'sex':           forms.RadioSelect,
