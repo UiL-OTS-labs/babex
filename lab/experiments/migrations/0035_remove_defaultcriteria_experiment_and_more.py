@@ -3,7 +3,7 @@
 from django.db import migrations, models
 import django.db.models.deletion
 
-# dict {Experiment: DefaultCriteria} or with types reversed
+# dict {Experiment.id: DefaultCriteria} or with types reversed
 current_relation_store = {}
 
 
@@ -14,7 +14,7 @@ def store_relation_forward(apps, schema_editor):
     DefaultCriteria = apps.get_model("experiments", "DefaultCriteria")
     db_alias = schema_editor.connection.alias
     criteria = DefaultCriteria.objects.using(db_alias).all()
-    current_relation_store = {c.experiment: c for c in criteria}
+    current_relation_store = {c.experiment.id: c for c in criteria}
 
 
 def restore_relation_forward(apps, schema_editor):
@@ -25,7 +25,7 @@ def restore_relation_forward(apps, schema_editor):
     experiments = Experiment.objects.using(db_alias).all()
 
     for exp in experiments:
-        exp.defaultcriteria = current_relation_store[exp]
+        exp.defaultcriteria_id = current_relation_store[exp.id].id
         exp.save()
 
 
@@ -35,7 +35,7 @@ def store_relation_backward(apps, schema_editor):
     Experiment = apps.get_model("experiments", "Experiment")
     db_alias = schema_editor.connection.alias
     experiments = Experiment.objects.using(db_alias).all()
-    current_relation_store = {e.defaultcriteria: e for e in experiments}
+    current_relation_store = {e.defaultcriteria.id: e for e in experiments}
 
 
 def restore_relation_backward(apps, schema_editor):
@@ -46,7 +46,7 @@ def restore_relation_backward(apps, schema_editor):
     criteria = DefaultCriteria.objects.using(db_alias).all()
 
     for crit in criteria:
-        crit.experiment = current_relation_store[crit]
+        crit.experiment_id = current_relation_store[crit.id].id
         crit.save()
 
 
