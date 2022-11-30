@@ -88,6 +88,3 @@ class DefaultCriteria(models.Model):
 
     def __str__(self):
         return "Default criteria for {}".format(self.experiment.name)
-
-
-
