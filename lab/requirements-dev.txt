@@ -2,3 +2,5 @@ seleniumbase
 mypy
 django-stubs
 djangorestframework-stubs
+jedi
+autopep8
