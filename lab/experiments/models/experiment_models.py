@@ -152,9 +152,7 @@ Met vriendelijke groet,<br/>
 
     defaultcriteria = models.OneToOneField(
         DefaultCriteria,
-        on_delete=models.CASCADE,
-        default=None,
-        null=True
+        on_delete=models.CASCADE
     )
 
     @property
