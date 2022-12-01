@@ -9,14 +9,14 @@ from rest_framework import generics, serializers
 from rest_framework.permissions import IsAdminUser
 
 
-from api.serializers.experiment_serializers import ExperimentSerializer
-from api.serializers.leader_serializers import LeaderSerializer
-from api.serializers.participant_serializers import ParticipantSerializer
-from api.utils.appointment_mail import send_appointment_mail
+from utils.appointment_mail import send_appointment_mail
 from experiments.models import Experiment, Appointment, TimeSlot
 from experiments.models.invite_models import Call
+from experiments.serializers import ExperimentSerializer
 from leaders.models import Leader
+from leaders.serializers import LeaderSerializer
 from participants.models import Participant
+from participants.serializers import ParticipantSerializer
 
 
 class CallHomeView(braces.LoginRequiredMixin, TemplateView):

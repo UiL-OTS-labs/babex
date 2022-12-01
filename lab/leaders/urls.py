@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import LeaderConvertToLdap, LeaderCreateView, LeaderHomeView, \
+from .views import LeaderCreateView, LeaderHomeView, \
     LeaderUpdateView, \
     LeaderDeleteView, LDAPLeaderCreateView, LDAPLeaderUpdateView
 
@@ -13,9 +13,4 @@ urlpatterns = [
     path('<int:pk>/', LeaderUpdateView.as_view(), name='update'),
     path('ldap/<int:pk>/', LDAPLeaderUpdateView.as_view(), name='update_ldap'),
     path('<int:pk>/delete/', LeaderDeleteView.as_view(), name='delete'),
-    path(
-        '<int:pk>/convert/',
-        LeaderConvertToLdap.as_view(),
-        name='convert_to_ldap'
-    ),
 ]

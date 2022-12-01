@@ -1,4 +1,0 @@
-from .admin_serializers import AdminSerializer
-from .criteria_serializers import ExperimentCriterionSerializer
-from .experiment_serializers import ExperimentSerializer
-from .timeslot_serializers import AppointmentSerializer, TimeSlotSerializer

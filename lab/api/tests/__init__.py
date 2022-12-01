@@ -1,2 +1,0 @@
-from .participant_account_creation import ParticipantAccountCreationTests
-from .account_deletion import AccountDeleteTests

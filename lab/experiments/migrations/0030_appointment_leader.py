@@ -13,7 +13,6 @@ def set_leader(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('leaders', '0004_alter_leader_user'),
         ('experiments', '0029_remove_timeslot_datetime_and_more'),
     ]
 
