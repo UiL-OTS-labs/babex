@@ -2,14 +2,16 @@ from datetime import date
 import pytest
 
 from main.models import User
-from experiments.models import Experiment
+from experiments.models import Experiment, DefaultCriteria
 from leaders.models import Leader
 from participants.models import Participant
 
 
 @pytest.fixture
 def sample_experiment(admin_user, db):
-    yield admin_user.leader.experiments.create()
+    yield admin_user.leader.experiments.create(
+        defaultcriteria=DefaultCriteria.objects.create()
+    )
 
 
 @pytest.fixture

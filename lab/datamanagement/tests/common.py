@@ -5,7 +5,7 @@ from django.utils.timezone import get_current_timezone
 
 from datamanagement.models import Thresholds
 from datamanagement.utils.common import get_thresholds_model
-from experiments.models import Experiment, TimeSlot
+from experiments.models import Experiment, TimeSlot, DefaultCriteria
 from experiments.tests import _get_or_create_leader, _get_or_create_location
 from main.models import User
 from participants.models import Participant
@@ -26,9 +26,12 @@ def _create_experiment(timeslot_dts=None) -> Experiment:
     if timeslot_dts is None:
         timeslot_dts = []
 
+    criteria = DefaultCriteria.objects.create()
+
     exp = Experiment.objects.create(
         name='test',
         location=_get_or_create_location(),
+        defaultcriteria=criteria
     )
     exp.leaders.add(_get_or_create_leader())
 
