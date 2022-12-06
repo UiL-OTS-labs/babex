@@ -28,6 +28,6 @@ class ExperimentSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'name', 'duration', 'compensation', 'task_description',
             'additional_instructions', 'open', 'public',
-            'location', 'leader', 'additional_leaders', 'excluded_experiments',
+            'location', 'leaders', 'excluded_experiments',
             'defaultcriteria', 'default_max_places'
         ]
