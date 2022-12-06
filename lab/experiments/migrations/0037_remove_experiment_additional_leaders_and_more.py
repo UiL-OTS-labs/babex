@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('leaders', '0001_initial'),
-        ('experiments', '0034_remove_experiment_participants_visible'),
+        ('experiments', '0036_alter_experiment_defaultcriteria')
     ]
 
     operations = [

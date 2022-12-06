@@ -156,10 +156,6 @@ Met vriendelijke groet,<br/>
             self.defaultcriteria = DefaultCriteria.objects.create()
         super().save(*args, **kwargs)
 
-    @property
-    def leaders(self):
-        return [self.leader] + list(self.additional_leaders.all())
-
     def n_timeslot_places(self):
         """Returns the sum of all timeslot places this experiment has.
         Used for experiment index page. Used to be an aggregate method in
