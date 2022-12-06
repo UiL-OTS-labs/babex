@@ -7,6 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from django.utils.timezone import get_current_timezone
 
 from leaders.models import Leader
+from .default_criteria_models import DefaultCriteria
 from .location_models import Location
 
 
@@ -149,6 +150,21 @@ Met vriendelijke groet,<br/>
         help_text=_("experiment:attribute:additional_leaders:help_text"),
     )
 
+    defaultcriteria = models.OneToOneField(
+        DefaultCriteria,
+        on_delete=models.CASCADE
+    )
+
+    def save(self, *args, **kwargs):
+        """Run models.save but make sure the experiment has default criteria"""
+        try:
+            no_createria = self.defaultcriteria is None
+            if no_createria:
+                self.defaultcriteria = DefaultCriteria.objects.create()
+        except Experiment.defaultcriteria.RelatedObjectDoesNotExist:
+            self.defaultcriteria = DefaultCriteria.objects.create()
+        super().save(*args, **kwargs)
+
     @property
     def leaders(self):
         return [self.leader] + list(self.additional_leaders.all())
@@ -162,6 +178,7 @@ Met vriendelijke groet,<br/>
 
         This function is basically me giving up....
         """
+
         return sum([x.max_places for x in self.timeslot_set.all()])
 
     def has_free_places(self):
@@ -172,6 +189,7 @@ Met vriendelijke groet,<br/>
         appointments is lower than the number of maximum appointments.
         :return:
         """
+
         if self.use_timeslots:
             return self.has_free_timeslots()
 
@@ -184,6 +202,7 @@ Met vriendelijke groet,<br/>
         return False.
         :return:
         """
+
         return self.timeslot_set.annotate(
             num_appointments=Count('appointments')
         ).filter(
