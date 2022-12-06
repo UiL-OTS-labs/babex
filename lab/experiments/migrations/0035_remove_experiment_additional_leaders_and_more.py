@@ -14,7 +14,7 @@ def migrate_leaders(apps, schema_editor):
 def revert_leaders(apps, schema_editor):
     Experiment = apps.get_model('experiments', 'Experiment')
     for exp in Experiment.objects.all():
-        leaders = list(exp.leaders)
+        leaders = list(exp.leaders.all())
         exp.leader = leaders[0]
         for leader in leaders[1:]:
             exp.additional_leaders.add(leader)
