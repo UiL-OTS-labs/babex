@@ -155,6 +155,16 @@ Met vriendelijke groet,<br/>
         on_delete=models.CASCADE
     )
 
+    def save(self, *args, **kwargs):
+        """Run models.save but make sure the experiment has default criteria"""
+        try:
+            no_createria = self.defaultcriteria is None
+            if no_createria:
+                self.defaultcriteria = DefaultCriteria.objects.create()
+        except Experiment.defaultcriteria.RelatedObjectDoesNotExist:
+            self.defaultcriteria = DefaultCriteria.objects.create()
+        super().save(*args, **kwargs)
+
     @property
     def leaders(self):
         return [self.leader] + list(self.additional_leaders.all())
