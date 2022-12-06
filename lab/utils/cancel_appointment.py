@@ -42,9 +42,7 @@ def _handle_late_comment(appointment: Appointment) -> None:
 def _inform_leaders(appointment: Appointment) -> None:
     experiment = appointment.experiment
 
-    leaders = [experiment.leader]
-    if experiment.additional_leaders.exists():
-        leaders.extend(experiment.additional_leaders.all())
+    leaders = experiment.leaders
 
     for leader in leaders:
         subject = 'UiL OTS participant deregistered for experiment: {}'.format(

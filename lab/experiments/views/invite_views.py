@@ -28,7 +28,9 @@ class InviteParticipantsForExperimentView(braces.LoginRequiredMixin,
         context['object_list'] = self.get_object_list()
         context['experiment'] = self.experiment
         context['admin'] = get_supreme_admin().get_full_name()
-        context['invite_text'] = get_invite_mail_content(self.experiment)
+
+        inviting_leader = self.request.user.leader
+        context['invite_text'] = get_invite_mail_content(self.experiment, inviting_leader)
 
         return context
 

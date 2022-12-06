@@ -10,11 +10,12 @@ from cdh.core.utils.mail import send_personalised_mass_mail
 from experiments.models import Experiment, Invitation
 from main.utils import get_supreme_admin, get_register_link
 from participants.models import Participant
+from leaders.models import Leader
 
 link_to_subscribe_regex = r'{link_to_subscribe(?::\"(.*)\")?}'
 
 
-def get_invite_mail_content(experiment: Experiment) -> str:
+def get_invite_mail_content(experiment: Experiment, leader: Leader) -> str:
     content = experiment.invite_email
 
     replacements = {
@@ -24,28 +25,12 @@ def get_invite_mail_content(experiment: Experiment) -> str:
         '{additional_instructions}': experiment.additional_instructions,
         '{experiment_name}':         experiment.name,
         '{experiment_location}':     '',
-        '{leader_name}':             experiment.leader.name,
-        '{leader_email}':            experiment.leader.user.email,
-        '{leader_phonenumber}':      experiment.leader.phonenumber,
-        '{all_leaders_name_list}':   experiment.leader.name,
+        '{leader_name}':             leader.name,
+        '{leader_email}':            leader.user.email,
+        '{leader_phonenumber}':      leader.phonenumber,
+        '{all_leaders_name_list}':   experiment.leader_names,
         '{admin}':                   get_supreme_admin().get_full_name(),
     }
-
-    num_additional_leaders = experiment.additional_leaders.count()
-
-    if num_additional_leaders > 0:
-        last_leader = experiment.additional_leaders.last()
-        assert last_leader is not None
-        others = experiment.additional_leaders.exclude(pk=last_leader.pk)
-
-        # If there's one additional, don't add the comma as it looks weird
-        if num_additional_leaders > 1:
-            replacements['{all_leaders_name_list}'] += ", "
-
-        replacements['{all_leaders_name_list}'] += ", ".join(
-            [x.name for x in others]
-        )
-        replacements['{all_leaders_name_list}'] += f" en {last_leader.name}"
 
     if experiment.location:
         replacements['{experiment_location}'] = experiment.location.name

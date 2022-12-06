@@ -27,10 +27,7 @@
                         {% get_verbose_field_name "experiments" "Experiment" "name" %}
                     </th>
                     <th>
-                        {% get_verbose_field_name "experiments" "Experiment" "leader" %}
-                    </th>
-                    <th>
-                        {% get_verbose_field_name "experiments" "Experiment" "additional_leaders" %}
+                        {% get_verbose_field_name "experiments" "Experiment" "leaders" %}
                     </th>
                     <th>
                         {% trans 'experiments:excluded_experiments:toggle_header' %}
@@ -49,10 +46,7 @@
                                 {{ experiment.name }}
                             </td>
                             <td>
-                                {{ experiment.leader.name }}
-                            </td>
-                            <td>
-                                {% for leader in experiment.additional_leaders.all %}
+                                {% for leader in experiment.leaders.all %}
                                     {{ leader.name }}
                                 {% endfor %}
                             </td>
