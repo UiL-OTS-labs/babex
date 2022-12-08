@@ -202,6 +202,6 @@ Met vriendelijke groet,<br/>
 
     @property
     def leader_names(self):
-        # TODO: i18n?
+        # TODO: i18n? (for connective 'en' -> 'and')
         leader_names = [leader.name for leader in self.leaders.all()]
         return ''.join(f'{name}, ' for name in leader_names[:-2]) + ' en '.join(leader_names[-2:])
