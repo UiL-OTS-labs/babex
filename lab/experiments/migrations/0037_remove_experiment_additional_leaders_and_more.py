@@ -7,7 +7,7 @@ def migrate_leaders(apps, schema_editor):
     Experiment = apps.get_model('experiments', 'Experiment')
     for exp in Experiment.objects.all():
         exp.leaders.add(exp.leader)
-        for leader in exp.additional_leaders.all():
+        for leader in exp.additional_leaders.exclude(pk=exp.leader.pk):
             exp.leaders.add(leader)
 
 
