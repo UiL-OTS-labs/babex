@@ -1,7 +1,14 @@
 {% extends 'vue/base.html' %}
 {% load i18n %}
 {% load vue3 %}
+{% load static %}
 {% load get_field_name %}
+
+{% block html_head %}
+{{ block.super }}
+{# tinymce editor for editing email #}
+<script src="{% static 'cdh.core/js/tinymce/tinymce.min.js' %}"></script>
+{% endblock %}
 
 {% block content %}
 <div class="uu-container">

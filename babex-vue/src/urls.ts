@@ -7,6 +7,7 @@ export const urls = {
 
     call: {
         appointment: '/experiments/call/appointment/',
-        log: '/experiments/call/'
+        log: '/experiments/call/',
+        sendEmail: '/experiments/call/appointment/email/',
     }
 };

@@ -3,6 +3,18 @@
     import AppointmentForm from './AppointmentForm.vue';
     import ClosingForm from './ClosingForm.vue';
     import {defineEmits, defineProps} from 'vue';
+    import AppointmentForm from './AppointmentForm.vue';
+
+    interface ActionContext {
+        type: string
+    }
+
+    /*
+    interface DateRangeContext extends ActionContext {
+        start: Date,
+        end: Date
+    }
+    */
 
     defineProps<{
         context: ActionContext,
