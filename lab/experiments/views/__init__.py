@@ -4,3 +4,4 @@ from .invite_views import *
 from .location_views import *
 from .appointment_views import *
 from .call_views import *
+from .email_views import *

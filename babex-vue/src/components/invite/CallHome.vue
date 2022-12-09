@@ -6,6 +6,7 @@
     import {formatDate, formatTime} from '../../util';
     import {EventApi, DateSelectArg} from '@fullcalendar/core';
 
+
     const props = defineProps<{
         participant: {id: number, name: string},
         experiment: {id: number, name: string},
@@ -17,6 +18,7 @@
 
     const calendar = ref<typeof AgendaCalendar|null>(null);
     const modalVisible = ref(false);
+    const emailModalVisible = ref(false);
     const step = ref(0);
     const event = ref<EventApi|null>(null);
     const saving = ref(false);
@@ -26,7 +28,30 @@
     const confirmationForm = ref({
         leader: props.leaders[0].id,
         emailParticipant: true,
+        editEmail: false,
     });
+
+    type TinyMCE = any;
+    let emailEditor: TinyMCE;
+    let appointment: number;
+
+    function emailDialog() {
+        modalVisible.value = false;
+        emailModalVisible.value = true;
+    }
+
+    async function tinymcify(el: HTMLInputElement) {
+        emailEditor = (await window.tinymce.init({target: el}))[0];
+        let response = await babexApi.call.appointment.getEmail(appointment);
+        emailEditor.setContent(response.content);
+    }
+
+    function confirmEmail() {
+        babexApi.call.appointment.sendEmail({
+            id: appointment,
+            content: emailEditor.getContent()
+        }).then(complete);
+    }
 
     function confirm() {
         if(!event.value || !event.value.start || !event.value.end) {
@@ -39,9 +64,17 @@
             experiment: props.experiment.id,
             participant: props.participant.id,
             leader: confirmationForm.value.leader,
-            emailParticipant: confirmationForm.value.emailParticipant
-        }).then( () => {
-            complete();
+            // when editEmail is selected, suppress the normal email sending function, as we'll do
+            // that from a separate form
+            emailParticipant: confirmationForm.value.emailParticipant && !confirmationForm.value.editEmail
+        }).then( (response) => {
+            if (confirmationForm.value.editEmail) {
+                appointment = response.id!;
+                emailDialog();
+            }
+            else {
+                complete();
+            }
         });
     }
 
@@ -109,6 +142,7 @@
         <button class="btn btn-primary" :class="{'btn-loading': saving}" @click="saveStatus" :disabled="callStatus==null">Save</button>
     </div>
 
+    <!-- dialog for picking appointment time and booking -->
     <Teleport to="body">
         <div v-if="modalVisible">
             <div id="modal-backdrop" class="modal-backdrop fade show" style="display:block;"></div>
@@ -156,11 +190,40 @@
                                                v-model="confirmationForm.emailParticipant"/>Send confirmation email
                                     </label>
                                 </div>
+                                <div class="row mb-3 justift-content-center">
+                                    <label class="form-label">
+                                        <input class="me-2 form-check-input" type="checkbox"
+                                               :disabled="!confirmationForm.emailParticipant"
+                                               v-model="confirmationForm.editEmail"/>Edit mail before sending
+                                    </label>
+                                </div>
                             </form>
                         </div>
                         <div class="modal-footer">
                             <button @click="confirm" type="button" class="btn btn-primary">Confirm</button>
                             <button @click="modalVisible = false" type="button" class="btn btn-secondary">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Teleport>
+
+    <!-- dialog for editing email before sending -->
+    <Teleport to="body">
+        <div v-if="emailModalVisible">
+            <div id="modal-backdrop" class="modal-backdrop fade show" style="display:block;"></div>
+            <div id="modal" class="modal fade show" tabindex="-1" style="display:block;">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h2>Edit message</h2>
+                            <textarea :ref="tinymcify">
+                            </textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button @click="confirmEmail" type="button" class="btn btn-primary">Confirm</button>
+                            <button @click="emailModalVisible = false" type="button" class="btn btn-secondary">Cancel</button>
                         </div>
                     </div>
                 </div>

@@ -16,7 +16,7 @@ from participants.models import Participant
 CANCEL_LINK_REGEX = r'{cancel_link(?::\"(.*)\")?}'
 
 
-def send_appointment_mail(appointment: Appointment) -> None:
+def send_appointment_mail(appointment: Appointment, override_content=None) -> None:
     experiment = appointment.experiment
     participant = appointment.participant
     time_slot = appointment.timeslot
@@ -64,7 +64,7 @@ def send_appointment_mail(appointment: Appointment) -> None:
         })
 
     email = AppointmentConfirmEmail(
-        [participant.email], subject, contents=experiment.confirmation_email)
+        [participant.email], subject, contents=override_content or experiment.confirmation_email)
     email.context = replacements
     email.send(connection=get_connection())
 
