@@ -40,9 +40,9 @@
         emailModalVisible.value = true;
     }
 
-    async function tinymcify(el: HTMLInputElement) {
+    async function tinymcify(el: HTMLTextAreaElement) {
         emailEditor = (await window.tinymce.init({target: el}))[0];
-        let response = await babexApi.call.appointment.getEmail(appointment);
+        const response = await babexApi.call.appointment.getEmail(appointment);
         emailEditor.setContent(response.content);
     }
 
@@ -218,7 +218,7 @@
                     <div class="modal-content">
                         <div class="modal-body">
                             <h2>Edit message</h2>
-                            <textarea :ref="tinymcify">
+                            <textarea :ref="(el) => tinymcify(el as HTMLTextAreaElement)">
                             </textarea>
                         </div>
                         <div class="modal-footer">
