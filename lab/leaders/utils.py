@@ -102,7 +102,7 @@ def _get_tomorrow():
 
 
 def update_leader(leader: Leader, name: str, email: str, phonenumber: str,
-                  password: str = None, is_active: bool = True) -> Leader:
+                  password: Optional[str] = None, is_active: bool = True) -> Leader:
     _leader_group = Group.objects.get(name=settings.LEADER_GROUP)
     _participant_group = Group.objects.get(name=settings.PARTICIPANT_GROUP)
 
