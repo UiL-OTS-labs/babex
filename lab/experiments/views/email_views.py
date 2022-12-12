@@ -6,10 +6,6 @@ from ..email import AppointmentConfirmEmail
 from .mixins import ExperimentObjectMixin
 
 
-def email_preview_view(request, pk):
-    return HttpResponse('yo')
-
-
 class AppointmentConfirmEmailPreview(braces.LoginRequiredMixin, ExperimentObjectMixin, BaseEmailPreviewView):
     email_class = AppointmentConfirmEmail
 

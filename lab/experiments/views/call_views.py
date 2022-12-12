@@ -97,10 +97,13 @@ class AppointmentSendEmail(views.APIView):
     permission_classes = [IsAdminUser]  # TODO: check if user is a leader of the experiment
 
     def get(self, request, *args, **kwargs):
+        """Returns the email template that's relevant for a given appointment.
+        Used to populate client-side editor"""
         appointment = Appointment.objects.get(pk=int(kwargs['pk']))
         return JsonResponse(dict(content=appointment.experiment.confirmation_email))
 
     def post(self, request, *args, **kwargs):
+        """Sends a custom email"""
         appointment = Appointment.objects.get(pk=int(request.data['id']))
         content = request.data['content']
         send_appointment_mail(appointment, content)
