@@ -20,8 +20,8 @@
     }
 
 
+    // Called when a day is selected.
     function onSelect(selectionInfo: DateSelectArg) {
-        // Called when a day is selected.
         deselectEvents();
         actionContext.value = {
             type: 'date-range',
@@ -31,8 +31,8 @@
         };
     }
 
+    // Called when a specific event (appointment, closing, ...) is selected.
     function onEventClick(eventInfo: EventClickArg) {
-        // Called when a specific event (appointment, closing, ...) is selected.
         deselectEvents();
         const element = eventInfo.el;
         element.classList.add('event-selected');
