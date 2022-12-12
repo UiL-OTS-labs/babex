@@ -14,6 +14,7 @@ def remind_participant(appointment: Appointment) -> None:
     subject = 'UiL OTS *Reminder* opgave experiment: {}'.format(experiment.name)
     context = {
         'participant':     appointment.participant,
+        'leader':          appointment.leader,
         'time_slot':       appointment.timeslot,
         'experiment':      experiment,
         'cancel_link':     _make_cancel_link()

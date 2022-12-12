@@ -30,10 +30,10 @@ def _create_experiment(timeslot_dts=None) -> Experiment:
 
     exp = Experiment.objects.create(
         name='test',
-        leader=_get_or_create_leader(),
         location=_get_or_create_location(),
         defaultcriteria=criteria
     )
+    exp.leaders.add(_get_or_create_leader())
 
     for timeslot_datetime in timeslot_dts:
         tm = TimeSlot()

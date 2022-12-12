@@ -58,7 +58,7 @@ class ParticipantTests(TestCase):
                 timeslot=timeslot,
                 participant=participant,
                 experiment=experiment,
-                leader=experiment.leader
+                leader=experiment.leaders.first()
             )
             # It checks on creation_date now, so we just copy the TS' datetime
             app.creation_date = app.timeslot.datetime
@@ -90,7 +90,7 @@ class ParticipantTests(TestCase):
             timeslot=timeslot,
             participant=participant_1,
             experiment=self.experiments[0],
-            leader=self.experiments[0].leader
+            leader=self.experiments[0].leaders.first()
         )
 
         # This should refuse to delete, as there is an appointment

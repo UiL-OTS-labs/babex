@@ -45,7 +45,7 @@ def test_experiment_list(sb, sample_experiment, sample_participant, as_admin):
 
 
 def test_schedule_appointment(sb, sample_experiment, sample_participant, sample_leader, as_admin):
-    sample_experiment.additional_leaders.add(sample_leader)
+    sample_experiment.leaders.add(sample_leader)
 
     sb.click('a:contains(Experiments)')
     sb.click('a:contains(Overview)')

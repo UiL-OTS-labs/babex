@@ -133,21 +133,12 @@ Met vriendelijke groet,<br/>
         help_text=_('experiment:attribute:excluded_experiments:help_text'),
     )
 
-    leader = models.ForeignKey(
+    leaders = models.ManyToManyField(
         Leader,
-        verbose_name=_("experiment:attribute:leader"),
-        on_delete=models.SET_DEFAULT,
+        verbose_name=_("experiment:attribute:leaders"),
         related_name='experiments',
-        default=1,
-        help_text=_("experiment:attribute:leader:help_text"),
-    )
-
-    additional_leaders = models.ManyToManyField(
-        Leader,
-        verbose_name=_("experiment:attribute:additional_leaders"),
-        related_name='secondary_experiments',
         blank=True,
-        help_text=_("experiment:attribute:additional_leaders:help_text"),
+        help_text=_("experiment:attribute:leaders:help_text"),
     )
 
     defaultcriteria = models.OneToOneField(
@@ -164,10 +155,6 @@ Met vriendelijke groet,<br/>
         except Experiment.defaultcriteria.RelatedObjectDoesNotExist:
             self.defaultcriteria = DefaultCriteria.objects.create()
         super().save(*args, **kwargs)
-
-    @property
-    def leaders(self):
-        return [self.leader] + list(self.additional_leaders.all())
 
     def n_timeslot_places(self):
         """Returns the sum of all timeslot places this experiment has.
@@ -212,3 +199,9 @@ Met vriendelijke groet,<br/>
 
     def __str__(self):
         return self.name
+
+    @property
+    def leader_names(self):
+        # TODO: i18n? (for connective 'en' -> 'and')
+        leader_names = [leader.name for leader in self.leaders.all()]
+        return ''.join(f'{name}, ' for name in leader_names[:-2]) + ' en '.join(leader_names[-2:])
