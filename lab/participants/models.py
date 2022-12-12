@@ -1,3 +1,4 @@
+from typing import cast
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -23,7 +24,7 @@ class ParticipantManager(models.Manager):
 
         # Get a QS with the secondary emails preloaded (to avoid n+1 database
         # calls)
-        queryset = self.prefetch_related('secondaryemail_set')
+        queryset = cast(models.QuerySet[Participant], self.prefetch_related('secondaryemail_set'))
 
         # This LC filters by checking if the email is the same, or appears in
         # the secondary email set.
@@ -55,7 +56,7 @@ class Participant(models.Model):
     capable = e_fields.EncryptedBooleanField(_('participant:attribute:capable'), default=True,)
 
     @property
-    def fullname(self) -> str:
+    def fullname(self):
         if self.name:
             return self.name
 

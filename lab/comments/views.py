@@ -1,8 +1,6 @@
 import braces.views as braces
-from django.contrib.auth.views import SuccessURLAllowedHostsMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy as reverse
-from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
 from cdh.core.views.mixins import DeleteSuccessMessageMixin
@@ -33,12 +31,10 @@ class CommentCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
 
 
 class CommentsDeleteView(braces.UserPassesTestMixin,
-                         SuccessURLAllowedHostsMixin,
                          DeleteSuccessMessageMixin,
                          generic.DeleteView):
     model = Comment
     success_message = _('comments:messages:deleted')
-    template_name = 'comments/delete.html'
 
     def get_success_url(self):
         return reverse('participants:detail', args=(self.object.participant.pk,))
