@@ -9,9 +9,7 @@ from django.utils.timezone import localtime
 import urllib.parse as parse
 
 from experiments.email import AppointmentConfirmEmail
-from experiments.models import Appointment, Experiment, TimeSlot
-from main.utils import get_supreme_admin
-from participants.models import Participant
+from experiments.models import Appointment
 
 CANCEL_LINK_REGEX = r'{cancel_link(?::\"(.*)\")?}'
 
