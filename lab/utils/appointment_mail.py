@@ -26,30 +26,14 @@ def send_appointment_mail(appointment: Appointment, override_content=None) -> No
     )
 
     replacements = {
-        'experiment_name': experiment.name,
-        'experiment_location': '',
-        'participant_name': participant.name,
-        'leader_name': experiment.leader.name,
-        'leader_email': experiment.leader.user.email,
-        'leader_phonenumber': experiment.leader.phonenumber,
-        'all_leaders_name_list': experiment.leader.name,
+        '{experiment_name}': experiment.name,
+        '{experiment_location}': '',
+        '{participant_name}': participant.name,
+        '{leader_name}': appointment.leader.name,
+        '{leader_email}': appointment.leader.user.email,
+        '{leader_phonenumber}': appointment.leader.phonenumber,
+        '{all_leaders_name_list}': experiment.leader_names
     }
-
-    num_additional_leaders = experiment.additional_leaders.count()
-
-    if num_additional_leaders > 0:
-        last_leader = experiment.additional_leaders.last()
-        assert last_leader is not None
-        others = experiment.additional_leaders.exclude(pk=last_leader.pk)
-
-        # If there's one additional, don't add the comma as it looks weird
-        if num_additional_leaders > 1:
-            replacements['all_leaders_name_list'] += ", "
-
-        replacements['all_leaders_name_list'] += ", ".join(
-            [x.name for x in others]
-        )
-        replacements['all_leaders_name_list'] += f" en {last_leader.name}"
 
     if experiment.location:
         replacements['experiment_location'] = experiment.location.name

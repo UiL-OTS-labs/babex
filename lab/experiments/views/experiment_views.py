@@ -114,13 +114,7 @@ class ExperimentEditExcludedExperimentsView(braces.LoginRequiredMixin,
     model = Experiment
 
     def get_queryset(self):
-        return Experiment.objects.exclude(
-            pk=self.kwargs['experiment']
-        ).select_related(
-            'leader',
-        ).prefetch_related(
-            'additional_leaders',
-        )
+        return Experiment.objects.exclude(pk=self.kwargs['experiment'])
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ExperimentEditExcludedExperimentsView, self) \

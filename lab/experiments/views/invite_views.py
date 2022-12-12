@@ -16,11 +16,6 @@ class InviteParticipantsForExperimentView(braces.LoginRequiredMixin,
                                           generic.TemplateView):
     template_name = 'experiments/invite.html'
 
-    experiment_prefetch_related = ['experimentcriterion_set',
-                                   'experimentcriterion_set__criterion',
-                                   'additional_leaders']
-    experiment_select_related = ['defaultcriteria', 'leader', ]
-
     def get_context_data(self, **kwargs):
         context = super(InviteParticipantsForExperimentView,
                         self).get_context_data(**kwargs)
@@ -28,7 +23,9 @@ class InviteParticipantsForExperimentView(braces.LoginRequiredMixin,
         context['object_list'] = self.get_object_list()
         context['experiment'] = self.experiment
         context['admin'] = get_supreme_admin().get_full_name()
-        context['invite_text'] = get_invite_mail_content(self.experiment)
+
+        inviting_leader = self.request.user.leader
+        context['invite_text'] = get_invite_mail_content(self.experiment, inviting_leader)
 
         return context
 
@@ -56,7 +53,7 @@ class InviteParticipantsForExperimentView(braces.LoginRequiredMixin,
                 data.get('content'),
                 self.experiment
             )
-        except:
+        except Exception:
             failed = True
 
         if failed:

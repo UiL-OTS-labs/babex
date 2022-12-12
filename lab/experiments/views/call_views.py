@@ -1,5 +1,4 @@
 import braces.views as braces
-from django.db.models import Q
 from django.views.generic import TemplateView
 from django.http.response import JsonResponse
 from django.utils.dateparse import parse_datetime
@@ -29,7 +28,7 @@ class CallHomeView(braces.LoginRequiredMixin, TemplateView):
 
         context['experiment'] = experiment
         context['experiment_serialized'] = ExperimentSerializer(experiment).data
-        context['leaders'] = [LeaderSerializer(leader).data for leader in experiment.leaders]
+        context['leaders'] = [LeaderSerializer(leader).data for leader in experiment.leaders.all()]
 
         participant = Participant.objects.get(pk=kwargs['participant'])
         context['participant'] = participant
@@ -79,7 +78,7 @@ class AppointmentConfirm(generics.CreateAPIView):
 
         leader = Leader.objects.filter(
             # make sure leader belongs to experiment
-            Q(experiments=experiment.pk) | Q(secondary_experiments=experiment.pk)
+            experiments=experiment.pk
         ).get(
             pk=request.data['leader'],
         )

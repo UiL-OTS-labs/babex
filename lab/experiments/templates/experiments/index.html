@@ -36,7 +36,7 @@
                         {% get_verbose_field_name "experiments" "Experiment" "name" %}
                     </th>
                     <th>
-                        {% get_verbose_field_name "experiments" "Experiment" "leader" %}
+                        {% get_verbose_field_name "experiments" "Experiment" "leaders" %}
                     </th>
                     <th>
                         {% trans "experiments:global:slots" %}
@@ -71,7 +71,7 @@
                             </a>
                         </td>
                         <td>
-                            {{ experiment.leader.name }}
+                            {{ experiment.leader_names }}
                         </td>
                         <td>
                             {% if experiment.use_timeslots %}
