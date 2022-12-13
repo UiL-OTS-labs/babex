@@ -1,6 +1,8 @@
 from django.conf.urls import include
 from django.urls import path
 
+from ..views.email_views import email_preview
+
 app_name = 'experiments'
 
 urlpatterns = [
@@ -28,4 +30,7 @@ urlpatterns = [
     path('criteria/', include('experiments.urls.criteria_urls.standalone')),
 
     path('', include('experiments.urls.call_urls')),
+
+    # email preview
+    path('email/preview/<str:template>/<int:experiment>/', email_preview, name='email_preview'),
 ]

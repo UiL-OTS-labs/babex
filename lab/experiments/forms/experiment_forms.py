@@ -1,4 +1,5 @@
 from django import forms
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from cdh.core.forms import TemplatedModelForm, BootstrapCheckboxInput, BootstrapRadioSelect
@@ -40,6 +41,9 @@ class ExperimentForm(TemplatedModelForm):
             }
         )
 
+        self.fields['confirmation_email'].widget.preview_url = self.preview_url_confirmation()
+        self.fields['invite_email'].widget.preview_url = self.preview_url_invite()
+
         # If we are updating an experiment, make sure you cannot exclude the
         # experiment you are updating!
         if self.instance:
@@ -48,19 +52,8 @@ class ExperimentForm(TemplatedModelForm):
                 (x.pk, x.name) for x in other_experiments
             ]
 
+    def preview_url_confirmation(self):
+        return reverse('experiments:email_preview', args=('confirmation', self.instance.pk))
 
-class ExperimentEmailTemplatesForm(TemplatedModelForm):
-    class Meta:
-        model = Experiment
-        fields = [
-            'confirmation_email'
-        ]
-
-        widgets = {
-            'confirmation_email': EmailContentEditWidget(None),
-        }
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        self.fields['confirmation_email'].widget.preview_url = 'todo'
+    def preview_url_invite(self):
+        return reverse('experiments:email_preview', args=('invite', self.instance.pk))
