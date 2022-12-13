@@ -1,6 +1,6 @@
 declare global {
     interface Window {
-        tinymce: any
+        tinymce: any // eslint-disable-line @typescript-eslint/no-explicit-any
     }
 }
 

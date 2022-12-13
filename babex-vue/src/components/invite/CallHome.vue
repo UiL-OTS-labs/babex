@@ -31,7 +31,9 @@
         editEmail: false,
     });
 
-    type TinyMCE = any;
+    // we can probably skip type checking tinymce's interface
+    type TinyMCE = any; // eslint-disable-line @typescript-eslint/no-explicit-any
+
     let emailEditor: TinyMCE;
     let appointment: number;
 
