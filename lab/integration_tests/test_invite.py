@@ -120,7 +120,8 @@ def test_schedule_appointment_edit_email(sb, sample_experiment, sample_participa
     sb.click('label:contains("Edit mail")')
     sb.click('button:contains(Confirm)')
 
-    sb.wait_for_element('.tox-tinymce')
+    while not sb.execute_script('return tinymce.activeEditor.initialized'):
+        time.sleep(0.2)
 
     # set tinymce editor with a custon email string
     test_email = '<em>this is a test email</em>'
