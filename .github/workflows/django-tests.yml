@@ -36,6 +36,12 @@ jobs:
           pip install -r requirements.txt
           pip install -r requirements-dev.txt
           pip install flake8 pytest
+          pip freeze > pip_freeze.log
+      - name: pip freeze
+        uses: actions/upload-artifact@v1
+        with:
+          name: pip freeze
+          path: pip_freeze.log
       - name: Lint with flake8
         run: |
           cd ${{ matrix.app }}
