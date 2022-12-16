@@ -57,6 +57,7 @@ def sample_appointment(sample_experiment, sample_participant, sample_leader, db)
 def test_experiment_list(sb, sample_experiment, sample_participant, as_admin):
     sb.click('a:contains(Experiments)')
     sb.click('a:contains(Overview)')
+    sb.click('button.icon-menu')
     sb.click('a:contains(Invite)')
     sb.assert_text('Baby McBaby')
 
@@ -66,6 +67,7 @@ def test_schedule_appointment(sb, sample_experiment, sample_participant, sample_
 
     sb.click('a:contains(Experiments)')
     sb.click('a:contains(Overview)')
+    sb.click('button.icon-menu')
     sb.click('a:contains(Invite)')
     sb.click('a.icon-phone')
     sb.click('button:contains(Schedule)')
@@ -84,6 +86,7 @@ def test_schedule_appointment(sb, sample_experiment, sample_participant, sample_
     # baby mcbaby shouldn't be available anymore
     sb.click('a:contains(Experiments)')
     sb.click('a:contains(Overview)')
+    sb.click('button.icon-menu')
     sb.click('a:contains(Invite)')
     sb.assert_text_not_visible('Baby McBaby')
 
