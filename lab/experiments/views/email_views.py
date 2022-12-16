@@ -2,7 +2,6 @@ import braces.views as braces
 from cdh.core.mail import BaseEmailPreviewView
 from datetime import datetime
 from django.template import defaultfilters
-from django.utils.timezone import localtime
 
 from ..models import Experiment
 from ..email import AppointmentConfirmEmail
@@ -14,7 +13,7 @@ def sample_context(experiment: Experiment):
         'date': defaultfilters.date(datetime.now(), 'l d-m-Y'),
         'time': defaultfilters.date(datetime.now(), 'H:i'),
         'experiment_name': experiment.name,
-        'experiment_location': experiment.location.name,
+        'experiment_location': experiment.location.name if experiment.location is not None else '-',
         'participant_name': 'Participant Name',
         'leader_name': 'Leader Name',
         'leader_email': 'leader@uu.nl',
