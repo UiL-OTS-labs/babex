@@ -108,6 +108,7 @@ def test_schedule_appointment_edit_email(sb, sample_experiment, sample_participa
 
     sb.click('a:contains(Experiments)')
     sb.click('a:contains(Overview)')
+    sb.click('button.icon-menu')
     sb.click('a:contains(Invite)')
     sb.click('a.icon-phone')
     sb.click('button:contains(Schedule)')
