@@ -51,7 +51,7 @@ class ApiClient {
         return await result.json();
     }
 
-    async post<T>(url: string, values: T): Promise<T> {
+    async post<T, D>(url: string, values: D): Promise<T> {
         const result = await fetch(url, {
             credentials: 'include',
             method: 'POST',
@@ -66,7 +66,7 @@ class ApiClient {
         return await result.json();
     }
 
-    async put<T>(url: string, id: string, values: T): Promise<T> {
+    async put<T, D>(url: string, id: string, values: D): Promise<T> {
         const result = await fetch(`${url}${id}/`, {
             credentials: 'include',
             method: 'PUT',
@@ -143,6 +143,15 @@ interface AppointmentCreate {
     emailParticipant: boolean
 }
 
+interface AppointmentEmail {
+    content: string
+}
+
+interface AppointmentSendEmail {
+    id: number,  // appointment id
+    content: string
+}
+
 class BabexApi {
     protected client = new ApiClient();
 
@@ -154,7 +163,13 @@ class BabexApi {
     call = {
         appointment: {
             create: (data: AppointmentCreate) => {
-                return this.client.post(urls.call.appointment, data);
+                return this.client.post<Appointment, AppointmentCreate>(urls.call.appointment, data);
+            },
+            getEmail: (id: number) => {
+                return this.client.get<AppointmentEmail>(urls.call.sendEmail + id);
+            },
+            sendEmail: (data: AppointmentSendEmail) => {
+                return this.client.post(urls.call.sendEmail, data);
             }
         },
         log: new GenericApiPart<Call>(this.client, urls.call.log),

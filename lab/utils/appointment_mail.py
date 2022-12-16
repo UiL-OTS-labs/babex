@@ -1,29 +1,23 @@
 import re
-from typing import Optional
 
 from django.conf import settings
+from django.core.mail import get_connection
 from django.template import defaultfilters
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.timezone import localtime
 import urllib.parse as parse
 
-from cdh.core.utils.mail import send_template_email
-
-from experiments.models import Appointment, Experiment, TimeSlot
-from main.utils import get_supreme_admin
-from participants.models import Participant
+from experiments.email import AppointmentConfirmEmail
+from experiments.models import Appointment
 
 CANCEL_LINK_REGEX = r'{cancel_link(?::\"(.*)\")?}'
 
 
-def send_appointment_mail(appointment: Appointment) -> None:
+def send_appointment_mail(appointment: Appointment, override_content=None) -> None:
     experiment = appointment.experiment
     participant = appointment.participant
     time_slot = appointment.timeslot
-
-    admin = get_supreme_admin()
-    template = 'api/mail/new_appointment'
 
     subject = 'Bevestiging inschrijving experiment UiL OTS: {}'.format(
         experiment.name
@@ -40,34 +34,21 @@ def send_appointment_mail(appointment: Appointment) -> None:
     }
 
     if experiment.location:
-        replacements['{experiment_location}'] = experiment.location.name
+        replacements['experiment_location'] = experiment.location.name
 
     if experiment.use_timeslots and time_slot is not None:
         # We don't use strftime because that's not _always_ timezone aware
         # Also, using the template filter is a neat hack to have the same format
         # string syntax everywhere
         replacements.update({
-            '{date}': defaultfilters.date(localtime(time_slot.start), 'l d-m-Y'),
-            '{time}': defaultfilters.date(localtime(time_slot.start), 'H:i'),
+            'date': defaultfilters.date(localtime(time_slot.start), 'l d-m-Y'),
+            'time': defaultfilters.date(localtime(time_slot.start), 'H:i'),
         })
 
-    send_template_email(
-        [participant.email],
-        subject,
-        template,
-        {
-            'experiment': experiment,
-            'html_content': _parse_contents_html(
-                experiment.confirmation_email,
-                replacements
-            ),
-            'plain_content': _parse_contents_plain(
-                experiment.confirmation_email,
-                replacements
-            )
-        },
-        admin.email
-    )
+    email = AppointmentConfirmEmail(
+        [participant.email], subject, contents=override_content or experiment.confirmation_email)
+    email.context = replacements
+    email.send(connection=get_connection())
 
 
 def _parse_contents_html(

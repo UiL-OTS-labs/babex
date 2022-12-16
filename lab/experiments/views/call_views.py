@@ -4,14 +4,14 @@ from django.http.response import JsonResponse
 from django.utils.dateparse import parse_datetime
 
 import ageutil
-from rest_framework import generics, serializers
+from rest_framework import generics, serializers, views
 from rest_framework.permissions import IsAdminUser
 
 
 from utils.appointment_mail import send_appointment_mail
 from experiments.models import Experiment, Appointment, TimeSlot
 from experiments.models.invite_models import Call
-from experiments.serializers import ExperimentSerializer
+from experiments.serializers import AppointmentSerializer, ExperimentSerializer
 from leaders.models import Leader
 from leaders.serializers import LeaderSerializer
 from participants.models import Participant
@@ -64,6 +64,7 @@ class CallHomeView(braces.LoginRequiredMixin, TemplateView):
 
 class AppointmentConfirm(generics.CreateAPIView):
     permission_classes = [IsAdminUser]  # TODO: check if user is a leader of the experiment
+    serializer_class = AppointmentSerializer
 
     def create(self, request, *args, **kwargs):
         experiment = Experiment.objects.get(pk=request.data['experiment'])
@@ -89,6 +90,23 @@ class AppointmentConfirm(generics.CreateAPIView):
         if request.data['emailParticipant']:
             send_appointment_mail(appointment)
 
+        return JsonResponse(self.serializer_class(appointment).data)
+
+
+class AppointmentSendEmail(views.APIView):
+    permission_classes = [IsAdminUser]  # TODO: check if user is a leader of the experiment
+
+    def get(self, request, *args, **kwargs):
+        """Returns the email template that's relevant for a given appointment.
+        Used to populate client-side editor"""
+        appointment = Appointment.objects.get(pk=int(kwargs['pk']))
+        return JsonResponse(dict(content=appointment.experiment.confirmation_email))
+
+    def post(self, request, *args, **kwargs):
+        """Sends a custom email"""
+        appointment = Appointment.objects.get(pk=int(request.data['id']))
+        content = request.data['content']
+        send_appointment_mail(appointment, content)
         return JsonResponse({})
 
 
