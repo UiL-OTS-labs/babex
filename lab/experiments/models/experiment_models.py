@@ -18,7 +18,7 @@ def _get_dt_2_hours_ago() -> datetime:
 
 class Experiment(models.Model):
 
-    DEFAULT_CONFIRMATION_MAIL = """<p>Beste {{participant_name}},</p>
+    DEFAULT_CONFIRMATION_MAIL = """<p>Beste {{parent_name}},</p>
     <p>
         Je hebt een afspraak gemaakt om mee te doen met het experiment:
         <strong>{{experiment_name}}</strong><br/><br/>

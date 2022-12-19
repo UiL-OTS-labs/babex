@@ -21,6 +21,7 @@ def sample_participant(db):
     yield Participant.objects.create(
         email='baby@baby.com',
         name='Baby McBaby',
+        parent_name='Parent McParent',
         birth_date=date(2020, 1, 1),
         multilingual=False,
         phonenumber='987654321',
@@ -101,6 +102,12 @@ def test_schedule_appointment(sb, sample_experiment, sample_participant, sample_
     # check that a confirmation email was sent
     sb.assertEqual(len(mail.outbox), 1)
     sb.assertEqual(mail.outbox[0].to[0], sample_participant.email)
+
+    # check that at least parent name and leader name are in the email contents
+    sb.assertIn(sample_participant.parent_name, mail.outbox[0].body)
+    sb.assertIn(sample_leader.user.get_full_name(), mail.outbox[0].body)
+    sb.assertIn(sample_participant.parent_name, mail.outbox[0].alternatives[0][0])
+    sb.assertIn(sample_leader.user.get_full_name(), mail.outbox[0].alternatives[0][0])
 
 
 def test_schedule_appointment_edit_email(sb, sample_experiment, sample_participant, sample_leader, as_admin):
