@@ -72,8 +72,6 @@ def _send_confirmation(appointment: Appointment) -> None:
         'participant':             appointment.participant,
         'time_slot':               time_slot,
         'experiment':              experiment,
-        'admin':                   appointment.leader.user.get_full_name(),
-        'admin_email':             appointment.leader.email,
         'other_time_link':         get_register_link(experiment),
         'home_link':               settings.FRONTEND_URI,
     }
