@@ -5,7 +5,7 @@ from cdh.core.utils.mail import send_template_email
 
 from comments.utils import add_system_comment
 from experiments.models import Appointment
-from main.utils import get_supreme_admin, get_register_link
+from main.utils import get_register_link
 
 
 def cancel_appointment(appointment: Appointment) -> None:
@@ -64,7 +64,6 @@ def _inform_leaders(appointment: Appointment) -> None:
 
 
 def _send_confirmation(appointment: Appointment) -> None:
-    admin = get_supreme_admin()
     experiment = appointment.experiment
     time_slot = appointment.timeslot
 
@@ -73,8 +72,8 @@ def _send_confirmation(appointment: Appointment) -> None:
         'participant':             appointment.participant,
         'time_slot':               time_slot,
         'experiment':              experiment,
-        'admin':                   admin.get_full_name(),
-        'admin_email':             admin.email,
+        'admin':                   appointment.leader.user.get_full_name(),
+        'admin_email':             appointment.leader.email,
         'other_time_link':         get_register_link(experiment),
         'home_link':               settings.FRONTEND_URI,
     }
@@ -83,6 +82,5 @@ def _send_confirmation(appointment: Appointment) -> None:
         [appointment.participant.email],
         subject,
         'api/mail/cancelled_appointment',
-        context,
-        admin.email
+        context
     )

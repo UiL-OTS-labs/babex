@@ -8,8 +8,7 @@ from leaders.models import Leader
 def admin_user(db):
     admin = User.objects.create(username='admin',
                                 is_superuser=True,
-                                is_staff=True,
-                                is_supreme_admin=True)
+                                is_staff=True)
     Leader.objects.create(name='Admin McAdmin',
                           phonenumber='12345678',
                           user=admin)

@@ -5,7 +5,7 @@ from cdh.core.utils.mail import send_template_email
 import auditlog.utils.log as auditlog
 from auditlog.enums import Event, UserType
 from experiments.models import Appointment
-from main.utils import get_supreme_admin, get_register_link
+from main.utils import get_register_link
 
 
 def unsubscribe_participant(appointment_pk: int,
@@ -21,23 +21,21 @@ def unsubscribe_participant(appointment_pk: int,
 
     message = "User deleted appointment for experiment '{}' for " \
               "participant '{} ({})'".format(
-        experiment.name,
-        appointment.participant.fullname,
-        appointment.participant.pk,
-    )
+                  experiment.name,
+                  appointment.participant.fullname,
+                  appointment.participant.pk,
+              )
 
     _log_deletions(message, deleting_user)
 
     if sent_email:
-        admin = get_supreme_admin()
-
         subject = 'UiL OTS uitschrijven experiment: {}'.format(experiment.name)
         context = {
             'participant':     appointment.participant,
             'time_slot':       time_slot,
             'experiment':      experiment,
-            'admin':           admin.get_full_name(),
-            'admin_email':     admin.email,
+            'admin':           appointment.leader.user.get_full_name(),
+            'admin_email':     appointment.leader.email,
             'other_time_link': get_register_link(experiment),
             'home_link':       settings.FRONTEND_URI,
         }
@@ -46,8 +44,7 @@ def unsubscribe_participant(appointment_pk: int,
             [appointment.participant.email],
             subject,
             'timeslots/mail/unsubscribed',
-            context,
-            admin.email
+            context
         )
 
 

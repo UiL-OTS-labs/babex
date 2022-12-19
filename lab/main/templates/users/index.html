@@ -55,9 +55,6 @@
                         {{ email|capfirst }}
                     </th>
                     <th>
-                        {% get_verbose_field_name 'main' 'User' 'is_supreme_admin' %}
-                    </th>
-                    <th>
                         {% get_verbose_field_name 'main' 'User' 'is_active' as active %}
                         {{ active|capfirst }}
                     </th>
@@ -86,9 +83,6 @@
                         </td>
                         <td>
                             {{ user.email }}
-                        </td>
-                        <td class="icon-supreme">
-                            {{ user.is_supreme_admin|yesno:"," }}
                         </td>
                         <td class="icon-yesno">
                             {{ user.is_active|yesno:"," }}
