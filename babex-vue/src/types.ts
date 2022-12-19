@@ -36,6 +36,7 @@ interface Call {
 }
 
 interface ActionContext {
+    calendar?: any,
     type?: string,
     event?: Dictionary,
     locations?: Location[],

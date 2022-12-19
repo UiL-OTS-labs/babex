@@ -1,11 +1,11 @@
-from datetime import timedelta, datetime
+import braces.views as braces
 import dateutil.parser
 
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
-from django.http.response import JsonResponse
+from django.shortcuts import render
+from django.views import generic
 
-from rest_framework import generics, views, serializers, viewsets
+from rest_framework import generics, viewsets, status
 from rest_framework.response import Response
 
 from experiments.models import Appointment, Location
@@ -48,6 +48,14 @@ class ClosingViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(end__gte=from_date, start__lt=to_date)
 
         return queryset
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data, many=isinstance(request.data, list))
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
 
 class AppointmentViewSet(viewsets.ModelViewSet):
     serializer_class = AppointmentSerializer

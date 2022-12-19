@@ -23,7 +23,8 @@
         </div>
         <div v-if="context.type=='date-range'" class="action-panel">
             <h5>Add closing</h5>
-            <ClosingForm :key="Math.random()" :start="context.start" :end="context.end" :locations="context.locations ?? []" @done="$emit('done')" />
+            <ClosingForm :key="Math.random()" :start="context.start" :end="context.end" :locations="context.locations ?? []" @done="$emit('done')"
+                         :calendar="context.calendar" />
         </div>
     </div>
 </template>

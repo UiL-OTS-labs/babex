@@ -131,6 +131,10 @@ class GenericApiPart<T> extends ApiPart {
     async create(values: T) {
         return this.client.post(this.endpoint, values);
     }
+
+    async createMany(values: T[]) {
+        return this.client.post(this.endpoint, values);
+    }
 }
 
 
