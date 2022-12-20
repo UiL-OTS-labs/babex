@@ -5,6 +5,7 @@ from rest_framework.routers import DefaultRouter
 from .views import GatewayHome
 from .views import Signups
 
+app_name = 'gateway'
 
 router = DefaultRouter()
 router.register('signup', Signups, basename='signup')
