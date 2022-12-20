@@ -64,3 +64,21 @@ class AppointmentViewSet(viewsets.ModelViewSet):
         queryset = Appointment.objects.all()
         return queryset
 
+
+class ClosingsAdminView(braces.LoginRequiredMixin, generic.TemplateView):
+    # TODO: admin permissions
+    template_name = 'agenda/closings_admin.html'
+
+    def get_context_data(self, **kwargs):
+        context = dict()
+        context['object_list'] = self.get_object_list()
+        return context
+
+    def get_object_list(self):
+        return Closing.objects.all().order_by('-start')
+
+    def post(self, request, *args, **kwargs):
+        '''simple post endpoint for removing closings'''
+        pks = map(int, request.POST.getlist('closings'))
+        Closing.objects.filter(pk__in=pks).delete()
+        return self.get(request, *args, **kwargs)
