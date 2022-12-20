@@ -14,7 +14,25 @@
     </div>
     <div class="uu-inner-container">
         <div class="col-10">
-            There's nothing here yet.
+            <p>Hello {{ user.get_full_name }}!</p>
+
+            {% if user.leader %}
+            <p>You are a leader for the following experiments:</p>
+            <ul>
+                {% for experiment in experiments %}
+                    <li><a href="{% url 'experiments:detail' experiment.pk %}">{{ experiment.name }}</a></li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if call_back %}
+            <p>You should call back these parents:</p>
+            <ul>
+                {% for participant in call_back %}
+                    <li><a href="{% url 'participants:detail' participant.pk %}">{{ participant.name }}</a></li>
+                {% endfor %}
+            </ul>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
