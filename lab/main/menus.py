@@ -89,7 +89,7 @@ Menu.add_item(
 
 
 admin_menu = [
-    MenuItem('mainmenu:admin:closings', reverse('agenda:admin.closings'))
+    MenuItem(_('mainmenu:admin:closings'), reverse('agenda:admin.closings'))
 ]
 
 Menu.add_item('main', MenuItem(_('mainmenu:admin'),

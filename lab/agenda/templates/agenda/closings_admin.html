@@ -21,7 +21,6 @@
 <div class="w-100 ps-5 pe-5">
     <div class="col-12">
         <p>
-            {% trans 'experiments:home:info_text' %}
         </p>
         <form method="post">
             {% csrf_token %}
@@ -73,7 +72,7 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <button class="btn btn-primary">Remove closings</button>
+            <button class="btn btn-primary">{% trans 'agenda:closings:remove' %}</button>
         </form>
         <br/>
     </div>
