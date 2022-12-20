@@ -65,8 +65,7 @@ class AppointmentViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class ClosingsAdminView(braces.LoginRequiredMixin, generic.TemplateView):
-    # TODO: admin permissions
+class ClosingsAdminView(braces.StaffuserRequiredMixin, generic.TemplateView):
     template_name = 'agenda/closings_admin.html'
 
     def get_context_data(self, **kwargs):
