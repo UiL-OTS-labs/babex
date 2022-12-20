@@ -8,18 +8,21 @@
     {% trans 'locations:home:header' %} - {{ block.super }}
 {% endblock %}
 
-
-{% block content %}
-<div class="uu-inner-container">
-    <div class="col-12">
-        <div class="float-right button button-colored">
-            <a href="{% url 'experiments:location_create' %}">
-                {% trans 'locations:home:create_location' %}
-            </a>
-        </div>
+{% block pre-messages-content %}
+    <div class="uu-hero justify-content-between align-items-center">
         <h1>
             {% trans 'locations:home:header' %}
         </h1>
+
+        <a href="{% url 'experiments:location_create' %}" class="btn btn-secondary">
+            {% trans 'locations:home:create_location' %}
+        </a>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="uu-container">
+    <div class="col-12">
         <p>
             {% trans 'locations:home:info_text' %}
         </p>
