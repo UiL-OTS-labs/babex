@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.views import generic
 
-from rest_framework import generics, viewsets, status
+from rest_framework import generics, viewsets, status, permissions
 from rest_framework.response import Response
 
 from experiments.models import Appointment, Location
@@ -37,8 +37,16 @@ def agenda_home(request):
     return render(request, 'agenda/home.html', context)
 
 
+class ClosingPermission(permissions.BasePermission):
+    def has_permission(self, request, view):
+        if view.action == 'list':
+            return True
+        return request.user.is_staff
+
+
 class ClosingViewSet(viewsets.ModelViewSet):
     serializer_class = ClosingSerializer
+    permission_classes = [ClosingPermission]
 
     def get_queryset(self):
         queryset = Closing.objects.all()
