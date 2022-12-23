@@ -764,7 +764,13 @@ msgstr "Next >>"
 #: experiments/templates/experiments/participants.html:11
 #: experiments/templates/experiments/participants.html:29
 msgid "experiments:participants:header"
-msgstr "participants - Experiment '{}'"
+msgstr "Participants - '{}'"
+
+msgid "experiments:participants:expected"
+msgstr "Expected"
+
+msgid "experiments:participants:past"
+msgstr "Past"
 
 #: experiments/templates/experiments/participants.html:39
 msgid "experiments:participants:info_text"

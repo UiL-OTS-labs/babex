@@ -117,18 +117,16 @@ class Appointment(models.Model):
 
     @start.setter
     def start(self, starttime):
-        self.timeslot.start = starttime 
+        self.timeslot.start = starttime
 
     @property
     def end(self):
         return self.timeslot.end
-    
+
     @end.setter
     def end(self, end_time):
-        self.timeslot.end = end_time 
+        self.timeslot.end = end_time
 
     def location(self):
         # TODO: temporary workaround for missing locations
         return self.experiment.location.name if self.experiment.location else 'Unknown'
-
-

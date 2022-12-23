@@ -1,0 +1,61 @@
+{% load datatables %}
+{% load i18n %}
+{% load transformat %}
+{% load get_field_name %}
+
+<table class="dt_custom" width="100%" data-language="{% datatables_lang %}" data-responsive="">
+    <thead>
+        <tr>
+            <th>
+                {% get_verbose_field_name "experiments" "TimeSlot" "start" %}
+            </th>
+            <th>
+                {% trans 'timeslots:day' %}
+            </th>
+            <th>
+                {% get_verbose_field_name "participants" "Participant" "name" %}
+            </th>
+            <th>
+                {% trans 'experiments:participants:email' %}
+            </th>
+            <th>
+                {% trans 'experiments:participants:phone_number' %}
+            </th>
+            <th>
+                {% trans 'experiments:participants:birth_date' %}
+            </th>
+            <th>
+                {% trans 'experiments:globals:actions' %}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for appointment in object_list %}
+        <tr>
+            <td>
+                {{ appointment.timeslot.start|date:"Y-m-d H:i" }}
+            </td>
+            <td>
+                {{ appointment.timeslot.start|date:"l" }}
+            </td>
+            <td>
+                <a href="{% url 'participants:detail' appointment.participant.pk %}">{{ appointment.participant.fullname }}</a>
+            </td>
+            <td>
+                <a href="mailto:{{ appointment.participant.email }}">
+                    {{ appointment.participant.email }}
+                </a>
+            </td>
+            <td>
+                {{ appointment.participant.phonenumber }}
+            </td>
+            <td>
+                {{ appointment.participant.birth_date|date:"Y-m-d" }}
+            </td>
+            <td>
+                <!-- actions -->
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

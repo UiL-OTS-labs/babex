@@ -7,6 +7,7 @@ from django.urls import reverse_lazy as reverse
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
+from django.utils import timezone
 from cdh.core.views import RedirectActionView
 from cdh.core.views.mixins import DeleteSuccessMessageMixin, \
     RedirectSuccessMessageMixin
@@ -154,62 +155,18 @@ class ExperimentExcludeOtherExperimentView(braces.LoginRequiredMixin,
 
 
 class ExperimentAppointmentsView(braces.LoginRequiredMixin,
-                                 ExperimentObjectMixin, generic.ListView):
+                                 ExperimentObjectMixin,
+                                 generic.TemplateView):
     template_name = 'experiments/participants.html'
-    model = Appointment
-
-    # Prefetch/select related criteria data for the criteria boxes
-    experiment_select_related = ['defaultcriteria']
-    experiment_prefetch_related = ['experimentcriterion_set__criterion']
 
     def get_context_data(self, *args, **kwargs):
-        context = super(ExperimentAppointmentsView, self).get_context_data(
-            *args,
-            **kwargs
-        )
+        context = super().get_context_data(*args, **kwargs)
 
         context['experiment'] = self.experiment
-
+        queryset = Appointment.objects.filter(experiment=self.experiment)
+        context['past_list'] = queryset.filter(timeslot__start__lt=timezone.now())
+        context['future_list'] = queryset.filter(timeslot__start__gte=timezone.now())
         return context
-
-    def get_queryset(self):
-        """
-        Returns an annotated queryset, which injects the `n` attribute. This
-        will hold the place this appointment has in a time slot.
-        :return:
-        """
-
-        # First, get a QuerySet containing only appointments for this experiment
-        qs = self.model.objects.filter(experiment=self.experiment)
-
-        # Ensure the time slot and participant objects are collected in the
-        # initial SELECT query
-        qs = qs.select_related('timeslot', 'participant')
-
-        # Build a query filter that selects all appointments with a lower or
-        # equal creation date
-        # (the equal part makes sure we count the appointment in question
-        # too, which is a hack to ensure that we display a 1-based place)
-        q_filter = None
-        if self.experiment.use_timeslots:
-            # If we use timeslots, we actually use the timeslot's set of
-            # appointments, to ensure that the counter is for appointments in
-            # that slot
-            q_filter = Q(
-                timeslot__appointments__creation_date__lte=F('creation_date')
-            )
-        else:
-            # If we don't use timeslots, we can just count all appointments
-            q_filter = Q(
-                creation_date__lte=F('creation_date')
-            )
-
-        # Make an aggregation object that counts the number of appointments,
-        # filtered by the filter we made above
-        # This means this will count all appointments with a lower creation_date
-        count = Count('timeslot__appointments', filter=q_filter)
-
-        return qs.annotate(n=count)
 
 
 # -------------------
