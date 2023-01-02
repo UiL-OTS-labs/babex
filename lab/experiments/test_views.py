@@ -1,6 +1,7 @@
 import json
 from datetime import datetime, timedelta
 from django.test import TestCase
+from django.utils import timezone
 
 from rest_framework.test import APIRequestFactory, force_authenticate
 
@@ -29,8 +30,8 @@ class AppointmentTests(TestCase):
     def test_appointment_confirm(self):
         data = {
             'experiment': self.experiment.pk,
-            'start': datetime.now() + timedelta(days=1),
-            'end': datetime.now() + timedelta(days=1, hours=1),
+            'start': timezone.now() + timedelta(days=1),
+            'end': timezone.now() + timedelta(days=1, hours=1),
             'leader': self.leader.pk,
             'participant': self.participant.pk,
             'emailParticipant': False
@@ -44,8 +45,8 @@ class AppointmentTests(TestCase):
     def test_appointment_confirm_fail_in_past(self):
         data = {
             'experiment': self.experiment.pk,
-            'start': datetime.now() - timedelta(hours=2),
-            'end': datetime.now() - timedelta(hours=1),
+            'start': timezone.now() - timedelta(hours=2),
+            'end': timezone.now() - timedelta(hours=1),
             'leader': self.leader.pk,
             'participant': self.participant.pk,
             'emailParticipant': False
