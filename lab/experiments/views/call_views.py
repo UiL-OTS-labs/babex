@@ -1,9 +1,9 @@
-from datetime import datetime
 import braces.views as braces
 from django.core.exceptions import BadRequest
 from django.views.generic import TemplateView
 from django.http.response import JsonResponse
 from django.utils.dateparse import parse_datetime
+from django.utils import timezone
 
 import ageutil
 from rest_framework import generics, serializers, views
@@ -73,7 +73,7 @@ class AppointmentConfirm(generics.CreateAPIView):
         start = parse_datetime(request.data['start'])
         end = parse_datetime(request.data['end'])
 
-        if end < start or start < datetime.now():
+        if end < start or start < timezone.now():
             raise BadRequest('Invalid appointment time')
 
         timeslot = TimeSlot.objects.create(
