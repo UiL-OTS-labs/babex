@@ -1,9 +1,10 @@
 {% extends 'base/base.html' %}
+{% load i18n %}
 
 {% block content %}
 <div class="uu-container">
     <div class="col-12">
-        Thank you for signing up.
+        {% trans 'parent:signup_done:message' %}
     </div>
 </div>
 {% endblock %}

@@ -1,13 +1,13 @@
 {% extends 'base/base.html' %}
+{% load i18n %}
 
 {% block content %}
 <div class="uu-container">
-    Welcome to the parent app.
-</div>
-
-<div class="uu-container">
     <div class="col-12">
-    <h1>Sign up:</h1>
+    <h1>{% trans 'signup:header' %}</h1>
+    <p>
+        {% trans 'signup:intro' %}
+    </p>
     <form method="post" class="uu-form">
         {% csrf_token %}
         {{ form }}
