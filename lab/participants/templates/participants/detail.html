@@ -52,6 +52,9 @@
         <div class="uu-sidebar-content" >
 {% display_messages messages False %}
         <section id="participant-general">
+            <a href="{% url 'participants:edit' participant.pk %}" class="btn btn-secondary float-end">
+                {% trans 'participants:detail:edit' %}
+            </a>
             <h2>General information</h2>
             <table class="table">
                 <tr>

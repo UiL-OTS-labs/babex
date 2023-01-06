@@ -1,6 +1,4 @@
-from typing import Any
 import braces.views as braces
-from django import forms
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy as reverse
 from django.utils.functional import cached_property
@@ -11,7 +9,7 @@ from cdh.core.views import FormSetUpdateView
 from cdh.core.views.mixins import DeleteSuccessMessageMixin
 
 from .forms import CriterionAnswerForm, ParticipantForm
-from .models import CriterionAnswer, Participant, SecondaryEmail
+from .models import CriterionAnswer, Participant
 from comments.forms import CommentForm
 
 from . import graphs
