@@ -1,0 +1,73 @@
+{% extends 'base/babex_base.html' %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+
+{% block pre-messages-content %}
+    <div class="uu-hero justify-content-between align-items-center">
+        <h1 class="h2">
+            {% trans 'signups:detail:header' %}
+        </h1>
+
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="uu-sidebar-container uu-sidebar-right uu-sidebar-sticky">
+        <aside class="uu-sidebar" >
+            <div class="uu-sidebar-collapse collapse">
+            <div class="w-100">
+                <ul class="nav">
+                </ul>
+            </div>
+            </div>
+        </aside>
+        <div class="uu-sidebar-content" >
+            <table class="table">
+                <tr>
+                    <td> {% get_verbose_field_name "signups" "Signup" "name" %} </td>
+                    <td> {{ signup.name }} </td>
+                </tr>
+                <tr>
+                    <td> {% get_verbose_field_name "signups" "Signup" "sex" %} </td>
+                    <td> {{ signup.sex }} </td>
+                </tr>
+                <tr>
+                    <td> {% get_verbose_field_name "signups" "Signup" "birth_date" %} </td>
+                    <td> {{ signup.birth_date }} </td>
+                </tr>
+                <tr>
+                    <td> {% get_verbose_field_name "signups" "Signup" "parent_name" %} </td>
+                    <td> {{ signup.parent_name }} </td>
+                </tr>
+                <tr>
+                    <td> {% get_verbose_field_name "signups" "Signup" "city" %} </td>
+                    <td> {{ signup.city }} </td>
+                </tr>
+                <tr>
+                    <td> {% get_verbose_field_name "signups" "Signup" "phonenumber" %} </td>
+                    <td> {{ signup.phonenumber }} </td>
+                </tr>
+                <tr>
+                    <td> {% get_verbose_field_name "signups" "Signup" "phonenumber_alt" %} </td>
+                    <td> {{ signup.phonenumber_alt }} </td>
+                </tr>
+                <tr>
+                    <td> {% get_verbose_field_name "signups" "Signup" "email" %} </td>
+                    <td> {{ signup.email }} </td>
+                </tr>
+                <tr>
+                    <td> {% get_verbose_field_name "signups" "Signup" "english_contact" %} </td>
+                    <td> {{ signup.english_contact|yesno:_("yes,no")  }} </td>
+                </tr>
+            </table>
+
+            <form method="post" action="{% url 'signups:detail' signup.pk %}">
+                {% csrf_token %}
+                <button name="action" value="approve" class="btn btn-primary me-2">{% trans 'signups:detail:approve' %}</button>
+                <button name="action" value="reject" class="btn btn-secondary">{% trans 'signups:detail:reject' %}</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
