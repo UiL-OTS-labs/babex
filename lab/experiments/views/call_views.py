@@ -1,11 +1,12 @@
 import braces.views as braces
+from django.core.exceptions import PermissionDenied
 from django.views.generic import TemplateView
 from django.http.response import JsonResponse
 from django.utils.dateparse import parse_datetime
 
 import ageutil
 from rest_framework import generics, serializers, views
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAuthenticated
 
 
 from utils.appointment_mail import send_appointment_mail
@@ -63,11 +64,13 @@ class CallHomeView(braces.LoginRequiredMixin, TemplateView):
 
 
 class AppointmentConfirm(generics.CreateAPIView):
-    permission_classes = [IsAdminUser]  # TODO: check if user is a leader of the experiment
+    permission_classes = [IsAuthenticated]
     serializer_class = AppointmentSerializer
 
     def create(self, request, *args, **kwargs):
         experiment = Experiment.objects.get(pk=request.data['experiment'])
+        if not experiment.is_leader(request.user):
+            raise PermissionDenied
 
         timeslot = TimeSlot.objects.create(
             start=parse_datetime(request.data['start']),
@@ -94,7 +97,7 @@ class AppointmentConfirm(generics.CreateAPIView):
 
 
 class AppointmentSendEmail(views.APIView):
-    permission_classes = [IsAdminUser]  # TODO: check if user is a leader of the experiment
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
         """Returns the email template that's relevant for a given appointment.
@@ -105,6 +108,8 @@ class AppointmentSendEmail(views.APIView):
     def post(self, request, *args, **kwargs):
         """Sends a custom email"""
         appointment = Appointment.objects.get(pk=int(request.data['id']))
+        if not appointment.experiment.is_leader(request.user):
+            raise PermissionDenied
         content = request.data['content']
         send_appointment_mail(appointment, content)
         return JsonResponse({})
@@ -117,11 +122,14 @@ class CallSerializer(serializers.ModelSerializer):
 
 
 class UpdateCall(generics.UpdateAPIView):
-    permission_classes = [IsAdminUser]  # TODO: check if user started the call
+    permission_classes = [IsAuthenticated]
     serializer_class = CallSerializer
 
     def update(self, request, *args, **kwargs):
         call = Call.objects.get(pk=kwargs['pk'])
+        if call.leader != request.user.leader:
+            raise PermissionDenied
+
         call.status = request.data['status']
         call.comment = request.data['comment']
         call.save()

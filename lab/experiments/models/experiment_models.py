@@ -7,6 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from django.utils.timezone import get_current_timezone
 
 from leaders.models import Leader
+from main.models import User
 from ..email import AppointmentConfirmEmail
 from .default_criteria_models import DefaultCriteria
 from .location_models import Location
@@ -206,3 +207,6 @@ Met vriendelijke groet,<br/>
         # TODO: i18n? (for connective 'en' -> 'and')
         leader_names = [leader.name for leader in self.leaders.all()]
         return ''.join(f'{name}, ' for name in leader_names[:-2]) + ' en '.join(leader_names[-2:])
+
+    def is_leader(self, user: User) -> bool:
+        return user.leader is not None and user.leader.experiments.filter(pk=self.pk).exists()

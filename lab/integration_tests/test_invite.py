@@ -55,7 +55,7 @@ def sample_appointment(sample_experiment, sample_participant, sample_leader, db)
         leader=sample_leader)
 
 
-def test_experiment_list(sb, sample_experiment, sample_participant, as_admin):
+def test_experiment_list(sb, sample_experiment, sample_participant, as_leader):
     sb.click('a:contains(Experiments)')
     sb.click('a:contains(Overview)')
     sb.click('button.icon-menu')
@@ -63,7 +63,9 @@ def test_experiment_list(sb, sample_experiment, sample_participant, as_admin):
     sb.assert_text('Baby McBaby')
 
 
-def test_schedule_appointment(sb, sample_experiment, sample_participant, sample_leader, as_admin):
+def test_schedule_appointment(sb, sample_experiment, sample_participant, sample_leader, as_leader):
+    sample_experiment.leaders.add(as_leader)
+    # test with a differnet leader than the currently logged user
     sample_experiment.leaders.add(sample_leader)
 
     sb.click('a:contains(Experiments)')
@@ -110,7 +112,8 @@ def test_schedule_appointment(sb, sample_experiment, sample_participant, sample_
     sb.assertIn(sample_leader.user.get_full_name(), mail.outbox[0].alternatives[0][0])
 
 
-def test_schedule_appointment_edit_email(sb, sample_experiment, sample_participant, sample_leader, as_admin):
+def test_schedule_appointment_edit_email(sb, sample_experiment, sample_participant, sample_leader, as_leader):
+    sample_experiment.leaders.add(as_leader)
     sample_experiment.leaders.add(sample_leader)
 
     sb.click('a:contains(Experiments)')
