@@ -20,14 +20,22 @@ class Invitation(models.Model):
 
 class Call(models.Model):
     class CallStatus(models.TextChoices):
-        # call status copied as-is from old babylab system
+        # call started
         STARTED = 'STARTED', _('experiments:call:status:started')
+        # parent does not answer
         NOREPLY = 'NOREPLY', _('experiments:call:status:noreply')
+        # asked call back another time
         CALLBACK = 'CALLBACK', _('experiments:call:status:callback')
+        # call ends in voicemail
         VOICEMAIL = 'VOICEMAIL', _('experiments:call:status:voicemail')
+        # parent prefers email communication
         EMAIL = 'EMAIL', _('experiments:call:status:email')
+        # appointment confirmed
         CONFIRMED = 'CONFIRMED', _('experiments:call:status:confirmed')
+        # cancel call
         CANCELLED = 'CANCELLED', _('experiments:call:status:cancelled')
+        # parent does not want to or cannot participate in specific experiment
+        EXCLUDE = 'EXCLUDE', _('experiments:call:status:exclude')
 
     status = models.CharField(max_length=20, choices=CallStatus.choices, default=CallStatus.STARTED)
     experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE)

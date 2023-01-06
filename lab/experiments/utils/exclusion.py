@@ -11,6 +11,7 @@ from typing import List, Optional
 from ageutil import age
 
 from experiments.models import Experiment, ExperimentCriterion, DefaultCriteria
+from experiments.models.invite_models import Call
 from participants.models import Participant
 
 # List of vars that can have the same values as the participant model
@@ -21,9 +22,8 @@ indifferentable_vars = [
 ]
 
 
-def get_eligible_participants_for_experiment(experiment: Experiment,
-                                             on_mailinglist: bool = True) -> \
-        List[Participant]:
+def get_eligible_participants_for_experiment(
+        experiment: Experiment, on_mailinglist: bool = True) -> List[Participant]:
     """
     This function produces a list of participants that can take part in
     the provided experiment.
@@ -60,15 +60,16 @@ def get_eligible_participants_for_experiment(experiment: Experiment,
     filtered = []
 
     for participant in participants:
-
         if check_default_criteria(participant, filters):
             continue
 
         if should_exclude_by_age(participant, default_criteria):
             continue
 
-        if _should_exclude_by_specific_criteria(participant,
-                                                specific_experiment_criteria):
+        if _should_exclude_by_specific_criteria(participant, specific_experiment_criteria):
+            continue
+
+        if should_exclude_by_call_status(participant, experiment):
             continue
 
         filtered.append(participant)
@@ -216,3 +217,12 @@ def should_exclude_by_age(participant: Participant, criteria: DefaultCriteria) -
         .to(months=criteria.max_age_months, days=criteria.max_age_days)
 
     return not age_pred.check(participant.birth_date)
+
+
+def should_exclude_by_call_status(participant: Participant, experiment: Experiment) -> bool:
+    """
+    When a parent indicates they cannot participate, there should be a Call object
+    for the relevant participant and experiment, with an EXCLUDE status
+    """
+    return participant.call_set.filter(
+        experiment=experiment, status=Call.CallStatus.EXCLUDE).exists()
