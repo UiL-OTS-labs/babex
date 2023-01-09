@@ -13,9 +13,9 @@ def _user_is_authenticated(x:WSGIRequest) -> bool:
 
 def _user_is_not_authenticated(x:WSGIRequest) -> bool:
     '''
-    Checks whether the user x is not authenticated 
+    Checks whether the user x is not authenticated
     '''
-    return not _user_is_authenticated(x) 
+    return not _user_is_authenticated(x)
 
 Menu.add_item("home", MenuItem(_('mainmenu:home'),
                                reverse('main:home'),
@@ -45,10 +45,10 @@ Menu.add_item("main", MenuItem(_('mainmenu:experiments'),
 
 users_menu = [
     MenuItem(_('mainmenu:leaders'),
-             reverse('leaders:home'),
+             reverse('main:users_leaders'),
              check=_user_is_authenticated),
     MenuItem(_('mainmenu:admins'),
-             reverse('main:users_home'),
+             reverse('main:users_admins'),
              check=_user_is_authenticated)
 ]
 

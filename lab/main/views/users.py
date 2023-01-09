@@ -12,18 +12,23 @@ from ..forms import UserCreationForm
 from ..models import User
 
 
-class UsersHomeView(braces.LoginRequiredMixin, generic.ListView):
+class UserLeadersView(braces.LoginRequiredMixin, generic.ListView):
     model = User
     template_name = 'users/index.html'
 
     def get_context_data(self, *args, **kwargs):
-        context = super(UsersHomeView, self).get_context_data(
-            *args,
-            **kwargs
-        )
-
+        context = super().get_context_data(*args, **kwargs)
         context['ldap'] = is_ldap_enabled()
+        return context
 
+
+class UserAdminsView(braces.SuperuserRequiredMixin, generic.ListView):
+    model = User
+    template_name = 'users/index.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['ldap'] = is_ldap_enabled()
         return context
 
 
