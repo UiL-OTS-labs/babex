@@ -69,7 +69,10 @@ INSTALLED_APPS = [
     'signups',
 
     'django.contrib.admin',
-    'django.forms'
+    'django.forms',
+
+    # deprecated
+    'leaders'
 ]
 
 MIDDLEWARE = [
