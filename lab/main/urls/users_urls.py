@@ -6,7 +6,7 @@ from ..views import LDAPUserCreateView, LDAPUserUpdateView, \
 
 urlpatterns = [
     path('', UserLeadersView.as_view(), name='users_leaders'),
-    path('', UserAdminsView.as_view(), name='users_admins'),
+    path('admins/', UserAdminsView.as_view(), name='users_admins'),
 
     path('edit/<int:pk>/', UserUpdateView.as_view(), name='user_edit'),
     path('ldap/edit/<int:pk>/', LDAPUserUpdateView.as_view(),

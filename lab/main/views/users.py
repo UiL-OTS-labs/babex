@@ -16,6 +16,9 @@ class UserLeadersView(braces.LoginRequiredMixin, generic.ListView):
     model = User
     template_name = 'users/index.html'
 
+    def get_queryset(self):
+        return User.objects.exclude(is_staff=True)
+
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['ldap'] = is_ldap_enabled()
@@ -26,8 +29,12 @@ class UserAdminsView(braces.SuperuserRequiredMixin, generic.ListView):
     model = User
     template_name = 'users/index.html'
 
+    def get_queryset(self):
+        return User.objects.filter(is_staff=True)
+
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
+        context['is_admins'] = True
         context['ldap'] = is_ldap_enabled()
         return context
 
