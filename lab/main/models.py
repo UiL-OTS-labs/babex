@@ -15,5 +15,12 @@ class User(AbstractUser):
         default=False,
     )
 
+    name = models.TextField()
+    phonenumber = models.TextField()
+
     def __audit_repr__(self):
         return "<AdminUser: {}>".format(self.email)
+
+    @property
+    def is_leader(self):
+        return self.experiments.count() > 0

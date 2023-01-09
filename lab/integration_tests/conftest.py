@@ -1,7 +1,6 @@
 import pytest
 
 from main.models import User
-from leaders.models import Leader
 
 
 @pytest.fixture
@@ -9,10 +8,9 @@ def admin_user(db):
     admin = User.objects.create(username='admin',
                                 is_superuser=True,
                                 is_staff=True,
-                                is_supreme_admin=True)
-    Leader.objects.create(name='Admin McAdmin',
-                          phonenumber='12345678',
-                          user=admin)
+                                is_supreme_admin=True,
+                                name='Admin McAdmin',
+                                phonenumber='12345678')
     admin.set_password('admin')
     admin.save()
     yield admin

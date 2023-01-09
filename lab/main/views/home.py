@@ -11,8 +11,8 @@ class HomeView(braces.LoginRequiredMixin, generic.TemplateView):
         context = super().get_context_data(**kwargs)
 
         user = self.request.user
-        context['experiments'] = user.leader.experiments.all()
+        context['experiments'] = user.experiments.all()
         context['call_back'] = set(call.participant for call in
-                                   user.leader.call_set.filter(status=Call.CallStatus.CALLBACK))
+                                   user.call_set.filter(status=Call.CallStatus.CALLBACK))
 
         return context
