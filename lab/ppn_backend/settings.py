@@ -60,7 +60,6 @@ INSTALLED_APPS = [
     'cdh.vue',
     'main',
     'experiments',
-    'leaders',
     'participants',
     'comments',
     'auditlog',
