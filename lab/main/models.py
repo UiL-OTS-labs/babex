@@ -23,4 +23,4 @@ class User(AbstractUser):
     def name(self):
         # reuse the existing fields on User, although it would
         # probably be better to have just a plain `name` field
-        return ' '.join(self.first_name, self.last_name)
+        return ' '.join((self.first_name, self.last_name))
