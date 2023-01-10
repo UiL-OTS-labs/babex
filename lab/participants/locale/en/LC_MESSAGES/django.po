@@ -300,3 +300,9 @@ msgstr "Participant deleted!"
 
 #~ msgid "participants:messages:merged_participants"
 #~ msgstr "Participant merged!"
+
+msgid "participants:detail:calls"
+msgstr "Calls"
+
+msgid "participants:detail:calls:status"
+msgstr "Status"
