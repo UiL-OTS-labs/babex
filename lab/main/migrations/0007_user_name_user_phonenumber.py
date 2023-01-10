@@ -12,12 +12,6 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='user',
-            name='name',
-            field=models.TextField(default=''),
-            preserve_default=False,
-        ),
-        migrations.AddField(
-            model_name='user',
             name='phonenumber',
             field=models.TextField(default=''),
             preserve_default=False,

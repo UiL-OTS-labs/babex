@@ -10,7 +10,6 @@ class User(AbstractUser):
         default=False,
     )
 
-    name = models.TextField()
     phonenumber = models.TextField()
 
     def __audit_repr__(self):
@@ -19,3 +18,9 @@ class User(AbstractUser):
     @property
     def is_leader(self):
         return self.experiments.count() > 0
+
+    @property
+    def name(self):
+        # reuse the existing fields on User, although it would
+        # probably be better to have just a plain `name` field
+        return ' '.join(self.first_name, self.last_name)
