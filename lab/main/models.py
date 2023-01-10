@@ -10,17 +10,19 @@ class User(AbstractUser):
         default=False,
     )
 
+    # remove default django fields
+    first_name = None  # type: ignore
+    last_name = None  # type: ignore
+
+    name = models.CharField(_("user:attribute:name"), max_length=150)
     phonenumber = models.TextField()
 
     def __audit_repr__(self):
-        return "<AdminUser: {}>".format(self.email)
+        return "<User: {}>".format(self.email)
 
     @property
     def is_leader(self):
         return self.experiments.count() > 0
 
-    @property
-    def name(self):
-        # reuse the existing fields on User, although it would
-        # probably be better to have just a plain `name` field
-        return ' '.join((self.first_name, self.last_name))
+    def get_full_name(self):
+        return self.name
