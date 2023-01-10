@@ -9,7 +9,7 @@ from cdh.core.utils.mail import send_personalised_mass_mail
 
 from experiments.models import Experiment, Invitation
 from main.models import User
-from main.utils import get_supreme_admin, get_register_link
+from main.utils import get_register_link
 from participants.models import Participant
 
 link_to_subscribe_regex = r'{link_to_subscribe(?::\"(.*)\")?}'
@@ -28,8 +28,7 @@ def get_invite_mail_content(experiment: Experiment, leader: User) -> str:
         '{leader_name}':             leader.name,
         '{leader_email}':            leader.email,
         '{leader_phonenumber}':      leader.phonenumber,
-        '{all_leaders_name_list}':   experiment.leader_names,
-        '{admin}':                   get_supreme_admin().get_full_name(),
+        '{all_leaders_name_list}':   experiment.leader_names
     }
 
     if experiment.location:
@@ -41,11 +40,7 @@ def get_invite_mail_content(experiment: Experiment, leader: User) -> str:
     return content
 
 
-def mail_invite(
-        participant_ids: List[str],
-        content: str,
-        experiment: Experiment) -> None:
-    admin = get_supreme_admin()
+def mail_invite(participant_ids: List[str], content: str, experiment: Experiment) -> None:
     html_content = _parse_contents_html(content, experiment)
     plain_content = _parse_contents_plain(content, experiment)
     participants = Participant.objects.filter(pk__in=participant_ids)
@@ -78,7 +73,6 @@ def mail_invite(
         data,
         'experiments/mail/invite',
         context,
-        admin.email,
         plain_context=plain_text_context
     )
 

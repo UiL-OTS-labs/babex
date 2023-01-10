@@ -4,12 +4,10 @@ from django.conf import settings
 from cdh.core.utils.mail import send_template_email
 
 from experiments.models import Appointment
-from main.utils import get_supreme_admin
 
 
 def remind_participant(appointment: Appointment) -> None:
     experiment = appointment.experiment
-    admin = get_supreme_admin()
 
     subject = 'UiL OTS *Reminder* opgave experiment: {}'.format(experiment.name)
     context = {
@@ -24,8 +22,7 @@ def remind_participant(appointment: Appointment) -> None:
         [appointment.participant.email],
         subject,
         'experiments/mail/reminder',
-        context,
-        admin.email
+        context
     )
 
 

@@ -6,7 +6,6 @@ from django.views import generic
 
 from experiments.utils.invite import _parse_contents_html as parse_contents, \
     get_invite_mail_content, mail_invite
-from main.utils import get_supreme_admin
 from .mixins import ExperimentObjectMixin
 from ..utils.exclusion import get_eligible_participants_for_experiment
 
@@ -22,7 +21,6 @@ class InviteParticipantsForExperimentView(braces.LoginRequiredMixin,
 
         context['object_list'] = self.get_object_list()
         context['experiment'] = self.experiment
-        context['admin'] = get_supreme_admin().get_full_name()
 
         inviting_leader = self.request.user
         context['invite_text'] = get_invite_mail_content(self.experiment, inviting_leader)

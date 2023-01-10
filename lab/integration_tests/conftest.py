@@ -8,7 +8,6 @@ def admin_user(db):
     admin = User.objects.create(username='admin',
                                 is_superuser=True,
                                 is_staff=True,
-                                is_supreme_admin=True,
                                 name='Admin McAdmin',
                                 phonenumber='12345678')
     admin.set_password('admin')
