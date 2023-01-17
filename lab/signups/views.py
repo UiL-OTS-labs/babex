@@ -13,6 +13,13 @@ from participants.models import Participant
 class SignupListView(braces.LoginRequiredMixin, ListView):
     queryset = Signup.objects.filter(status=Signup.Status.NEW)
 
+    def post(self, request, *args, **kwargs):
+        '''simple post endpoint for bulk-rejecting signups'''
+        pks = map(int, request.POST.getlist('signups'))
+        for signup in Signup.objects.filter(pk__in=pks):
+            reject_signup(signup)
+        return self.get(request, *args, **kwargs)
+
 
 class SignupDetailView(braces.LoginRequiredMixin, DetailView):
     queryset = Signup.objects.all()
@@ -27,8 +34,7 @@ class SignupDetailView(braces.LoginRequiredMixin, DetailView):
             approve_signup(signup)
             messages.success(request, _('signups:messages:approved'))
         elif action == 'reject':
-            signup.status = Signup.Status.REJECTED
-            signup.save()
+            reject_signup(signup)
             messages.success(request, _('signups:messages:rejected'))
         return redirect(reverse_lazy('signups:list'))
 
@@ -50,4 +56,9 @@ def approve_signup(signup: Signup):
     )
 
     signup.status = Signup.Status.APPROVED
+    signup.save()
+
+
+def reject_signup(signup: Signup):
+    signup.status = Signup.Status.REJECTED
     signup.save()
