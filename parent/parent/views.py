@@ -37,7 +37,9 @@ class SignupView(FormView):
     success_url = reverse_lazy('signup.done')
 
     def form_valid(self, form):
-        signup = Signup(**form.cleaned_data)
+        # filter out blank fields
+        fields = {key: value for key, value in form.cleaned_data.items() if value}
+        signup = Signup(**fields)
         signup.put()
         return super().form_valid(form)
 

@@ -10,7 +10,7 @@ class Signup(models.Model):
     parent_name = models.TextField()
     city = models.TextField()
     phonenumber = models.TextField()
-    phonenumber_alt = models.TextField()
+    phonenumber_alt = models.TextField(blank=True)
     email = models.TextField()
 
     english_contact = models.BooleanField()
