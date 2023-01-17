@@ -108,23 +108,48 @@
                             ></button>
                             <ul class="dropdown-menu">
                                 {% if user.is_ldap_account %}
-                                    <li><a class="dropdown-item" href="{% url 'main:user_edit_ldap' user.pk %}" >
-                                        {% trans 'users:action:edit' %}
-                                    </a></li>
+                                    <li>
+                                        {% if is_admins %}
+                                            <a class="dropdown-item" href="{% url 'main:admin_edit_ldap' user.pk %}" >
+                                        {% else %}
+                                            <a class="dropdown-item" href="{% url 'main:user_edit_ldap' user.pk %}" >
+                                        {% endif %}
+                                            {% trans 'users:action:edit' %}
+                                        </a>
+                                    </li>
                                 {% else %}
-                                    <li><a class="dropdown-item" href="{% url 'main:user_edit' user.pk %}" >
-                                        {% trans 'users:action:edit' %}
-                                    </a></li>
-                                    <li><a class="dropdown-item" href="{% url 'main:user_password' user.pk %}" >
-                                        {% trans 'users:action:password' %}
-                                    </a></li>
+                                    <li>
+                                        {% if is_admins %}
+                                            <a class="dropdown-item" href="{% url 'main:admin_edit' user.pk %}" >
+                                        {% else %}
+                                            <a class="dropdown-item" href="{% url 'main:user_edit' user.pk %}" >
+                                        {% endif %}
+                                            {% trans 'users:action:edit' %}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        {% if is_admins %}
+                                            <a class="dropdown-item" href="{% url 'main:admin_password' user.pk %}" >
+                                        {% else %}
+                                            <a class="dropdown-item" href="{% url 'main:user_password' user.pk %}" >
+                                        {% endif %}
+                                            {% trans 'users:action:password' %}
+                                        </a>
+                                    </li>
                                 {% endif %}
+
                                 {# We should not allow a user to delete their own account, that will we AWKWARD #}
                                 {# https://www.youtube.com/watch?v=q9kDT44DBXs #}
                                 {% if not request.user == user %}
-                                    <li><a class="dropdown-item" href="{% url 'main:user_delete' user.pk %}">
-                                        {% trans 'users:action:delete' %}
-                                    </a></li>
+                                    <li>
+                                        {% if is_admins %}
+                                            <a class="dropdown-item" href="{% url 'main:admin_delete' user.pk %}" >
+                                        {% else %}
+                                            <a class="dropdown-item" href="{% url 'main:user_delete' user.pk %}" >
+                                        {% endif %}
+                                            {% trans 'users:action:delete' %}
+                                        </a>
+                                    </li>
                                 {% endif %}
                             </ul>
                         </td>

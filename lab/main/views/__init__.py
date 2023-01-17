@@ -3,4 +3,4 @@ from .home import HomeView
 from .mixins import RedirectSuccessMessageMixin
 from .users import LDAPUserCreateView, LDAPUserUpdateView, \
     UserChangePasswordView, UserCreateView, UserDeleteView, UserUpdateView, \
-    UserAdminsView, UserLeadersView
+    UserHome

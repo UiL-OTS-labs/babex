@@ -18,7 +18,11 @@
         <form method="post">{% csrf_token %}
             <p>{% transformat 'users:delete:text' object %}</p>
             <div class="button" style="display: inline-block">
-                <a href="{% url 'main:users_home' %}" >
+                {% if object.is_staff %}
+                    <a href="{% url 'main:admins_home' %}" >
+                {% else %}
+                    <a href="{% url 'main:leaders_home' %}" >
+                {% endif %}
                     {% trans 'global:delete:cancel' %}
                 </a>
             </div>
