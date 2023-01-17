@@ -168,6 +168,9 @@
                         <th>
                             {% trans 'participants:detail:calls:status' %}
                         </th>
+                        <th>
+                            {% trans 'participants:detail:calls:called_by' %}
+                        </th>
                     </tr>
                 </thead>
                 {% for call in participant.call_set.all %}
@@ -180,6 +183,9 @@
                     </td>
                     <td>
                         {{ call.get_status_display }}
+                    </td>
+                    <td>
+                        {{ call.leader }}
                     </td>
                 </tr>
                 {% endfor %}
