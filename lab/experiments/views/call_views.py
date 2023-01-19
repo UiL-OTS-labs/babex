@@ -1,3 +1,4 @@
+import datetime
 import braces.views as braces
 from django.core.exceptions import BadRequest
 from django.views.generic import TemplateView
@@ -76,12 +77,10 @@ class AppointmentConfirm(generics.CreateAPIView):
         if end < start or start < timezone.now():
             raise BadRequest('Invalid appointment time')
 
-        timeslot = TimeSlot.objects.create(
-            start=start,
-            end=end,
-            experiment=experiment,
-            max_places=1
-        )
+        participant = Participant.objects.get(pk=request.data['participant'])
+
+        if not self.check_age_at_appointment(participant, experiment, start):
+            raise BadRequest('Invalid appointment time')
 
         leader = Leader.objects.filter(
             # make sure leader belongs to experiment
@@ -90,7 +89,12 @@ class AppointmentConfirm(generics.CreateAPIView):
             pk=request.data['leader'],
         )
 
-        participant = Participant.objects.get(pk=request.data['participant'])
+        timeslot = TimeSlot.objects.create(
+            start=start,
+            end=end,
+            experiment=experiment,
+            max_places=1
+        )
         appointment = Appointment.objects.create(
             participant=participant, timeslot=timeslot, experiment=experiment, leader=leader)
 
@@ -98,6 +102,13 @@ class AppointmentConfirm(generics.CreateAPIView):
             send_appointment_mail(appointment)
 
         return JsonResponse(self.serializer_class(appointment).data)
+
+    def check_age_at_appointment(self, participant: Participant, experiment: Experiment, start: datetime.date) -> bool:
+        criteria = experiment.defaultcriteria
+        age_pred = ageutil.age(months=criteria.min_age_months, days=criteria.min_age_days)\
+            .to(months=criteria.max_age_months, days=criteria.max_age_days)\
+            .on(start)
+        return age_pred.check(participant.birth_date)
 
 
 class AppointmentSendEmail(views.APIView):
