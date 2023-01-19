@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 import time
 import pytest
 from django.core import mail
@@ -74,7 +74,8 @@ def test_schedule_appointment(sb, sample_experiment, sample_participant, sample_
     sb.click('button:contains(Schedule)')
 
     # pick time
-    sb.click(f'td[data-date="{date.today()}"]')
+    tomorrow = date.today() + timedelta(days=1)
+    sb.click(f'td[data-date="{tomorrow}"]')
     sb.click('td.fc-timegrid-slot-lane[data-time="10:00:00"]')
     sb.click('button:contains(Next)')
 
@@ -93,7 +94,7 @@ def test_schedule_appointment(sb, sample_experiment, sample_participant, sample_
 
     # check that appointment is visible on agenda
     sb.click('a:contains(Agenda)')
-    sb.assert_element(f'td[data-date="{date.today()}"] .fc-event')
+    sb.assert_element(f'td[data-date="{tomorrow}"] .fc-event')
 
     # appointment should contain both participant and leader names
     sb.assert_text('Baby McBaby', '.fc-event')
@@ -121,7 +122,8 @@ def test_schedule_appointment_edit_email(sb, sample_experiment, sample_participa
     sb.click('button:contains(Schedule)')
 
     # pick time
-    sb.click(f'td[data-date="{date.today()}"]')
+    tomorrow = date.today() + timedelta(days=1)
+    sb.click(f'td[data-date="{tomorrow}"]')
     sb.click('td.fc-timegrid-slot-lane[data-time="10:00:00"]')
     sb.click('button:contains(Next)')
 
