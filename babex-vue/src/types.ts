@@ -36,6 +36,7 @@ interface Call {
 }
 
 interface ActionContext {
+    calendar?: any,
     type?: string,
     event?: Dictionary,
     locations?: Location[],
@@ -44,4 +45,10 @@ interface ActionContext {
     end?: Date
 }
 
-export {Appointment, Closing, Location, Call, ActionContext};
+interface User {
+    name: string,
+    isStaff: boolean
+}
+
+
+export {Appointment, Closing, Location, Call, ActionContext, User};

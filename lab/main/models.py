@@ -1,3 +1,4 @@
+import json
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -12,3 +13,9 @@ class User(AbstractUser):
 
     def __audit_repr__(self):
         return "<AdminUser: {}>".format(self.email)
+
+    def to_json(self):
+        return json.dumps({
+            'name': self.username,
+            'isStaff': self.is_staff
+        })
