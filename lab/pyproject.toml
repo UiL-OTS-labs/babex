@@ -16,3 +16,9 @@ ignore_errors = true
 
 [tool.django-stubs]
 django_settings_module = 'ppn_backend.settings'
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
