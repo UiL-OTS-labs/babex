@@ -7,8 +7,9 @@ from cdh.core.forms import BootstrapCheckboxInput, BootstrapRadioSelect, DateFie
 
 
 def get_valid_year_range():
+    """generates a list of valid birth years for the singup form"""
     end = date.today().year
-    start = end - 10
+    start = end - 10  # arbitrary limit on 10 years old, should probably be lower...
     return range(end, start, -1)
 
 
@@ -35,10 +36,13 @@ class SignupForm(TemplatedForm):
     speech_parent = forms.BooleanField(label=_('parent:forms:signup:speech_parent'), required=False)
     multilingual = forms.BooleanField(label=_('parent:forms:signup:multilingual'), required=False)
 
+    # not saved anywhere, but it's a nice way to get a mandatory consent checkbox
     data_consent = forms.BooleanField(label=('parent:forms:signup:data_consent'))
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        # replace the default django checkbox fields with bootstrap compatible ones
         for key, field in self.fields.items():
             if isinstance(field.widget, forms.CheckboxInput):
                 field.widget = BootstrapCheckboxInput()
