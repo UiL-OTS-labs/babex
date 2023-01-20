@@ -1,0 +1,24 @@
+[tool.mypy]
+exclude = [
+  '.*migrations.*'
+]
+
+plugins = [
+  'mypy_django_plugin.main',
+  'mypy_drf_plugin.main'
+]
+
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = 'auditlog.*'
+ignore_errors = true
+
+[tool.django-stubs]
+django_settings_module = 'parent.settings'
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"

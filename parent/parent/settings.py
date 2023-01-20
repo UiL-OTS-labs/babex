@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from typing import List
 
 from django.utils.translation import gettext_lazy as _
 
@@ -27,7 +28,7 @@ SECRET_KEY = 'django-insecure-29a21((%rrei8t%y$u)4phny_i-30o*cq#)7m=zj0f+jqwul#$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS: List[str] = []
 
 
 # Application definition
