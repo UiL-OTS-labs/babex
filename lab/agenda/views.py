@@ -1,11 +1,11 @@
-from datetime import timedelta, datetime
+import braces.views as braces
 import dateutil.parser
 
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
-from django.http.response import JsonResponse
+from django.shortcuts import render
+from django.views import generic
 
-from rest_framework import generics, views, serializers, viewsets
+from rest_framework import generics, viewsets, status, permissions
 from rest_framework.response import Response
 
 from experiments.models import Appointment, Location
@@ -37,8 +37,16 @@ def agenda_home(request):
     return render(request, 'agenda/home.html', context)
 
 
+class ClosingPermission(permissions.BasePermission):
+    def has_permission(self, request, view):
+        if view.action == 'list':
+            return True
+        return request.user.is_staff
+
+
 class ClosingViewSet(viewsets.ModelViewSet):
     serializer_class = ClosingSerializer
+    permission_classes = [ClosingPermission]
 
     def get_queryset(self):
         queryset = Closing.objects.all()
@@ -49,6 +57,14 @@ class ClosingViewSet(viewsets.ModelViewSet):
 
         return queryset
 
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data, many=isinstance(request.data, list))
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
 class AppointmentViewSet(viewsets.ModelViewSet):
     serializer_class = AppointmentSerializer
 
@@ -56,3 +72,20 @@ class AppointmentViewSet(viewsets.ModelViewSet):
         queryset = Appointment.objects.all()
         return queryset
 
+
+class ClosingsAdminView(braces.StaffuserRequiredMixin, generic.TemplateView):
+    template_name = 'agenda/closings_admin.html'
+
+    def get_context_data(self, **kwargs):
+        context = dict()
+        context['object_list'] = self.get_object_list()
+        return context
+
+    def get_object_list(self):
+        return Closing.objects.all().order_by('-start')
+
+    def post(self, request, *args, **kwargs):
+        '''simple post endpoint for removing closings'''
+        pks = map(int, request.POST.getlist('closings'))
+        Closing.objects.filter(pk__in=pks).delete()
+        return self.get(request, *args, **kwargs)

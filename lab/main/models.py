@@ -1,6 +1,7 @@
+import json
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-
 from django.utils.translation import gettext_lazy as _
 
 
@@ -26,3 +27,9 @@ class User(AbstractUser):
 
     def get_full_name(self):
         return self.name
+
+    def to_json(self):
+        return json.dumps({
+            'name': self.username,
+            'isStaff': self.is_staff
+        })

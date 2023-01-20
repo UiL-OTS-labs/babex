@@ -1,26 +1,33 @@
 from django.conf import settings
+from django.core.handlers.wsgi import WSGIRequest
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django.core.handlers.wsgi import WSGIRequest
 from menu import Menu, MenuItem
 
 
-def _user_is_authenticated(x:WSGIRequest) -> bool:
+def _user_is_authenticated(x: WSGIRequest) -> bool:
     '''
     Checks whether the user x is is_authenticated
     '''
     return x.user.is_authenticated
 
-def _user_is_not_authenticated(x:WSGIRequest) -> bool:
+
+def _user_is_not_authenticated(x: WSGIRequest) -> bool:
     '''
     Checks whether the user x is not authenticated
     '''
     return not _user_is_authenticated(x)
 
+
+def _user_is_admin(req: WSGIRequest) -> bool:
+    return req.user.is_authenticated and req.user.is_staff
+
+
 Menu.add_item("home", MenuItem(_('mainmenu:home'),
                                reverse('main:home'),
                                exact_url=True
                                ))
+
 
 Menu.add_item("main", MenuItem(_('mainmenu:agenda'),
                                reverse('agenda:home'),
@@ -78,12 +85,17 @@ Menu.add_item(
         children=participants_menu,
         check=_user_is_authenticated,
         url=None
-        ))
+    ))
 
-# Menu.add_item("main", MenuItem(_('mainmenu:comments'),
-#                                reverse('comments:home'),
-#                                check=lambda x: x.user.is_authenticated
-#                                ))
+
+admin_menu = [
+    MenuItem(_('mainmenu:admin:closings'), reverse('agenda:admin.closings'))
+]
+
+Menu.add_item('main', MenuItem(_('mainmenu:admin'),
+                               children=admin_menu,
+                               check=_user_is_admin,
+                               url=None))
 
 
 if 'datamanagement' in settings.INSTALLED_APPS:
