@@ -1,4 +1,3 @@
-import braces.views as braces
 from django.contrib.auth.forms import SetPasswordForm
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
@@ -42,8 +41,8 @@ class BaseUserView(UserPassesTestMixin):
             return User.objects.filter(is_staff=True)
         return User.objects.exclude(is_staff=True)
 
-    def get_context_data(self):
-        context = super().get_context_data()
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         context["is_admins"] = self.is_admins
         return context
 
