@@ -82,6 +82,12 @@
 
     function onSelect(selectionInfo: DateSelectArg) {
         if (selectionInfo.view.type === 'timeGridDay') {
+            let now = new Date();
+            if (selectionInfo.start < now) {
+                // prevent selection in the past
+                return;
+            }
+
             if (event.value) {
                 event.value.remove();
             }

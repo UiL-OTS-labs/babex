@@ -9,24 +9,16 @@
    {% transformat 'experiments:detail:header' experiment.name %} - {{ block.super }}
 {% endblock %}
 
-{% block content %}
-<div class="uu-inner-container">
-    <div class="col-12">
-        <div class="button button-colored float-right" id="back_to_prev">
-            <a href="{% url 'experiments:home' %}">
-                {% trans 'experiments:detail:all_experiments' %}
-            </a>
-        </div>
-        <h1>
+{% block pre-messages-content %}
+    <div class="uu-hero justify-content-between align-items-center">
+        <h1 class="h2">
             {% transformat 'experiments:detail:header' experiment.name %}
         </h1>
     </div>
-</div>
-{% include 'experiments/detail_parts/info.html' %}
+{% endblock %}
 
-{% if experiment.use_timeslots %}
-    {% include 'experiments/detail_parts/timeslots.html' %}
-{% endif %}
+{% block content %}
+{% include 'experiments/detail_parts/info.html' %}
 
 {% include 'experiments/detail_parts/participants.html' %}
 

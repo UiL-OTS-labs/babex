@@ -1,15 +1,6 @@
-from datetime import datetime
-
-from pytz import timezone
-from dateutil.relativedelta import relativedelta
-from django.test import TestCase
-
 from main.models import User
 from leaders.models import Leader
-from participants.models import Participant, CriterionAnswer
-from .models import Experiment, Criterion, ExperimentCriterion, Appointment, \
-    Location, TimeSlot
-from .utils.exclusion import get_eligible_participants_for_experiment
+from .models import Location
 
 
 def _get_or_create_leader() -> Leader:

@@ -28,6 +28,13 @@
     section:not(:first-of-type) {
         margin-top: 2em;
     }
+
+    a.experiment {
+        text-decoration: none;
+    }
+    a.experiment:hover {
+        text-decoration: underline;
+    }
 </style>
 {% endblock %}
 
@@ -44,6 +51,7 @@
                     <li class="nav-item"><a href="#hero" class="nav-link">General information</a></li>
                     <li class="nav-item"><a href="#participant-contact" class="nav-link">Contact details</a></li>
                     <li class="nav-item"><a href="#participant-appointments" class="nav-link">Appointments</a></li>
+                    <li class="nav-item"><a href="#participant-appointments" class="nav-link">{% trans 'participants:detail:calls' %}</a></li>
                     <li class="nav-item"><a href="#participant-comments" class="nav-link">Comments</a></li>
                 </ul>
             </div>
@@ -127,7 +135,9 @@
                 {% for appointment in participant.appointments.all %}
                 <tr>
                     <td>
-                        {{ appointment.experiment }}
+                        <a class="experiment" href="{% url 'experiments:detail' appointment.experiment.pk %}">
+                            {{ appointment.experiment }}
+                        </a>
                     </td>
                     <td>
                         {% if appointment.timeslot %}
@@ -138,6 +148,44 @@
                         {% if appointment.timeslot %}
                         {{ appointment.place }}
                         {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </section>
+
+        <section id="participant-calls">
+            <h2>{% trans 'participants:detail:calls' %}</h2>
+            <table class="dt_custom" width="100%">
+                <thead>
+                    <tr>
+                        <th width="40%">
+                            {% trans 'participants:detail:experiments' %}
+                        </th>
+                        <th>
+                            {% trans 'participants:detail:datetime' %}
+                        </th>
+                        <th>
+                            {% trans 'participants:detail:calls:status' %}
+                        </th>
+                        <th>
+                            {% trans 'participants:detail:calls:called_by' %}
+                        </th>
+                    </tr>
+                </thead>
+                {% for call in participant.call_set.all %}
+                <tr>
+                    <td>
+                        <a class="experiment" href="{% url 'experiments:detail' call.experiment.pk %}">{{ call.experiment }}</a>
+                    </td>
+                    <td>
+                        {{ call.creation_date|date:"Y-m-d H:i" }}
+                    </td>
+                    <td>
+                        {{ call.get_status_display }}
+                    </td>
+                    <td>
+                        {{ call.leader }}
                     </td>
                 </tr>
                 {% endfor %}

@@ -1,22 +1,21 @@
-import braces.views as braces
-from django.core.exceptions import PermissionDenied
-from django.views.generic import TemplateView
-from django.http.response import JsonResponse
-from django.utils.dateparse import parse_datetime
-
 import ageutil
+import braces.views as braces
+from django.core.exceptions import BadRequest, PermissionDenied
+from django.http.response import JsonResponse
+from django.utils import timezone
+from django.utils.dateparse import parse_datetime
+from django.views.generic import TemplateView
 from rest_framework import generics, serializers, views
 from rest_framework.permissions import IsAuthenticated
 
-
-from utils.appointment_mail import send_appointment_mail
-from experiments.models import Experiment, Appointment, TimeSlot
+from experiments.models import Appointment, Experiment, TimeSlot
 from experiments.models.invite_models import Call
 from experiments.serializers import AppointmentSerializer, ExperimentSerializer
 from leaders.models import Leader
 from leaders.serializers import LeaderSerializer
 from participants.models import Participant
 from participants.serializers import ParticipantSerializer
+from utils.appointment_mail import send_appointment_mail
 
 
 class CallHomeView(braces.LoginRequiredMixin, TemplateView):
@@ -72,9 +71,15 @@ class AppointmentConfirm(generics.CreateAPIView):
         if not experiment.is_leader(request.user):
             raise PermissionDenied
 
+        start = parse_datetime(request.data['start'])
+        end = parse_datetime(request.data['end'])
+
+        if end < start or start < timezone.now():
+            raise BadRequest('Invalid appointment time')
+
         timeslot = TimeSlot.objects.create(
-            start=parse_datetime(request.data['start']),
-            end=parse_datetime(request.data['end']),
+            start=start,
+            end=end,
             experiment=experiment,
             max_places=1
         )
