@@ -306,3 +306,6 @@ msgstr "Calls"
 
 msgid "participants:detail:calls:status"
 msgstr "Status"
+
+msgid "participants:detail:calls:called_by"
+msgstr "Called by"

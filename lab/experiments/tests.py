@@ -1,6 +1,5 @@
-
-from main.models import User
 from experiments.models import Location
+from main.models import User
 
 
 def _get_or_create_leader() -> User:
