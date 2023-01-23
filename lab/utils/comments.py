@@ -1,12 +1,12 @@
 from comments.models import Comment
 from experiments.models import Experiment
-from leaders.models import Leader
+from main.models import User
 from participants.models import Participant
 
 
 def add_comment(experiment: Experiment,
                 participant: Participant,
-                leader: Leader,
+                leader: User,
                 comment: str) -> None:
     c = Comment()
     c.participant = participant

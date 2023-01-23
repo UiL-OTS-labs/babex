@@ -47,7 +47,7 @@
         {% if request.user.is_authenticated %}
             <div class="border-left ps-3 pe-3">
                 {% with request.user as user %}
-                    {% transformat "site:header:login" user.first_name %}
+                    {% transformat "site:header:login" user.name %}
                     &nbsp;
                     <a href="{% url 'main:logout' %}" class="text-decoration-underline">({% trans 'main:globals:logout' %})</a>
                 {% endwith %}

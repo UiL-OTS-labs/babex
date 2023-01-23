@@ -8,14 +8,14 @@ from django.utils.safestring import mark_safe
 from cdh.core.utils.mail import send_personalised_mass_mail
 
 from experiments.models import Experiment, Invitation
+from main.models import User
 from main.utils import get_register_link
 from participants.models import Participant
-from leaders.models import Leader
 
 link_to_subscribe_regex = r'{link_to_subscribe(?::\"(.*)\")?}'
 
 
-def get_invite_mail_content(experiment: Experiment, leader: Leader) -> str:
+def get_invite_mail_content(experiment: Experiment, leader: User) -> str:
     content = experiment.invite_email
 
     replacements = {
@@ -26,7 +26,7 @@ def get_invite_mail_content(experiment: Experiment, leader: Leader) -> str:
         '{experiment_name}':         experiment.name,
         '{experiment_location}':     '',
         '{leader_name}':             leader.name,
-        '{leader_email}':            leader.user.email,
+        '{leader_email}':            leader.email,
         '{leader_phonenumber}':      leader.phonenumber,
         '{all_leaders_name_list}':   experiment.leader_names
     }

@@ -8,35 +8,43 @@
     {% trans 'users:home:header' %} - {{ block.super }}
 {% endblock %}
 
+{% block pre-messages-content %}
+    {% if is_admins %}
+        <div class="uu-hero justify-content-between align-items-center">
+            <h1 class="h2">
+                {% trans 'users:admins:header' %}
+            </h1>
+
+            <div class="btn-group btn-group-sm" role="group">
+                <a href="{% url 'main:user_create' %}" class="btn btn-secondary">
+                    {% trans 'users:home:create_admin' %}
+                </a>
+                <a href="{% url 'main:user_create_ldap' %}" class="btn btn-secondary">
+                    {% trans 'users:home:create_admin:ldap' %}
+                </a>
+            </div>
+        </div>
+    {% else %}
+        <div class="uu-hero justify-content-between align-items-center">
+            <h1 class="h2">
+                {% trans 'users:leaders:header' %}
+            </h1>
+
+            <div class="btn-group btn-group-sm" role="group">
+                <a href="{% url 'main:user_create' %}" class="btn btn-secondary">
+                    {% trans 'users:home:create_leader' %}
+                </a>
+                <a href="{% url 'main:user_create_ldap' %}" class="btn btn-secondary">
+                    {% trans 'users:home:create_leader:ldap' %}
+                </a>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
 
 {% block content %}
 <div class="uu-inner-container">
     <div class="col-12">
-        <div class="float-right ">
-            <div class="button button-colored">
-                <a href="{% url 'main:user_create' %}">
-                    {% if ldap %}
-                        {% trans 'users:home:create_user:local' %}
-                    {% else %}
-                        {% trans 'users:home:create_user' %}
-                    {% endif %}
-                </a>
-            </div>
-            {% if ldap %}
-            <br/>
-            <div class="button button-colored mt-1">
-                <a href="{% url 'main:user_create_ldap' %}">
-                    {% trans 'users:home:create_user:ldap' %}
-                </a>
-            </div>
-            {% endif %}
-        </div>
-        <h1>
-            {% trans 'users:home:header' %}
-        </h1>
-        <p>
-            {% trans 'users:home:info_text' %}
-        </p>
         <table class="dt" width="100%" data-language="{% datatables_lang %}">
             <thead>
                 <tr>
@@ -93,41 +101,57 @@
                             </td>
                         {% endif %}
                         <td>
-                        {% if user.is_ldap_account %}
-                            <a
-                                href="{% url 'main:user_edit_ldap' user.pk %}"
-                                title="{% trans 'users:home:edit:title' %}"
-                                class="icon-edit"
-                            >
-                                <span class="behind-icon">U</span> 
-                            </a>
-                        {% else %}
-                            <a
-                                href="{% url 'main:user_edit' user.pk %}"
-                                title="{% trans 'users:home:edit:title' %}"
-                                class="icon-edit"
-                            >
-                                <span class="behind-icon">U</span> 
-                            </a>
-                            <a
-                                href="{% url 'main:user_password' user.pk %}"
-                                title="{% trans 'users:home:change_password:title' %}"
-                                class="icon-edit"
-                            >
-                                <span class="behind-icon">P</span> 
-                            </a>
-                        {% endif %}
-                            {# We should not allow a user to delete their own account, that will we AWKWARD #}
-                            {# https://www.youtube.com/watch?v=q9kDT44DBXs #}
-                            {% if not request.user == user %}
-                            <a
-                                href="{% url 'main:user_delete' user.pk %}"
-                                title="{% trans 'users:home:delete:title' %}"
-                                class="icon-delete"
-                            >
-                                
-                            </a>
-                            {% endif %}
+                            <button class="btn icon-menu dropdown-toggle p-1"
+                                type="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            ></button>
+                            <ul class="dropdown-menu">
+                                {% if user.is_ldap_account %}
+                                    <li>
+                                        {% if is_admins %}
+                                            <a class="dropdown-item" href="{% url 'main:admin_edit_ldap' user.pk %}" >
+                                        {% else %}
+                                            <a class="dropdown-item" href="{% url 'main:user_edit_ldap' user.pk %}" >
+                                        {% endif %}
+                                            {% trans 'users:action:edit' %}
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        {% if is_admins %}
+                                            <a class="dropdown-item" href="{% url 'main:admin_edit' user.pk %}" >
+                                        {% else %}
+                                            <a class="dropdown-item" href="{% url 'main:user_edit' user.pk %}" >
+                                        {% endif %}
+                                            {% trans 'users:action:edit' %}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        {% if is_admins %}
+                                            <a class="dropdown-item" href="{% url 'main:admin_password' user.pk %}" >
+                                        {% else %}
+                                            <a class="dropdown-item" href="{% url 'main:user_password' user.pk %}" >
+                                        {% endif %}
+                                            {% trans 'users:action:password' %}
+                                        </a>
+                                    </li>
+                                {% endif %}
+
+                                {# We should not allow a user to delete their own account, that will we AWKWARD #}
+                                {# https://www.youtube.com/watch?v=q9kDT44DBXs #}
+                                {% if not request.user == user %}
+                                    <li>
+                                        {% if is_admins %}
+                                            <a class="dropdown-item" href="{% url 'main:admin_delete' user.pk %}" >
+                                        {% else %}
+                                            <a class="dropdown-item" href="{% url 'main:user_delete' user.pk %}" >
+                                        {% endif %}
+                                            {% trans 'users:action:delete' %}
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
                         </td>
                     </tr>
                 {% endfor %}
