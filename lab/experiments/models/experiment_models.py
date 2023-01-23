@@ -209,4 +209,4 @@ Met vriendelijke groet,<br/>
         return ''.join(f'{name}, ' for name in leader_names[:-2]) + ' en '.join(leader_names[-2:])
 
     def is_leader(self, user: User) -> bool:
-        return user.leader is not None and user.leader.experiments.filter(pk=self.pk).exists()
+        return user.experiments.filter(pk=self.pk).exists()
