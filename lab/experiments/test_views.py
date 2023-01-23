@@ -1,13 +1,13 @@
 import json
-from datetime import datetime, timedelta
+from datetime import timedelta
+
 from django.test import TestCase
 from django.utils import timezone
-
 from rest_framework.test import APIRequestFactory, force_authenticate
 
 from main.models import User
-from leaders.models import Leader
 from participants.models import Participant
+
 from .models import Experiment
 from .views.call_views import AppointmentConfirm
 
@@ -16,9 +16,8 @@ class AppointmentTests(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.user = User.objects.create(username='test', is_staff=True)
-        cls.leader = Leader.objects.create(user=cls.user)
         cls.experiment = Experiment.objects.create()
-        cls.experiment.leaders.add(cls.leader)
+        cls.experiment.leaders.add(cls.user)
 
         cls.participant = Participant.objects.create(
             dyslexic_parent=False,  # this is not nullable at the moment of writing the test
@@ -32,7 +31,7 @@ class AppointmentTests(TestCase):
             'experiment': self.experiment.pk,
             'start': timezone.now() + timedelta(days=1),
             'end': timezone.now() + timedelta(days=1, hours=1),
-            'leader': self.leader.pk,
+            'leader': self.user.pk,
             'participant': self.participant.pk,
             'emailParticipant': False
         }
@@ -47,7 +46,7 @@ class AppointmentTests(TestCase):
             'experiment': self.experiment.pk,
             'start': timezone.now() - timedelta(hours=2),
             'end': timezone.now() - timedelta(hours=1),
-            'leader': self.leader.pk,
+            'leader': self.user.pk,
             'participant': self.participant.pk,
             'emailParticipant': False
         }

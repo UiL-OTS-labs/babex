@@ -22,7 +22,7 @@ class InviteParticipantsForExperimentView(braces.LoginRequiredMixin,
         context['object_list'] = self.get_object_list()
         context['experiment'] = self.experiment
 
-        inviting_leader = self.request.user.leader
+        inviting_leader = self.request.user
         context['invite_text'] = get_invite_mail_content(self.experiment, inviting_leader)
 
         return context

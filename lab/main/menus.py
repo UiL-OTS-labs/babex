@@ -1,7 +1,7 @@
 from django.conf import settings
+from django.core.handlers.wsgi import WSGIRequest
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django.core.handlers.wsgi import WSGIRequest
 from menu import Menu, MenuItem
 
 
@@ -52,10 +52,10 @@ Menu.add_item("main", MenuItem(_('mainmenu:experiments'),
 
 users_menu = [
     MenuItem(_('mainmenu:leaders'),
-             reverse('leaders:home'),
+             reverse('main:users_leaders'),
              check=_user_is_authenticated),
     MenuItem(_('mainmenu:admins'),
-             reverse('main:users_home'),
+             reverse('main:users_admins'),
              check=_user_is_authenticated)
 ]
 

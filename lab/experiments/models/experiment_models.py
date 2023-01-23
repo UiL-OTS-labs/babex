@@ -6,7 +6,7 @@ from django.db.models import Count, F
 from django.utils.translation import gettext_lazy as _
 from django.utils.timezone import get_current_timezone
 
-from leaders.models import Leader
+from main.models import User
 from ..email import AppointmentConfirmEmail
 from .default_criteria_models import DefaultCriteria
 from .location_models import Location
@@ -135,7 +135,7 @@ Met vriendelijke groet,<br/>
     )
 
     leaders = models.ManyToManyField(
-        Leader,
+        User,
         verbose_name=_("experiment:attribute:leaders"),
         related_name='experiments',
         blank=True,

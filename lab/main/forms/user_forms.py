@@ -6,7 +6,7 @@ from main.models import User
 
 class UserCreationForm(auth_forms.UserCreationForm):
     class Meta:
-        fields = ('username', 'first_name', 'last_name', 'is_active')
+        fields = ('username', 'name', 'is_active')
         model = User
         field_classes = {
             'username': auth_forms.UsernameField
@@ -17,7 +17,7 @@ class UserUpdateForm(auth_forms.UserChangeForm):
     password = None  # type: ignore
 
     class Meta:
-        fields = ('username', 'first_name', 'last_name', 'is_active')
+        fields = ('username', 'name', 'is_active')
         model = User
         field_classes = {
             'username': auth_forms.UsernameField

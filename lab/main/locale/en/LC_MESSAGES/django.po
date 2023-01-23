@@ -56,7 +56,7 @@ msgstr "Leaders"
 
 #: main/menus.py:57
 msgid "mainmenu:admins"
-msgstr "Admins"
+msgstr "Lab managers"
 
 #: main/menus.py:62
 msgid "mainmenu:users"
@@ -170,7 +170,7 @@ msgstr "Save"
 
 #: main/templates/users/create.html:8 main/templates/users/create.html:22
 msgid "users:create:header"
-msgstr "Create new Admin account"
+msgstr "Create new user account"
 
 #: main/templates/users/create.html:25
 msgid "users:create:info_text"
@@ -277,3 +277,18 @@ msgstr "Password changed!"
 
 #~ msgid "mainmenu:comments"
 #~ msgstr "Comments"
+
+msgid "users:action:edit"
+msgstr "Edit"
+
+msgid "users:action:password"
+msgstr "Change password"
+
+msgid "users:action:delete"
+msgstr "Delete"
+
+msgid "users:leaders:header"
+msgstr "Leaders"
+
+msgid "users:admins:header"
+msgstr "Lab managers"
