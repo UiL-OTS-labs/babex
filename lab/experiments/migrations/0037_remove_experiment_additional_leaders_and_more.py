@@ -23,7 +23,6 @@ def revert_leaders(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('leaders', '0001_initial'),
         ('experiments', '0036_alter_experiment_defaultcriteria')
     ]
 

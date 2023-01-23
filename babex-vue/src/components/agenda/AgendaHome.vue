@@ -27,7 +27,8 @@
             type: 'date-range',
             start: selectionInfo.start,
             end: selectionInfo.end,
-            locations: props.locations
+            locations: props.locations,
+            calendar: calendar.value
         };
     }
 
@@ -41,7 +42,8 @@
         actionContext.value = {
             type: 'event-select',
             event: event,
-            locations: props.locations
+            locations: props.locations,
+            calendar: calendar.value
         };
     }
 

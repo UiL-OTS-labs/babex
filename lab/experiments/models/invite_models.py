@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from participants.models import Participant
 from .experiment_models import Experiment
-from leaders.models import Leader
+from main.models import User
 
 
 class Invitation(models.Model):
@@ -32,7 +32,7 @@ class Call(models.Model):
     status = models.CharField(max_length=20, choices=CallStatus.choices, default=CallStatus.STARTED)
     experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE)
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
-    leader = models.ForeignKey(Leader,
+    leader = models.ForeignKey(User,
                                # don't delete old calls just because the caller is gone
                                on_delete=models.PROTECT)
 

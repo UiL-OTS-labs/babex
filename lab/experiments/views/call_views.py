@@ -11,8 +11,8 @@ from rest_framework.permissions import IsAuthenticated
 from experiments.models import Appointment, Experiment, TimeSlot
 from experiments.models.invite_models import Call
 from experiments.serializers import AppointmentSerializer, ExperimentSerializer
-from leaders.models import Leader
-from leaders.serializers import LeaderSerializer
+from main.models import User
+from main.serializers import UserSerializer
 from participants.models import Participant
 from participants.serializers import ParticipantSerializer
 from utils.appointment_mail import send_appointment_mail
@@ -28,7 +28,7 @@ class CallHomeView(braces.LoginRequiredMixin, TemplateView):
 
         context['experiment'] = experiment
         context['experiment_serialized'] = ExperimentSerializer(experiment).data
-        context['leaders'] = [LeaderSerializer(leader).data for leader in experiment.leaders.all()]
+        context['leaders'] = [UserSerializer(leader).data for leader in experiment.leaders.all()]
 
         participant = Participant.objects.get(pk=kwargs['participant'])
         context['participant'] = participant
@@ -45,7 +45,7 @@ class CallHomeView(braces.LoginRequiredMixin, TemplateView):
         call, created = Call.objects.get_or_create(
             experiment=experiment,
             participant=participant,
-            leader=self.request.user.leader,
+            leader=self.request.user,
             status=Call.CallStatus.STARTED
         )
         context['call'] = CallSerializer(call).data
@@ -84,7 +84,7 @@ class AppointmentConfirm(generics.CreateAPIView):
             max_places=1
         )
 
-        leader = Leader.objects.filter(
+        leader = User.objects.filter(
             # make sure leader belongs to experiment
             experiments=experiment.pk
         ).get(

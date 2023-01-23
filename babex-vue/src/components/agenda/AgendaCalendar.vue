@@ -29,7 +29,7 @@
             id: event.id,
             start: event.start,
             end: event.end,
-            title:'Closed',
+            title: 'Closed',
             extra: event.is_global ? 'Entire building' : event.location_name,
             display: 'block',
             category: 'closing',

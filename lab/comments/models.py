@@ -2,9 +2,8 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 import cdh.core.fields as e_fields
-from experiments.models import Experiment
-from leaders.models import Leader
 from participants.models import Participant
+from main.models import User
 
 
 class Comment(models.Model):
@@ -19,7 +18,7 @@ class Comment(models.Model):
     )
 
     leader = models.ForeignKey(
-        Leader,
+        User,
         on_delete=models.CASCADE,
         verbose_name=_('comment:attribute:leader'),
         null=True,

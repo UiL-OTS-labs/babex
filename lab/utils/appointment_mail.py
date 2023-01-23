@@ -29,7 +29,7 @@ def send_appointment_mail(appointment: Appointment, override_content=None) -> No
         'participant_name': participant.name,
         'parent_name': participant.parent_name,
         'leader_name': appointment.leader.name,
-        'leader_email': appointment.leader.user.email,
+        'leader_email': appointment.leader.email,
         'leader_phonenumber': appointment.leader.phonenumber,
         'all_leaders_name_list': experiment.leader_names
     }

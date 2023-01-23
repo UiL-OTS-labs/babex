@@ -4,19 +4,20 @@ from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 
 from experiments.models import Location
-from experiments.models import Appointment
+
 
 class Closing(models.Model):
-    start = models.DateTimeField(_('closing:attribute:start'), db_index=True)
-    end = models.DateTimeField(_('closing:attribute:end'), db_index=True)
+    start = models.DateTimeField(_('agenda:closing:attribute:start'), db_index=True)
+    end = models.DateTimeField(_('agenda:closing:attribute:end'), db_index=True)
 
     # SET_NULL will let us keep closings history if for some reason a location is removed
-    location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
+    location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True,
+                                 verbose_name=_('agenda:closing:attribute:location'))
 
     # used to indicate entire lab is closed
-    is_global = models.BooleanField()
+    is_global = models.BooleanField(_('agenda:cosing:attribute:is_global'))
 
-    comment = models.TextField(null=True)
+    comment = models.TextField(_('agenda:cosing:attribute:comment'), null=True)
 
 
 class ClosingSerializer(serializers.ModelSerializer):
