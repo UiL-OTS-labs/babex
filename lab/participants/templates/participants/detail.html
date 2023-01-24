@@ -128,7 +128,10 @@
                             {% trans 'participants:detail:datetime' %}
                         </th>
                         <th>
-                            {% trans 'participants:detail:location' %}
+                            {% trans 'participants:detail:appointment:location' %}
+                        </th>
+                        <th>
+                            {% trans 'participants:detail:appointment:outcome' %}
                         </th>
                     </tr>
                 </thead>
@@ -146,6 +149,9 @@
                     </td>
                     <td>
                         {{ appointment.location }}
+                    </td>
+                    <td>
+                        {{ appointment.get_outcome_display }}
                     </td>
                 </tr>
                 {% endfor %}
