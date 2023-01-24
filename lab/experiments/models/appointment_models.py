@@ -10,36 +10,30 @@ from cdh.core.utils import enumerate_to
 
 
 class TimeSlot(models.Model):
-    experiment = models.ForeignKey(
-        Experiment,
-        on_delete=models.CASCADE
-    )
+    experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE)
 
-    start = models.DateTimeField(
-        _('time_slot:attribute:start'))
-    end = models.DateTimeField(
-        _('time_slot:attribute:start'))
+    start = models.DateTimeField(_("time_slot:attribute:start"))
+    end = models.DateTimeField(_("time_slot:attribute:start"))
 
     @property
     def datetime(self):
         return self.start  # temporarily keep compatability
 
     max_places = models.PositiveSmallIntegerField(
-        _('time_slot:attribute:max_places'),
+        _("time_slot:attribute:max_places"),
         validators=[
             MinValueValidator(1),
             MaxValueValidator(10),
-        ]
+        ],
     )
 
     @property
     def places(self) -> list:
         """Returns a list of places with a corresponding participant (if any)"""
-        return [{
-            'n':           n,
-            'appointment': appointment
-        } for n, appointment in enumerate_to(self.appointments.all(),
-                                             self.max_places, 1)]
+        return [
+            {"n": n, "appointment": appointment}
+            for n, appointment in enumerate_to(self.appointments.all(), self.max_places, 1)
+        ]
 
     def has_free_places(self) -> bool:
         return self.appointments.count() < self.max_places
@@ -49,27 +43,23 @@ class TimeSlot(models.Model):
         return self.max_places - self.appointments.count()
 
     def __str__(self):
-        return "{}: {}".format(
-            self.experiment.name,
-            self.datetime
-        )
+        return "{}: {}".format(self.experiment.name, self.datetime)
 
 
 class Appointment(models.Model):
-
     class Meta:
-        ordering = ['creation_date']
+        ordering = ["creation_date"]
 
     participant = models.ForeignKey(
         Participant,
         on_delete=models.PROTECT,
-        related_name='appointments',
+        related_name="appointments",
     )
 
     timeslot = models.ForeignKey(
         TimeSlot,
         on_delete=models.CASCADE,
-        related_name='appointments',
+        related_name="appointments",
         null=True,
         blank=True,
     )
@@ -77,7 +67,7 @@ class Appointment(models.Model):
     experiment = models.ForeignKey(
         Experiment,
         on_delete=models.CASCADE,
-        related_name='appointments',
+        related_name="appointments",
     )
 
     leader = models.ForeignKey(User, on_delete=models.PROTECT, null=False)
@@ -100,16 +90,13 @@ class Appointment(models.Model):
         places = self.timeslot.places
 
         for place in places:
-            if place['appointment'].pk == self.pk:
-                return place['n']
+            if place["appointment"].pk == self.pk:
+                return place["n"]
 
         return -1
 
     def __str__(self):
-        return "{} -> {}".format(
-            self.participant,
-            self.experiment.name
-        )
+        return "{} -> {}".format(self.participant, self.experiment.name)
 
     @property
     def start(self):
@@ -129,4 +116,4 @@ class Appointment(models.Model):
 
     def location(self):
         # TODO: temporary workaround for missing locations
-        return self.experiment.location.name if self.experiment.location else 'Unknown'
+        return self.experiment.location.name if self.experiment.location else "Unknown"
