@@ -19,7 +19,8 @@
             extra: `${event.location} (${event.leader})`,
             display: 'block',
             category: 'appointment',
-            comment : event.comment
+            comment: event.comment,
+            outcome: event.outcome
         };
     }
 
