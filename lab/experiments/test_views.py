@@ -69,7 +69,7 @@ class AppointmentTests(TestCase):
             'experiment': self.experiment.pk,
             'start': timezone.now() + timedelta(days=7),
             'end': timezone.now() + timedelta(days=7, hours=1),
-            'leader': self.leader.pk,
+            'leader': self.user.pk,
             'participant': self.participant.pk,
             'emailParticipant': False
         }
@@ -91,7 +91,7 @@ class AppointmentTests(TestCase):
             'experiment': self.experiment.pk,
             'start': timezone.now() + timedelta(days=7),
             'end': timezone.now() + timedelta(days=7, hours=1),
-            'leader': self.leader.pk,
+            'leader': self.user.pk,
             'participant': self.participant.pk,
             'emailParticipant': False
         }
