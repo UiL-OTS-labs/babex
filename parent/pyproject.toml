@@ -15,7 +15,7 @@ module = 'auditlog.*'
 ignore_errors = true
 
 [tool.django-stubs]
-django_settings_module = 'ppn_backend.settings'
+django_settings_module = 'parent.settings'
 
 [tool.black]
 line-length = 120

@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 
 from participants.models import Participant
 from .experiment_models import Experiment
-from leaders.models import Leader
+from main.models import User
 from cdh.core.utils import enumerate_to
 
 
@@ -80,7 +80,7 @@ class Appointment(models.Model):
         related_name='appointments',
     )
 
-    leader = models.ForeignKey(Leader, on_delete=models.PROTECT, null=False)
+    leader = models.ForeignKey(User, on_delete=models.PROTECT, null=False)
 
     creation_date = models.DateTimeField(
         auto_now_add=True,

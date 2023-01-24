@@ -1,6 +1,6 @@
+from cdh.core.utils.mail import send_template_email
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from cdh.core.utils.mail import send_template_email
 
 import auditlog.utils.log as auditlog
 from auditlog.enums import Event, UserType
@@ -34,7 +34,7 @@ def unsubscribe_participant(appointment_pk: int,
             'participant':     appointment.participant,
             'time_slot':       time_slot,
             'experiment':      experiment,
-            'admin':           appointment.leader.user.get_full_name(),
+            'admin':           appointment.leader.get_full_name(),
             'admin_email':     appointment.leader.email,
             'other_time_link': get_register_link(experiment),
             'home_link':       settings.FRONTEND_URI,

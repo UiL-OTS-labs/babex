@@ -298,6 +298,10 @@ msgstr "Confirmed"
 msgid "experiments:call:status:cancelled"
 msgstr "Cancel"
 
+#: experiments/models/invite_models.py:38
+msgid "experiments:call:status:exclude"
+msgstr "Does not want to or cannot participate"
+
 #: experiments/models/location_models.py:8
 msgid "location:attribute:name"
 msgstr "Name"

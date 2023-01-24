@@ -16,7 +16,7 @@
         <div class="col-10">
             <p>Hello {{ user.get_full_name }}!</p>
 
-            {% if user.leader %}
+            {% if user.is_leader %}
             <p>You are a leader for the following experiments:</p>
             <ul>
                 {% for experiment in experiments %}

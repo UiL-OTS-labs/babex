@@ -60,7 +60,6 @@ INSTALLED_APPS = [
     'cdh.vue',
     'main',
     'experiments',
-    'leaders',
     'participants',
     'comments',
     'auditlog',
@@ -70,7 +69,10 @@ INSTALLED_APPS = [
     'signups',
 
     'django.contrib.admin',
-    'django.forms'
+    'django.forms',
+
+    # deprecated
+    'leaders'
 ]
 
 MIDDLEWARE = [

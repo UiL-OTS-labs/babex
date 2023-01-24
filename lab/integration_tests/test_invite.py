@@ -5,13 +5,12 @@ from django.core import mail
 
 from main.models import User
 from experiments.models import Appointment, DefaultCriteria, TimeSlot
-from leaders.models import Leader
 from participants.models import Participant
 
 
 @pytest.fixture
 def sample_experiment(admin_user, db):
-    yield admin_user.leader.experiments.create(
+    yield admin_user.experiments.create(
         defaultcriteria=DefaultCriteria.objects.create()
     )
 
@@ -34,10 +33,9 @@ def sample_participant(db):
 
 @pytest.fixture
 def sample_leader(db):
-    user = User.objects.create(username='leader')
-    yield Leader.objects.create(name='Leader McLeader',
-                                phonenumber='23456789',
-                                user=user)
+    yield User.objects.create(name='Leader McLeader',
+                              username='leader',
+                              phonenumber='23456789')
 
 
 @pytest.fixture
@@ -55,7 +53,7 @@ def sample_appointment(sample_experiment, sample_participant, sample_leader, db)
         leader=sample_leader)
 
 
-def test_experiment_list(sb, sample_experiment, sample_participant, as_admin):
+def test_experiment_list(sb, sample_experiment, sample_participant, as_leader):
     sb.click('a:contains(Experiments)')
     sb.click('a:contains(Overview)')
     sb.click('button.icon-menu')
@@ -63,7 +61,9 @@ def test_experiment_list(sb, sample_experiment, sample_participant, as_admin):
     sb.assert_text('Baby McBaby')
 
 
-def test_schedule_appointment(sb, sample_experiment, sample_participant, sample_leader, as_admin):
+def test_schedule_appointment(sb, sample_experiment, sample_participant, sample_leader, as_leader):
+    sample_experiment.leaders.add(as_leader)
+    # test with a differnet leader than the currently logged user
     sample_experiment.leaders.add(sample_leader)
 
     sb.click('a:contains(Experiments)')
@@ -106,12 +106,13 @@ def test_schedule_appointment(sb, sample_experiment, sample_participant, sample_
 
     # check that at least parent name and leader name are in the email contents
     sb.assertIn(sample_participant.parent_name, mail.outbox[0].body)
-    sb.assertIn(sample_leader.user.get_full_name(), mail.outbox[0].body)
+    sb.assertIn(sample_leader.name, mail.outbox[0].body)
     sb.assertIn(sample_participant.parent_name, mail.outbox[0].alternatives[0][0])
-    sb.assertIn(sample_leader.user.get_full_name(), mail.outbox[0].alternatives[0][0])
+    sb.assertIn(sample_leader.name, mail.outbox[0].alternatives[0][0])
 
 
-def test_schedule_appointment_edit_email(sb, sample_experiment, sample_participant, sample_leader, as_admin):
+def test_schedule_appointment_edit_email(sb, sample_experiment, sample_participant, sample_leader, as_leader):
+    sample_experiment.leaders.add(as_leader)
     sample_experiment.leaders.add(sample_leader)
 
     sb.click('a:contains(Experiments)')
@@ -150,3 +151,24 @@ def test_schedule_appointment_edit_email(sb, sample_experiment, sample_participa
     sb.assertEqual(mail.outbox[0].to[0], sample_participant.email)
     sb.assertIn(test_email_plain, mail.outbox[0].body)
     sb.assertIn(test_email, mail.outbox[0].alternatives[0][0])
+
+
+def test_call_exclusion(sb, sample_experiment, sample_participant, sample_leader, as_admin):
+    sample_experiment.leaders.add(sample_leader)
+
+    sb.click('a:contains(Experiments)')
+    sb.click('a:contains(Overview)')
+    sb.click('button.icon-menu')
+    sb.click('a:contains(Invite)')
+    sb.click('a.icon-phone')
+
+    # indicates participant can't participate
+    sb.click('input[value="EXCLUDE"]')
+    sb.click('button:contains(Save)')
+
+    # baby mcbaby shouldn't be available anymore
+    sb.click('a:contains(Experiments)')
+    sb.click('a:contains(Overview)')
+    sb.click('button.icon-menu')
+    sb.click('a:contains(Invite)')
+    sb.assert_text_not_visible('Baby McBaby')

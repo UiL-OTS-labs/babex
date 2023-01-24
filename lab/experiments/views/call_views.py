@@ -1,24 +1,22 @@
 import datetime
-import braces.views as braces
-from django.core.exceptions import BadRequest
-from django.views.generic import TemplateView
-from django.http.response import JsonResponse
-from django.utils.dateparse import parse_datetime
-from django.utils import timezone
-
 import ageutil
+import braces.views as braces
+from django.core.exceptions import BadRequest, PermissionDenied
+from django.http.response import JsonResponse
+from django.utils import timezone
+from django.utils.dateparse import parse_datetime
+from django.views.generic import TemplateView
 from rest_framework import generics, serializers, views
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAuthenticated
 
-
-from utils.appointment_mail import send_appointment_mail
-from experiments.models import Experiment, Appointment, TimeSlot
+from experiments.models import Appointment, Experiment, TimeSlot
 from experiments.models.invite_models import Call
 from experiments.serializers import AppointmentSerializer, ExperimentSerializer
-from leaders.models import Leader
-from leaders.serializers import LeaderSerializer
+from main.models import User
+from main.serializers import UserSerializer
 from participants.models import Participant
 from participants.serializers import ParticipantSerializer
+from utils.appointment_mail import send_appointment_mail
 
 
 class CallHomeView(braces.LoginRequiredMixin, TemplateView):
@@ -31,7 +29,7 @@ class CallHomeView(braces.LoginRequiredMixin, TemplateView):
 
         context['experiment'] = experiment
         context['experiment_serialized'] = ExperimentSerializer(experiment).data
-        context['leaders'] = [LeaderSerializer(leader).data for leader in experiment.leaders.all()]
+        context['leaders'] = [UserSerializer(leader).data for leader in experiment.leaders.all()]
 
         participant = Participant.objects.get(pk=kwargs['participant'])
         context['participant'] = participant
@@ -48,7 +46,7 @@ class CallHomeView(braces.LoginRequiredMixin, TemplateView):
         call, created = Call.objects.get_or_create(
             experiment=experiment,
             participant=participant,
-            leader=self.request.user.leader,
+            leader=self.request.user,
             status=Call.CallStatus.STARTED
         )
         context['call'] = CallSerializer(call).data
@@ -66,11 +64,14 @@ class CallHomeView(braces.LoginRequiredMixin, TemplateView):
 
 
 class AppointmentConfirm(generics.CreateAPIView):
-    permission_classes = [IsAdminUser]  # TODO: check if user is a leader of the experiment
+    permission_classes = [IsAuthenticated]
     serializer_class = AppointmentSerializer
 
     def create(self, request, *args, **kwargs):
         experiment = Experiment.objects.get(pk=request.data['experiment'])
+        if not experiment.is_leader(request.user):
+            raise PermissionDenied
+
         start = parse_datetime(request.data['start'])
         end = parse_datetime(request.data['end'])
 
@@ -82,7 +83,7 @@ class AppointmentConfirm(generics.CreateAPIView):
         if not self.check_age_at_appointment(participant, experiment, start):
             raise BadRequest('Invalid appointment time')
 
-        leader = Leader.objects.filter(
+        leader = User.objects.filter(
             # make sure leader belongs to experiment
             experiments=experiment.pk
         ).get(
@@ -112,7 +113,7 @@ class AppointmentConfirm(generics.CreateAPIView):
 
 
 class AppointmentSendEmail(views.APIView):
-    permission_classes = [IsAdminUser]  # TODO: check if user is a leader of the experiment
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
         """Returns the email template that's relevant for a given appointment.
@@ -123,6 +124,8 @@ class AppointmentSendEmail(views.APIView):
     def post(self, request, *args, **kwargs):
         """Sends a custom email"""
         appointment = Appointment.objects.get(pk=int(request.data['id']))
+        if not appointment.experiment.is_leader(request.user):
+            raise PermissionDenied
         content = request.data['content']
         send_appointment_mail(appointment, content)
         return JsonResponse({})
@@ -135,11 +138,14 @@ class CallSerializer(serializers.ModelSerializer):
 
 
 class UpdateCall(generics.UpdateAPIView):
-    permission_classes = [IsAdminUser]  # TODO: check if user started the call
+    permission_classes = [IsAuthenticated]
     serializer_class = CallSerializer
 
     def update(self, request, *args, **kwargs):
         call = Call.objects.get(pk=kwargs['pk'])
+        if call.leader != request.user:
+            raise PermissionDenied
+
         call.status = request.data['status']
         call.comment = request.data['comment']
         call.save()

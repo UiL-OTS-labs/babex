@@ -3,10 +3,11 @@ from datetime import datetime, timedelta
 from django.core.validators import MinValueValidator
 from django.db import models
 from django.db.models import Count, F
-from django.utils.translation import gettext_lazy as _
 from django.utils.timezone import get_current_timezone
+from django.utils.translation import gettext_lazy as _
 
-from leaders.models import Leader
+from main.models import User
+
 from ..email import AppointmentConfirmEmail
 from .default_criteria_models import DefaultCriteria
 from .location_models import Location
@@ -135,7 +136,7 @@ Met vriendelijke groet,<br/>
     )
 
     leaders = models.ManyToManyField(
-        Leader,
+        User,
         verbose_name=_("experiment:attribute:leaders"),
         related_name='experiments',
         blank=True,
@@ -206,3 +207,6 @@ Met vriendelijke groet,<br/>
         # TODO: i18n? (for connective 'en' -> 'and')
         leader_names = [leader.name for leader in self.leaders.all()]
         return ''.join(f'{name}, ' for name in leader_names[:-2]) + ' en '.join(leader_names[-2:])
+
+    def is_leader(self, user: User) -> bool:
+        return user.experiments.filter(pk=self.pk).exists()
