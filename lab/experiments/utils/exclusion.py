@@ -201,18 +201,17 @@ def _get_specific_criterion(specific_experiment_criteria, criterion) -> \
 
 def should_exclude_by_age(participant: Participant, criteria: DefaultCriteria) -> bool:
     """
-    Determines if a participant should be excluded based upon their age
+    Determines if a participant should be excluded (from being invited) based upon their age
 
     :param participant:
     :param default_criteria:
     :return:
     """
 
-    # If we don't know the age, assume it's allowed
-    if participant.age is None:
-        return False
+    age_pred = age(months=criteria.min_age_months, days=criteria.min_age_days).to(
+        months=criteria.max_age_months, days=criteria.max_age_days
+    )
 
-    age_pred = age(months=criteria.min_age_months, days=criteria.min_age_days)\
-        .to(months=criteria.max_age_months, days=criteria.max_age_days)
-
-    return not age_pred.check(participant.birth_date)
+    can_participate_today = age_pred.check(participant.birth_date)
+    can_participate_within_14_days = age_pred.on(datetime.today() + timedelta(days=14)).check(participant.birth_date)
+    return not (can_participate_today or can_participate_within_14_days)
