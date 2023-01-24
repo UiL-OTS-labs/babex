@@ -132,7 +132,7 @@ class UpdateCall(generics.UpdateAPIView):
 
     def update(self, request, *args, **kwargs):
         call = Call.objects.get(pk=kwargs['pk'])
-        if call.leader != request.user.leader:
+        if call.leader != request.user:
             raise PermissionDenied
 
         call.status = request.data['status']
