@@ -97,6 +97,21 @@ class ApiClient {
             }
         });
     }
+
+    async patch<T, D>(url: string, id: string, values: D): Promise<T> {
+        const result = await fetch(`${url}${id}/`, {
+            credentials: 'include',
+            method: 'PATCH',
+            headers: this.headers(),
+            body: JSON.stringify(values),
+        });
+
+        if (result.status >= 400) {
+            throw new ApiError(result.status, result.statusText);
+        }
+
+        return await result.json();
+    }
 }
 
 class ApiPart {
@@ -126,6 +141,10 @@ class GenericApiPart<T> extends ApiPart {
 
     async update(id: string, values: T) {
         return this.client.put(this.endpoint, id, values);
+    }
+
+    async updatePartial(id: string, values: Partial<T>) {
+        return this.client.patch(this.endpoint, id, values);
     }
 
     async create(values: T) {
@@ -174,7 +193,7 @@ class BabexApi {
             },
             sendEmail: (data: AppointmentSendEmail) => {
                 return this.client.post(urls.call.sendEmail, data);
-            }
+            },
         },
         log: new GenericApiPart<Call>(this.client, urls.call.log),
     }
