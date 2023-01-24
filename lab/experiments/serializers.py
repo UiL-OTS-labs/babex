@@ -8,7 +8,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
         model = Appointment
         fields = [
             'id', 'experiment', 'leader', 'participant', 'location',
-            'start', 'end', 'comment'
+            'start', 'end', 'comment', 'outcome',
         ]
 
     experiment = serializers.StringRelatedField()  # type: ignore

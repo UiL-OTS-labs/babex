@@ -1,6 +1,7 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
 
 from participants.models import Participant
 from .experiment_models import Experiment
@@ -49,33 +50,21 @@ class Appointment(models.Model):
     class Meta:
         ordering = ["creation_date"]
 
-    participant = models.ForeignKey(
-        Participant,
-        on_delete=models.PROTECT,
-        related_name="appointments",
-    )
+    class Outcome(models.TextChoices):
+        # appointment was succesfully completed
+        COMPLETED = "COMPLETED", _("experiments:appointment:outcome:completed")
+        # participant did not participate
+        NOSHOW = "NOSHOW", _("experiments:appointment:outcome:noshow")
+        # participant had to be excluded
+        EXCLUDED = "EXCLUDED", _("experiments:appointment:outcome:excluded")
 
-    timeslot = models.ForeignKey(
-        TimeSlot,
-        on_delete=models.CASCADE,
-        related_name="appointments",
-        null=True,
-        blank=True,
-    )
-
-    experiment = models.ForeignKey(
-        Experiment,
-        on_delete=models.CASCADE,
-        related_name="appointments",
-    )
-
+    participant = models.ForeignKey(Participant, on_delete=models.PROTECT, related_name="appointments")
+    timeslot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE, related_name="appointments", null=True, blank=True)
+    experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE, related_name="appointments")
     leader = models.ForeignKey(User, on_delete=models.PROTECT, null=False)
-
-    creation_date = models.DateTimeField(
-        auto_now_add=True,
-    )
-
-    comment = models.CharField(max_length=100, default="")
+    creation_date = models.DateTimeField(auto_now_add=True)
+    comment = models.CharField(max_length=100, default="", blank=True)
+    outcome = models.CharField(max_length=20, choices=Outcome.choices, null=True)
 
     def save(self, *args, **kwargs):
         self.timeslot.save()
