@@ -60,6 +60,14 @@ def get_eligible_participants_for_experiment(
     filtered = []
 
     for participant in participants:
+        participated_in = participant.appointments.exclude(outcome=Appointment.Outcome.NOSHOW).values_list(
+            "experiment", flat=True
+        )
+
+        if experiment.pk in participated_in:
+            # participant has/had an appointment for this experiment
+            continue
+
         if check_default_criteria(participant, filters):
             continue
 
