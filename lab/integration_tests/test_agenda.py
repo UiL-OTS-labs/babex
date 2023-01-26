@@ -56,7 +56,10 @@ def appointment_yesterday(db, sample_experiment, sample_leader, sample_participa
     )
 
 
-def test_agenda_set_appointment_outcome(sb, appointment_yesterday, as_admin, agenda):
+def test_agenda_set_appointment_outcome(sb, appointment_yesterday, as_leader, agenda):
+    appointment_yesterday.experiment.leaders.add(as_leader)
+
+    sb.assert_text_visible(appointment_yesterday.participant.name)
     sb.click(f'td[data-date="{appointment_yesterday.start.date()}"]')
     sb.assert_element_visible(".action-panel")
     sb.assert_text("Edit appointment", ".action-panel")
@@ -73,3 +76,10 @@ def test_agenda_set_appointment_outcome(sb, appointment_yesterday, as_admin, age
     sb.reload()
     sb.click(f'td[data-date="{appointment_yesterday.start.date()}"]')
     sb.assert_element_visible('input[value="NOSHOW"]:checked')
+
+    # participant should be available again after a no-show
+    sb.click("a:contains(Experiments)")
+    sb.click("a:contains(Overview)")
+    sb.click("button.icon-menu")
+    sb.click("a:contains(Invite)")
+    sb.assert_text_visible(appointment_yesterday.participant.name)
