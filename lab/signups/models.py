@@ -23,8 +23,7 @@ class Signup(models.Model):
     multilingual = e_fields.EncryptedBooleanField()
 
     class Status(models.TextChoices):
-        NEW = "NEW", _("signups:stats:new")
-        APPROVED = "APPROVED", _("signups:stats:approved")
-        REJECTED = "REJECTED", _("signups:stats:rejected")
-
-    status = e_fields.EncryptedTextField(max_length=20, choices=Status.choices, default=Status.NEW)
+        NEW = 'NEW', _('signups:stats:new')
+        APPROVED = 'APPROVED', _('signups:stats:approved')
+        REJECTED = 'REJECTED', _('signups:stats:rejected')
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.NEW)
