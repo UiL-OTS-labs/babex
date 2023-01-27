@@ -13,7 +13,12 @@
         leaders: {id: number, name: string}[],
         statuses: { [id: string]: string},
         call: Call,
-        completeUrl: string
+        completeUrl: string,
+
+        // range during which the participant is eligible for participation in the experiment
+        // passed from Django in an ISO-formatted string
+        start: string,
+        end: string
     }>();
 
     const calendar = ref<typeof AgendaCalendar|null>(null);
@@ -158,7 +163,7 @@
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div v-if="step === 0" class="modal-content">
                         <div class="modal-body">
-                                <AgendaCalendar ref="calendar" @select="onSelect"></AgendaCalendar>
+                            <AgendaCalendar ref="calendar" @select="onSelect" :start="start" :end="end"></AgendaCalendar>
                         </div>
                         <div class="modal-footer">
                             <button @click="step = 1" type="button" class="btn btn-primary" :disabled="event==null">Next</button>
