@@ -27,3 +27,5 @@ class Signup(models.Model):
         APPROVED = 'APPROVED', _('signups:stats:approved')
         REJECTED = 'REJECTED', _('signups:stats:rejected')
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.NEW)
+
+    created = models.DateTimeField(auto_now_add=True)
