@@ -28,6 +28,9 @@
                             <th>
                             </th>
                             <th>
+                                {% get_verbose_field_name "signups" "Signup" "created" %}
+                            </th>
+                            <th>
                                 {% get_verbose_field_name "signups" "Signup" "name" %}
                             </th>
                             <th>
@@ -40,6 +43,9 @@
                             <tr>
                                 <td>
                                     <input class="checkbox" type="checkbox" name="signups" value="{{ signup.pk }}">
+                                </td>
+                                <td>
+                                    {{ signup.created }}
                                 </td>
                                 <td>
                                     {{ signup.name }}

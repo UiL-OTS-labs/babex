@@ -1,0 +1,11 @@
+{% extends 'cdh.core/mail_template.html' %}
+
+{% block banner %}
+    New signups
+{% endblock %}
+
+{% block content %}
+    <p>There are {{ count }} new participants waiting for approval ({{ total }} total).</p>
+
+    <p><a href="{{ base_url }}{% url 'signups:list' %}">Click here</a> to inspect them.</p>
+{% endblock %}
