@@ -102,7 +102,7 @@
             {% trans "experiments:call:home:actions" %}
         </div>
         {% url 'experiments:invite' experiment.pk as completeUrl %}
-        {% vue babex.CallHome :experiment=experiment_serialized :participant=participant_serialized :leaders :statuses :call :completeUrl %}
+        {% vue babex.CallHome :experiment=experiment_serialized :participant=participant_serialized :leaders :statuses :call :completeUrl :start=participation_range.0 :end=participation_range.1 %}
     </div>
 </div>
 

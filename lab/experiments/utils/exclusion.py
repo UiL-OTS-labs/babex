@@ -12,34 +12,30 @@ from typing import List, Optional
 from ageutil import age
 
 from experiments.models import DefaultCriteria, Experiment, ExperimentCriterion
+from experiments.models.invite_models import Call
 from participants.models import Participant
 
 # List of vars that can have the same values as the participant model
 # variables, with an indifferent option
 indifferentable_vars = [
-    'language',
-    'sex',
+    "language",
+    "sex",
 ]
 
 
-def get_eligible_participants_for_experiment(experiment: Experiment,
-                                             on_mailinglist: bool = True) -> \
-        List[Participant]:
+def get_eligible_participants_for_experiment(experiment: Experiment, on_mailinglist: bool = True) -> List[Participant]:
     """
     This function produces a list of participants that can take part in
     the provided experiment.
     """
     default_criteria = experiment.defaultcriteria
-    specific_experiment_criteria = \
-        experiment.experimentcriterion_set.select_related(
-            'criterion'
-        )
+    specific_experiment_criteria = experiment.experimentcriterion_set.select_related("criterion")
 
     # Base filters: a participant should be capable, and by default be on the
     # mailing list
     filters = {
-        'email_subscription': on_mailinglist,
-        'capable':            True,
+        "email_subscription": on_mailinglist,
+        "capable": True,
     }
 
     # Build the rest of the filters
@@ -60,15 +56,16 @@ def get_eligible_participants_for_experiment(experiment: Experiment,
     filtered = []
 
     for participant in participants:
-
         if check_default_criteria(participant, filters):
             continue
 
         if should_exclude_by_age(participant, default_criteria):
             continue
 
-        if _should_exclude_by_specific_criteria(participant,
-                                                specific_experiment_criteria):
+        if _should_exclude_by_specific_criteria(participant, specific_experiment_criteria):
+            continue
+
+        if should_exclude_by_call_status(participant, experiment):
             continue
 
         filtered.append(participant)
@@ -204,3 +201,11 @@ def should_exclude_by_age(participant: Participant, criteria: DefaultCriteria) -
     can_participate_today = age_pred.check(participant.birth_date)
     can_participate_within_14_days = age_pred.on(datetime.today() + timedelta(days=14)).check(participant.birth_date)
     return not (can_participate_today or can_participate_within_14_days)
+
+
+def should_exclude_by_call_status(participant: Participant, experiment: Experiment) -> bool:
+    """
+    When a parent indicates they cannot participate, there should be a Call object
+    for the relevant participant and experiment, with an EXCLUDE status
+    """
+    return participant.call_set.filter(experiment=experiment, status=Call.CallStatus.EXCLUDE).exists()
