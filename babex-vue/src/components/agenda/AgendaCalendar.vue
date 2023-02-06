@@ -4,9 +4,16 @@
     import timeGridPlugin from '@fullcalendar/timegrid';
     import interactionPlugin from '@fullcalendar/interaction';
     import type {EventInput, EventContentArg, CalendarOptions, EventSourceApi} from '@fullcalendar/core';
-    import {defineEmits, defineExpose, ref} from 'vue';
+    import {defineEmits, defineExpose, defineProps, ref} from 'vue';
 
     import {urls} from '../../urls';
+
+    const props = defineProps<{
+        // optional starting date of valid selection range (iso format)
+        start?: string,
+        // optional ending date of valid selection range (iso format)
+        end?: string,
+    }>();
 
     function formatAppointment(event: EventInput) : EventInput {
         return {
@@ -72,7 +79,15 @@
         eventContent: eventRender,
         selectable: true,
         select: (info) => emit('select', info),
-        eventClick: (info) => emit('eventClick', info)
+        eventClick: (info) => emit('eventClick', info),
+
+        events: [
+            { start: props.start, end: props.end, display: 'inverse-background', color: 'gray' }
+        ],
+        selectConstraint: {
+            start: props.start,
+            end: props.end
+        }
     };
 
     function eventRender(arg: EventContentArg) {
@@ -82,7 +97,7 @@
               <div class="fc-event-title-container">
                 <div class="fc-event-title fc-sticky">${arg.event.title}</div>
               </div></div>
-              <div>${arg.event.extendedProps.extra}</div>`
+              <div>${arg.event.extendedProps.extra ?? ''}</div>`
         }
     }
 

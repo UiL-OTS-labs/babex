@@ -6,6 +6,7 @@ straightforward as you'd expect.
 Also, because we use application-level database encryption, we cannot compare
 inside the database. This is why everything is done in python.
 """
+from datetime import datetime, timedelta
 from typing import List, Optional
 
 from ageutil import age
@@ -47,11 +48,14 @@ def get_eligible_participants_for_experiment(experiment: Experiment, on_mailingl
 
     # Exclude all participants with an appointment for an experiment that was
     # marked as an exclusion criteria
-    participants = Participant.objects.exclude(
-        appointments__experiment__in=experiment.excluded_experiments.all()
-    ).prefetch_related(
-        "secondaryemail_set", "criterionanswer_set"
-    )  # Used in the invite page template!
+    participants = (
+        Participant.objects.exclude(appointments__experiment__in=experiment.excluded_experiments.all())
+        .exclude(
+            # Exclude all participants who have already signed up
+            appointments__experiment=experiment
+        )
+        .prefetch_related("secondaryemail_set", "criterionanswer_set")  # Used in the invite page template!
+    )
 
     # List of all allowed participants
     filtered = []
@@ -196,22 +200,20 @@ def _get_specific_criterion(specific_experiment_criteria, criterion) -> Optional
 
 def should_exclude_by_age(participant: Participant, criteria: DefaultCriteria) -> bool:
     """
-    Determines if a participant should be excluded based upon their age
+    Determines if a participant should be excluded (from being invited) based upon their age
 
     :param participant:
     :param default_criteria:
     :return:
     """
 
-    # If we don't know the age, assume it's allowed
-    if participant.age is None:
-        return False
-
     age_pred = age(months=criteria.min_age_months, days=criteria.min_age_days).to(
         months=criteria.max_age_months, days=criteria.max_age_days
     )
 
-    return not age_pred.check(participant.birth_date)
+    can_participate_today = age_pred.check(participant.birth_date)
+    can_participate_within_14_days = age_pred.on(datetime.today() + timedelta(days=14)).check(participant.birth_date)
+    return not (can_participate_today or can_participate_within_14_days)
 
 
 def should_exclude_by_call_status(participant: Participant, experiment: Experiment) -> bool:

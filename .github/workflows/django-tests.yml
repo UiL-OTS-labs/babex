@@ -50,6 +50,10 @@ jobs:
         run: |
           cd ${{ matrix.app }}
           python manage.py compilemessages
+      - name: Check for missing migrations
+        run: |
+          cd ${{ matrix.app }}
+          python manage.py makemigrations --check --dry-run
       - name: Run django tests
         run: |
           cd ${{ matrix.app }}
