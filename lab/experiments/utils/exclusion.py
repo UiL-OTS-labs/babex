@@ -11,7 +11,12 @@ from typing import List, Optional
 
 from ageutil import age
 
-from experiments.models import DefaultCriteria, Experiment, ExperimentCriterion
+from experiments.models import (
+    Appointment,
+    DefaultCriteria,
+    Experiment,
+    ExperimentCriterion,
+)
 from experiments.models.invite_models import Call
 from participants.models import Participant
 
@@ -43,19 +48,24 @@ def get_eligible_participants_for_experiment(experiment: Experiment, on_mailingl
 
     # Exclude all participants with an appointment for an experiment that was
     # marked as an exclusion criteria
-    participants = (
-        Participant.objects.exclude(appointments__experiment__in=experiment.excluded_experiments.all())
-        .exclude(
-            # Exclude all participants who have already signed up
-            appointments__experiment=experiment
-        )
-        .prefetch_related("secondaryemail_set", "criterionanswer_set")  # Used in the invite page template!
-    )
+    participants = Participant.objects.exclude(
+        appointments__experiment__in=experiment.excluded_experiments.all()
+    ).prefetch_related(
+        "secondaryemail_set", "criterionanswer_set"
+    )  # Used in the invite page template!
 
     # List of all allowed participants
     filtered = []
 
     for participant in participants:
+        participated_in = participant.appointments.exclude(outcome=Appointment.Outcome.NOSHOW).values_list(
+            "experiment", flat=True
+        )
+
+        if experiment.pk in participated_in:
+            # participant has/had an appointment for this experiment
+            continue
+
         if check_default_criteria(participant, filters):
             continue
 

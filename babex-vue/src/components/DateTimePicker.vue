@@ -24,6 +24,7 @@
 
     defineProps<{
         modelValue: Date,
+        readonly?: boolean
     }>();
 
     const emits = defineEmits(['update:modelValue']);
@@ -31,7 +32,7 @@
 
 <template>
   <div>
-      <input class="form-control" type="text" :value="formatDateTime(modelValue)" @change="onChange">
+      <input :readonly="readonly" class="form-control" type="text" :value="formatDateTime(modelValue)" @change="onChange">
   </div>
 </template>
 
