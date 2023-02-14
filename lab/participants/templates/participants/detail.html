@@ -128,7 +128,10 @@
                             {% trans 'participants:detail:datetime' %}
                         </th>
                         <th>
-                            {% trans 'participants:detail:place' %}
+                            {% trans 'participants:detail:appointment:location' %}
+                        </th>
+                        <th>
+                            {% trans 'participants:detail:appointment:outcome' %}
                         </th>
                     </tr>
                 </thead>
@@ -145,9 +148,10 @@
                         {% endif %}
                     </td>
                     <td>
-                        {% if appointment.timeslot %}
-                        {{ appointment.place }}
-                        {% endif %}
+                        {{ appointment.location }}
+                    </td>
+                    <td>
+                        {{ appointment.get_outcome_display }}
                     </td>
                 </tr>
                 {% endfor %}

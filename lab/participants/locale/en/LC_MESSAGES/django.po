@@ -298,8 +298,11 @@ msgstr "Participant deleted!"
 #~ msgid "participants:home:detail:title"
 #~ msgstr "View details"
 
-#~ msgid "participants:messages:merged_participants"
-#~ msgstr "Participant merged!"
+msgid "participants:detail:appointment:location"
+msgstr "Location"
+
+msgid "participants:detail:appointment:outcome"
+msgstr "Outcome"
 
 msgid "participants:detail:calls"
 msgstr "Calls"
