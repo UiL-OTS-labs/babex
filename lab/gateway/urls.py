@@ -1,16 +1,22 @@
-from django.urls import path, include
-
+from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
-from .views import GatewayHome
-from .views import Signups
+from mailauth.views import MailAuthView, SetParticipantView
 
-app_name = 'gateway'
+from .views import AppointmentsView, GatewayHome, Signups
+
+app_name = "gateway"
 
 router = DefaultRouter()
-router.register('signup', Signups, basename='signup')
+router.register("signup", Signups, basename="signup")
 
 urlpatterns = [
-    path('', GatewayHome.as_view(), name='home'),
-    path('', include(router.urls)),
+    path("", GatewayHome.as_view(), name="home"),
+    path("", include(router.urls)),
+    #
+    path("mailauth/", MailAuthView.as_view()),
+    path("mailauth/set_participant/", SetParticipantView.as_view()),
+    path("mailauth/token/<str:token>/", MailAuthView.as_view()),
+    #
+    path("appointment/", AppointmentsView.as_view()),
 ]
