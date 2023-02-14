@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 from django.urls import reverse_lazy
@@ -14,6 +13,22 @@ class Signup(rest.Resource):
         supported_operations = [rest.Operations.put]
 
     name = rest.TextField()
+    sex = rest.TextField()
+    birth_date = rest.DateField()
+
+    parent_name = rest.TextField()
+    city = rest.TextField()
+    phonenumber = rest.TextField()
+    phonenumber_alt = rest.TextField()
+    email = rest.TextField()
+
+    english_contact = rest.BoolField()
+    newsletter = rest.BoolField()
+
+    dyslexic_parent = rest.BoolField()
+    tos_parent = rest.BoolField()
+    speech_parent = rest.BoolField()
+    multilingual = rest.BoolField()
 
 
 class SignupView(FormView):
@@ -22,7 +37,9 @@ class SignupView(FormView):
     success_url = reverse_lazy('signup.done')
 
     def form_valid(self, form):
-        signup = Signup(name=form.cleaned_data['name'])
+        # filter out blank fields
+        fields = {key: value for key, value in form.cleaned_data.items() if value}
+        signup = Signup(**fields)
         signup.put()
         return super().form_valid(form)
 

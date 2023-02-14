@@ -1,0 +1,77 @@
+{% extends 'base/babex_base.html' %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+
+{% block pre-messages-content %}
+    <div class="uu-hero justify-content-between align-items-center">
+        <h1 class="h2">
+            {% trans 'signups:list:header' %}
+        </h1>
+
+    </div>
+{% endblock %}
+{% block content %}
+<div class="uu-container">
+    <div class="col-12">
+        <div class="mb-5">
+        {% trans 'signups:list:intro' %}
+        </div>
+
+        {% if object_list %}
+            <form method="post">
+                {% csrf_token %}
+                <table class="dt_custom" width="100%" data-language="{% datatables_lang %}">
+                    <thead>
+                        <tr>
+                            <th>
+                            </th>
+                            <th>
+                                {% get_verbose_field_name "signups" "Signup" "created" %}
+                            </th>
+                            <th>
+                                {% get_verbose_field_name "signups" "Signup" "name" %}
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for signup in object_list %}
+                            <tr>
+                                <td>
+                                    <input class="checkbox" type="checkbox" name="signups" value="{{ signup.pk }}">
+                                </td>
+                                <td>
+                                    {{ signup.created }}
+                                </td>
+                                <td>
+                                    {{ signup.name }}
+                                </td>
+                                <td>
+                                    <a href="{% url 'signups:detail' signup.pk %}">
+                                        {% trans 'signups:list:detail' %}
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <button class="btn btn-primary">{% trans 'signups:list:remove' %}</button>
+            </form>
+        {% else %}
+            {% trans 'signups:list:empty' %}
+        {% endif %}
+        <br/>
+    </div>
+</div>
+
+<script>
+    $('.dt_custom').DataTable({
+        dom: 'Bfrtip',
+        buttons : ['pageLength'],
+    });
+</script>
+{% endblock %}

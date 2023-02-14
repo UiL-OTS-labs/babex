@@ -1,0 +1,75 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-27 13:33+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: signups/models.py:26
+msgid "signups:stats:new"
+msgstr ""
+
+#: signups/models.py:27
+msgid "signups:stats:approved"
+msgstr "Approved"
+
+#: signups/models.py:28
+msgid "signups:stats:rejected"
+msgstr "Rejected"
+
+#: signups/templates/signups/signup_detail.html:10
+msgid "signups:detail:header"
+msgstr "Signup details"
+
+#: signups/templates/signups/signup_detail.html:62
+msgid "yes,no"
+msgstr "Yes,No"
+
+#: signups/templates/signups/signup_detail.html:68
+msgid "signups:detail:approve"
+msgstr "Approve"
+
+#: signups/templates/signups/signup_detail.html:69
+msgid "signups:detail:reject"
+msgstr "Reject"
+
+#: signups/templates/signups/signup_list.html:10
+msgid "signups:list:header"
+msgstr "Signups"
+
+#: signups/templates/signups/signup_list.html:19
+msgid "signups:list:intro"
+msgstr ""
+
+#: signups/templates/signups/signup_list.html:49
+msgid "signups:list:detail"
+msgstr "details"
+
+#: signups/templates/signups/signup_list.html:56
+msgid "signups:list:remove"
+msgstr "Remove"
+
+#: signups/templates/signups/signup_list.html:59
+msgid "signups:list:empty"
+msgstr "No signups waiting for approval"
+
+#: signups/views.py:35
+msgid "signups:messages:approved"
+msgstr "Approved"
+
+#: signups/views.py:38
+msgid "signups:messages:rejected"
+msgstr "Rejected"
