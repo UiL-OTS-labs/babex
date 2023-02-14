@@ -1046,3 +1046,12 @@ msgstr "Successfully invited participants!"
 
 #~ msgid "experiments:detail:appointments"
 #~ msgstr "Appointments"
+
+msgid "experiments:appointment:outcome:completed"
+msgstr "Completed"
+
+msgid "experiments:appointment:outcome:noshow"
+msgstr "No-show"
+
+msgid "experiments:appointment:outcome:excluded"
+msgstr "Excluded"

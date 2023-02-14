@@ -9,6 +9,7 @@ interface Appointment {
     comment: string
     experiment?: string,
     leader?: string,
+    outcome?: string,
 }
 
 interface Closing {
