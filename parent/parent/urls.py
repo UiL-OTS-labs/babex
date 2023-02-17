@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import include, path
 
-from .views import SignupDone, SignupView, home
+from .views import SignupDone, SignupView, home, status
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -9,6 +9,7 @@ urlpatterns = [
     path("cdhcore/", include("cdh.core.urls")),
     # home
     path("", home, name="home"),
+    path("status", status),
     # magiclink
     path("auth/", include("mailauth.urls")),
     # signup

@@ -1,5 +1,6 @@
 from cdh.rest import client as rest
 from django.contrib import messages
+from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
@@ -58,3 +59,15 @@ def home(request):
         messages.error(request, "error retreiving data")
 
     return render(request, "parent/home.html", dict(appointments=appointments))
+
+
+def status(request):
+    # check that the lab app is reachable
+    try:
+        ok, _ = gateway(request, "/gateway/")
+        if not ok:
+            return JsonResponse(dict(ok=False))
+    except Exception:
+        return JsonResponse(dict(ok=False))
+
+    return JsonResponse(dict(ok=True))
