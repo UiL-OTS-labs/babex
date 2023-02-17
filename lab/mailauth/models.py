@@ -89,6 +89,10 @@ def try_authenticate(token: str) -> Tuple[Optional[MailAuth], List[Participant]]
 
 def lookup_session_token(token: str) -> Optional[Participant]:
     """Retrieves the relevant Participant for the current session, if one has been set"""
+    if not token:
+        # never accept an empty string as a token
+        return None
+
     try:
         mauth = MailAuth.objects.get(
             session_token=token,

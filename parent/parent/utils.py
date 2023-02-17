@@ -16,10 +16,10 @@ def gateway(
 
     headers = dict()
     if "token" in request.session:
-        # x-session-token is a custom header that stores the session token we
+        # in the authorization header we store the session token we
         # receive from the lab app after a succesful authentication flow.
         # see mailauth.views.link_verify()
-        headers["x-session-token"] = request.session["token"]
+        headers["Authorization"] = "Bearer {}".format(request.session["token"])
 
     if method is None:
         if data is not None:

@@ -45,7 +45,11 @@ class MailAuthView(views.APIView):
 
 class SetParticipantView(views.APIView):
     def post(self, request, *args, **kwargs):
-        token = request.headers.get("x-session-token")
+        try:
+            token = request.headers.get("Authorization").split(" ")[1]
+        except Exception:
+            raise exceptions.PermissionDenied()
+
         if resolve_participant(token, request.data["participant_id"]):
             return Response(dict())
         raise exceptions.PermissionDenied()
