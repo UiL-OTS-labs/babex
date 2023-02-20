@@ -38,7 +38,7 @@ class Experiment(models.Model):
     </p>
     <p>
         Met vriendelijke groet,<br/>
-        het UiL OTS lab
+        het ILS lab
     </p>"""
 
     DEFAULT_INVITE_MAIL = """<p>Je kunt je weer opgeven voor een nieuw
