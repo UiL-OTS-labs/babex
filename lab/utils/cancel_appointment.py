@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
-from django.conf import settings
 from cdh.core.utils.mail import send_template_email
+from django.conf import settings
 
 from comments.utils import add_system_comment
 from experiments.models import Appointment
@@ -33,9 +33,7 @@ def _handle_late_comment(appointment: Appointment) -> None:
 
     if now > deadline:
         add_system_comment(
-            appointment.participant,
-            "Cancelled less than 24h before experiment",
-            appointment.timeslot.experiment
+            appointment.participant, "Cancelled less than 24h before experiment", appointment.timeslot.experiment
         )
 
 
@@ -45,40 +43,28 @@ def _inform_leaders(appointment: Appointment) -> None:
     leaders = experiment.leaders.all()
 
     for leader in leaders:
-        subject = 'UiL OTS participant deregistered for experiment: {}'.format(
-            experiment.name)
+        subject = "ILS participant deregistered for experiment: {}".format(experiment.name)
         context = {
-            'participant': appointment.participant,
-            'time_slot':   appointment.timeslot,
-            'experiment':  experiment,
-            'leader':      leader,
+            "participant": appointment.participant,
+            "time_slot": appointment.timeslot,
+            "experiment": experiment,
+            "leader": leader,
         }
 
-        send_template_email(
-            [leader.email],
-            subject,
-            'api/mail/participant_cancelled',
-            context,
-            'no-reply@uu.nl'
-        )
+        send_template_email([leader.email], subject, "api/mail/participant_cancelled", context, "no-reply@uu.nl")
 
 
 def _send_confirmation(appointment: Appointment) -> None:
     experiment = appointment.experiment
     time_slot = appointment.timeslot
 
-    subject = 'UiL OTS uitschrijven experiment: {}'.format(experiment.name)
+    subject = "ILS uitschrijven experiment: {}".format(experiment.name)
     context = {
-        'participant':             appointment.participant,
-        'time_slot':               time_slot,
-        'experiment':              experiment,
-        'other_time_link':         get_register_link(experiment),
-        'home_link':               settings.FRONTEND_URI,
+        "participant": appointment.participant,
+        "time_slot": time_slot,
+        "experiment": experiment,
+        "other_time_link": get_register_link(experiment),
+        "home_link": settings.FRONTEND_URI,
     }
 
-    send_template_email(
-        [appointment.participant.email],
-        subject,
-        'api/mail/cancelled_appointment',
-        context
-    )
+    send_template_email([appointment.participant.email], subject, "api/mail/cancelled_appointment", context)

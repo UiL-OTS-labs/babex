@@ -13,7 +13,7 @@ Deze link blijft 24 uur geldig. Daarna kun je een nieuwe link aanvragen via 'wac
 {% endif %}
 
 Met vriendelijke groet,
-het UiL OTS lab
+het ILS lab
 
 
 Dit bericht is automatisch verzonden omdat je een account hebt aangemaakt.
