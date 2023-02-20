@@ -530,6 +530,21 @@ msgstr "Admin user"
 msgid "experiments:detail:comment:delete"
 msgstr "Delete comment"
 
+msgid "experiments:detail:progress"
+msgstr "Progress"
+
+msgid "experiments:detail:progress:target"
+msgstr "Target"
+
+msgid "experiments:detail:progress:tested"
+msgstr "Tested"
+
+msgid "experiments:detail:progress:planned"
+msgstr "Planned"
+
+msgid "experiments:detail:progress:excluded"
+msgstr "Excluded"
+
 #: experiments/templates/experiments/detail_parts/info.html:11
 msgid "experiments:detail:info"
 msgstr "General info"

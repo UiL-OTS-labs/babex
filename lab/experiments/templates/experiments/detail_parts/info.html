@@ -6,7 +6,32 @@
 
 
 <div class="uu-inner-container">
-    <div class="col-6">
+    <div class="col-4">
+        <h3 class="d-inline">
+            {% trans 'experiments:detail:progress' %}
+        </h3>
+        <div>
+            <table class="criteria-table mt-1">
+                <tr>
+                    <td>{% trans 'experiments:detail:progress:target' %}</td>
+                    <td>{{ progress.target }}</td>
+                </tr>
+                <tr>
+                    <td>{% trans 'experiments:detail:progress:tested' %}</td>
+                    <td>{{ progress.tested }}</td>
+                </tr>
+                <tr>
+                    <td>{% trans 'experiments:detail:progress:planned' %}</td>
+                    <td>{{ progress.planned }}</td>
+                </tr>
+                <tr>
+                    <td>{% trans 'experiments:detail:progress:excluded' %}</td>
+                    <td>{{ progress.excluded }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col-4">
         <h3 class="d-inline">
             {% trans 'experiments:detail:info' %}
         </h3>
@@ -91,7 +116,7 @@
             </table>
         </div>
     </div>
-    <div class="col-6">
+    <div class="col-4">
         <h3 class="d-inline">
             {% trans 'experiments:detail:criteria' %}
         </h3>
