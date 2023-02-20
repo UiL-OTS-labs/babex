@@ -38,10 +38,10 @@ def create_mail_auth(email: Optional[str] = None, participant: Optional[Particip
     """There are two general scenarios where we would like to create a mail authentication token:
     1. The parent enters their email on the login page.
        In this case we send a token that identifies them by email, and later have to
-       potentially possible_pps between multiple participants in case they have more than one child.
+       potentially disambiguate between multiple participants, in case they have more than one child.
     2. The parents are mailed by the system in the context of a specific experiment.
-       In this case we should know precisely who is the relevant participant, and can already
-       identify them in the MailAuth object
+       In this case we should already precisely know who is the relevant participant, and can
+       save them in the MailAuth object
     """
     if not email and not participant:
         raise ValueError("Either email or participant must be specified")
@@ -61,8 +61,6 @@ def try_authenticate(token: str) -> Tuple[Optional[MailAuth], List[Participant]]
             link_token=token,
             # link should not be too old
             created__gte=threshold,
-            # link should be unused
-            # session_token=None,
         )
     except MailAuth.DoesNotExist:
         return None, []

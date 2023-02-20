@@ -47,7 +47,7 @@ def signup(sb, apps):
 def mailbox():
     yield read_mail
     # delete emails
-    shutil.rmtree("/tmp/babex-mailbox")
+    shutil.rmtree(EMAIL_FILE_PATH)
 
 
 def test_parent_login(sb, apps, signup, as_admin, mailbox):
