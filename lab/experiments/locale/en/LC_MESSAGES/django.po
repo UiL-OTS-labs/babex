@@ -142,6 +142,12 @@ msgstr "Duration"
 msgid "experiment:attribute:compensation"
 msgstr "Compensation"
 
+msgid "experiment:attribute:recruitment_target"
+msgstr "Recruitment target"
+
+msgid "experiment:attribute:recruitment_target:help"
+msgstr "How many participants are aimed for"
+
 #: experiments/models/experiment_models.py:73
 msgid "experiment:attribute:task_description"
 msgstr "Task description"

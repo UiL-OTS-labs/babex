@@ -67,7 +67,9 @@ Met vriendelijke groet,<br/>
     compensation = models.TextField(_("experiment:attribute:compensation"))
 
     # how many participants are aimed for
-    recruitment_target = models.IntegerField(_("experiment:attribute:recruitment_target"))
+    recruitment_target = models.IntegerField(
+        _("experiment:attribute:recruitment_target"), help_text=_("experiment:attribute:recruitment_target:help")
+    )
 
     task_description = models.TextField(_("experiment:attribute:task_description"))
 
