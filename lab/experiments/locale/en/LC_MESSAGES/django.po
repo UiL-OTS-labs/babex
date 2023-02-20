@@ -551,6 +551,12 @@ msgstr "Planned"
 msgid "experiments:detail:progress:excluded"
 msgstr "Excluded"
 
+msgid "experiments:detail:progress:to_plan"
+msgstr "To plan"
+
+msgid "experiments:detail:progress:to_test"
+msgstr "To test"
+
 #: experiments/templates/experiments/detail_parts/info.html:11
 msgid "experiments:detail:info"
 msgstr "General info"

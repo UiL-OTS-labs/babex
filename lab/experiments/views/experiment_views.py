@@ -79,13 +79,16 @@ class ExperimentDetailView(braces.LoginRequiredMixin, generic.DetailView):
         context["appointments"] = self.object.appointments.all()
 
         # progress overview
-        context["progress"] = dict(
+        progress = dict(
             target=self.object.recruitment_target,
             tested=self.object.appointments.filter(outcome=Appointment.Outcome.COMPLETED).count(),
             # TODO: is it better to check the date of the appointment?
             planned=self.object.appointments.filter(outcome=None).count(),
             excluded=self.object.appointments.filter(outcome=Appointment.Outcome.EXCLUDED).count(),
         )
+        progress["to_plan"] = max(0, progress["target"] - progress["tested"] - progress["planned"])
+        progress["to_test"] = max(0, progress["target"] - progress["tested"])
+        context["progress"] = progress
         return context
 
     def _get_timeslots(self):
