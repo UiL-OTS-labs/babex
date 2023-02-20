@@ -60,93 +60,85 @@ Met vriendelijke groet,<br/>
 {{admin}}
 </p>"""
 
-    name = models.TextField(
-        _('experiment:attribute:name')
-    )
+    name = models.TextField(_("experiment:attribute:name"))
 
-    duration = models.TextField(
-        _('experiment:attribute:duration')
-    )
+    duration = models.TextField(_("experiment:attribute:duration"))
 
-    compensation = models.TextField(
-        _('experiment:attribute:compensation')
-    )
+    compensation = models.TextField(_("experiment:attribute:compensation"))
 
-    task_description = models.TextField(
-        _('experiment:attribute:task_description')
-    )
+    # how many participants are aimed for
+    recruitment_target = models.IntegerField(_("experiment:attribute:recruitment_target"))
+
+    task_description = models.TextField(_("experiment:attribute:task_description"))
 
     additional_instructions = models.TextField(
-        _('experiment:attribute:additional_instructions'),
+        _("experiment:attribute:additional_instructions"),
         blank=True,
     )
 
     confirmation_email = models.TextField(
-        _('experiment:attribute:confirmation_email'),
+        _("experiment:attribute:confirmation_email"),
         help_text=AppointmentConfirmEmail.help_text,
         default=DEFAULT_CONFIRMATION_MAIL,
     )
 
     invite_email = models.TextField(
-        _('experiment:attribute:invite_email'),
-        help_text=_('experiment:attribute:invite_email:help_text'),
+        _("experiment:attribute:invite_email"),
+        help_text=_("experiment:attribute:invite_email:help_text"),
         default=DEFAULT_INVITE_MAIL,
     )
 
     location = models.ForeignKey(
         Location,
-        verbose_name=_('experiment:attribute:location'),
+        verbose_name=_("experiment:attribute:location"),
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
     )
 
     use_timeslots = models.BooleanField(
-        _('experiment:attribute:use_timeslots'),
+        _("experiment:attribute:use_timeslots"),
         default=True,
-        help_text=_('experiment:attribute:use_timeslots:help_text'),
+        help_text=_("experiment:attribute:use_timeslots:help_text"),
     )
 
     default_max_places = models.PositiveSmallIntegerField(
-        _('experiment:attribute:default_max_places'),
+        _("experiment:attribute:default_max_places"),
         validators=[
             MinValueValidator(1),
         ],
-        help_text=_('experiment:attribute:default_max_places:help_text'),
+        help_text=_("experiment:attribute:default_max_places:help_text"),
         default=1,
     )
 
     open = models.BooleanField(
-        _('experiment:attribute:open'),
+        _("experiment:attribute:open"),
         default=False,
-        help_text=_('experiment:attribute:open:help_text'),
+        help_text=_("experiment:attribute:open:help_text"),
     )
 
     public = models.BooleanField(
-        _('experiment:attribute:public'),
+        _("experiment:attribute:public"),
         default=True,
-        help_text=_('experiment:attribute:public:help_text'),
+        help_text=_("experiment:attribute:public:help_text"),
     )
 
     excluded_experiments = models.ManyToManyField(
         "self",
-        verbose_name=_('experiment:attribute:excluded_experiments'),
+        verbose_name=_("experiment:attribute:excluded_experiments"),
         blank=True,
-        help_text=_('experiment:attribute:excluded_experiments:help_text'),
+        help_text=_("experiment:attribute:excluded_experiments:help_text"),
     )
 
     leaders = models.ManyToManyField(
         User,
         verbose_name=_("experiment:attribute:leaders"),
-        related_name='experiments',
+        related_name="experiments",
         blank=True,
         help_text=_("experiment:attribute:leaders:help_text"),
     )
 
-    defaultcriteria = models.OneToOneField(
-        DefaultCriteria,
-        on_delete=models.CASCADE
-    )
+    defaultcriteria = models.OneToOneField(DefaultCriteria, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         """Run models.save but make sure the experiment has default criteria"""
@@ -192,12 +184,11 @@ Met vriendelijke groet,<br/>
         :return:
         """
 
-        return self.timeslot_set.annotate(
-            num_appointments=Count('appointments')
-        ).filter(
-            datetime__gt=_get_dt_2_hours_ago(),
-            max_places__gt=F('num_appointments')
-        ).exists()
+        return (
+            self.timeslot_set.annotate(num_appointments=Count("appointments"))
+            .filter(datetime__gt=_get_dt_2_hours_ago(), max_places__gt=F("num_appointments"))
+            .exists()
+        )
 
     def __str__(self):
         return self.name
@@ -206,7 +197,7 @@ Met vriendelijke groet,<br/>
     def leader_names(self):
         # TODO: i18n? (for connective 'en' -> 'and')
         leader_names = [leader.name for leader in self.leaders.all()]
-        return ''.join(f'{name}, ' for name in leader_names[:-2]) + ' en '.join(leader_names[-2:])
+        return "".join(f"{name}, " for name in leader_names[:-2]) + " en ".join(leader_names[-2:])
 
     def is_leader(self, user: User) -> bool:
         return user.experiments.filter(pk=self.pk).exists()
