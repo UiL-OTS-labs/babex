@@ -68,7 +68,9 @@ Met vriendelijke groet,<br/>
 
     # how many participants are aimed for
     recruitment_target = models.IntegerField(
-        _("experiment:attribute:recruitment_target"), help_text=_("experiment:attribute:recruitment_target:help")
+        _("experiment:attribute:recruitment_target"),
+        help_text=_("experiment:attribute:recruitment_target:help"),
+        default=0,
     )
 
     task_description = models.TextField(_("experiment:attribute:task_description"))
