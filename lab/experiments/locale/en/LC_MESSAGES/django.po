@@ -142,6 +142,12 @@ msgstr "Duration"
 msgid "experiment:attribute:compensation"
 msgstr "Compensation"
 
+msgid "experiment:attribute:recruitment_target"
+msgstr "Recruitment target"
+
+msgid "experiment:attribute:recruitment_target:help"
+msgstr "How many participants are aimed for"
+
 #: experiments/models/experiment_models.py:73
 msgid "experiment:attribute:task_description"
 msgstr "Task description"
@@ -526,6 +532,27 @@ msgstr "Admin user"
 #: experiments/templates/experiments/detail_parts/comments.html:61
 msgid "experiments:detail:comment:delete"
 msgstr "Delete comment"
+
+msgid "experiments:detail:progress"
+msgstr "Progress"
+
+msgid "experiments:detail:progress:target"
+msgstr "Target"
+
+msgid "experiments:detail:progress:tested"
+msgstr "Tested"
+
+msgid "experiments:detail:progress:planned"
+msgstr "Planned"
+
+msgid "experiments:detail:progress:excluded"
+msgstr "Excluded"
+
+msgid "experiments:detail:progress:to_plan"
+msgstr "To plan"
+
+msgid "experiments:detail:progress:to_test"
+msgstr "To test"
 
 #: experiments/templates/experiments/detail_parts/info.html:11
 msgid "experiments:detail:info"
