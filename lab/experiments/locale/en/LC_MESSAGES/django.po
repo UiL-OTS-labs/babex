@@ -71,11 +71,11 @@ msgstr "Places in this slot"
 
 #: experiments/models/criteria_models.py:10
 msgid "default_criteria:attribute:multilingual:no"
-msgstr "One"
+msgstr "Monolingual"
 
 #: experiments/models/criteria_models.py:11
 msgid "default_criteria:attribute:multilingual:yes"
-msgstr "Many"
+msgstr "Multilingual"
 
 #: experiments/models/criteria_models.py:12
 #: experiments/models/criteria_models.py:18
@@ -108,7 +108,7 @@ msgstr "What should the participant's language be?"
 
 #: experiments/models/criteria_models.py:38
 msgid "default_criteria:attribute:multilingual"
-msgstr "Does the participant have to speak one or many languages? "
+msgstr "Does the participant have to be monolingual or multilingual?"
 
 #: experiments/models/criteria_models.py:46
 msgid "default_criteria:attribute:sex"
@@ -116,7 +116,7 @@ msgstr "Should the participant be Male or Female?"
 
 #: experiments/models/criteria_models.py:54
 msgid "default_criteria:attribute:dyslexia"
-msgstr "Should the participant be dyslectic?"
+msgstr "Should the participant have a dyslectic parent?"
 
 #: experiments/models/criteria_models.py:62
 msgid "default_criteria:attribute:min_age"
