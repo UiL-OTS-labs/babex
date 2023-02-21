@@ -8,9 +8,7 @@ from experiments.models import Appointment
 from main.utils import get_register_link
 
 
-def unsubscribe_participant(appointment_pk: int,
-                            sent_email: bool = True,
-                            deleting_user=None) -> None:
+def unsubscribe_participant(appointment_pk: int, sent_email: bool = True, deleting_user=None) -> None:
     appointment = Appointment.objects.get(pk=appointment_pk)
     time_slot = appointment.timeslot
     experiment = appointment.experiment
@@ -19,33 +17,27 @@ def unsubscribe_participant(appointment_pk: int,
     # next bit
     appointment.delete()
 
-    message = "User deleted appointment for experiment '{}' for " \
-              "participant '{} ({})'".format(
-                  experiment.name,
-                  appointment.participant.fullname,
-                  appointment.participant.pk,
-              )
+    message = "User deleted appointment for experiment '{}' for " "participant '{} ({})'".format(
+        experiment.name,
+        appointment.participant.fullname,
+        appointment.participant.pk,
+    )
 
     _log_deletions(message, deleting_user)
 
     if sent_email:
-        subject = 'UiL OTS uitschrijven experiment: {}'.format(experiment.name)
+        subject = "ILS uitschrijven experiment: {}".format(experiment.name)
         context = {
-            'participant':     appointment.participant,
-            'time_slot':       time_slot,
-            'experiment':      experiment,
-            'admin':           appointment.leader.get_full_name(),
-            'admin_email':     appointment.leader.email,
-            'other_time_link': get_register_link(experiment),
-            'home_link':       settings.FRONTEND_URI,
+            "participant": appointment.participant,
+            "time_slot": time_slot,
+            "experiment": experiment,
+            "admin": appointment.leader.get_full_name(),
+            "admin_email": appointment.leader.email,
+            "other_time_link": get_register_link(experiment),
+            "home_link": settings.FRONTEND_URI,
         }
 
-        send_template_email(
-            [appointment.participant.email],
-            subject,
-            'timeslots/mail/unsubscribed',
-            context
-        )
+        send_template_email([appointment.participant.email], subject, "timeslots/mail/unsubscribed", context)
 
 
 def _log_deletions(message, deleting_user):

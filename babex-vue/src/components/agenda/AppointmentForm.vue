@@ -77,7 +77,7 @@
     <!-- only show outcome when the appointment (start time) is in the past -->
     <div v-if="isPast()">
         <div class="form-check">
-            <label class="form-check-label"><input class="form-check-input" type="radio" value="COMPLETE" v-model="form.outcome">Complete</label>
+            <label class="form-check-label"><input class="form-check-input" type="radio" value="COMPLETED" v-model="form.outcome">Complete</label>
         </div>
         <div class="form-check">
             <label class="form-check-label"><input class="form-check-input" type="radio" value="NOSHOW" v-model="form.outcome">No-show</label>

@@ -249,14 +249,11 @@ msgstr ""
 "field as a box."
 
 #: experiments/models/experiment_models.py:143
-msgid "experiment:attribute:leader"
-msgstr "Leader"
+msgid "experiment:attribute:leaders"
+msgstr "Experiment leaders"
 
-#: experiments/models/experiment_models.py:147
-msgid "experiment:attribute:leader:help_text"
-msgstr ""
-"The main experiment leader, who will be displayed as the contact on the "
-"experiment page."
+msgid "experiment:attribute:leaders:help_text"
+msgstr "Users listed here can call participants, manage appointments etc."
 
 #: experiments/models/experiment_models.py:152
 msgid "experiment:attribute:additional_leaders"
