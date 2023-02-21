@@ -8,6 +8,18 @@
     {% trans 'experiments:home:header' %} - {{ block.super }}
 {% endblock %}
 
+{% block html_head %}
+{{ block.super }}
+<script nonce="{{ request.csp_nonce }}">
+    $(function () {
+        $('.dt_custom').DataTable({
+            searching: false,
+            lengthChange: false,
+        });
+    });
+</script>
+{% endblock %}
+
 {% block pre-messages-content %}
     <div class="uu-hero justify-content-between align-items-center">
         <h1 class="h2">
@@ -26,7 +38,7 @@
         <p>
             {% trans 'experiments:home:info_text' %}
         </p>
-        <table class="dt" width="100%" data-language="{% datatables_lang %}">
+        <table class="dt_custom table" width="100%" data-language="{% datatables_lang %}">
             <thead>
                 <tr>
                     <th>

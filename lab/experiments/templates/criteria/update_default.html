@@ -18,14 +18,14 @@
         <p>
             {% trans 'criteria:new_default_criteria:info_text' %}
         </p>
-        <form method="post">
+        <form method="post" class="uu-form">
             {% csrf_token %}
             <table width="100%">
-                {{ form.as_table }}
+                {{ form }}
             </table>
             <br/>
             <div class="float-right">
-                <button type="submit">{% trans 'experiments:globals:save_button' %}</button>
+                <button class="btn btn-primary" type="submit">{% trans 'experiments:globals:save_button' %}</button>
             </div>
         </form>
     </div>
