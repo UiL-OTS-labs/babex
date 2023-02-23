@@ -1,0 +1,53 @@
+{% extends 'base/babex_base.html' %}
+{% load datatables %}
+{% load get_field_name %}
+{% load i18n %}
+
+{% block pre-messages-content %}
+    <div class="uu-hero justify-content-between align-items-center">
+        <h1 class="h2">
+            {% trans 'survey_admin:home:header' %}
+        </h1>
+
+        <a href="#" class="btn btn-secondary">
+            {% trans 'survey_admin:home:create_survey' %}
+        </a>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <table class="dt" width="100%" data-language="{% datatables_lang %}">
+            <thead>
+                <tr>
+                    <th>
+                        {% get_verbose_field_name 'survey_admin' 'SurveyDefinition' 'id' %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name 'survey_admin' 'SurveyDefinition' 'name' %}
+                    </th>
+                    <th data-priority="100">
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for survey in object_list %}
+                    <tr>
+                        <td>
+                            {{ survey.pk }}
+                        </td>
+                        <td>
+                            {{ survey.name }}
+                        </td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" href="{% url 'survey_admin:preview' survey.pk %}">Preview</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
-from typing import List
 import os
+from typing import List
 
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
@@ -67,10 +67,12 @@ INSTALLED_APPS = [
     'agenda',
 
     'signups',
+    'survey_admin',
 
     'django.contrib.admin',
     'django.forms',
 
+    'django_json_widget',
     # deprecated
     'leaders'
 ]

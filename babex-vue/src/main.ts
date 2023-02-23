@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import AgendaCalendar from './components/agenda/AgendaCalendar.vue'
 import AgendaHome from './components/agenda/AgendaHome.vue'
 import CallHome from './components/invite/CallHome.vue'
+import SurveyView from './components/survey/SurveyView.vue'
 import * as Toaster from './toaster'
 
 
@@ -15,7 +16,9 @@ Object.defineProperty(window, 'babex', {
         AgendaCalendar,
         AgendaHome,
 
-        CallHome
+        CallHome,
+
+        SurveyView
     }
 });
 

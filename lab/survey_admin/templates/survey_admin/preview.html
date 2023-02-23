@@ -1,0 +1,21 @@
+{% extends 'vue/base.html' %}
+{% load datatables %}
+{% load get_field_name %}
+{% load i18n %}
+{% load vue3 %}
+
+{% block pre-messages-content %}
+    <div class="uu-hero justify-content-between align-items-center">
+        <h1 class="h2">
+            {% trans 'survey_admin:preview:header' %} - {{ object.name }}
+        </h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        {% vue babex.SurveyView :definition=object.content %}
+    </div>
+</div>
+{% endblock %}
