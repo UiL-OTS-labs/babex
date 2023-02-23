@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from rest_framework import exceptions, views
 from rest_framework.response import Response
 
@@ -38,7 +40,8 @@ class MailAuthView(views.APIView):
             raise exceptions.AuthenticationFailed()
 
         # email exists, generate token and send it
-        mauth = create_mail_auth(email)
+        expiry = datetime.now() + timedelta(hours=24)
+        mauth = create_mail_auth(expiry, email)
         mauth.send()
         return Response(dict())
 

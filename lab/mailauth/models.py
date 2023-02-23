@@ -12,8 +12,8 @@ from participants.models import Participant
 
 class MailAuth(models.Model):
     email = e_fields.EncryptedEmailField()
-    # used to check for expiry of link/session
     created = models.DateTimeField(auto_now_add=True)
+    expiry = models.DateTimeField()
     # used in mail sent to parent for authentication
     link_token = models.CharField(max_length=64, default=token_urlsafe, unique=True)
     # null by default, generated upon succesful login. Has to be present in any (non-login) request.
@@ -34,7 +34,9 @@ class MailAuth(models.Model):
         mail.send()
 
 
-def create_mail_auth(email: Optional[str] = None, participant: Optional[Participant] = None) -> MailAuth:
+def create_mail_auth(
+    expiry: datetime, email: Optional[str] = None, participant: Optional[Participant] = None
+) -> MailAuth:
     """There are two general scenarios where we would like to create a mail authentication token:
     1. The parent enters their email on the login page.
        In this case we send a token that identifies them by email, and later have to
@@ -51,16 +53,15 @@ def create_mail_auth(email: Optional[str] = None, participant: Optional[Particip
 
     assert email
     # participant could still be None, to indicate it must be later resolved
-    return MailAuth.objects.create(email=email, participant=participant)
+    return MailAuth.objects.create(expiry=expiry, email=email, participant=participant)
 
 
 def try_authenticate(token: str) -> Tuple[Optional[MailAuth], List[Participant]]:
-    threshold = datetime.now() - timedelta(hours=24)
     try:
         mauth = MailAuth.objects.get(
             link_token=token,
             # link should not be too old
-            created__gte=threshold,
+            expiry__gte=datetime.now(),
         )
     except MailAuth.DoesNotExist:
         return None, []
