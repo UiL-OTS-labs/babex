@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="uu-container">
+    <div class="col-12" >
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            <input name="email"><button>Send</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

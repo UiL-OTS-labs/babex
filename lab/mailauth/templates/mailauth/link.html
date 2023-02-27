@@ -1,0 +1,10 @@
+{% extends 'cdh.core/mail_template.html' %}
+
+{% block banner %}
+    Login with link
+{% endblock %}
+
+{% block content %}
+    <p><a href="{{ base_url }}auth/{{ link_token }}">Click here</a> to login.</p>
+    <p><em>Note: this link will expire in 24 hours</em></p>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="uu-container">
+    <div class="col-12" >
+        <h2>Please choose the relevant participant:</h2>
+        <ul>
+            {% for pp in possible_pps %}
+                <li><a href="{% url 'mailauth:resolve' pp.id %}">{{ pp.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

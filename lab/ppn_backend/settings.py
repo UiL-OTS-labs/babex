@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'datamanagement',
     'agenda',
 
+    'mailauth',
     'signups',
     'survey_admin',
 
@@ -89,6 +90,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'cdh.core.middleware.ThreadLocalUserMiddleware',
+    'mailauth.middleware.SessionTokenMiddleware',
 ]
 if not DEBUG:
     MIDDLEWARE += [
@@ -149,6 +151,7 @@ JWT_ALGORITHM = 'HS512'
 FIELD_ENCRYPTION_KEY = 'IhWBKI5MORNNtI5WWqZwOflEwojBACtuz9lKXwcF4HI='
 
 FRONTEND_URI = 'http://localhost:8000/'
+PARENT_URI = 'http://localhost:9000/'
 
 # Groups
 

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'cdh.core',
     'cdh.rest',
     'parent',
+    'mailauth',
 
     'django.contrib.admin',
     'django.forms'
