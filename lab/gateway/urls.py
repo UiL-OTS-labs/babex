@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 
 from mailauth.views import MailAuthView, SetParticipantView
 
-from .views import AppointmentsView, GatewayHome, Signups
+from .views import AppointmentsView, GatewayHome, Signups, SurveyInvitesView, SurveyView
 
 app_name = "gateway"
 
@@ -19,4 +19,7 @@ urlpatterns = [
     path("mailauth/token/<str:token>/", MailAuthView.as_view()),
     #
     path("appointment/", AppointmentsView.as_view()),
+    #
+    path("survey_invites/", SurveyInvitesView.as_view()),
+    path("survey/<pk>/", SurveyView.as_view()),
 ]

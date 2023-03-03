@@ -12,4 +12,12 @@
         {% endfor %}
     </div>
 </div>
+<div class="uu-container">
+    <div class="col-12">
+        <h3>Surveys</h3>
+        {% for invitation in survey_invites %}
+            <a href="{% url 'survey' invitation.survey %}">{{ invitation.survey_name }}</a>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

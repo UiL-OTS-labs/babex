@@ -1,0 +1,16 @@
+{% extends 'vue/base.html' %}
+{% load vue3 %}
+
+{% block content %}
+<div class="uu-container">
+    Please complete the following survey:
+</div>
+<div class="uu-inner-container">
+    <div class="col-12">
+        {% vue babex.SurveyView :definition=survey.content %}
+    </div>
+</div>
+<div class="uu-inner-container">
+    <button class="btn btn-primary">Send</button>
+</div>
+{% endblock %}

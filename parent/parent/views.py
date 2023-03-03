@@ -1,7 +1,7 @@
 from cdh.rest import client as rest
 from django.contrib import messages
 from django.http.response import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
@@ -56,9 +56,15 @@ def home(request):
     # TODO: this is just an example of fetching participant data from the parent app
     ok, appointments = gateway(request, "/gateway/appointment/")
     if not ok:
-        messages.error(request, "error retreiving data")
+        messages.error(request, "error retreiving appointment data")
 
-    return render(request, "parent/home.html", dict(appointments=appointments))
+    ok, survey_invites = gateway(request, "/gateway/survey_invites/")
+    if not ok:
+        messages.error(request, "error retreiving survey data")
+
+    return render(request, "parent/home.html",
+                  dict(appointments=appointments,
+                       survey_invites=survey_invites))
 
 
 def status(request):
@@ -71,3 +77,12 @@ def status(request):
         return JsonResponse(dict(ok=False))
 
     return JsonResponse(dict(ok=True))
+
+
+@session_required
+def survey_view(request, survey_id):
+    ok, survey = gateway(request, f"/gateway/survey/{survey_id}")
+    if not ok:
+        messages.error(request, "error retreiving data")
+        return redirect('home')
+    return render(request, "survey/view.html", dict(survey=survey))
