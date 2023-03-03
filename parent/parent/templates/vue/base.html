@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load vue3 %}
+
+{% block html_head %}
+{{ block.super }}
+<!-- load vue app from static folder (run 'yarn watch') -->
+<script src="{% static 'vue/js/chunk-vendors.js' %}"></script>
+<script src="{% static 'vue/js/app.js' %}"></script>
+
+<!-- load vue app from webpack server with hot-reloading (run 'yarn serve') -->
+<!-- <script src="http://localhost:8081/js/chunk-vendors.js"></script> -->
+<!-- <script src="http://localhost:8081/js/app.js"></script> -->
+
+<style>
+</style>
+{% endblock %}
+
+{% block uu-content %}
+{{ block.super }}
+<div id="toast_container" class="position-fixed toast-container bottom-0 end-0 p-3">
+</div>
+{% endblock %}
