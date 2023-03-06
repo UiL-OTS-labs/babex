@@ -14,3 +14,6 @@ class SurveyInvite(models.Model):
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE, related_name="survey_invites")
     created = models.DateTimeField(auto_now_add=True)
     completed = models.DateTimeField(null=True)
+
+    class Meta:
+        unique_together = ["survey", "participant"]
