@@ -11,7 +11,7 @@
     <div>
         <table>
             <tr>
-                <td v-for="option in options">
+                <td v-for="option in options" :key="option">
                     <label>
                     <input type="radio" :name="id">
                     {{option}}

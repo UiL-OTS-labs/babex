@@ -16,7 +16,7 @@
 </script>
 
 <template>
-    <div class="card" v-for="(question, index) in definition.questions">
+    <div class="card" v-for="(question, index) in definition.questions" :key="index">
         <div class="card-body">
             <div class="prompt">{{ question.prompt }}</div>
             <div class="question-body">
