@@ -1,21 +1,64 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.views.generic import ListView, DetailView
+import logging
 
-from .models import SurveyDefinition
+from django.contrib.messages import error, success
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.utils.translation import gettext as _
+from django.views.generic import DetailView, ListView, TemplateView
+from rest_framework.permissions import IsAuthenticated
+
+from participants.models import Participant
+
+from .models import SurveyDefinition, SurveyInvite
+from .utils import send_survey_invite_mail
+
+log = logging.getLogger()
 
 
 class SurveyOverview(ListView):
     # TODO: permissions
     queryset = SurveyDefinition.objects.all()
-    template_name = 'survey_admin/index.html'
+    template_name = "survey_admin/index.html"
 
 
 class SurveyPreview(DetailView):
     # TODO: permissions
     queryset = SurveyDefinition.objects.all()
-    template_name = 'survey_admin/preview.html'
+    template_name = "survey_admin/preview.html"
 
 
-def overview(request):
-    return HttpResponse('')
+class SurveyInviteParticipants(TemplateView):
+    permission_classes = [IsAuthenticated]
+    template_name = "survey_admin/invite.html"
+
+    @property
+    def survey(self):
+        return SurveyDefinition.objects.get(pk=self.kwargs["pk"])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["survey"] = self.survey
+        context["object_list"] = self.get_participants()
+        return context
+
+    def get_participants(self):
+        # TODO: exclude participants who already filled the survey?
+        return Participant.objects.exclude()
+
+    def post(self, request, *args, **kwargs):
+        participant_ids = map(int, request.POST.getlist("participants"))
+
+        failed = False
+        for participant_id in participant_ids:
+            participant = Participant.objects.get(pk=participant_id)
+            invite, created = SurveyInvite.objects.get_or_create(participant=participant, survey=self.survey)
+            try:
+                invite.send()
+            except Exception:
+                log.exception("Failed sending survey invite: %d", invite.pk)
+                failed = True
+                error(request, _("survey_admin:message:invite_failure"))
+
+        if not failed:
+            success(request, _("survey_admin:message:invite_success"))
+        return self.get(request)

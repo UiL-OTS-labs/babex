@@ -23,7 +23,9 @@ def link_verify(request, token):
         # there are multiple participants (babies) associated with the given email address,
         # ask the user to choose a specific participant
         return list_pps(request, response["possible_pps"])
-    return redirect("/")
+
+    redirect_to = request.GET.get('redirect', '/')
+    return redirect(redirect_to)
 
 
 def list_pps(request, possible_pps):
