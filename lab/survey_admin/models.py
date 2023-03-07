@@ -27,7 +27,7 @@ class SurveyInvite(models.Model):
         expiry = datetime.now() + timedelta(days=7)
         mauth = create_mail_auth(expiry, participant=self.participant)
 
-        context = dict(link=mauth.get_link(f"survey/{self.survey.pk}"))
+        context = dict(link=mauth.get_link(f"/survey/{self.survey.pk}"))
         mail = TemplateEmail(
             html_template="survey_admin/mail/invite.html",
             context=context,
