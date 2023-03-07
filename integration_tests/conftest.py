@@ -1,8 +1,14 @@
 from collections import namedtuple
+import importlib
 import os
-import shutil
 import pytest
 import subprocess
+import email
+import glob
+import shutil
+
+import django
+from lab_settings import EMAIL_FILE_PATH
 
 LAB_PORT = 18000
 PARENT_PORT = 19000
@@ -78,6 +84,12 @@ class DjangoServerProcess:
     def url(self):
         return f"http://localhost:{self.port}/"
 
+    def get_model(self, app_name: str, model: str):
+        os.environ['DJANGO_SETTINGS_MODULE'] = self.settings
+        django.setup()
+        module = importlib.import_module(f'{app_name}.models')
+        return module.__dict__[model]
+
 
 @pytest.fixture(scope="module")
 def lab_app():
@@ -113,3 +125,21 @@ def as_admin(sb, lab_app):
     sb.click('button:contains("Log in")')
     sb.switch_to_default_driver()
     return driver
+
+
+def read_mail(address):
+    messages = []
+    for path in glob.glob(EMAIL_FILE_PATH + "/*"):
+        with open(path) as f:
+            msg = email.message_from_file(f)
+            if msg["To"] == address:
+                messages.append(msg)
+
+    return messages
+
+
+@pytest.fixture
+def mailbox():
+    yield read_mail
+    # delete emails
+    shutil.rmtree(EMAIL_FILE_PATH)

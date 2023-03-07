@@ -1,22 +1,6 @@
-import email
-import glob
-import shutil
-import time
 import re
 import pytest
 import requests
-from lab_settings import EMAIL_FILE_PATH
-
-
-def read_mail(address):
-    messages = []
-    for path in glob.glob(EMAIL_FILE_PATH + '/*'):
-        with open(path) as f:
-            msg = email.message_from_file(f)
-            if msg['To'] == address:
-                messages.append(msg)
-
-    return messages
 
 
 def test_services_start(apps):
@@ -41,13 +25,6 @@ def signup(sb, apps):
 
     sb.assert_text_visible('signup_done')
     return email
-
-
-@pytest.fixture
-def mailbox():
-    yield read_mail
-    # delete emails
-    shutil.rmtree(EMAIL_FILE_PATH)
 
 
 def test_parent_login(sb, apps, signup, as_admin, mailbox):
