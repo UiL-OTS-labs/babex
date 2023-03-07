@@ -1,8 +1,6 @@
 import logging
 
 from django.contrib.messages import error, success
-from django.http import HttpResponse
-from django.shortcuts import render
 from django.utils.translation import gettext as _
 from django.views.generic import DetailView, ListView, TemplateView
 from rest_framework.permissions import IsAuthenticated
@@ -10,7 +8,6 @@ from rest_framework.permissions import IsAuthenticated
 from participants.models import Participant
 
 from .models import SurveyDefinition, SurveyInvite
-from .utils import send_survey_invite_mail
 
 log = logging.getLogger()
 
