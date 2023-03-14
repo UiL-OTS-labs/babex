@@ -1,14 +1,19 @@
 <script lang="ts" setup>
-    import {defineProps} from 'vue';
+    import { defineEmits, ref, watch } from 'vue';
 
-    const props = defineProps<{
-        id: string,
-    }>();
+    const props = defineProps <{
+        modelValue?: string,
+    }>()
+
+    const emit = defineEmits(['update:modelValue']);
+    const text = ref(props.modelValue);
+
+    watch(text, () => emit('update:modelValue', text));
 </script>
 
 <template>
     <div>
-        <input type="text">
+        <textarea v-model="text"></textarea>
     </div>
 </template>
 

@@ -1,17 +1,21 @@
 <script lang="ts" setup>
-    import {defineProps} from 'vue';
+    import { ref, watch } from 'vue';
 
-    const props = defineProps<{
-        id: string,
+    let props = defineProps<{
+        modelValue?: string,
         yes: string,
-        no: string
+        no: string,
     }>();
+
+    let emit = defineEmits(['update:modelValue']);
+    let choice = ref(props.modelValue);
+    watch(choice, () => emit('update:modelValue', choice));
 </script>
 
 <template>
     <div>
-        <label><input type="radio">{{yes}}</label>
-        <label><input type="radio">{{no}}</label>
+        <label><input type="radio" v-model="choice" :value="yes">{{yes}}</label>
+        <label><input type="radio" v-model="choice" :value="no">{{no}}</label>
     </div>
 </template>
 

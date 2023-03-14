@@ -51,5 +51,18 @@ interface User {
     isStaff: boolean
 }
 
+// survey types
+interface Question {
+    template: string;
+    prompt: string;
+    required?: boolean;
+}
 
-export {Appointment, Closing, Location, Call, ActionContext, User};
+// TODO: maybe figure out a less ambiguous name
+interface Response {
+    // hold reference back to the relevant question in the form definition
+    question: Question;
+    value?: any;
+}
+
+export {Appointment, Closing, Location, Call, ActionContext, User, Question, Response};
