@@ -109,7 +109,7 @@ def parent_app():
     server.shutdown()
 
 
-@pytest.fixture()
+@pytest.fixture(scope="module")
 def apps(lab_app, parent_app):
     return namedtuple("Apps", "lab,parent")(lab_app, parent_app)
 
