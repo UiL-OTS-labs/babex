@@ -1,15 +1,18 @@
+from cdh.rest import client as rest
+from django.contrib import messages
+from django.http.response import JsonResponse
+from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
-from django.urls import reverse_lazy
-
-from cdh.rest import client as rest
 
 from .forms import SignupForm
+from .utils import gateway, session_required
 
 
 class Signup(rest.Resource):
     class Meta:
-        path = '/gateway/signup/'
+        path = "/gateway/signup/"
         supported_operations = [rest.Operations.put]
 
     name = rest.TextField()
@@ -32,9 +35,9 @@ class Signup(rest.Resource):
 
 
 class SignupView(FormView):
-    template_name = 'signup.html'
+    template_name = "signup.html"
     form_class = SignupForm
-    success_url = reverse_lazy('signup.done')
+    success_url = reverse_lazy("signup.done")
 
     def form_valid(self, form):
         # filter out blank fields
@@ -45,4 +48,26 @@ class SignupView(FormView):
 
 
 class SignupDone(TemplateView):
-    template_name = 'signup_done.html'
+    template_name = "signup_done.html"
+
+
+@session_required
+def home(request):
+    # TODO: this is just an example of fetching participant data from the parent app
+    ok, appointments = gateway(request, "/gateway/appointment/")
+    if not ok:
+        messages.error(request, "error retreiving data")
+
+    return render(request, "parent/home.html", dict(appointments=appointments))
+
+
+def status(request):
+    # check that the lab app is reachable
+    try:
+        ok, _ = gateway(request, "/gateway/")
+        if not ok:
+            return JsonResponse(dict(ok=False))
+    except Exception:
+        return JsonResponse(dict(ok=False))
+
+    return JsonResponse(dict(ok=True))
