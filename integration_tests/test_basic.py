@@ -10,7 +10,8 @@ from lab_settings import EMAIL_FILE_PATH
 
 def read_mail(address):
     messages = []
-    for path in glob.glob(EMAIL_FILE_PATH + '/*'):
+    for path in sorted(glob.glob(EMAIL_FILE_PATH + '/*')):
+        # filename includes timestamp, so sorting by name also sorts by time
         with open(path) as f:
             msg = email.message_from_file(f)
             if msg['To'] == address:
@@ -51,6 +52,14 @@ def mailbox():
 
 
 def test_parent_login(sb, apps, signup, as_admin, mailbox):
+    # confirm signup email
+    mail = mailbox(signup)
+    assert len(mail)
+    html = mail[0].get_payload()[1].get_payload()
+    # find link in email
+    link = re.search(r'<a href="([^"]+)"', html).group(1)
+    sb.open(link)
+
     sb.switch_to_driver(as_admin)
     # approve signup
     sb.click("a:contains(Participants)")
@@ -64,9 +73,10 @@ def test_parent_login(sb, apps, signup, as_admin, mailbox):
     sb.type('input[name="email"]', signup)
     sb.click('button:contains("Send")')
 
+    # use login link from (second) email
     mail = mailbox(signup)
-    assert len(mail)
-    html = mail[0].get_payload()[1].get_payload()
+    assert len(mail) == 2
+    html = mail[1].get_payload()[1].get_payload()
     # find link in email
     link = re.search(r'<a href="([^"]+)"', html).group(1)
     sb.open(link)

@@ -1,4 +1,8 @@
+from secrets import token_urlsafe
+
 import cdh.core.fields as e_fields
+from cdh.core.mail import TemplateEmail
+from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -23,9 +27,24 @@ class Signup(models.Model):
     multilingual = e_fields.EncryptedBooleanField()
 
     class Status(models.TextChoices):
-        NEW = 'NEW', _('signups:stats:new')
-        APPROVED = 'APPROVED', _('signups:stats:approved')
-        REJECTED = 'REJECTED', _('signups:stats:rejected')
+        NEW = "NEW", _("signups:stats:new")
+        APPROVED = "APPROVED", _("signups:stats:approved")
+        REJECTED = "REJECTED", _("signups:stats:rejected")
+
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.NEW)
 
     created = models.DateTimeField(auto_now_add=True)
+    email_confirmed = models.DateTimeField(null=True, blank=True)
+    link_token = models.CharField(max_length=64, default=token_urlsafe, unique=True)
+
+    def send_email_validation(self):
+        mail = TemplateEmail(
+            html_template="signups/mail/validation.html",
+            context=dict(
+                base_url=settings.PARENT_URI,
+                link_token=self.link_token,
+            ),
+            to=[self.email],
+            subject="please validate your email",
+        )
+        mail.send()

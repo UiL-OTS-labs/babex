@@ -15,6 +15,10 @@ class Signups(viewsets.GenericViewSet, mixins.CreateModelMixin):
     queryset = Signup.objects.all()
     serializer_class = SignupSerializer
 
+    def perform_create(self, serializer):
+        super().perform_create(serializer)
+        serializer.instance.send_email_validation()
+
 
 class HasParticipant(permissions.BasePermission):
     def has_permission(self, request, view):
