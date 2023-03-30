@@ -83,3 +83,23 @@ def test_parent_login(sb, apps, signup, as_admin, mailbox):
 
     # check that login worked
     sb.assert_text_visible('Welcome')
+
+
+def test_parent_login_unapproved(signup, apps, sb, mailbox):
+    # confirm signup email
+    mail = mailbox(signup)
+    assert len(mail)
+    html = mail[0].get_payload()[1].get_payload()
+    # find link in email
+    link = re.search(r'<a href="([^"]+)"', html).group(1)
+    sb.open(link)
+
+    # try to login via email
+    sb.switch_to_default_driver()
+    sb.open(apps.parent.url)
+    sb.type('input[name="email"]', signup)
+    sb.click('button:contains("Send")')
+
+    # make sure that no login email has arrived
+    mail = mailbox(signup)
+    assert len(mail) == 1
