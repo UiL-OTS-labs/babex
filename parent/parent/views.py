@@ -1,7 +1,7 @@
 from cdh.rest import client as rest
 from django.contrib import messages
 from django.http.response import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
