@@ -44,7 +44,6 @@ class ParticipantTests(TestCase):
     def test_no_appointments(self):
         num = get_participants_without_appointments()
 
-        import pdb; pdb.set_trace()
         # Should have offsets 10 to 15 for a total of 6 participants
         self.assertEqual(len(num), 6)
 
