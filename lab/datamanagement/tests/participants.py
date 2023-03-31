@@ -1,17 +1,24 @@
 from datetime import datetime, timedelta
 
 from django.test import TestCase
-from django.utils.timezone import get_current_timezone
+from django.utils import timezone
 
 from auditlog.models import LogEntry
-from participants.models import Participant
-from .common import _create_dummy_user, _create_thresholds, _create_experiment, \
-    _create_participant
 from experiments.models import Appointment, Invitation, TimeSlot
+from participants.models import Participant
+
 from ..utils.common import get_thresholds_model
-from ..utils.participants import delete_participant, \
-    get_participants_with_appointments, \
-    get_participants_without_appointments
+from ..utils.participants import (
+    delete_participant,
+    get_participants_with_appointments,
+    get_participants_without_appointments,
+)
+from .common import (
+    _create_dummy_user,
+    _create_experiment,
+    _create_participant,
+    _create_thresholds,
+)
 
 
 class ParticipantTests(TestCase):
@@ -23,8 +30,7 @@ class ParticipantTests(TestCase):
         self.experiments = []
 
         for days_offset in range(5, 16):
-            dt = datetime.now(tz=get_current_timezone()) - \
-                 timedelta(days=days_offset)
+            dt = timezone.now() - timedelta(days=days_offset)
             self.participants.append(
                 _create_participant(
                     "offset_used: {}".format(days_offset),
@@ -38,6 +44,7 @@ class ParticipantTests(TestCase):
     def test_no_appointments(self):
         num = get_participants_without_appointments()
 
+        import pdb; pdb.set_trace()
         # Should have offsets 10 to 15 for a total of 6 participants
         self.assertEqual(len(num), 6)
 
