@@ -143,3 +143,9 @@ def mailbox():
     yield read_mail
     # delete emails
     shutil.rmtree(EMAIL_FILE_PATH)
+
+
+@pytest.fixture(scope="function", autouse=True)
+def _dj_autoclear_mailbox() -> None:
+    # Override the `_dj_autoclear_mailbox` test fixture in `pytest_django`.
+    pass
