@@ -21,13 +21,18 @@ class SurveyInvite(models.Model):
     completed = models.DateTimeField(null=True)
 
     class Meta:
+        # TODO: should these be unique together? maybe a participant can fill the same survey
+        # multiple times?
         unique_together = ["survey", "participant"]
 
-    def send(self):
+    def get_link(self):
         expiry = datetime.now() + timedelta(days=7)
         mauth = create_mail_auth(expiry, participant=self.participant)
 
-        context = dict(link=mauth.get_link(f"/survey/{self.survey.pk}"))
+        return mauth.get_link(f"/survey/{self.pk}")
+
+    def send(self):
+        context = dict(link=self.get_link())
         mail = TemplateEmail(
             html_template="survey_admin/mail/invite.html",
             context=context,
@@ -35,3 +40,9 @@ class SurveyInvite(models.Model):
             subject="invitation to fill survey",
         )
         mail.send()
+
+
+class SurveyResponse(models.Model):
+    invite = models.OneToOneField(SurveyInvite, on_delete=models.PROTECT)
+    data = models.JSONField()
+    created = models.DateTimeField(auto_now_add=True)

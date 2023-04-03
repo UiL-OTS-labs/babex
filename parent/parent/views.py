@@ -1,3 +1,5 @@
+import json
+
 from cdh.rest import client as rest
 from django.contrib import messages
 from django.http.response import JsonResponse
@@ -80,9 +82,22 @@ def status(request):
 
 
 @session_required
-def survey_view(request, survey_id):
-    ok, survey = gateway(request, f"/gateway/survey/{survey_id}")
+def survey_view(request, invite_id):
+    ok, survey = gateway(request, f"/gateway/survey/{invite_id}")
     if not ok:
         messages.error(request, "error retreiving data")
         return redirect('home')
     return render(request, "survey/view.html", dict(survey=survey))
+
+
+@session_required
+def survey_response_view(request):
+    data = json.loads(request.body)
+    # TODO: use real invite id
+    data['invite_id'] = 1
+    ok, _ = gateway(request, "/gateway/survey/response/",
+                    data=data)
+    if not ok:
+        messages.error(request, "error submitting data")
+        return JsonResponse(dict(ok=False))
+    return JsonResponse(dict(ok=True))

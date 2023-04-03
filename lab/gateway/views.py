@@ -4,8 +4,12 @@ from rest_framework.response import Response
 from experiments.serializers import AppointmentSerializer
 from signups.models import Signup
 from signups.serializers import SignupSerializer
-from survey_admin.models import SurveyDefinition
-from survey_admin.serializers import SurveyDefinitionSerializer, SurveyInviteSerializer
+from survey_admin.models import SurveyDefinition, SurveyResponse
+from survey_admin.serializers import (
+    SurveyDefinitionSerializer,
+    SurveyInviteSerializer,
+    SurveyResponseSerializer,
+)
 
 
 class GatewayHome(views.APIView):
@@ -37,9 +41,10 @@ class SurveyView(generics.RetrieveAPIView):
     serializer_class = SurveyDefinitionSerializer
     queryset = SurveyDefinition.objects.all()
 
-    def get_queryset(self):
-        # queryset should only contain surveys the participant was invited to fill
-        return SurveyDefinition.objects.filter(surveyinvite__participant=self.request.participant)
+    def get_object(self):
+        # resolve Survey model via invite
+        invite = self.request.participant.survey_invites.get(pk=self.kwargs["invite_id"])
+        return invite.survey
 
 
 class SurveyInvitesView(generics.ListAPIView):
@@ -48,3 +53,13 @@ class SurveyInvitesView(generics.ListAPIView):
 
     def get_queryset(self):
         return self.request.participant.survey_invites.all()
+
+
+class SurveyResponseView(generics.CreateAPIView):
+    permission_classes = [HasParticipant]
+    serializer_class = SurveyResponseSerializer
+
+    def create(self, request, *args, **kwargs):
+        invite = self.request.participant.survey_invites.get(pk=self.request.data["invite_id"])
+        SurveyResponse.objects.create(invite=invite, data=self.request.data["data"])
+        return Response({})

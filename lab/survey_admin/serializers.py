@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import SurveyDefinition, SurveyInvite
+from .models import SurveyDefinition, SurveyInvite, SurveyResponse
 
 
 class SurveyDefinitionSerializer(serializers.ModelSerializer):
@@ -15,3 +15,9 @@ class SurveyInviteSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
     survey_name = serializers.CharField(source="survey.name")
+
+
+class SurveyResponseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SurveyResponse
+        fields = ["data"]

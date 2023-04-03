@@ -6,6 +6,8 @@
         definition: any
     }>();
 
+    const emit = defineEmits(['send']);
+
     let data = reactive([{}]);
     let currentPage = ref(0);
 
@@ -33,7 +35,7 @@
     }
 
     function send() {
-        // TODO
+        emit('send', data);
     }
 
     function isLastPage() {

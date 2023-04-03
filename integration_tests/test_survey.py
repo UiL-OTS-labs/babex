@@ -1,14 +1,18 @@
 import re
+import random
+import string
+import time
 from datetime import date
 
 import pytest
 
 
-@pytest.fixture(scope='module')
+@pytest.fixture
 def participant(apps):
+    suffix = ''.join(random.choice(string.digits) for i in range(4))
     Participant = apps.lab.get_model("participants", "Participant")
     participant = Participant.objects.create(
-        email="baby@baby.com",
+        email=f"baby{suffix}@baby.com",
         name="Baby McBaby",
         parent_name="Parent McParent",
         birth_date=date(2020, 1, 1),
@@ -19,35 +23,25 @@ def participant(apps):
         capable=True,
         email_subscription=True,
     )
-    return participant
+    yield participant
+    participant.delete()
 
 
-@pytest.fixture
-def as_parent(sb, apps, participant, mailbox):
-    # try to login via email
-    sb.switch_to_default_driver()
-    sb.open(apps.parent.url)
-    sb.type('input[name="email"]', participant.email)
-    sb.click('button:contains("Send")')
-
-    mail = mailbox(participant.email)
-    assert len(mail)
-    html = mail[0].get_payload()[1].get_payload()
-    # find link in email
-    link = re.search(r'<a href="([^"]+)"', html).group(1)
-    sb.open(link)
-    return sb
-
-
-def test_survey_invite(sb, apps, as_admin, participant, mailbox):
+@pytest.fixture(scope='module')
+def survey(apps):
     SurveyDefinition = apps.lab.get_model("survey_admin", "SurveyDefinition")
     survey_def = {
         "pages": [
-            {"questions": [{"template": "yesno", "prompt": "this is a test question"}]}
+            {"intro": "first page", "questions": [{"template": "yesno", "prompt": "this is a test question"}]},
+            {"intro": "second page", "questions": [{"template": "yesno", "prompt": "this is another test question"}]}
         ]
     }
-    SurveyDefinition.objects.create(name="Test Survey", content=survey_def)
+    sd = SurveyDefinition.objects.create(name="Test Survey", content=survey_def)
+    yield sd
+    sd.delete()
 
+
+def test_survey_invite(sb, apps, as_admin, participant, survey, mailbox):
     # send survey invite as admin
     sb.switch_to_driver(as_admin)
     sb.click("a:contains(Surveys)")
@@ -69,18 +63,25 @@ def test_survey_invite(sb, apps, as_admin, participant, mailbox):
     sb.assert_text_visible("this is a test question")
 
 
-def test_survey_pages(as_parent, apps, as_admin, participant):
-    SurveyDefinition = apps.lab.get_model("survey_admin", "SurveyDefinition")
-    survey_def = {
-        "pages": [
-            {"intro": "first page", "questions": [{"template": "yesno", "prompt": "this is a test question"}]},
-            {"intro": "second page", "questions": [{"template": "yesno", "prompt": "this is another test question"}]}
-        ]
-    }
-    sd = SurveyDefinition.objects.create(name="Test Survey", content=survey_def)
-    sd.surveyinvite_set.create(survey=sd, participant=participant)
+@pytest.fixture
+def survey_invite(participant, survey):
+    invite = survey.surveyinvite_set.create(survey=survey, participant=participant)
+    return invite
 
-    as_parent.open(apps.parent.url + f'/survey/{sd.pk}')
+
+@pytest.fixture
+def parent_open_survey(sb, apps, participant, survey_invite):
+    def delegate():
+        # try to login via email
+        sb.switch_to_default_driver()
+        sb.open(survey_invite.get_link())
+        return sb
+    yield delegate
+    survey_invite.delete()
+
+
+def test_survey_pages(parent_open_survey):
+    as_parent = parent_open_survey()
 
     # check that the first page is visible
     as_parent.assert_text_visible("first page")
@@ -108,18 +109,11 @@ def test_survey_pages(as_parent, apps, as_admin, participant):
     as_parent.assert_attribute('input[value="Yes"]', 'checked')
 
 
-def test_required_question(as_parent, apps, as_admin, participant):
-    SurveyDefinition = apps.lab.get_model("survey_admin", "SurveyDefinition")
-    survey_def = {
-        "pages": [
-            {"intro": "first page", "questions": [{"template": "yesno", "prompt": "this is a test question", "required": True}]},
-            {"intro": "second page", "questions": [{"template": "yesno", "prompt": "this is another test question"}]}
-        ]
-    }
-    sd = SurveyDefinition.objects.create(name="Test Survey", content=survey_def)
-    sd.surveyinvite_set.create(participant=participant)
+def test_required_question(survey, parent_open_survey):
+    survey.content['pages'][0]['questions'][0]['required'] = True
+    survey.save()
 
-    as_parent.open(apps.parent.url + f'/survey/{sd.pk}')
+    as_parent = parent_open_survey()
 
     # proceeding to the next page should be impossible without answering a required question
     as_parent.click('button:contains(Continue)')
@@ -129,3 +123,21 @@ def test_required_question(as_parent, apps, as_admin, participant):
     as_parent.click('input[value="No"]')
     as_parent.click('button:contains(Continue)')
     as_parent.assert_text_visible("second page")
+
+
+def test_survey_response(parent_open_survey, apps, as_admin):
+    as_parent = parent_open_survey()
+
+    as_parent.click('input[value="Yes"]')
+    as_parent.click('button:contains(Continue)')
+    as_parent.click('input[value="No"]')
+    as_parent.click('button:contains(Send)')
+
+    # wait for backend request
+    time.sleep(0.1)
+
+    SurveyResponse = apps.lab.get_model('survey_admin', 'SurveyResponse')
+    assert SurveyResponse.objects.count() == 1
+
+    # cleanup response
+    SurveyResponse.objects.all().delete()

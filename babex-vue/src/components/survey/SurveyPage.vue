@@ -35,7 +35,11 @@
 
     watch(form, () => {
         if (isReady()) {
-            emit('ready', true, Object.fromEntries(Object.keys(form).map(key => [key, form[key].value])));
+            // collect just the response values and propagate them upwards
+            // we use the ?? operator to replace undefined with null, so that entries
+            // are not removed from the object during serialization
+            let collected = Object.fromEntries(Object.keys(form).map(key => [key, form[key].value ?? null]));
+            emit('ready', true, collected);
         }
         else {
             emit('ready', false);
