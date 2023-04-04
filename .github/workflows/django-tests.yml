@@ -1,5 +1,8 @@
 name: Build and Test App
 
+runs:
+  using: docker
+
 on:
   push:
     branches: [ develop, main, ]
@@ -7,14 +10,57 @@ on:
     branches: [ develop, main, ]
 
 jobs:
-  build:
-
+  build_vue:
     runs-on: ubuntu-latest
     continue-on-error: false
+
+    strategy:
+      matrix:
+        node-version: [16]
+
+    steps:
+      - name: Install OS dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libldap2-dev libsasl2-dev libssl-dev gettext poppler-utils poppler-data libpoppler-cpp-dev
+      - uses: actions/checkout@v2
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: 'babex-vue/package-lock.json'
+      - name: Install node deps
+        run: |
+          cd babex-vue
+          npm ci
+      - name: Lint Vue app
+        run: |
+          cd babex-vue
+          npm run lint
+      - name: Build Vue app
+        if: always()  # continue with build when linting fails
+        run: |
+          cd babex-vue
+          npm run dev
+      - name: Package app
+        run: |
+          cd lab/main/static/
+          tar cvf babex-vue.tar vue
+          gzip babex-vue.tar
+      - uses: actions/upload-artifact@v1
+        with:
+          name: babex-vue
+          path: lab/main/static/babex-vue.tar.gz
+
+  build:
+    needs: build_vue
+    runs-on: ubuntu-latest
+    continue-on-error: false
+
     strategy:
       max-parallel: 2
       matrix:
-        node-version: [16]
         python-version: ['3.10']
         app: ['lab', 'parent']
 
@@ -58,25 +104,15 @@ jobs:
         run: |
           cd ${{ matrix.app }}
           python manage.py test
-      - name: Set up Node
-        uses: actions/setup-node@v3
+      - name: Download vue app
+        uses: actions/download-artifact@v3
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-          cache-dependency-path: 'babex-vue/package-lock.json'
-      - name: Install node deps
+          name: babex-vue
+      - name: Unpack vue app
         run: |
-          cd babex-vue
-          npm ci
-      - name: Lint Vue app
-        run: |
-          cd babex-vue
-          npm run lint
-      - name: Build Vue app
-        if: always()  # continue with build when linting fails
-        run: |
-          cd babex-vue
-          npm run dev
+          mv babex-vue.tar.gz lab/main/static/
+          cd lab/main/static/
+          tar xzf babex-vue.tar.gz
       - name: Integration tests
         run: |
           cd ${{ matrix.app }}/integration_tests
