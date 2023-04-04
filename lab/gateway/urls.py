@@ -2,6 +2,7 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
 from mailauth.views import MailAuthView, SetParticipantView
+from signups.views import SignupVerifyView
 
 from .views import (
     AppointmentsView,
@@ -20,6 +21,8 @@ router.register("signup", Signups, basename="signup")
 urlpatterns = [
     path("", GatewayHome.as_view(), name="home"),
     path("", include(router.urls)),
+    #
+    path("signup/verify/<str:token>/", SignupVerifyView.as_view()),
     #
     path("mailauth/", MailAuthView.as_view()),
     path("mailauth/set_participant/", SetParticipantView.as_view()),
