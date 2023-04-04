@@ -146,11 +146,12 @@ jobs:
           pip install -r parent/requirements-dev.txt
       - name: Compile 18n
         run: |
-          cd lab
+          cd ./lab
           python manage.py compilemessages
       - name: Compile 18n
         run: |
-          cd parent
+          cd ./parent
+          ls -al
           python manage.py compilemessages
       - name: Download vue app
         uses: actions/download-artifact@v3
