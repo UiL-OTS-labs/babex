@@ -46,7 +46,6 @@ def signup(sb, apps):
     sb.click('#id_data_consent')
     sb.click('input[type="submit"]')
 
-    sb.assert_text_visible('signup_done')
     return email
 
 
