@@ -23,7 +23,7 @@ def sample_signup(db):
         speech_parent=True,
         multilingual=True,
         status=Signup.Status.NEW,
-        email_confirmed=timezone.now(),
+        email_verified=timezone.now(),
     )
 
 

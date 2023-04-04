@@ -34,7 +34,7 @@ class Signup(rest.Resource):
     multilingual = rest.BoolField()
 
     link_token = rest.TextField(null=True)
-    email_confirmed = rest.DateTimeField(null=True, blank=True)
+    email_verified = rest.DateTimeField(null=True, blank=True)
 
 
 class SignupView(FormView):
@@ -54,8 +54,8 @@ class SignupDone(TemplateView):
     template_name = "signup_done.html"
 
 
-def signup_confirm(request, token):
-    ok, _ = gateway(request, f"/gateway/signup/confirm/{token}")
+def signup_verify(request, token):
+    ok, _ = gateway(request, f"/gateway/signup/verify/{token}")
     if ok:
         return render(request, "signup_confirmed.html")
     messages.error(request, "email confrimation failed")

@@ -34,7 +34,7 @@ class Signup(models.Model):
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.NEW)
 
     created = models.DateTimeField(auto_now_add=True)
-    email_confirmed = models.DateTimeField(null=True, blank=True)
+    email_verified = models.DateTimeField(null=True, blank=True)
     link_token = models.CharField(max_length=64, default=token_urlsafe, unique=True)
 
     def send_email_validation(self):

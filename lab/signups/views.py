@@ -14,7 +14,7 @@ from signups.models import Signup
 
 
 class SignupListView(braces.LoginRequiredMixin, ListView):
-    queryset = Signup.objects.filter(status=Signup.Status.NEW, email_confirmed__isnull=False)
+    queryset = Signup.objects.filter(status=Signup.Status.NEW, email_verified__isnull=False)
 
     def post(self, request, *args, **kwargs):
         """simple post endpoint for bulk-rejecting signups"""
@@ -67,9 +67,9 @@ def reject_signup(signup: Signup):
     signup.save()
 
 
-class SignupConfirmView(views.APIView):
+class SignupVerifyView(views.APIView):
     def get(self, request, *args, **kwargs):
         signup = Signup.objects.get(link_token=kwargs["token"])
-        signup.email_confirmed = timezone.now()
+        signup.email_verified = timezone.now()
         signup.save()
         return Response(dict())
