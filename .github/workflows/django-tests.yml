@@ -140,18 +140,19 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install flake8 pytest
-          pip install -r lab/requirements.txt
-          pip install -r lab/requirements-dev.txt
-          pip install -r parent/requirements.txt
-          pip install -r parent/requirements-dev.txt
+          cd lab
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+          cd ../parent
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
       - name: Compile 18n
         run: |
-          cd ./lab
+          cd lab
           python manage.py compilemessages
       - name: Compile 18n
         run: |
-          cd ./parent
-          ls -al
+          cd parent
           python manage.py compilemessages
       - name: Download vue app
         uses: actions/download-artifact@v3
