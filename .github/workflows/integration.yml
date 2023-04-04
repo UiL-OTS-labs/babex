@@ -1,4 +1,5 @@
-name: Build and Test App
+# general integration tests for the combined application
+name: Integration tests
 
 on:
   push:
@@ -7,8 +8,7 @@ on:
     branches: [ develop, main, ]
 
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
     continue-on-error: false
     strategy:
@@ -16,13 +16,12 @@ jobs:
       matrix:
         node-version: [16]
         python-version: ['3.10']
-        app: ['lab', 'parent']
 
     steps:
       - name: Install OS dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libldap2-dev libsasl2-dev libssl-dev gettext poppler-utils poppler-data libpoppler-cpp-dev
+          sudo apt-get install libldap2-dev libsasl2-dev libssl-dev gettext poppler-utils poppler-data libpoppler-cpp-dev
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
@@ -32,32 +31,13 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          cd ${{ matrix.app }}
-          pip install -r requirements.txt
-          pip install -r requirements-dev.txt
-          pip install flake8 pytest
-      - name: pip freeze
-        run: |
-          pip freeze
-      - name: Lint with flake8
-        run: |
-          cd ${{ matrix.app }}
-          # stop the build if there are Python syntax errors or undefined names
-          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+          pip install -r lab/requirements.txt
+          pip install -r lab/requirements-dev.txt
+          pip install pytest
       - name: Compile 18n
         run: |
           cd ${{ matrix.app }}
           python manage.py compilemessages
-      - name: Check for missing migrations
-        run: |
-          cd ${{ matrix.app }}
-          python manage.py makemigrations --check --dry-run
-      - name: Run django tests
-        run: |
-          cd ${{ matrix.app }}
-          python manage.py test
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
@@ -79,7 +59,7 @@ jobs:
           npm run dev
       - name: Integration tests
         run: |
-          cd ${{ matrix.app }}/integration_tests
+          cd integration_tests
           pytest
       - uses: actions/upload-artifact@v1
         if: failure()
