@@ -2,10 +2,27 @@ import email
 import glob
 import shutil
 import time
+import random
 import re
+import shutil
+import string
+import time
+
 import pytest
 import requests
 from lab_settings import EMAIL_FILE_PATH
+
+
+def read_mail(address):
+    messages = []
+    for path in sorted(glob.glob(EMAIL_FILE_PATH + '/*')):
+        # filename includes timestamp, so sorting by name also sorts by time
+        with open(path) as f:
+            msg = email.message_from_file(f)
+            if msg['To'] == address:
+                messages.append(msg)
+
+    return messages
 
 
 def read_mail(address):
@@ -29,7 +46,8 @@ def test_services_start(apps):
 
 @pytest.fixture
 def signup(sb, apps):
-    email = 'parent@localhost.local'
+    suffix = ''.join(random.choice(string.digits) for i in range(4))
+    email = f'parent{suffix}@localhost.local'
     sb.open(apps.parent.url + 'signup/')
     sb.type('#id_name', 'Test Baby')
     sb.type('#id_parent_name', 'Test Parent')
