@@ -2,7 +2,12 @@ import email
 import glob
 import shutil
 import time
+import random
 import re
+import shutil
+import string
+import time
+
 import pytest
 import requests
 from lab_settings import EMAIL_FILE_PATH
@@ -10,7 +15,8 @@ from lab_settings import EMAIL_FILE_PATH
 
 def read_mail(address):
     messages = []
-    for path in glob.glob(EMAIL_FILE_PATH + '/*'):
+    for path in sorted(glob.glob(EMAIL_FILE_PATH + '/*')):
+        # filename includes timestamp, so sorting by name also sorts by time
         with open(path) as f:
             msg = email.message_from_file(f)
             if msg['To'] == address:
@@ -28,7 +34,8 @@ def test_services_start(apps):
 
 @pytest.fixture
 def signup(sb, apps):
-    email = 'parent@localhost.local'
+    suffix = ''.join(random.choice(string.digits) for i in range(4))
+    email = f'parent{suffix}@localhost.local'
     sb.open(apps.parent.url + 'signup/')
     sb.type('#id_name', 'Test Baby')
     sb.type('#id_parent_name', 'Test Parent')
@@ -39,7 +46,6 @@ def signup(sb, apps):
     sb.click('#id_data_consent')
     sb.click('input[type="submit"]')
 
-    sb.assert_text_visible('signup_done')
     return email
 
 
@@ -51,6 +57,14 @@ def mailbox():
 
 
 def test_parent_login(sb, apps, signup, as_admin, mailbox):
+    # confirm signup email
+    mail = mailbox(signup)
+    assert len(mail)
+    html = mail[0].get_payload()[1].get_payload()
+    # find link in email
+    link = re.search(r'<a href="([^"]+)"', html).group(1)
+    sb.open(link)
+
     sb.switch_to_driver(as_admin)
     # approve signup
     sb.click("a:contains(Participants)")
@@ -64,6 +78,20 @@ def test_parent_login(sb, apps, signup, as_admin, mailbox):
     sb.type('input[name="email"]', signup)
     sb.click('button:contains("Send")')
 
+    # use login link from (second) email
+    mail = mailbox(signup)
+    assert len(mail) == 2
+    html = mail[1].get_payload()[1].get_payload()
+    # find link in email
+    link = re.search(r'<a href="([^"]+)"', html).group(1)
+    sb.open(link)
+
+    # check that login worked
+    sb.assert_text_visible('Welcome')
+
+
+def test_parent_login_unapproved(signup, apps, sb, mailbox):
+    # confirm signup email
     mail = mailbox(signup)
     assert len(mail)
     html = mail[0].get_payload()[1].get_payload()
@@ -71,5 +99,12 @@ def test_parent_login(sb, apps, signup, as_admin, mailbox):
     link = re.search(r'<a href="([^"]+)"', html).group(1)
     sb.open(link)
 
-    # check that login worked
-    sb.assert_text_visible('Welcome')
+    # try to login via email
+    sb.switch_to_default_driver()
+    sb.open(apps.parent.url)
+    sb.type('input[name="email"]', signup)
+    sb.click('button:contains("Send")')
+
+    # make sure that no login email has arrived
+    mail = mailbox(signup)
+    assert len(mail) == 1

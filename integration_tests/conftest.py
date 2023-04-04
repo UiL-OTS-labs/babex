@@ -19,7 +19,10 @@ class DjangoServerProcess:
 
     def migrate(self):
         # delete existing db
-        os.unlink(f"{self.name}.int.db.sqlite3")
+        try:
+            os.unlink(f"{self.name}.int.db.sqlite3")
+        except FileNotFoundError:
+            pass
 
         cmd = [
             "python",

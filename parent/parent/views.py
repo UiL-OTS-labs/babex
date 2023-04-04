@@ -1,7 +1,7 @@
 from cdh.rest import client as rest
 from django.contrib import messages
 from django.http.response import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
@@ -33,6 +33,9 @@ class Signup(rest.Resource):
     speech_parent = rest.BoolField()
     multilingual = rest.BoolField()
 
+    link_token = rest.TextField(null=True)
+    email_verified = rest.DateTimeField(null=True, blank=True)
+
 
 class SignupView(FormView):
     template_name = "signup.html"
@@ -49,6 +52,14 @@ class SignupView(FormView):
 
 class SignupDone(TemplateView):
     template_name = "signup_done.html"
+
+
+def signup_verify(request, token):
+    ok, _ = gateway(request, f"/gateway/signup/verify/{token}")
+    if ok:
+        return render(request, "signup_confirmed.html")
+    messages.error(request, "email confrimation failed")
+    return redirect("home")
 
 
 @session_required

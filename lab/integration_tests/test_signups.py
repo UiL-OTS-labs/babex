@@ -1,6 +1,7 @@
 from datetime import datetime
 
 import pytest
+from django.utils import timezone
 
 from signups.models import Signup
 
@@ -22,6 +23,7 @@ def sample_signup(db):
         speech_parent=True,
         multilingual=True,
         status=Signup.Status.NEW,
+        email_verified=timezone.now(),
     )
 
 
