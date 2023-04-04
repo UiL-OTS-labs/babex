@@ -36,7 +36,9 @@ jobs:
           pip install pytest
       - name: Compile 18n
         run: |
-          cd ${{ matrix.app }}
+          cd lab
+          python manage.py compilemessages
+          cd ../parent
           python manage.py compilemessages
       - name: Set up Node
         uses: actions/setup-node@v3
