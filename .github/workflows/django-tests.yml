@@ -1,8 +1,5 @@
 name: Build and Test App
 
-runs:
-  using: docker
-
 on:
   push:
     branches: [ develop, main, ]
