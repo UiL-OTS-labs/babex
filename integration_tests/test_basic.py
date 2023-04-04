@@ -25,18 +25,6 @@ def read_mail(address):
     return messages
 
 
-def read_mail(address):
-    messages = []
-    for path in sorted(glob.glob(EMAIL_FILE_PATH + '/*')):
-        # filename includes timestamp, so sorting by name also sorts by time
-        with open(path) as f:
-            msg = email.message_from_file(f)
-            if msg['To'] == address:
-                messages.append(msg)
-
-    return messages
-
-
 def test_services_start(apps):
     response = requests.get(apps.parent.url + 'status')
     assert response.ok
