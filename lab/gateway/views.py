@@ -64,6 +64,6 @@ class SurveyResponseView(generics.CreateAPIView):
     serializer_class = SurveyResponseSerializer
 
     def create(self, request, *args, **kwargs):
-        invite = self.request.participant.survey_invites.get(pk=self.request.data["invite_id"])
+        invite = self.request.participant.survey_invites.get(pk=self.request.data["invite"])
         SurveyResponse.objects.create(invite=invite, data=self.request.data["data"])
         return Response({})

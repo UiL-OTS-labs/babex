@@ -75,9 +75,7 @@ def home(request):
     if not ok:
         messages.error(request, "error retreiving survey data")
 
-    return render(request, "parent/home.html",
-                  dict(appointments=appointments,
-                       survey_invites=survey_invites))
+    return render(request, "parent/home.html", dict(appointments=appointments, survey_invites=survey_invites))
 
 
 def status(request):
@@ -97,17 +95,14 @@ def survey_view(request, invite_id):
     ok, survey = gateway(request, f"/gateway/survey/{invite_id}")
     if not ok:
         messages.error(request, "error retreiving data")
-        return redirect('home')
-    return render(request, "survey/view.html", dict(survey=survey))
+        return redirect("home")
+    return render(request, "survey/view.html", dict(survey=survey, invite_id=invite_id))
 
 
 @session_required
 def survey_response_view(request):
     data = json.loads(request.body)
-    # TODO: use real invite id
-    data['invite_id'] = 1
-    ok, _ = gateway(request, "/gateway/survey/response/",
-                    data=data)
+    ok, _ = gateway(request, "/gateway/survey/response/", data=data)
     if not ok:
         messages.error(request, "error submitting data")
         return JsonResponse(dict(ok=False))

@@ -7,12 +7,14 @@
     import SurveyView from './SurveyView.vue'
 
     let props = defineProps<{
-        definition: any
+        definition: any,
+        invite_id: number
     }>();
 
-async function send(data: any) {
+    async function send(data: any) {
         console.log(data);
         let result = await parentApi.survey.response.create({
+            invite: props.invite_id,
             data: data
         });
         console.log(result);
