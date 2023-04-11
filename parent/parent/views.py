@@ -94,7 +94,7 @@ def status(request):
 def survey_view(request, invite_id):
     ok, survey = gateway(request, f"/gateway/survey/{invite_id}")
     if not ok:
-        messages.error(request, "error retreiving data")
+        messages.error(request, survey["detail"])
         return redirect("home")
     return render(request, "survey/view.html", dict(survey=survey, invite_id=invite_id))
 

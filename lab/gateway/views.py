@@ -1,4 +1,5 @@
 from rest_framework import generics, mixins, permissions, views, viewsets
+from rest_framework.exceptions import APIException
 from rest_framework.response import Response
 
 from experiments.serializers import AppointmentSerializer
@@ -48,6 +49,9 @@ class SurveyView(generics.RetrieveAPIView):
     def get_object(self):
         # resolve Survey model via invite
         invite = self.request.participant.survey_invites.get(pk=self.kwargs["invite_id"])
+        if hasattr(invite, "surveyresponse"):
+            # survey response was already sent
+            raise APIException("Survey already completed")
         return invite.survey
 
 

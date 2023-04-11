@@ -139,5 +139,9 @@ def test_survey_response(parent_open_survey, apps, as_admin):
     SurveyResponse = apps.lab.get_model('survey_admin', 'SurveyResponse')
     assert SurveyResponse.objects.count() == 1
 
+    # check that you cannot complete the survey a second time
+    as_parent = parent_open_survey()
+    as_parent.assert_text_visible('already completed')
+
     # cleanup response
     SurveyResponse.objects.all().delete()
