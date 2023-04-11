@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     # Django extensions
     'django_extensions',
+    'vue3_tag',
 
     # django-simple-menu
     'menu',

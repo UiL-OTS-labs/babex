@@ -18,5 +18,6 @@ django-auth-ldap
 django-impersonate
 pytest-django
 -e git+https://github.com/UiL-OTS-labs/ageutil@main#egg=ageutil
+-e git+https://github.com/UiL-OTS-labs/django-vue3-tag@main#egg=django-vue3-tag
 matplotlib
 freezegun

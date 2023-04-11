@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'vue3_tag',
+
     'menu',
     'cdh.core',
     'cdh.rest',
