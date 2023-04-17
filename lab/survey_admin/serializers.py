@@ -20,4 +20,4 @@ class SurveyInviteSerializer(serializers.ModelSerializer):
 class SurveyResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = SurveyResponse
-        fields = ["data"]
+        fields = ["data", "created", "updated", "completed"]

@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
 
 from cdh.core.mail import TemplateEmail
-from django.conf import settings
 from django.db import models
 
 from mailauth.models import create_mail_auth
@@ -45,4 +44,7 @@ class SurveyInvite(models.Model):
 class SurveyResponse(models.Model):
     invite = models.OneToOneField(SurveyInvite, on_delete=models.PROTECT)
     data = models.JSONField()
+
     created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    completed = models.DateTimeField(null=True)

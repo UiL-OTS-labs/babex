@@ -92,6 +92,11 @@ def status(request):
 
 @session_required
 def survey_view(request, invite_id):
+    ok, survey_response = gateway(request, f"/gateway/survey/{invite_id}/response/")
+    if ok and survey_response.get("completed") is not None:
+        messages.error(request, "Survey already completed")
+        return redirect("home")
+
     ok, survey = gateway(request, f"/gateway/survey/{invite_id}")
     if not ok:
         messages.error(request, survey["detail"])
@@ -102,7 +107,11 @@ def survey_view(request, invite_id):
 @session_required
 def survey_response_view(request):
     data = json.loads(request.body)
-    ok, _ = gateway(request, "/gateway/survey/response/", data=data)
+    invite_id = data["invite"]
+    # TODO: refactor frontend conde to avoid this hack
+    del data["invite"]
+
+    ok, _ = gateway(request, f"/gateway/survey/{invite_id}/response/", data=data)
     if not ok:
         messages.error(request, "error submitting data")
         return JsonResponse(dict(ok=False))
