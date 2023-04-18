@@ -48,3 +48,6 @@ class SurveyResponse(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     completed = models.DateTimeField(null=True)
+
+    # for partial responses: store the index of the page from which we should resume the survey
+    page = models.IntegerField(default=0)

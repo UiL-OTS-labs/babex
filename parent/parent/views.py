@@ -101,14 +101,20 @@ def survey_view(request, invite_id):
     if not ok:
         messages.error(request, survey["detail"])
         return redirect("home")
-    return render(request, "survey/view.html", dict(survey=survey, invite_id=invite_id))
+
+    ok, survey_response = gateway(request, f"/gateway/survey/{invite_id}/response/")
+    if not ok:
+        messages.error(request, survey["detail"])
+        return redirect("home")
+
+    return render(request, "survey/view.html", dict(survey=survey, invite_id=invite_id, response=survey_response))
 
 
 @session_required
 def survey_response_view(request):
     data = json.loads(request.body)
     invite_id = data["invite"]
-    # TODO: refactor frontend conde to avoid this hack
+    # TODO: refactor frontend code to avoid this hack
     del data["invite"]
 
     ok, _ = gateway(request, f"/gateway/survey/{invite_id}/response/", data=data)

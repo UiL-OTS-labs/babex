@@ -6,7 +6,7 @@
         definition: any
     }>();
 
-    const emit = defineEmits(['send']);
+    const emit = defineEmits(['save', 'send']);
 
     let data = reactive([{}]);
     let currentPage = ref(0);
@@ -24,6 +24,7 @@
         if (currentPage.value < props.definition.pages.length - 1) {
             pageReady.value = false;
             currentPage.value++;
+            emit('save', data, currentPage.value);
         }
     }
 
@@ -36,6 +37,12 @@
 
     function send() {
         emit('send', data);
+        // TODO redirect after submission
+    }
+
+    function save(pageIndex: number) {
+        emit('save', data, pageIndex);
+        // TODO redirect after submission
     }
 
     function isLastPage() {
@@ -48,6 +55,13 @@
             data[currentPage.value] = formData;
         }
     }
+
+    function restore(fromData: any, page: number) {
+        currentPage.value = page;
+        Object.assign(data, fromData);
+    }
+
+    defineExpose({ restore });
 </script>
 
 <template>
@@ -57,8 +71,11 @@
     </div>
     <div class="mt-3">
         <button class="btn btn-secondary" @click="prev()" v-if="currentPage > 0">← Back</button>
-        <button class="btn btn-primary float-end" @click="next()" v-if="!isLastPage()">Continue →</button>
-        <button class="btn btn-primary float-end" @click="send()" v-if="isLastPage()">Send</button>
+        <div class="btn-group float-end">
+            <button class="btn btn-secondary" @click="save(currentPage)" v-if="!isLastPage()">Save for later</button>
+            <button class="btn btn-primary" @click="next()" v-if="!isLastPage()">Continue →</button>
+            <button class="btn btn-primary" @click="send()" v-if="isLastPage()">Send</button>
+        </div>
     </div>
 </template>
 

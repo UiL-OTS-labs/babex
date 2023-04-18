@@ -83,12 +83,17 @@ class SurveyViewSet(viewsets.ModelViewSet):
 
     @response.mapping.post
     def submit_response(self, request, pk):
-        return self.save_response(pk, is_completed=True)
+        return self.save_response(pk, is_completed=self.request.data.get("final", False))
 
     def save_response(self, pk, is_completed):
         completed = timezone.now() if is_completed else None
         response, _ = SurveyResponse.objects.update_or_create(
-            invite_id=pk, defaults=dict(data=self.request.data["data"], completed=completed)
+            invite_id=pk,
+            defaults=dict(
+                data=self.request.data["data"],
+                page=self.request.data.get("page", 0),
+                completed=completed,
+            ),
         )
         serializer = SurveyResponseSerializer(response)
         return Response(serializer.data)

@@ -45,6 +45,7 @@
             emit('ready', false);
         }
     });
+
     props.definition.questions.forEach((question: any, idx: number) => {
         form[questionId(idx)] = { question: question, value: props.data?.[questionId(idx)] };
     });
