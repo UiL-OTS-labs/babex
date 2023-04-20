@@ -97,8 +97,3 @@ class SurveyViewSet(viewsets.ModelViewSet):
         )
         serializer = SurveyResponseSerializer(response)
         return Response(serializer.data)
-
-    # def create(self, request, *args, **kwargs):
-    #     invite = self.request.participant.survey_invites.get(pk=self.request.data["invite"])
-    #     SurveyResponse.objects.create(invite=invite, data=self.request.data["data"])
-    #     return Response({})
