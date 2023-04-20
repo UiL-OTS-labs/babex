@@ -21,3 +21,4 @@ pytest-django
 -e git+https://github.com/UiL-OTS-labs/django-vue3-tag@main#egg=django-vue3-tag
 matplotlib
 freezegun
+django_json_widget
