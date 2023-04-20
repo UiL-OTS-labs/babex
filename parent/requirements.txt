@@ -10,6 +10,10 @@
     # via -r requirements.in
 asgiref==3.5.2
     # via django
+certifi==2022.12.7
+    # via requests
+charset-normalizer==3.1.0
+    # via requests
 deprecated==1.2.13
     # via cdh-django-core
 django==4.0.8
@@ -25,14 +29,20 @@ django-simple-menu==2.1.0
     # via -r requirements.in
 djangorestframework==3.14.0
     # via -r requirements.in
+idna==3.4
+    # via requests
 importlib-metadata==5.1.0
     # via django-simple-menu
 pytz==2022.6
     # via djangorestframework
+requests==2.28.2
+    # via -r requirements.in
 sqlparse==0.4.3
     # via
     #   django
     #   django-debug-toolbar
+urllib3==1.26.15
+    # via requests
 wrapt==1.14.1
     # via deprecated
 zipp==3.11.0
