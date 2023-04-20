@@ -145,7 +145,7 @@ def read_mail(address):
 def mailbox():
     yield read_mail
     # delete emails
-    shutil.rmtree(EMAIL_FILE_PATH)
+    shutil.rmtree(EMAIL_FILE_PATH, ignore_errors=True)
 
 
 @pytest.fixture(scope="function", autouse=True)
