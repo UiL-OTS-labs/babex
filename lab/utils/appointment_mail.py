@@ -10,6 +10,7 @@ from django.utils.timezone import localtime
 
 from experiments.email import AppointmentConfirmEmail
 from experiments.models import Appointment
+from mailauth.models import create_mail_auth
 
 CANCEL_LINK_REGEX = r"{cancel_link(?::\"(.*)\")?}"
 
@@ -18,8 +19,15 @@ def send_appointment_mail(appointment: Appointment, override_content=None) -> No
     experiment = appointment.experiment
     participant = appointment.participant
     time_slot = appointment.timeslot
+    assert time_slot
 
     subject = "Bevestiging inschrijving experiment ILS: {}".format(experiment.name)
+
+    # generate auth link for cancelation
+    expiry = time_slot.end
+    mauth = create_mail_auth(expiry, participant=appointment.participant)
+
+    cancel_link = mauth.get_link(f"/appointment/{appointment.pk}/cancel/")
 
     replacements = {
         "experiment_name": experiment.name,
@@ -30,6 +38,7 @@ def send_appointment_mail(appointment: Appointment, override_content=None) -> No
         "leader_email": appointment.leader.email,
         "leader_phonenumber": appointment.leader.phonenumber,
         "all_leaders_name_list": experiment.leader_names,
+        "cancel_link": cancel_link,
     }
 
     if experiment.location:
