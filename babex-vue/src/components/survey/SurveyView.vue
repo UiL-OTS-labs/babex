@@ -3,13 +3,14 @@
     import SurveyPage from './SurveyPage.vue';
 
     const props = defineProps<{
-        definition: any
+        definition: any,
+        initial?: { data: any, page: number }
     }>();
 
     const emit = defineEmits(['save', 'send']);
 
-    let data = reactive([{}]);
-    let currentPage = ref(0);
+    let data = reactive(props.initial?.data ?? [{}]);
+    let currentPage = ref(props.initial?.page ?? 0);
 
     let showErrors = ref(false);
     provide('showErrors', showErrors);
@@ -55,13 +56,6 @@
             data[currentPage.value] = formData;
         }
     }
-
-    function restore(fromData: any, page: number) {
-        currentPage.value = page;
-        Object.assign(data, fromData);
-    }
-
-    defineExpose({ restore });
 </script>
 
 <template>

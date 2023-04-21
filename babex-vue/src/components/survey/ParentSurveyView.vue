@@ -15,12 +15,6 @@
 
     let survey = ref<typeof SurveyView|null>(null);
 
-    onMounted(() => {
-        if (props.response) {
-            survey.value!.restore(props.response.data, props.response.page);
-        }
-    })
-
     async function save(data: any, page: number) {
         let result = await parentApi.survey.response.create({
             invite: props.invite_id,
@@ -41,7 +35,7 @@
 </script>
 
 <template>
-    <SurveyView ref="survey" :definition="definition" @save="save" @send="send"/>
+    <SurveyView ref="survey" :definition="definition" @save="save" @send="send" :initial="response" />
 </template>
 
 <style>
