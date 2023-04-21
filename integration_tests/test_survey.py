@@ -146,3 +146,21 @@ def test_survey_response(parent_open_survey, apps, as_admin):
 
     # cleanup response
     SurveyResponse.objects.all().delete()
+
+
+def test_survey_response_restore(parent_open_survey, apps, as_admin):
+    as_parent = parent_open_survey()
+
+    as_parent.click('input[value="Yes"]')
+    as_parent.click('button:contains("Save for later")')
+
+    # wait for backend request
+    time.sleep(0.1)
+
+    # checkbox should be checked when the survey is opened again
+    as_parent = parent_open_survey()
+    as_parent.assert_attribute('input[value="Yes"]', 'checked')
+
+    # cleanup response
+    SurveyResponse = apps.lab.get_model('survey_admin', 'SurveyResponse')
+    SurveyResponse.objects.all().delete()
