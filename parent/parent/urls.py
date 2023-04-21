@@ -9,6 +9,7 @@ from .views import (
     status,
     survey_response_view,
     survey_view,
+    cancel_appointment_view
 )
 
 urlpatterns = [
@@ -27,4 +28,6 @@ urlpatterns = [
     # surveys
     path("survey/<int:invite_id>/", survey_view, name="survey"),
     path("survey/response/", survey_response_view, name="survey.response"),
+    # appointments
+    path("appointment/<int:appointment_id>/cancel/", cancel_appointment_view, name="appointment.cancel"),
 ]
