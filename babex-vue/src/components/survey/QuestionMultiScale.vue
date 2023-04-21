@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import {defineProps, ref, reactive, watch} from 'vue';
+    import {defineProps, reactive, watch} from 'vue';
 
     defineProps<{
         modelValue?: string[],
