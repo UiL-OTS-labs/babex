@@ -17,7 +17,6 @@ class SurveyInvite(models.Model):
     survey = models.ForeignKey(SurveyDefinition, on_delete=models.CASCADE)
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE, related_name="survey_invites")
     created = models.DateTimeField(auto_now_add=True)
-    completed = models.DateTimeField(null=True)
 
     class Meta:
         # TODO: should these be unique together? maybe a participant can fill the same survey
@@ -42,7 +41,7 @@ class SurveyInvite(models.Model):
 
 
 class SurveyResponse(models.Model):
-    invite = models.OneToOneField(SurveyInvite, on_delete=models.PROTECT)
+    invite = models.OneToOneField(SurveyInvite, on_delete=models.CASCADE)
     data = models.JSONField()
 
     created = models.DateTimeField(auto_now_add=True)

@@ -38,6 +38,7 @@ def survey(apps):
     }
     sd = SurveyDefinition.objects.create(name="Test Survey", content=survey_def)
     yield sd
+    sd.surveyinvite_set.all().delete()
     sd.delete()
 
 
