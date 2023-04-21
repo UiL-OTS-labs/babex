@@ -54,10 +54,10 @@
 <template>
     <div v-html="definition.intro">
     </div>
-    <div class="card" v-for="(question, index) in definition.questions" :key="index">
+    <div class="card mt-3" v-for="(question, index) in definition.questions" :key="index">
         <div class="card-body">
             <div class="prompt" v-html="question.prompt"></div>
-            <div class="question-body">
+            <div class="mt-2 question-body">
                 <div v-if="question.template == 'yesno'">
                     <QuestionYesNo v-model="questionModel(index).value" yes="Yes" no="No"/>
                 </div>
@@ -68,7 +68,7 @@
                     <QuestionScale v-model="questionModel(index).value" :options="question.options" />
                 </div>
                 <div v-if="question.template == 'multi-scale'">
-                    <QuestionMultiScale v-model="questionModel(index).value" :options="question.options" :items="question.items" :radio="question.radio" />
+                    <QuestionMultiScale v-model="questionModel(index).value" :options="question.options" :items="question.items" :radio="question.radio ?? true" />
                 </div>
             </div>
             <div v-if="showErrors && hasErrors(form[questionId(index)])" class="text-danger">please answer the question</div>

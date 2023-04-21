@@ -13,9 +13,13 @@
 </script>
 
 <template>
-    <div>
-        <label><input type="radio" v-model="choice" :value="yes">{{yes}}</label>
-        <label><input type="radio" v-model="choice" :value="no">{{no}}</label>
+    <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" v-model="choice" :value="yes">
+        <label class="form-check-label"> {{yes}} </label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" v-model="choice" :value="no">
+        <label class="form-check-label">{{no}}</label>
     </div>
 </template>
 

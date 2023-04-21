@@ -13,7 +13,7 @@
 
 <template>
     <div>
-        <textarea v-model="text"></textarea>
+        <textarea class="form-control" v-model="text"></textarea>
     </div>
 </template>
 

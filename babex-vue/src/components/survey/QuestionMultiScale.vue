@@ -25,8 +25,8 @@
             <tr v-for="(item, index) in items" :key="index">
                 <td>{{item}}</td>
                 <th v-for="option in options" :key="option">
-                    <input v-if="radio" :value="option" v-model="choices[index]" type="radio"/>
-                    <input v-if="!radio" :value="option" v-model="choices[index]" type="checkbox"/>
+                    <input class="form-check-input" v-if="radio" :value="option" v-model="choices[index]" type="radio"/>
+                    <input class="form-check-input" v-if="!radio" :value="option" v-model="choices[index]" type="checkbox"/>
                 </th>
             </tr>
         </table>

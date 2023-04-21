@@ -13,16 +13,10 @@
 
 <template>
     <div>
-        <table class="table">
-            <tr>
-                <td v-for="option in options" :key="option">
-                    <label>
-                        <input type="radio" v-model="choice" :value="option">
-                        {{option}}
-                    </label>
-                </td>
-            </tr>
-        </table>
+        <div class="form-check form-check-inline" v-for="option in options" :key="option">
+            <input class="form-check-input" type="radio" v-model="choice" :value="option">
+            <label class="form-check-label"> {{option}} </label>
+        </div>
     </div>
 </template>
 
