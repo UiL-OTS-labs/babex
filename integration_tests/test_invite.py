@@ -43,6 +43,8 @@ def test_cancel_appointment_from_email(apps, participant, mailbox, sb):
     leader = User.objects.first()  # admin
     start = timezone.now()
     end = start + timedelta(hours=1)
+    experiment.leaders.add(leader)
+    experiment.save()
     appointment = make_appointment(experiment, participant, leader, start, end)
 
     send_appointment_mail(appointment)
@@ -57,3 +59,10 @@ def test_cancel_appointment_from_email(apps, participant, mailbox, sb):
     # check that the appointment was removed
     with pytest.raises(ObjectDoesNotExist):
         appointment.refresh_from_db()
+
+    # check that leader was notified
+    mail = mailbox(leader.email)
+    assert len(mail) == 1
+    text = mail[0].get_payload()[0].get_payload()
+    assert participant.name in text
+    assert 'unsubscribed' in text
