@@ -98,6 +98,9 @@ class Appointment(models.Model):
 
 
 def make_appointment(experiment: Experiment, participant: Participant, leader: User, start: datetime, end: datetime):
+    if leader not in experiment.leaders.all():
+        raise ValueError(f'{leader} is not a leader in the experiment "{experiment}"')
+
     timeslot = TimeSlot.objects.create(start=start, end=end, experiment=experiment, max_places=1)
     appointment = Appointment.objects.create(
         participant=participant, timeslot=timeslot, experiment=experiment, leader=leader
