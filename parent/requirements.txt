@@ -4,13 +4,15 @@
 #
 #    pip-compile
 #
--e git+https://github.com/DH-IT-Portal-Development/django-shared-core@develop#egg=cdh-django-core
+-e git+https://github.com/DH-IT-Portal-Development/django-shared-core@v3.0.1#egg=cdh-django-core
+    # via -r requirements.in
+-e git+https://github.com/UiL-OTS-labs/django-vue3-tag@main#egg=django-vue3-tag
     # via -r requirements.in
 asgiref==3.5.2
     # via django
-certifi==2022.9.24
+certifi==2022.12.7
     # via requests
-charset-normalizer==2.1.1
+charset-normalizer==3.1.0
     # via requests
 closure==20191111
     # via cdh-django-core
@@ -26,7 +28,7 @@ django==4.0.8
     #   djangorestframework
 django-debug-toolbar==3.7.0
     # via -r requirements.in
-django-filter==22.1
+django-filter==23.1
     # via cdh-django-core
 django-simple-menu==2.1.0
     # via -r requirements.in
@@ -52,15 +54,17 @@ python-magic==0.4.27
     # via cdh-django-core
 pytz==2022.6
     # via djangorestframework
-requests==2.28.1
-    # via cdh-django-core
+requests==2.28.2
+    # via
+    #   -r requirements.in
+    #   cdh-django-core
 six==1.16.0
     # via pyscss
 sqlparse==0.4.3
     # via
     #   django
     #   django-debug-toolbar
-urllib3==1.26.13
+urllib3==1.26.15
     # via requests
 vbuild==0.8.1
     # via cdh-django-core

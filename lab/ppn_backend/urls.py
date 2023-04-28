@@ -33,6 +33,7 @@ urlpatterns = [
     path('cdhcore/', include('cdh.core.urls')),
     path('vue/', include('cdh.vue.urls')),
     path('impersonate/', include('impersonate.urls')),
+    path('survey/', include('survey_admin.urls')),
 ]
 
 admin.site.site_header = 'Babex BACKEND'

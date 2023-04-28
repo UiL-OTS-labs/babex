@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     # Django extensions
     'django_extensions',
+    'vue3_tag',
 
     # django-simple-menu
     'menu',
@@ -68,10 +69,12 @@ INSTALLED_APPS = [
 
     'mailauth',
     'signups',
+    'survey_admin',
 
     'django.contrib.admin',
     'django.forms',
 
+    'django_json_widget',
     # deprecated
     'leaders'
 ]
@@ -220,8 +223,6 @@ LANGUAGES = (
 TIME_ZONE = 'Europe/Amsterdam'
 
 USE_I18N = True
-
-USE_L10N = True
 
 USE_TZ = True
 

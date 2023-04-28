@@ -1,3 +1,5 @@
+import json
+
 from cdh.rest import client as rest
 from django.contrib import messages
 from django.http.response import JsonResponse
@@ -67,9 +69,13 @@ def home(request):
     # TODO: this is just an example of fetching participant data from the parent app
     ok, appointments = gateway(request, "/gateway/appointment/")
     if not ok:
-        messages.error(request, "error retreiving data")
+        messages.error(request, "error retreiving appointment data")
 
-    return render(request, "parent/home.html", dict(appointments=appointments))
+    ok, survey_invites = gateway(request, "/gateway/survey_invites/")
+    if not ok:
+        messages.error(request, "error retreiving survey data")
+
+    return render(request, "parent/home.html", dict(appointments=appointments, survey_invites=survey_invites))
 
 
 def status(request):
@@ -81,4 +87,38 @@ def status(request):
     except Exception:
         return JsonResponse(dict(ok=False))
 
+    return JsonResponse(dict(ok=True))
+
+
+@session_required
+def survey_view(request, invite_id):
+    ok, survey_response = gateway(request, f"/gateway/survey/{invite_id}/response/")
+    if ok and survey_response.get("completed") is not None:
+        messages.error(request, "Survey already completed")
+        return redirect("home")
+
+    ok, survey = gateway(request, f"/gateway/survey/{invite_id}")
+    if not ok:
+        messages.error(request, survey["detail"])
+        return redirect("home")
+
+    ok, survey_response = gateway(request, f"/gateway/survey/{invite_id}/response/")
+    if not ok:
+        messages.error(request, survey["detail"])
+        return redirect("home")
+
+    return render(request, "survey/view.html", dict(survey=survey, invite_id=invite_id, response=survey_response))
+
+
+@session_required
+def survey_response_view(request):
+    data = json.loads(request.body)
+    invite_id = data["invite"]
+    # TODO: refactor frontend code to avoid this hack
+    del data["invite"]
+
+    ok, _ = gateway(request, f"/gateway/survey/{invite_id}/response/", data=data)
+    if not ok:
+        messages.error(request, "error submitting data")
+        return JsonResponse(dict(ok=False))
     return JsonResponse(dict(ok=True))

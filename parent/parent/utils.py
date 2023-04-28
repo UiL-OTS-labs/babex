@@ -38,9 +38,9 @@ def gateway(
 
 def session_required(handler):
     # decorator function for limiting views to authenticated users
-    def delegate(request):
+    def delegate(request, *args, **kwargs):
         if "token" not in request.session:
             return redirect("mailauth:home")
-        return handler(request)
+        return handler(request, *args, **kwargs)
 
     return delegate

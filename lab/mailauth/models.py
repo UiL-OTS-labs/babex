@@ -33,6 +33,9 @@ class MailAuth(models.Model):
         )
         mail.send()
 
+    def get_link(self, redirect=None):
+        return settings.PARENT_URI + f"auth/{self.link_token}?redirect={redirect}"
+
 
 def create_mail_auth(
     expiry: datetime, email: Optional[str] = None, participant: Optional[Participant] = None

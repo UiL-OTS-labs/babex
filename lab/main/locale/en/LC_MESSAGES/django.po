@@ -295,3 +295,6 @@ msgstr "Lab managers"
 
 msgid "mainmenu:signups"
 msgstr "Signups"
+
+msgid "mainmenu:survey_admin"
+msgstr "Surveys"

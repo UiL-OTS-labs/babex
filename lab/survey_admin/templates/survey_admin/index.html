@@ -1,0 +1,81 @@
+{% extends 'base/babex_base.html' %}
+{% load datatables %}
+{% load get_field_name %}
+{% load i18n %}
+
+{% block html_head %}
+{{ block.super }}
+<script nonce="{{ request.csp_nonce }}">
+    $(function () {
+        $('.dt_custom').DataTable({
+            searching: false,
+            lengthChange: false,
+        });
+    });
+</script>
+{% endblock %}
+
+{% block pre-messages-content %}
+    <div class="uu-hero justify-content-between align-items-center">
+        <h1 class="h2">
+            {% trans 'survey_admin:home:header' %}
+        </h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <table class="dt_custom" width="100%" data-language="{% datatables_lang %}">
+            <thead>
+                <tr>
+                    <th>
+                        {% get_verbose_field_name 'survey_admin' 'SurveyDefinition' 'id' %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name 'survey_admin' 'SurveyDefinition' 'name' %}
+                    </th>
+                    <th data-priority="100">
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for survey in object_list %}
+                    <tr>
+                        <td>
+                            {{ survey.pk }}
+                        </td>
+                        <td>
+                            {{ survey.name }}
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button
+                                    class="btn icon-menu dropdown-toggle p-1"
+                                    type="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                ></button> {# Formatting is like this for a reason, namely whitespace #}
+
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="{% url 'survey_admin:preview' survey.pk %}" class="dropdown-item">
+                                            {% trans 'survey_admin:action:preview' %}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'survey_admin:invite' survey.pk %}" class="dropdown-item">
+                                            {% trans 'survey_admin:action:invite' %}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

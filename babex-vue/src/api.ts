@@ -1,4 +1,4 @@
-import {urls} from './urls';
+import {urls, parentUrls} from './urls';
 import type {Appointment, Closing, Call} from './types';
 
 function getCookie(name: string): string | null {
@@ -199,4 +199,14 @@ class BabexApi {
     }
 }
 
+
+// TODO: maybe move to a separate module
+class ParentApi {
+    protected client = new ApiClient();
+    survey = {
+        response: new GenericApiPart(this.client, parentUrls.survey.response),
+    }
+}
+
 export const babexApi = new BabexApi();
+export const parentApi = new ParentApi();

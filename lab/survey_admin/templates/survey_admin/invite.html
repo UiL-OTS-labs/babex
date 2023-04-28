@@ -1,0 +1,82 @@
+{% extends "base/babex_base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+{% load static %}
+
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <h1>
+            {% transformat 'survey_admin:invite:header' experiment.name %} - {{ survey.name }}
+        </h1>
+    </div>
+</div>
+
+<div class="uu-inner-container">
+    <form class="w-100" method="post">
+        <div>
+            <div class="col-12">
+                {% csrf_token %}
+                <table class="dt" width="100%" data-language="{% datatables_lang %}" data-responsive="">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>
+                                {% get_verbose_field_name "participants" "Participant" "name" %}
+                            </th>
+                            <th>
+                                {% get_verbose_field_name "participants" "Participant" "email" %}
+                            </th>
+                            <th>
+                                {% trans 'experiments:invite:last_call' %}
+                            </th>
+                            <th>
+                                {% trans 'experiments:invite:last_email' %}
+                            </th>
+                            <th>
+                                {% trans 'experiments:invite:actions' %}
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for participant in object_list %}
+                            <tr>
+                                <td>
+                                    <input class="checkbox" type="checkbox" name="participants" value="{{ participant.pk }}">
+                                </td>
+                                <td>
+                                    <!-- name -->
+                                    <a href="{% url 'participants:detail' participant.pk %}">
+                                        {{ participant.fullname }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <!-- email -->
+                                    {{ participant.email }}
+                                </td>
+                                <td>
+                                    <!-- last call -->
+                                    {{ participant.last_call.creation_date }}
+                                </td>
+                                <td>
+                                    <!-- last email -->
+
+                                </td>
+                                <td>
+                                    <!-- actions -->
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <button class="btn btn-primary">{% trans 'suvey_admin:invite:send' %}</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

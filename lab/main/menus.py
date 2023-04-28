@@ -67,6 +67,9 @@ if "datamanagement" in settings.INSTALLED_APPS:
         "main", MenuItem(_("mainmenu:datamanagement"), reverse("datamanagement:overview"), check=_user_is_authenticated)
     )
 
+Menu.add_item(
+    "main", MenuItem(_("mainmenu:survey_admin"), reverse("survey_admin:overview"), check=_user_is_authenticated)
+)
 
 Menu.add_item("footer", MenuItem(_("footermenu:login"), reverse("main:login"), check=_user_is_not_authenticated))
 

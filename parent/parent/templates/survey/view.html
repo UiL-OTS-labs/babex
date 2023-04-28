@@ -1,0 +1,13 @@
+{% extends 'vue/base.html' %}
+{% load vue3 %}
+
+{% block content %}
+<div class="uu-container">
+    Please complete the following survey:
+</div>
+<div class="uu-inner-container">
+    <div class="col-12">
+        {% vue babex.ParentSurveyView :definition=survey.content :invite_id=invite_id :response=response %}
+    </div>
+</div>
+{% endblock %}
