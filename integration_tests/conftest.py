@@ -137,7 +137,8 @@ def as_admin(sb, lab_app):
 
 def read_mail(address):
     messages = []
-    for path in glob.glob(EMAIL_FILE_PATH + "/*"):
+    for path in sorted(glob.glob(EMAIL_FILE_PATH + "/*")):
+        # filename includes timestamp, so sorting by name also sorts by time
         with open(path) as f:
             msg = email.message_from_file(f)
             if msg["To"] == address:
