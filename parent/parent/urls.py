@@ -9,7 +9,7 @@ from .views import (
     status,
     survey_response_view,
     survey_view,
-    cancel_appointment_view
+    cancel_appointment_view,
 )
 
 urlpatterns = [
