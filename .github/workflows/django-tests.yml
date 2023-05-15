@@ -109,7 +109,7 @@ jobs:
       - name: Integration tests
         run: |
           cd ${{ matrix.app }}/integration_tests
-          pytest
+          pytest --headless2
       - uses: actions/upload-artifact@v1
         if: failure()
         with:
@@ -166,7 +166,7 @@ jobs:
       - name: Integration tests
         run: |
           cd integration_tests
-          pytest
+          pytest --headless2
       - uses: actions/upload-artifact@v1
         if: failure()
         with:
