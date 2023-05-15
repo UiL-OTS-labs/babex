@@ -62,7 +62,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libldap2-dev libsasl2-dev libssl-dev gettext poppler-utils poppler-data libpoppler-cpp-dev
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
@@ -130,7 +130,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libldap2-dev libsasl2-dev libssl-dev gettext poppler-utils poppler-data libpoppler-cpp-dev
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
