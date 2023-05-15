@@ -166,7 +166,7 @@ jobs:
       - name: Integration tests
         run: |
           cd integration_tests
-          pytest # --headless2
+          pytest --headless2
       - uses: actions/upload-artifact@v1
         if: failure()
         with:
