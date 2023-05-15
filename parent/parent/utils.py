@@ -33,7 +33,9 @@ def gateway(
         headers=headers,
         json=data,
     )
-    return response.ok, response.json()
+    if len(response.text):
+        return response.ok, response.json()
+    return response.ok, dict()
 
 
 def session_required(handler):

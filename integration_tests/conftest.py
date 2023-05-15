@@ -22,6 +22,7 @@ class DjangoServerProcess:
         self.path = path
         self.port = port
         self.settings = f"{name}_settings"
+        self.db_conn = None
 
     def migrate(self):
         # delete existing db
@@ -81,6 +82,8 @@ class DjangoServerProcess:
             raise RuntimeError(f"could not start app in {self.path}")
 
     def shutdown(self):
+        if self.db_conn:
+            self.db_conn.close()
         self.process.terminate()
 
     @property
@@ -90,6 +93,8 @@ class DjangoServerProcess:
     def get_model(self, app_name: str, model: str):
         os.environ['DJANGO_SETTINGS_MODULE'] = self.settings
         django.setup()
+        from django.db import connection
+        self.db_conn = connection
         module = importlib.import_module(f'{app_name}.models')
         return module.__dict__[model]
 
@@ -132,7 +137,8 @@ def as_admin(sb, lab_app):
 
 def read_mail(address):
     messages = []
-    for path in glob.glob(EMAIL_FILE_PATH + "/*"):
+    for path in sorted(glob.glob(EMAIL_FILE_PATH + "/*")):
+        # filename includes timestamp, so sorting by name also sorts by time
         with open(path) as f:
             msg = email.message_from_file(f)
             if msg["To"] == address:

@@ -122,3 +122,13 @@ def survey_response_view(request):
         messages.error(request, "error submitting data")
         return JsonResponse(dict(ok=False))
     return JsonResponse(dict(ok=True))
+
+
+def cancel_appointment_view(request, appointment_id):
+    # TODO: handle appointment already canceled
+    ok, _ = gateway(request, f"/gateway/appointment/{appointment_id}/", method="delete")
+    if not ok:
+        messages.error(request, "error")
+        return JsonResponse(dict(ok=False))
+
+    return render(request, "appointment/canceled.html")

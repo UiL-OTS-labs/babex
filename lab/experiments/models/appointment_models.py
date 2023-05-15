@@ -1,12 +1,15 @@
-from django.core.validators import MinValueValidator, MaxValueValidator
-from django.db import models
-from django.utils.translation import gettext_lazy as _
-from django.utils import timezone
+from datetime import datetime
 
-from participants.models import Participant
-from .experiment_models import Experiment
-from main.models import User
 from cdh.core.utils import enumerate_to
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import models
+from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
+
+from main.models import User
+from participants.models import Participant
+
+from .experiment_models import Experiment
 
 
 class TimeSlot(models.Model):
@@ -92,3 +95,14 @@ class Appointment(models.Model):
     def location(self):
         # TODO: temporary workaround for missing locations
         return self.experiment.location.name if self.experiment.location else "Unknown"
+
+
+def make_appointment(experiment: Experiment, participant: Participant, leader: User, start: datetime, end: datetime):
+    if leader not in experiment.leaders.all():
+        raise ValueError(f'{leader} is not a leader in the experiment "{experiment}"')
+
+    timeslot = TimeSlot.objects.create(start=start, end=end, experiment=experiment, max_places=1)
+    appointment = Appointment.objects.create(
+        participant=participant, timeslot=timeslot, experiment=experiment, leader=leader
+    )
+    return appointment

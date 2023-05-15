@@ -13,6 +13,7 @@ from survey_admin.serializers import (
     SurveyInviteSerializer,
     SurveyResponseSerializer,
 )
+from utils.cancel_appointment import cancel_appointment
 
 
 class GatewayHome(views.APIView):
@@ -34,13 +35,16 @@ class HasParticipant(permissions.BasePermission):
         return request.participant is not None
 
 
-class AppointmentsView(generics.ListAPIView):
-    # TODO: this is just an example of providing participant data to the parent app
+class AppointmentViewSet(viewsets.ModelViewSet):
     permission_classes = [HasParticipant]
     serializer_class = AppointmentSerializer
 
     def get_queryset(self):
         return self.request.participant.appointments.all()
+
+    def perform_destroy(self, appointment):
+        # using DELETE to cancel appointment
+        cancel_appointment(appointment)
 
 
 class SurveyView(generics.RetrieveAPIView):
