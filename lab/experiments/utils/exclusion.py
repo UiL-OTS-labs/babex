@@ -58,9 +58,14 @@ def get_eligible_participants_for_experiment(experiment: Experiment, on_mailingl
     filtered = []
 
     for participant in participants:
-        participated_in = participant.appointments.exclude(outcome=Appointment.Outcome.NOSHOW).values_list(
-            "experiment", flat=True
+        appointments = participant.appointments.all()
+
+        # exclude appointments that didn't happen
+        appointments = appointments.exclude(outcome=Appointment.Outcome.NOSHOW).exclude(
+            outcome=Appointment.Outcome.CANCELED
         )
+
+        participated_in = appointments.values_list("experiment", flat=True)
 
         if experiment.pk in participated_in:
             # participant has/had an appointment for this experiment
