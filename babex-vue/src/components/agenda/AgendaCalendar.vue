@@ -90,10 +90,12 @@
         }
     };
 
+    // override built-in template with multiline support and styling for canceled appointments
     function eventRender(arg: EventContentArg) {
-        // override built-in template with multiline support
+        let className = arg.event.extendedProps.outcome && 'event-' + arg.event.extendedProps.outcome.toLowerCase();
+
         return {
-            html: `<div class="fc-event-main-frame"><div class="fc-event-time">${arg.timeText}</div>
+            html: `<div class="fc-event-main-frame ${className}"><div class="fc-event-time">${arg.timeText}</div>
               <div class="fc-event-title-container">
                 <div class="fc-event-title fc-sticky">${arg.event.title}</div>
               </div></div>
@@ -147,5 +149,9 @@
     .event-selected {
         background: #8ac4fd;
         border-color: #8ac4fd;
+    }
+
+    .event-canceled div, .event-canceled + div {
+        text-decoration: line-through;
     }
 </style>

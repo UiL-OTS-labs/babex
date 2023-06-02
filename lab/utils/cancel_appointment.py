@@ -15,7 +15,7 @@ def cancel_appointment(appointment: Appointment) -> None:
     _inform_leaders(appointment)
     _send_confirmation(appointment)
 
-    appointment.delete()
+    appointment.cancel()
 
 
 def _handle_late_comment(appointment: Appointment) -> None:
