@@ -4,6 +4,7 @@ from datetime import date, datetime, timedelta
 import pytest
 from django.core import mail
 
+from experiments.models import Appointment, DefaultCriteria, TimeSlot
 from main.models import User
 
 
@@ -126,3 +127,36 @@ def test_call_exclusion(sb, sample_experiment, sample_participant, sample_leader
     sb.click("button.icon-menu")
     sb.click("a:contains(Invite)")
     sb.assert_text_not_visible("Baby McBaby")
+
+
+def test_reschedule_participant(sb, sample_experiment, sample_participant, sample_leader, as_leader):
+    """it should be possible to make a new appointment with the same participant, if a previous appointment was canceled"""
+
+    sample_experiment.leaders.add(as_leader)
+
+    # create a test appointment
+    timeslot = TimeSlot.objects.create(
+        start=datetime.now() + timedelta(hours=24),
+        end=datetime.now() + timedelta(hours=25),
+        experiment=sample_experiment,
+        max_places=1,
+    )
+    appointment = Appointment.objects.create(
+        participant=sample_participant, experiment=sample_experiment, timeslot=timeslot, leader=sample_leader
+    )
+
+    # baby mcbaby shouldn't be available anymore
+    sb.click("a:contains(Experiments)")
+    sb.click("a:contains(Overview)")
+    sb.click("button.icon-menu")
+    sb.click("a:contains(Invite)")
+    sb.assert_text_not_visible("Baby McBaby")
+
+    appointment.cancel()
+
+    # baby mcbaby should be available again
+    sb.click("a:contains(Experiments)")
+    sb.click("a:contains(Overview)")
+    sb.click("button.icon-menu")
+    sb.click("a:contains(Invite)")
+    sb.assert_text_visible("Baby McBaby")

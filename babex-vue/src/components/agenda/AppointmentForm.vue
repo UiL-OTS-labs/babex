@@ -23,7 +23,7 @@
         outcome: props.event.extendedProps.outcome ?? undefined,
     });
 
-    async function remove() {
+    async function cancel() {
         babexApi.agenda.appointment.delete(props.event.id).then(() => {
             emit('done');
         });
@@ -53,6 +53,9 @@
         return props.event.start < (new Date());
     }
 
+    function isCanceled() {
+        return props.event.extendedProps.outcome == 'CANCELED';
+    }
 </script>
 
 <template>
@@ -90,8 +93,8 @@
     <div><button class="btn btn-primary save">Save</button></div>
   </form>
 
-  <div v-if="!isPast()">
-    <button class="btn btn-danger" @click="remove()">Remove</button>
+  <div v-if="!isPast() && !isCanceled()">
+    <button class="btn btn-danger" @click="cancel()">Cancel appointment</button>
   </div>
 </template>
 

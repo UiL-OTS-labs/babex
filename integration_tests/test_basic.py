@@ -27,6 +27,9 @@ def signup(sb, apps):
     sb.click('#id_data_consent')
     sb.click('input[type="submit"]')
 
+    # check that the form was submitted
+    assert 'signup/done' in sb.get_current_url()
+
     return email
 
 

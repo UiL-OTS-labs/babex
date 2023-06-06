@@ -60,6 +60,8 @@ class Appointment(models.Model):
         NOSHOW = "NOSHOW", _("experiments:appointment:outcome:noshow")
         # participant had to be excluded
         EXCLUDED = "EXCLUDED", _("experiments:appointment:outcome:excluded")
+        # canceled appointment
+        CANCELED = "CANCELED", _("experiments:appointment:outcome:canceled")
 
     participant = models.ForeignKey(Participant, on_delete=models.PROTECT, related_name="appointments")
     timeslot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE, related_name="appointments", null=True, blank=True)
@@ -68,6 +70,7 @@ class Appointment(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True)
     comment = models.CharField(max_length=100, default="", blank=True)
     outcome = models.CharField(max_length=20, choices=Outcome.choices, null=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
         self.timeslot.save()
@@ -95,6 +98,14 @@ class Appointment(models.Model):
     def location(self):
         # TODO: temporary workaround for missing locations
         return self.experiment.location.name if self.experiment.location else "Unknown"
+
+    def cancel(self):
+        self.outcome = Appointment.Outcome.CANCELED
+        self.save()
+
+    @property
+    def is_canceled(self):
+        return self.outcome == Appointment.Outcome.CANCELED
 
 
 def make_appointment(experiment: Experiment, participant: Participant, leader: User, start: datetime, end: datetime):
