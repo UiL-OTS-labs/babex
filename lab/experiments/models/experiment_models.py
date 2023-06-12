@@ -138,7 +138,7 @@ Met vriendelijke groet,<br/>
         User,
         verbose_name=_("experiment:attribute:leaders"),
         related_name="experiments",
-        blank=True,
+        blank=False,
         help_text=_("experiment:attribute:leaders:help_text"),
     )
 
