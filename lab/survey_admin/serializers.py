@@ -9,15 +9,16 @@ class SurveyDefinitionSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class SurveyResponseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SurveyResponse
+        fields = ["data", "created", "updated", "completed", "page"]
+
+
 class SurveyInviteSerializer(serializers.ModelSerializer):
     class Meta:
         model = SurveyInvite
         fields = "__all__"
 
     survey_name = serializers.CharField(source="survey.name")
-
-
-class SurveyResponseSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SurveyResponse
-        fields = ["data", "created", "updated", "completed", "page"]
+    response = SurveyResponseSerializer(read_only=True, source="surveyresponse")

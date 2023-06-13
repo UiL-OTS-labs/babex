@@ -1,3 +1,5 @@
+import datetime
+from operator import itemgetter
 import json
 
 from cdh.rest import client as rest
@@ -75,7 +77,21 @@ def home(request):
     if not ok:
         messages.error(request, "error retreiving survey data")
 
-    return render(request, "parent/home.html", dict(appointments=appointments, survey_invites=survey_invites))
+    for appointment in appointments:
+        appointment['start'] = datetime.datetime.fromisoformat(appointment['start'])
+    appointments = sorted(appointments, key=itemgetter('start'))
+
+    for invite in survey_invites:
+        if invite['response']:
+            if invite['response']['completed']:
+                invite['response']['completed'] = datetime.datetime.fromisoformat(invite['response']['completed'])
+            if invite['response']['updated']:
+                invite['response']['updated'] = datetime.datetime.fromisoformat(invite['response']['updated'])
+
+    appointments = sorted(appointments, key=itemgetter('start'))
+    import pdb; pdb.set_trace()
+    return render(request, "parent/home.html",
+                  dict(appointments=appointments, survey_invites=survey_invites))
 
 
 def status(request):

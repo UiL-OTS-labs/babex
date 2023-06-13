@@ -1,23 +1,67 @@
 {% extends 'base/base.html' %}
-{% block content %}
-<div class="uu-container">
-    Welcome to the parent app.
-</div>
+{% load i18n %}
 
-<div class="uu-container">
-    <div class="col-12">
-        <h3>appointments</h3>
-        {% for appointment in appointments %}
-            {{ appointment.experiment }}
-        {% endfor %}
+{% block content %}
+    <style>
+        .card.canceled div {
+            color: #aaa;
+            text-decoration: line-through;
+        }
+    </style>
+    <div class="uu-hero">
+        <h1>ILS Babylab</h1>
     </div>
-</div>
-<div class="uu-container">
-    <div class="col-12">
-        <h3>Surveys</h3>
-        {% for invitation in survey_invites %}
-            <a href="{% url 'survey' invitation.id %}">{{ invitation.survey_name }}</a>
-        {% endfor %}
+
+    <div class="uu-sidebar-container uu-sidebar-right">
+        <aside class="uu-sidebar" >
+            <p>Some general information and instructions</p>
+        </aside>
+        <div class="uu-sidebar-content" >
+            <section>
+                <h3>Appointments</h3>
+                {% for appointment in appointments %}
+                    <div class="card mt-3 {% if appointment.outcome == 'CANCELED' %} canceled {% endif %}">
+                        <div class="card-body">
+                            <h5 class="card-title"> {{ appointment.experiment }}
+                                {% if appointment.outcome == 'CANCELED' %}
+                                    - Canceled
+                                {% endif %}
+                            </h5>
+                            <div>{{ appointment.participant }}</div>
+                            <div>{{ appointment.start|date:'l M d, Y' }}, {{ appointment.start|time }}</div>
+                            <div>{{ appointment.leader }}</div>
+                            <div>Contact: {{ appointment.contact_phone }}</div>
+                            {% if appointment.outcome != 'CANCELED' %}
+                                <a class="btn btn-danger" href="{% url 'appointment.cancel' appointment.id %}">
+                                    Cancel appointment
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </section>
+            <section class="mt-5">
+                <h3>Surveys</h3>
+                {% for invitation in survey_invites %}
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ invitation.survey_name }}</h5>
+                            {% if invitation.response.completed %}
+                                {% trans 'Completed at: ' %} {{ invitation.response.completed | date }}, {{ invitation.response.completed | time }}
+                            {% else %}
+                                <a class="btn btn-primary" href="{% url 'survey' invitation.id %}">
+                                    {% if invitation.response.updated %}
+                                        {% trans 'Continue survey' %}
+                                    {% else %}
+                                        {% trans 'Start survey' %}
+                                    {% endif %}
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </section>
+
+        </div>
     </div>
-</div>
 {% endblock %}
