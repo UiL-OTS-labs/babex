@@ -1,6 +1,6 @@
 import datetime
-from operator import itemgetter
 import json
+from operator import itemgetter
 
 from cdh.rest import client as rest
 from django.contrib import messages
@@ -76,17 +76,6 @@ def home(request):
     ok, survey_invites = gateway(request, "/gateway/survey_invites/")
     if not ok:
         messages.error(request, "error retreiving survey data")
-
-    for appointment in appointments:
-        appointment["start"] = datetime.datetime.fromisoformat(appointment["start"])
-    appointments = sorted(appointments, key=itemgetter("start"))
-
-    for invite in survey_invites:
-        if invite["response"]:
-            if invite["response"]["completed"]:
-                invite["response"]["completed"] = datetime.datetime.fromisoformat(invite["response"]["completed"])
-            if invite["response"]["updated"]:
-                invite["response"]["updated"] = datetime.datetime.fromisoformat(invite["response"]["updated"])
 
     appointments = sorted(appointments, key=itemgetter("start"))
     return render(request, "parent/home.html", dict(appointments=appointments, survey_invites=survey_invites))
