@@ -78,20 +78,18 @@ def home(request):
         messages.error(request, "error retreiving survey data")
 
     for appointment in appointments:
-        appointment['start'] = datetime.datetime.fromisoformat(appointment['start'])
-    appointments = sorted(appointments, key=itemgetter('start'))
+        appointment["start"] = datetime.datetime.fromisoformat(appointment["start"])
+    appointments = sorted(appointments, key=itemgetter("start"))
 
     for invite in survey_invites:
-        if invite['response']:
-            if invite['response']['completed']:
-                invite['response']['completed'] = datetime.datetime.fromisoformat(invite['response']['completed'])
-            if invite['response']['updated']:
-                invite['response']['updated'] = datetime.datetime.fromisoformat(invite['response']['updated'])
+        if invite["response"]:
+            if invite["response"]["completed"]:
+                invite["response"]["completed"] = datetime.datetime.fromisoformat(invite["response"]["completed"])
+            if invite["response"]["updated"]:
+                invite["response"]["updated"] = datetime.datetime.fromisoformat(invite["response"]["updated"])
 
-    appointments = sorted(appointments, key=itemgetter('start'))
-    import pdb; pdb.set_trace()
-    return render(request, "parent/home.html",
-                  dict(appointments=appointments, survey_invites=survey_invites))
+    appointments = sorted(appointments, key=itemgetter("start"))
+    return render(request, "parent/home.html", dict(appointments=appointments, survey_invites=survey_invites))
 
 
 def status(request):
