@@ -16,7 +16,7 @@ class User(AbstractUser):
     last_name = None  # type: ignore
 
     name = models.CharField(_("user:attribute:name"), max_length=150)
-    phonenumber = models.TextField()
+    phonenumber = models.CharField(_("user:attribute:phonenumber"), max_length=100)
 
     def __audit_repr__(self):
         return "<User: {}>".format(self.email)
