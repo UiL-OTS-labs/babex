@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 class User(AbstractUser):
     is_ldap_account = models.BooleanField(
-        _('user:is_ldap_account'),
+        _("user:is_ldap_account"),
         default=False,
     )
 
@@ -29,7 +29,4 @@ class User(AbstractUser):
         return self.name
 
     def to_json(self):
-        return json.dumps({
-            'name': self.username,
-            'isStaff': self.is_staff
-        })
+        return json.dumps({"name": self.username, "isStaff": self.is_staff})
