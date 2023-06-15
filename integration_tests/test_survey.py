@@ -64,6 +64,23 @@ def test_survey_invite(sb, apps, as_admin, participant, survey, mailbox):
     sb.assert_text_visible("this is a test question")
 
 
+def test_survey_invite_in_overview(sb, apps, as_admin, participant, survey, login_as):
+    # send survey invite as admin
+    sb.switch_to_driver(as_admin)
+    sb.click("a:contains(Surveys)")
+    sb.click("button.dropdown-toggle")
+    sb.click("a:contains(invite)")
+    sb.click('input[type="checkbox"]')
+    sb.click("button:contains(send)")
+
+    # try to login via email
+    login_as(participant.email)
+
+    # check that login worked
+    sb.assert_text_visible('Appointments')
+    sb.assert_text_visible(survey.name)
+
+
 @pytest.fixture
 def survey_invite(participant, survey):
     invite = survey.surveyinvite_set.create(survey=survey, participant=participant)
