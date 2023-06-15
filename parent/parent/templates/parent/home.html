@@ -14,11 +14,11 @@
 
     <div class="uu-sidebar-container uu-sidebar-right">
         <aside class="uu-sidebar" >
-            <p>Some general information and instructions</p>
+            <p>{% trans 'Some general information and instructions' %}</p>
         </aside>
         <div class="uu-sidebar-content" >
             <section>
-                <h3>Appointments</h3>
+                <h3>{% trans 'Appointments' %}</h3>
                 {% for appointment in appointments %}
                     <div class="card mt-3 {% if appointment.outcome == 'CANCELED' %} canceled {% endif %}">
                         <div class="card-body">
@@ -38,10 +38,12 @@
                             {% endif %}
                         </div>
                     </div>
+                {% empty %}
+                    {% trans 'No appointments' %}
                 {% endfor %}
             </section>
             <section class="mt-5">
-                <h3>Surveys</h3>
+                <h3>{% trans 'Surveys' %}</h3>
                 {% for invitation in survey_invites %}
                     <div class="card mt-3">
                         <div class="card-body">
@@ -59,6 +61,8 @@
                             {% endif %}
                         </div>
                     </div>
+                {% empty %}
+                    {% trans 'No survey invitations' %}
                 {% endfor %}
             </section>
 
