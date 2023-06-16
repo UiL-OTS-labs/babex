@@ -5,6 +5,7 @@ import pytest
 import subprocess
 import email
 import glob
+import re
 import shutil
 
 import django
@@ -158,3 +159,35 @@ def mailbox():
 def _dj_autoclear_mailbox() -> None:
     # Override the `_dj_autoclear_mailbox` test fixture in `pytest_django`.
     pass
+
+
+@pytest.fixture
+def link_from_mail(mailbox):
+
+    def _delegate(email, subject=None):
+        for message in mailbox(email):
+            if subject is None or subject in message['subject']:
+                html = message.get_payload()[1].get_payload()
+                # find link in email
+                link = re.search(r'<a href="([^"]+)"', html).group(1)
+                return link
+
+    return _delegate
+
+
+@pytest.fixture
+def login_as(sb, apps, link_from_mail, mailbox):
+
+    def _delegate(email):
+        sb.switch_to_default_driver()
+        sb.open(apps.parent.url)
+        sb.type('input[name="email"]', email)
+        sb.click('button:contains("Send")')
+
+        # use login link from (second) email
+        if link := link_from_mail(email, 'login link'):
+            sb.open(link)
+            return True
+        return False
+
+    return _delegate

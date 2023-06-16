@@ -34,14 +34,12 @@ def signup(sb, apps):
     return email
 
 
-def test_parent_login(sb, apps, signup, as_admin, mailbox):
+def test_parent_login(sb, apps, signup, as_admin, link_from_mail, login_as):
     # confirm signup email
-    mail = mailbox(signup)
-    assert len(mail)
-    html = mail[0].get_payload()[1].get_payload()
-    # find link in email
-    link = re.search(r'<a href="([^"]+)"', html).group(1)
-    sb.open(link)
+    if link := link_from_mail(signup, 'validate'):
+        sb.open(link)
+    else:
+        pytest.fail('could not find validation link')
 
     sb.switch_to_driver(as_admin)
     # approve signup
@@ -51,38 +49,18 @@ def test_parent_login(sb, apps, signup, as_admin, mailbox):
     sb.click("button:contains(Approve)")
 
     # try to login via email
-    sb.switch_to_default_driver()
-    sb.open(apps.parent.url)
-    sb.type('input[name="email"]', signup)
-    sb.click('button:contains("Send")')
-
-    # use login link from (second) email
-    mail = mailbox(signup)
-    assert len(mail) == 2
-    html = mail[1].get_payload()[1].get_payload()
-    # find link in email
-    link = re.search(r'<a href="([^"]+)"', html).group(1)
-    sb.open(link)
+    login_as(signup)
 
     # check that login worked
-    sb.assert_text_visible('Welcome')
+    sb.assert_text_visible('Appointments')
 
 
-def test_parent_login_unapproved(signup, apps, sb, mailbox):
+def test_parent_login_unapproved(signup, apps, sb, link_from_mail, login_as):
     # confirm signup email
-    mail = mailbox(signup)
-    assert len(mail)
-    html = mail[0].get_payload()[1].get_payload()
-    # find link in email
-    link = re.search(r'<a href="([^"]+)"', html).group(1)
-    sb.open(link)
-
-    # try to login via email
-    sb.switch_to_default_driver()
-    sb.open(apps.parent.url)
-    sb.type('input[name="email"]', signup)
-    sb.click('button:contains("Send")')
+    if link := link_from_mail(signup, 'validate'):
+        sb.open(link)
+    else:
+        pytest.fail('could not find validation link')
 
     # make sure that no login email has arrived
-    mail = mailbox(signup)
-    assert len(mail) == 1
+    assert login_as(signup) is False

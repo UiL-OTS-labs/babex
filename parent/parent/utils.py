@@ -1,9 +1,22 @@
+import datetime
+import re
 from typing import Optional, Tuple
 
 import requests
 from django.conf import settings
 from django.http.request import HttpRequest
 from django.shortcuts import redirect
+
+
+def json_decoder(obj):
+    for key, value in obj.items():
+        if type(value) == str and re.search(r"\+\d\d:\d\d$", value):
+            try:
+                obj[key] = datetime.datetime.fromisoformat(value)
+            except:
+                # maybe it's not a date
+                pass
+    return obj
 
 
 def gateway(
@@ -34,7 +47,7 @@ def gateway(
         json=data,
     )
     if len(response.text):
-        return response.ok, response.json()
+        return response.ok, response.json(object_hook=json_decoder)
     return response.ok, dict()
 
 
