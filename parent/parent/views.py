@@ -68,7 +68,6 @@ def signup_verify(request, token):
 
 @session_required
 def home(request):
-    # TODO: this is just an example of fetching participant data from the parent app
     ok, appointments = gateway(request, "/gateway/appointment/")
     if not ok:
         messages.error(request, "error retreiving appointment data")
@@ -78,6 +77,9 @@ def home(request):
         messages.error(request, "error retreiving survey data")
 
     appointments = sorted(appointments, key=itemgetter("start"))
+    # only show future appointments
+    appointments = [a for a in appointments if a["start"].date() >= datetime.date.today()]
+
     return render(request, "parent/home.html", dict(appointments=appointments, survey_invites=survey_invites))
 
 
