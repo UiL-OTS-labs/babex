@@ -134,6 +134,13 @@ Met vriendelijke groet,<br/>
         help_text=_("experiment:attribute:excluded_experiments:help_text"),
     )
 
+    required_experiments = models.ManyToManyField(
+        "self",
+        verbose_name=_("experiment:attribute:required_experiments"),
+        blank=True,
+        help_text=_("experiment:attribute:required_experiments:help_text"),
+    )
+
     leaders = models.ManyToManyField(
         User,
         verbose_name=_("experiment:attribute:leaders"),

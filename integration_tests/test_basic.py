@@ -28,6 +28,7 @@ def signup(sb, apps):
     sb.click('input[type="submit"]')
 
     # check that the form was submitted
+    sb.assert_element_not_visible('input[type="submit"]')
     assert 'signup/done' in sb.get_current_url()
 
     return email

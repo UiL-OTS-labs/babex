@@ -71,6 +71,11 @@ def get_eligible_participants_for_experiment(experiment: Experiment, on_mailingl
             # participant has/had an appointment for this experiment
             continue
 
+        required = experiment.required_experiments.values_list("pk", flat=True)
+        if not set(required).issubset(participated_in):
+            # missing a required experiment
+            continue
+
         if check_default_criteria(participant, filters):
             continue
 
