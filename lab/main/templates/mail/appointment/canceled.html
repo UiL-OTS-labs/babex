@@ -1,0 +1,26 @@
+{% extends 'cdh.core/mail_template.html' %}
+
+{% block banner %}
+    Appointment canceled: {{ appointment.experiment.name }}
+{% endblock %}
+
+{% block content %}
+    <p>
+        Dear {{  appointment.participant.parent_name }},
+    </p>
+
+    <p>
+        This is a confirmation that you have canceled the following appointment:
+    </p>
+
+    <p>
+        Experiment: {{ appointment.experiment.name }}<br>
+        Date: {{ appointment.start|date }}<br>
+        Time: {{ appointment.start|time }}<br>
+    </p>
+
+    <p>
+        Regards,<br>
+        ILS Labs
+    </p>
+{% endblock %}
