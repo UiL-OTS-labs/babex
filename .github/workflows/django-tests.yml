@@ -96,7 +96,7 @@ jobs:
       - name: Run django tests
         run: |
           cd ${{ matrix.app }}
-          python manage.py test
+          make test
       - name: Download vue app
         uses: actions/download-artifact@v3
         with:
