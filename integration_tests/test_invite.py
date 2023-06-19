@@ -61,8 +61,8 @@ def test_cancel_appointment_from_email(apps, participant, mailbox, link_from_mai
         mail = mailbox(leader.email)
         assert len(mail) == 1
         text = mail[0].get_payload()[0].get_payload()
-        assert participant.name in text
-        assert 'unsubscribed' in text
+        assert participant.name not in text  # avoid exposing participant name in email
+        assert 'canceled' in text
     finally:
         # delete appointment so that the participant can be deleted as well
         appointment.delete()
