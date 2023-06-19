@@ -44,7 +44,7 @@ def _inform_leaders(appointment: Appointment) -> None:
     leaders = experiment.leaders.all()
 
     for leader in leaders:
-        subject = "ILS participant deregistered for experiment: {}".format(experiment.name)
+        subject = "ILS appointment canceled by parent"
         context = {
             "appointment": appointment,
             "leader": leader,
@@ -66,6 +66,6 @@ def _send_confirmation(appointment: Appointment) -> None:
         html_template="mail/appointment/canceled.html",
         context=context,
         to=[appointment.participant.email],
-        subject=_("utils:cancel_appointment:subject"),
+        subject="ILS appointment canceled",
     )
     mail.send()
