@@ -23,8 +23,11 @@ def signup(sb, apps):
     sb.type('#id_city', 'Townsville')
     sb.type('#id_phonenumber', '06412345678')
     sb.type('#id_email', email)
-    sb.click('#id_sex_0')
-    sb.click('#id_data_consent')
+
+    # use js_click instead of click, because if these are not visible (below view),
+    # then a normal click will sometimes not work
+    sb.js_click('#id_sex_0')
+    sb.js_click('#id_data_consent')
     sb.click('input[type="submit"]')
 
     # check that the form was submitted

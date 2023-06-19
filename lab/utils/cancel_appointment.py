@@ -1,7 +1,9 @@
 from datetime import datetime, timedelta
 
+from cdh.core.mail import TemplateEmail
 from cdh.core.utils.mail import send_template_email
 from django.conf import settings
+from django.utils.translation import gettext_lazy as _
 
 from comments.utils import add_system_comment
 from experiments.models import Appointment
@@ -39,32 +41,31 @@ def _handle_late_comment(appointment: Appointment) -> None:
 
 def _inform_leaders(appointment: Appointment) -> None:
     experiment = appointment.experiment
-
     leaders = experiment.leaders.all()
 
     for leader in leaders:
-        subject = "ILS participant deregistered for experiment: {}".format(experiment.name)
+        subject = "ILS appointment canceled by parent"
         context = {
-            "participant": appointment.participant,
-            "time_slot": appointment.timeslot,
-            "experiment": experiment,
+            "appointment": appointment,
             "leader": leader,
         }
 
-        send_template_email([leader.email], subject, "api/mail/participant_cancelled", context, "no-reply@uu.nl")
+        mail = TemplateEmail(
+            html_template="mail/appointment/canceled_leader.html",
+            context=context,
+            to=[leader.email],
+            subject=subject,
+        )
+        mail.send()
 
 
 def _send_confirmation(appointment: Appointment) -> None:
-    experiment = appointment.experiment
-    time_slot = appointment.timeslot
+    context = {"appointment": appointment}
 
-    subject = "ILS uitschrijven experiment: {}".format(experiment.name)
-    context = {
-        "participant": appointment.participant,
-        "time_slot": time_slot,
-        "experiment": experiment,
-        "other_time_link": get_register_link(experiment),
-        "home_link": settings.FRONTEND_URI,
-    }
-
-    send_template_email([appointment.participant.email], subject, "api/mail/cancelled_appointment", context)
+    mail = TemplateEmail(
+        html_template="mail/appointment/canceled.html",
+        context=context,
+        to=[appointment.participant.email],
+        subject="ILS appointment canceled",
+    )
+    mail.send()
