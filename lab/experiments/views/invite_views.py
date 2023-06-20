@@ -4,26 +4,25 @@ from django.core.exceptions import ObjectDoesNotExist, ViewDoesNotExist
 from django.utils.translation import gettext as _
 from django.views import generic
 
-from experiments.utils.invite import _parse_contents_html as parse_contents, \
-    get_invite_mail_content, mail_invite
-from .mixins import ExperimentObjectMixin
+from experiments.utils.invite import _parse_contents_html as parse_contents
+from experiments.utils.invite import get_invite_mail_content, mail_invite
+from main.auth.util import ExperimentLeaderMixin, RandomLeaderMixin
+
 from ..utils.exclusion import get_eligible_participants_for_experiment
+from .mixins import ExperimentObjectMixin
 
 
-class InviteParticipantsForExperimentView(braces.LoginRequiredMixin,
-                                          ExperimentObjectMixin,
-                                          generic.TemplateView):
-    template_name = 'experiments/invite.html'
+class InviteParticipantsForExperimentView(ExperimentLeaderMixin, ExperimentObjectMixin, generic.TemplateView):
+    template_name = "experiments/invite.html"
 
     def get_context_data(self, **kwargs):
-        context = super(InviteParticipantsForExperimentView,
-                        self).get_context_data(**kwargs)
+        context = super(InviteParticipantsForExperimentView, self).get_context_data(**kwargs)
 
-        context['object_list'] = self.get_object_list()
-        context['experiment'] = self.experiment
+        context["object_list"] = self.get_object_list()
+        context["experiment"] = self.experiment
 
         inviting_leader = self.request.user
-        context['invite_text'] = get_invite_mail_content(self.experiment, inviting_leader)
+        context["invite_text"] = get_invite_mail_content(self.experiment, inviting_leader)
 
         return context
 
@@ -32,9 +31,9 @@ class InviteParticipantsForExperimentView(braces.LoginRequiredMixin,
 
         for participant in particitants:
             try:
-                invite = participant.invitation_set.filter(
-                    experiment=self.experiment
-                ).order_by('-creation_date').first()
+                invite = (
+                    participant.invitation_set.filter(experiment=self.experiment).order_by("-creation_date").first()
+                )
                 participant.invite = invite
             except ObjectDoesNotExist:
                 participant.invite = None
@@ -46,25 +45,20 @@ class InviteParticipantsForExperimentView(braces.LoginRequiredMixin,
         failed = False
 
         try:
-            mail_invite(
-                data.getlist('participants[]'),
-                data.get('content'),
-                self.experiment
-            )
+            mail_invite(data.getlist("participants[]"), data.get("content"), self.experiment)
         except Exception:
             failed = True
 
         if failed:
-            error(request, _('experiments:message:invite_failure'))
+            error(request, _("experiments:message:invite_failure"))
         else:
-            success(request, _('experiments:message:invite_success'))
+            success(request, _("experiments:message:invite_success"))
 
         return self.get(request)
 
 
-class MailPreviewView(braces.LoginRequiredMixin, ExperimentObjectMixin,
-                      generic.TemplateView):
-    template_name = 'experiments/mail/invite.html'
+class MailPreviewView(RandomLeaderMixin, ExperimentObjectMixin, generic.TemplateView):
+    template_name = "experiments/mail/invite.html"
 
     def get(self, request, *args, **kwargs):
         raise ViewDoesNotExist
@@ -75,10 +69,10 @@ class MailPreviewView(braces.LoginRequiredMixin, ExperimentObjectMixin,
     def get_context_data(self, **kwargs):
         context = super(MailPreviewView, self).get_context_data(**kwargs)
 
-        context['experiment'] = self.experiment
-        context['preview'] = True
+        context["experiment"] = self.experiment
+        context["preview"] = True
 
-        content = self.request.POST.get('content')
-        context['content'] = parse_contents(content, self.experiment)
+        content = self.request.POST.get("content")
+        context["content"] = parse_contents(content, self.experiment)
 
         return context

@@ -13,6 +13,7 @@ from rest_framework.permissions import IsAuthenticated
 from experiments.models import Appointment, Experiment, make_appointment
 from experiments.models.invite_models import Call
 from experiments.serializers import AppointmentSerializer, ExperimentSerializer
+from main.auth.util import ExperimentLeaderMixin
 from main.models import User
 from main.serializers import UserSerializer
 from participants.models import Participant
@@ -20,7 +21,7 @@ from participants.serializers import ParticipantSerializer
 from utils.appointment_mail import send_appointment_mail
 
 
-class CallHomeView(braces.LoginRequiredMixin, TemplateView):
+class CallHomeView(ExperimentLeaderMixin, TemplateView):
     template_name = "call/home.html"
 
     def get_context_data(self, *args, **kwargs):

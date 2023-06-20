@@ -14,6 +14,9 @@ from ..models import User
 
 
 class BaseUserView(UserPassesTestMixin):
+    """Used as a base for the many views below and handles
+    all permission testing via test_func()"""
+
     is_admins = False  # to be overriden in as_view()
 
     def test_func(self):

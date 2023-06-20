@@ -13,7 +13,7 @@ from participants.models import Participant
 from signups.models import Signup
 
 
-class SignupListView(braces.LoginRequiredMixin, ListView):
+class SignupListView(braces.StaffuserRequiredMixin, ListView):
     queryset = Signup.objects.filter(status=Signup.Status.NEW, email_verified__isnull=False)
 
     def post(self, request, *args, **kwargs):
@@ -24,7 +24,7 @@ class SignupListView(braces.LoginRequiredMixin, ListView):
         return self.get(request, *args, **kwargs)
 
 
-class SignupDetailView(braces.LoginRequiredMixin, DetailView):
+class SignupDetailView(braces.StaffuserRequiredMixin, DetailView):
     queryset = Signup.objects.all()
 
     def post(self, request, *args, **kwargs):
