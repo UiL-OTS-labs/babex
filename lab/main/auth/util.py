@@ -29,7 +29,7 @@ class RandomLeaderMixin(UserPassesTestMixin):
 
     def test_func(self, user):
         # staff = lab managers, can access any experiment
-        return (user.is_leader() or user.is_staff) and self.test_leader(user)
+        return (user.is_leader or user.is_staff) and self.test_leader(user)
 
 
 class IsExperimentLeader(IsAuthenticated):
@@ -47,4 +47,4 @@ class IsRandomLeader(IsAuthenticated):
 
     def has_permission(self, request, view):
         # staff = lab managers, can access any experiment
-        return super().has_permission(request, view) and (self.request.user.is_staff or self.request.user.is_leader())
+        return super().has_permission(request, view) and (self.request.user.is_staff or self.request.user.is_leader)

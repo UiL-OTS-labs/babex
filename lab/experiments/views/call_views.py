@@ -8,12 +8,11 @@ from django.utils import timezone
 from django.utils.dateparse import parse_datetime
 from django.views.generic import TemplateView
 from rest_framework import generics, serializers, views
-from rest_framework.permissions import IsAuthenticated
 
 from experiments.models import Appointment, Experiment, make_appointment
 from experiments.models.invite_models import Call
 from experiments.serializers import AppointmentSerializer, ExperimentSerializer
-from main.auth.util import ExperimentLeaderMixin
+from main.auth.util import ExperimentLeaderMixin, IsExperimentLeader, IsRandomLeader
 from main.models import User
 from main.serializers import UserSerializer
 from participants.models import Participant
@@ -69,8 +68,12 @@ class CallHomeView(ExperimentLeaderMixin, TemplateView):
 
 
 class AppointmentConfirm(generics.CreateAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsExperimentLeader]
     serializer_class = AppointmentSerializer
+
+    @property
+    def experiment(self):
+        return Experiment.objects.get(pk=self.request.data["experiment"])
 
     def create(self, request, *args, **kwargs):
         experiment = Experiment.objects.get(pk=request.data["experiment"])
@@ -112,7 +115,11 @@ class AppointmentConfirm(generics.CreateAPIView):
 
 
 class AppointmentSendEmail(views.APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsExperimentLeader]
+
+    @property
+    def experiment(self):
+        return Appointment.objects.get(pk=self.kwargs["pk"]).experiment
 
     def get(self, request, *args, **kwargs):
         """Returns the email template that's relevant for a given appointment.
@@ -137,8 +144,12 @@ class CallSerializer(serializers.ModelSerializer):
 
 
 class UpdateCall(generics.UpdateAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsExperimentLeader]
     serializer_class = CallSerializer
+
+    @property
+    def experiment(self):
+        return Call.objects.get(pk=self.kwargs["pk"]).experiment
 
     def update(self, request, *args, **kwargs):
         call = Call.objects.get(pk=kwargs["pk"])
