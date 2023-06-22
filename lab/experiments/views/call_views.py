@@ -23,6 +23,10 @@ from utils.appointment_mail import send_appointment_mail
 class CallHomeView(ExperimentLeaderMixin, TemplateView):
     template_name = "call/home.html"
 
+    @property
+    def experiment(self):
+        return Experiment.objects.get(pk=self.kwargs["experiment"])
+
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
 

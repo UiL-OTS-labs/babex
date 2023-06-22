@@ -108,8 +108,8 @@ jobs:
           tar xzf babex-vue.tar.gz
       - name: Integration tests
         run: |
-          cd ${{ matrix.app }}/integration_tests
-          pytest --headless2
+          cd ${{ matrix.app }}
+          make testint
       - uses: actions/upload-artifact@v1
         if: failure()
         with:

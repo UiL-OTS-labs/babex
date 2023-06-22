@@ -97,24 +97,6 @@
                             {{ experiment.n_excluded_experiments|default_if_none:0 }}
                         </td>
                         <td>
-                            <a
-                                href="{% url 'experiments:switch_open' experiment.pk %}"
-                                class="icon-yesno"
-                                title="{% trans 'experiments:home:switch_open:title' %}"
-                            >
-                                {{ experiment.open|yesno:"," }}
-                            </a>
-                        </td>
-                        <td >
-                            <a
-                                href="{% url 'experiments:switch_public' experiment.pk %}"
-                                class="icon-yesno"
-                                title="{% trans 'experiments:home:switch_public:title' %}"
-                            >
-                                {{ experiment.public|yesno:"," }}
-                            </a>
-                        </td>
-                        <td>
                             {% include 'experiments/experiment_actions_snippit.html' %}
                         </td>
                     </tr>
