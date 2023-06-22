@@ -41,12 +41,6 @@ class ExperimentForm(TemplatedModelForm):
     def __init__(self, *args, **kwargs):
         super(ExperimentForm, self).__init__(*args, **kwargs)
 
-        self.fields["default_max_places"].widget.attrs.update(
-            {
-                "min": 1,
-            }
-        )
-
         self.fields["confirmation_email"].widget.preview_url = self.preview_url_confirmation()
         self.fields["invite_email"].widget.preview_url = self.preview_url_invite()
 

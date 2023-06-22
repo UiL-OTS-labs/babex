@@ -60,10 +60,6 @@ msgstr "Online"
 msgid "time_slot:attribute:datetime"
 msgstr "Tijd & Datum"
 
-#: experiments/models/appointment_models.py:22
-msgid "time_slot:attribute:max_places"
-msgstr "Aantal plekken"
-
 #: experiments/models/criteria_models.py:10
 msgid "default_criteria:attribute:multilingual:no"
 msgstr "Een"
@@ -207,17 +203,6 @@ msgstr ""
 "Indien 'op locatie' is gekozen, moeten participanten voor een tijdslot "
 "inschrijven. Als 'online' is gekozen, schrijven participanten alleen in voor "
 "een experiment."
-
-#: experiments/models/experiment_models.py:108
-msgid "experiment:attribute:default_max_places"
-msgstr "Standaard aantal plekken"
-
-#: experiments/models/experiment_models.py:112
-msgid "experiment:attribute:default_max_places:help_text"
-msgstr ""
-"Standaard aantal plekken in een timeslot. Dit kan later per slot veranderd "
-"worden. Als een experiment geen timeslots gebruikt, is dit het max aantal "
-"participanten voor dit experiment."
 
 #: experiments/models/experiment_models.py:117
 msgid "experiment:attribute:open"

@@ -140,7 +140,6 @@ def test_reschedule_participant(sb, sample_experiment, sample_participant, sampl
         start=datetime.now() + timedelta(hours=24),
         end=datetime.now() + timedelta(hours=25),
         experiment=sample_experiment,
-        max_places=1,
     )
     appointment = Appointment.objects.create(
         participant=sample_participant, experiment=sample_experiment, timeslot=timeslot, leader=sample_leader

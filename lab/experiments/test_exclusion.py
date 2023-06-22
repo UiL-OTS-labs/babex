@@ -14,7 +14,6 @@ def test_excluded_experiment(client, admin_user, sample_participant):
         start=datetime.now() + timedelta(hours=24),
         end=datetime.now() + timedelta(hours=25),
         experiment=experiment_1,
-        max_places=1,
     )
     sample_participant.appointments.create(experiment=experiment_1, leader=admin_user, timeslot=timeslot)
 
@@ -41,7 +40,6 @@ def test_required_experiment(client, admin_user, sample_participant):
         start=datetime.now() + timedelta(hours=24),
         end=datetime.now() + timedelta(hours=25),
         experiment=experiment_1,
-        max_places=1,
     )
     sample_participant.appointments.create(experiment=experiment_1, leader=admin_user, timeslot=timeslot)
 
@@ -63,14 +61,12 @@ def test_required_experiment_multiple(client, admin_user, sample_participant):
         start=datetime.now() + timedelta(hours=24),
         end=datetime.now() + timedelta(hours=25),
         experiment=experiment_1,
-        max_places=1,
     )
     sample_participant.appointments.create(experiment=experiment_1, leader=admin_user, timeslot=timeslot)
     timeslot = TimeSlot.objects.create(
         start=datetime.now() + timedelta(hours=48),
         end=datetime.now() + timedelta(hours=49),
         experiment=experiment_2,
-        max_places=1,
     )
     sample_participant.appointments.create(experiment=experiment_2, leader=admin_user, timeslot=timeslot)
 

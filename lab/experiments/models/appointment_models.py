@@ -1,9 +1,6 @@
 from datetime import datetime
 
-from cdh.core.utils import enumerate_to
-from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from main.models import User
@@ -21,29 +18,6 @@ class TimeSlot(models.Model):
     @property
     def datetime(self):
         return self.start  # temporarily keep compatability
-
-    max_places = models.PositiveSmallIntegerField(
-        _("time_slot:attribute:max_places"),
-        validators=[
-            MinValueValidator(1),
-            MaxValueValidator(10),
-        ],
-    )
-
-    @property
-    def places(self) -> list:
-        """Returns a list of places with a corresponding participant (if any)"""
-        return [
-            {"n": n, "appointment": appointment}
-            for n, appointment in enumerate_to(self.appointments.all(), self.max_places, 1)
-        ]
-
-    def has_free_places(self) -> bool:
-        return self.appointments.count() < self.max_places
-
-    @property
-    def free_places(self) -> int:
-        return self.max_places - self.appointments.count()
 
     def __str__(self):
         return "{}: {}".format(self.experiment.name, self.datetime)
@@ -112,7 +86,7 @@ def make_appointment(experiment: Experiment, participant: Participant, leader: U
     if leader not in experiment.leaders.all():
         raise ValueError(f'{leader} is not a leader in the experiment "{experiment}"')
 
-    timeslot = TimeSlot.objects.create(start=start, end=end, experiment=experiment, max_places=1)
+    timeslot = TimeSlot.objects.create(start=start, end=end, experiment=experiment)
     appointment = Appointment.objects.create(
         participant=participant, timeslot=timeslot, experiment=experiment, leader=leader
     )

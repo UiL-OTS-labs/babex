@@ -51,5 +51,4 @@ class ExperimentSerializer(serializers.ModelSerializer):
             "leaders",
             "excluded_experiments",
             "defaultcriteria",
-            "default_max_places",
         ]

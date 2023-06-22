@@ -106,15 +106,6 @@ Met vriendelijke groet,<br/>
         help_text=_("experiment:attribute:use_timeslots:help_text"),
     )
 
-    default_max_places = models.PositiveSmallIntegerField(
-        _("experiment:attribute:default_max_places"),
-        validators=[
-            MinValueValidator(1),
-        ],
-        help_text=_("experiment:attribute:default_max_places:help_text"),
-        default=1,
-    )
-
     open = models.BooleanField(
         _("experiment:attribute:open"),
         default=False,
@@ -160,46 +151,6 @@ Met vriendelijke groet,<br/>
         except Experiment.defaultcriteria.RelatedObjectDoesNotExist:
             self.defaultcriteria = DefaultCriteria.objects.create()
         super().save(*args, **kwargs)
-
-    def n_timeslot_places(self):
-        """Returns the sum of all timeslot places this experiment has.
-        Used for experiment index page. Used to be an aggregate method in
-        that view, but it turns out it was not playing well with the other
-        aggregates (it was taking those as a multiply number, due to weird
-        join behaviour).
-
-        This function is basically me giving up....
-        """
-
-        return sum([x.max_places for x in self.timeslot_set.all()])
-
-    def has_free_places(self):
-        """
-        Returns if this experiment is available for new participants. If
-        this experiment uses timeslots, it will return the same as
-        has_free_timeslots. Otherwise, it will check if the number of existing
-        appointments is lower than the number of maximum appointments.
-        :return:
-        """
-
-        if self.use_timeslots:
-            return self.has_free_timeslots()
-
-        return self.appointments.count() < self.default_max_places
-
-    def has_free_timeslots(self):
-        """
-        Returns if this experiment still has free timeslots available for
-        registering. If this experiment does not use timeslots, it will always
-        return False.
-        :return:
-        """
-
-        return (
-            self.timeslot_set.annotate(num_appointments=Count("appointments"))
-            .filter(datetime__gt=_get_dt_2_hours_ago(), max_places__gt=F("num_appointments"))
-            .exists()
-        )
 
     def __str__(self):
         return self.name
