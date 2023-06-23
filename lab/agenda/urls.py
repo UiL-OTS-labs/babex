@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from rest_framework.routers import DefaultRouter
 
 from .views import (
@@ -13,9 +13,9 @@ app_name = "agenda"
 
 urlpatterns = [
     path("", AgendaHome.as_view(), name="home"),
-    path("<str:date>/", AgendaHome.as_view(), name="agenda.date"),
     path("feed", AppointmentFeed.as_view(), name="feed"),
     path("admin/closings", ClosingsAdminView.as_view(), name="admin.closings"),
+    re_path(r"(?P<date>\d{4}-\d{2}-\d{2})/", AgendaHome.as_view(), name="agenda.date"),
 ]
 
 router = DefaultRouter()
