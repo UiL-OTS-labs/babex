@@ -22,9 +22,11 @@ class Signup(rest.Resource):
     name = rest.TextField()
     sex = rest.TextField()
     birth_date = rest.DateField()
+    birth_weight = rest.IntegerField()
+    pregnancy_weeks = rest.IntegerField()
+    pregnancy_days = rest.IntegerField()
 
     parent_name = rest.TextField()
-    city = rest.TextField()
     phonenumber = rest.TextField()
     phonenumber_alt = rest.TextField()
     email = rest.TextField()
@@ -33,8 +35,6 @@ class Signup(rest.Resource):
     newsletter = rest.BoolField()
 
     dyslexic_parent = rest.BoolField()
-    tos_parent = rest.BoolField()
-    speech_parent = rest.BoolField()
     multilingual = rest.BoolField()
 
     link_token = rest.TextField(null=True)

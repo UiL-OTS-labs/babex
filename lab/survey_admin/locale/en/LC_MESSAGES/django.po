@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-27 15:02+0100\n"
+"POT-Creation-Date: 2023-06-23 15:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,14 +17,59 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: survey_admin/templates/survey_admin/index.html:21
 msgid "survey_admin:home:header"
 msgstr "Surveys"
 
-#: survey_admin/templates/survey_admin/index.html:25
-msgid "survey_admin:home:create_survey"
+#: survey_admin/templates/survey_admin/index.html:64
+#, fuzzy
+#| msgid "survey_admin:preview:header"
+msgid "survey_admin:action:preview"
+msgstr "Preview"
+
+#: survey_admin/templates/survey_admin/index.html:69
+#, fuzzy
+#| msgid "survey_admin:home:header"
+msgid "survey_admin:action:invite"
+msgstr "Surveys"
+
+#: survey_admin/templates/survey_admin/invite.html:13
+#, fuzzy
+#| msgid "survey_admin:preview:header"
+msgid "survey_admin:invite:header"
+msgstr "Preview"
+
+#: survey_admin/templates/survey_admin/invite.html:34
+msgid "experiments:invite:last_call"
 msgstr ""
+
+#: survey_admin/templates/survey_admin/invite.html:37
+msgid "experiments:invite:last_email"
+msgstr ""
+
+#: survey_admin/templates/survey_admin/invite.html:40
+msgid "experiments:invite:actions"
+msgstr ""
+
+#: survey_admin/templates/survey_admin/invite.html:76
+#, fuzzy
+#| msgid "survey_admin:preview:header"
+msgid "suvey_admin:invite:send"
+msgstr "Preview"
 
 #: survey_admin/templates/survey_admin/preview.html:10
 msgid "survey_admin:preview:header"
 msgstr "Preview"
+
+#: survey_admin/views.py:60
+#, fuzzy
+#| msgid "survey_admin:home:header"
+msgid "survey_admin:message:invite_failure"
+msgstr "Surveys"
+
+#: survey_admin/views.py:63
+#, fuzzy
+#| msgid "survey_admin:home:header"
+msgid "survey_admin:message:invite_success"
+msgstr "Surveys"

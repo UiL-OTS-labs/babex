@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-12 11:12+0200\n"
+"POT-Creation-Date: 2023-06-23 15:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,19 +18,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: comments/models.py:18
+#: comments/models.py:17
 msgid "comment:attribute:participant"
 msgstr "Participant"
 
-#: comments/models.py:24
+#: comments/models.py:23
 msgid "comment:attribute:leader"
 msgstr "Added by"
 
-#: comments/models.py:29
+#: comments/models.py:28
 msgid "comment:attribute:comment"
 msgstr "Comment"
 
-#: comments/models.py:33 comments/models.py:40
+#: comments/models.py:32 comments/models.py:39
 msgid "comment:attribute:datetime"
 msgstr "Added on"
 
@@ -93,11 +93,11 @@ msgstr " "
 msgid "comments:globals:add_button"
 msgstr "Add"
 
-#: comments/views.py:29
+#: comments/views.py:18
 msgid "comments:messages:created"
 msgstr "Comment added!"
 
-#: comments/views.py:40
+#: comments/views.py:29
 msgid "comments:messages:deleted"
 msgstr "Delete deleted!"
 

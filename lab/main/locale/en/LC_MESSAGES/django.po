@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-20 10:28+0100\n"
+"POT-Creation-Date: 2023-06-23 15:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,81 +18,106 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: main/forms/user_forms.py:26 main/forms/user_forms.py:52
-#: main/forms/user_forms.py:83
-msgid "main:forms:error:no_supreme_admin"
+#: main/admin.py:11
+msgid "Personal info"
 msgstr ""
-"Disabling main admin status for this user will result in no main admins "
-"being set. Please make a different user main admin before disabling this "
-"user's main admin status."
+
+#: main/admin.py:13
+msgid "Permissions"
+msgstr ""
+
+#: main/admin.py:24
+msgid "Important dates"
+msgstr ""
 
 #: main/menus.py:26
 msgid "mainmenu:home"
 msgstr "Home"
 
-#: main/menus.py:32
+#: main/menus.py:29
 msgid "mainmenu:agenda"
 msgstr "Agenda"
 
-#: main/menus.py:38
+#: main/menus.py:32
 msgid "mainmenu:experiments:overview"
 msgstr "Overview"
 
-#: main/menus.py:40
+#: main/menus.py:33
 msgid "mainmenu:locations"
 msgstr "Locations"
 
-#: main/menus.py:42
+#: main/menus.py:34
 msgid "mainmenu:criteria"
 msgstr "Criteria"
 
-#: main/menus.py:46
+#: main/menus.py:38
 msgid "mainmenu:experiments"
 msgstr "Experiments"
 
-#: main/menus.py:54
+#: main/menus.py:43
 msgid "mainmenu:leaders"
 msgstr "Leaders"
 
-#: main/menus.py:57
+#: main/menus.py:44
 msgid "mainmenu:admins"
 msgstr "Lab managers"
 
-#: main/menus.py:62
+#: main/menus.py:47
 msgid "mainmenu:users"
 msgstr "Users"
 
-#: main/menus.py:70 main/menus.py:84
+#: main/menus.py:50 main/menus.py:56
 msgid "mainmenu:participants"
 msgstr "Participants"
 
-#: main/menus.py:95
-msgid "mainmenu:admin"
-msgstr "Admin"
+#: main/menus.py:51
+#, fuzzy
+#| msgid "mainmenu:admins"
+msgid "mainmenu:demographics"
+msgstr "Lab managers"
 
+#: main/menus.py:52
+msgid "mainmenu:signups"
+msgstr "Signups"
+
+#: main/menus.py:60
 msgid "mainmenu:admin:closings"
 msgstr "Closings"
 
-#: main/menus.py:102
+#: main/menus.py:62
+msgid "mainmenu:admin"
+msgstr "Admin"
+
+#: main/menus.py:67
 msgid "mainmenu:datamanagement"
 msgstr "Data management"
 
-#: main/menus.py:108
+#: main/menus.py:71
+msgid "mainmenu:survey_admin"
+msgstr "Surveys"
+
+#: main/menus.py:74
 msgid "footermenu:login"
 msgstr "Log in"
 
-#: main/menus.py:113 main/templates/base/babex_base.html:52
+#: main/menus.py:76 main/templates/base/babex_base.html:52
 #: main/templates/base/login_header.html:7
 msgid "main:globals:logout"
 msgstr "Log out"
 
-#: main/models.py:9
-msgid "user:is_supreme_admin"
-msgstr "Main admin"
-
-#: main/models.py:14
+#: main/models.py:10
 msgid "user:is_ldap_account"
 msgstr "Solis Account"
+
+#: main/models.py:18
+#, fuzzy
+#| msgid "users:home:name"
+msgid "user:attribute:name"
+msgstr "Name"
+
+#: main/models.py:19
+msgid "user:attribute:phonenumber"
+msgstr ""
 
 #: main/templates/base/babex_base.html:18
 #: main/templates/base/babex_base.html:19
@@ -184,57 +209,69 @@ msgstr "Delete account"
 msgid "users:delete:text"
 msgstr "Are you sure you want to delete the account '{}'?"
 
-#: main/templates/users/delete.html:22
+#: main/templates/users/delete.html:26
 msgid "global:delete:cancel"
 msgstr "Cancel"
 
-#: main/templates/users/delete.html:25
+#: main/templates/users/delete.html:29
 msgid "global:delete:confirm"
 msgstr "Confirm"
 
-#: main/templates/users/index.html:8 main/templates/users/index.html:35
+#: main/templates/users/index.html:8
 msgid "users:home:header"
 msgstr "Administrator accounts"
 
-#: main/templates/users/index.html:19
-msgid "users:home:create_user:local"
-msgstr "New non-Solis admin account"
+#: main/templates/users/index.html:15
+msgid "users:admins:header"
+msgstr "Lab managers"
 
-#: main/templates/users/index.html:21
-msgid "users:home:create_user"
+#: main/templates/users/index.html:20
+#, fuzzy
+#| msgid "users:home:create_user"
+msgid "users:home:create_admin"
 msgstr "New admin account"
 
-#: main/templates/users/index.html:29
-msgid "users:home:create_user:ldap"
+#: main/templates/users/index.html:23
+#, fuzzy
+#| msgid "users:home:create_user:ldap"
+msgid "users:home:create_admin:ldap"
 msgstr "New Solis admin account"
 
-#: main/templates/users/index.html:38
-msgid "users:home:info_text"
-msgstr ""
-"The main admin account is the one that will be used as the contact in the "
-"frontend. If there is more than one account flagged as the main admin, one "
-"will be selected pseudo-randomly. (So you probably want to make sure there "
-"is only one).<br/>"
+#: main/templates/users/index.html:30
+msgid "users:leaders:header"
+msgstr "Leaders"
 
-#: main/templates/users/index.html:51
+#: main/templates/users/index.html:35
+#, fuzzy
+#| msgid "users:home:create_user"
+msgid "users:home:create_leader"
+msgstr "New admin account"
+
+#: main/templates/users/index.html:38
+#, fuzzy
+#| msgid "users:home:create_user:ldap"
+msgid "users:home:create_leader:ldap"
+msgstr "New Solis admin account"
+
+#: main/templates/users/index.html:59
 msgid "users:home:name"
 msgstr "Name"
 
-#: main/templates/users/index.html:70
+#: main/templates/users/index.html:75
 msgid "users:home:actions"
 msgstr "Actions"
 
-#: main/templates/users/index.html:105 main/templates/users/index.html:113
-msgid "users:home:edit:title"
-msgstr "Edit account"
+#: main/templates/users/index.html:117 main/templates/users/index.html:127
+msgid "users:action:edit"
+msgstr "Edit"
 
-#: main/templates/users/index.html:120
-msgid "users:home:change_password:title"
+#: main/templates/users/index.html:136
+msgid "users:action:password"
 msgstr "Change password"
 
-#: main/templates/users/index.html:131
-msgid "users:home:delete:title"
-msgstr "Delete account"
+#: main/templates/users/index.html:150
+msgid "users:action:delete"
+msgstr "Delete"
 
 #: main/templates/users/update.html:9 main/templates/users/update.html:23
 msgid "users:update:header"
@@ -249,17 +286,45 @@ msgstr " "
 msgid "Empty list and '%(class_name)s.allow_empty' is False."
 msgstr ""
 
-#: main/views/users.py:37 main/views/users.py:47
+#: main/views/users.py:65 main/views/users.py:71
 msgid "users:message:updated"
 msgstr "Account updated!"
 
-#: main/views/users.py:57 main/views/users.py:67
+#: main/views/users.py:77 main/views/users.py:83
 msgid "users:message:created"
 msgstr "New account created!"
 
-#: main/views/users.py:84
+#: main/views/users.py:94
 msgid "users:message:changed_password"
 msgstr "Password changed!"
+
+#~ msgid "main:forms:error:no_supreme_admin"
+#~ msgstr ""
+#~ "Disabling main admin status for this user will result in no main admins "
+#~ "being set. Please make a different user main admin before disabling this "
+#~ "user's main admin status."
+
+#~ msgid "user:is_supreme_admin"
+#~ msgstr "Main admin"
+
+#~ msgid "users:home:create_user:local"
+#~ msgstr "New non-Solis admin account"
+
+#~ msgid "users:home:info_text"
+#~ msgstr ""
+#~ "The main admin account is the one that will be used as the contact in the "
+#~ "frontend. If there is more than one account flagged as the main admin, "
+#~ "one will be selected pseudo-randomly. (So you probably want to make sure "
+#~ "there is only one).<br/>"
+
+#~ msgid "users:home:edit:title"
+#~ msgstr "Edit account"
+
+#~ msgid "users:home:change_password:title"
+#~ msgstr "Change password"
+
+#~ msgid "users:home:delete:title"
+#~ msgstr "Delete account"
 
 #~ msgid "main:home:text"
 #~ msgstr ""
@@ -277,24 +342,3 @@ msgstr "Password changed!"
 
 #~ msgid "mainmenu:comments"
 #~ msgstr "Comments"
-
-msgid "users:action:edit"
-msgstr "Edit"
-
-msgid "users:action:password"
-msgstr "Change password"
-
-msgid "users:action:delete"
-msgstr "Delete"
-
-msgid "users:leaders:header"
-msgstr "Leaders"
-
-msgid "users:admins:header"
-msgstr "Lab managers"
-
-msgid "mainmenu:signups"
-msgstr "Signups"
-
-msgid "mainmenu:survey_admin"
-msgstr "Surveys"

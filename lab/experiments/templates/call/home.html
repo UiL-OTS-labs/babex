@@ -45,10 +45,6 @@
                 <section>
                     <table class="table">
                         <tr>
-                            <td width="40%"> {% get_verbose_field_name "participants" "Participant" "city" %} </td>
-                            <td width="60%"> {{ participant.city|default_if_none:'' }} </td>
-                        </tr>
-                        <tr>
                             <td> {% get_verbose_field_name "participants" "Participant" "created" %} </td>
                             <td> {{ participant.created|date:"Y-m-d" }} </td>
                         </tr>

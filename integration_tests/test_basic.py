@@ -19,14 +19,18 @@ def signup(sb, apps):
     email = f'parent{suffix}@localhost.local'
     sb.open(apps.parent.url + 'signup/')
     sb.type('#id_name', 'Test Baby')
+    sb.click('#id_sex_0')
+
+    sb.type('#id_birth_weight', '2200')
+    sb.type('#id_pregnancy_weeks', '3')
+    sb.type('#id_pregnancy_days', '1')
+
     sb.type('#id_parent_name', 'Test Parent')
-    sb.type('#id_city', 'Townsville')
     sb.type('#id_phonenumber', '06412345678')
     sb.type('#id_email', email)
 
     # use js_click instead of click, because if these are not visible (below view),
     # then a normal click will sometimes not work
-    sb.js_click('#id_sex_0')
     sb.js_click('#id_data_consent')
     sb.click('input[type="submit"]')
 
