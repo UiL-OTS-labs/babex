@@ -53,6 +53,7 @@
                     <li class="nav-item"><a href="#participant-appointments" class="nav-link">Appointments</a></li>
                     <li class="nav-item"><a href="#participant-appointments" class="nav-link">{% trans 'participants:detail:calls' %}</a></li>
                     <li class="nav-item"><a href="#participant-comments" class="nav-link">Comments</a></li>
+                    <li class="nav-item"><a href="#participant-surveys" class="nav-link">Surveys</a></li>
                 </ul>
             </div>
             </div>
@@ -198,6 +199,10 @@
 
         <section id="participant-comments">
             {% include 'participants/comments.html' %}
+        </section>
+
+        <section id="participant-surveys">
+            {% include 'participants/surveys.html' %}
         </section>
         </div>
     </div>

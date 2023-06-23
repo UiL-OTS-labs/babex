@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-22 09:58+0200\n"
+"POT-Creation-Date: 2023-06-23 12:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,47 +16,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: participants/forms.py:30
+#: participants/forms.py:32
 msgid "participants:multilingual:many"
 msgstr "Many"
 
-#: participants/forms.py:31
+#: participants/forms.py:33
 msgid "participants:multilingual:one"
 msgstr "One"
 
-#: participants/models.py:44
+#: participants/models.py:16
 msgid "participant:attribute:email"
 msgstr "E-mail address"
 
-#: participants/models.py:45
+#: participants/models.py:19
 msgid "participant:attribute:name"
 msgstr "Name"
 
-#: participants/models.py:46
+#: participants/models.py:24
 msgid "participant:attribute:language"
 msgstr "Language"
 
-#: participants/models.py:47
+#: participants/models.py:27
 msgid "participant:attribute:dyslexic_parent"
 msgstr "Dyslexic parent"
 
-#: participants/models.py:48
+#: participants/models.py:30
 msgid "participant:attribute:birth_date"
 msgstr "Birth date"
 
-#: participants/models.py:49
+#: participants/models.py:35
 msgid "participant:attribute:multilingual"
 msgstr "Multilingual"
 
-#: participants/models.py:50
+#: participants/models.py:40
 msgid "participant:attribute:phonenumber"
 msgstr "Phone number"
 
-#: participants/models.py:51
+#: participants/models.py:45
 msgid "participant:attribute:sex"
 msgstr "Sex"
 
-#: participants/models.py:52
+#: participants/models.py:50
 msgid "participant:attribute:email_subscription"
 msgstr "On mailing list"
 
@@ -72,62 +72,62 @@ msgstr "Gestation weeks"
 msgid "participant:attribute:pregnancy_days"
 msgstr "Gestation days"
 
-#: participants/models.py:56
+#: participants/models.py:57
 msgid "participant:attribute:phonenumber_alt"
 msgstr "Phone number (secondary)"
 
-#: participants/models.py:57
+#: participants/models.py:61
 msgid "participant:attribute:parent_name"
 msgstr "Parent name"
 
-#: participants/models.py:58
+#: participants/models.py:62
 msgid "participant:attribute:city"
 msgstr "City"
 
-#: participants/models.py:60
+#: participants/models.py:65
 msgid "participant:attribute:created"
 msgstr "Registered on"
 
-#: participants/models.py:69
+#: participants/models.py:70
 msgid "participant:attribute:capable"
 msgstr "Capable"
 
-#: participants/models.py:77 participants/models.py:107
+#: participants/models.py:79 participants/models.py:110
 msgid "participant:name:unknown"
 msgstr "name unknown"
 
-#: participants/models.py:88
+#: participants/models.py:90
 #: participants/templates/widgets/participant_sex_widget.html:22
 msgid "participant:attribute:sex:male"
 msgstr "Male"
 
-#: participants/models.py:89
+#: participants/models.py:91
 #: participants/templates/widgets/participant_sex_widget.html:28
 msgid "participant:attribute:sex:female"
 msgstr "Female"
 
-#: participants/models.py:90
+#: participants/models.py:92
 #: participants/templates/widgets/participant_sex_widget.html:40
 msgid "participant:attribute:sex:prefer_not_to_answer"
 msgstr "Preferred not to answer"
 
-#: participants/models.py:133
+#: participants/models.py:122
 msgid "participants:age:years"
 msgstr "years"
 
-#: participants/models.py:134
+#: participants/models.py:123
 msgid "participants:age:months"
 msgstr "months"
 
-#: participants/models.py:135
+#: participants/models.py:124
 msgid "participants:age:days"
 msgstr "days"
 
-#: participants/models.py:149
+#: participants/models.py:143
 msgid "secondary_email:attribute:email"
 msgstr "Secondary e-mail address"
 
-#: participants/models.py:167
+#: participants/models.py:160
 msgid "criterion_answer:attribute:answer"
 msgstr "Answer"
 
@@ -164,35 +164,71 @@ msgstr "Cancel"
 msgid "participants:delete:confirm"
 msgstr "Delete participant"
 
-#: participants/templates/participants/detail.html:9
+#: participants/templates/participants/demographics.html:10
+#: participants/templates/participants/index.html:9
+#: participants/templates/participants/index.html:16
+msgid "participants:home:header"
+msgstr "Participants"
+
+#: participants/templates/participants/demographics.html:17
+#, fuzzy
+#| msgid "participants:detail:header"
+msgid "participants:demographics:header"
+msgstr "Details of '{}'"
+
+#: participants/templates/participants/detail.html:10
 msgid "participants:detail:header"
 msgstr "Details of '{}'"
 
-#: participants/templates/participants/detail.html:72
+#: participants/templates/participants/detail.html:54
+#: participants/templates/participants/detail.html:163
+msgid "participants:detail:calls"
+msgstr "Calls"
+
+#: participants/templates/participants/detail.html:65
+#, fuzzy
+#| msgid "participants:detail:header"
+msgid "participants:detail:edit"
+msgstr "Details of '{}'"
+
+#: participants/templates/participants/detail.html:86
 msgid "participants:attribute:getational_age"
 msgstr "Gestational age"
 
-#: participants/templates/participants/detail.html:76
+#: participants/templates/participants/detail.html:90
 msgid "participants:attribute:age"
 msgstr "Age"
 
-#: participants/templates/participants/detail.html:85
-#: participants/templates/participants/detail.html:89
-#: participants/templates/participants/index.html:51
+#: participants/templates/participants/detail.html:99
+#: participants/templates/participants/detail.html:103
 msgid "yes,no"
 msgstr "yes,no"
 
-#: participants/templates/participants/detail.html:112
+#: participants/templates/participants/detail.html:126
+#: participants/templates/participants/detail.html:168
 msgid "participants:detail:experiments"
 msgstr "Experiment"
 
-#: participants/templates/participants/detail.html:115
+#: participants/templates/participants/detail.html:129
+#: participants/templates/participants/detail.html:171
 msgid "participants:detail:datetime"
 msgstr "Date & Time"
 
-#: participants/templates/participants/detail.html:118
-msgid "participants:detail:place"
-msgstr "Place"
+#: participants/templates/participants/detail.html:132
+msgid "participants:detail:appointment:location"
+msgstr "Location"
+
+#: participants/templates/participants/detail.html:135
+msgid "participants:detail:appointment:outcome"
+msgstr "Outcome"
+
+#: participants/templates/participants/detail.html:174
+msgid "participants:detail:calls:status"
+msgstr "Status"
+
+#: participants/templates/participants/detail.html:177
+msgid "participants:detail:calls:called_by"
+msgstr "Called by"
 
 #: participants/templates/participants/edit.html:8
 #: participants/templates/participants/edit.html:64
@@ -207,11 +243,6 @@ msgstr "<br/>"
 #: participants/templates/participants/specific_criteria.html:32
 msgid "participants:globals:save_button"
 msgstr "Save"
-
-#: participants/templates/participants/index.html:9
-#: participants/templates/participants/index.html:16
-msgid "participants:home:header"
-msgstr "Participants"
 
 #: participants/templates/participants/index.html:19
 msgid "participants:home:info_text"
@@ -259,15 +290,31 @@ msgstr "Specific criteria for '{}'"
 msgid "participants:specific_criteria:info_text"
 msgstr " "
 
+#: participants/templates/participants/surveys.html:7
+msgid "participants:detail:survey:name"
+msgstr "Name"
+
+#: participants/templates/participants/surveys.html:10
+msgid "participants:detail:survey:invited"
+msgstr "Invited"
+
+#: participants/templates/participants/surveys.html:13
+msgid "participants:detail:survey:updated"
+msgstr "Updated"
+
+#: participants/templates/participants/surveys.html:16
+msgid "participants:detail:survey:completed"
+msgstr "Completed"
+
 #: participants/templates/widgets/participant_language_widget.html:24
 msgid "Other"
 msgstr ""
 
-#: participants/views.py:54
+#: participants/views.py:52
 msgid "participants:messages:updated_participant"
 msgstr "Participant updated!"
 
-#: participants/views.py:108
+#: participants/views.py:76
 msgid "participants:messages:deleted_participant"
 msgstr "Participant deleted!"
 
@@ -297,18 +344,3 @@ msgstr "Participant deleted!"
 
 #~ msgid "participants:home:detail:title"
 #~ msgstr "View details"
-
-msgid "participants:detail:appointment:location"
-msgstr "Location"
-
-msgid "participants:detail:appointment:outcome"
-msgstr "Outcome"
-
-msgid "participants:detail:calls"
-msgstr "Calls"
-
-msgid "participants:detail:calls:status"
-msgstr "Status"
-
-msgid "participants:detail:calls:called_by"
-msgstr "Called by"
