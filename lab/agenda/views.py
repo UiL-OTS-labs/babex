@@ -30,7 +30,8 @@ class AgendaHome(generic.TemplateView, RandomLeaderMixin):
 
     def get_context_data(self, *args, **kwargs):
         locations = Location.objects.all()
-        return {"locations": [self._format_location(x) for x in locations]}
+
+        return dict(locations=[self._format_location(x) for x in locations], date=self.kwargs.get("date"))
 
 
 class ClosingPermission(permissions.BasePermission):

@@ -13,6 +13,7 @@ app_name = "agenda"
 
 urlpatterns = [
     path("", AgendaHome.as_view(), name="home"),
+    path("<str:date>/", AgendaHome.as_view(), name="agenda.date"),
     path("feed", AppointmentFeed.as_view(), name="feed"),
     path("admin/closings", ClosingsAdminView.as_view(), name="admin.closings"),
 ]
