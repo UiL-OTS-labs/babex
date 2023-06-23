@@ -54,7 +54,9 @@
     }
 
     onMounted(() => {
-        calendar.value?.calendar.getApi().changeView('timeGridDay', props.date);
+        if (props.date) {
+            calendar.value?.calendar.getApi().changeView('timeGridDay', props.date);
+        }
     })
 
 </script>
