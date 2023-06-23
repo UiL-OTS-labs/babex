@@ -49,7 +49,6 @@ def appointment_yesterday(db, sample_experiment, sample_leader, sample_participa
         start=midnight - timedelta(hours=13),
         end=midnight - timedelta(hours=12),
         experiment=sample_experiment,
-        max_places=1,
     )
     yield Appointment.objects.create(
         participant=sample_participant, experiment=sample_experiment, timeslot=timeslot, leader=sample_leader

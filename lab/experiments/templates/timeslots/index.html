@@ -111,11 +111,6 @@
                                     </td>
                                 {% endif %}
                                 <td>
-                                    {% if place.n == timeslot.max_places %}
-                                        <a href="{% url 'experiments:timeslots_delete' experiment.pk timeslot.pk %}" class="icon-delete">
-                                            
-                                        </a>
-                                    {% endif %}
                                     {% if place.appointment %}
                                         <a
                                             href="{% url 'experiments:unsubscribe' experiment.pk place.appointment.pk %}"
@@ -132,9 +127,6 @@
                                             
                                         </a>
                                     {% endif %}
-                                </td>
-                                <td class="text-center">
-                                    <input type="checkbox" class="timeslot_checkbox" name="timeslot_{{ timeslot.pk }}[]" value="{{ place.n }}" data-timeslot="{{ timeslot.pk }}" data-n="{{ place.n }}" data-participant="{{ place.participant.pk }}" data-last="{{ timeslot.max_places }}" id="{{ timeslot.pk }}-{{ place.n }}">
                                 </td>
                             </tr>
                         {% endfor %}

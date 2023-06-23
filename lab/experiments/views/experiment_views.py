@@ -91,15 +91,6 @@ class ExperimentDetailView(ExperimentLeaderMixin, generic.DetailView):
         context["progress"] = progress
         return context
 
-    def _get_timeslots(self):
-        timeslots = self.object.timeslot_set.all()
-        out = []
-
-        for timeslot in timeslots:  # Type: TimeSlot
-            out.append((timeslot.datetime, timeslot.free_places, timeslot.max_places - timeslot.free_places))
-
-        return out
-
 
 class ExperimentDeleteView(braces.SuperuserRequiredMixin, DeleteSuccessMessageMixin, generic.DeleteView):
     model = Experiment
