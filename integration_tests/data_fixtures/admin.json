@@ -6,6 +6,7 @@
 	    "username": "admin",
 	    "password": "pbkdf2_sha256$320000$6MdlmKwGohtOCZBqZC79IS$aJOxH9ajzELPMTwn7DW2+Q9lpPlSeVHiVuugl+4DAZM=",
 	    "is_superuser": true,
+	    "is_staff": true,
 	    "name": "Admin",
 	    "email": "admin@localhost.local"
 	}

@@ -1,15 +1,14 @@
 from django.urls import path
 
-from .views import CommentCreateView, CommentsDeleteView, CommentsHomeView
+from .views import CommentCreateView, CommentsDeleteView
 
-app_name = 'comments'
+app_name = "comments"
 
 urlpatterns = [
-    path('', CommentsHomeView.as_view(), name='home'),
-    path('<int:pk>/delete/', CommentsDeleteView.as_view(), name='delete'),
+    path("<int:pk>/delete/", CommentsDeleteView.as_view(), name="delete"),
     path(
-        'new/',
+        "new/",
         CommentCreateView.as_view(),
-        name='new',
+        name="new",
     ),
 ]

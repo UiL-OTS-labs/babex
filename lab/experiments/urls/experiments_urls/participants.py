@@ -1,31 +1,25 @@
 from django.urls import path
 
-from experiments.views import (ExperimentAppointmentsView,
-                               InviteParticipantsForExperimentView,
-                               MailPreviewView, RemindParticipantsView )
+from experiments.views import (
+    ExperimentAppointmentsView,
+    InviteParticipantsForExperimentView,
+    MailPreviewView,
+)
 
 urlpatterns = [
     path(
-        'participants/',
+        "participants/",
         ExperimentAppointmentsView.as_view(),
-        name='participants',
+        name="participants",
     ),
-
     path(
-        'participants/remind/',
-        RemindParticipantsView.as_view(),
-        name='remind_participants',
-    ),
-
-    path(
-        'invite/',
+        "invite/",
         InviteParticipantsForExperimentView.as_view(),
-        name='invite',
+        name="invite",
     ),
-
     path(
-        'invite/preview/',
+        "invite/preview/",
         MailPreviewView.as_view(),
-        name='mail_preview',
+        name="mail_preview",
     ),
 ]

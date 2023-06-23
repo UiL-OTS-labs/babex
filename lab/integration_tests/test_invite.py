@@ -9,6 +9,7 @@ from main.models import User
 
 
 def test_experiment_list(sb, sample_experiment, sample_participant, as_leader):
+    as_leader.experiments.add(sample_experiment)
     sb.click("a:contains(Experiments)")
     sb.click("a:contains(Overview)")
     sb.click("button.icon-menu")

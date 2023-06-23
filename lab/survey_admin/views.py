@@ -3,9 +3,10 @@ import logging
 from django.contrib.messages import error, success
 from django.utils.translation import gettext as _
 from django.views.generic import DetailView, ListView, TemplateView
-from rest_framework.permissions import IsAuthenticated
 
+from main.auth.util import IsRandomLeader
 from participants.models import Participant
+from participants.permissions import participants_visible_to_leader
 
 from .models import SurveyDefinition, SurveyInvite
 
@@ -25,7 +26,7 @@ class SurveyPreview(DetailView):
 
 
 class SurveyInviteParticipants(TemplateView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsRandomLeader]
     template_name = "survey_admin/invite.html"
 
     @property
@@ -40,7 +41,9 @@ class SurveyInviteParticipants(TemplateView):
 
     def get_participants(self):
         # TODO: exclude participants who already filled the survey?
-        return Participant.objects.exclude()
+        if self.request.user.is_staff:
+            return Participant.objects.all()
+        return participants_visible_to_leader(self.request.user)
 
     def post(self, request, *args, **kwargs):
         participant_ids = map(int, request.POST.getlist("participants"))

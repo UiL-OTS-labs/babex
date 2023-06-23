@@ -64,7 +64,6 @@ INSTALLED_APPS = [
     'participants',
     'comments',
     'auditlog',
-    'datamanagement',
     'agenda',
 
     'mailauth',

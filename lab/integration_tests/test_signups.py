@@ -27,7 +27,7 @@ def sample_signup(db):
     )
 
 
-def test_signup_approve(sb, sample_signup, live_server, as_leader):
+def test_signup_approve(sb, sample_signup, live_server, as_admin):
     sb.click("a:contains(Participants)")
     sb.click("a:contains(Signups)")
 
@@ -47,7 +47,7 @@ def test_signup_approve(sb, sample_signup, live_server, as_leader):
     sb.assert_text(sample_signup.name, "table")
 
 
-def test_signup_reject(sb, sample_signup, live_server, as_leader):
+def test_signup_reject(sb, sample_signup, live_server, as_admin):
     sb.click("a:contains(Participants)")
     sb.click("a:contains(Signups)")
 

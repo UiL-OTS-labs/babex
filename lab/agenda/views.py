@@ -8,6 +8,7 @@ from rest_framework.response import Response
 
 from experiments.models import Appointment, Location
 from experiments.serializers import AppointmentSerializer
+from main.auth.util import RandomLeaderMixin
 
 from .models import Closing, ClosingSerializer
 
@@ -21,17 +22,15 @@ class AppointmentFeed(generics.ListAPIView):
         return Appointment.objects.filter(timeslot__start__gte=from_date, timeslot__end__lt=to_date)
 
 
-@login_required
-def agenda_home(request):
-    locations = Location.objects.all()
+class AgendaHome(generic.TemplateView, RandomLeaderMixin):
+    template_name = "agenda/home.html"
 
-    def format_location(location):
+    def _format_location(self, location: Location):
         return dict(id=location.id, name=location.name)
 
-    context = dict()
-    context["locations"] = [format_location(x) for x in locations]
-
-    return render(request, "agenda/home.html", context)
+    def get_context_data(self, *args, **kwargs):
+        locations = Location.objects.all()
+        return {"locations": [self._format_location(x) for x in locations]}
 
 
 class ClosingPermission(permissions.BasePermission):
