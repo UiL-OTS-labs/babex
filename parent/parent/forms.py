@@ -97,10 +97,22 @@ class SignupForm(TemplatedForm):
         widget=BootstrapRadioSelect(),
     )
 
-    multilingual = forms.BooleanField(label=_("parent:forms:signup:multilingual"), required=False)
+    multilingual = forms.BooleanField(
+        label=_("parent:forms:signup:multilingual"),
+        required=False,
+        widget=BootstrapRadioSelect(choices=((True, _("Yes")), (False, _("No")))),
+    )
 
-    english_contact = forms.BooleanField(label=_("parent:forms:signup:english_contact"), required=False)
-    newsletter = forms.BooleanField(label=_("parent:forms:signup:newsletter"), required=False)
+    english_contact = forms.BooleanField(
+        label=_("parent:forms:signup:english_contact"),
+        required=False,
+        widget=BootstrapRadioSelect(choices=((True, _("Yes")), (False, _("No")))),
+    )
+    newsletter = forms.BooleanField(
+        label=_("parent:forms:signup:newsletter"),
+        required=False,
+        widget=BootstrapRadioSelect(choices=((True, _("Yes")), (False, _("No")))),
+    )
 
     # not saved anywhere, but it's a nice way to get a mandatory consent checkbox
     data_consent = forms.BooleanField(label=_("parent:forms:signup:data_consent"))
