@@ -25,6 +25,8 @@ def signup(sb, apps):
     sb.type('#id_pregnancy_weeks', '3')
     sb.type('#id_pregnancy_days', '1')
 
+    sb.click('#id_dyslexic_parent_3')
+
     sb.type('#id_parent_name', 'Test Parent')
     sb.type('#id_phonenumber', '06412345678')
     sb.type('#id_email', email)

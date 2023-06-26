@@ -49,6 +49,7 @@ class SignupView(FormView):
     def form_valid(self, form):
         # filter out blank fields
         fields = {key: value for key, value in form.cleaned_data.items() if value}
+        fields['pregnancy_weeks'], fields['pregnancy_days'] = fields['pregnancy_duration']
         signup = Signup(**fields)
         signup.put()
         return super().form_valid(form)
