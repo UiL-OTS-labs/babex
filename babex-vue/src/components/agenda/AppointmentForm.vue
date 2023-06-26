@@ -24,9 +24,11 @@
     });
 
     async function cancel() {
-        babexApi.agenda.appointment.delete(props.event.id).then(() => {
-            emit('done');
-        });
+        if (confirm('Are you sure?')) {
+            babexApi.agenda.appointment.delete(props.event.id).then(() => {
+                emit('done');
+            });
+        }
     }
 
     function onSubmit(event: Event) {
