@@ -21,6 +21,9 @@ def sample_signup(db):
         multilingual=True,
         status=Signup.Status.NEW,
         email_verified=timezone.now(),
+        birth_weight=2000,
+        pregnancy_weeks=40,
+        pregnancy_days=4,
     )
 
 
