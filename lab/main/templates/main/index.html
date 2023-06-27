@@ -25,13 +25,24 @@
             </ul>
             {% endif %}
 
+            {% if missing_outcome %}
+                <p>Please update the outcome of the following appointments:</p>
+                <ul>
+                    {% for appointment in missing_outcome %}
+                        <li>{{ appointment.timeslot.start | date }}:
+                            <a href="{% url 'agenda:agenda.date' appointment.timeslot.start.date %}">{{ appointment.participant.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
             {% if call_back %}
-            <p>You should call back these parents:</p>
-            <ul>
-                {% for participant in call_back %}
-                    <li><a href="{% url 'participants:detail' participant.pk %}">{{ participant.name }}</a></li>
-                {% endfor %}
-            </ul>
+                <p>You should call back these parents:</p>
+                <ul>
+                    {% for participant in call_back %}
+                        <li><a href="{% url 'participants:detail' participant.pk %}">{{ participant.name }}</a></li>
+                    {% endfor %}
+                </ul>
             {% endif %}
         </div>
     </div>

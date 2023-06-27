@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-23 15:09+0200\n"
+"POT-Creation-Date: 2023-06-27 11:51+0200\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,10 +18,52 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: experiments/email.py:8
-#, fuzzy, python-brace-format
+#: experiments/email.py:7
+#, fuzzy
 #| msgid "experiments:detail:appointments"
-msgid "experiments.email.appointmentconfirm.var.{name}"
+msgid "experiments.email.appointmentconfirm.var.baby"
+msgstr "Appointments"
+
+#: experiments/email.py:8
+#, fuzzy
+#| msgid "experiments:detail:appointments"
+msgid "experiments.email.appointmentconfirm.var.experiment_name"
+msgstr "Appointments"
+
+#: experiments/email.py:9
+#, fuzzy
+#| msgid "experiments:detail:appointments"
+msgid "experiments.email.appointmentconfirm.var.date"
+msgstr "Appointments"
+
+#: experiments/email.py:10
+#, fuzzy
+#| msgid "experiments:detail:appointments"
+msgid "experiments.email.appointmentconfirm.var.time"
+msgstr "Appointments"
+
+#: experiments/email.py:11
+#, fuzzy
+#| msgid "experiments:detail:appointments"
+msgid "experiments.email.appointmentconfirm.var.experiment_location"
+msgstr "Appointments"
+
+#: experiments/email.py:12
+#, fuzzy
+#| msgid "experiments:detail:appointments"
+msgid "experiments.email.appointmentconfirm.var.leader_name"
+msgstr "Appointments"
+
+#: experiments/email.py:13
+#, fuzzy
+#| msgid "experiments:detail:appointments"
+msgid "experiments.email.appointmentconfirm.var.leader_email"
+msgstr "Appointments"
+
+#: experiments/email.py:14
+#, fuzzy
+#| msgid "experiments:detail:appointments"
+msgid "experiments.email.appointmentconfirm.var.leader_phonenumber"
 msgstr "Appointments"
 
 #: experiments/forms/criteria_forms.py:94
@@ -66,10 +108,8 @@ msgstr "Online"
 
 #: experiments/models/appointment_models.py:15
 #: experiments/models/appointment_models.py:16
-#, fuzzy
-#| msgid "time_slot:attribute:datetime"
 msgid "time_slot:attribute:start"
-msgstr "Date & Time"
+msgstr "Start"
 
 #: experiments/models/appointment_models.py:32
 msgid "experiments:appointment:outcome:completed"
@@ -84,10 +124,8 @@ msgid "experiments:appointment:outcome:excluded"
 msgstr "Excluded"
 
 #: experiments/models/appointment_models.py:38
-#, fuzzy
-#| msgid "experiments:appointment:outcome:excluded"
 msgid "experiments:appointment:outcome:canceled"
-msgstr "Excluded"
+msgstr "Canceled"
 
 #: experiments/models/default_criteria_models.py:8
 msgid "default_criteria:attribute:multilingual:no"
@@ -950,100 +988,3 @@ msgstr "Successfully invited participants!"
 
 #~ msgid "experiments:message:sent_reminders"
 #~ msgstr "Sent reminders to {} participant(s)"
-
-#~ msgid "default_criteria:attribute:min_age"
-#~ msgstr "What should the lower bound of the participant's age be?"
-
-#~ msgid "default_criteria:attribute:max_age"
-#~ msgstr "What should the upper bound of the participant's age be?"
-
-#~ msgid "default_criteria:attribute:max_age:help_text"
-#~ msgstr "Set to -1 if this criterion doesn't matter"
-
-#~ msgid "experiment:attribute:confirmation_email:help_text"
-#~ msgstr ""
-#~ "There are several variables you can use:<br/><code>{experiment_name}</"
-#~ "code> The name of the experiment<br/><code>{experiment_location}</code> "
-#~ "The location of the experiment (if set)<br/><code>{participant_name}</"
-#~ "code> The name of the participant<br/><code>{date}</code> The date of the "
-#~ "chosen timeslot<br/><code>{time}</code> The time of the chosen "
-#~ "timeslot<br/><code>{leader_name}</code> The name of the leader<br/"
-#~ "><code>{leader_email}</code> The e-mail of the leader<br/"
-#~ "><code>{leader_phonenumber}</code> The phonenumber of the leader<br/"
-#~ "><code>{all_leaders_name_list}</code> A list of all leaders, nicely "
-#~ "formatted for humans<br/>"
-
-#~ msgid "experiment:attribute:additional_leaders"
-#~ msgstr "Additional leaders"
-
-#~ msgid "experiment:attribute:additional_leaders:help_text"
-#~ msgstr ""
-#~ "Any additional leaders for this experiment. They will be able to login "
-#~ "and see appointments, like the main leader. <br/>You can type in a name "
-#~ "to search through the list. Once selected, the leader should show up in "
-#~ "the field as a box."
-
-#~ msgid "experiments:detail:all_experiments"
-#~ msgstr "All experiments"
-
-#~ msgid "experiments:detail:info:participants_visible"
-#~ msgstr "Participants Visible"
-
-#~ msgid "experiments:participants:info_text"
-#~ msgstr " "
-
-#~ msgid "experiments:participants:place"
-#~ msgstr "WP"
-
-#~ msgid "experiments:participants:reminder"
-#~ msgstr "Reminder"
-
-#, fuzzy
-#~| msgid "experiments:participants:dyslexic"
-#~ msgid "experiments:participants:dyslexic_parent"
-#~ msgstr "Dysl. (Y/N)"
-
-#~ msgid "experiments:participants:language"
-#~ msgstr "Lang."
-
-#~ msgid "experiments:participants:multilingual"
-#~ msgstr "Multiple Lang. (one/many)"
-
-#~ msgid "experiments:participants:sex"
-#~ msgstr "Sex (M/F)"
-
-#~ msgid "many,one"
-#~ msgstr "many,one"
-
-#~ msgid "experiments:participants:send"
-#~ msgstr "Send"
-
-#~ msgid "experiments:invite:already_invited"
-#~ msgstr "Invited on"
-
-#~ msgid "experiments:invite:text:help"
-#~ msgstr ""
-#~ "The invite text has been generated from this experiment's invite mail "
-#~ "template. This template can be edited on the <a href=\"{}\">experiment "
-#~ "edit page</a>."
-
-#~ msgid "experiments:invite:preview_button"
-#~ msgstr "Preview"
-
-#~ msgid "experiments:invite:invite_button"
-#~ msgstr "Invite participants"
-
-#~ msgid "experiments:home:edit_timeslots:title"
-#~ msgstr "Edit timeslots"
-
-#~ msgid "experiments:home:edit_timeslots:title:disabled"
-#~ msgstr "This experiment does not use timeslots."
-
-#~ msgid "experiments:home:edit_default_criteria:title"
-#~ msgstr "Edit default criteria"
-
-#~ msgid "experiments:home:edit_specific_criteria:title"
-#~ msgstr "Edit specific criteria"
-
-#~ msgid "experiments:home:exclude_experiments:title"
-#~ msgstr "Exclude experiments"

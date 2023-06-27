@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-23 15:09+0200\n"
+"POT-Creation-Date: 2023-06-27 11:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,10 +71,8 @@ msgid "mainmenu:participants"
 msgstr "Participants"
 
 #: main/menus.py:51
-#, fuzzy
-#| msgid "mainmenu:admins"
 msgid "mainmenu:demographics"
-msgstr "Lab managers"
+msgstr "Demographics"
 
 #: main/menus.py:52
 msgid "mainmenu:signups"
@@ -110,8 +108,6 @@ msgid "user:is_ldap_account"
 msgstr "Solis Account"
 
 #: main/models.py:18
-#, fuzzy
-#| msgid "users:home:name"
 msgid "user:attribute:name"
 msgstr "Name"
 
@@ -226,32 +222,24 @@ msgid "users:admins:header"
 msgstr "Lab managers"
 
 #: main/templates/users/index.html:20
-#, fuzzy
-#| msgid "users:home:create_user"
 msgid "users:home:create_admin"
-msgstr "New admin account"
+msgstr "New lab manager account"
 
 #: main/templates/users/index.html:23
-#, fuzzy
-#| msgid "users:home:create_user:ldap"
 msgid "users:home:create_admin:ldap"
-msgstr "New Solis admin account"
+msgstr "New Solis lab manager account"
 
 #: main/templates/users/index.html:30
 msgid "users:leaders:header"
 msgstr "Leaders"
 
 #: main/templates/users/index.html:35
-#, fuzzy
-#| msgid "users:home:create_user"
 msgid "users:home:create_leader"
-msgstr "New admin account"
+msgstr "New leader account"
 
 #: main/templates/users/index.html:38
-#, fuzzy
-#| msgid "users:home:create_user:ldap"
 msgid "users:home:create_leader:ldap"
-msgstr "New Solis admin account"
+msgstr "New Solis leader account"
 
 #: main/templates/users/index.html:59
 msgid "users:home:name"

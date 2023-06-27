@@ -1,6 +1,7 @@
 <script lang="ts" setup>
     import {defineEmits, defineProps, ref} from 'vue';
     import {babexApi} from '../../api';
+    import { _ } from '@/util';
 
     import DateTimePicker from '../DateTimePicker.vue';
 
@@ -24,9 +25,11 @@
     });
 
     async function cancel() {
-        babexApi.agenda.appointment.delete(props.event.id).then(() => {
-            emit('done');
-        });
+        if (confirm(_('Are you sure?'))) {
+            babexApi.agenda.appointment.delete(props.event.id).then(() => {
+                emit('done');
+            });
+        }
     }
 
     function onSubmit(event: Event) {
