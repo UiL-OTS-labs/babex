@@ -25,4 +25,10 @@ function formatDateTime(date: Date): string {
     return formatter.format(date);
 }
 
-export {formatDate, formatTime, formatDateTime};
+
+function _(str: string): string {
+    // placeholder function for translation strings
+    return str;
+}
+
+export {formatDate, formatTime, formatDateTime, _};
