@@ -1,3 +1,5 @@
+import messages_en from '@/messages.en.json';
+import messages_nl from '@/messages.nl.json';
 
 function formatDate(date: Date): string {
     const options = {
@@ -26,9 +28,14 @@ function formatDateTime(date: Date): string {
 }
 
 
+/**
+ * Resolves translation messages via messages json.
+ * Expects window.currentLanguage to be defined.
+ */
 function _(str: string): string {
-    // placeholder function for translation strings
-    return str;
+    let messages = window.getLanguage() == 'nl' ? messages_nl: messages_en;
+    let m = messages as {[key: string]: string|null};
+    return m[str] ?? str;
 }
 
 export {formatDate, formatTime, formatDateTime, _};

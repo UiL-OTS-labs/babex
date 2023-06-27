@@ -1,4 +1,5 @@
 {% extends 'base/babex_base.html' %}
+{% load i18n %}
 {% load static %}
 {% load vue3 %}
 
@@ -19,6 +20,11 @@
     // pass information about current user to vue app
     function getUser() {
         return JSON.parse("{{ request.user.to_json|escapejs }}");
+    }
+
+    {% get_current_language as LANGUAGE_CODE %}
+    function getLanguage() {
+        return '{{ LANGUAGE_CODE|escapejs }}';
     }
 </script>
 {% endblock %}
