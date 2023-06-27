@@ -1,0 +1,36 @@
+{% load i18n %}
+<h2>Surveys</h2>
+<table class="dt_custom" width="100%">
+    <thead>
+        <tr>
+            <th width="40%">
+                {% trans 'participants:detail:survey:name' %}
+            </th>
+            <th>
+                {% trans 'participants:detail:survey:invited' %}
+            </th>
+            <th>
+                {% trans 'participants:detail:survey:updated' %}
+            </th>
+            <th>
+                {% trans 'participants:detail:survey:completed' %}
+            </th>
+        </tr>
+    </thead>
+    {% for invite in participant.survey_invites.all %}
+        <tr>
+            <td>
+                {{ invite.survey.name }}
+            </td>
+            <td>
+                {{ invite.created|date:"Y-m-d H:i" }}
+            </td>
+            <td>
+                {{ invite.surveyresponse.updated|date:"Y-m-d H:i" }}
+            </td>
+            <td>
+                {{ invite.surveyresponse.completed|date:"Y-m-d H:i" }}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
