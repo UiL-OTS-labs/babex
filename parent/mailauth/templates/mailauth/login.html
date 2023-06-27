@@ -1,13 +1,23 @@
 {% extends 'base/base.html' %}
+{% load i18n %}
 
 {% block content %}
-<div class="uu-container">
-    <div class="col-12" >
-        <h2>Login</h2>
-        <form method="post">
-            {% csrf_token %}
-            <input name="email"><button>Send</button>
-        </form>
+    <div class="uu-hero">
+        <h1>ILS Babylab</h1>
     </div>
-</div>
+    <div class="uu-container">
+        <div class="col-12" >
+            <h2>{% trans 'parent:mailauth:login:header' %}</h2>
+            <p>
+                {% trans 'parent:mailauth:login:intro' %}
+            </p>
+            <form method="post" class="uu-form">
+                {% csrf_token %}
+                {{ form }}
+                <div>
+                    <button class="btn btn-primary">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}

@@ -1,9 +1,13 @@
 {% extends 'base/base.html' %}
+{% load i18n %}
 
 {% block content %}
-<div class="uu-container">
-    <div class="col-12" >
-        Sent login link by mail
+    <div class="uu-hero">
+        <h1>ILS Babylab</h1>
     </div>
-</div>
+    <div class="uu-container">
+        <div class="col-12" >
+            {% trans 'parent:mailauth:sent' %}
+        </div>
+    </div>
 {% endblock %}

@@ -67,7 +67,7 @@ def signup_verify(request, token):
 
 
 @session_required
-def home(request):
+def overview(request):
     ok, appointments = gateway(request, "/gateway/appointment/")
     if not ok:
         messages.error(request, "error retreiving appointment data")
@@ -80,7 +80,7 @@ def home(request):
     # only show future appointments
     appointments = [a for a in appointments if a["start"].date() >= datetime.date.today()]
 
-    return render(request, "parent/home.html", dict(appointments=appointments, survey_invites=survey_invites))
+    return render(request, "parent/overview.html", dict(appointments=appointments, survey_invites=survey_invites))
 
 
 def status(request):
@@ -137,3 +137,7 @@ def cancel_appointment_view(request, appointment_id):
         return JsonResponse(dict(ok=False))
 
     return render(request, "appointment/canceled.html")
+
+
+def home(request):
+    return render(request, 'parent/home.html')
