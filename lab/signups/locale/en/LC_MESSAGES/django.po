@@ -28,7 +28,7 @@ msgstr "Pregnancy weeks"
 
 #: signups/models.py:28
 msgid "participant:attribute:pregnancy_days"
-msgstr ""Pregnancy days
+msgstr "Pregnancy days"
 
 #: signups/models.py:31
 msgid "signups:stats:new"
