@@ -15,7 +15,7 @@ def collect_messages(language, output_path):
     except FileNotFoundError:
         existing = {}
 
-    i18n_re = re.compile(r'''_\(['"](.+?)['"]\)''')
+    i18n_re = re.compile(r'_\([\'"](.+?)[\'"]\)')
 
     with open(output_path, 'w') as out:
         p = partial(print, file=out)
@@ -24,7 +24,10 @@ def collect_messages(language, output_path):
             for idx, line in enumerate(open(f)):
                 results = i18n_re.findall(line)
                 for result in results:
+                    # this is a silly trick to get around the fact that JSON doesn't officially support comments
+                    # also the reason why json.dump isn't being used
                     p(f'"//": "{f}:{idx}",')
+
                     m = existing.get(result)
                     if m is None:
                         p(f'"{result}": null,')
