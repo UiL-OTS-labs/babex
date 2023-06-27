@@ -22,7 +22,7 @@ class AppointmentFeed(generics.ListAPIView):
         return Appointment.objects.filter(timeslot__start__gte=from_date, timeslot__end__lt=to_date)
 
 
-class AgendaHome(generic.TemplateView, RandomLeaderMixin):
+class AgendaHome(RandomLeaderMixin, generic.TemplateView):
     template_name = "agenda/home.html"
 
     def _format_location(self, location: Location):

@@ -110,7 +110,7 @@ class ParticipantSpecificCriteriaUpdateView(braces.StaffuserRequiredMixin, FormS
         return Participant.objects.get(pk=participant_pk)
 
 
-class ParticipantsDemographicsView(generic.TemplateView, braces.StaffuserRequiredMixin):
+class ParticipantsDemographicsView(braces.StaffuserRequiredMixin, generic.TemplateView):
 
     template_name = "participants/demographics.html"
 

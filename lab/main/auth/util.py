@@ -15,6 +15,9 @@ class ExperimentLeaderMixin(UserPassesTestMixin):
         return True
 
     def test_func(self, user):
+        if not user.is_authenticated:
+            return False
+        # staff = lab managers, can access any experiment
         return user.is_staff or self.experiment in user.experiments.all()
 
 
@@ -28,6 +31,8 @@ class RandomLeaderMixin(UserPassesTestMixin):
         return True
 
     def test_func(self, user):
+        if not user.is_authenticated:
+            return False
         # staff = lab managers, can access any experiment
         return (user.is_leader or user.is_staff) and self.test_leader(user)
 
