@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-27 13:33+0100\n"
+"POT-Creation-Date: 2023-06-27 11:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,15 +18,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: signups/models.py:26
+#: signups/models.py:30
 msgid "signups:stats:new"
 msgstr ""
 
-#: signups/models.py:27
+#: signups/models.py:31
 msgid "signups:stats:approved"
 msgstr "Approved"
 
-#: signups/models.py:28
+#: signups/models.py:32
 msgid "signups:stats:rejected"
 msgstr "Rejected"
 
@@ -54,22 +54,22 @@ msgstr "Signups"
 msgid "signups:list:intro"
 msgstr ""
 
-#: signups/templates/signups/signup_list.html:49
+#: signups/templates/signups/signup_list.html:55
 msgid "signups:list:detail"
 msgstr "details"
 
-#: signups/templates/signups/signup_list.html:56
+#: signups/templates/signups/signup_list.html:62
 msgid "signups:list:remove"
 msgstr "Remove"
 
-#: signups/templates/signups/signup_list.html:59
+#: signups/templates/signups/signup_list.html:65
 msgid "signups:list:empty"
 msgstr "No signups waiting for approval"
 
-#: signups/views.py:35
+#: signups/views.py:38
 msgid "signups:messages:approved"
 msgstr "Approved"
 
-#: signups/views.py:38
+#: signups/views.py:41
 msgid "signups:messages:rejected"
 msgstr "Rejected"

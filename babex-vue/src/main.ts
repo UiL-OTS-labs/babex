@@ -4,6 +4,7 @@ import AgendaHome from './components/agenda/AgendaHome.vue'
 import CallHome from './components/invite/CallHome.vue'
 import SurveyView from './components/survey/SurveyView.vue'
 import ParentSurveyView from './components/survey/ParentSurveyView.vue'
+import CancelAppointment from './components/parent/CancelAppointment.vue'
 import * as Toaster from './toaster'
 
 
@@ -20,7 +21,8 @@ Object.defineProperty(window, 'babex', {
         CallHome,
 
         SurveyView,
-        ParentSurveyView
+        ParentSurveyView,
+        CancelAppointment
     }
 });
 

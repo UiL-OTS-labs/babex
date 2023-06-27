@@ -2,13 +2,14 @@
     import AgendaActions from './AgendaActions.vue';
     import AgendaCalendar from './AgendaCalendar.vue';
     import {ActionContext, Location} from '@/types';
-    import {defineProps, ref} from 'vue';
+    import {defineProps, onMounted, ref} from 'vue';
     import { DateSelectArg, EventClickArg } from '@fullcalendar/common';
 
     const calendar = ref<typeof AgendaCalendar|null>(null);
 
     const props = defineProps<{
         locations: Location[],
+        date?: string, // when specified, focus the agenda on yyyy-mm-dd
     }>();
 
     const actionContext = ref<ActionContext>({});
@@ -51,6 +52,13 @@
         calendar.value?.refresh();
         actionContext.value = {};
     }
+
+    onMounted(() => {
+        if (props.date) {
+            calendar.value?.calendar.getApi().changeView('timeGridDay', props.date);
+        }
+    })
+
 </script>
 
 <template>

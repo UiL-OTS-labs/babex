@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-23 12:07+0200\n"
+"POT-Creation-Date: 2023-06-27 11:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -180,53 +180,50 @@ msgstr "Details of '{}'"
 msgid "participants:detail:header"
 msgstr "Details of '{}'"
 
-#: participants/templates/participants/detail.html:54
-#: participants/templates/participants/detail.html:163
+#: participants/templates/participants/detail.html:162
 msgid "participants:detail:calls"
 msgstr "Calls"
 
-#: participants/templates/participants/detail.html:65
-#, fuzzy
-#| msgid "participants:detail:header"
+#: participants/templates/participants/detail.html:64
 msgid "participants:detail:edit"
-msgstr "Details of '{}'"
+msgstr "Edit"
 
-#: participants/templates/participants/detail.html:86
+#: participants/templates/participants/detail.html:85
 msgid "participants:attribute:getational_age"
 msgstr "Gestational age"
 
-#: participants/templates/participants/detail.html:90
+#: participants/templates/participants/detail.html:89
 msgid "participants:attribute:age"
 msgstr "Age"
 
-#: participants/templates/participants/detail.html:99
-#: participants/templates/participants/detail.html:103
+#: participants/templates/participants/detail.html:98
+#: participants/templates/participants/detail.html:102
 msgid "yes,no"
 msgstr "yes,no"
 
-#: participants/templates/participants/detail.html:126
-#: participants/templates/participants/detail.html:168
+#: participants/templates/participants/detail.html:125
+#: participants/templates/participants/detail.html:167
 msgid "participants:detail:experiments"
 msgstr "Experiment"
 
-#: participants/templates/participants/detail.html:129
-#: participants/templates/participants/detail.html:171
+#: participants/templates/participants/detail.html:128
+#: participants/templates/participants/detail.html:170
 msgid "participants:detail:datetime"
 msgstr "Date & Time"
 
-#: participants/templates/participants/detail.html:132
+#: participants/templates/participants/detail.html:131
 msgid "participants:detail:appointment:location"
 msgstr "Location"
 
-#: participants/templates/participants/detail.html:135
+#: participants/templates/participants/detail.html:134
 msgid "participants:detail:appointment:outcome"
 msgstr "Outcome"
 
-#: participants/templates/participants/detail.html:174
+#: participants/templates/participants/detail.html:173
 msgid "participants:detail:calls:status"
 msgstr "Status"
 
-#: participants/templates/participants/detail.html:177
+#: participants/templates/participants/detail.html:176
 msgid "participants:detail:calls:called_by"
 msgstr "Called by"
 
