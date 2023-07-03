@@ -1,5 +1,5 @@
 from django.utils import timezone
-from rest_framework import generics, mixins, permissions, status, views, viewsets
+from rest_framework import generics, mixins, permissions, views, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import APIException
 from rest_framework.response import Response
@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from experiments.serializers import AppointmentSerializer
 from signups.models import Signup
 from signups.serializers import SignupSerializer
-from survey_admin.models import SurveyDefinition, SurveyInvite, SurveyResponse
+from survey_admin.models import SurveyDefinition, SurveyResponse
 from survey_admin.serializers import (
     SurveyDefinitionSerializer,
     SurveyInviteSerializer,

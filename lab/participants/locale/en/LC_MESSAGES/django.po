@@ -80,10 +80,6 @@ msgstr "Phone number (secondary)"
 msgid "participant:attribute:parent_name"
 msgstr "Parent name"
 
-#: participants/models.py:62
-msgid "participant:attribute:city"
-msgstr "City"
-
 #: participants/models.py:65
 msgid "participant:attribute:created"
 msgstr "Registered on"

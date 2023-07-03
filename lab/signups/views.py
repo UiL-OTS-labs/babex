@@ -52,7 +52,6 @@ def approve_signup(signup: Signup):
         email=signup.email,
         phonenumber=signup.phonenumber,
         phonenumber_alt=signup.phonenumber_alt,
-        city=signup.city,
         email_subscription=signup.newsletter,
         dyslexic_parent=signup.dyslexic_parent,
         multilingual=signup.multilingual,
