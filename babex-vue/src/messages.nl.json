@@ -1,0 +1,29 @@
+{
+
+"//": "src/components/agenda/AppointmentForm.vue:27",
+"Are you sure?": null,
+"//": "src/components/agenda/AppointmentForm.vue:64",
+"Participant:": null,
+"//": "src/components/agenda/AppointmentForm.vue:66",
+"From:": null,
+"//": "src/components/agenda/AppointmentForm.vue:69",
+"To:": null,
+"//": "src/components/agenda/AppointmentForm.vue:73",
+"Location:": null,
+"//": "src/components/agenda/AppointmentForm.vue:77",
+"Comments:": null,
+"//": "src/components/agenda/AppointmentForm.vue:85",
+"Complete": null,
+"//": "src/components/agenda/AppointmentForm.vue:88",
+"No-show": null,
+"//": "src/components/agenda/AppointmentForm.vue:91",
+"Exclude": null,
+"//": "src/components/agenda/AppointmentForm.vue:95",
+"Save": "Opslaan",
+"//": "src/components/agenda/AppointmentForm.vue:99",
+"Cancel appointment": "Afspraak afzeggen",
+"//": "src/components/parent/CancelAppointment.vue:8",
+"Are you sure?": null,
+
+"//": ""
+}

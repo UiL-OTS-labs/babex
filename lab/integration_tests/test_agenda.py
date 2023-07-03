@@ -55,8 +55,9 @@ def appointment_yesterday(db, sample_experiment, sample_leader, sample_participa
     )
 
 
-def test_agenda_set_appointment_outcome(sb, appointment_yesterday, as_leader, agenda):
+def test_agenda_set_appointment_outcome(sb, appointment_yesterday, as_leader):
     appointment_yesterday.experiment.leaders.add(as_leader)
+    sb.click('a:contains("Agenda")')
 
     sb.assert_text_visible(appointment_yesterday.participant.name)
     sb.click(f'td[data-date="{appointment_yesterday.start.date()}"]')

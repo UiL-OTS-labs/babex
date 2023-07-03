@@ -9,11 +9,10 @@ from django.utils.translation import gettext_lazy as _
 
 class Signup(models.Model):
     name = e_fields.EncryptedCharField(max_length=100)
-    sex = e_fields.EncryptedCharField(max_length=1)
+    sex = e_fields.EncryptedCharField(max_length=50)
     birth_date = e_fields.EncryptedDateField()
 
     parent_name = e_fields.EncryptedTextField()
-    city = e_fields.EncryptedTextField()
     phonenumber = e_fields.EncryptedTextField()
     phonenumber_alt = e_fields.EncryptedTextField(blank=True)
     email = e_fields.EncryptedTextField()
@@ -22,9 +21,11 @@ class Signup(models.Model):
     newsletter = e_fields.EncryptedBooleanField()
 
     dyslexic_parent = e_fields.EncryptedBooleanField()
-    tos_parent = e_fields.EncryptedBooleanField()
-    speech_parent = e_fields.EncryptedBooleanField()
     multilingual = e_fields.EncryptedBooleanField()
+
+    birth_weight = e_fields.EncryptedIntegerField(_("participant:attribute:birth_weight"))
+    pregnancy_weeks = e_fields.EncryptedIntegerField(_("participant:attribute:pregnancy_weeks"))
+    pregnancy_days = e_fields.EncryptedIntegerField(_("participant:attribute:pregnancy_days"))
 
     class Status(models.TextChoices):
         NEW = "NEW", _("signups:stats:new")

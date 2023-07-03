@@ -59,7 +59,6 @@ class Participant(models.Model):
         null=True,
     )
     parent_name = e_fields.EncryptedTextField(_("participant:attribute:parent_name"), null=True)
-    city = e_fields.EncryptedTextField(_("participant:attribute:city"), null=True)
 
     created = models.DateTimeField(
         verbose_name=_("participant:attribute:created"),

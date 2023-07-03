@@ -3,6 +3,7 @@ declare global {
         tinymce: any // eslint-disable-line @typescript-eslint/no-explicit-any
 
         getUser: () => User
+        getLanguage: () => string
     }
 }
 

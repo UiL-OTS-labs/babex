@@ -18,15 +18,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: signups/models.py:30
-msgid "signups:stats:new"
+#: signups/models.py:26
+msgid "participant:attribute:birth_weight"
 msgstr ""
 
+#: signups/models.py:27
+msgid "participant:attribute:pregnancy_weeks"
+msgstr "Pregnancy weeks"
+
+#: signups/models.py:28
+msgid "participant:attribute:pregnancy_days"
+msgstr "Pregnancy days"
+
 #: signups/models.py:31
+msgid "signups:stats:new"
+msgstr "New"
+
+#: signups/models.py:32
 msgid "signups:stats:approved"
 msgstr "Approved"
 
-#: signups/models.py:32
+#: signups/models.py:33
 msgid "signups:stats:rejected"
 msgstr "Rejected"
 
@@ -34,15 +46,15 @@ msgstr "Rejected"
 msgid "signups:detail:header"
 msgstr "Signup details"
 
-#: signups/templates/signups/signup_detail.html:62
+#: signups/templates/signups/signup_detail.html:58
 msgid "yes,no"
 msgstr "Yes,No"
 
-#: signups/templates/signups/signup_detail.html:68
+#: signups/templates/signups/signup_detail.html:64
 msgid "signups:detail:approve"
 msgstr "Approve"
 
-#: signups/templates/signups/signup_detail.html:69
+#: signups/templates/signups/signup_detail.html:65
 msgid "signups:detail:reject"
 msgstr "Reject"
 
