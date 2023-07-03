@@ -35,11 +35,17 @@
 
     // Called when a specific event (appointment, closing, ...) is selected.
     function onEventClick(eventInfo: EventClickArg) {
+        const event = eventInfo.event;
+
+        if (event.extendedProps.temp) {
+            // don't process clicks on temporary events
+            return;
+        }
+
         deselectEvents();
         const element = eventInfo.el;
         element.classList.add('event-selected');
 
-        const event = eventInfo.event;
         actionContext.value = {
             type: 'event-select',
             event: event,
