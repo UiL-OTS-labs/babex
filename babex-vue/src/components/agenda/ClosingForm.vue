@@ -79,7 +79,8 @@
                     category: 'closing',
                     display: 'block',
                     title: 'Closed',
-                    extra: ''
+                    extra: '',
+                    temp: true // this marks the event as temporary
                 });
                 temporaryEvents.value.push(event);
             }
