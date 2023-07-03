@@ -15,7 +15,7 @@
 <style>
 </style>
 
-<script>
+<script nonce="{{ request.csp_nonce }}">
     // pass information about current user to vue app
     function getUser() {
         return JSON.parse("{{ request.user.to_json|escapejs }}");
