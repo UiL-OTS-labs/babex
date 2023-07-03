@@ -62,20 +62,20 @@
 </script>
 
 <template>
-  <p><b>Participant:</b> {{form.participant}}</p>
+  <p><b>{{ _('Participant:') }}</b> {{form.participant}}</p>
   <form @submit="onSubmit">
-    <div>From:</div>
+    <div>{{ _('From:') }}</div>
     <DateTimePicker class="appointment-start" v-model="form.start" :readonly="isPast()" />
 
-    <div>To:</div>
+    <div>{{ _('To:') }}</div>
     <DateTimePicker class="appointment-end" v-model="form.end" :readonly="isPast()" />
 
     <div>
-      <p><b>Location:</b> {{form.location}}</p>
+      <p><b>{{ _('Location:') }}</b> {{form.location}}</p>
     </div>
 
     <div>
-      <label>Comments:</label>
+      <label>{{ _('Comments:') }}</label>
       <textarea class="form-control" v-model="form.comment" :readonly="isPast()"></textarea>
     </div>
     <hr>
@@ -83,21 +83,21 @@
     <!-- only show outcome when the appointment (start time) is in the past -->
     <div v-if="isPast()">
         <div class="form-check">
-            <label class="form-check-label"><input class="form-check-input" type="radio" value="COMPLETED" v-model="form.outcome">Complete</label>
+            <label class="form-check-label"><input class="form-check-input" type="radio" value="COMPLETED" v-model="form.outcome">{{ _('Complete') }}</label>
         </div>
         <div class="form-check">
-            <label class="form-check-label"><input class="form-check-input" type="radio" value="NOSHOW" v-model="form.outcome">No-show</label>
+            <label class="form-check-label"><input class="form-check-input" type="radio" value="NOSHOW" v-model="form.outcome">{{ _('No-show') }}</label>
         </div>
         <div class="form-check">
-            <label class="form-check-label"><input class="form-check-input" type="radio" value="EXCLUDED" v-model="form.outcome">Exclude</label>
+            <label class="form-check-label"><input class="form-check-input" type="radio" value="EXCLUDED" v-model="form.outcome">{{ _('Exclude') }}</label>
         </div>
     </div>
 
-    <div><button class="btn btn-primary save">Save</button></div>
+    <div><button class="btn btn-primary save">{{ _('Save') }}</button></div>
   </form>
 
   <div v-if="!isPast() && !isCanceled()">
-    <button class="btn btn-danger" @click="cancel()">Cancel appointment</button>
+    <button class="btn btn-danger" @click="cancel()">{{ _('Cancel appointment') }}</button>
   </div>
 </template>
 
