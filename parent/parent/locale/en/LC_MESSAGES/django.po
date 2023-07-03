@@ -115,28 +115,20 @@ msgid "appointment:canceled"
 msgstr ""
 
 #: parent/templates/parent/home.html:17
-#, fuzzy
-#| msgid "parent:forms:signup:email"
 msgid "parent:home:sidebar"
-msgstr "E-mail"
+msgstr ""
 
 #: parent/templates/parent/home.html:22
-#, fuzzy
-#| msgid "parent:forms:signup:sex"
 msgid "parent:home:intro"
-msgstr "Sex"
+msgstr "Welcome to the ILS Babylab administration system"
 
 #: parent/templates/parent/home.html:26
-#, fuzzy
-#| msgid "parent:forms:signup:sex"
 msgid "parent:home:signup"
-msgstr "Sex"
+msgstr "Sign up for participation"
 
 #: parent/templates/parent/home.html:27
-#, fuzzy
-#| msgid "parent:forms:signup:name"
 msgid "parent:home:signin"
-msgstr "Name"
+msgstr "Sign in to your account"
 
 #: parent/templates/parent/overview.html:18
 msgid "Some general information and instructions"
