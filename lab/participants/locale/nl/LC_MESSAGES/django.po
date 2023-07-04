@@ -166,11 +166,6 @@ msgstr "Heeft account"
 msgid "yes,no"
 msgstr "ja,nee"
 
-#: participants/templates/participants/detail.html:111
-#: participants/templates/participants/index.html:92
-msgid "options:many,one"
-msgstr "meerdere,een"
-
 #: participants/templates/participants/detail.html:169
 msgid "participants:detail:experiments"
 msgstr "Experimenten"

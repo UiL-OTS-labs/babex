@@ -795,10 +795,6 @@ msgstr ""
 "Verwijder participant uit dit timeslot (zonder automatische bevestigings-"
 "mail)."
 
-#: experiments/templates/experiments/participants.html:159
-msgid "many,one"
-msgstr "meerdere,een"
-
 #: experiments/templates/experiments/participants.html:194
 msgid "experiments:participants:send"
 msgstr "Verstuur"

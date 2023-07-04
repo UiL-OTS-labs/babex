@@ -249,10 +249,6 @@ msgstr "Age"
 msgid "participants:globals:actions"
 msgstr "Actions"
 
-#: participants/templates/participants/index.html:50
-msgid "options:many,one"
-msgstr "many,one"
-
 #: participants/templates/participants/index.html:57
 msgid "participants:home:update:title"
 msgstr "Edit participant"
