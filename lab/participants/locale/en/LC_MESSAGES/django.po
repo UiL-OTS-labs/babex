@@ -176,7 +176,6 @@ msgstr "Details of '{}'"
 msgid "participants:detail:header"
 msgstr "Details of '{}'"
 
-#: participants/templates/participants/detail.html:54
 #: participants/templates/participants/detail.html:162
 msgid "participants:detail:calls"
 msgstr "Calls"
