@@ -27,4 +27,4 @@ def participants_visible_to_leader(leader: User) -> QuerySet[Participant]:
 
 def can_leader_access_participant(leader: User, participant: Participant) -> bool:
     # not very efficient, but ok for now
-    return participant in participants_visible_to_leader(leader)
+    return leader.is_staff or participant in participants_visible_to_leader(leader)
