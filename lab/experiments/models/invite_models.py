@@ -1,9 +1,10 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from participants.models import Participant
-from .experiment_models import Experiment
 from main.models import User
+from participants.models import Participant
+
+from .experiment_models import Experiment
 
 
 class Invitation(models.Model):
@@ -21,28 +22,33 @@ class Invitation(models.Model):
 class Call(models.Model):
     class CallStatus(models.TextChoices):
         # call started
-        STARTED = 'STARTED', _('experiments:call:status:started')
+        STARTED = "STARTED", _("experiments:call:status:started")
         # parent does not answer
-        NOREPLY = 'NOREPLY', _('experiments:call:status:noreply')
+        NOREPLY = "NOREPLY", _("experiments:call:status:noreply")
         # asked call back another time
-        CALLBACK = 'CALLBACK', _('experiments:call:status:callback')
+        CALLBACK = "CALLBACK", _("experiments:call:status:callback")
         # call ends in voicemail
-        VOICEMAIL = 'VOICEMAIL', _('experiments:call:status:voicemail')
+        VOICEMAIL = "VOICEMAIL", _("experiments:call:status:voicemail")
         # parent prefers email communication
-        EMAIL = 'EMAIL', _('experiments:call:status:email')
+        EMAIL = "EMAIL", _("experiments:call:status:email")
         # appointment confirmed
-        CONFIRMED = 'CONFIRMED', _('experiments:call:status:confirmed')
+        CONFIRMED = "CONFIRMED", _("experiments:call:status:confirmed")
         # cancel call
-        CANCELLED = 'CANCELLED', _('experiments:call:status:cancelled')
+        CANCELLED = "CANCELLED", _("experiments:call:status:cancelled")
         # parent does not want to or cannot participate in specific experiment
-        EXCLUDE = 'EXCLUDE', _('experiments:call:status:exclude')
+        EXCLUDE = "EXCLUDE", _("experiments:call:status:exclude")
+        # parent does not want to participate in any experiment
+        # (in the case of multiple children, this only applies to the current one)
+        DEACTIVATE = "DEACTIVATE", _("experiments:call:status:deactivate")
 
     status = models.CharField(max_length=20, choices=CallStatus.choices, default=CallStatus.STARTED)
     experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE)
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
-    leader = models.ForeignKey(User,
-                               # don't delete old calls just because the caller is gone
-                               on_delete=models.PROTECT)
+    leader = models.ForeignKey(
+        User,
+        # don't delete old calls just because the caller is gone
+        on_delete=models.PROTECT,
+    )
 
     creation_date = models.DateTimeField(auto_now_add=True)
     comment = models.TextField(null=True)

@@ -10,6 +10,11 @@
 {% endblock %}
 
 {% block content %}
+<style>
+    .deactivated, .deactivated a {
+        color: #aaa !important;
+    }
+</style>
 <div class="uu-inner-container">
     <div class="col-12">
         <h1>
@@ -38,7 +43,7 @@
 
             <tbody>
                 {% for participant in object_list %}
-                    <tr>
+                    <tr {% if participant.deactivated %}class="deactivated"{% endif %}>
                         <td>
                           <a href="{% url 'participants:detail' participant.pk %}">{{ participant.fullname }}</a>
                         </td>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-27 11:51+0200\n"
+"POT-Creation-Date: 2023-07-04 16:46+0200\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -292,37 +292,41 @@ msgstr "Experiment leaders"
 msgid "experiment:attribute:leaders:help_text"
 msgstr "Users listed here can call participants, manage appointments etc."
 
-#: experiments/models/invite_models.py:24
+#: experiments/models/invite_models.py:25
 msgid "experiments:call:status:started"
 msgstr "Started"
 
-#: experiments/models/invite_models.py:26
+#: experiments/models/invite_models.py:27
 msgid "experiments:call:status:noreply"
 msgstr "No reply"
 
-#: experiments/models/invite_models.py:28
+#: experiments/models/invite_models.py:29
 msgid "experiments:call:status:callback"
 msgstr "Call back"
 
-#: experiments/models/invite_models.py:30
+#: experiments/models/invite_models.py:31
 msgid "experiments:call:status:voicemail"
 msgstr "Voicemail"
 
-#: experiments/models/invite_models.py:32
+#: experiments/models/invite_models.py:33
 msgid "experiments:call:status:email"
 msgstr "Prefer email"
 
-#: experiments/models/invite_models.py:34
+#: experiments/models/invite_models.py:35
 msgid "experiments:call:status:confirmed"
 msgstr "Confirmed"
 
-#: experiments/models/invite_models.py:36
+#: experiments/models/invite_models.py:37
 msgid "experiments:call:status:cancelled"
 msgstr "Cancel"
 
-#: experiments/models/invite_models.py:38
+#: experiments/models/invite_models.py:39
 msgid "experiments:call:status:exclude"
 msgstr "Does not want to or cannot participate"
+
+#: experiments/models/invite_models.py:42
+msgid "experiments:call:status:deactivate"
+msgstr "Do not contact ever again"
 
 #: experiments/models/location_models.py:8
 msgid "location:attribute:name"
@@ -332,11 +336,11 @@ msgstr "Name"
 msgid "location:attribute:route_url"
 msgstr "Routedescription URL"
 
-#: experiments/templates/call/home.html:79
+#: experiments/templates/call/home.html:75
 msgid "experiment:attribute:age_range"
 msgstr "Age range"
 
-#: experiments/templates/call/home.html:102
+#: experiments/templates/call/home.html:98
 msgid "experiments:call:home:actions"
 msgstr "After you've made the call, please select one of the following:"
 
