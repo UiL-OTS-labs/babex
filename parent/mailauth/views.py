@@ -24,7 +24,7 @@ def link_verify(request, token):
         # ask the user to choose a specific participant
         return list_pps(request, response["possible_pps"])
 
-    redirect_to = request.GET.get('redirect', '/')
+    redirect_to = request.GET.get('redirect', '/overview')
     return redirect(redirect_to)
 
 
@@ -38,7 +38,7 @@ def resolve_pp(request, participant_id):
     ok, response = gateway(
         request, f"/gateway/mailauth/set_participant/", data=dict(participant_id=int(participant_id))
     )
-    return redirect("/")
+    return redirect("/overview")
 
 
 class LoginFormView(FormView):

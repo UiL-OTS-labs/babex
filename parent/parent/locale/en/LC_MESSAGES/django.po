@@ -1,0 +1,199 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-03 12:30+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: parent/forms.py:59
+msgid "parent:forms:signup:pregnancy_weeks"
+msgstr "Pregnancy weeks"
+
+#: parent/forms.py:60
+msgid "parent:forms:signup:pregnancy_days"
+msgstr "Pregnancy days"
+
+#: parent/forms.py:69
+msgid "parent:forms:signup:name"
+msgstr "Name"
+
+#: parent/forms.py:71
+msgid "parent:forms:signup:sex"
+msgstr "Sex"
+
+#: parent/forms.py:75
+msgid "parent:forms:signup:birth_date"
+msgstr "Birth date"
+
+#: parent/forms.py:78
+msgid "parent:forms:signup:parent_name"
+msgstr "Parent name"
+
+#: parent/forms.py:80
+msgid "parent:forms:signup:birth_weight"
+msgstr "Birth weight (in grams)"
+
+#: parent/forms.py:84
+msgid "parent:forms:signup:phonenumber"
+msgstr "Phone"
+
+#: parent/forms.py:85
+msgid "parent:forms:signup:phonenumber_alt"
+msgstr "Phone (secondary)"
+
+#: parent/forms.py:86
+msgid "parent:forms:signup:email"
+msgstr "E-mail"
+
+#: parent/forms.py:89
+msgid "parent:forms:signup:dyslexic_parent"
+msgstr "Dyslexic parent?"
+
+#: parent/forms.py:92
+msgid "parent:forms:signup:dyslexic_parent:f"
+msgstr "Yes, mother"
+
+#: parent/forms.py:93
+msgid "parent:forms:signup:dyslexic_parent:m"
+msgstr "Yes, father"
+
+#: parent/forms.py:94
+msgid "parent:forms:signup:dyslexic_parent:both"
+msgstr "Yes, both"
+
+#: parent/forms.py:95
+msgid "parent:forms:signup:dyslexic_parent:no"
+msgstr "No"
+
+#: parent/forms.py:101
+msgid "parent:forms:signup:multilingual"
+msgstr "Multilingual"
+
+#: parent/forms.py:103 parent/forms.py:109 parent/forms.py:114
+msgid "Yes"
+msgstr ""
+
+#: parent/forms.py:103 parent/forms.py:109 parent/forms.py:114
+msgid "No"
+msgstr ""
+
+#: parent/forms.py:107
+msgid "parent:forms:signup:english_contact"
+msgstr "Ok with English"
+
+#: parent/forms.py:112
+msgid "parent:forms:signup:newsletter"
+msgstr "Sign up for the newsletter"
+
+#: parent/forms.py:118
+msgid "parent:forms:signup:data_consent"
+msgstr "Consent"
+
+#: parent/settings.py:122
+msgid "lang:nl"
+msgstr "Nederlands"
+
+#: parent/settings.py:123
+msgid "lang:en"
+msgstr "English"
+
+#: parent/templates/appointment/canceled.html:6
+msgid "appointment:canceled"
+msgstr ""
+
+#: parent/templates/parent/home.html:17
+msgid "parent:home:sidebar"
+msgstr ""
+
+#: parent/templates/parent/home.html:22
+msgid "parent:home:intro"
+msgstr "Welcome to the ILS Babylab administration system"
+
+#: parent/templates/parent/home.html:26
+msgid "parent:home:signup"
+msgstr "Sign up for participation"
+
+#: parent/templates/parent/home.html:27
+msgid "parent:home:signin"
+msgstr "Sign in to your account"
+
+#: parent/templates/parent/overview.html:18
+msgid "Some general information and instructions"
+msgstr ""
+
+#: parent/templates/parent/overview.html:22
+msgid "Appointments"
+msgstr ""
+
+#: parent/templates/parent/overview.html:42
+msgid "No appointments"
+msgstr ""
+
+#: parent/templates/parent/overview.html:46
+msgid "Surveys"
+msgstr ""
+
+#: parent/templates/parent/overview.html:52
+msgid "Completed at: "
+msgstr ""
+
+#: parent/templates/parent/overview.html:56
+msgid "Continue survey"
+msgstr ""
+
+#: parent/templates/parent/overview.html:58
+msgid "Start survey"
+msgstr ""
+
+#: parent/templates/parent/overview.html:65
+msgid "No survey invitations"
+msgstr ""
+
+#: parent/templates/signup.html:7
+msgid "signup:header"
+msgstr "Sign up"
+
+#: parent/templates/signup.html:9
+msgid "signup:intro"
+msgstr ""
+"To sign up for participation in the babylab, please fill in the following "
+"form:"
+
+#: parent/templates/signup_confirmed.html:7
+msgid "parent:signup_confirmed:message"
+msgstr ""
+
+#: parent/templates/signup_done.html:7
+msgid "parent:signup_done:message"
+msgstr "Thank you for signing up!"
+
+#: parent/templates/widgets/participant_sex_widget.html:16
+msgid "participant:attribute:sex:male"
+msgstr "Male"
+
+#: parent/templates/widgets/participant_sex_widget.html:22
+msgid "participant:attribute:sex:female"
+msgstr "Female"
+
+#: parent/templates/widgets/participant_sex_widget.html:28
+msgid "participant:attribute:sex:other"
+msgstr "Other"
+
+#~ msgid "parent:forms:signup:sex:f"
+#~ msgstr "Female"
+
+#~ msgid "parent:forms:signup:sex:m"
+#~ msgstr "Male"

@@ -1,0 +1,71 @@
+{% extends 'vue/base.html' %}
+{% load i18n %}
+{% load vue3 %}
+
+{% block content %}
+    <style>
+        .card.canceled div {
+            color: #aaa;
+            text-decoration: line-through;
+        }
+    </style>
+    <div class="uu-hero">
+        <h1>ILS Babylab</h1>
+    </div>
+
+    <div class="uu-sidebar-container uu-sidebar-right">
+        <aside class="uu-sidebar" >
+            <p>{% trans 'Some general information and instructions' %}</p>
+        </aside>
+        <div class="uu-sidebar-content" >
+            <section>
+                <h3>{% trans 'Appointments' %}</h3>
+                {% for appointment in appointments %}
+                    <div class="card mt-3 {% if appointment.outcome == 'CANCELED' %} canceled {% endif %}">
+                        <div class="card-body">
+                            <h5 class="card-title"> {{ appointment.experiment }}
+                                {% if appointment.outcome == 'CANCELED' %}
+                                    - Canceled
+                                {% endif %}
+                            </h5>
+                            <div>{{ appointment.participant }}</div>
+                            <div>{{ appointment.start|date:'l M d, Y' }}, {{ appointment.start|time }}</div>
+                            <div>{{ appointment.leader }}</div>
+                            <div>Contact: {{ appointment.contact_phone }}</div>
+                            <div class="mt-3">{{ appointment.instructions }}</div>
+                            {% if appointment.outcome != 'CANCELED' %}
+                                {% vue babex.CancelAppointment :id=appointment.id %}
+                            {% endif %}
+                        </div>
+                    </div>
+                {% empty %}
+                    {% trans 'No appointments' %}
+                {% endfor %}
+            </section>
+            <section class="mt-5">
+                <h3>{% trans 'Surveys' %}</h3>
+                {% for invitation in survey_invites %}
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ invitation.survey_name }}</h5>
+                            {% if invitation.response.completed %}
+                                {% trans 'Completed at: ' %} {{ invitation.response.completed | date }}, {{ invitation.response.completed | time }}
+                            {% else %}
+                                <a class="btn btn-primary" href="{% url 'survey' invitation.id %}">
+                                    {% if invitation.response.updated %}
+                                        {% trans 'Continue survey' %}
+                                    {% else %}
+                                        {% trans 'Start survey' %}
+                                    {% endif %}
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% empty %}
+                    {% trans 'No survey invitations' %}
+                {% endfor %}
+            </section>
+
+        </div>
+    </div>
+{% endblock %}

@@ -180,7 +180,7 @@ def login_as(sb, apps, link_from_mail, mailbox):
 
     def _delegate(email):
         sb.switch_to_default_driver()
-        sb.open(apps.parent.url)
+        sb.open(apps.parent.url + 'auth/')
         sb.type('input[name="email"]', email)
         sb.click('button:contains("Send")')
 

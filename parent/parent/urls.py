@@ -5,6 +5,7 @@ from .views import (
     SignupDone,
     SignupView,
     home,
+    overview,
     signup_verify,
     status,
     survey_response_view,
@@ -18,6 +19,7 @@ urlpatterns = [
     path("cdhcore/", include("cdh.core.urls")),
     # home
     path("", home, name="home"),
+    path("overview", overview, name="overview"),
     path("status", status),
     # magiclink
     path("auth/", include("mailauth.urls")),
