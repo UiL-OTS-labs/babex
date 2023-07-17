@@ -186,10 +186,8 @@ msgid "participants:detail:calls"
 msgstr "Calls"
 
 #: participants/templates/participants/detail.html:65
-#, fuzzy
-#| msgid "participants:detail:datetime"
 msgid "participants:detail:deactivated"
-msgstr "Date & Time"
+msgstr "Participant deactivated on "
 
 #: participants/templates/participants/detail.html:71
 msgid "participants:detail:edit"
