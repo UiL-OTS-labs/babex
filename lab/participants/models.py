@@ -103,6 +103,9 @@ class Participant(models.Model):
         self.deactivated = timezone.now()
         self.save()
 
+    def can_be_deleted(self):
+        return len(self.appointments.all()) < 1
+
 
 class SecondaryEmail(models.Model):
     email = e_fields.EncryptedEmailField(

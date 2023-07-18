@@ -3,13 +3,12 @@ from cdh.core.views import FormSetUpdateView
 from cdh.core.views.mixins import DeleteSuccessMessageMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import Http404, HttpRequest, HttpResponse
+from django.shortcuts import redirect
 from django.urls import reverse_lazy as reverse
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
-import auditlog.utils.log as auditlog
-from auditlog.enums import Event, UserType
 from comments.forms import CommentForm
 from main.auth.util import RandomLeaderMixin
 from participants.permissions import (
@@ -77,15 +76,11 @@ class ParticipantDeleteView(braces.StaffuserRequiredMixin, DeleteSuccessMessageM
     template_name = "participants/delete.html"
     model = Participant
 
-    def delete(self, request, *args, **kwargs):
-        participant = self.get_object()
-
-        message = "Admin deleted participant '{}'".format(participant)
-        auditlog.log(Event.DELETE_DATA, message, self.request.user, UserType.ADMIN)
-
-        participant.appointments.all().delete()
-
-        return super().delete(request, *args, **kwargs)
+    def post(self, request, *args, **kwargs):
+        if "deactivate" in self.request.POST:
+            self.get_object().deactivate()
+            return redirect(self.success_url)
+        return super().post(request, *args, **kwargs)
 
 
 class ParticipantSpecificCriteriaUpdateView(braces.StaffuserRequiredMixin, FormSetUpdateView):

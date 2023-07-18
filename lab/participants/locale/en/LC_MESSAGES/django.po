@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-04 16:46+0200\n"
+"POT-Creation-Date: 2023-07-18 16:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -148,19 +148,39 @@ msgid "participants:detail:comments:submit"
 msgstr "Send"
 
 #: participants/templates/participants/delete.html:8
-#: participants/templates/participants/delete.html:16
+#: participants/templates/participants/delete.html:15
 msgid "participants:delete:header"
 msgstr "Delete participant"
 
-#: participants/templates/participants/delete.html:19
-msgid "participants:delete:text"
-msgstr "Are you sure you want to delete participant '{}'?"
+#: participants/templates/participants/delete.html:24
+msgid "participants:delete:deactivate:text"
+msgstr ""
+"This participants has participated in one or more experiments and cannot be "
+"deleted: "
 
-#: participants/templates/participants/delete.html:22
+#: participants/templates/participants/delete.html:32
+msgid "participants:delete:deactivate:prompt"
+msgstr "You can still choose to deactivate the participant."
+
+#: participants/templates/participants/delete.html:34
+#: participants/templates/participants/delete.html:44
 msgid "participants:delete:cancel"
 msgstr "Cancel"
 
-#: participants/templates/participants/delete.html:25
+msgid "participants:delete:deactivate"
+msgstr "Deactivate participant"
+
+#: participants/templates/participants/delete.html:39
+msgid "participants:delete:delete:text"
+msgstr ""
+"This participant has never participated in an experiment and can be safely "
+"deleted from the database."
+
+#: participants/templates/participants/delete.html:42
+msgid "participants:delete:delete:prompt"
+msgstr "Are you sure you want to delete participant '{}'?"
+
+#: participants/templates/participants/delete.html:45
 msgid "participants:delete:confirm"
 msgstr "Delete participant"
 
@@ -180,55 +200,84 @@ msgstr "Details of '{}'"
 msgid "participants:detail:header"
 msgstr "Details of '{}'"
 
+#: participants/templates/participants/detail.html:49
+msgid "participants:detail:sections"
+msgstr "Sections"
+
+#: participants/templates/participants/detail.html:51
+msgid "participants:detail:general"
+msgstr "General information"
+
+#: participants/templates/participants/detail.html:52
+msgid "participants:detail:contact"
+msgstr "Contact details"
+
+#: participants/templates/participants/detail.html:53
+msgid "participants:detail:appointments"
+msgstr "Appointments"
+
 #: participants/templates/participants/detail.html:54
-#: participants/templates/participants/detail.html:169
+#: participants/templates/participants/detail.html:170
 msgid "participants:detail:calls"
 msgstr "Calls"
 
-#: participants/templates/participants/detail.html:65
+#: participants/templates/participants/detail.html:55
+msgid "participants:detail:comments"
+msgstr "Comments"
+
+#: participants/templates/participants/detail.html:56
+msgid "participants:detail:surveys"
+msgstr "Surveys"
+
+#: participants/templates/participants/detail.html:57
+#: participants/templates/participants/manage.html:2
+msgid "participants:detail:manage"
+msgstr "Manage"
+
+#: participants/templates/participants/detail.html:66
 msgid "participants:detail:deactivated"
 msgstr "Participant deactivated on "
 
-#: participants/templates/participants/detail.html:71
+#: participants/templates/participants/detail.html:72
 msgid "participants:detail:edit"
 msgstr "Edit"
 
-#: participants/templates/participants/detail.html:92
+#: participants/templates/participants/detail.html:93
 msgid "participants:attribute:getational_age"
 msgstr "Gestational age"
 
-#: participants/templates/participants/detail.html:96
+#: participants/templates/participants/detail.html:97
 msgid "participants:attribute:age"
 msgstr "Age"
 
-#: participants/templates/participants/detail.html:105
-#: participants/templates/participants/detail.html:109
+#: participants/templates/participants/detail.html:106
+#: participants/templates/participants/detail.html:110
 msgid "yes,no"
 msgstr "yes,no"
 
-#: participants/templates/participants/detail.html:132
-#: participants/templates/participants/detail.html:174
+#: participants/templates/participants/detail.html:133
+#: participants/templates/participants/detail.html:175
 msgid "participants:detail:experiments"
 msgstr "Experiment"
 
-#: participants/templates/participants/detail.html:135
-#: participants/templates/participants/detail.html:177
+#: participants/templates/participants/detail.html:136
+#: participants/templates/participants/detail.html:178
 msgid "participants:detail:datetime"
 msgstr "Date & Time"
 
-#: participants/templates/participants/detail.html:138
+#: participants/templates/participants/detail.html:139
 msgid "participants:detail:appointment:location"
 msgstr "Location"
 
-#: participants/templates/participants/detail.html:141
+#: participants/templates/participants/detail.html:142
 msgid "participants:detail:appointment:outcome"
 msgstr "Outcome"
 
-#: participants/templates/participants/detail.html:180
+#: participants/templates/participants/detail.html:181
 msgid "participants:detail:calls:status"
 msgstr "Status"
 
-#: participants/templates/participants/detail.html:183
+#: participants/templates/participants/detail.html:184
 msgid "participants:detail:calls:called_by"
 msgstr "Called by"
 
@@ -259,8 +308,6 @@ msgid "participants:globals:actions"
 msgstr "Actions"
 
 #: participants/templates/participants/index.html:55
-#, fuzzy
-#| msgid "yes,no"
 msgid "options:yes,no"
 msgstr "yes,no"
 
@@ -268,7 +315,8 @@ msgstr "yes,no"
 msgid "participants:home:update:title"
 msgstr "Edit participant"
 
-#: participants/templates/participants/index.html:69
+#: participants/templates/participants/index.html:66
+#: participants/templates/participants/manage.html:5
 msgid "participants:home:delete:title"
 msgstr "Delete this participant"
 
@@ -314,13 +362,19 @@ msgstr "Completed"
 msgid "Other"
 msgstr ""
 
-#: participants/views.py:52
+#: participants/views.py:51
 msgid "participants:messages:updated_participant"
 msgstr "Participant updated!"
 
-#: participants/views.py:76
+#: participants/views.py:75
 msgid "participants:messages:deleted_participant"
 msgstr "Participant deleted!"
+
+#~ msgid "participants:deactivate"
+#~ msgstr "Deactivate participant"
+
+#~ msgid "participants:delete:text"
+#~ msgstr "Are you sure you want to delete participant '{}'?"
 
 #~ msgid "participants:update:header:secondary_email"
 #~ msgstr "Secondary e-mail(s)"
