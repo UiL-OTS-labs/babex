@@ -69,10 +69,8 @@ class AppointmentViewSet(viewsets.ModelViewSet):
         queryset = Appointment.objects.all()
         return queryset
 
-    def destroy(self, request, pk):
-        appointment = self.get_object()
+    def perform_destroy(self, appointment: Appointment):
         appointment.cancel()
-        return appointment
 
 
 class ClosingsAdminView(braces.StaffuserRequiredMixin, generic.TemplateView):
