@@ -104,6 +104,7 @@ class Participant(models.Model):
         self.save()
 
     def can_be_deleted(self):
+        # participants who have never participated may be removed without consequences
         return len(self.appointments.all()) < 1
 
 
