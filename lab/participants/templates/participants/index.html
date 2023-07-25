@@ -10,6 +10,11 @@
 {% endblock %}
 
 {% block content %}
+<style>
+    .deactivated, .deactivated a {
+        color: #aaa !important;
+    }
+</style>
 <div class="uu-inner-container">
     <div class="col-12">
         <h1>
@@ -38,7 +43,7 @@
 
             <tbody>
                 {% for participant in object_list %}
-                    <tr>
+                    <tr {% if participant.deactivated %}class="deactivated"{% endif %}>
                         <td>
                           <a href="{% url 'participants:detail' participant.pk %}">{{ participant.fullname }}</a>
                         </td>
@@ -50,21 +55,14 @@
                         <td> {{ participant.multilingual|yesno:_('options:yes,no') }} </td>
                         <td> {{ participant.created|date:'Y-m-d' }} </td>
                         <td>
-                          {% vue babex.ParticipantActions inline %}
-                            <a
-                                href="{% url 'participants:edit' participant.pk %}"
-                                class="icon-update"
-                                title="{% trans 'participants:home:update:title'  %}"
-                            >
-                               <span class="behind-icon">P</span> 
-                            </a>
-                            <a
-                                href="{% url 'participants:delete' participant.pk %}"
-                                class="icon-delete"
-                                title="{% trans 'participants:home:delete:title' %}"
-                            >
-                                
-                            </a>
+                            <a href="{% url 'participants:edit' participant.pk %}"
+                               class="icon-update" title="{% trans 'participants:home:update:title'  %}" > </a>
+                            {% if request.user.is_staff %}
+                                {% if not participant.deactivated %}
+                                    <a href="{% url 'participants:delete' participant.pk %}" class="icon-delete"
+                                       title="{% trans 'participants:home:delete:title' %}"></a>
+                                {% endif %}
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}

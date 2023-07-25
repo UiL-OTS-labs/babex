@@ -46,9 +46,11 @@ def get_eligible_participants_for_experiment(experiment: Experiment, on_mailingl
     # Build the rest of the filters
     filters = build_exclusion_filters(default_criteria, filters)
 
+    # Exclude deactivated participants
+    participants = Participant.objects.filter(deactivated=None)
     # Exclude all participants with an appointment for an experiment that was
     # marked as an exclusion criteria
-    participants = Participant.objects.exclude(
+    participants = participants.exclude(
         appointments__experiment__in=experiment.excluded_experiments.all()
     ).prefetch_related(
         "secondaryemail_set", "criterionanswer_set"

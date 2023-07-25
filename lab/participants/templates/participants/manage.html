@@ -1,0 +1,15 @@
+{% load i18n %}
+<h2>{% trans 'participants:detail:manage' %}</h2>
+
+<a href="{% url 'participants:delete' participant.pk %}" class="btn btn-danger"
+   title="{% trans 'participants:home:delete:title' %}"
+   {% if participant.deactivated %}
+   disabled
+   {% endif %}
+>
+    {% if participant.can_be_deleted %}
+        {% trans 'participants:delete:confirm' %}
+    {% else %}
+        {% trans 'participants:delete:deactivate' %}
+    {% endif %}
+</a>

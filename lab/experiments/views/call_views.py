@@ -164,4 +164,6 @@ class UpdateCall(generics.UpdateAPIView):
         call.comment = request.data["comment"]
         call.save()
 
+        if call.status == Call.CallStatus.DEACTIVATE:
+            call.participant.deactivate()
         return JsonResponse(self.serializer_class(call).data)

@@ -9,22 +9,42 @@
 {% endblock %}
 
 
-{% block content %}
-<div class="uu-inner-container">
-    <div class="col-12">
+{% block uu-content %}
+    <div class="uu-hero">
         <h1>
-            {% trans 'participants:delete:header' %}
+            {% trans 'participants:delete:header' %} - {{ participant.name }}
         </h1>
+    </div>
+
+    <div class="uu-inner-container">
+    <div class="col-12">
         <form method="post">{% csrf_token %}
-            <p>{% transformat 'participants:delete:text' object %}</p>
-            <div class="button" style="display: inline-block">
-                <a href="{% url 'participants:home' %}" >
-                    {% trans 'participants:delete:cancel' %}
-                </a>
-            </div>
-            <input type="submit" value="{% trans 'participants:delete:confirm' %}">
+        {% if participant.can_be_deleted %}
+            <p>
+                {% trans 'participants:delete:delete:text' %}
+            </p>
+            <p>
+                {% transformat 'participants:delete:delete:prompt' object.name %}
+            </p>
+            <a class="btn btn-secondary" href="{% url 'participants:home' %}">{% trans 'participants:delete:cancel' %}</a>
+            <button class="btn btn-danger">{% trans 'participants:delete:confirm' %}</button>
         </form>
-        <br/>
+        {% else %}
+            <p>
+                {% trans 'participants:delete:deactivate:text' %}
+            </p>
+            <ul>
+                {% for appointment in participant.appointments.all %}
+                    <li>{{ appointment.experiment }}</li>
+                {% endfor %}
+            </ul>
+            <p>
+                {% trans 'participants:delete:deactivate:prompt' %}
+            </p>
+            <a class="btn btn-secondary" href="{% url 'participants:home' %}">{% trans 'participants:delete:cancel' %}</a>
+            <input type="hidden" name="deactivate"/>
+            <button class="btn btn-danger">{% trans 'participants:delete:deactivate' %}</button>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
