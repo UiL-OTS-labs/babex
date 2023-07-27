@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-18 16:46+0200\n"
+"POT-Creation-Date: 2023-07-27 16:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,110 +24,130 @@ msgstr "Many"
 msgid "participants:multilingual:one"
 msgstr "One"
 
-#: participants/models.py:16
+#: participants/models.py:14
 msgid "participant:attribute:email"
 msgstr "E-mail address"
 
-#: participants/models.py:17
+#: participants/models.py:15
 msgid "participant:attribute:name"
 msgstr "Name"
 
-#: participants/models.py:18
+#: participants/models.py:16
 msgid "participant:attribute:language"
 msgstr "Language"
 
-#: participants/models.py:19
+#: participants/models.py:18
 msgid "participant:attribute:dyslexic_parent"
 msgstr "Dyslexic parent"
 
-#: participants/models.py:20
+#: participants/models.py:21 participants/models.py:74
+msgid "participant:attribute:dyslexic_parent:f"
+msgstr "Mother"
+
+#: participants/models.py:22 participants/models.py:73
+msgid "participant:attribute:dyslexic_parent:m"
+msgstr "Father"
+
+#: participants/models.py:23 participants/models.py:75
+msgid "participant:attribute:dyslexic_parent:both"
+msgstr "Both"
+
+#: participants/models.py:24 participants/models.py:77
+msgid "participant:attribute:dyslexic_parent:no"
+msgstr "No"
+
+#: participants/models.py:25 participants/models.py:76
+msgid "participant:attribute:dyslexic_parent:unk"
+msgstr "Unknown"
+
+#: participants/models.py:28
 msgid "participant:attribute:birth_date"
 msgstr "Birth date"
 
-#: participants/models.py:21
+#: participants/models.py:29
 msgid "participant:attribute:multilingual"
 msgstr "Multilingual"
 
-#: participants/models.py:22
+#: participants/models.py:30
 msgid "participant:attribute:phonenumber"
 msgstr "Phone number"
 
-#: participants/models.py:23
+#: participants/models.py:31
 msgid "participant:attribute:sex"
 msgstr "Sex"
 
-#: participants/models.py:24
+#: participants/models.py:32
 msgid "participant:attribute:email_subscription"
 msgstr "On mailing list"
 
-#: participants/models.py:25
+#: participants/models.py:33
 msgid "participant:attribute:birth_weight"
 msgstr "Weight at birth"
 
-#: participants/models.py:26
+#: participants/models.py:34
 msgid "participant:attribute:pregnancy_weeks"
 msgstr "Gestation weeks"
 
-#: participants/models.py:27
+#: participants/models.py:35
 msgid "participant:attribute:pregnancy_days"
 msgstr "Gestation days"
 
-#: participants/models.py:28
+#: participants/models.py:36
 msgid "participant:attribute:phonenumber_alt"
 msgstr "Phone number (secondary)"
 
-#: participants/models.py:29
+#: participants/models.py:37
 msgid "participant:attribute:parent_name"
 msgstr "Parent name"
 
-#: participants/models.py:31
+#: participants/models.py:39
 msgid "participant:attribute:created"
 msgstr "Registered on"
 
-#: participants/models.py:32
+#: participants/models.py:40
 msgid "participant:attribute:deactivated"
 msgstr "This participant has been deactivated on"
 
-#: participants/models.py:34
+#: participants/models.py:42
 msgid "participant:attribute:capable"
 msgstr "Capable"
 
-#: participants/models.py:41 participants/models.py:72
+#: participants/models.py:49 participants/models.py:90
 msgid "participant:name:unknown"
 msgstr "name unknown"
 
-#: participants/models.py:52
+#: participants/models.py:60
 #: participants/templates/widgets/participant_sex_widget.html:22
 msgid "participant:attribute:sex:male"
 msgstr "Male"
 
-#: participants/models.py:53
+#: participants/models.py:61
 #: participants/templates/widgets/participant_sex_widget.html:28
 msgid "participant:attribute:sex:female"
 msgstr "Female"
 
-#: participants/models.py:54
+#: participants/models.py:62
 #: participants/templates/widgets/participant_sex_widget.html:40
 msgid "participant:attribute:sex:prefer_not_to_answer"
 msgstr "Preferred not to answer"
 
-#: participants/models.py:84
+#: participants/models.py:102
 msgid "participants:age:years"
 msgstr "years"
 
-#: participants/models.py:85
+#: participants/models.py:103
 msgid "participants:age:months"
 msgstr "months"
 
-#: participants/models.py:86
+#: participants/models.py:104
 msgid "participants:age:days"
 msgstr "days"
 
-#: participants/models.py:109
+#: participants/models.py:131
 msgid "secondary_email:attribute:email"
 msgstr "Secondary e-mail address"
 
-#: participants/models.py:126
+#: participants/models.py:148
 msgid "criterion_answer:attribute:answer"
 msgstr "Answer"
 
@@ -153,36 +173,39 @@ msgid "participants:delete:header"
 msgstr "Delete participant"
 
 #: participants/templates/participants/delete.html:24
-msgid "participants:delete:deactivate:text"
-msgstr ""
-"This participants has participated in one or more experiments and cannot be "
-"deleted: "
-
-#: participants/templates/participants/delete.html:32
-msgid "participants:delete:deactivate:prompt"
-msgstr "You can still choose to deactivate the participant."
-
-#: participants/templates/participants/delete.html:34
-#: participants/templates/participants/delete.html:44
-msgid "participants:delete:cancel"
-msgstr "Cancel"
-
-msgid "participants:delete:deactivate"
-msgstr "Deactivate participant"
-
-#: participants/templates/participants/delete.html:39
 msgid "participants:delete:delete:text"
 msgstr ""
 "This participant has never participated in an experiment and can be safely "
 "deleted from the database."
 
-#: participants/templates/participants/delete.html:42
+#: participants/templates/participants/delete.html:27
 msgid "participants:delete:delete:prompt"
 msgstr "Are you sure you want to delete participant '{}'?"
 
-#: participants/templates/participants/delete.html:45
+#: participants/templates/participants/delete.html:29
+#: participants/templates/participants/delete.html:44
+msgid "participants:delete:cancel"
+msgstr "Cancel"
+
+#: participants/templates/participants/delete.html:30
+#: participants/templates/participants/manage.html:11
 msgid "participants:delete:confirm"
 msgstr "Delete participant"
+
+#: participants/templates/participants/delete.html:34
+msgid "participants:delete:deactivate:text"
+msgstr ""
+"This participants has participated in one or more experiments and cannot be "
+"deleted: "
+
+#: participants/templates/participants/delete.html:42
+msgid "participants:delete:deactivate:prompt"
+msgstr "You can still choose to deactivate the participant."
+
+#: participants/templates/participants/delete.html:46
+#: participants/templates/participants/manage.html:13
+msgid "participants:delete:deactivate"
+msgstr "Deactivate participant"
 
 #: participants/templates/participants/demographics.html:10
 #: participants/templates/participants/index.html:9
@@ -217,7 +240,7 @@ msgid "participants:detail:appointments"
 msgstr "Appointments"
 
 #: participants/templates/participants/detail.html:54
-#: participants/templates/participants/detail.html:170
+#: participants/templates/participants/detail.html:172
 msgid "participants:detail:calls"
 msgstr "Calls"
 
@@ -229,55 +252,54 @@ msgstr "Comments"
 msgid "participants:detail:surveys"
 msgstr "Surveys"
 
-#: participants/templates/participants/detail.html:57
+#: participants/templates/participants/detail.html:58
 #: participants/templates/participants/manage.html:2
 msgid "participants:detail:manage"
 msgstr "Manage"
 
-#: participants/templates/participants/detail.html:66
+#: participants/templates/participants/detail.html:68
 msgid "participants:detail:deactivated"
 msgstr "Participant deactivated on "
 
-#: participants/templates/participants/detail.html:72
+#: participants/templates/participants/detail.html:74
 msgid "participants:detail:edit"
 msgstr "Edit"
 
-#: participants/templates/participants/detail.html:93
+#: participants/templates/participants/detail.html:95
 msgid "participants:attribute:getational_age"
 msgstr "Gestational age"
 
-#: participants/templates/participants/detail.html:97
+#: participants/templates/participants/detail.html:99
 msgid "participants:attribute:age"
 msgstr "Age"
 
-#: participants/templates/participants/detail.html:106
-#: participants/templates/participants/detail.html:110
+#: participants/templates/participants/detail.html:112
 msgid "yes,no"
 msgstr "yes,no"
 
-#: participants/templates/participants/detail.html:133
-#: participants/templates/participants/detail.html:175
+#: participants/templates/participants/detail.html:135
+#: participants/templates/participants/detail.html:177
 msgid "participants:detail:experiments"
 msgstr "Experiment"
 
-#: participants/templates/participants/detail.html:136
-#: participants/templates/participants/detail.html:178
+#: participants/templates/participants/detail.html:138
+#: participants/templates/participants/detail.html:180
 msgid "participants:detail:datetime"
 msgstr "Date & Time"
 
-#: participants/templates/participants/detail.html:139
+#: participants/templates/participants/detail.html:141
 msgid "participants:detail:appointment:location"
 msgstr "Location"
 
-#: participants/templates/participants/detail.html:142
+#: participants/templates/participants/detail.html:144
 msgid "participants:detail:appointment:outcome"
 msgstr "Outcome"
 
-#: participants/templates/participants/detail.html:181
+#: participants/templates/participants/detail.html:183
 msgid "participants:detail:calls:status"
 msgstr "Status"
 
-#: participants/templates/participants/detail.html:184
+#: participants/templates/participants/detail.html:186
 msgid "participants:detail:calls:called_by"
 msgstr "Called by"
 
@@ -311,11 +333,11 @@ msgstr "Actions"
 msgid "options:yes,no"
 msgstr "yes,no"
 
-#: participants/templates/participants/index.html:62
+#: participants/templates/participants/index.html:59
 msgid "participants:home:update:title"
 msgstr "Edit participant"
 
-#: participants/templates/participants/index.html:66
+#: participants/templates/participants/index.html:63
 #: participants/templates/participants/manage.html:5
 msgid "participants:home:delete:title"
 msgstr "Delete this participant"

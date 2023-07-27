@@ -1,5 +1,3 @@
-from typing import cast
-
 import ageutil
 import cdh.core.fields as e_fields
 from django.db import models
@@ -16,7 +14,17 @@ class Participant(models.Model):
     email = e_fields.EncryptedEmailField(_("participant:attribute:email"))
     name = e_fields.EncryptedTextField(_("participant:attribute:name"), blank=True, null=True)
     language = e_fields.EncryptedTextField(_("participant:attribute:language"))
-    dyslexic_parent = e_fields.EncryptedBooleanField(_("participant:attribute:dyslexic_parent"))
+    dyslexic_parent = e_fields.EncryptedCharField(
+        _("participant:attribute:dyslexic_parent"),
+        max_length=5,
+        choices=(
+            ("F", _("participant:attribute:dyslexic_parent:f")),
+            ("M", _("participant:attribute:dyslexic_parent:m")),
+            ("BOTH", _("participant:attribute:dyslexic_parent:both")),
+            ("NO", _("participant:attribute:dyslexic_parent:no")),
+            ("UNK", _("participant:attribute:dyslexic_parent:unk")),
+        ),
+    )
     birth_date = e_fields.EncryptedDateField(_("participant:attribute:birth_date"), blank=True, null=True)
     multilingual = e_fields.EncryptedBooleanField(_("participant:attribute:multilingual"), blank=True, null=True)
     phonenumber = e_fields.EncryptedTextField(_("participant:attribute:phonenumber"), blank=True, null=True)
@@ -59,6 +67,16 @@ class Participant(models.Model):
             return mappings[self.sex]
 
         return self.sex
+
+    def dyslexic_parent_display(self):
+        mappings = {
+            "M": _("participant:attribute:dyslexic_parent:m"),
+            "F": _("participant:attribute:dyslexic_parent:f"),
+            "BOTH": _("participant:attribute:dyslexic_parent:both"),
+            "UNK": _("participant:attribute:dyslexic_parent:unk"),
+            "NO": _("participant:attribute:dyslexic_parent:no"),
+        }
+        return mappings[self.dyslexic_parent]
 
     @property
     def has_account(self):
