@@ -5,138 +5,143 @@
 {% load static %}
 
 
-<div class="uu-inner-container">
-    <div class="col-4">
-        <h3 class="d-inline">
-            {% trans 'experiments:detail:progress' %}
-        </h3>
-        <div>
-            <table class="criteria-table mt-1">
-                <tr>
-                    <td>{% trans 'experiments:detail:progress:target' %}</td>
-                    <td>{{ progress.target }}</td>
-                </tr>
-                <tr>
-                    <td>{% trans 'experiments:detail:progress:tested' %}</td>
-                    <td>{{ progress.tested }}</td>
-                </tr>
-                <tr>
-                    <td>{% trans 'experiments:detail:progress:planned' %}</td>
-                    <td>{{ progress.planned }}</td>
-                </tr>
-                <tr>
-                    <td>{% trans 'experiments:detail:progress:excluded' %}</td>
-                    <td>{{ progress.excluded }}</td>
-                </tr>
-                <tr><td><hr></td></tr>
-                <tr>
-                    <td>{% trans 'experiments:detail:progress:to_plan' %}</td>
-                    <td>{{ progress.to_plan }}</td>
-                </tr>
-                <tr>
-                    <td>{% trans 'experiments:detail:progress:to_test' %}</td>
-                    <td>{{ progress.to_test }}</td>
-                </tr>
-            </table>
+<div class="uu-container">
+    <div class="row gx-3 w-100">
+        <div class="col-4">
+            <div class="p-2">
+                <h3 class="d-inline">
+                    {% trans 'experiments:detail:progress' %}
+                </h3>
+            </div>
+            <div>
+                <table class="table table-striped mt-1">
+                    <tbody>
+                        <tr>
+                            <td>{% trans 'experiments:detail:progress:target' %}</td>
+                            <td>{{ progress.target }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'experiments:detail:progress:tested' %}</td>
+                            <td>{{ progress.tested }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'experiments:detail:progress:planned' %}</td>
+                            <td>{{ progress.planned }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'experiments:detail:progress:excluded' %}</td>
+                            <td>{{ progress.excluded }}</td>
+                        </tr>
+                    </tbody>
+                    <tbody class="table-group-divider">
+                        <tr>
+                            <td>{% trans 'experiments:detail:progress:to_plan' %}</td>
+                            <td>{{ progress.to_plan }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'experiments:detail:progress:to_test' %}</td>
+                            <td>{{ progress.to_test }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-    <div class="col-4">
-        <h3 class="d-inline">
-            {% trans 'experiments:detail:info' %}
-        </h3>
-        <a href="{% url 'experiments:update' experiment.pk %}?next={{ request.path }}">
-            {% trans 'experiments:detail:edit_info' %}
-        </a>
-        <br/>
-        <div class="d-inline-block">
-            <table class="criteria-table mt-1">
-                <tr>
-                    <td>
-                        {% trans 'experiments:detail:info:duration' %}
-                    </td>
-                    <td>
-                        {{ experiment.duration }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        {% trans 'experiments:detail:info:compensation' %}
-                    </td>
-                    <td>
-                        {{ experiment.compensation }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        {% trans 'experiments:detail:info:task_description' %}
-                    </td>
-                    <td>
-                        {{ experiment.task_description }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        {% trans 'experiments:detail:info:additional_instructions' %}
-                    </td>
-                    <td>
-                        {{ experiment.additional_instructions }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        {% trans 'experiments:detail:info:use_timeslots' %}
-                    </td>
-                    <td>
-                        {{ experiment.use_timeslots|yesno:_("yes,no") }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        {% trans 'experiments:detail:info:location' %}
-                    </td>
-                    <td>
-                        {{ experiment.location }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        {% trans 'experiments:detail:info:open' %}
-                    </td>
-                    <td>
-                        {{ experiment.open|yesno:_("yes,no") }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        {% trans 'experiments:detail:info:public' %}
-                    </td>
-                    <td>
-                        {{ experiment.public|yesno:_("yes,no") }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        {% trans 'experiments:detail:info:leader' %}
-                    </td>
-                    <td>
-                        {{ experiment.leader_names }}
-                    </td>
-                </tr>
-            </table>
+        <div class="col-4">
+            <div class="p-2">
+                <h3 class="d-inline">
+                    {% trans 'experiments:detail:info' %}
+                </h3>
+                <a href="{% url 'experiments:update' experiment.pk %}?next={{ request.path }}">
+                    {% trans 'experiments:detail:edit_info' %}
+                </a>
+            </div>
+            <div>
+                <table class="table table-striped mt-1">
+                    <tr>
+                        <td>
+                            {% trans 'experiments:detail:info:duration' %}
+                        </td>
+                        <td>
+                            {{ experiment.duration }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {% trans 'experiments:detail:info:compensation' %}
+                        </td>
+                        <td>
+                            {{ experiment.compensation }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {% trans 'experiments:detail:info:task_description' %}
+                        </td>
+                        <td>
+                            {{ experiment.task_description }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {% trans 'experiments:detail:info:additional_instructions' %}
+                        </td>
+                        <td>
+                            {{ experiment.additional_instructions }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {% trans 'experiments:detail:info:use_timeslots' %}
+                        </td>
+                        <td>
+                            {{ experiment.use_timeslots|yesno:_("yes,no") }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {% trans 'experiments:detail:info:location' %}
+                        </td>
+                        <td>
+                            {{ experiment.location }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {% trans 'experiments:detail:info:open' %}
+                        </td>
+                        <td>
+                            {{ experiment.open|yesno:_("yes,no") }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {% trans 'experiments:detail:info:public' %}
+                        </td>
+                        <td>
+                            {{ experiment.public|yesno:_("yes,no") }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {% trans 'experiments:detail:info:leader' %}
+                        </td>
+                        <td>
+                            {{ experiment.leader_names }}
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
-    </div>
-    <div class="col-4">
-        <h3 class="d-inline">
-            {% trans 'experiments:detail:criteria' %}
-        </h3>
-        <a href="{% url 'experiments:default_criteria' experiment.pk %}?next={{ request.path }}">
-            {% trans 'experiments:detail:edit_default_criteria' %}
-        </a>
-        -
-        <a href="{% url 'experiments:specific_criteria' experiment.pk %}">
-            {% trans 'experiments:detail:edit_specific_criteria' %}
-        </a><br/>
-        {% include 'experiments/criteria_snippit.html' %}
+        <div class="col-4">
+            <div class="p-2">
+                <h3 class="d-inline">
+                    {% trans 'experiments:detail:criteria' %}
+                </h3>
+                <a href="{% url 'experiments:specific_criteria' experiment.pk %}">
+                    {% trans 'experiments:detail:edit_specific_criteria' %}
+                </a>
+            </div>
+            {% include 'experiments/criteria_snippit.html' %}
+        </div>
     </div>
 </div>
-<br/>

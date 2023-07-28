@@ -1,5 +1,5 @@
 import json
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 
 from django.core.exceptions import BadRequest
 from django.test import TestCase
@@ -13,6 +13,8 @@ from participants.models import Participant
 from .models import Experiment
 from .views.call_views import AppointmentConfirm
 from .views.invite_views import InviteParticipantsForExperimentView
+
+from experiments.models import TimeSlot
 
 
 class AppointmentTests(TestCase):
@@ -157,3 +159,22 @@ class InviteTests(TestCase):
         response = InviteParticipantsForExperimentView.as_view()(request, experiment=self.experiment.pk)
 
         self.assertEqual(len(response.context_data["object_list"]), 0)
+
+
+# new test written in pytest style
+
+
+def test_experiment_detail_view(admin_client, admin_user, sample_experiment, sample_participant):
+    # make an appointment
+    timeslot = TimeSlot.objects.create(
+        start=datetime.now() + timedelta(hours=24),
+        end=datetime.now() + timedelta(hours=25),
+        experiment=sample_experiment,
+    )
+    appointment = sample_participant.appointments.create(
+        experiment=sample_experiment, leader=admin_user, timeslot=timeslot
+    )
+
+    response = admin_client.get(f"/experiments/{sample_experiment.pk}/")
+
+    assert appointment in response.context["appointments"].all()
