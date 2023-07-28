@@ -6,15 +6,15 @@
 
 <div class="uu-inner-container">
     <div class="col-12">
-        <h3 class="d-inline">
-            {% trans 'experiments:detail:participants' %}
-        </h3>
-        <a href="{% url 'experiments:participants' experiment.pk %}">
-            {% trans 'experiments:detail:participants:view_details' %}
-        </a>
-        <br/>
-        <br/>
-        <table class="w-100 dt">
+        <div class="bg-primary p-2 mb-2">
+            <h3 class="d-inline">
+                {% trans 'experiments:detail:appointments' %}
+            </h3>
+            <a href="{% url 'experiments:participants' experiment.pk %}">
+                {% trans 'experiments:detail:view_participants' %}
+            </a>
+        </div>
+        <table class="w-100 dt_custom table">
             <thead>
                 <tr>
                     <th class="w-50">
@@ -44,3 +44,10 @@
         </table>
     </div>
 </div>
+<script>
+    $('.dt_custom').DataTable({
+        dom: 'tip',
+        searching: false,
+        lengthChange: false,
+    });
+</script>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-28 10:18+0200\n"
+"POT-Creation-Date: 2023-07-28 10:25+0200\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -643,12 +643,12 @@ msgid "experiments:detail:edit_specific_criteria"
 msgstr "Edit specific criteria"
 
 #: experiments/templates/experiments/detail_parts/participants.html:10
-msgid "experiments:detail:participants"
-msgstr "Participants"
+msgid "experiments:detail:appointments"
+msgstr "Appointments"
 
 #: experiments/templates/experiments/detail_parts/participants.html:13
-msgid "experiments:detail:participants:view_details"
-msgstr "View details"
+msgid "experiments:detail:view_participants"
+msgstr "Participants"
 
 #: experiments/templates/experiments/detail_parts/participants.html:21
 msgid "experiments:detail:participants:name"

@@ -31,7 +31,7 @@
 {% block content %}
 <div class="uu-inner-container">
     <div class="col-12">
-        <form method="post" action="{% url 'experiments:remind_participants' experiment.pk %}">
+        <form method="post">
             {% csrf_token %}
             <h2>{% trans 'experiments:participants:expected' %}</h2>
             {% with object_list=future_list %}
