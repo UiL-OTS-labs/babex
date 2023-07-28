@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-04 16:46+0200\n"
+"POT-Creation-Date: 2023-07-28 10:18+0200\n"
 "PO-Revision-Date: 2018-11-23 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -655,8 +655,12 @@ msgid "experiments:detail:participants:name"
 msgstr "Name"
 
 #: experiments/templates/experiments/detail_parts/participants.html:24
-msgid "experiments:detail:participants:date_added"
-msgstr "Date registered"
+msgid "experiments:detail:participants:appointment"
+msgstr "Appointment"
+
+#: experiments/templates/experiments/detail_parts/participants.html:27
+msgid "experiments:detail:participants:outcome"
+msgstr "Outcome"
 
 #: experiments/templates/experiments/detail_parts/timeslots.html:10
 msgid "experiments:detail:timeslots"
@@ -942,7 +946,7 @@ msgstr "Successfully created experiment"
 msgid "experiments:message:update:success"
 msgstr "Successfully updated experiment"
 
-#: experiments/views/experiment_views.py:99
+#: experiments/views/experiment_views.py:98
 msgid "experiments:message:deleted_experiment"
 msgstr "Experiment deleted!"
 
@@ -953,6 +957,9 @@ msgstr "Something went wrong!"
 #: experiments/views/invite_views.py:55
 msgid "experiments:message:invite_success"
 msgstr "Successfully invited participants!"
+
+#~ msgid "experiments:detail:participants:date_added"
+#~ msgstr "Date registered"
 
 #~ msgid "experiments:global:slots"
 #~ msgstr "Slots"

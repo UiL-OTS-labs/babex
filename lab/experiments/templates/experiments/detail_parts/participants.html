@@ -17,11 +17,14 @@
         <table class="w-100 dt">
             <thead>
                 <tr>
-                    <th class="w-75">
+                    <th class="w-50">
                         {% trans 'experiments:detail:participants:name' %}
                     </th>
                     <th class="w-25">
-                        {% trans 'experiments:detail:participants:date_added' %}
+                        {% trans 'experiments:detail:participants:appointment' %}
+                    </th>
+                    <th class="w-25">
+                        {% trans 'experiments:detail:participants:outcome' %}
                     </th>
                 </tr>
             </thead>
@@ -30,8 +33,11 @@
                     <td>
                         {{ appointment.participant.name }}
                     </td>
-                    <td data-order="{{ appointment.creation_date|date:'U' }}">
-                        {{ appointment.creation_date|date:"l d M Y, H:i"|capfirst }}
+                    <td data-order="{{ appointment.start|date:'U' }}">
+                        {{ appointment.start|date:"l d M Y, H:i"|capfirst }}
+                    </td>
+                    <td>
+                        {{ appointment.outcome|lower }}
                     </td>
                 </tr>
             {% endfor %}
