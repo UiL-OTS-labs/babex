@@ -137,8 +137,8 @@
                 <h3 class="d-inline">
                     {% trans 'experiments:detail:criteria' %}
                 </h3>
-                <a href="{% url 'experiments:specific_criteria' experiment.pk %}">
-                    {% trans 'experiments:detail:edit_specific_criteria' %}
+                <a href="{% url 'experiments:default_criteria' experiment.pk %}?next={{ request.path }}">
+                    {% trans 'experiments:detail:edit_default_criteria' %}
                 </a>
             </div>
             {% include 'experiments/criteria_snippit.html' %}
