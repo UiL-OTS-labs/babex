@@ -157,3 +157,10 @@ class InviteTests(TestCase):
         response = InviteParticipantsForExperimentView.as_view()(request, experiment=self.experiment.pk)
 
         self.assertEqual(len(response.context_data["object_list"]), 0)
+
+
+# new test written in pytest style
+
+
+def test_experiment_detail_view(admin_client, sample_experiment):
+    response = admin_client.get(f"/experiments/{sample_experiment.pk}/")
