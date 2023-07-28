@@ -6,22 +6,25 @@
 
 <div class="uu-inner-container">
     <div class="col-12">
-        <h3 class="d-inline">
-            {% trans 'experiments:detail:participants' %}
-        </h3>
-        <a href="{% url 'experiments:participants' experiment.pk %}">
-            {% trans 'experiments:detail:participants:view_details' %}
-        </a>
-        <br/>
-        <br/>
-        <table class="w-100 dt">
+        <div class="bg-primary p-2 mb-2">
+            <h3 class="d-inline">
+                {% trans 'experiments:detail:appointments' %}
+            </h3>
+            <a href="{% url 'experiments:participants' experiment.pk %}">
+                {% trans 'experiments:detail:view_participants' %}
+            </a>
+        </div>
+        <table class="w-100 dt_custom table">
             <thead>
                 <tr>
-                    <th class="w-75">
+                    <th class="w-50">
                         {% trans 'experiments:detail:participants:name' %}
                     </th>
                     <th class="w-25">
-                        {% trans 'experiments:detail:participants:date_added' %}
+                        {% trans 'experiments:detail:participants:appointment' %}
+                    </th>
+                    <th class="w-25">
+                        {% trans 'experiments:detail:participants:outcome' %}
                     </th>
                 </tr>
             </thead>
@@ -30,11 +33,21 @@
                     <td>
                         {{ appointment.participant.name }}
                     </td>
-                    <td data-order="{{ appointment.creation_date|date:'U' }}">
-                        {{ appointment.creation_date|date:"l d M Y, H:i"|capfirst }}
+                    <td data-order="{{ appointment.start|date:'U' }}">
+                        {{ appointment.start|date:"l d M Y, H:i"|capfirst }}
+                    </td>
+                    <td>
+                        {{ appointment.outcome|lower }}
                     </td>
                 </tr>
             {% endfor %}
         </table>
     </div>
 </div>
+<script>
+    $('.dt_custom').DataTable({
+        dom: 'tip',
+        searching: false,
+        lengthChange: false,
+    });
+</script>

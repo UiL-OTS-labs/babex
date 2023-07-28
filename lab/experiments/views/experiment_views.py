@@ -75,7 +75,6 @@ class ExperimentDetailView(ExperimentLeaderMixin, generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["timeslots"] = self._get_timeslots()
         context["appointments"] = self.object.appointments.all()
 
         # progress overview
