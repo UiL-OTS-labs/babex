@@ -133,9 +133,14 @@ def build_exclusion_filters(default_criteria, filters=None) -> dict:
         if getattr(default_criteria, var) != "I":
             filters[var] = getattr(default_criteria, var)
 
-    # Dyslexia is always a filter
-    expected_value = default_criteria.dyslexia == "Y"
-    filters["dyslexic_parent"] = expected_value
+    if default_criteria.dyslexia == "Y":
+        # should have a dyslexic parent
+        filters["dyslexic_parent_bool"] = True
+    elif default_criteria.dyslexia == "N":
+        # should not have a dyslexic parent
+        filters["dyslexic_parent_bool"] = False
+    else:  # indifferent
+        pass
 
     # Rewrite this expected to a boolean value, as it's stored as a boolean
     if default_criteria.multilingual != "I":

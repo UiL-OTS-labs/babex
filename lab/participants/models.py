@@ -68,6 +68,14 @@ class Participant(models.Model):
 
         return self.sex
 
+    @property
+    def dyslexic_parent_bool(self) -> bool | None:
+        if self.dyslexic_parent in ["M", "F", "BOTH"]:
+            return True
+        elif self.dyslexic_parent == "NO":
+            return False
+        return None
+
     def dyslexic_parent_display(self):
         mappings = {
             "M": _("participant:attribute:dyslexic_parent:m"),
