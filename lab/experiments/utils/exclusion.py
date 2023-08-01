@@ -163,10 +163,8 @@ def check_default_criteria(participant: Participant, filters: dict) -> list:
     # Loop over the defined filters
     for attr, expected_value in filters.items():
         found_value = getattr(participant, attr, None)
-        # If we the found value is not the same as the expected,
-        # mark this participant as 'to exclude'. None means we don't have this
-        # value, so we give it the benifit of the doubt and allow it anyways
-        if found_value != expected_value and found_value is not None:
+
+        if found_value != expected_value:
             failed_criteria.append(attr)
 
     return failed_criteria
