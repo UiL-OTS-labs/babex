@@ -17,7 +17,7 @@ def sample_signup(db):
         email="parent@localhost.local",
         english_contact=True,
         newsletter=True,
-        dyslexic_parent=False,
+        dyslexic_parent="NO",
         multilingual=True,
         status=Signup.Status.NEW,
         email_verified=timezone.now(),
