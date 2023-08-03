@@ -22,7 +22,6 @@ def participant(apps):
         phonenumber="987654321",
         dyslexic_parent=False,
         language="nl",
-        capable=True,
         email_subscription=True,
     )
     yield participant

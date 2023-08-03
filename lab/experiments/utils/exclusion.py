@@ -36,15 +36,8 @@ def get_eligible_participants_for_experiment(experiment: Experiment, on_mailingl
     default_criteria = experiment.defaultcriteria
     specific_experiment_criteria = experiment.experimentcriterion_set.select_related("criterion")
 
-    # Base filters: a participant should be capable, and by default be on the
-    # mailing list
-    filters = {
-        "email_subscription": on_mailinglist,
-        "capable": True,
-    }
-
     # Build the rest of the filters
-    filters = build_exclusion_filters(default_criteria, filters)
+    filters = build_exclusion_filters(default_criteria)
 
     # Exclude deactivated participants
     participants = Participant.objects.filter(deactivated=None)
