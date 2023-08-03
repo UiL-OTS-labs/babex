@@ -21,7 +21,7 @@ def sample_participant(db):
         birth_date=date(2020, 1, 1),
         multilingual=False,
         phonenumber="987654321",
-        dyslexic_parent="UNK",
+        dyslexic_parent="NO",
         language="nl",
         capable=True,
         email_subscription=True,
