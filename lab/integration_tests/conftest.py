@@ -35,7 +35,7 @@ def as_leader(sb, django_user_model, live_server):
 
 @pytest.fixture
 def sample_experiment(admin_user, db):
-    yield admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
+    yield admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create(dyslexia="I"))
 
 
 @pytest.fixture
