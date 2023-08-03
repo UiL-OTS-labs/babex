@@ -80,10 +80,6 @@ msgstr "Geslacht"
 msgid "participant:attribute:email_subscription"
 msgstr "Op maillijst"
 
-#: participants/models.py:116
-msgid "participant:attribute:capable"
-msgstr "Bekwaam"
-
 #: participants/models.py:128
 msgid "participant:attribute:created"
 msgstr "Aangemaakt op"
