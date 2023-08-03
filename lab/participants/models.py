@@ -9,6 +9,13 @@ from utils.models import EncryptedManager
 
 
 class Participant(models.Model):
+    class DyslexicParent(models.TextChoices):
+        MALE = "M"
+        FEMALE = "F"
+        BOTH = "BOTH"
+        NEITHER = "NO"
+        UNKNOWN = "UNK"
+
     objects = EncryptedManager()
 
     email = e_fields.EncryptedEmailField(_("participant:attribute:email"))
@@ -18,11 +25,11 @@ class Participant(models.Model):
         _("participant:attribute:dyslexic_parent"),
         max_length=5,
         choices=(
-            ("F", _("participant:attribute:dyslexic_parent:f")),
-            ("M", _("participant:attribute:dyslexic_parent:m")),
-            ("BOTH", _("participant:attribute:dyslexic_parent:both")),
-            ("NO", _("participant:attribute:dyslexic_parent:no")),
-            ("UNK", _("participant:attribute:dyslexic_parent:unk")),
+            (DyslexicParent.FEMALE, _("participant:attribute:dyslexic_parent:f")),
+            (DyslexicParent.MALE, _("participant:attribute:dyslexic_parent:m")),
+            (DyslexicParent.BOTH, _("participant:attribute:dyslexic_parent:both")),
+            (DyslexicParent.NEITHER, _("participant:attribute:dyslexic_parent:no")),
+            (DyslexicParent.UNKNOWN, _("participant:attribute:dyslexic_parent:unk")),
         ),
     )
     birth_date = e_fields.EncryptedDateField(_("participant:attribute:birth_date"), blank=True, null=True)
@@ -70,9 +77,13 @@ class Participant(models.Model):
 
     @property
     def dyslexic_parent_bool(self) -> bool | None:
-        if self.dyslexic_parent in ["M", "F", "BOTH"]:
+        if self.dyslexic_parent in [
+            Participant.DyslexicParent.FEMALE,
+            Participant.DyslexicParent.MALE,
+            Participant.DyslexicParent.BOTH,
+        ]:
             return True
-        elif self.dyslexic_parent == "NO":
+        elif self.dyslexic_parent == Participant.DyslexicParent.NEITHER:
             return False
         return None
 

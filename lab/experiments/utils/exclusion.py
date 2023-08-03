@@ -130,13 +130,13 @@ def build_exclusion_filters(default_criteria, filters=None) -> dict:
         filters = {}
 
     for var in indifferentable_vars:
-        if getattr(default_criteria, var) != "I":
+        if getattr(default_criteria, var) != DefaultCriteria.Dyslexia.INDIFFERENT:
             filters[var] = getattr(default_criteria, var)
 
-    if default_criteria.dyslexia == "Y":
+    if default_criteria.dyslexia == DefaultCriteria.Dyslexia.YES:
         # should have a dyslexic parent
         filters["dyslexic_parent_bool"] = True
-    elif default_criteria.dyslexia == "N":
+    elif default_criteria.dyslexia == DefaultCriteria.Dyslexia.NO:
         # should not have a dyslexic parent
         filters["dyslexic_parent_bool"] = False
     else:  # indifferent

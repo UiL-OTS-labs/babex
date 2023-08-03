@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 
 from experiments.models import DefaultCriteria, TimeSlot
 from experiments.utils.exclusion import get_eligible_participants_for_experiment
+from participants.models import Participant
 
 
 def test_excluded_experiment(admin_user, sample_participant):
@@ -74,32 +75,43 @@ def test_required_experiment_multiple(admin_user, sample_participant):
 
 
 def test_dyslexia_required(admin_user, sample_participant):
-    experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create(dyslexia="Y"))
-    for value in ["M", "F", "BOTH"]:
+    experiment = admin_user.experiments.create(
+        defaultcriteria=DefaultCriteria.objects.create(dyslexia=DefaultCriteria.Dyslexia.YES)
+    )
+    for value in [Participant.DyslexicParent.FEMALE, Participant.DyslexicParent.MALE, Participant.DyslexicParent.BOTH]:
         sample_participant.dyslexic_parent = value
         sample_participant.save()
         assert sample_participant in get_eligible_participants_for_experiment(experiment)
-    for value in ["NO", "UNK"]:
+    for value in [Participant.DyslexicParent.NEITHER, Participant.DyslexicParent.UNKNOWN]:
         sample_participant.dyslexic_parent = value
         sample_participant.save()
         assert sample_participant not in get_eligible_participants_for_experiment(experiment)
 
 
 def test_dyslexia_excluded(admin_user, sample_participant):
-    experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create(dyslexia="N"))
-    for value in ["M", "F", "BOTH", "UNK"]:
+    experiment = admin_user.experiments.create(
+        defaultcriteria=DefaultCriteria.objects.create(dyslexia=DefaultCriteria.Dyslexia.NO)
+    )
+    for value in [
+        Participant.DyslexicParent.FEMALE,
+        Participant.DyslexicParent.MALE,
+        Participant.DyslexicParent.BOTH,
+        Participant.DyslexicParent.UNKNOWN,
+    ]:
         sample_participant.dyslexic_parent = value
         sample_participant.save()
         assert sample_participant not in get_eligible_participants_for_experiment(experiment)
-    for value in ["NO"]:
+    for value in [Participant.DyslexicParent.NEITHER]:
         sample_participant.dyslexic_parent = value
         sample_participant.save()
         assert sample_participant in get_eligible_participants_for_experiment(experiment)
 
 
 def test_dyslexia_indifferent(admin_user, sample_participant):
-    experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create(dyslexia="I"))
-    for value in ["M", "F", "BOTH", "UNK", "NO"]:
+    experiment = admin_user.experiments.create(
+        defaultcriteria=DefaultCriteria.objects.create(dyslexia=DefaultCriteria.Dyslexia.INDIFFERENT)
+    )
+    for value in [choice[0] for choice in Participant.DyslexicParent.choices]:
         sample_participant.dyslexic_parent = value
         sample_participant.save()
         assert sample_participant in get_eligible_participants_for_experiment(experiment)

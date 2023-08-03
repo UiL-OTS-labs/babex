@@ -18,7 +18,7 @@ def participant(apps):
         birth_date=date(2020, 1, 1),
         multilingual=False,
         phonenumber="987654321",
-        dyslexic_parent='UNK',
+        dyslexic_parent=Participant.DyslexicParent.UNKNOWN,
         language="nl",
         capable=True,
         email_subscription=True,

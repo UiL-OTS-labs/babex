@@ -35,7 +35,9 @@ def as_leader(sb, django_user_model, live_server):
 
 @pytest.fixture
 def sample_experiment(admin_user, db):
-    yield admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create(dyslexia="I"))
+    yield admin_user.experiments.create(
+        defaultcriteria=DefaultCriteria.objects.create(dyslexia=DefaultCriteria.Dyslexia.INDIFFERENT)
+    )
 
 
 @pytest.fixture
@@ -47,7 +49,7 @@ def sample_participant(db):
         birth_date=date(2020, 1, 1),
         multilingual=False,
         phonenumber="987654321",
-        dyslexic_parent="UNK",
+        dyslexic_parent=Participant.DyslexicParent.UNKNOWN,
         language="nl",
         capable=True,
         email_subscription=True,

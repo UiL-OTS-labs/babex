@@ -3,6 +3,7 @@ from datetime import datetime
 import pytest
 from django.utils import timezone
 
+from participants.models import Participant
 from signups.models import Signup
 
 
@@ -17,7 +18,7 @@ def sample_signup(db):
         email="parent@localhost.local",
         english_contact=True,
         newsletter=True,
-        dyslexic_parent="NO",
+        dyslexic_parent=Participant.DyslexicParent.NEITHER,
         multilingual=True,
         status=Signup.Status.NEW,
         email_verified=timezone.now(),

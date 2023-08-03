@@ -24,7 +24,7 @@ class AppointmentTests(TestCase):
         cls.experiment = Experiment.objects.create()
         cls.experiment.leaders.add(cls.user)
 
-        cls.participant = Participant.objects.create(dyslexic_parent="UNK")
+        cls.participant = Participant.objects.create(dyslexic_parent=Participant.DyslexicParent.UNKNOWN)
 
     def setUp(self):
         self.factory = APIRequestFactory()
@@ -113,7 +113,7 @@ class InviteTests(TestCase):
         cls.experiment.leaders.add(cls.user)
 
         cls.participant = Participant.objects.create(
-            dyslexic_parent="NO",
+            dyslexic_parent=Participant.DyslexicParent.NEITHER,
             multilingual=False,
             email_subscription=True,  # TODO: this shouldn't have an effect on exclusions
             language="nl",  # default experiment language
