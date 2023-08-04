@@ -25,5 +25,5 @@ urlpatterns = [
     #
     path("survey_invites/", views.SurveyInvitesView.as_view()),
     #
-    path("unsubscribe/", views.UnsubscribeView.as_view()),
+    path("deactivate/", views.DeactivateView.as_view()),
 ]

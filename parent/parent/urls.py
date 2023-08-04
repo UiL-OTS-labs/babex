@@ -6,13 +6,13 @@ from .views import (
     SignupView,
     cancel_appointment_view,
     data_management_view,
+    deactivate_view,
     home,
     overview,
     signup_verify,
     status,
     survey_response_view,
     survey_view,
-    unsubscribe_view,
 )
 
 urlpatterns = [
@@ -36,5 +36,5 @@ urlpatterns = [
     path("appointment/<int:appointment_id>/cancel/", cancel_appointment_view, name="appointment.cancel"),
     # data management
     path("data/", data_management_view, name="data"),
-    path("data/unsubscribe/", unsubscribe_view, name="data.unsubscribe"),
+    path("data/deactivate/", deactivate_view, name="data.deactivate"),
 ]

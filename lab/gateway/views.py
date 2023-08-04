@@ -103,7 +103,7 @@ class SurveyViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-class UnsubscribeView(views.APIView):
+class DeactivateView(views.APIView):
     permission_classes = [HasParticipant]
 
     def post(self, request, *args, **kwargs):

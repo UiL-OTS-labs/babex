@@ -149,8 +149,8 @@ def data_management_view(request):
 
 
 @session_required
-def unsubscribe_view(request):
-    ok, _ = gateway(request, f"/gateway/unsubscribe/", method="post")
+def deactivate_view(request):
+    ok, _ = gateway(request, "/gateway/deactivate/", method="post")
     if not ok:
         messages.error(request, "error")
         return redirect("data")
