@@ -93,6 +93,7 @@ class SignupForm(TemplatedForm):
             ("M", _("parent:forms:signup:dyslexic_parent:m")),
             ("BOTH", _("parent:forms:signup:dyslexic_parent:both")),
             ("NO", _("parent:forms:signup:dyslexic_parent:no")),
+            ("UNK", _("parent:forms:signup:dyslexic_parent:unk")),
         ),
         widget=BootstrapRadioSelect(),
     )

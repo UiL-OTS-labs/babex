@@ -2,9 +2,10 @@ from datetime import datetime, timedelta
 
 from experiments.models import DefaultCriteria, TimeSlot
 from experiments.utils.exclusion import get_eligible_participants_for_experiment
+from participants.models import Participant
 
 
-def test_excluded_experiment(client, admin_user, sample_participant):
+def test_excluded_experiment(admin_user, sample_participant):
     experiment_1 = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
     experiment_2 = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
     experiment_3 = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
@@ -25,7 +26,7 @@ def test_excluded_experiment(client, admin_user, sample_participant):
     assert sample_participant not in get_eligible_participants_for_experiment(experiment_3)
 
 
-def test_required_experiment(client, admin_user, sample_participant):
+def test_required_experiment(admin_user, sample_participant):
     experiment_1 = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
     experiment_2 = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
 
@@ -46,7 +47,7 @@ def test_required_experiment(client, admin_user, sample_participant):
     assert sample_participant in get_eligible_participants_for_experiment(experiment_2)
 
 
-def test_required_experiment_multiple(client, admin_user, sample_participant):
+def test_required_experiment_multiple(admin_user, sample_participant):
     experiment_1 = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
     experiment_2 = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
     experiment_3 = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
@@ -71,3 +72,46 @@ def test_required_experiment_multiple(client, admin_user, sample_participant):
     sample_participant.appointments.create(experiment=experiment_2, leader=admin_user, timeslot=timeslot)
 
     assert sample_participant in get_eligible_participants_for_experiment(experiment_3)
+
+
+def test_dyslexia_required(admin_user, sample_participant):
+    experiment = admin_user.experiments.create(
+        defaultcriteria=DefaultCriteria.objects.create(dyslexia=DefaultCriteria.Dyslexia.YES)
+    )
+    for value in [Participant.DyslexicParent.FEMALE, Participant.DyslexicParent.MALE, Participant.DyslexicParent.BOTH]:
+        sample_participant.dyslexic_parent = value
+        sample_participant.save()
+        assert sample_participant in get_eligible_participants_for_experiment(experiment)
+    for value in [Participant.DyslexicParent.NEITHER, Participant.DyslexicParent.UNKNOWN]:
+        sample_participant.dyslexic_parent = value
+        sample_participant.save()
+        assert sample_participant not in get_eligible_participants_for_experiment(experiment)
+
+
+def test_dyslexia_excluded(admin_user, sample_participant):
+    experiment = admin_user.experiments.create(
+        defaultcriteria=DefaultCriteria.objects.create(dyslexia=DefaultCriteria.Dyslexia.NO)
+    )
+    for value in [
+        Participant.DyslexicParent.FEMALE,
+        Participant.DyslexicParent.MALE,
+        Participant.DyslexicParent.BOTH,
+        Participant.DyslexicParent.UNKNOWN,
+    ]:
+        sample_participant.dyslexic_parent = value
+        sample_participant.save()
+        assert sample_participant not in get_eligible_participants_for_experiment(experiment)
+    for value in [Participant.DyslexicParent.NEITHER]:
+        sample_participant.dyslexic_parent = value
+        sample_participant.save()
+        assert sample_participant in get_eligible_participants_for_experiment(experiment)
+
+
+def test_dyslexia_indifferent(admin_user, sample_participant):
+    experiment = admin_user.experiments.create(
+        defaultcriteria=DefaultCriteria.objects.create(dyslexia=DefaultCriteria.Dyslexia.INDIFFERENT)
+    )
+    for value in [choice[0] for choice in Participant.DyslexicParent.choices]:
+        sample_participant.dyslexic_parent = value
+        sample_participant.save()
+        assert sample_participant in get_eligible_participants_for_experiment(experiment)

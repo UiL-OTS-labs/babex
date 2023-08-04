@@ -34,7 +34,7 @@ class Signup(rest.Resource):
     english_contact = rest.BoolField()
     newsletter = rest.BoolField()
 
-    dyslexic_parent = rest.BoolField()
+    dyslexic_parent = rest.TextField()
     multilingual = rest.BoolField()
 
     link_token = rest.TextField(null=True)
@@ -49,7 +49,7 @@ class SignupView(FormView):
     def form_valid(self, form):
         # filter out blank fields
         fields = {key: value for key, value in form.cleaned_data.items() if value}
-        fields['pregnancy_weeks'], fields['pregnancy_days'] = fields['pregnancy_duration']
+        fields["pregnancy_weeks"], fields["pregnancy_days"] = fields["pregnancy_duration"]
         signup = Signup(**fields)
         signup.put()
         return super().form_valid(form)
@@ -141,4 +141,4 @@ def cancel_appointment_view(request, appointment_id):
 
 
 def home(request):
-    return render(request, 'parent/home.html')
+    return render(request, "parent/home.html")

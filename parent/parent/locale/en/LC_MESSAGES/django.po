@@ -60,7 +60,7 @@ msgstr "E-mail"
 
 #: parent/forms.py:89
 msgid "parent:forms:signup:dyslexic_parent"
-msgstr "Dyslexic parent?"
+msgstr "Does any of the (biological) parents have Dyslexia?"
 
 #: parent/forms.py:92
 msgid "parent:forms:signup:dyslexic_parent:f"
@@ -77,6 +77,9 @@ msgstr "Yes, both"
 #: parent/forms.py:95
 msgid "parent:forms:signup:dyslexic_parent:no"
 msgstr "No"
+
+msgid "parent:forms:signup:dyslexic_parent:unk"
+msgstr "Prefer not to say"
 
 #: parent/forms.py:101
 msgid "parent:forms:signup:multilingual"
