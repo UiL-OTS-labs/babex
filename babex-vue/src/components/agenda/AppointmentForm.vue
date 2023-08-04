@@ -62,43 +62,42 @@
 </script>
 
 <template>
-  <p><b>{{ _('Participant:') }}</b> {{form.participant}}</p>
-  <form @submit="onSubmit">
-    <div>{{ _('From:') }}</div>
-    <DateTimePicker class="appointment-start" v-model="form.start" :readonly="isPast()" />
-
-    <div>{{ _('To:') }}</div>
-    <DateTimePicker class="appointment-end" v-model="form.end" :readonly="isPast()" />
-
-    <div>
-      <p><b>{{ _('Location:') }}</b> {{form.location}}</p>
+    <div class="mt-4 mb-4">
+        <div><b>{{ _('Participant:') }}</b> {{form.participant}}</div>
+        <div><b>{{ _('Experiment:') }}</b> {{event.extendedProps.experiment}}</div>
+        <div><b>{{ _('Location:') }}</b> {{form.location}}</div>
     </div>
+    <form @submit="onSubmit">
+        <div>{{ _('From:') }}</div>
+        <DateTimePicker class="appointment-start" v-model="form.start" :readonly="isPast()" />
 
-    <div>
-      <label>{{ _('Comments:') }}</label>
-      <textarea class="form-control" v-model="form.comment" :readonly="isPast()"></textarea>
+        <div>{{ _('To:') }}</div>
+        <DateTimePicker class="appointment-end" v-model="form.end" :readonly="isPast()" />
+
+        <div>
+            <label>{{ _('Comments:') }}</label>
+            <textarea class="form-control" v-model="form.comment" :readonly="isPast()"></textarea>
+        </div>
+
+        <!-- only show outcome when the appointment (start time) is in the past -->
+        <div v-if="isPast()" class="mt-4">
+            <div class="form-check">
+                <label class="form-check-label"><input class="form-check-input" type="radio" value="COMPLETED" v-model="form.outcome">{{ _('Complete') }}</label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label"><input class="form-check-input" type="radio" value="NOSHOW" v-model="form.outcome">{{ _('No-show') }}</label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label"><input class="form-check-input" type="radio" value="EXCLUDED" v-model="form.outcome">{{ _('Exclude') }}</label>
+            </div>
+        </div>
+
+        <div class="mt-4"><button class="btn btn-primary save">{{ _('Save') }}</button></div>
+    </form>
+
+    <div v-if="!isPast() && !isCanceled()">
+        <button class="btn btn-danger" @click="cancel()">{{ _('Cancel appointment') }}</button>
     </div>
-    <hr>
-
-    <!-- only show outcome when the appointment (start time) is in the past -->
-    <div v-if="isPast()">
-        <div class="form-check">
-            <label class="form-check-label"><input class="form-check-input" type="radio" value="COMPLETED" v-model="form.outcome">{{ _('Complete') }}</label>
-        </div>
-        <div class="form-check">
-            <label class="form-check-label"><input class="form-check-input" type="radio" value="NOSHOW" v-model="form.outcome">{{ _('No-show') }}</label>
-        </div>
-        <div class="form-check">
-            <label class="form-check-label"><input class="form-check-input" type="radio" value="EXCLUDED" v-model="form.outcome">{{ _('Exclude') }}</label>
-        </div>
-    </div>
-
-    <div><button class="btn btn-primary save">{{ _('Save') }}</button></div>
-  </form>
-
-  <div v-if="!isPast() && !isCanceled()">
-    <button class="btn btn-danger" @click="cancel()">{{ _('Cancel appointment') }}</button>
-  </div>
 </template>
 
 <style scoped>

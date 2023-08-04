@@ -21,13 +21,14 @@
             start: event.start,
             end: event.end,
             title: event.participant,
-            location : event.location,
+            location: event.location,
             // extra field will be displayed in a separate line
             extra: `${event.location} (${event.leader})`,
             display: 'block',
             category: 'appointment',
             comment: event.comment,
-            outcome: event.outcome
+            outcome: event.outcome,
+            experiment: event.experiment
         };
     }
 
