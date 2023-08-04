@@ -34,7 +34,7 @@ class Signup(rest.Resource):
     english_contact = rest.BoolField()
     newsletter = rest.BoolField()
 
-    dyslexic_parent = rest.BoolField()
+    dyslexic_parent = rest.TextField()
     multilingual = rest.BoolField()
 
     link_token = rest.TextField(null=True)

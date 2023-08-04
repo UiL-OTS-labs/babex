@@ -20,7 +20,7 @@ class Signup(models.Model):
     english_contact = e_fields.EncryptedBooleanField()
     newsletter = e_fields.EncryptedBooleanField()
 
-    dyslexic_parent = e_fields.EncryptedBooleanField()
+    dyslexic_parent = e_fields.EncryptedCharField(max_length=5)
     multilingual = e_fields.EncryptedBooleanField()
 
     birth_weight = e_fields.EncryptedIntegerField(_("participant:attribute:birth_weight"))

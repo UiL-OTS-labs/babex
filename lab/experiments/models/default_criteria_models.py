@@ -16,10 +16,15 @@ class DefaultCriteria(models.Model):
         ("I", _("experiments:globals:indifferent")),
     )
 
+    class Dyslexia(models.TextChoices):
+        YES = "Y"
+        NO = "N"
+        INDIFFERENT = "I"
+
     DYSLEXIA = (
-        ("Y", _("default_criteria:attribute:dyslexia:yes")),
-        ("N", _("default_criteria:attribute:dyslexia:no")),
-        ("I", _("experiments:globals:indifferent")),
+        (Dyslexia.YES, _("default_criteria:attribute:dyslexia:yes")),
+        (Dyslexia.NO, _("default_criteria:attribute:dyslexia:no")),
+        (Dyslexia.INDIFFERENT, _("experiments:globals:indifferent")),
     )
 
     language = models.TextField(

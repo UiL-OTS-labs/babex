@@ -123,12 +123,17 @@ def build_exclusion_filters(default_criteria, filters=None) -> dict:
         filters = {}
 
     for var in indifferentable_vars:
-        if getattr(default_criteria, var) != "I":
+        if getattr(default_criteria, var) != DefaultCriteria.Dyslexia.INDIFFERENT:
             filters[var] = getattr(default_criteria, var)
 
-    # Dyslexia is always a filter
-    expected_value = default_criteria.dyslexia == "Y"
-    filters["dyslexic_parent"] = expected_value
+    if default_criteria.dyslexia == DefaultCriteria.Dyslexia.YES:
+        # should have a dyslexic parent
+        filters["dyslexic_parent_bool"] = True
+    elif default_criteria.dyslexia == DefaultCriteria.Dyslexia.NO:
+        # should not have a dyslexic parent
+        filters["dyslexic_parent_bool"] = False
+    else:  # indifferent
+        pass
 
     # Rewrite this expected to a boolean value, as it's stored as a boolean
     if default_criteria.multilingual != "I":
@@ -151,10 +156,8 @@ def check_default_criteria(participant: Participant, filters: dict) -> list:
     # Loop over the defined filters
     for attr, expected_value in filters.items():
         found_value = getattr(participant, attr, None)
-        # If we the found value is not the same as the expected,
-        # mark this participant as 'to exclude'. None means we don't have this
-        # value, so we give it the benifit of the doubt and allow it anyways
-        if found_value != expected_value and found_value is not None:
+
+        if found_value != expected_value:
             failed_criteria.append(attr)
 
     return failed_criteria
