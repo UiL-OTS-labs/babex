@@ -72,10 +72,12 @@ def overview(request):
     ok, appointments = gateway(request, "/gateway/appointment/")
     if not ok:
         messages.error(request, "error retreiving appointment data")
+        return render(request, "parent/overview.html")
 
     ok, survey_invites = gateway(request, "/gateway/survey_invites/")
     if not ok:
         messages.error(request, "error retreiving survey data")
+        return render(request, "parent/overview.html")
 
     appointments = sorted(appointments, key=itemgetter("start"))
     # only show future appointments
@@ -153,6 +155,8 @@ def unsubscribe_view(request):
         messages.error(request, "error")
         return redirect("data")
 
+    # remove session token
+    del request.session["token"]
     return render(request, "data/removed.html")
 
 

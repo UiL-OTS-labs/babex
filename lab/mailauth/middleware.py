@@ -14,10 +14,15 @@ class SessionTokenMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
+        request.participant = None
         try:
             token = request.headers.get("Authorization").split(" ")[1]
-            request.participant = lookup_session_token(token)
+            participant = lookup_session_token(token)
+
+            # make sure the participant wasn't deactivated
+            if participant.deactivated is None:
+                request.participant = participant
         except Exception:
-            request.participant = None
+            pass
 
         return self.get_response(request)
