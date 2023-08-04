@@ -29,7 +29,7 @@ class MailAuthView(views.APIView):
     def post(self, request, *args, **kwargs):
         email = request.data["email"]
 
-        participant = Participant.objects.efilter(email=email)
+        participant = Participant.objects.efilter(deactivated=None, email=email)
         try:
             # read from generator
             next(participant)
