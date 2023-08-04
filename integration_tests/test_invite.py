@@ -9,25 +9,6 @@ from django.utils import timezone
 import pytest
 
 
-@pytest.fixture
-def participant(apps):
-    suffix = ''.join(random.choice(string.digits) for i in range(4))
-    Participant = apps.lab.get_model("participants", "Participant")
-    participant = Participant.objects.create(
-        email=f"baby{suffix}@baby.com",
-        name="Baby McBaby",
-        parent_name="Parent McParent",
-        birth_date=date(2020, 1, 1),
-        multilingual=False,
-        phonenumber="987654321",
-        dyslexic_parent=False,
-        language="nl",
-        email_subscription=True,
-    )
-    yield participant
-    participant.delete()
-
-
 def test_cancel_appointment_from_email(apps, participant, mailbox, link_from_mail, sb):
     apps.lab.load('admin')  # generate admin user
     Experiment = apps.lab.get_model('experiments', 'Experiment')

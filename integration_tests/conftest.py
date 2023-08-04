@@ -1,14 +1,18 @@
-from collections import namedtuple
-import importlib
-import os
-import pytest
-import subprocess
 import email
 import glob
+import importlib
+import os
+import random
 import re
 import shutil
+import string
+import subprocess
+from collections import namedtuple
+from datetime import date
 
 import django
+import pytest
+
 from lab_settings import EMAIL_FILE_PATH
 
 LAB_PORT = 18000
@@ -191,3 +195,22 @@ def login_as(sb, apps, link_from_mail, mailbox):
         return False
 
     return _delegate
+
+
+@pytest.fixture
+def participant(apps):
+    suffix = ''.join(random.choice(string.digits) for i in range(4))
+    Participant = apps.lab.get_model("participants", "Participant")
+    participant = Participant.objects.create(
+        email=f"baby{suffix}@baby.com",
+        name="Baby McBaby",
+        parent_name="Parent McParent",
+        birth_date=date(2020, 1, 1),
+        multilingual=False,
+        phonenumber="987654321",
+        dyslexic_parent=False,
+        language="nl",
+        email_subscription=True,
+    )
+    yield participant
+    participant.delete()
