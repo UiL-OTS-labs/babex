@@ -49,7 +49,7 @@ class SignupView(FormView):
     def form_valid(self, form):
         # filter out blank fields
         fields = {key: value for key, value in form.cleaned_data.items() if value}
-        fields['pregnancy_weeks'], fields['pregnancy_days'] = fields['pregnancy_duration']
+        fields["pregnancy_weeks"], fields["pregnancy_days"] = fields["pregnancy_duration"]
         signup = Signup(**fields)
         signup.put()
         return super().form_valid(form)
@@ -130,6 +130,7 @@ def survey_response_view(request):
     return JsonResponse(dict(ok=True))
 
 
+@session_required
 def cancel_appointment_view(request, appointment_id):
     # TODO: handle appointment already canceled
     ok, _ = gateway(request, f"/gateway/appointment/{appointment_id}/", method="delete")
@@ -140,5 +141,20 @@ def cancel_appointment_view(request, appointment_id):
     return render(request, "appointment/canceled.html")
 
 
+@session_required
+def data_management_view(request):
+    return render(request, "data/home.html")
+
+
+@session_required
+def unsubscribe_view(request):
+    ok, _ = gateway(request, f"/gateway/unsubscribe/", method="post")
+    if not ok:
+        messages.error(request, "error")
+        return redirect("data")
+
+    return render(request, "data/removed.html")
+
+
 def home(request):
-    return render(request, 'parent/home.html')
+    return render(request, "parent/home.html")

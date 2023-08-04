@@ -1,0 +1,29 @@
+{% extends 'vue/base.html' %}
+{% load i18n %}
+{% load vue3 %}
+
+{% block content %}
+    <div class="uu-sidebar-container uu-sidebar-right">
+        <aside class="uu-sidebar" >
+            <p>{% translate 'Some general information and instructions' %}</p>
+
+            {% include 'parent/side_menu.html' %}
+        </aside>
+        <div class="uu-sidebar-content" >
+            <section>
+                <p>
+                    Intro text about data management.
+                </p>
+                <p>
+                    {% translate 'You can choose to remove your child from the database, which will prevent you from being called for future participation.' %}
+                </p>
+                {% with msg=_('Are you sure?') %}
+                    <form action="{% url 'data.unsubscribe' %}" method="post" onsubmit="return confirm('{{msg}}')">
+                        {% csrf_token %}
+                        <button class="btn btn-danger">{% translate 'Remove from database' %}</button>
+                    </form>
+                {% endwith %}
+            </section>
+        </div>
+    </div>
+{% endblock %}
