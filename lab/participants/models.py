@@ -46,8 +46,6 @@ class Participant(models.Model):
     created = models.DateTimeField(verbose_name=_("participant:attribute:created"), auto_now_add=True)
     deactivated = models.DateTimeField(verbose_name=_("participant:attribute:deactivated"), null=True)
 
-    capable = e_fields.EncryptedBooleanField(_("participant:attribute:capable"), default=True)
-
     @property
     def fullname(self):
         if self.name:

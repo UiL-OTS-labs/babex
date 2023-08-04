@@ -115,7 +115,6 @@ class InviteTests(TestCase):
         cls.participant = Participant.objects.create(
             dyslexic_parent=Participant.DyslexicParent.NEITHER,
             multilingual=False,
-            email_subscription=True,  # TODO: this shouldn't have an effect on exclusions
             language="nl",  # default experiment language
         )
 

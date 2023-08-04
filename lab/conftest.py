@@ -23,7 +23,6 @@ def sample_participant(db):
         phonenumber="987654321",
         dyslexic_parent=Participant.DyslexicParent.NEITHER,
         language="nl",
-        capable=True,
         email_subscription=True,
     )
 
