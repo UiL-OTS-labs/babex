@@ -35,6 +35,14 @@
                     {% endfor %}
                 </ul>
             {% endif %}
+            {% if open_calls %}
+                <p>{% trans 'main:home:open_calls:text' %}
+                <ul>
+                    {% for call in open_calls %}
+                        <li><a href="{% url 'experiments:call' call.experiment.pk call.participant.pk %}">{{ call.participant.name }}</a> ({{ call.creation_date | date:'Y-m-d H:i' }})</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
 
             {% if call_back %}
                 <p>You should call back these parents:</p>

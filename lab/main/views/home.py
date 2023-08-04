@@ -18,6 +18,7 @@ class HomeView(braces.LoginRequiredMixin, generic.TemplateView):
             context["call_back"] = set(
                 call.participant for call in user.call_set.filter(status=Call.CallStatus.CALLBACK)
             )
+            context["open_calls"] = user.call_set.filter(status=Call.CallStatus.STARTED)
             context["missing_outcome"] = (
                 user.appointment_set.filter(outcome=None)
                 .filter(timeslot__start__lte=timezone.now())
