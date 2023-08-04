@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-27 11:51+0200\n"
+"POT-Creation-Date: 2023-08-04 16:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -147,6 +147,12 @@ msgstr "Babex Admin"
 #: main/templates/main/index.html:6 main/templates/main/index.html:12
 msgid "main:home:header"
 msgstr "Home"
+
+#: main/templates/main/index.html:39
+msgid "main:home:open_calls:text"
+msgstr ""
+"These are calls made by you which are missing a status. "
+"Please update the result of each call:"
 
 #: main/templates/main/login_lockout.html:9
 #: main/templates/main/login_lockout.html:17
@@ -313,11 +319,6 @@ msgstr "Password changed!"
 
 #~ msgid "users:home:delete:title"
 #~ msgstr "Delete account"
-
-#~ msgid "main:home:text"
-#~ msgstr ""
-#~ "Welcome {},<br/><br/>There are currently {} open experiments, with {} "
-#~ "free slots. "
 
 #~ msgid "main:home:experiments:name"
 #~ msgstr "Experiments"
