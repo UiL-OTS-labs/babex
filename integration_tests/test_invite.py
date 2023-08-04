@@ -1,8 +1,6 @@
 import random
-import re
 import string
 from datetime import date, timedelta
-from django.core.exceptions import ObjectDoesNotExist
 from django.utils import timezone
 
 
@@ -72,7 +70,6 @@ def test_appointment_in_parent_overview(apps, participant, mailbox, sb, login_as
     Experiment = apps.lab.get_model('experiments', 'Experiment')
     DefaultCriteria = apps.lab.get_model('experiments', 'DefaultCriteria')
     User = apps.lab.get_model('main', 'User')
-    Appointment = apps.lab.get_model('experiments', 'Appointment')
     experiment = Experiment.objects.create(defaultcriteria=DefaultCriteria.objects.create(),
                                            name='Text Experiment')
 
@@ -101,7 +98,6 @@ def test_past_appointment_not_in_parent_overview(apps, participant, mailbox, sb,
     Experiment = apps.lab.get_model('experiments', 'Experiment')
     DefaultCriteria = apps.lab.get_model('experiments', 'DefaultCriteria')
     User = apps.lab.get_model('main', 'User')
-    Appointment = apps.lab.get_model('experiments', 'Appointment')
     experiment = Experiment.objects.create(defaultcriteria=DefaultCriteria.objects.create(),
                                            name='Text Experiment')
 
