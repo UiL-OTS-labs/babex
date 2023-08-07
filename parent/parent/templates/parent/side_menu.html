@@ -1,8 +1,8 @@
 {% load i18n %}
 <div class="mt-5">
     <ul>
-        <li><a href="{% url 'overview' %}">{% trans 'Home' %}</a></li>
-        <li><a href="{% url 'data' %}">{% trans 'Data management' %}</a></li>
-        <li><a href="mailto:babylab.ilslabs@uu.nl">{% trans 'Ask a question' %}</a></li>
+        <li><a href="{% url 'overview' %}">{% translate 'parent:sidebar:overview' %}</a></li>
+        <li><a href="{% url 'data' %}">{% translate 'parent:sidebar:data' %}</a></li>
+        <li><a href="mailto:babylab.ilslabs@uu.nl">{% translate 'parent:sidebar:contact' %}</a></li>
     </ul>
 </div>

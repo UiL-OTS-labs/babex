@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Copyright (C) YEAR THE PACKAGES COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-03 12:30+0000\n"
+"POT-Creation-Date: 2023-08-07 08:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,44 +78,71 @@ msgstr "Yes, both"
 msgid "parent:forms:signup:dyslexic_parent:no"
 msgstr "No"
 
+#: parent/forms.py:96
 msgid "parent:forms:signup:dyslexic_parent:unk"
 msgstr "Prefer not to say"
 
-#: parent/forms.py:101
+#: parent/forms.py:102
 msgid "parent:forms:signup:multilingual"
 msgstr "Multilingual"
 
-#: parent/forms.py:103 parent/forms.py:109 parent/forms.py:114
+#: parent/forms.py:104 parent/forms.py:110 parent/forms.py:115
 msgid "Yes"
 msgstr ""
 
-#: parent/forms.py:103 parent/forms.py:109 parent/forms.py:114
+#: parent/forms.py:104 parent/forms.py:110 parent/forms.py:115
 msgid "No"
 msgstr ""
 
-#: parent/forms.py:107
+#: parent/forms.py:108
 msgid "parent:forms:signup:english_contact"
 msgstr "Ok with English"
 
-#: parent/forms.py:112
+#: parent/forms.py:113
 msgid "parent:forms:signup:newsletter"
 msgstr "Sign up for the newsletter"
 
-#: parent/forms.py:118
+#: parent/forms.py:119
 msgid "parent:forms:signup:data_consent"
 msgstr "Consent"
 
-#: parent/settings.py:122
+#: parent/settings.py:123
 msgid "lang:nl"
 msgstr "Nederlands"
 
-#: parent/settings.py:123
+#: parent/settings.py:124
 msgid "lang:en"
 msgstr "English"
 
 #: parent/templates/appointment/canceled.html:6
 msgid "appointment:canceled"
 msgstr ""
+
+#: parent/templates/data/home.html:8
+msgid "parent:sidebar:general"
+msgstr "Some general information and instructions"
+
+#: parent/templates/data/home.html:15
+msgid "parent:data:intro"
+msgstr "Intro text about data management."
+
+#: parent/templates/data/home.html:18
+msgid "parent:data:remove"
+msgstr ""
+"You can choose to remove your child from the database, which will prevent "
+"you from being called for future participation."
+
+#: parent/templates/data/home.html:20
+msgid "parent:data:remove:confirm"
+msgstr "Are you sure?"
+
+#: parent/templates/data/home.html:23
+msgid "parent:data:remove:button"
+msgstr "Remove from database"
+
+#: parent/templates/data/removed.html:7
+msgid "parent:date:removed"
+msgstr "You have been succesfully removed from the babylab database"
 
 #: parent/templates/parent/home.html:17
 msgid "parent:home:sidebar"
@@ -133,37 +160,49 @@ msgstr "Sign up for participation"
 msgid "parent:home:signin"
 msgstr "Sign in to your account"
 
-#: parent/templates/parent/overview.html:18
+#: parent/templates/parent/overview.html:14
 msgid "Some general information and instructions"
 msgstr ""
 
-#: parent/templates/parent/overview.html:22
+#: parent/templates/parent/overview.html:19
 msgid "Appointments"
 msgstr ""
 
-#: parent/templates/parent/overview.html:42
+#: parent/templates/parent/overview.html:39
 msgid "No appointments"
 msgstr ""
 
-#: parent/templates/parent/overview.html:46
+#: parent/templates/parent/overview.html:43
 msgid "Surveys"
 msgstr ""
 
-#: parent/templates/parent/overview.html:52
+#: parent/templates/parent/overview.html:49
 msgid "Completed at: "
 msgstr ""
 
-#: parent/templates/parent/overview.html:56
+#: parent/templates/parent/overview.html:53
 msgid "Continue survey"
 msgstr ""
 
-#: parent/templates/parent/overview.html:58
+#: parent/templates/parent/overview.html:55
 msgid "Start survey"
 msgstr ""
 
-#: parent/templates/parent/overview.html:65
+#: parent/templates/parent/overview.html:62
 msgid "No survey invitations"
 msgstr ""
+
+#: parent/templates/parent/side_menu.html:4
+msgid "parent:sidebar:overview"
+msgstr "Home"
+
+#: parent/templates/parent/side_menu.html:5
+msgid "parent:sidebar:data"
+msgstr "Data management"
+
+#: parent/templates/parent/side_menu.html:6
+msgid "parent:sidebar:contact"
+msgstr "Ask a question"
 
 #: parent/templates/signup.html:7
 msgid "signup:header"
