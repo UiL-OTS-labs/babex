@@ -101,3 +101,11 @@ class SurveyViewSet(viewsets.ModelViewSet):
         )
         serializer = SurveyResponseSerializer(response)
         return Response(serializer.data)
+
+
+class DeactivateView(views.APIView):
+    permission_classes = [HasParticipant]
+
+    def post(self, request, *args, **kwargs):
+        self.request.participant.deactivate()
+        return Response(dict())

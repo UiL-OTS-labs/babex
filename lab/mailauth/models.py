@@ -73,7 +73,7 @@ def try_authenticate(token: str) -> Tuple[Optional[MailAuth], List[Participant]]
     if not mauth.participant:
         # specific participant wasn't already chosen
 
-        participants = list(Participant.objects.efilter(email=mauth.email))
+        participants = list(Participant.objects.efilter(deactivated=None, email=mauth.email))
         if len(participants) == 1:
             # only one participant associated with email, assign it immediately
             mauth.participant = participants[0]
@@ -122,6 +122,7 @@ def resolve_participant(token: str, participant_id: int) -> bool:
     try:
         mauth.participant = next(
             Participant.objects.efilter(
+                deactivated=None,
                 pk=participant_id,
                 # important to include the email, so that the participant id cannot
                 # be freely set to whatever

@@ -72,10 +72,12 @@ def overview(request):
     ok, appointments = gateway(request, "/gateway/appointment/")
     if not ok:
         messages.error(request, "error retreiving appointment data")
+        return render(request, "parent/overview.html")
 
     ok, survey_invites = gateway(request, "/gateway/survey_invites/")
     if not ok:
         messages.error(request, "error retreiving survey data")
+        return render(request, "parent/overview.html")
 
     appointments = sorted(appointments, key=itemgetter("start"))
     # only show future appointments
@@ -130,6 +132,7 @@ def survey_response_view(request):
     return JsonResponse(dict(ok=True))
 
 
+@session_required
 def cancel_appointment_view(request, appointment_id):
     # TODO: handle appointment already canceled
     ok, _ = gateway(request, f"/gateway/appointment/{appointment_id}/", method="delete")
@@ -138,6 +141,23 @@ def cancel_appointment_view(request, appointment_id):
         return JsonResponse(dict(ok=False))
 
     return render(request, "appointment/canceled.html")
+
+
+@session_required
+def data_management_view(request):
+    return render(request, "data/home.html")
+
+
+@session_required
+def deactivate_view(request):
+    ok, _ = gateway(request, "/gateway/deactivate/", method="post")
+    if not ok:
+        messages.error(request, "error")
+        return redirect("data")
+
+    # remove session token
+    del request.session["token"]
+    return render(request, "data/removed.html")
 
 
 def home(request):

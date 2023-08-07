@@ -24,4 +24,6 @@ urlpatterns = [
     path("mailauth/token/<str:token>/", MailAuthView.as_view()),
     #
     path("survey_invites/", views.SurveyInvitesView.as_view()),
+    #
+    path("deactivate/", views.DeactivateView.as_view()),
 ]

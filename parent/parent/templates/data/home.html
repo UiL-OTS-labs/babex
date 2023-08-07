@@ -1,0 +1,29 @@
+{% extends 'vue/base.html' %}
+{% load i18n %}
+{% load vue3 %}
+
+{% block content %}
+    <div class="uu-sidebar-container uu-sidebar-right">
+        <aside class="uu-sidebar" >
+            <p>{% translate 'parent:sidebar:general' %}</p>
+
+            {% include 'parent/side_menu.html' %}
+        </aside>
+        <div class="uu-sidebar-content" >
+            <section>
+                <p>
+                    {% translate 'parent:data:intro' %}
+                </p>
+                <p>
+                    {% translate 'parent:data:remove' %}
+                </p>
+                {% with msg=_('parent:data:remove:confirm') %}
+                    <form action="{% url 'data.deactivate' %}" method="post" onsubmit="return confirm('{{msg}}')">
+                        {% csrf_token %}
+                        <button class="btn btn-danger">{% translate 'parent:data:remove:button' %}</button>
+                    </form>
+                {% endwith %}
+            </section>
+        </div>
+    </div>
+{% endblock %}

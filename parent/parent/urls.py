@@ -4,13 +4,15 @@ from django.urls import include, path
 from .views import (
     SignupDone,
     SignupView,
+    cancel_appointment_view,
+    data_management_view,
+    deactivate_view,
     home,
     overview,
     signup_verify,
     status,
     survey_response_view,
     survey_view,
-    cancel_appointment_view,
 )
 
 urlpatterns = [
@@ -32,4 +34,7 @@ urlpatterns = [
     path("survey/response/", survey_response_view, name="survey.response"),
     # appointments
     path("appointment/<int:appointment_id>/cancel/", cancel_appointment_view, name="appointment.cancel"),
+    # data management
+    path("data/", data_management_view, name="data"),
+    path("data/deactivate/", deactivate_view, name="data.deactivate"),
 ]
