@@ -1,4 +1,8 @@
+import logging
+
 from .models import lookup_session_token
+
+log = logging.getLogger()
 
 
 class SessionTokenMiddleware:
@@ -15,14 +19,15 @@ class SessionTokenMiddleware:
 
     def __call__(self, request):
         request.participant = None
-        try:
-            token = request.headers.get("Authorization").split(" ")[1]
-            participant = lookup_session_token(token)
+        if auth := request.headers.get("Authorization"):
+            try:
+                token = auth.split(" ")[1]
+                participant = lookup_session_token(token)
 
-            # make sure the participant wasn't deactivated
-            if participant.deactivated is None:
-                request.participant = participant
-        except Exception:
-            pass
+                # make sure the participant wasn't deactivated
+                if participant.deactivated is None:
+                    request.participant = participant
+            except Exception:
+                log.exception("Error while processing authorization header: %s", auth)
 
         return self.get_response(request)
