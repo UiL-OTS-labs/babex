@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
+from django.shortcuts import redirect, render
 from django.urls import include, path
 from django.views.i18n import JavaScriptCatalog
 
@@ -57,3 +58,9 @@ if hasattr(settings, "SAML_CONFIG"):
     urlpatterns += [
         path("saml/", include("djangosaml2.urls")),
     ]
+
+
+def handler403(request, exception):
+    if request.user.is_authenticated:
+        return render(request, "403.html", status=403)
+    return redirect(settings.LOGIN_URL)

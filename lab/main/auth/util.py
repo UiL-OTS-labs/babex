@@ -10,6 +10,8 @@ class ExperimentLeaderMixin(UserPassesTestMixin):
     Note that this is different than RandomLeaderMixin.
     """
 
+    raise_exception = True
+
     def test_leader(self, user):
         # used by child views for finer grained control over leader access
         return True
@@ -25,6 +27,8 @@ class RandomLeaderMixin(UserPassesTestMixin):
     """checks that the current user is a leader of ANY currently active experiment.
     Assumes the existence of a self.experiment property on the view.
     Suitable for use with regular Django class-based views"""
+
+    raise_exception = True
 
     def test_leader(self, user):
         # used by child view for finer grained control over leader access
