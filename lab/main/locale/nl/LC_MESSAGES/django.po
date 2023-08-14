@@ -74,10 +74,6 @@ msgstr "Log uit"
 msgid "user:is_supreme_admin"
 msgstr "Hoofd admin"
 
-#: main/models.py:14
-msgid "user:is_ldap_account"
-msgstr "Solis Account"
-
 #: main/templates/base/login_header.html:6
 msgid "site:header:login"
 msgstr "Welkom {}!"
@@ -190,10 +186,6 @@ msgstr "Nieuw non-Solis admin account"
 #: main/templates/users/index.html:21
 msgid "users:home:create_user"
 msgstr "Nieuw admin account"
-
-#: main/templates/users/index.html:29
-msgid "users:home:create_user:ldap"
-msgstr "Nieuw Solis admin account"
 
 #: main/templates/users/index.html:38
 msgid "users:home:info_text"

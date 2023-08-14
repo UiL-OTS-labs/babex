@@ -46,7 +46,6 @@ django==4.0.7
     # via
     #   -r requirements.in
     #   cdh-django-core
-    #   django-auth-ldap
     #   django-axes
     #   django-braces
     #   django-csp
@@ -55,8 +54,6 @@ django==4.0.7
     #   django-filter
     #   django-simple-menu
     #   djangorestframework
-django-auth-ldap==4.0.0
-    # via -r requirements.in
 django-axes==5.32.0
     # via -r requirements.in
 django-braces==1.15.0
@@ -123,12 +120,6 @@ pscript==0.7.7
     # via vbuild
 py==1.11.0
     # via pytest
-pyasn1==0.4.8
-    # via
-    #   pyasn1-modules
-    #   python-ldap
-pyasn1-modules==0.2.8
-    # via python-ldap
 pycparser==2.21
     # via cffi
 pygments==2.12.0
@@ -152,8 +143,6 @@ python-dateutil==2.8.2
     #   -r requirements.in
     #   freezegun
     #   matplotlib
-python-ldap==3.4.0
-    # via django-auth-ldap
 python-magic==0.4.27
     # via cdh-django-core
 pytz==2022.1

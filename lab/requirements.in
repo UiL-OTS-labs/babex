@@ -14,7 +14,6 @@ cryptography
 python-dateutil
 -e git+https://github.com/DH-IT-Portal-Development/django-shared-core@v3.0.1#egg=cdh-django-core
 mysqlclient
-django-auth-ldap
 django-impersonate
 pytest-django
 -e git+https://github.com/UiL-OTS-labs/ageutil@main#egg=ageutil

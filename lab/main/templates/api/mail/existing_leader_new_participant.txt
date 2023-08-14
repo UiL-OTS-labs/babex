@@ -8,14 +8,10 @@ Je kunt vanaf nu bij nieuwe experimenten een mailtje ontvangen met een uitnodigi
 {% endif %}
 
 Aangezien je eerder al een proefleider account hebt gekregen, kun je hetzelfde account gebruiken om in te loggen als proefpersoon.
-{% if is_ldap_user %}
-Je login gegevens bestaan uit je UU-mail en je UU-wachtwoord.
-{% else %}
 Inloggen kun je met je email adres en je bestaande wachtwoord.
 Ben je je wachtwoord vergeten? Dan kun je met de volgende link je wachtwoord veranderen: {{ set_password_link }}
 
 Deze link blijft 24 uur geldig. Daarna kun je een nieuwe link aanvragen via 'wachtwoord vergeten?' op het inlogscherm.
-{% endif %}
 
 Met vriendelijke groet,
 het ILS lab

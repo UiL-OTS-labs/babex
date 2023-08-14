@@ -103,10 +103,6 @@ msgstr "Log in"
 msgid "main:globals:logout"
 msgstr "Log out"
 
-#: main/models.py:10
-msgid "user:is_ldap_account"
-msgstr "Solis Account"
-
 #: main/models.py:18
 msgid "user:attribute:name"
 msgstr "Name"
@@ -239,10 +235,6 @@ msgstr "Lab managers"
 msgid "users:home:create_admin"
 msgstr "New lab manager account"
 
-#: main/templates/users/index.html:23
-msgid "users:home:create_admin:ldap"
-msgstr "New Solis lab manager account"
-
 #: main/templates/users/index.html:30
 msgid "users:leaders:header"
 msgstr "Leaders"
@@ -250,10 +242,6 @@ msgstr "Leaders"
 #: main/templates/users/index.html:35
 msgid "users:home:create_leader"
 msgstr "New leader account"
-
-#: main/templates/users/index.html:38
-msgid "users:home:create_leader:ldap"
-msgstr "New Solis leader account"
 
 #: main/templates/users/index.html:59
 msgid "users:home:name"

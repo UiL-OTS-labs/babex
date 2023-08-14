@@ -6,11 +6,6 @@ from django.utils.translation import gettext_lazy as _
 
 
 class User(AbstractUser):
-    is_ldap_account = models.BooleanField(
-        _("user:is_ldap_account"),
-        default=False,
-    )
-
     # remove default django fields
     first_name = None  # type: ignore
     last_name = None  # type: ignore

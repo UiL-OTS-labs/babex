@@ -22,15 +22,11 @@
 
     <p>
         Aangezien je eerder al een proefleider account hebt gekregen, kun je hetzelfde account gebruiken om in te loggen als proefpersoon.<br/>
-        {% if is_ldap_user %}
-            Je login gegevens bestaan uit je UU-mail en je UU-wachtwoord.
-        {% else %}
-            Inloggen kun je met je email adres en je bestaande wachtwoord.
-            <br/><br/>
-            Ben je je wachtwoord vergeten? Dan kun je <a href="{{ set_password_link }}">hier</a> je wachtwoord veranderen.
-            <br/>
-            Deze link blijft 24 uur geldig. Daarna kun je een nieuwe link aanvragen via 'wachtwoord vergeten?' op het <a href="{{ login_link }}">inlogscherm</a>.
-        {% endif %}
+        Inloggen kun je met je email adres en je bestaande wachtwoord.
+        <br/><br/>
+        Ben je je wachtwoord vergeten? Dan kun je <a href="{{ set_password_link }}">hier</a> je wachtwoord veranderen.
+        <br/>
+        Deze link blijft 24 uur geldig. Daarna kun je een nieuwe link aanvragen via 'wachtwoord vergeten?' op het <a href="{{ login_link }}">inlogscherm</a>.
     </p>
     <p>
         Met vriendelijke groet,<br/>
