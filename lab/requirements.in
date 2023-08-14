@@ -12,7 +12,7 @@ djangorestframework
 django-debug-toolbar
 cryptography
 python-dateutil
--e git+https://github.com/DH-IT-Portal-Development/django-shared-core@v3.1.0-alpha-6#egg=cdh-django-core
+cdh-django-core[federated-auth] @ git+https://github.com/DH-IT-Portal-Development/django-shared-core@v3.1.0-alpha-6#egg=cdh-django-core
 mysqlclient
 django-impersonate
 pytest-django
