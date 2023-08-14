@@ -19,37 +19,41 @@ from django.urls import include, path
 from django.views.i18n import JavaScriptCatalog
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('main.urls')),
-
-    path('experiments/', include('experiments.urls')),
-    path('participants/', include('participants.urls')),
-    path('comments/', include('comments.urls')),
-    path('agenda/', include('agenda.urls')),
-    path('signups/', include('signups.urls')),
-
-    path('i18n/', include('django.conf.urls.i18n')),
-    path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
-    path('cdhcore/', include('cdh.core.urls')),
-    path('vue/', include('cdh.vue.urls')),
-    path('impersonate/', include('impersonate.urls')),
-    path('survey/', include('survey_admin.urls')),
+    path("admin/", admin.site.urls),
+    path("", include("main.urls")),
+    path("experiments/", include("experiments.urls")),
+    path("participants/", include("participants.urls")),
+    path("comments/", include("comments.urls")),
+    path("agenda/", include("agenda.urls")),
+    path("signups/", include("signups.urls")),
+    path("i18n/", include("django.conf.urls.i18n")),
+    path("jsi18n/", JavaScriptCatalog.as_view(), name="javascript-catalog"),
+    path("cdhcore/", include("cdh.core.urls")),
+    path("vue/", include("cdh.vue.urls")),
+    path("impersonate/", include("impersonate.urls")),
+    path("survey/", include("survey_admin.urls")),
 ]
 
-admin.site.site_header = 'Babex BACKEND'
-admin.site.site_title = 'Babex BACKEND'
-admin.site.index_title = 'Babex BACKEND'
+admin.site.site_header = "Babex BACKEND"
+admin.site.site_title = "Babex BACKEND"
+admin.site.index_title = "Babex BACKEND"
 
 # Added separately because at the time DM wasn't finished and only included
 # in test environments
-if 'datamanagement' in settings.INSTALLED_APPS:
+if "datamanagement" in settings.INSTALLED_APPS:
     urlpatterns = [
-        path('datamanagement/', include('datamanagement.urls')),
+        path("datamanagement/", include("datamanagement.urls")),
     ] + urlpatterns  # type: ignore
 
 if settings.DEBUG:
     import debug_toolbar
-    urlpatterns = [
-        path('__debug__/', include(debug_toolbar.urls)),
 
+    urlpatterns = [
+        path("__debug__/", include(debug_toolbar.urls)),
     ] + urlpatterns  # type: ignore
+
+
+if hasattr(settings, "SAML_CONFIG"):
+    urlpatterns += [
+        path("saml/", include("djangosaml2.urls")),
+    ]
