@@ -20,7 +20,6 @@ class Participant(models.Model):
 
     email = e_fields.EncryptedEmailField(_("participant:attribute:email"))
     name = e_fields.EncryptedTextField(_("participant:attribute:name"), blank=True, null=True)
-    language = e_fields.EncryptedTextField(_("participant:attribute:language"))
     dyslexic_parent = e_fields.EncryptedCharField(
         _("participant:attribute:dyslexic_parent"),
         max_length=5,
