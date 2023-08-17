@@ -6,8 +6,6 @@
 #
 -e git+https://github.com/UiL-OTS-labs/ageutil@main#egg=ageutil
     # via -r requirements.in
--e git+https://github.com/DH-IT-Portal-Development/django-shared-core@v3.0.1#egg=cdh-django-core
-    # via -r requirements.in
 -e git+https://github.com/UiL-OTS-labs/django-vue3-tag@main#egg=django-vue3-tag
     # via -r requirements.in
 asgiref==3.5.2
@@ -17,6 +15,10 @@ attrs==22.1.0
 blessings==1.7
     # via curtsies
 bpython==0.22.1
+    # via
+    #   -r requirements.in
+    #   cdh-django-core
+cdh-django-core @ git+https://github.com/DH-IT-Portal-Development/django-shared-core@v3.1.0-alpha-6
     # via -r requirements.in
 certifi==2021.10.8
     # via requests
@@ -31,7 +33,11 @@ closure==20191111
 contourpy==1.0.6
     # via matplotlib
 cryptography==36.0.2
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   cdh-django-core
+    #   pyopenssl
+    #   pysaml2
 curtsies==0.3.10
     # via bpython
 cwcwidth==0.1.6
@@ -40,47 +46,65 @@ cwcwidth==0.1.6
     #   curtsies
 cycler==0.11.0
     # via matplotlib
+defusedxml==0.7.1
+    # via
+    #   djangosaml2
+    #   pysaml2
 deprecated==1.2.13
     # via cdh-django-core
 django==4.0.7
     # via
     #   -r requirements.in
     #   cdh-django-core
-    #   django-auth-ldap
     #   django-axes
     #   django-braces
     #   django-csp
     #   django-debug-toolbar
     #   django-extensions
-    #   django-filter
+    #   django-modeltranslation
     #   django-simple-menu
     #   djangorestframework
-django-auth-ldap==4.0.0
-    # via -r requirements.in
+    #   djangosaml2
 django-axes==5.32.0
     # via -r requirements.in
 django-braces==1.15.0
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   cdh-django-core
 django-csp==3.7
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   cdh-django-core
 django-debug-toolbar==3.2.4
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   cdh-django-core
 django-extensions==3.1.5
-    # via -r requirements.in
-django-filter==23.1
-    # via cdh-django-core
+    # via
+    #   -r requirements.in
+    #   cdh-django-core
 django-impersonate==1.8.2
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   cdh-django-core
 django-ipware==4.0.2
     # via django-axes
 django-json-widget==1.1.1
     # via -r requirements.in
+django-modeltranslation==0.18.11
+    # via cdh-django-core
 django-simple-menu==1.2.1
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   cdh-django-core
 djangorestframework==3.13.1
     # via
     #   -r requirements.in
     #   cdh-django-core
+djangosaml2==1.7.0
+    # via cdh-django-core
+elementpath==4.1.5
+    # via xmlschema
 fonttools==4.38.0
     # via matplotlib
 freezegun==1.2.2
@@ -123,12 +147,6 @@ pscript==0.7.7
     # via vbuild
 py==1.11.0
     # via pytest
-pyasn1==0.4.8
-    # via
-    #   pyasn1-modules
-    #   python-ldap
-pyasn1-modules==0.2.8
-    # via python-ldap
 pycparser==2.21
     # via cffi
 pygments==2.12.0
@@ -137,10 +155,14 @@ pyjwt==2.3.0
     # via
     #   -r requirements.in
     #   cdh-django-core
+pyopenssl==22.0.0
+    # via pysaml2
 pyparsing==3.0.9
     # via
     #   matplotlib
     #   packaging
+pysaml2==7.4.2
+    # via djangosaml2
 pyscss==1.4.0
     # via cdh-django-core
 pytest==7.1.3
@@ -152,18 +174,20 @@ python-dateutil==2.8.2
     #   -r requirements.in
     #   freezegun
     #   matplotlib
-python-ldap==3.4.0
-    # via django-auth-ldap
+    #   pysaml2
 python-magic==0.4.27
     # via cdh-django-core
 pytz==2022.1
-    # via djangorestframework
+    # via
+    #   djangorestframework
+    #   pysaml2
 pyxdg==0.27
     # via bpython
 requests==2.27.1
     # via
     #   bpython
     #   cdh-django-core
+    #   pysaml2
 six==1.16.0
     # via
     #   blessings
@@ -178,15 +202,19 @@ tomli==2.0.1
     #   pep517
     #   pytest
 typing-extensions==4.2.0
-    # via bpython
+    # via
+    #   bpython
+    #   django-modeltranslation
 urllib3==1.26.9
     # via requests
-vbuild==0.8.1
+vbuild==0.8.2
     # via cdh-django-core
 wheel==0.37.1
     # via pip-tools
 wrapt==1.14.1
     # via deprecated
+xmlschema==2.4.0
+    # via pysaml2
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip

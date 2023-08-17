@@ -132,7 +132,7 @@ def as_admin(sb, lab_app):
     lab_app.load("admin")
     driver = sb.get_new_driver()
     sb.switch_to_driver(driver)
-    sb.open(lab_app.url)
+    sb.open(lab_app.url + '/login')
     sb.type("#id_username", "admin")
     sb.type("#id_password", "admin")
     sb.click('button:contains("Log in")')
