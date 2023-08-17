@@ -27,11 +27,6 @@ class DefaultCriteria(models.Model):
         (Dyslexia.INDIFFERENT, _("experiments:globals:indifferent")),
     )
 
-    language = models.TextField(
-        _("default_criteria:attribute:language"),
-        default="nl",
-    )
-
     multilingual = models.CharField(
         _("default_criteria:attribute:multilingual"),
         choices=MULTILINGUAL,
@@ -80,12 +75,6 @@ class DefaultCriteria(models.Model):
         blank=True,
     )
     max_age_months = models.IntegerField(validators=[MinValueValidator(0)], null=True, blank=True)
-
-    def get_language_display(self):
-        if self.language == "I":
-            return _("experiments:globals:indifferent")
-
-        return self.language
 
     def get_min_age_display(self):
         if self.min_age_days is None and self.min_age_months is None:

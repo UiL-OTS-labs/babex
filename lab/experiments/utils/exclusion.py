@@ -20,13 +20,6 @@ from experiments.models import (
 from experiments.models.invite_models import Call
 from participants.models import Participant
 
-# List of vars that can have the same values as the participant model
-# variables, with an indifferent option
-indifferentable_vars = [
-    "language",
-    "sex",
-]
-
 
 def get_eligible_participants_for_experiment(experiment: Experiment, on_mailinglist: bool = True) -> List[Participant]:
     """
@@ -121,10 +114,6 @@ def build_exclusion_filters(default_criteria, filters=None) -> dict:
     """
     if filters is None:
         filters = {}
-
-    for var in indifferentable_vars:
-        if getattr(default_criteria, var) != DefaultCriteria.Dyslexia.INDIFFERENT:
-            filters[var] = getattr(default_criteria, var)
 
     if default_criteria.dyslexia == DefaultCriteria.Dyslexia.YES:
         # should have a dyslexic parent
