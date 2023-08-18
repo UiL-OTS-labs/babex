@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-04 16:04+0200\n"
+"POT-Creation-Date: 2023-08-14 10:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -103,10 +103,6 @@ msgstr "Log in"
 msgid "main:globals:logout"
 msgstr "Log out"
 
-#: main/models.py:10
-msgid "user:is_ldap_account"
-msgstr "Solis Account"
-
 #: main/models.py:18
 msgid "user:attribute:name"
 msgstr "Name"
@@ -114,6 +110,14 @@ msgstr "Name"
 #: main/models.py:19
 msgid "user:attribute:phonenumber"
 msgstr ""
+
+#: main/templates/403.html:7
+msgid "main:error:permission_deined:header"
+msgstr "Permission Denied"
+
+#: main/templates/403.html:11
+msgid "main:error:permission_deined:text"
+msgstr "You do not have permissions to access the requested page. Please contact the lab managers for assistance."
 
 #: main/templates/base/babex_base.html:18
 #: main/templates/base/babex_base.html:19
@@ -151,8 +155,8 @@ msgstr "Home"
 #: main/templates/main/index.html:39
 msgid "main:home:open_calls:text"
 msgstr ""
-"These are calls made by you which are missing a status. "
-"Please update the result of each call:"
+"These are calls made by you which are missing a status. Please update the "
+"result of each call:"
 
 #: main/templates/main/login_lockout.html:9
 #: main/templates/main/login_lockout.html:17
@@ -231,10 +235,6 @@ msgstr "Lab managers"
 msgid "users:home:create_admin"
 msgstr "New lab manager account"
 
-#: main/templates/users/index.html:23
-msgid "users:home:create_admin:ldap"
-msgstr "New Solis lab manager account"
-
 #: main/templates/users/index.html:30
 msgid "users:leaders:header"
 msgstr "Leaders"
@@ -242,10 +242,6 @@ msgstr "Leaders"
 #: main/templates/users/index.html:35
 msgid "users:home:create_leader"
 msgstr "New leader account"
-
-#: main/templates/users/index.html:38
-msgid "users:home:create_leader:ldap"
-msgstr "New Solis leader account"
 
 #: main/templates/users/index.html:59
 msgid "users:home:name"

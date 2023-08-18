@@ -5,9 +5,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
-from main.auth import PpnLdapBackend
-from main.forms.user_forms import LDAPUserCreationForm, UserUpdateForm
-from main.utils import is_ldap_enabled
+from main.forms.user_forms import UserUpdateForm
 
 from ..forms import UserCreationForm
 from ..models import User
@@ -55,7 +53,6 @@ class UserHome(BaseUserView, generic.ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context["ldap"] = is_ldap_enabled()
         return context
 
 
@@ -65,27 +62,10 @@ class UserUpdateView(BaseUserView, SuccessMessageMixin, generic.UpdateView):
     success_message = _("users:message:updated")
 
 
-class LDAPUserUpdateView(BaseUserView, SuccessMessageMixin, generic.UpdateView):
-    template_name = "users/update.html"
-    form_class = LDAPUserCreationForm
-    success_message = _("users:message:updated")
-
-
 class UserCreateView(BaseUserView, SuccessMessageMixin, generic.CreateView):
     template_name = "users/create.html"
     form_class = UserCreationForm
     success_message = _("users:message:created")
-
-
-class LDAPUserCreateView(BaseUserView, SuccessMessageMixin, generic.CreateView):
-    template_name = "users/create.html"
-    form_class = LDAPUserCreationForm
-    success_message = _("users:message:created")
-
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        PpnLdapBackend().populate_user(self.object.username)
-        return response
 
 
 class UserChangePasswordView(BaseUserView, SuccessMessageMixin, generic.UpdateView):

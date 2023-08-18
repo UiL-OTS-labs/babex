@@ -269,9 +269,12 @@ MENU_HIDE_EMPTY = False
 
 AUDIT_LOG_ENABLE = not DEBUG
 
-# try:
-#     from .ldap_settings import *
-# except ImportError:
-#     print('Proceeding without LDAP settings')
-
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
+
+
+try:
+    from .saml_settings import *
+    INSTALLED_APPS += SAML_APPS
+    MIDDLEWARE += SAML_MIDDLEWARE
+except ImportError:
+    print('Proceeding without SAML')

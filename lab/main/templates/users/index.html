@@ -19,9 +19,6 @@
                 <a href="{% url 'main:user_create' %}" class="btn btn-secondary">
                     {% trans 'users:home:create_admin' %}
                 </a>
-                <a href="{% url 'main:user_create_ldap' %}" class="btn btn-secondary">
-                    {% trans 'users:home:create_admin:ldap' %}
-                </a>
             </div>
         </div>
     {% else %}
@@ -33,9 +30,6 @@
             <div class="btn-group btn-group-sm" role="group">
                 <a href="{% url 'main:user_create' %}" class="btn btn-secondary">
                     {% trans 'users:home:create_leader' %}
-                </a>
-                <a href="{% url 'main:user_create_ldap' %}" class="btn btn-secondary">
-                    {% trans 'users:home:create_leader:ldap' %}
                 </a>
             </div>
         </div>
@@ -66,11 +60,6 @@
                         {% get_verbose_field_name 'main' 'User' 'is_active' as active %}
                         {{ active|capfirst }}
                     </th>
-                    {% if ldap %}
-                        <th>
-                            {% get_verbose_field_name 'main' 'User' 'is_ldap_account' %}
-                        </th>
-                    {% endif %}
                     <th>
                         {% trans 'users:home:actions' %}
                     </th>
@@ -95,11 +84,6 @@
                         <td class="icon-yesno">
                             {{ user.is_active|yesno:"," }}
                         </td>
-                        {% if ldap %}
-                            <td class="icon-ldap">
-                                {{ user.is_ldap_account|yesno:"," }}
-                            </td>
-                        {% endif %}
                         <td>
                             <button class="btn icon-menu dropdown-toggle p-1"
                                 type="button"
@@ -107,36 +91,24 @@
                                 aria-expanded="false"
                             ></button>
                             <ul class="dropdown-menu">
-                                {% if user.is_ldap_account %}
-                                    <li>
-                                        {% if is_admins %}
-                                            <a class="dropdown-item" href="{% url 'main:admin_edit_ldap' user.pk %}" >
-                                        {% else %}
-                                            <a class="dropdown-item" href="{% url 'main:user_edit_ldap' user.pk %}" >
-                                        {% endif %}
-                                            {% trans 'users:action:edit' %}
-                                        </a>
-                                    </li>
-                                {% else %}
-                                    <li>
-                                        {% if is_admins %}
-                                            <a class="dropdown-item" href="{% url 'main:admin_edit' user.pk %}" >
-                                        {% else %}
+                                <li>
+                                    {% if is_admins %}
+                                        <a class="dropdown-item" href="{% url 'main:admin_edit' user.pk %}" >
+                                    {% else %}
                                             <a class="dropdown-item" href="{% url 'main:user_edit' user.pk %}" >
-                                        {% endif %}
-                                            {% trans 'users:action:edit' %}
-                                        </a>
-                                    </li>
-                                    <li>
-                                        {% if is_admins %}
-                                            <a class="dropdown-item" href="{% url 'main:admin_password' user.pk %}" >
-                                        {% else %}
+                                    {% endif %}
+                                    {% trans 'users:action:edit' %}
+                                            </a>
+                                </li>
+                                <li>
+                                    {% if is_admins %}
+                                        <a class="dropdown-item" href="{% url 'main:admin_password' user.pk %}" >
+                                    {% else %}
                                             <a class="dropdown-item" href="{% url 'main:user_password' user.pk %}" >
-                                        {% endif %}
-                                            {% trans 'users:action:password' %}
-                                        </a>
-                                    </li>
-                                {% endif %}
+                                    {% endif %}
+                                    {% trans 'users:action:password' %}
+                                            </a>
+                                </li>
 
                                 {# We should not allow a user to delete their own account, that will we AWKWARD #}
                                 {# https://www.youtube.com/watch?v=q9kDT44DBXs #}
