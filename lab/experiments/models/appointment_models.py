@@ -45,6 +45,7 @@ class Appointment(models.Model):
     comment = models.CharField(max_length=100, default="", blank=True)
     outcome = models.CharField(max_length=20, choices=Outcome.choices, null=True)
     updated = models.DateTimeField(auto_now=True)
+    reminder_sent = models.DateTimeField(null=True)
 
     def save(self, *args, **kwargs):
         self.timeslot.save()
