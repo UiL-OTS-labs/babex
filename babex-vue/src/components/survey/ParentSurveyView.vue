@@ -16,7 +16,7 @@
     let survey = ref<typeof SurveyView|null>(null);
 
     async function save(data: any, page: number) {
-        let result = await parentApi.survey.response.create({
+        await parentApi.survey.response.create({
             invite: props.invite_id,
             data: data,
             final: false,
@@ -25,7 +25,7 @@
     }
 
     async function send(data: any) {
-        let result = await parentApi.survey.response.create({
+        await parentApi.survey.response.create({
             invite: props.invite_id,
             data: data,
             final: true
