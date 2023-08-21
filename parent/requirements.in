@@ -2,6 +2,6 @@ Django>=4.0,<4.1
 django-simple-menu
 djangorestframework
 django-debug-toolbar
--e git+https://github.com/DH-IT-Portal-Development/django-shared-core@v3.0.1#egg=cdh-django-core
+cdh-django-core[all] @ git+https://github.com/DH-IT-Portal-Development/django-shared-core@develop#egg=cdh-django-core
 -e git+https://github.com/UiL-OTS-labs/django-vue3-tag@main#egg=django-vue3-tag
 requests
