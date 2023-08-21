@@ -26,7 +26,7 @@ def test_schedule_appointment(sb, sample_experiment, sample_participant, sample_
     sb.click("a:contains(Overview)")
     sb.click("button.icon-menu")
     sb.click("a:contains(Invite)")
-    sb.click("a.icon-phone")
+    sb.click("td.actions a:contains(Call)")
     sb.click("button:contains(Schedule)")
 
     # pick time
@@ -75,7 +75,7 @@ def test_schedule_appointment_edit_email(sb, sample_experiment, sample_participa
     sb.click("a:contains(Overview)")
     sb.click("button.icon-menu")
     sb.click("a:contains(Invite)")
-    sb.click("a.icon-phone")
+    sb.click("td.actions a:contains(Call)")
     sb.click("button:contains(Schedule)")
 
     # pick time
@@ -116,7 +116,7 @@ def test_call_exclusion(sb, sample_experiment, sample_participant, sample_leader
     sb.click("a:contains(Overview)")
     sb.click("button.icon-menu")
     sb.click("a:contains(Invite)")
-    sb.click("a.icon-phone")
+    sb.click("td.actions a:contains(Call)")
 
     # indicates participant can't participate
     sb.click('input[value="EXCLUDE"]')
