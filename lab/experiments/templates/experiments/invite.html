@@ -7,6 +7,14 @@
 
 {% block html_head %}
     <script src="{% static 'experiments/invite/table.js' %}"></script>
+    <style>
+        .actions a {
+            text-decoration: none;
+        }
+        .actions a:hover {
+            font-weight: bold;
+        }
+    </style>
 {% endblock %}
 
 {% block header_title %}
@@ -80,10 +88,9 @@
                                     <!-- last email -->
 
                                 </td>
-                                <td>
+                                <td class="actions">
                                     <!-- actions -->
-                                    <a class="icon-phone" title="{% trans 'experiments:invite:call_participant' %}" href="{% url 'experiments:call' experiment.pk participant.pk %}"><a>
-                                    <a class="icon-mail" title="{% trans 'experiments:invite:mail_participant' %}" href="#"><a>
+                                    <a href="{% url 'experiments:call' experiment.pk participant.pk %}"><span class="icon-phone"></span> {% translate 'experiments:invite:actions:call' %}</a>
                                 </td>
                             </tr>
                         {% endfor %}
