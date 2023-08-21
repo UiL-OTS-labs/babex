@@ -1,7 +1,7 @@
 flake8
 black
 isort
-seleniumbase
+seleniumbase==4.15.5
 mypy
 django-stubs>=1.13.0
 djangorestframework-stubs
