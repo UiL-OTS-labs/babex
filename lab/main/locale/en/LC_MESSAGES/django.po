@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-14 10:07+0200\n"
+"POT-Creation-Date: 2023-08-21 10:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -103,11 +103,11 @@ msgstr "Log in"
 msgid "main:globals:logout"
 msgstr "Log out"
 
-#: main/models.py:18
+#: main/models.py:13
 msgid "user:attribute:name"
 msgstr "Name"
 
-#: main/models.py:19
+#: main/models.py:14
 msgid "user:attribute:phonenumber"
 msgstr ""
 
@@ -117,7 +117,9 @@ msgstr "Permission Denied"
 
 #: main/templates/403.html:11
 msgid "main:error:permission_deined:text"
-msgstr "You do not have permissions to access the requested page. Please contact the lab managers for assistance."
+msgstr ""
+"You do not have permissions to access the requested page. Please contact the "
+"lab managers for assistance."
 
 #: main/templates/base/babex_base.html:18
 #: main/templates/base/babex_base.html:19
@@ -235,31 +237,31 @@ msgstr "Lab managers"
 msgid "users:home:create_admin"
 msgstr "New lab manager account"
 
-#: main/templates/users/index.html:30
+#: main/templates/users/index.html:27
 msgid "users:leaders:header"
 msgstr "Leaders"
 
-#: main/templates/users/index.html:35
+#: main/templates/users/index.html:32
 msgid "users:home:create_leader"
 msgstr "New leader account"
 
-#: main/templates/users/index.html:59
+#: main/templates/users/index.html:53
 msgid "users:home:name"
 msgstr "Name"
 
-#: main/templates/users/index.html:75
+#: main/templates/users/index.html:64
 msgid "users:home:actions"
 msgstr "Actions"
 
-#: main/templates/users/index.html:117 main/templates/users/index.html:127
+#: main/templates/users/index.html:100
 msgid "users:action:edit"
 msgstr "Edit"
 
-#: main/templates/users/index.html:136
+#: main/templates/users/index.html:109
 msgid "users:action:password"
 msgstr "Change password"
 
-#: main/templates/users/index.html:150
+#: main/templates/users/index.html:122
 msgid "users:action:delete"
 msgstr "Delete"
 
@@ -276,15 +278,15 @@ msgstr " "
 msgid "Empty list and '%(class_name)s.allow_empty' is False."
 msgstr ""
 
-#: main/views/users.py:65 main/views/users.py:71
+#: main/views/users.py:62
 msgid "users:message:updated"
 msgstr "Account updated!"
 
-#: main/views/users.py:77 main/views/users.py:83
+#: main/views/users.py:68
 msgid "users:message:created"
 msgstr "New account created!"
 
-#: main/views/users.py:94
+#: main/views/users.py:74
 msgid "users:message:changed_password"
 msgstr "Password changed!"
 
