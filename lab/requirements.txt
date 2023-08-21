@@ -26,8 +26,6 @@ cffi==1.15.0
     # via cryptography
 charset-normalizer==2.0.12
     # via requests
-click==8.1.2
-    # via pip-tools
 closure==20191111
     # via cdh-django-core
 contourpy==1.0.6
@@ -133,12 +131,8 @@ packaging==21.3
     # via
     #   matplotlib
     #   pytest
-pep517==0.12.0
-    # via pip-tools
 pillow==9.3.0
     # via matplotlib
-pip-tools==6.6.0
-    # via -r requirements.in
 pluggy==1.0.0
     # via pytest
 ply==3.11
@@ -198,9 +192,7 @@ sqlparse==0.4.2
     #   django
     #   django-debug-toolbar
 tomli==2.0.1
-    # via
-    #   pep517
-    #   pytest
+    # via pytest
 typing-extensions==4.2.0
     # via
     #   bpython
@@ -209,13 +201,10 @@ urllib3==1.26.9
     # via requests
 vbuild==0.8.2
     # via cdh-django-core
-wheel==0.37.1
-    # via pip-tools
 wrapt==1.14.1
     # via deprecated
 xmlschema==2.4.0
     # via pysaml2
 
 # The following packages are considered to be unsafe in a requirements file:
-# pip
 # setuptools

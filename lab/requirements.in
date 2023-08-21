@@ -4,7 +4,6 @@ django-braces
 django-csp
 django-simple-menu
 django-extensions # QoF for the admin, adds a lot of useful manage.py commands
-pip-tools
 cryptography
 PyJWT
 bpython
