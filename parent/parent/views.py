@@ -93,6 +93,7 @@ def status(request):
         if not ok:
             return JsonResponse(dict(ok=False))
     except Exception:
+        log.exception("Error in status check")
         return JsonResponse(dict(ok=False))
 
     return JsonResponse(dict(ok=True))
