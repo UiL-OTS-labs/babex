@@ -13,6 +13,8 @@ from django.views.generic.edit import FormView
 from .forms import SignupForm
 from .utils import gateway, session_required
 
+log = logging.getLogger()
+
 
 class Signup(rest.Resource):
     class Meta:
