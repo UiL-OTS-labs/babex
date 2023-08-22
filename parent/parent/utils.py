@@ -1,4 +1,5 @@
 import datetime
+import logging
 import re
 from typing import Optional, Tuple
 
@@ -6,6 +7,8 @@ import requests
 from django.conf import settings
 from django.http.request import HttpRequest
 from django.shortcuts import redirect
+
+log = logging.getLogger()
 
 
 def json_decoder(obj):
@@ -46,6 +49,8 @@ def gateway(
         headers=headers,
         json=data,
     )
+    if not response.ok:
+        log.error("Gateway request %s failed: %s", url, response.text)
     if len(response.text):
         return response.ok, response.json(object_hook=json_decoder)
     return response.ok, dict()
