@@ -1,5 +1,6 @@
 import datetime
 import json
+import logging
 from operator import itemgetter
 
 from cdh.rest import client as rest
