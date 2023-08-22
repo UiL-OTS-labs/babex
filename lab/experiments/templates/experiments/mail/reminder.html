@@ -1,30 +1,32 @@
-{% extends 'mail/base.html' %}
+{% extends 'cdh.core/mail_template.html' %}
 
-{% block subtitle %}
-    Herinnering afspraak experiment <strong>{{ experiment.name }}</strong>
+{% block banner %}
+    Herinnering afspraak experiment <strong>{{ appointment.experiment.name }}</strong>
 {% endblock %}
 
 {% block content %}
     <p>
-        Beste {{ participant.mail_name }},
+        Beste {{ appointment.participant.parent_name }},
     </p>
     <p>
         <strong>Dit is een reminder!</strong>
     </p>
     <p>
-        Je hebt een afspraak gemaakt om mee te doen met het experiment: <strong> {{ experiment.name }}</strong>.
+        Je hebt een afspraak gemaakt om mee te doen met het experiment: <strong> {{ appointment.experiment.name }}</strong>.
     </p>
     <p>
-        We verwachten je op: <br/>
-        Datum: <strong>{{ time_slot.datetime|date:"l d-m-Y" }}</strong><br/>
-        Tijd: <strong>{{ time_slot.datetime|date:"H:i" }} uur</strong><br/>
-        Locatie: <strong>{{ experiment.location }}</strong><br/>
+        We verwachten {{ appointment.participant.name }} op: <br/>
+        Datum: <strong>{{ appointment.timeslot.datetime|date:"l d-m-Y" }}</strong><br/>
+        Tijd: <strong>{{ appointment.timeslot.datetime|date:"H:i" }} uur</strong><br/>
+        Locatie: <strong>{{ appointment.experiment.location }}</strong><br/>
     </p>
     <p>
-        Als je deze afspraak wilt afzeggen, kun je dat doen via <a href="{{ cancel_link }}">deze link</a>. Doe dat
-        alsjeblieft minstens 24 uur vantevoren. Als je vlak vantevoren ontdekt dat je verhinderd bent, neem dan svp even
-        persoonlijk contact op met de proefleider ({{ leader.name }}, email: {{ leader.email }}
-        tel.: {{ leader.phonenumber }}).
+        TODO: text over mogelijk oorontsteking
+    </p>
+    <p>
+        Als je vlak vantevoren ontdekt dat je verhinderd bent, neem dan svp even
+        persoonlijk contact op met de proefleider ({{ appointment.leader.name }}, email: {{ appointment.leader.email }}
+        tel.: {{ appointment.leader.phonenumber }}).
     </p>
 {% endblock %}
 
