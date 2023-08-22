@@ -1,4 +1,3 @@
-import braces.views as braces
 from cdh.core.views import FormSetUpdateView
 from cdh.core.views.mixins import DeleteSuccessMessageMixin
 from django.contrib.messages.views import SuccessMessageMixin
@@ -10,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
 from comments.forms import CommentForm
-from main.auth.util import RandomLeaderMixin
+from main.auth.util import LabManagerMixin, RandomLeaderMixin
 from participants.permissions import (
     can_leader_access_participant,
     participants_visible_to_leader,
@@ -70,7 +69,7 @@ class ParticipantUpdateView(RandomLeaderMixin, SuccessMessageMixin, generic.Upda
         return can_leader_access_participant(user, self.get_object())
 
 
-class ParticipantDeleteView(braces.StaffuserRequiredMixin, DeleteSuccessMessageMixin, generic.DeleteView):
+class ParticipantDeleteView(LabManagerMixin, DeleteSuccessMessageMixin, generic.DeleteView):
     success_url = reverse("participants:home")
     success_message = _("participants:messages:deleted_participant")
     template_name = "participants/delete.html"
@@ -83,7 +82,7 @@ class ParticipantDeleteView(braces.StaffuserRequiredMixin, DeleteSuccessMessageM
         return super().post(request, *args, **kwargs)
 
 
-class ParticipantSpecificCriteriaUpdateView(braces.StaffuserRequiredMixin, FormSetUpdateView):
+class ParticipantSpecificCriteriaUpdateView(LabManagerMixin, FormSetUpdateView):
     form = CriterionAnswerForm
     template_name = "participants/specific_criteria.html"
     succes_url = reverse("participants:home")
@@ -105,8 +104,7 @@ class ParticipantSpecificCriteriaUpdateView(braces.StaffuserRequiredMixin, FormS
         return Participant.objects.get(pk=participant_pk)
 
 
-class ParticipantsDemographicsView(braces.StaffuserRequiredMixin, generic.TemplateView):
-
+class ParticipantsDemographicsView(LabManagerMixin, generic.TemplateView):
     template_name = "participants/demographics.html"
 
 

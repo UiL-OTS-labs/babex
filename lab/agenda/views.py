@@ -1,4 +1,3 @@
-import braces.views as braces
 import dateutil.parser
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
@@ -8,7 +7,7 @@ from rest_framework.response import Response
 
 from experiments.models import Appointment, Location
 from experiments.serializers import AppointmentSerializer
-from main.auth.util import RandomLeaderMixin
+from main.auth.util import LabManagerMixin, RandomLeaderMixin
 
 from .models import Closing, ClosingSerializer
 
@@ -73,7 +72,7 @@ class AppointmentViewSet(viewsets.ModelViewSet):
         appointment.cancel()
 
 
-class ClosingsAdminView(braces.StaffuserRequiredMixin, generic.TemplateView):
+class ClosingsAdminView(LabManagerMixin, generic.TemplateView):
     template_name = "agenda/closings_admin.html"
 
     def get_context_data(self, **kwargs):

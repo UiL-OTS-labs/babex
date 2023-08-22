@@ -1,5 +1,9 @@
-from braces.views import UserPassesTestMixin
-from rest_framework.permissions import IsAuthenticated
+from braces.views import StaffuserRequiredMixin, UserPassesTestMixin
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
+
+
+class LabManagerMixin(StaffuserRequiredMixin):
+    raise_exception = True
 
 
 class ExperimentLeaderMixin(UserPassesTestMixin):
@@ -39,6 +43,10 @@ class RandomLeaderMixin(UserPassesTestMixin):
             return False
         # staff = lab managers, can access any experiment
         return (user.is_leader or user.is_staff) and self.test_leader(user)
+
+
+class IsLabManager(IsAdminUser):
+    pass
 
 
 class IsExperimentLeader(IsAuthenticated):

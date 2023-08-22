@@ -9,11 +9,12 @@ from django.views.generic import DetailView, ListView
 from rest_framework import views
 from rest_framework.response import Response
 
+from main.auth.util import LabManagerMixin
 from participants.models import Participant
 from signups.models import Signup
 
 
-class SignupListView(braces.StaffuserRequiredMixin, ListView):
+class SignupListView(LabManagerMixin, ListView):
     queryset = Signup.objects.filter(status=Signup.Status.NEW, email_verified__isnull=False)
 
     def post(self, request, *args, **kwargs):

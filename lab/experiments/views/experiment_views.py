@@ -9,7 +9,7 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
-from main.auth.util import ExperimentLeaderMixin, RandomLeaderMixin
+from main.auth.util import ExperimentLeaderMixin, LabManagerMixin, RandomLeaderMixin
 
 from ..forms import ExperimentForm
 from ..models import Appointment, Experiment
@@ -39,7 +39,7 @@ class ExperimentHomeView(RandomLeaderMixin, generic.ListView):
         )
 
 
-class ExperimentCreateView(braces.StaffuserRequiredMixin, SuccessMessageMixin, generic.CreateView):
+class ExperimentCreateView(LabManagerMixin, SuccessMessageMixin, generic.CreateView):
     template_name = "experiments/new.html"
     form_class = ExperimentForm
     success_message = _("experiments:message:create:success")
@@ -48,9 +48,7 @@ class ExperimentCreateView(braces.StaffuserRequiredMixin, SuccessMessageMixin, g
         return reverse("experiments:default_criteria", args=[self.object.pk])
 
 
-class ExperimentUpdateView(
-    braces.StaffuserRequiredMixin, SuccessURLAllowedHostsMixin, SuccessMessageMixin, generic.UpdateView
-):
+class ExperimentUpdateView(LabManagerMixin, SuccessURLAllowedHostsMixin, SuccessMessageMixin, generic.UpdateView):
     template_name = "experiments/edit.html"
     form_class = ExperimentForm
     model = Experiment

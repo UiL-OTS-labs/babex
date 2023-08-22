@@ -1,4 +1,3 @@
-import braces.views as braces
 from cdh.core.views import RedirectActionView
 from cdh.core.views.mixins import DeleteSuccessMessageMixin, RedirectSuccessMessageMixin
 from django.contrib.auth.views import SuccessURLAllowedHostsMixin
@@ -10,6 +9,7 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
+from main.auth.util import LabManagerMixin
 from main.views import FormListView
 
 from ..forms import CriterionForm, DefaultCriteriaForm, ExperimentCriterionForm
@@ -26,7 +26,7 @@ from .mixins import ExperimentObjectMixin
 #
 
 
-class CriteriaHomeView(braces.StaffuserRequiredMixin, generic.ListView):
+class CriteriaHomeView(LabManagerMixin, generic.ListView):
     model = Criterion
     template_name = "criteria/index.html"
 
@@ -35,14 +35,14 @@ class CriteriaHomeView(braces.StaffuserRequiredMixin, generic.ListView):
         return qs
 
 
-class CriteriaCreateView(braces.StaffuserRequiredMixin, SuccessMessageMixin, generic.CreateView):
+class CriteriaCreateView(LabManagerMixin, SuccessMessageMixin, generic.CreateView):
     form_class = CriterionForm
     template_name = "criteria/new.html"
     success_url = reverse("experiments:criteria_home")
     success_message = _("criteria:messages:created")
 
 
-class CriteriaUpdateView(braces.StaffuserRequiredMixin, SuccessMessageMixin, generic.UpdateView):
+class CriteriaUpdateView(LabManagerMixin, SuccessMessageMixin, generic.UpdateView):
     form_class = CriterionForm
     template_name = "criteria/edit.html"
     success_url = reverse("experiments:criteria_home")
@@ -50,7 +50,7 @@ class CriteriaUpdateView(braces.StaffuserRequiredMixin, SuccessMessageMixin, gen
     model = Criterion
 
 
-class CriteriaDeleteView(braces.StaffuserRequiredMixin, DeleteSuccessMessageMixin, generic.DeleteView):
+class CriteriaDeleteView(LabManagerMixin, DeleteSuccessMessageMixin, generic.DeleteView):
     success_message = _("criteria:messages:deleted")
     success_url = reverse("experiments:criteria_home")
     model = Criterion
@@ -62,7 +62,7 @@ class CriteriaDeleteView(braces.StaffuserRequiredMixin, DeleteSuccessMessageMixi
 #
 
 
-class DefaultCriteriaUpdateView(braces.StaffuserRequiredMixin, SuccessURLAllowedHostsMixin, generic.UpdateView):
+class DefaultCriteriaUpdateView(LabManagerMixin, SuccessURLAllowedHostsMixin, generic.UpdateView):
     template_name = "criteria/update_default.html"
     form_class = DefaultCriteriaForm
     model = DefaultCriteria
@@ -110,7 +110,7 @@ class DefaultCriteriaUpdateView(braces.StaffuserRequiredMixin, SuccessURLAllowed
 
 
 class CriteriaListView(
-    braces.StaffuserRequiredMixin, SuccessURLAllowedHostsMixin, SuccessMessageMixin, ExperimentObjectMixin, FormListView
+    LabManagerMixin, SuccessURLAllowedHostsMixin, SuccessMessageMixin, ExperimentObjectMixin, FormListView
 ):
     """
     This view is a bit special, it's both a ListView and a CreateView in one!
@@ -183,7 +183,7 @@ class CriteriaListView(
 
 
 class AddExistingCriterionToExperimentView(
-    braces.StaffuserRequiredMixin, RedirectSuccessMessageMixin, ExperimentObjectMixin, RedirectActionView
+    LabManagerMixin, RedirectSuccessMessageMixin, ExperimentObjectMixin, RedirectActionView
 ):
     success_message = _("criteria:messages:added_to_experiment")
 
@@ -202,7 +202,7 @@ class AddExistingCriterionToExperimentView(
 
 
 class RemoveCriterionFromExperiment(
-    braces.StaffuserRequiredMixin, RedirectSuccessMessageMixin, ExperimentObjectMixin, RedirectActionView
+    LabManagerMixin, RedirectSuccessMessageMixin, ExperimentObjectMixin, RedirectActionView
 ):
     success_message = _("criteria:messages:removed_from_experiment")
 
