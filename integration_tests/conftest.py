@@ -7,6 +7,7 @@ import re
 import shutil
 import string
 import subprocess
+import pexpect
 from collections import namedtuple
 from datetime import date
 
@@ -76,15 +77,8 @@ class DjangoServerProcess:
             "--settings",
             self.settings,
         ]
-        self.process = subprocess.Popen(cmd, env=self.env)
-        try:
-            self.process.wait(1)
-        except subprocess.TimeoutExpired:
-            # this is good, the process is still running
-            pass
-
-        if self.process.returncode is not None:
-            raise RuntimeError(f"could not start app in {self.path}")
+        self.process = pexpect.spawn(cmd[0], cmd[1:], env=self.env)
+        self.process.expect('Starting development server')
 
     def shutdown(self):
         if self.db_conn:
