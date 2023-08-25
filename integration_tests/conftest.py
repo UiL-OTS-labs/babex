@@ -4,6 +4,7 @@ import importlib
 import os
 import random
 import re
+import requests
 import shutil
 import string
 import subprocess
@@ -77,11 +78,20 @@ class DjangoServerProcess:
             self.settings,
         ]
         self.process = subprocess.Popen(cmd, env=self.env)
-        try:
-            self.process.wait(1)
-        except subprocess.TimeoutExpired:
-            # this is good, the process is still running
-            pass
+        for attempt in range(5):
+            try:
+                requests.get(self.url)
+                # server is ready and answering requests
+                break
+            except requests.ConnectionError:
+                # server isn't ready, keep trying
+                pass
+
+            try:
+                self.process.wait(1)
+            except subprocess.TimeoutExpired:
+                # this is good, the process is still running
+                pass
 
         if self.process.returncode is not None:
             raise RuntimeError(f"could not start app in {self.path}")
