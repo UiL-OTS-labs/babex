@@ -1,4 +1,4 @@
-from seleniumbase.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException
 
 
 def test_create_experiment(sb, as_admin, sample_leader):
