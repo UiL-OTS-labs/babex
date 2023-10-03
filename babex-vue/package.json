@@ -3,10 +3,10 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "serve": "vite",
-        "build": "vite build && bash rename-assets.sh",
+        "serve": "vite --port 8081",
+        "build": "vite build --manifest",
         "lint": "vue-tsc --noEmit && eslint src",
-        "watch": "vite build --watch --mode development --emptyOutDir"
+        "watch": "vite build --watch --mode development --emptyOutDir --manifest"
     },
     "dependencies": {
         "@fullcalendar/bootstrap": "^5.11.0",

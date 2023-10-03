@@ -5,15 +5,20 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  build: {
-    outDir: "../lab/main/static/vue",
-  },
-  plugins: [
-    vue(),
-  ],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+    base: '/static/',
+    build: {
+        outDir: "../lab/main/static/vue",
+        manifest: true,
+        rollupOptions: {
+            input: 'src/main.ts'
+        }
+    },
+    plugins: [
+        vue(),
+    ],
+    resolve: {
+        alias: {
+            '@': fileURLToPath(new URL('./src', import.meta.url))
+        }
     }
-  }
 })

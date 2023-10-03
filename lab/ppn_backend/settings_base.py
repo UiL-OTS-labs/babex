@@ -191,3 +191,5 @@ CSP_IMG_SRC = [
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 60 * 60 * 12  # 12 hours
+VUE_MANIFEST = "main/static/vue/manifest.json"
+VUE_URL = "/static/vue/"
