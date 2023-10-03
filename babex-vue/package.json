@@ -6,6 +6,7 @@
         "serve": "vite --port 8081",
         "build": "vite build --manifest",
         "lint": "vue-tsc --noEmit && eslint src",
+        "dev": "vite build --mode development --emptyOutDir --manifest",
         "watch": "vite build --watch --mode development --emptyOutDir --manifest"
     },
     "dependencies": {
