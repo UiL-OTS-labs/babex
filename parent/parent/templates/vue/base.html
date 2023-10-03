@@ -4,16 +4,12 @@
 
 {% block html_head %}
 {{ block.super }}
-<!-- load vue app from static folder (run 'yarn watch') -->
-<script src="{% static 'vue/assets/app.js' %}"></script>
-<link rel="stylesheet" href="{% static 'vue/assets/app.css' %}"/>
+    {# to enable live reload with vite in development, uncomment below #}
+    {# <script type="module" src="http://localhost:8081/@vite/client"></script> #}
+    {# <script type="module" src="http://localhost:8081/src/main.ts"></script> #}
 
-<!-- load vue app from webpack server with hot-reloading (run 'yarn serve') -->
-<!-- <script src="http://localhost:8081/js/chunk-vendors.js"></script> -->
-<!-- <script src="http://localhost:8081/js/app.js"></script> -->
-
-<style>
-</style>
+    {# and comment this #}
+    {% vue_assets %}
 {% endblock %}
 
 {% block uu-content %}
