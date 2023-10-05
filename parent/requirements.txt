@@ -73,7 +73,7 @@ djangorestframework==3.14.0
     # via
     #   -r requirements.in
     #   cdh-django-core
-djangosaml2==1.7.0
+djangosaml2==1.6.0
     # via cdh-django-core
 elementpath==4.1.5
     # via xmlschema
