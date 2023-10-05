@@ -103,9 +103,9 @@ jobs:
           name: babex-vue
       - name: Unpack vue app
         run: |
-          mv babex-vue.tar.gz lab/main/static/
-          cd lab/main/static/
-          tar xzf babex-vue.tar.gz
+          # deploy vue app twice
+          tar xzf babex-vue.tar.gz -C lab/main/static/
+          tar xzf babex-vue.tar.gz -C parent/parent/static/
       - name: Integration tests
         run: |
           cd ${{ matrix.app }}
