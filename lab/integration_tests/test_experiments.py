@@ -14,14 +14,8 @@ def test_create_experiment(sb, as_admin, sample_leader):
     sb.type('textarea[name="task_description"]', "task description")
     sb.type('textarea[name="additional_instructions"]', "additional instructions")
 
-    sb.click("#id_leaders ~ .select2")
-    try:
-        sb.click(f"li:contains('{sample_leader.username}')")
-    except NoSuchElementException:
-        # in some cases the first click only scrolls the view
-        # in that case, click again to get the select2 box to appear
-        sb.click("#id_leaders ~ .select2")
-        sb.click(f"li:contains('{sample_leader.username}')")
+    sb.hover_and_click("#id_leaders ~ .select2", "#id_leaders ~ .select2")
+    sb.click(f"li:contains('{sample_leader.username}')")
 
     sb.click('button:contains("Next")')
     sb.assert_text_visible("Successfully created")
