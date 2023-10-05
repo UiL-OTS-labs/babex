@@ -145,5 +145,5 @@ API_HOST = 'http://localhost:8000'
 
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
-VUE_MANIFEST = "parent/static/vue/manifest.json"
+VUE_MANIFEST = BASE_DIR / "parent/static/vue/manifest.json"
 VUE_URL = "/static/vue/"
