@@ -1,0 +1,72 @@
+{% load i18n %}
+<div class="form-check">
+    <input class="form-check-input" id="id_languages_mono_dutch" type="radio" name="languages" value="Nederlands" />
+    <label class="form-check-label" for="id_languages_mono_dutch">
+        {% translate 'parent:forms:signup:languages:mono_dutch' %}
+    </label>
+</div>
+
+<div class="form-check">
+    <input class="form-check-input" id="id_languages_mono_other" name="languages" type="radio" value=""/>
+    <label class="form-check-label" for="id_languages_mono_other">
+        {% translate 'parent:forms:signup:languages:mono_other' %}
+    </label>
+</div>
+
+
+<div class="uu-form-field">
+    <select class="w-100" id="id_languages_mono_select" name="languages_mono" disabled>
+        <option></option>
+        <option>Engels</option>
+        <option>Duits</option>
+        <option>Spaans</option>
+        <option>Frans</option>
+        <option>Italiaans</option>
+        <option>Turks</option>
+        <option>Fries</option>
+        <option>Arabisch</option>
+        <option>Russisch</option>
+        <option>Chinees</option>
+        <option>Grieks</option>
+        <option>Portugees</option>
+        <option>Hongaars</option>
+    </select>
+</div>
+
+<div class="form-check">
+    <input class="form-check-input" id="id_languages_multi" name="languages" type="radio" value=""/>
+    <label class="form-check-label" for="id_languages_multi">
+        {% translate 'parent:forms:signup:languages:multi' %}
+    </label>
+</div>
+
+<div class="uu-form-field">
+    <select class="w-100" id="id_languages_multi_select" name="languages_multi" multiple="true" disabled>
+        <option>Nederlands</option>
+        <option>Engels</option>
+        <option>Duits</option>
+        <option>Spaans</option>
+        <option>Frans</option>
+        <option>Italiaans</option>
+        <option>Turks</option>
+        <option>Fries</option>
+        <option>Arabisch</option>
+        <option>Russisch</option>
+        <option>Chinees</option>
+        <option>Grieks</option>
+        <option>Portugees</option>
+        <option>Hongaars</option>
+    </select>
+</div>
+
+<script type="text/javascript" nonce="{{ request.csp_nonce }}">
+    $(function() {
+        $('input[type=radio]').change(() => {
+            $('#id_languages_multi_select').prop('disabled', !$('#id_languages_multi').prop('checked'));
+            $('#id_languages_mono_select').prop('disabled', !$('#id_languages_mono_other').prop('checked'));
+        });
+
+        $('#id_languages_multi_select').select2({tags: true});
+        $('#id_languages_mono_select').select2({tags: true});
+    });
+</script>

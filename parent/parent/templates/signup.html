@@ -5,9 +5,40 @@
 <div class="uu-container">
     <div class="col-12">
     <h1>{% trans 'signup:header' %}</h1>
+
     <p>
-        {% trans 'signup:intro' %}
+        Fijn dat u uw kind wilt aanmelden om ons te helpen bij ons onderzoek! De persoonsgegevens die u hieronder
+        opgeeft, zullen door de manager of door studenten of onderzoekers van het Babylab voor verschillende doelen
+        worden gebruikt:
     </p>
+    <ul>
+        <li>om te kijken aan welk experiment uw kind kan meedoen en </li>
+        <li>om contact met u te kunnen opnemen.</li>
+    </ul>
+    <p>Ook kunnen de gegevens door wetenschappers worden gebruikt voor hun onderzoek.</p>
+    <p>
+        Alle gegevens die u in dit formulier opgeeft, worden met de grootste vertrouwelijkheid behandeld. Uw gegevens en
+        die van uw kind worden verwijderd kort nadat uw kind een leeftijd heeft bereikt waarop het niet meer in
+        aanmerking komt voor ons onderzoek. Meestal is dat met ongeveer 2,5 jaar. U kunt hieronder ook aangeven of wij
+        de gegevens langer mogen bewaren voor mogelijk vervolgonderzoek of voor ander onderzoek.
+    </p>
+
+    <ul>
+        <li>
+            Wanneer u uw gegevens wilt aanpassen of verwijderen, dan kan dat via de <a href="#TODO">selfservice
+            pagina</a>. Vul daar het e-mailadres in dat u hieronder opgeeft en volg de aanwijzingen op het scherm. Na
+            registratie kan het een paar dagen duren voordat u uw gegevens kunt inzien.
+        </li>
+        <li>
+            Wilt u meer weten over de manier waarop wij omgaan met uw persoonsgegevens en die van uw kind? Lees dan onze
+            <a href="#TODO">privacyverklaring</a>
+        </li>
+    </ul>
+    <p>
+        Woont u niet in Utrecht of omgeving? Houd er dan alstublieft rekening mee dat jonge kinderen na een lange
+        reistijd vaak te moe zijn (of geen zin meer hebben) om mee te doen met een onderzoek.
+    </p>
+
     <form method="post" class="uu-form">
         {% csrf_token %}
         {{ form }}

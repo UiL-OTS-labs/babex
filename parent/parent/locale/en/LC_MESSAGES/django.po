@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-07 08:50+0000\n"
+"POT-Creation-Date: 2023-10-23 09:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -208,12 +208,6 @@ msgstr "Ask a question"
 msgid "signup:header"
 msgstr "Sign up"
 
-#: parent/templates/signup.html:9
-msgid "signup:intro"
-msgstr ""
-"To sign up for participation in the babylab, please fill in the following "
-"form:"
-
 #: parent/templates/signup_confirmed.html:7
 msgid "parent:signup_confirmed:message"
 msgstr ""
@@ -233,6 +227,11 @@ msgstr "Female"
 #: parent/templates/widgets/participant_sex_widget.html:28
 msgid "participant:attribute:sex:other"
 msgstr "Other"
+
+#~ msgid "signup:intro"
+#~ msgstr ""
+#~ "To sign up for participation in the babylab, please fill in the following "
+#~ "form:"
 
 #~ msgid "parent:forms:signup:sex:f"
 #~ msgstr "Female"
