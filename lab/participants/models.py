@@ -142,18 +142,7 @@ class Participant(models.Model):
         return len(self.appointments.all()) < 1
 
 
-class SecondaryEmail(models.Model):
-    email = e_fields.EncryptedEmailField(
-        _("secondary_email:attribute:email"),
-    )
 
-    participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.email
-
-    def __repr__(self):
-        return "<SecondaryEmail ({})>".format(self.email)
 
 
 class CriterionAnswer(models.Model):
