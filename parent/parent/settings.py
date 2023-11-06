@@ -144,3 +144,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 API_HOST = 'http://localhost:8000'
 
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
+INTERNAL_IPS = ["127.0.0.1"]
+INSTALLED_APPS.append("debug_toolbar")
+MIDDLEWARE.append(
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+)
