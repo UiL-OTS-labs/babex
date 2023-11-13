@@ -1,10 +1,18 @@
+import json
 from secrets import token_urlsafe
 
 import cdh.core.fields as e_fields
+from cdh.core.fields.mixin import EncryptedMixin
 from cdh.core.mail import TemplateEmail
 from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
+
+class EncryptedJSONField(EncryptedMixin, models.JSONField):
+    def to_python(self, value):
+        decrypted = EncryptedMixin.to_python(self, value)
+        return json.loads(decrypted, cls=self.decoder)
 
 
 class Signup(models.Model):
@@ -12,7 +20,8 @@ class Signup(models.Model):
     sex = e_fields.EncryptedCharField(max_length=50)
     birth_date = e_fields.EncryptedDateField()
 
-    parent_name = e_fields.EncryptedTextField()
+    parent_first_name = e_fields.EncryptedTextField()
+    parent_last_name = e_fields.EncryptedTextField()
     phonenumber = e_fields.EncryptedTextField()
     phonenumber_alt = e_fields.EncryptedTextField(blank=True)
     email = e_fields.EncryptedTextField()
@@ -21,16 +30,23 @@ class Signup(models.Model):
     newsletter = e_fields.EncryptedBooleanField()
 
     dyslexic_parent = e_fields.EncryptedCharField(max_length=5)
-    multilingual = e_fields.EncryptedBooleanField()
+    tos_parent = e_fields.EncryptedCharField(max_length=5, null=True)
 
-    birth_weight = e_fields.EncryptedIntegerField(_("participant:attribute:birth_weight"))
-    pregnancy_weeks = e_fields.EncryptedIntegerField(_("participant:attribute:pregnancy_weeks"))
-    pregnancy_days = e_fields.EncryptedIntegerField(_("participant:attribute:pregnancy_days"))
+    # why is this a json field?
+    # mostly because the user should be able to add their own language,
+    # but we don't want to create a model right away because it has to first be approved.
+    # upon approval, these will be translated into ForeignKey relations (see Participant.languages)
+    languages = EncryptedJSONField(null=True)
+
+    birth_weight = e_fields.EncryptedCharField(_("participant:attribute:birth_weight"), max_length=30)
+    pregnancy_duration = e_fields.EncryptedCharField(
+        _("participant:attribute:pregnancy_weeks"), max_length=30, null=True
+    )
 
     class Status(models.TextChoices):
         NEW = "NEW", _("signups:stats:new")
         APPROVED = "APPROVED", _("signups:stats:approved")
-        REJECTED = "REJECTED", _("signups:stats:rejected")
+        REJECTED = "(REJECTED", _("signups:stats:rejected")
 
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.NEW)
 

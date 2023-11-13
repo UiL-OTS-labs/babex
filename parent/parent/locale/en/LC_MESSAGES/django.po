@@ -19,12 +19,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: parent/forms.py:59
-msgid "parent:forms:signup:pregnancy_weeks"
-msgstr "Pregnancy weeks"
-
-#: parent/forms.py:60
-msgid "parent:forms:signup:pregnancy_days"
-msgstr "Pregnancy days"
+msgid "parent:forms:signup:pregnancy_duration"
+msgstr "Pregnancy duration"
 
 #: parent/forms.py:69
 msgid "parent:forms:signup:name"
@@ -81,10 +77,6 @@ msgstr "No"
 #: parent/forms.py:96
 msgid "parent:forms:signup:dyslexic_parent:unk"
 msgstr "Prefer not to say"
-
-#: parent/forms.py:102
-msgid "parent:forms:signup:multilingual"
-msgstr "Multilingual"
 
 #: parent/forms.py:104 parent/forms.py:110 parent/forms.py:115
 msgid "Yes"

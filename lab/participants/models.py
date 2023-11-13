@@ -8,43 +8,71 @@ from experiments.models.criteria_models import Criterion
 from utils.models import EncryptedManager
 
 
+class Language(models.Model):
+    name = e_fields.EncryptedCharField(max_length=100)
+
+
 class Participant(models.Model):
-    class DyslexicParent(models.TextChoices):
-        MALE = "M"
-        FEMALE = "F"
-        BOTH = "BOTH"
-        NEITHER = "NO"
-        UNKNOWN = "UNK"
+    class Sex(models.TextChoices):
+        MALE = "M", _("participant:attribute:sex:male")
+        FEMALE = "F", _("participant:attribute:sex:female")
+        UNKNOWN = "UNK", _("participant:attribute:sex:prefer_not_to_answer")
+
+    class WhichParent(models.TextChoices):
+        MALE = "M", _("participant:attribute:which_parent:m")
+        FEMALE = "F", _("participant:attribute:which_parent:f")
+        BOTH = "BOTH", _("participant:attribute:which_parent:both")
+        NEITHER = "NO", _("participant:attribute:which_parent:neither")
+        UNKNOWN = "UNK", _("participant:attribute:which_parent:unk")
+
+    class BirthWeight(models.TextChoices):
+        LESS_THAN_2500 = "LESS_THAN_2500", _("participant:attribute:birth_weight:less_than_2500")
+        _2500_TO_4500 = "2500_TO_4500", _("participant:attribute:birth_weight:2500_to_4500")
+        MORE_THAN_4500 = "MORE_THAN_4500", _("participant:attribute:birth_weight:more_than_4500")
+
+    class PregnancyDuration(models.TextChoices):
+        LESS_THAN_37 = "LESS_THAN_37", _("participant:attribute:pregnancy_duration:less_than_37")
+        _37_TO_42 = "37_TO_42", _("participant:attribute:pregnancy_duration:37_to_42")
+        MORE_THAN_42 = "MORE_THAN_42", _("participant:attribute:pregnancy_duration:more_than_42")
 
     objects = EncryptedManager()
 
-    email = e_fields.EncryptedEmailField(_("participant:attribute:email"))
     name = e_fields.EncryptedTextField(_("participant:attribute:name"), blank=True, null=True)
-    dyslexic_parent = e_fields.EncryptedCharField(
-        _("participant:attribute:dyslexic_parent"),
-        max_length=5,
-        choices=(
-            (DyslexicParent.FEMALE, _("participant:attribute:dyslexic_parent:f")),
-            (DyslexicParent.MALE, _("participant:attribute:dyslexic_parent:m")),
-            (DyslexicParent.BOTH, _("participant:attribute:dyslexic_parent:both")),
-            (DyslexicParent.NEITHER, _("participant:attribute:dyslexic_parent:no")),
-            (DyslexicParent.UNKNOWN, _("participant:attribute:dyslexic_parent:unk")),
-        ),
-    )
-    birth_date = e_fields.EncryptedDateField(_("participant:attribute:birth_date"), blank=True, null=True)
-    multilingual = e_fields.EncryptedBooleanField(_("participant:attribute:multilingual"), blank=True, null=True)
-    phonenumber = e_fields.EncryptedTextField(_("participant:attribute:phonenumber"), blank=True, null=True)
     sex = e_fields.EncryptedTextField(_("participant:attribute:sex"), blank=True, null=True)
-    email_subscription = e_fields.EncryptedBooleanField(_("participant:attribute:email_subscription"), default=False)
-    birth_weight = e_fields.EncryptedIntegerField(_("participant:attribute:birth_weight"), null=True)
-    pregnancy_weeks = e_fields.EncryptedIntegerField(_("participant:attribute:pregnancy_weeks"), null=True)
-    pregnancy_days = e_fields.EncryptedIntegerField(_("participant:attribute:pregnancy_days"), null=True)
+    birth_date = e_fields.EncryptedDateField(_("participant:attribute:birth_date"), blank=True, null=True)
+
+    birth_weight = e_fields.EncryptedIntegerField(
+        _("participant:attribute:birth_weight"), null=True, choices=BirthWeight.choices
+    )
+    pregnancy_duration = e_fields.EncryptedCharField(
+        _("participant:attribute:pregnancy_duration"),
+        null=True,
+        choices=PregnancyDuration.choices,
+        max_length=30,
+    )
+    languages = models.anyToManyField(Language)
+
+    parent_first_name = e_fields.EncryptedTextField(_("participant:attribute:parent_first_name"), null=True)
+    parent_last_name = e_fields.EncryptedTextField(_("participant:attribute:parent_last_name"), null=True)
+    email = e_fields.EncryptedEmailField(_("participant:attribute:email"))
+    phonenumber = e_fields.EncryptedTextField(_("participant:attribute:phonenumber"), blank=True, null=True)
     phonenumber_alt = e_fields.EncryptedTextField(_("participant:attribute:phonenumber_alt"), blank=True, null=True)
-    parent_name = e_fields.EncryptedTextField(_("participant:attribute:parent_name"), null=True)
+
+    dyslexic_parent = e_fields.EncryptedCharField(
+        _("participant:attribute:dyslexic_parent"), max_length=5, choices=WhichParent.choices
+    )
+    tos_parent = e_fields.EncryptedCharField(
+        _("participant:attribute:dyslexic_parent"), max_length=5, choices=WhichParent.choices
+    )
+
+    save_longer = e_fields.EncryptedBooleanField(_("participant:attribute:save_longer"), default=False)
+    english_contact = e_fields.EncryptedBooleanField(_("participant:attribute:english_contact"), default=False)
+    email_subscription = e_fields.EncryptedBooleanField(_("participant:attribute:email_subscription"), default=False)
 
     created = models.DateTimeField(verbose_name=_("participant:attribute:created"), auto_now_add=True)
     deactivated = models.DateTimeField(verbose_name=_("participant:attribute:deactivated"), null=True)
 
+    # TODO: remove
     @property
     def fullname(self):
         if self.name:
@@ -52,6 +80,7 @@ class Participant(models.Model):
 
         return _("participant:name:unknown")
 
+    # TODO: remove?
     @property
     def mail_name(self) -> str:
         if self.name:
@@ -60,44 +89,25 @@ class Participant(models.Model):
         return "proefpersoon"
 
     def get_sex_display(self):
-        mappings = {
-            "M": _("participant:attribute:sex:male"),
-            "F": _("participant:attribute:sex:female"),
-            "PNTA": _("participant:attribute:sex:prefer_not_to_answer"),
-            None: None,
-        }
-
-        if self.sex in mappings:
-            return mappings[self.sex]
-
-        return self.sex
+        return self.Sex(self.sex).label
 
     @property
     def dyslexic_parent_bool(self) -> bool | None:
         if self.dyslexic_parent in [
-            Participant.DyslexicParent.FEMALE,
-            Participant.DyslexicParent.MALE,
-            Participant.DyslexicParent.BOTH,
+            self.WhichParent.FEMALE,
+            self.WhichParent.MALE,
+            self.WhichParent.BOTH,
         ]:
             return True
-        elif self.dyslexic_parent == Participant.DyslexicParent.NEITHER:
+        elif self.dyslexic_parent == self.WhichParent.NEITHER:
             return False
         return None
 
     def dyslexic_parent_display(self):
-        mappings = {
-            "M": _("participant:attribute:dyslexic_parent:m"),
-            "F": _("participant:attribute:dyslexic_parent:f"),
-            "BOTH": _("participant:attribute:dyslexic_parent:both"),
-            "UNK": _("participant:attribute:dyslexic_parent:unk"),
-            "NO": _("participant:attribute:dyslexic_parent:no"),
-        }
-        return mappings[self.dyslexic_parent]
+        return self.WhichParent(self.dyslexic_parent).label
 
-    @property
-    def has_account(self):
-        # TODO: is this needed?
-        return False
+    def tos_parent_display(self):
+        return self.WhichParent(self.tos_parent).label
 
     def __str__(self):
         name = self.fullname
@@ -125,9 +135,7 @@ class Participant(models.Model):
 
     @property
     def gestational_age(self):
-        if None not in [self.pregnancy_days, self.pregnancy_weeks]:
-            return f"{self.pregnancy_weeks}; {self.pregnancy_days}"
-        return ""
+        return self.PregnancyDuration[self.pregnancy_duration].label
 
     @property
     def last_call(self):
@@ -141,10 +149,20 @@ class Participant(models.Model):
         # participants who have never participated may be removed without consequences
         return len(self.appointments.all()) < 1
 
+    @property
+    def parent_name(self):
+        return f"{self.parent_first_name} {self.parent_last_name}"
+
+    @property
+    def multilingual(self):
+        return self.languages.count() > 1
+
+    @property
+    def languages_pretty(self):
+        return ", ".join(self.languages.all().values_list("name", flat=True))
 
 
-
-
+# TODO: remove
 class CriterionAnswer(models.Model):
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
 

@@ -1,3 +1,4 @@
+import json
 from datetime import date
 
 from cdh.core.forms import (
@@ -13,22 +14,29 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
 
-class LanguagesWidget(forms.widgets.Widget):
+class LanguagesWidget(forms.widgets.SelectMultiple):
     template_name = "widgets/languages_widget.html"
 
     def value_from_datadict(self, data, files, name):
-        value = data.get(name)
-
+        value = data.getlist(name)
         return value
 
     def get_context(self, name, value, attrs):
         context = super().get_context(name, value, attrs)
 
-        if context["widget"]["value"] not in ["M", "F"]:
-            context["widget"]["other_value"] = context["widget"]["value"]
-            context["widget"]["value"] = "OTHER"
-
         return context
+
+
+class LanguagesField(forms.MultipleChoiceField):
+    def to_python(self, value):
+        v = super().to_python(value)
+        if isinstance(v, str):
+            v = [v]
+
+        return list(filter(None, v))  # remove empty values (TODO: why are they here to begin with?)
+
+    def valid_value(self, value):
+        return isinstance(value, str)
 
 
 def get_valid_year_range():
@@ -75,8 +83,17 @@ class SignupForm(TemplatedForm):
         ),
         widget=BootstrapRadioSelect(),
     )
-    languages = forms.MultipleChoiceField(
-        label=_("parent:forms:signup:languages"), choices=(("Nederlands", "Nederlands"),), widget=LanguagesWidget
+    languages = LanguagesField(
+        # TODO: this should use a custom field object to support new values that are not part of the predetermined choices
+        # but it should still support prepopulating with known
+        label=_("parent:forms:signup:languages"),
+        widget=LanguagesWidget,
+        choices=(
+            ("Nederlands", "Nederlands"),
+            ("Engels", "Engels"),
+            ("Duits", "Duits"),
+            ("Spaans", "Spaans"),
+        ),
     )
     parent_header = TemplatedFormTextField(header=_("parent:forms:signup:parent_header"))
     parent_first_name = forms.CharField(label=_("parent:forms:signup:parent_first_name"))
@@ -119,19 +136,19 @@ class SignupForm(TemplatedForm):
     )
 
     general_header = TemplatedFormTextField(header=_("parent:forms:signup:general_header"))
-    save_longer = forms.BooleanField(
+    save_longer = forms.NullBooleanField(
         label=_("parent:forms:signup:save_longer"),
         help_text=_("parent:forms:signup:save_longer:help"),
         required=True,
         widget=BootstrapRadioSelect(choices=((True, _("Yes")), (False, _("No")))),
     )
-    english_contact = forms.BooleanField(
+    english_contact = forms.NullBooleanField(
         label=_("parent:forms:signup:english_contact"),
         help_text=_("parent:forms:signup:english_contact:help"),
         required=True,
         widget=BootstrapRadioSelect(choices=((True, _("Yes")), (False, _("No")))),
     )
-    newsletter = forms.BooleanField(
+    newsletter = forms.NullBooleanField(
         label=mark_safe(_("parent:forms:signup:newsletter")),
         help_text=_("parent:forms:signup:newsletter_help"),
         required=True,

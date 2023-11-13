@@ -1,9 +1,10 @@
 {% load get_field_name %}
+{% load i18n %}
 
 <h2>Contact details</h2>
 <table class="table">
     <tr>
-        <td width="40%"> {% get_verbose_field_name "participants" "Participant" "parent_name" %} </td>
+        <td width="40%"> {% translate "participant:attribute:parent_name" %} </td>
         <td width="60%"> {{ participant.parent_name|default_if_none:'' }} </td>
     </tr>
     <tr>
