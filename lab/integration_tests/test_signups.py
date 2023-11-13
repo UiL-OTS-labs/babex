@@ -13,18 +13,18 @@ def sample_signup(db):
         name="Test signup",
         sex="F",
         birth_date=datetime(2020, 4, 4),
-        parent_name="Parent",
+        parent_first_name="Parent",
+        parent_last_name="McParent",
         phonenumber="12345678",
         email="parent@localhost.local",
         english_contact=True,
         newsletter=True,
-        dyslexic_parent=Participant.DyslexicParent.NEITHER,
+        dyslexic_parent=Participant.WhichParent.NEITHER,
         multilingual=True,
         status=Signup.Status.NEW,
         email_verified=timezone.now(),
-        birth_weight=2000,
-        pregnancy_weeks=40,
-        pregnancy_days=4,
+        birth_weight=Participant.BirthWeight._2500_TO_4500,
+        pregnancy_duration=Participant.PregnancyDuration._37_TO_42,
     )
 
 

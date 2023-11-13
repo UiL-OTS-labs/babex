@@ -214,11 +214,11 @@ def participant(apps):
     participant = Participant.objects.create(
         email=f"baby{suffix}@baby.com",
         name="Baby McBaby",
-        parent_name="Parent McParent",
+        parent_first_name="Parent",
+        parent_last_name="McParent",
         birth_date=date(2020, 1, 1),
-        multilingual=False,
         phonenumber="987654321",
-        dyslexic_parent=Participant.DyslexicParent.UNKNOWN,
+        dyslexic_parent=Participant.WhichParent.UNKNOWN,
         email_subscription=True,
     )
     yield participant
