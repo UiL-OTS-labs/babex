@@ -20,11 +20,12 @@ def sample_signup(db):
         english_contact=True,
         newsletter=True,
         dyslexic_parent=Participant.WhichParent.NEITHER,
-        multilingual=True,
+        tos_parent=Participant.WhichParent.NEITHER,
         status=Signup.Status.NEW,
         email_verified=timezone.now(),
         birth_weight=Participant.BirthWeight._2500_TO_4500,
         pregnancy_duration=Participant.PregnancyDuration._37_TO_42,
+        save_longer=False,
     )
 
 
