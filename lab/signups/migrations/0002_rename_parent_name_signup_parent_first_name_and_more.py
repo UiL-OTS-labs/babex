@@ -40,9 +40,4 @@ class Migration(migrations.Migration):
             name='birth_weight',
             field=cdh.core.fields.encrypted_fields.EncryptedCharField(verbose_name='participant:attribute:birth_weight'),
         ),
-        migrations.AlterField(
-            model_name='signup',
-            name='status',
-            field=models.CharField(choices=[('NEW', 'signups:stats:new'), ('APPROVED', 'signups:stats:approved'), ('(REJECTED', 'signups:stats:rejected')], default='NEW', max_length=20),
-        ),
     ]
