@@ -72,22 +72,6 @@ class Participant(models.Model):
     created = models.DateTimeField(verbose_name=_("participant:attribute:created"), auto_now_add=True)
     deactivated = models.DateTimeField(verbose_name=_("participant:attribute:deactivated"), null=True)
 
-    # TODO: remove
-    @property
-    def fullname(self):
-        if self.name:
-            return self.name
-
-        return _("participant:name:unknown")
-
-    # TODO: remove?
-    @property
-    def mail_name(self) -> str:
-        if self.name:
-            return self.name
-
-        return "proefpersoon"
-
     def get_sex_display(self):
         return self.Sex(self.sex).label
 
@@ -162,13 +146,4 @@ class Participant(models.Model):
         return ", ".join(self.languages.all().values_list("name", flat=True))
 
 
-# TODO: remove
-class CriterionAnswer(models.Model):
-    participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
 
-    criterion = models.ForeignKey(Criterion, on_delete=models.CASCADE)
-
-    answer = e_fields.EncryptedTextField(_("criterion_answer:attribute:answer"))
-
-    def __str__(self):
-        return "({}) {}: {}".format(self.participant.name, self.criterion.name_natural, self.answer)
