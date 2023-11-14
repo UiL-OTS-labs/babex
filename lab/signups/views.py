@@ -60,7 +60,6 @@ def approve_signup(signup: Signup):
         email=signup.email,
         phonenumber=signup.phonenumber,
         phonenumber_alt=signup.phonenumber_alt,
-        email_subscription=signup.newsletter,
         dyslexic_parent=signup.dyslexic_parent,
         tos_parent=signup.tos_parent,
         save_longer=signup.save_longer,
