@@ -114,7 +114,6 @@ class InviteTests(TestCase):
 
         cls.participant = Participant.objects.create(
             dyslexic_parent=Participant.WhichParent.NEITHER,
-            multilingual=False,
         )
 
         cls.experiment.defaultcriteria.min_age_days = 0

@@ -15,7 +15,7 @@ def sample_experiment(admin_user, db):
 @pytest.fixture
 def sample_participant(db):
     dutch = Language.objects.create(name="Nederlands")
-    yield Participant.objects.create(
+    participant = Participant.objects.create(
         email="baby@baby.com",
         name="Baby McBaby",
         parent_first_name="Parent",
@@ -24,8 +24,9 @@ def sample_participant(db):
         phonenumber="987654321",
         dyslexic_parent=Participant.WhichParent.NEITHER,
         email_subscription=True,
-        languages=[dutch],
     )
+    participant.languages.add(dutch)
+    yield participant
 
 
 @pytest.fixture
