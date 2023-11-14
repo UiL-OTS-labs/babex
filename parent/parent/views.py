@@ -34,6 +34,7 @@ class Signup(rest.Resource):
     phonenumber_alt = rest.TextField()
     email = rest.TextField()
 
+    save_longer = rest.BoolField()
     english_contact = rest.BoolField()
     newsletter = rest.BoolField()
 

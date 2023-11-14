@@ -26,6 +26,7 @@ class Signup(models.Model):
     phonenumber_alt = e_fields.EncryptedTextField(blank=True)
     email = e_fields.EncryptedTextField()
 
+    save_longer = e_fields.EncryptedBooleanField()
     english_contact = e_fields.EncryptedBooleanField()
     newsletter = e_fields.EncryptedBooleanField()
 

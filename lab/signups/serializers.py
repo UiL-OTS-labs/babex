@@ -18,6 +18,7 @@ class SignupSerializer(serializers.ModelSerializer):
             "phonenumber_alt",
             "email",
             "english_contact",
+            "save_longer",
             "newsletter",
             "dyslexic_parent",
             "tos_parent",

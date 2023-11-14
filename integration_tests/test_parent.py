@@ -173,3 +173,18 @@ def test_signup_multilingual_with_custom(sb, apps, default_signup_fill_form, as_
     # check that the languages were saved correctly
     participant = Participant.objects.last()
     assert participant.languages.values_list('name', flat=True)
+
+
+def test_signup_save_longer(sb, apps, default_signup_fill_form):
+    Signup = apps.lab.get_model('signups', 'Signup')
+
+    sb.click('#id_save_longer_0')
+    sb.click('input[type="submit"]')
+
+    # check that the form was submitted
+    sb.assert_element_not_visible('input[type="submit"]')
+    assert 'signup/done' in sb.get_current_url()
+
+    signup = Signup.objects.last()
+    # verify the fields were saved correctly
+    assert signup.save_longer is True
