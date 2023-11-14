@@ -9,9 +9,11 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-class EncryptedJSONField(EncryptedMixin, models.JSONField):
+class EncryptedJSONListField(EncryptedMixin, models.JSONField):
     def to_python(self, value):
         decrypted = EncryptedMixin.to_python(self, value)
+        if decrypted is None:
+            return []
         return json.loads(decrypted, cls=self.decoder)
 
 
@@ -38,7 +40,7 @@ class Signup(models.Model):
     # mostly because the user should be able to add their own language,
     # but we don't want to create a model right away because it has to first be approved.
     # upon approval, these will be translated into ForeignKey relations (see Participant.languages)
-    languages = EncryptedJSONField(null=True)
+    languages = EncryptedJSONListField(null=True)
 
     birth_weight = e_fields.EncryptedCharField(_("participant:attribute:birth_weight"), max_length=30)
     pregnancy_duration = e_fields.EncryptedCharField(
