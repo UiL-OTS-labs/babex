@@ -50,6 +50,10 @@
                     <td> {{ signup.phonenumber_alt }} </td>
                 </tr>
                 <tr>
+                    <td> {% get_verbose_field_name "signups" "Signup" "languages" %} </td>
+                    <td> {{ signup.languages|join:", "}} </td>
+                </tr>
+                <tr>
                     <td> {% get_verbose_field_name "signups" "Signup" "email" %} </td>
                     <td> {{ signup.email }} </td>
                 </tr>
