@@ -50,7 +50,7 @@ class Participant(models.Model):
         choices=PregnancyDuration.choices,
         max_length=30,
     )
-    languages = models.anyToManyField(Language)
+    languages = models.ManyToManyField(Language)
 
     parent_first_name = e_fields.EncryptedTextField(_("participant:attribute:parent_first_name"), null=True)
     parent_last_name = e_fields.EncryptedTextField(_("participant:attribute:parent_last_name"), null=True)
