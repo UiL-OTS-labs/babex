@@ -146,4 +146,13 @@ class Participant(models.Model):
         return ", ".join(self.languages.all().values_list("name", flat=True))
 
 
+# TODO: remove
+class CriterionAnswer(models.Model):
+    participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
 
+    criterion = models.ForeignKey(Criterion, on_delete=models.CASCADE)
+
+    answer = e_fields.EncryptedTextField(_("criterion_answer:attribute:answer"))
+
+    def __str__(self):
+        return "({}) {}: {}".format(self.participant.name, self.criterion.name_natural, self.answer)
