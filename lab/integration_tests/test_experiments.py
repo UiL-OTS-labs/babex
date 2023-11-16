@@ -1,6 +1,3 @@
-from selenium.common.exceptions import NoSuchElementException
-
-
 def test_create_experiment(sb, as_admin, sample_leader):
     sb.click("a:contains(Experiments)")
     sb.click("a:contains(Overview)")

@@ -144,3 +144,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 API_HOST = 'http://localhost:8000'
 
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
+
+VUE_MANIFEST = BASE_DIR / "parent/static/vue/manifest.json"
+VUE_URL = "/static/vue/"
