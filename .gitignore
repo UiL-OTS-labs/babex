@@ -3,6 +3,7 @@
 *.pot
 *.pyc
 __pycache__/
+*.egg-info
 
 ### Project-specific ###
 *.sqlite3
