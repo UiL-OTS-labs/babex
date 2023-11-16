@@ -8,15 +8,20 @@ SECRET_KEY = "something else"
 FIELD_ENCRYPTION_KEY = base64.b64encode(b"a" * 32)
 PARENT_URI = 'http://localhost:19000/'
 
-EMAIL_FROM = "babex@localhost.local"
+DEBUG = True
+FIELD_ENCRYPTION_KEY = base64.b64encode(b'a' * 32)
+
+SECRET_KEY = 'secret'
+
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = '/tmp/babex-mailbox'
+EMAIL_FROM = "babex@localhost.local"
 
 DATABASES = {
-    'default': {
+    "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": 'lab.int.db.sqlite3',
-    }
+        "NAME": "lab.int.db.sqlite3",
+    },
 }
 
 FIXTURE_DIRS = ['data_fixtures']

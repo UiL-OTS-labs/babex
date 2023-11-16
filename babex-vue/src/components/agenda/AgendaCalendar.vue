@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+    import '@fullcalendar/core/vdom';
     import FullCalendar from '@fullcalendar/vue3';
     import dayGridPlugin from '@fullcalendar/daygrid';
     import timeGridPlugin from '@fullcalendar/timegrid';

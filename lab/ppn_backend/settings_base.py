@@ -1,9 +1,10 @@
 import os
+from pathlib import Path
 
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Application definition
 
@@ -191,3 +192,5 @@ CSP_IMG_SRC = [
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 60 * 60 * 12  # 12 hours
+VUE_MANIFEST = BASE_DIR / "main/static/vue/manifest.json"
+VUE_URL = "/static/vue/"
