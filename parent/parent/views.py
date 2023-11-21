@@ -25,23 +25,22 @@ class Signup(rest.Resource):
     name = rest.TextField()
     sex = rest.TextField()
     birth_date = rest.DateField()
-    birth_weight = rest.IntegerField()
-    pregnancy_weeks = rest.IntegerField()
-    pregnancy_days = rest.IntegerField()
+    birth_weight = rest.TextField()
+    pregnancy_duration = rest.TextField()
 
-    parent_name = rest.TextField()
+    parent_first_name = rest.TextField()
+    parent_last_name = rest.TextField()
     phonenumber = rest.TextField()
     phonenumber_alt = rest.TextField()
     email = rest.TextField()
 
+    save_longer = rest.BoolField()
     english_contact = rest.BoolField()
     newsletter = rest.BoolField()
 
     dyslexic_parent = rest.TextField()
-    multilingual = rest.BoolField()
-
-    link_token = rest.TextField(null=True)
-    email_verified = rest.DateTimeField(null=True, blank=True)
+    tos_parent = rest.TextField()
+    languages = rest.CollectionField(rest.StringCollection)
 
 
 class SignupView(FormView):
@@ -51,10 +50,9 @@ class SignupView(FormView):
 
     def form_valid(self, form):
         # filter out blank fields
-        fields = {key: value for key, value in form.cleaned_data.items() if value}
-        fields["pregnancy_weeks"], fields["pregnancy_days"] = fields["pregnancy_duration"]
+        fields = {key: value for key, value in form.cleaned_data.items() if value is not None}
         signup = Signup(**fields)
-        signup.put()
+        signup.put(as_json=True)
         return super().form_valid(form)
 
 

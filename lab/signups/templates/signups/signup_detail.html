@@ -38,8 +38,8 @@
                     <td> {{ signup.birth_date }} </td>
                 </tr>
                 <tr>
-                    <td> {% get_verbose_field_name "signups" "Signup" "parent_name" %} </td>
-                    <td> {{ signup.parent_name }} </td>
+                    <td> {% translate "signup:attribute:parent_name" %} </td>
+                    <td> {{ signup.parent_first_name }} {{ signup.parent_last_name }} </td>
                 </tr>
                 <tr>
                     <td> {% get_verbose_field_name "signups" "Signup" "phonenumber" %} </td>
@@ -48,6 +48,10 @@
                 <tr>
                     <td> {% get_verbose_field_name "signups" "Signup" "phonenumber_alt" %} </td>
                     <td> {{ signup.phonenumber_alt }} </td>
+                </tr>
+                <tr>
+                    <td> {% get_verbose_field_name "signups" "Signup" "languages" %} </td>
+                    <td> {{ signup.languages|join:", "}} </td>
                 </tr>
                 <tr>
                     <td> {% get_verbose_field_name "signups" "Signup" "email" %} </td>

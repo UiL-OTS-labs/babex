@@ -4,7 +4,7 @@ import pytest
 
 from experiments.models import DefaultCriteria
 from main.models import User
-from participants.models import Participant
+from participants.models import Language, Participant
 
 
 @pytest.fixture
@@ -42,16 +42,20 @@ def sample_experiment(admin_user, db):
 
 @pytest.fixture
 def sample_participant(db):
-    yield Participant.objects.create(
+    dutch = Language.objects.create(name="Nederlands")
+    participant = Participant.objects.create(
         email="baby@baby.com",
         name="Baby McBaby",
-        parent_name="Parent McParent",
+        parent_first_name="Parent",
+        parent_last_name="McParent",
         birth_date=date(2020, 1, 1),
-        multilingual=False,
         phonenumber="987654321",
-        dyslexic_parent=Participant.DyslexicParent.UNKNOWN,
+        dyslexic_parent=Participant.WhichParent.NEITHER,
         email_subscription=True,
     )
+    participant.languages.add(dutch)
+    yield participant
+
 
 
 @pytest.fixture

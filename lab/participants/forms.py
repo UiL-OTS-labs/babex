@@ -18,7 +18,7 @@ class ParticipantForm(TemplatedModelForm):
             "email",
             "dyslexic_parent",
             "birth_date",
-            "multilingual",
+            "languages",
             "phonenumber",
             "sex",
             "email_subscription",

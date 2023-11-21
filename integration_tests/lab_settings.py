@@ -4,6 +4,8 @@ sys.path.append('../lab')
 
 from ppn_backend.settings_base import *
 
+SECRET_KEY = "something else"
+FIELD_ENCRYPTION_KEY = base64.b64encode(b"a" * 32)
 PARENT_URI = 'http://localhost:19000/'
 
 DEBUG = True
@@ -23,3 +25,6 @@ DATABASES = {
 }
 
 FIXTURE_DIRS = ['data_fixtures']
+
+ALLOWED_HOSTS = ["localhost"]
+DEBUG = True

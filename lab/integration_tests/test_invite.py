@@ -61,9 +61,9 @@ def test_schedule_appointment(sb, sample_experiment, sample_participant, sample_
     sb.assertEqual(mail.outbox[0].to[0], sample_participant.email)
 
     # check that at least parent name and leader name are in the email contents
-    sb.assertIn(sample_participant.parent_name, mail.outbox[0].body)
+    sb.assertIn(sample_participant.parent_last_name, mail.outbox[0].body)
     sb.assertIn(sample_leader.name, mail.outbox[0].body)
-    sb.assertIn(sample_participant.parent_name, mail.outbox[0].alternatives[0][0])
+    sb.assertIn(sample_participant.parent_last_name, mail.outbox[0].alternatives[0][0])
     sb.assertIn(sample_leader.name, mail.outbox[0].alternatives[0][0])
 
 

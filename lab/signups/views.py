@@ -10,7 +10,7 @@ from rest_framework import views
 from rest_framework.response import Response
 
 from main.auth.util import LabManagerMixin
-from participants.models import Participant
+from participants.models import Language, Participant
 from signups.models import Signup
 
 
@@ -45,18 +45,28 @@ class SignupDetailView(braces.StaffuserRequiredMixin, DetailView):
 
 def approve_signup(signup: Signup):
     """Creates a new Participant record from a given Signup"""
-    Participant.objects.create(
+    # resolve languages field
+    languages = []
+    for language in signup.languages:
+        lang, created = Language.objects.get_or_create(name=language)
+        languages.append(lang)
+
+    participant = Participant.objects.create(
         name=signup.name,
         sex=signup.sex,
         birth_date=signup.birth_date,
-        parent_name=signup.parent_name,
+        parent_first_name=signup.parent_first_name,
+        parent_last_name=signup.parent_last_name,
         email=signup.email,
         phonenumber=signup.phonenumber,
         phonenumber_alt=signup.phonenumber_alt,
-        email_subscription=signup.newsletter,
         dyslexic_parent=signup.dyslexic_parent,
-        multilingual=signup.multilingual,
+        tos_parent=signup.tos_parent,
+        save_longer=signup.save_longer,
+        english_contact=signup.english_contact,
+        email_subscription=signup.newsletter,
     )
+    participant.languages.set(languages)
 
     signup.status = Signup.Status.APPROVED
     signup.save()

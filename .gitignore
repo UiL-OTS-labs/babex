@@ -3,6 +3,7 @@
 *.pot
 *.pyc
 __pycache__/
+*.egg-info
 
 ### Project-specific ###
 *.sqlite3
@@ -15,6 +16,7 @@ ppn_backend/ldap_settings.py
 venv*
 env*
 .env*
+.venv
 
 ### IDE ###
 .idea
@@ -28,3 +30,5 @@ main/static/vue
 
 # vim temporary files
 *.sw[op]
+
+_build

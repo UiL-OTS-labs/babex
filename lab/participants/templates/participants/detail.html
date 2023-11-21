@@ -92,8 +92,8 @@
                     <td> {{ participant.birth_weight|default_if_none:'' }} </td>
                 </tr>
                 <tr>
-                    <td> {% trans "participants:attribute:getational_age" %} </td>
-                    <td> {{ participant.gestational_age }} </td>
+                    <td> {% trans "participants:attribute:pregnancy_duration" %} </td>
+                    <td> {{ participant.pregnancy_duration }} </td>
                 </tr>
                 <tr>
                     <td> {% trans "participants:attribute:age" %} </td>
@@ -104,8 +104,10 @@
                     <td> {{ participant.dyslexic_parent_display }} </td>
                 </tr>
                 <tr>
-                    <td> {% get_verbose_field_name "participants" "Participant" "multilingual" %} </td>
-                    <td> {{ participant.multilingual|yesno:_("yes,no")|default_if_none:"" }} </td>
+                    <td> {% translate "participants:attribute:languages" %} </td>
+                    <td>
+                        {{ participant.languages_pretty }}
+                    </td>
                 </tr>
                 <tr>
                     <td> {% get_verbose_field_name "participants" "Participant" "sex" %} </td>
