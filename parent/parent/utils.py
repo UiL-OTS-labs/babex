@@ -43,12 +43,17 @@ def gateway(
         else:
             method = "get"
 
-    response = requests.request(
-        method=method.upper(),
-        url=settings.API_HOST + url,
-        headers=headers,
-        json=data,
-    )
+    try:
+        response = requests.request(
+            method=method.upper(),
+            url=settings.API_HOST + url,
+            headers=headers,
+            json=data,
+        )
+    except Exception:
+        log.exception("Could not reach gateway")
+        return False, dict()
+        
     if not response.ok:
         log.error("Gateway request %s failed: %s", url, response.text)
     if len(response.text):

@@ -52,8 +52,11 @@ class SignupView(FormView):
         # filter out blank fields
         fields = {key: value for key, value in form.cleaned_data.items() if value is not None}
         signup = Signup(**fields)
-        signup.put(as_json=True)
-        return super().form_valid(form)
+        if signup.put(as_json=True):
+            return super().form_valid(form)
+        
+        log.error("Couldn't reach server while processing signup")
+        return super().get(self.request)
 
 
 class SignupDone(TemplateView):
