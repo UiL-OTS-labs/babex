@@ -26,4 +26,6 @@ urlpatterns = [
     path("survey_invites/", views.SurveyInvitesView.as_view()),
     #
     path("deactivate/", views.DeactivateView.as_view()),
+    #
+    path("languages/", views.LanguagesView.as_view()),
 ]

@@ -5,6 +5,8 @@ from rest_framework.exceptions import APIException
 from rest_framework.response import Response
 
 from experiments.serializers import AppointmentSerializer
+from participants.models import Language
+from participants.serializers import LanguageSerializer
 from signups.models import Signup
 from signups.serializers import SignupSerializer
 from survey_admin.models import SurveyDefinition, SurveyResponse
@@ -109,3 +111,8 @@ class DeactivateView(views.APIView):
     def post(self, request, *args, **kwargs):
         self.request.participant.deactivate()
         return Response(dict())
+
+
+class LanguagesView(generics.ListAPIView):
+    serializer_class = LanguageSerializer
+    queryset = Language.objects.all()

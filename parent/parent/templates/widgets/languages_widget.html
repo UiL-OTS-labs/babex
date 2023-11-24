@@ -17,19 +17,11 @@
 <div class="uu-form-field">
     <select class="w-100" id="id_languages_mono_select" name="languages" disabled>
         <option></option>
-        <option>Engels</option>
-        <option>Duits</option>
-        <option>Spaans</option>
-        <option>Frans</option>
-        <option>Italiaans</option>
-        <option>Turks</option>
-        <option>Fries</option>
-        <option>Arabisch</option>
-        <option>Russisch</option>
-        <option>Chinees</option>
-        <option>Grieks</option>
-        <option>Portugees</option>
-        <option>Hongaars</option>
+        {% for group_name, group_choices, group_index in widget.optgroups %}
+            {% for option in group_choices %}
+                <option value="{{ option.value }}">{{ option.label }}</option>
+            {% endfor %}
+        {% endfor %}
     </select>
 </div>
 
@@ -42,20 +34,12 @@
 
 <div class="uu-form-field">
     <select class="w-100" id="id_languages_multi_select" name="languages" multiple="true" disabled>
-        <option>Nederlands</option>
-        <option>Engels</option>
-        <option>Duits</option>
-        <option>Spaans</option>
-        <option>Frans</option>
-        <option>Italiaans</option>
-        <option>Turks</option>
-        <option>Fries</option>
-        <option>Arabisch</option>
-        <option>Russisch</option>
-        <option>Chinees</option>
-        <option>Grieks</option>
-        <option>Portugees</option>
-        <option>Hongaars</option>
+        <option></option>
+        {% for group_name, group_choices, group_index in widget.optgroups %}
+            {% for option in group_choices %}
+                <option value="{{ option.value }}">{{ option.label }}</option>
+            {% endfor %}
+        {% endfor %}
     </select>
 </div>
 
