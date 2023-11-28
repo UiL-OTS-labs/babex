@@ -47,6 +47,9 @@ class LoginFormView(FormView):
     success_url = reverse_lazy("mailauth:sent")
 
     def form_valid(self, form):
-        # TODO: check the response
-        gateway(self.request, "/gateway/mailauth/", data=dict(email=form.cleaned_data["email"]))
-        return super().form_valid(form)
+        ok, _ = gateway(self.request, "/gateway/mailauth/", data=dict(email=form.cleaned_data["email"]))
+        if ok:
+            return super().form_valid(form)
+        messages.error(self.request, "login failed")
+        return super().get(self.request)
+
