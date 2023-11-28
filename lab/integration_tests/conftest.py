@@ -24,7 +24,7 @@ def as_admin(sb, admin_user, live_server):
 def as_leader(sb, django_user_model, live_server):
     username = "test_user"
     password = "test_user"
-    user = django_user_model.objects.create_user(username=username, password=password)
+    user = django_user_model.objects.create_user(username=username, password=password, name='Test Leader')
     sb.open(live_server.url + "/login")
     # sb.click('#djHideToolBarButton')
     sb.type("#id_username", username)
@@ -46,6 +46,7 @@ def sample_participant(db):
     participant = Participant.objects.create(
         email="baby@baby.com",
         name="Baby McBaby",
+        sex=Participant.Sex.UNKNOWN,
         parent_first_name="Parent",
         parent_last_name="McParent",
         birth_date=date(2020, 1, 1),
