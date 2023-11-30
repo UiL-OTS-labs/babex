@@ -1,0 +1,27 @@
+{% load i18n %}
+<h2>{% translate "participants:detail:extradata" %}</h2>
+<table class="dt_custom" width="100%">
+    <thead>
+        <tr>
+            <th width="40%">
+                {% trans 'participants:detail:extradata:title' %}
+            </th>
+            <th>
+                {% trans 'participants:detail:extradata:content' %}
+            </th>
+        </tr>
+    </thead>
+    {% for datum in participant.extradata_set.all %}
+        <tr>
+            <td>
+                {{ datum.title }}
+            </td>
+            <td>
+                {{ datum.content }}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'participants:extradata.add' participant.pk %}">
+    {% translate 'participants:detail:extradata:new' %}
+</a>
