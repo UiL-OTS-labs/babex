@@ -41,8 +41,8 @@ class Participant(models.Model):
     sex = e_fields.EncryptedTextField(_("participant:attribute:sex"), blank=True, null=True)
     birth_date = e_fields.EncryptedDateField(_("participant:attribute:birth_date"), blank=True, null=True)
 
-    birth_weight = e_fields.EncryptedIntegerField(
-        _("participant:attribute:birth_weight"), null=True, choices=BirthWeight.choices
+    birth_weight = e_fields.EncryptedCharField(
+        _("participant:attribute:birth_weight"), null=True, choices=BirthWeight.choices, max_length=30
     )
     pregnancy_duration = e_fields.EncryptedCharField(
         _("participant:attribute:pregnancy_duration"),

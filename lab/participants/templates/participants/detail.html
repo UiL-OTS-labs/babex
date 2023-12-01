@@ -89,11 +89,11 @@
                 </tr>
                 <tr>
                     <td> {% get_verbose_field_name "participants" "Participant" "birth_weight" %} </td>
-                    <td> {{ participant.birth_weight|default_if_none:'' }} </td>
+                    <td> {{ participant.get_birth_weight_display|default_if_none:'' }} </td>
                 </tr>
                 <tr>
                     <td> {% trans "participants:attribute:pregnancy_duration" %} </td>
-                    <td> {{ participant.pregnancy_duration }} </td>
+                    <td> {{ participant.get_pregnancy_duration_display }} </td>
                 </tr>
                 <tr>
                     <td> {% trans "participants:attribute:age" %} </td>
