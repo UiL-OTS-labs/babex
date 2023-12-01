@@ -1,22 +1,20 @@
-'''This module is added to simulate a recruitment, it's main purpose is to
+"""This module is added to simulate a recruitment, it's main purpose is to
 fill the database with participants for testing this app. Also the utilities
 to undo the changes are provided.
-'''
+"""
 
-from .models import Participant
 import random
-from datetime import datetime
-from datetime import timedelta
+from datetime import datetime, timedelta
 from typing import List
 
+from .models import Language, Participant
 
 DEFAULT_PREFIX = "Gener@t3d"
 DEFAULT_PHONE = "06-11"
-SIM_CITY = "".join(reversed("Utrecht-City"))
 
 
 def _generate_name(prefix: str, num: int) -> str:
-    """ Generate a prefixed name for a generated participant"""
+    """Generate a prefixed name for a generated participant"""
     letter_pick = "abcdefghijklmnopqrstuvwxyz"
     num_letters = random.choice(range(5, 13))
     name = "".join([prefix, "_", str(num), "_"])
@@ -25,16 +23,13 @@ def _generate_name(prefix: str, num: int) -> str:
     return "".join([name, uniq])
 
 
-def _generate_parent_dylexia(chance=.05) -> bool:
-    """gives a chance of having a parent with dyslexia"""
-    return random.random() < chance
+def _generate_random_languages() -> list[Language]:
+    language_names = ["Nederlands", "Engels", "Frans", "Spaans", "Duits", "Arabisch"]
+    languages = [Language.objects.get_or_create(name=lang)[0] for lang in language_names]
+    return random.sample(languages, k=random.randint(1, 4))
 
 
-def simulate_recruitment(
-        number: int,
-        date: datetime,
-        day_range: int = 60,
-        name_prefix=DEFAULT_PREFIX):
+def simulate_recruitment(number: int, date: datetime, day_range: int = 60, name_prefix=DEFAULT_PREFIX):
     """Simulate a recruitment this will add participant to the database. It's
     useful for generating participants to give some body to the database.
 
@@ -52,38 +47,37 @@ def simulate_recruitment(
     :param days_spread: The number of days around the data the children are born
     :param str name_prefix: A prefix to prepend to the participant name
     """
-    WEEK_MU, WEEK_SIGMA = 40, 2
-
     for i in range(number):
-
         name = _generate_name(name_prefix, i)
         email = "generated-{}@gen.mars".format(random.randint(int(1e6), int(1e7)))
-        dyslexic_parent = _generate_parent_dylexia()
-        multilingual = _generate_parent_dylexia()
-        pweeks = int(round(random.normalvariate(WEEK_MU, WEEK_SIGMA)))
-        pdays = pweeks * 7 + random.choice(list(range(7)))
-        birth_weight = random.normalvariate(3500, 1000)
         phonenumber = DEFAULT_PHONE
-        days_add = int(round((random.random() - .5) * day_range))
+        days_add = int(round((random.random() - 0.5) * day_range))
         birth_date = date + timedelta(days=days_add)
-        gender = random.choice("FM")
+        sex = random.choice(list(Participant.Sex))
+        pregnancy_duration = random.choice(list(Participant.PregnancyDuration))
+        birth_weight = random.choice(list(Participant.BirthWeight))
+        dyslexic_parent = random.choice(list(Participant.WhichParent))
+        tos_parent = random.choice(list(Participant.WhichParent))
 
-        Participant.objects.create(
-            email=email,
+        pp = Participant.objects.create(
             name=name,
-            language="BLanguage",
-            dyslexic_parent=dyslexic_parent,
-            multilingual=multilingual,
+            sex=sex,
             birth_date=birth_date,
-            phonenumber=phonenumber,
-            sex=gender,
-            email_subscription=random.choice([True, False]),
             birth_weight=birth_weight,
-            pregnancy_weeks=pweeks,
-            pregnancy_days=pdays,
-            parent_name="parent_" + name,
-            city=SIM_CITY
+            pregnancy_duration=pregnancy_duration,
+            parent_first_name="parent_" + name,
+            parent_last_name="parent_" + name,
+            email=email,
+            phonenumber=phonenumber,
+            phonenumber_alt=phonenumber,
+            dyslexic_parent=dyslexic_parent,
+            tos_parent=tos_parent,
+            save_longer=random.choice([True, False]),
+            english_contact=random.choice([True, False]),
+            email_subscription=random.choice([True, False]),
         )
+        pp.languages.set(_generate_random_languages())
+        pp.save()
 
 
 def _get_simulated_participants(prefix) -> List[Participant]:
@@ -93,16 +87,7 @@ def _get_simulated_participants(prefix) -> List[Participant]:
     This method finds the fake pp's in order to delete them
     """
     pps = Participant.objects.all()
-    city = SIM_CITY
-
-    def check_pp(pp: Participant):
-        if pp.name[:len(prefix)] == prefix and \
-           pp.phonenumber == DEFAULT_PHONE and \
-           pp.city == city:
-            return True
-        return False
-
-    return [pp for pp in pps if check_pp(pp)]
+    return [pp for pp in pps if pp.name.startswith(prefix) and pp.phonenumber == DEFAULT_PHONE]
 
 
 def remove_simulated_participants(prefix: str = DEFAULT_PREFIX):
