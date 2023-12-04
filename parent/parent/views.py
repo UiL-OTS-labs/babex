@@ -178,3 +178,11 @@ def deactivate_view(request):
 
 def home(request):
     return render(request, "parent/home.html")
+
+
+def error404(request, *args, **kwargs):
+    return render(request, "error/404.html", status=404)
+
+
+def error500(request, *args, **kwargs):
+    return render(request, "error/500.html", status=500)
