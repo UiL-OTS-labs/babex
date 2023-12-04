@@ -158,3 +158,8 @@ class SignupForm(TemplatedForm):
         for key, field in self.fields.items():
             if isinstance(field.widget, forms.CheckboxInput):
                 field.widget = BootstrapCheckboxInput()
+
+    def clean_birth_date(self):
+        if self.cleaned_data["birth_date"] >= date.today():
+            raise forms.ValidationError("parent:forms:signup:birth_date:error:future")
+        return self.cleaned_data["birth_date"]

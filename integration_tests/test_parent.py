@@ -189,3 +189,17 @@ def test_signup_save_longer(sb, apps, default_signup_fill_form):
     signup = Signup.objects.last()
     # verify the fields were saved correctly
     assert signup.save_longer is True
+
+
+def test_signup_unborn(sb, apps, default_signup_fill_form):
+    Signup = apps.lab.get_model('signups', 'Signup')
+
+    now = datetime.datetime.now()
+    sb.select_option_by_text('#id_birth_date_year', str(now.year))
+    sb.select_option_by_text('#id_birth_date_month', now.strftime('%B'))
+    sb.select_option_by_text('#id_birth_date_day', str(now.day + 1))
+
+    sb.click('input[type="submit"]')
+
+    # check that the form was submitted
+    sb.assert_element_visible('select.is-invalid')
