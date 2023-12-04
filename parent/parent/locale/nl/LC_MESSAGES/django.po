@@ -361,4 +361,4 @@ msgid "parent:error:404"
 msgstr "De gevraagde pagina kon niet worden gevonden."
 
 msgid "parent:error:500"
-msgstr "Je verzoek kon niet worden verwerkt vanwege een onverwachte fout. Probeer het later nog een keer."
+msgstr "Uw verzoek kon niet worden verwerkt vanwege een onverwachte fout. Probeer het later nog een keer."
