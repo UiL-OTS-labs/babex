@@ -196,12 +196,6 @@ msgstr "Deactivate participant"
 msgid "participants:home:header"
 msgstr "Participants"
 
-#: participants/templates/participants/demographics.html:17
-#, fuzzy
-#| msgid "participants:detail:header"
-msgid "participants:demographics:header"
-msgstr "Details of '{}'"
-
 #: participants/templates/participants/detail.html:10
 msgid "participants:detail:header"
 msgstr "Details of '{}'"
@@ -378,3 +372,6 @@ msgstr "Participant updated!"
 #: participants/views.py:75
 msgid "participants:messages:deleted_participant"
 msgstr "Participant deleted!"
+
+msgid "participants:demographics:header"
+msgstr "Demographics"
