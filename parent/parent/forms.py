@@ -1,4 +1,3 @@
-import json
 from datetime import date
 
 from cdh.core.forms import (
@@ -20,11 +19,6 @@ class LanguagesWidget(forms.widgets.SelectMultiple):
     def value_from_datadict(self, data, files, name):
         value = data.getlist(name)
         return value
-
-    def get_context(self, name, value, attrs):
-        context = super().get_context(name, value, attrs)
-
-        return context
 
 
 class LanguagesField(forms.MultipleChoiceField):
@@ -88,12 +82,7 @@ class SignupForm(TemplatedForm):
         # but it should still support prepopulating with known
         label=_("parent:forms:signup:languages"),
         widget=LanguagesWidget,
-        choices=(
-            ("Nederlands", "Nederlands"),
-            ("Engels", "Engels"),
-            ("Duits", "Duits"),
-            ("Spaans", "Spaans"),
-        ),
+        choices=[],
     )
     parent_header = TemplatedFormTextField(header=_("parent:forms:signup:parent_header"))
     parent_first_name = forms.CharField(label=_("parent:forms:signup:parent_first_name"))

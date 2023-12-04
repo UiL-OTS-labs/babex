@@ -58,6 +58,17 @@ class SignupView(FormView):
         log.error("Couldn't reach server while processing signup")
         return super().get(self.request)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        ok, languages = gateway(self.request, "/gateway/languages/")
+
+        choices = []
+        for lang in languages:
+            choices.append((lang["name"], lang["name"]))
+
+        context["form"].fields["languages"].choices = choices
+        return context
+
 
 class SignupDone(TemplateView):
     template_name = "signup_done.html"

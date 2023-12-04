@@ -1,12 +1,13 @@
 from cdh.rest import client as rest
 from django.contrib import messages
 from django.http.response import HttpResponse
-from django.shortcuts import render, redirect
-from django.views.generic.edit import FormView
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
+from django.views.generic.edit import FormView
+
+from parent.utils import gateway
 
 from .forms import LoginForm
-from parent.utils import gateway
 
 
 def link_verify(request, token):
@@ -24,7 +25,7 @@ def link_verify(request, token):
         # ask the user to choose a specific participant
         return list_pps(request, response["possible_pps"])
 
-    redirect_to = request.GET.get('redirect', '/overview')
+    redirect_to = request.GET.get("redirect", "/overview")
     return redirect(redirect_to)
 
 
@@ -35,9 +36,7 @@ def list_pps(request, possible_pps):
 
 def resolve_pp(request, participant_id):
     """tell the lab app which participant we should refer to for the rest of the session"""
-    ok, response = gateway(
-        request, f"/gateway/mailauth/set_participant/", data=dict(participant_id=int(participant_id))
-    )
+    ok, response = gateway(request, "/gateway/mailauth/set_participant/", data=dict(participant_id=int(participant_id)))
     return redirect("/overview")
 
 
