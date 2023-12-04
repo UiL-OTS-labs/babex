@@ -356,3 +356,6 @@ msgstr "Alleen in een andere taal, namelijk:"
 #: parent/templates/widgets/languages_widget.html:41
 msgid "parent:forms:signup:languages:multi"
 msgstr "In meerdere talen, namelijk:"
+
+msgid "parent:forms:signup:birth_date:help_text"
+msgstr "Kinderen mogen worden ingeschreven als ze minder dan 3 jaar oud zijn op het moment van inschrijving"

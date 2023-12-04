@@ -58,6 +58,7 @@ class SignupForm(TemplatedForm):
     birth_date = DateField(
         label=_("parent:forms:signup:birth_date"),
         widget=forms.SelectDateWidget(years=get_valid_year_range()),
+        help_text=_("parent:forms:signup:birth_date:help_text"),
     )
     birth_weight = forms.ChoiceField(
         label=_("parent:forms:signup:birth_weight"),
