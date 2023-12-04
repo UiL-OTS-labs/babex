@@ -16,18 +16,21 @@ class ParticipantForm(TemplatedModelForm):
         fields = [
             "name",
             "email",
-            "dyslexic_parent",
             "birth_date",
             "languages",
             "phonenumber",
+            "phonenumber_alt",
             "sex",
             "email_subscription",
+            "english_contact",
         ]
         widgets = {
             "name": forms.TextInput,
             "phonenumber": forms.TextInput,
+            "phonenumber_alt": forms.TextInput,
             "sex": ParticipantSexWidget,
             "email_subscription": BootstrapCheckboxInput,
+            "english_contact": BootstrapCheckboxInput,
         }
 
     def __init__(self, *args, **kwargs):
