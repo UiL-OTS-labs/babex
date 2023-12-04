@@ -362,3 +362,6 @@ msgstr "Kinderen mogen worden ingeschreven als ze minder dan 3 jaar oud zijn op 
 
 msgid "parent:forms:signup:birth_date:error:future"
 msgstr "U heeft een geboortedatum aangegeven die in de toekomst ligt"
+
+msgid "parent:forms:signup:email_again:error:email"
+msgstr "Dit e-mailadres komt niet overeen met die bovenstaande"

@@ -163,3 +163,7 @@ class SignupForm(TemplatedForm):
         if self.cleaned_data["birth_date"] >= date.today():
             raise forms.ValidationError(_("parent:forms:signup:birth_date:error:future"))
         return self.cleaned_data["birth_date"]
+
+    def clean(self):
+        if self.cleaned_data["email"] != self.cleaned_data["email_again"]:
+            self.add_error("email_again", forms.ValidationError(_("parent:forms:signup:email_again:error:email")))
