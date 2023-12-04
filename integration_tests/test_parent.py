@@ -1,3 +1,4 @@
+import datetime
 import random
 import string
 
@@ -16,7 +17,7 @@ def default_signup_fill_form(sb, apps):
 
     sb.select_option_by_text('#id_birth_date_month', 'March')
     sb.select_option_by_text('#id_birth_date_day', '5')
-    sb.select_option_by_text('#id_birth_date_year', '2021')
+    sb.select_option_by_text('#id_birth_date_year', str(datetime.datetime.now().year - 1))
 
     sb.click('#id_birth_weight_1')
     sb.click('#id_pregnancy_duration_1')
