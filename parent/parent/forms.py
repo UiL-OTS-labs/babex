@@ -161,5 +161,5 @@ class SignupForm(TemplatedForm):
 
     def clean_birth_date(self):
         if self.cleaned_data["birth_date"] >= date.today():
-            raise forms.ValidationError("parent:forms:signup:birth_date:error:future")
+            raise forms.ValidationError(_("parent:forms:signup:birth_date:error:future"))
         return self.cleaned_data["birth_date"]
