@@ -17,6 +17,8 @@
         $('.dt_custom').DataTable({
             searching: false,
             lengthChange: false,
+            info: false,
+            paging: false
         });
     });
 </script>
@@ -54,6 +56,7 @@
                         <li class="nav-item"><a href="#participant-appointments" class="nav-link">{% trans 'participants:detail:calls' %}</a></li>
                         <li class="nav-item"><a href="#participant-comments" class="nav-link">{% trans 'participants:detail:comments' %}</a></li>
                         <li class="nav-item"><a href="#participant-surveys" class="nav-link">{% trans 'participants:detail:surveys' %}</a></li>
+                        <li class="nav-item"><a href="#participant-extradata" class="nav-link">{% trans 'participants:detail:extradata' %}</a></li>
                         {% if request.user.is_staff %}
                             <li class="nav-item"><a href="#participant-manage" class="nav-link">{% trans 'participants:detail:manage' %}</a></li>
                         {% endif %}
@@ -210,6 +213,10 @@
 
         <section id="participant-surveys">
             {% include 'participants/surveys.html' %}
+        </section>
+
+        <section id="participant-extradata">
+            {% include 'participants/extradata.html' %}
         </section>
 
         {% if request.user.is_staff %}

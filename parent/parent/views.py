@@ -54,13 +54,15 @@ class SignupView(FormView):
         signup = Signup(**fields)
         if signup.put(as_json=True):
             return super().form_valid(form)
-        
+
         log.error("Couldn't reach server while processing signup")
         return super().get(self.request)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         ok, languages = gateway(self.request, "/gateway/languages/")
+        if not ok:
+            raise RuntimeError("Could not fetch language list")
 
         choices = []
         for lang in languages:

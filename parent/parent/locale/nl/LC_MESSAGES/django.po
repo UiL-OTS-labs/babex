@@ -362,3 +362,12 @@ msgstr "De gevraagde pagina kon niet worden gevonden."
 
 msgid "parent:error:500"
 msgstr "Uw verzoek kon niet worden verwerkt vanwege een onverwachte fout. Probeer het later nog een keer."
+
+msgid "parent:forms:signup:birth_date:help_text"
+msgstr "Kinderen mogen worden ingeschreven als ze minder dan 3 jaar oud zijn op het moment van inschrijving"
+
+msgid "parent:forms:signup:birth_date:error:future"
+msgstr "U heeft een geboortedatum aangegeven die in de toekomst ligt"
+
+msgid "parent:forms:signup:email_again:error:email"
+msgstr "Dit e-mailadres komt niet overeen met die bovenstaande"

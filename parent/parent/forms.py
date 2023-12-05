@@ -58,6 +58,7 @@ class SignupForm(TemplatedForm):
     birth_date = DateField(
         label=_("parent:forms:signup:birth_date"),
         widget=forms.SelectDateWidget(years=get_valid_year_range()),
+        help_text=_("parent:forms:signup:birth_date:help_text"),
     )
     birth_weight = forms.ChoiceField(
         label=_("parent:forms:signup:birth_weight"),
@@ -157,3 +158,12 @@ class SignupForm(TemplatedForm):
         for key, field in self.fields.items():
             if isinstance(field.widget, forms.CheckboxInput):
                 field.widget = BootstrapCheckboxInput()
+
+    def clean_birth_date(self):
+        if self.cleaned_data["birth_date"] >= date.today():
+            raise forms.ValidationError(_("parent:forms:signup:birth_date:error:future"))
+        return self.cleaned_data["birth_date"]
+
+    def clean(self):
+        if self.cleaned_data["email"] != self.cleaned_data["email_again"]:
+            self.add_error("email_again", forms.ValidationError(_("parent:forms:signup:email_again:error:email")))

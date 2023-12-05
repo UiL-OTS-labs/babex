@@ -1,6 +1,7 @@
 from cdh.core.views import FormSetUpdateView
 from cdh.core.views.mixins import DeleteSuccessMessageMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.forms.forms import BaseForm
 from django.http import Http404, HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy as reverse
@@ -16,8 +17,8 @@ from participants.permissions import (
 )
 
 from . import graphs
-from .forms import CriterionAnswerForm, ParticipantForm
-from .models import CriterionAnswer, Participant
+from .forms import CriterionAnswerForm, ExtraDataForm, ParticipantForm
+from .models import CriterionAnswer, ExtraData, Participant
 
 
 class ParticipantsHomeView(RandomLeaderMixin, generic.ListView):
@@ -138,3 +139,15 @@ def render_demograhpics_png(request: HttpRequest, width: int = 850, height: int 
 
 def render_demograhpics_svg(request: HttpRequest, width: int = 850, height: int = 0):
     return render_demograhpics(request, "svg", width, height)
+
+
+class ExtraDataAddView(RandomLeaderMixin, SuccessMessageMixin, generic.CreateView):
+    model = ExtraData
+    form_class = ExtraDataForm
+
+    def form_valid(self, form):
+        form.instance.participant = Participant.objects.get(pk=self.kwargs['pk'])
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse("participants:detail", args=(self.object.participant.pk,))

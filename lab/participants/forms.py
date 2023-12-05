@@ -6,7 +6,7 @@ from cdh.core.forms import (
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
-from .models import CriterionAnswer, Participant
+from .models import CriterionAnswer, ExtraData, Participant
 from .widgets import ParticipantSexWidget
 
 
@@ -45,3 +45,9 @@ class CriterionAnswerForm(forms.ModelForm):
 
         self.fields["answer"].label = self.instance.criterion.name_natural
         self.fields["answer"].widget.choices = self.instance.criterion.choices_tuple
+
+
+class ExtraDataForm(TemplatedModelForm):
+    class Meta:
+        model = ExtraData
+        fields = ["title", "content"]
