@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.http.response import JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 
@@ -77,10 +78,10 @@ class SignupDone(TemplateView):
 
 
 def signup_verify(request, token):
-    ok, _ = gateway(request, f"/gateway/signup/verify/{token}")
+    ok, result = gateway(request, f"/gateway/signup/verify/{token}")
     if ok:
         return render(request, "signup_confirmed.html")
-    messages.error(request, "email confrimation failed")
+    messages.error(request, _("parent:error:signup_verify"))
     return redirect("home")
 
 
@@ -88,12 +89,12 @@ def signup_verify(request, token):
 def overview(request):
     ok, appointments = gateway(request, "/gateway/appointment/")
     if not ok:
-        messages.error(request, "error retreiving appointment data")
+        messages.error(request, _("parent:error:data_generic"))
         return render(request, "parent/overview.html")
 
     ok, survey_invites = gateway(request, "/gateway/survey_invites/")
     if not ok:
-        messages.error(request, "error retreiving survey data")
+        messages.error(request, _("parent:error:data_generic"))
         return render(request, "parent/overview.html")
 
     appointments = sorted(appointments, key=itemgetter("start"))
@@ -106,7 +107,7 @@ def overview(request):
 def status(request):
     # check that the lab app is reachable
     try:
-        ok, _ = gateway(request, "/gateway/")
+        ok, result = gateway(request, "/gateway/")
         if not ok:
             return JsonResponse(dict(ok=False))
     except Exception:
@@ -143,9 +144,9 @@ def survey_response_view(request):
     # TODO: refactor frontend code to avoid this hack
     del data["invite"]
 
-    ok, _ = gateway(request, f"/gateway/survey/{invite_id}/response/", data=data)
+    ok, result = gateway(request, f"/gateway/survey/{invite_id}/response/", data=data)
     if not ok:
-        messages.error(request, "error submitting data")
+        messages.error(request, _("parent:error:data_generic"))
         return JsonResponse(dict(ok=False))
     return JsonResponse(dict(ok=True))
 
@@ -153,9 +154,9 @@ def survey_response_view(request):
 @session_required
 def cancel_appointment_view(request, appointment_id):
     # TODO: handle appointment already canceled
-    ok, _ = gateway(request, f"/gateway/appointment/{appointment_id}/", method="delete")
+    ok, result = gateway(request, f"/gateway/appointment/{appointment_id}/", method="delete")
     if not ok:
-        messages.error(request, "error")
+        messages.error(request, _("parent:error:appointment_cancel"))
         return JsonResponse(dict(ok=False))
 
     return render(request, "appointment/canceled.html")
@@ -168,9 +169,9 @@ def data_management_view(request):
 
 @session_required
 def deactivate_view(request):
-    ok, _ = gateway(request, "/gateway/deactivate/", method="post")
+    ok, result = gateway(request, "/gateway/deactivate/", method="post")
     if not ok:
-        messages.error(request, "error")
+        messages.error(request, _("parent:error:deactivate"))
         return redirect("data")
 
     # remove session token

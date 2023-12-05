@@ -1,8 +1,7 @@
-from cdh.rest import client as rest
 from django.contrib import messages
-from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 from django.views.generic.edit import FormView
 
 from parent.utils import gateway
@@ -15,7 +14,7 @@ def link_verify(request, token):
 
     # upon successful authentication, the lab app should respond with a session token
     if not ok or "session_token" not in response:
-        messages.error(request, "login failed, please try again")
+        messages.error(request, _("parent:error:login_failed"))
         return redirect("home")
 
     request.session["token"] = response["session_token"]
@@ -46,9 +45,8 @@ class LoginFormView(FormView):
     success_url = reverse_lazy("mailauth:sent")
 
     def form_valid(self, form):
-        ok, _ = gateway(self.request, "/gateway/mailauth/", data=dict(email=form.cleaned_data["email"]))
+        ok, result = gateway(self.request, "/gateway/mailauth/", data=dict(email=form.cleaned_data["email"]))
         if ok:
             return super().form_valid(form)
-        messages.error(self.request, "login failed")
+        messages.error(self.request, _("parent:error:login_failed"))
         return super().get(self.request)
-
