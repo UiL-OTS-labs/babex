@@ -16,16 +16,18 @@
         <h1>
             {% trans 'participants:demographics:header' %}
         </h1>
-        <p>
-            A brief overview of the age's of the current participants.
-        </p>
         <img id="histogram"
-             src="{% url 'participants:histo-svg' %}"
              class="w-100"
+             src="{% url 'participants:demographics.graph' 'histo' %}"
+             alt="loading graph">
+        </img>
+
+        <img id="histogram"
+             class="w-100"
+             src="{% url 'participants:demographics.graph' 'histo_grouped' %}"
              alt="loading graph">
         </img>
         <br/>
     </div>
 </div>
 {% endblock %}
-

@@ -232,12 +232,6 @@ msgstr "Deactivate participant"
 msgid "participants:home:header"
 msgstr "Participants"
 
-#: participants/templates/participants/demographics.html:17
-#, fuzzy
-#| msgid "participants:detail:header"
-msgid "participants:demographics:header"
-msgstr "Details of '{}'"
-
 #: participants/templates/participants/detail.html:10
 msgid "participants:detail:header"
 msgstr "Details of '{}'"
@@ -440,17 +434,5 @@ msgstr "Participant updated!"
 msgid "participants:messages:deleted_participant"
 msgstr "Participant deleted!"
 
-#~ msgid "participant:attribute:dyslexic_parent:no"
-#~ msgstr "No"
-
-#~ msgid "participant:attribute:pregnancy_weeks"
-#~ msgstr "Gestation weeks"
-
-#~ msgid "secondary_email:attribute:email"
-#~ msgstr "Secondary e-mail address"
-
-#~ msgid "participants:attribute:getational_age"
-#~ msgstr "Gestational age"
-
-#~ msgid "yes,no"
-#~ msgstr "yes,no"
+msgid "participants:demographics:header"
+msgstr "Demographics"
