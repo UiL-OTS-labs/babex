@@ -16,3 +16,9 @@ class EncryptedManager(models.Manager):
                     break
             else:
                 yield object
+
+    def get_or_create(self, **kwargs):
+        try:
+            return next(self.efilter(**kwargs)), False
+        except StopIteration:
+            return super().get_or_create(**kwargs)
