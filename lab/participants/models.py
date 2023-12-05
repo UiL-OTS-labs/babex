@@ -11,6 +11,9 @@ from utils.models import EncryptedManager
 class Language(models.Model):
     name = e_fields.EncryptedCharField(max_length=100)
 
+    def __str__(self):
+        return self.name
+
 
 class Participant(models.Model):
     class Sex(models.TextChoices):

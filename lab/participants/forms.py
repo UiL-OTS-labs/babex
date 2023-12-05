@@ -1,10 +1,5 @@
-from cdh.core.forms import (
-    BootstrapCheckboxInput,
-    BootstrapRadioSelect,
-    TemplatedModelForm,
-)
+from cdh.core.forms import BootstrapCheckboxInput, TemplatedModelForm
 from django import forms
-from django.utils.translation import gettext_lazy as _
 
 from .models import CriterionAnswer, ExtraData, Participant
 from .widgets import ParticipantSexWidget
@@ -13,21 +8,26 @@ from .widgets import ParticipantSexWidget
 class ParticipantForm(TemplatedModelForm):
     class Meta:
         model = Participant
+        # note: this form intentionally does not include the more sensitive fields,
+        # because it's also less likely that an experiment leader would have to edit those
         fields = [
             "name",
             "email",
-            "dyslexic_parent",
             "birth_date",
             "languages",
             "phonenumber",
+            "phonenumber_alt",
             "sex",
             "email_subscription",
+            "english_contact",
         ]
         widgets = {
             "name": forms.TextInput,
             "phonenumber": forms.TextInput,
+            "phonenumber_alt": forms.TextInput,
             "sex": ParticipantSexWidget,
             "email_subscription": BootstrapCheckboxInput,
+            "english_contact": BootstrapCheckboxInput,
         }
 
     def __init__(self, *args, **kwargs):
