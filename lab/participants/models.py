@@ -11,6 +11,9 @@ from utils.models import EncryptedManager
 class Language(models.Model):
     name = e_fields.EncryptedCharField(max_length=100)
 
+    def __str__(self):
+        return self.name
+
 
 class Participant(models.Model):
     class Sex(models.TextChoices):
@@ -160,3 +163,10 @@ class CriterionAnswer(models.Model):
 
     def __str__(self):
         return "({}) {}: {}".format(self.participant.name, self.criterion.name_natural, self.answer)
+
+
+class ExtraData(models.Model):
+    participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
+    title = e_fields.EncryptedCharField(max_length=255, verbose_name=_("extradata:attribute:title"))
+    created = e_fields.EncryptedDateTimeField(verbose_name=_("extradata:attribute:created"), auto_now_add=True)
+    content = e_fields.EncryptedTextField()

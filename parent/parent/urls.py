@@ -40,6 +40,11 @@ urlpatterns = [
     path("data/deactivate/", deactivate_view, name="data.deactivate"),
 ]
 
+
+handler404 = "parent.views.error404"
+handler500 = "parent.views.error500"
+
+
 if settings.DEBUG:
     import debug_toolbar
 

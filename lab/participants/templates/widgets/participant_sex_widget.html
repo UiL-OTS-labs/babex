@@ -14,7 +14,7 @@
         <label for="id_sex_0">
             <input class="form-check-input" type="radio" name="{{ widget.name }}" value="M" id="id_sex_0" required="">
             {% trans 'participant:attribute:sex:male' %}
-        </label>
+
     </div>
     <div>
         <label for="id_sex_1">
@@ -25,8 +25,7 @@
     <div>
         <label for="id_sex_2">
             <input class="form-check-input" type="radio" name="{{ widget.name }}" value="OTHER" id="id_sex_2" required="">
-            {% trans 'participant:attribute:sex:other' %}
-            <input class="form-control" name="{{ widget.name }}_other" id="id_sex_1_other" value="{{ widget.other_value|default_if_none:"" }}">
+            {% trans 'participant:attribute:sex:unknown' %}
         </label>
     </div>
 

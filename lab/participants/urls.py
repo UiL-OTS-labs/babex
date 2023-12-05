@@ -1,6 +1,7 @@
 from django.urls import path
 
 from .views import (
+    ExtraDataAddView,
     ParticipantDeleteView,
     ParticipantDetailView,
     ParticipantsDemographicsView,
@@ -21,6 +22,7 @@ urlpatterns = [
     path(
         "<int:pk>/specific-criteria/", ParticipantSpecificCriteriaUpdateView.as_view(), name="update_specific_criteria"
     ),
+    path("<int:pk>/extradata/add", ExtraDataAddView.as_view(), name="extradata.add"),
 ]
 
 # paths for the demographics graph urls these render image/png or similar

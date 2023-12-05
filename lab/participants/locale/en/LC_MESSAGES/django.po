@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-15 12:23+0200\n"
+"POT-Creation-Date: 2023-11-28 15:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,123 +16,155 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: participants/models.py:21
-msgid "participant:attribute:email"
-msgstr "E-mail address"
-
-#: participants/models.py:22
-msgid "participant:attribute:name"
-msgstr "Name"
-
-#: participants/models.py:24
-msgid "participant:attribute:dyslexic_parent"
-msgstr "Dyslexic parent"
-
-#: participants/models.py:27 participants/models.py:90
-msgid "participant:attribute:dyslexic_parent:f"
-msgstr "Mother"
-
-#: participants/models.py:28 participants/models.py:89
-msgid "participant:attribute:dyslexic_parent:m"
-msgstr "Father"
-
-#: participants/models.py:29 participants/models.py:91
-msgid "participant:attribute:dyslexic_parent:both"
-msgstr "Both"
-
-#: participants/models.py:30 participants/models.py:93
-msgid "participant:attribute:dyslexic_parent:no"
-msgstr "No"
-
-#: participants/models.py:31 participants/models.py:92
-msgid "participant:attribute:dyslexic_parent:unk"
-msgstr "Unknown"
-
-#: participants/models.py:34
-msgid "participant:attribute:birth_date"
-msgstr "Birth date"
-
-#: participants/models.py:35
-msgid "participant:attribute:multilingual"
-msgstr "Multilingual"
-
-#: participants/models.py:36
-msgid "participant:attribute:phonenumber"
-msgstr "Phone number"
-
-#: participants/models.py:37
-msgid "participant:attribute:sex"
-msgstr "Sex"
-
-#: participants/models.py:38
-msgid "participant:attribute:email_subscription"
-msgstr "On mailing list"
-
-#: participants/models.py:39
-msgid "participant:attribute:birth_weight"
-msgstr "Weight at birth"
-
-#: participants/models.py:40
-msgid "participant:attribute:pregnancy_weeks"
-msgstr "Gestation weeks"
-
-#: participants/models.py:41
-msgid "participant:attribute:pregnancy_days"
-msgstr "Gestation days"
-
-#: participants/models.py:42
-msgid "participant:attribute:phonenumber_alt"
-msgstr "Phone number (secondary)"
-
-#: participants/models.py:43
-msgid "participant:attribute:parent_name"
-msgstr "Parent name"
-
-#: participants/models.py:45
-msgid "participant:attribute:created"
-msgstr "Registered on"
-
-#: participants/models.py:46
-msgid "participant:attribute:deactivated"
-msgstr "This participant has been deactivated on"
-
-#: participants/models.py:53 participants/models.py:106
-msgid "participant:name:unknown"
-msgstr "name unknown"
-
-#: participants/models.py:64
+#: participants/models.py:17
 #: participants/templates/widgets/participant_sex_widget.html:16
 msgid "participant:attribute:sex:male"
 msgstr "Male"
 
-#: participants/models.py:65
+#: participants/models.py:18
 #: participants/templates/widgets/participant_sex_widget.html:22
 msgid "participant:attribute:sex:female"
 msgstr "Female"
 
-#: participants/models.py:66
+#: participants/models.py:19
 msgid "participant:attribute:sex:prefer_not_to_answer"
 msgstr "Preferred not to answer"
 
-#: participants/models.py:118
+#: participants/models.py:22
+msgid "participant:attribute:which_parent:m"
+msgstr "Father"
+
+#: participants/models.py:23
+msgid "participant:attribute:which_parent:f"
+msgstr "Mother"
+
+#: participants/models.py:24
+msgid "participant:attribute:which_parent:both"
+msgstr "Both"
+
+#: participants/models.py:25
+msgid "participant:attribute:which_parent:neither"
+msgstr "Neither"
+
+#: participants/models.py:26
+msgid "participant:attribute:which_parent:unk"
+msgstr "Unknown"
+
+#: participants/models.py:29
+msgid "participant:attribute:birth_weight:less_than_2500"
+msgstr "Less than 2500 grams"
+
+#: participants/models.py:30
+msgid "participant:attribute:birth_weight:2500_to_4500"
+msgstr "Between 2500 to 4500 grams"
+
+#: participants/models.py:31
+msgid "participant:attribute:birth_weight:more_than_4500"
+msgstr "More than 4500 grams"
+
+#: participants/models.py:34
+msgid "participant:attribute:pregnancy_duration:less_than_37"
+msgstr "Less than 37 weeks"
+
+#: participants/models.py:35
+msgid "participant:attribute:pregnancy_duration:37_to_42"
+msgstr "Between 37 to 42 weeks"
+
+#: participants/models.py:36
+msgid "participant:attribute:pregnancy_duration:more_than_42"
+msgstr "More than 42 weeks"
+
+#: participants/models.py:40
+msgid "participant:attribute:name"
+msgstr "Name"
+
+#: participants/models.py:41
+msgid "participant:attribute:sex"
+msgstr "Sex"
+
+#: participants/models.py:42
+msgid "participant:attribute:birth_date"
+msgstr "Birth date"
+
+#: participants/models.py:45
+msgid "participant:attribute:birth_weight"
+msgstr "Weight at birth"
+
+#: participants/models.py:48
+msgid "participant:attribute:pregnancy_duration"
+msgstr "Pregnancy duration"
+
+#: participants/models.py:55
+msgid "participant:attribute:parent_first_name"
+msgstr "Parent first name"
+
+#: participants/models.py:56
+msgid "participant:attribute:parent_last_name"
+msgstr "Parent last name"
+
+#: participants/models.py:57
+msgid "participant:attribute:email"
+msgstr "E-mail address"
+
+#: participants/models.py:58
+msgid "participant:attribute:phonenumber"
+msgstr "Phone number"
+
+#: participants/models.py:59
+msgid "participant:attribute:phonenumber_alt"
+msgstr "Phone number (secondary)"
+
+#: participants/models.py:62 participants/models.py:65
+msgid "participant:attribute:dyslexic_parent"
+msgstr "Dyslexic parent"
+
+#: participants/models.py:69
+msgid "participant:attribute:save_longer"
+msgstr "Agreed to saving data for 10 years"
+
+#: participants/models.py:69
+msgid "participant:attribute:english_contact"
+msgstr "Agreed to being contacted in English"
+
+#: participants/models.py:70
+msgid "participant:attribute:email_subscription"
+msgstr "On mailing list"
+
+#: participants/models.py:72
+msgid "participant:attribute:created"
+msgstr "Registered on"
+
+#: participants/models.py:73
+msgid "participant:attribute:deactivated"
+msgstr "This participant has been deactivated on"
+
+#: participants/models.py:104
+msgid "participant:name:unknown"
+msgstr "name unknown"
+
+#: participants/models.py:116
 msgid "participants:age:years"
 msgstr "years"
 
-#: participants/models.py:119
+#: participants/models.py:117
 msgid "participants:age:months"
 msgstr "months"
 
-#: participants/models.py:120
+#: participants/models.py:118
 msgid "participants:age:days"
 msgstr "days"
 
-#: participants/models.py:147
-msgid "secondary_email:attribute:email"
-msgstr "Secondary e-mail address"
-
-#: participants/models.py:164
+#: participants/models.py:159
 msgid "criterion_answer:attribute:answer"
 msgstr "Answer"
+
+#: participants/models.py:167
+msgid "extradata:attribute:title"
+msgstr "Extra data"
+
+#: participants/models.py:168
+msgid "extradata:attribute:created"
+msgstr "Logged time"
 
 #: participants/templates/participants/comments.html:7
 msgid "comments:home:system_user"
@@ -149,6 +181,10 @@ msgstr "+ new comment"
 #: participants/templates/participants/comments.html:39
 msgid "participants:detail:comments:submit"
 msgstr "Send"
+
+#: participants/templates/participants/contact.html:7
+msgid "participant:attribute:parent_name"
+msgstr "Parent name"
 
 #: participants/templates/participants/delete.html:8
 #: participants/templates/participants/delete.html:15
@@ -217,7 +253,7 @@ msgid "participants:detail:appointments"
 msgstr "Appointments"
 
 #: participants/templates/participants/detail.html:54
-#: participants/templates/participants/detail.html:172
+#: participants/templates/participants/detail.html:171
 msgid "participants:detail:calls"
 msgstr "Calls"
 
@@ -229,69 +265,90 @@ msgstr "Comments"
 msgid "participants:detail:surveys"
 msgstr "Surveys"
 
-#: participants/templates/participants/detail.html:58
+#: participants/templates/participants/detail.html:57
+#: participants/templates/participants/extradata.html:2
+msgid "participants:detail:extradata"
+msgstr "Extra data"
+
+#: participants/templates/participants/detail.html:59
 #: participants/templates/participants/manage.html:2
 msgid "participants:detail:manage"
 msgstr "Manage"
 
-#: participants/templates/participants/detail.html:68
+#: participants/templates/participants/detail.html:69
 msgid "participants:detail:deactivated"
 msgstr "Participant deactivated on "
 
-#: participants/templates/participants/detail.html:74
+#: participants/templates/participants/detail.html:75
 msgid "participants:detail:edit"
 msgstr "Edit"
 
-#: participants/templates/participants/detail.html:95
-msgid "participants:attribute:getational_age"
-msgstr "Gestational age"
+#: participants/templates/participants/detail.html:96
+msgid "participants:attribute:pregnancy_duration"
+msgstr "Pregnancy duration"
 
-#: participants/templates/participants/detail.html:99
+#: participants/templates/participants/detail.html:100
 msgid "participants:attribute:age"
 msgstr "Age"
 
-#: participants/templates/participants/detail.html:112
-msgid "yes,no"
-msgstr "yes,no"
+#: participants/templates/participants/detail.html:108
+msgid "participants:attribute:languages"
+msgstr "Languages"
 
-#: participants/templates/participants/detail.html:135
-#: participants/templates/participants/detail.html:177
+#: participants/templates/participants/detail.html:134
+#: participants/templates/participants/detail.html:176
 msgid "participants:detail:experiments"
 msgstr "Experiment"
 
-#: participants/templates/participants/detail.html:138
-#: participants/templates/participants/detail.html:180
+#: participants/templates/participants/detail.html:137
+#: participants/templates/participants/detail.html:179
 msgid "participants:detail:datetime"
 msgstr "Date & Time"
 
-#: participants/templates/participants/detail.html:141
+#: participants/templates/participants/detail.html:140
 msgid "participants:detail:appointment:location"
 msgstr "Location"
 
-#: participants/templates/participants/detail.html:144
+#: participants/templates/participants/detail.html:143
 msgid "participants:detail:appointment:outcome"
 msgstr "Outcome"
 
-#: participants/templates/participants/detail.html:183
+#: participants/templates/participants/detail.html:182
 msgid "participants:detail:calls:status"
 msgstr "Status"
 
-#: participants/templates/participants/detail.html:186
+#: participants/templates/participants/detail.html:185
 msgid "participants:detail:calls:called_by"
 msgstr "Called by"
 
 #: participants/templates/participants/edit.html:8
-#: participants/templates/participants/edit.html:64
+#: participants/templates/participants/edit.html:62
 msgid "participants:update:header"
 msgstr "Edit participant"
 
-#: participants/templates/participants/edit.html:67
+#: participants/templates/participants/edit.html:65
 msgid "participants:update:info_text"
 msgstr "<br/>"
 
-#: participants/templates/participants/edit.html:75
+#: participants/templates/participants/edit.html:73
 #: participants/templates/participants/specific_criteria.html:32
 msgid "participants:globals:save_button"
+msgstr "Save"
+
+#: participants/templates/participants/extradata.html:7
+msgid "participants:detail:extradata:title"
+msgstr "Title"
+
+#: participants/templates/participants/extradata.html:10
+msgid "participants:detail:extradata:content"
+msgstr "Content"
+
+#: participants/templates/participants/extradata.html:26
+msgid "participants:detail:extradata:new"
+msgstr "+ add datum"
+
+#: participants/templates/participants/extradata_form.html:10
+msgid "participants:extradata:add:submit"
 msgstr "Save"
 
 #: participants/templates/participants/index.html:24
@@ -302,19 +359,23 @@ msgstr "<br/>"
 msgid "participants:age"
 msgstr "Age"
 
-#: participants/templates/participants/index.html:39
+#: participants/templates/participants/index.html:34
+msgid "participants:attribute:multilingual"
+msgstr "Multilingual"
+
+#: participants/templates/participants/index.html:38
 msgid "participants:globals:actions"
 msgstr "Actions"
 
-#: participants/templates/participants/index.html:55
+#: participants/templates/participants/index.html:53
 msgid "options:yes,no"
 msgstr "yes,no"
 
-#: participants/templates/participants/index.html:59
+#: participants/templates/participants/index.html:57
 msgid "participants:home:update:title"
 msgstr "Edit participant"
 
-#: participants/templates/participants/index.html:63
+#: participants/templates/participants/index.html:61
 #: participants/templates/participants/manage.html:5
 msgid "participants:home:delete:title"
 msgstr "Delete this participant"

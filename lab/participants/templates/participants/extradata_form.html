@@ -1,0 +1,14 @@
+{% extends "base/babex_base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <form method="post" class="uu-form uu-form-no-gap">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" class="btn btn-primary" value="{% translate 'participants:extradata:add:submit' %}">
+        </form>
+    </div>
+</div>
+{% endblock %}
