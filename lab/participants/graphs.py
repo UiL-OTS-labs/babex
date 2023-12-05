@@ -45,8 +45,6 @@ def render_participants_by_group(ax: matplotlib.axes.SubplotBase, participants: 
     premature = [pp for pp in participants if pp.pregnancy_duration == Participant.PregnancyDuration.LESS_THAN_37]
     rest = [pp for pp in participants if pp not in set(risc_dyslexia + multilingual + premature)]
 
-    colors = ["red", "blue", "green"]
-
     delta_dys = [diff_months(today, pp.birth_date) for pp in risc_dyslexia]
     delta_mult = [diff_months(today, pp.birth_date) for pp in multilingual]
     delta_premature = [diff_months(today, pp.birth_date) for pp in premature]
@@ -71,16 +69,12 @@ def render_demograhpics(width: int, height: int) -> bytes:
 
     participants = Participant.objects.all()
     ax_pp = fig.subplots()
-    # ax_group = fig.add_subplot(2, 1, 2, sharex=ax_pp, sharey=ax_pp)
 
     render_all_participants(ax_pp, list(participants), today)
-    # render_participants_by_group(ax_group, list(participants), today)
 
     payload = BytesIO()
-
     fig.savefig(payload, transparent=False, format="svg")
     payload.seek(0)
-
     return payload.read(-1)
 
 
