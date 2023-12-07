@@ -371,3 +371,19 @@ msgstr "U heeft een geboortedatum aangegeven die in de toekomst ligt"
 
 msgid "parent:forms:signup:email_again:error:email"
 msgstr "Dit e-mailadres komt niet overeen met die bovenstaande"
+
+msgid "parent:error:deactivate"
+msgstr "Het is niet gelukt om u uit te schirjven. Neem alstublieft contact met ons op via e-mail: babylab.ilslabs@uu.nl"
+
+msgid "parent:error:appointment_cancel"
+msgstr "Het is niet gelukt om de afspraak af te zeggen. Neem alstublieft contact met ons op via e-mail: babylab.ilslabs@uu.nl"
+
+msgid "parent:error:login_failed"
+msgstr "Inloggen is mislukt, probeer het later opnieuw"
+
+msgid "parent:error:signup_verify"
+msgstr "Het is niet gelukt om uw e-mailadres te verifiëren. Neem alstublieft contact met ons op via e-mail: babylab.ilslabs@uu.nl"
+
+msgid "parent:error:data_generic"
+msgstr "Er is een fout opgetreden tijdens het laden van uw gegevens"
+
