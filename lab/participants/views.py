@@ -17,8 +17,8 @@ from participants.permissions import (
 )
 
 from . import graphs
-from .forms import CriterionAnswerForm, ExtraDataForm, ParticipantForm
-from .models import CriterionAnswer, ExtraData, Participant
+from .forms import ExtraDataForm, ParticipantForm
+from .models import ExtraData, Participant
 
 
 class ParticipantsHomeView(RandomLeaderMixin, generic.ListView):
@@ -81,28 +81,6 @@ class ParticipantDeleteView(LabManagerMixin, DeleteSuccessMessageMixin, generic.
             self.get_object().deactivate()
             return redirect(self.success_url)
         return super().post(request, *args, **kwargs)
-
-
-class ParticipantSpecificCriteriaUpdateView(LabManagerMixin, FormSetUpdateView):
-    form = CriterionAnswerForm
-    template_name = "participants/specific_criteria.html"
-    succes_url = reverse("participants:home")
-
-    def get_queryset(self):
-        return CriterionAnswer.objects.filter(participant=self.participant)
-
-    def get_context_data(self, **kwargs):
-        context = super(ParticipantSpecificCriteriaUpdateView, self).get_context_data(**kwargs)
-
-        context["participant"] = self.participant
-
-        return context
-
-    @cached_property
-    def participant(self):
-        participant_pk = self.kwargs.get("pk")
-
-        return Participant.objects.get(pk=participant_pk)
 
 
 class ParticipantsDemographicsView(LabManagerMixin, generic.TemplateView):

@@ -7,16 +7,11 @@ Also, because we use application-level database encryption, we cannot compare
 inside the database. This is why everything is done in python.
 """
 from datetime import datetime, timedelta
-from typing import List, Optional
+from typing import List
 
 from ageutil import age
 
-from experiments.models import (
-    Appointment,
-    DefaultCriteria,
-    Experiment,
-    ExperimentCriterion,
-)
+from experiments.models import Appointment, DefaultCriteria, Experiment
 from experiments.models.invite_models import Call
 from participants.models import Participant
 
@@ -27,7 +22,6 @@ def get_eligible_participants_for_experiment(experiment: Experiment, on_mailingl
     the provided experiment.
     """
     default_criteria = experiment.defaultcriteria
-    specific_experiment_criteria = experiment.experimentcriterion_set.select_related("criterion")
 
     # Build the rest of the filters
     filters = build_exclusion_filters(default_criteria)
@@ -36,11 +30,7 @@ def get_eligible_participants_for_experiment(experiment: Experiment, on_mailingl
     participants = Participant.objects.filter(deactivated=None)
     # Exclude all participants with an appointment for an experiment that was
     # marked as an exclusion criteria
-    participants = participants.exclude(
-        appointments__experiment__in=experiment.excluded_experiments.all()
-    ).prefetch_related(
-        "criterionanswer_set"
-    )  # Used in the invite page template!
+    participants = participants.exclude(appointments__experiment__in=experiment.excluded_experiments.all())
 
     # List of all allowed participants
     filtered = []
@@ -70,9 +60,6 @@ def get_eligible_participants_for_experiment(experiment: Experiment, on_mailingl
         if should_exclude_by_age(participant, default_criteria):
             continue
 
-        if _should_exclude_by_specific_criteria(participant, specific_experiment_criteria):
-            continue
-
         if should_exclude_by_call_status(participant, experiment):
             continue
 
@@ -88,17 +75,12 @@ def check_participant_eligible(experiment: Experiment, participant: Participant)
     """
 
     default_criteria = experiment.defaultcriteria
-    specific_experiment_criteria = experiment.experimentcriterion_set.select_related("criterion")
-
     filters = build_exclusion_filters(default_criteria)
 
     if check_default_criteria(participant, filters):
         return False
 
     if should_exclude_by_age(participant, default_criteria):
-        return False
-
-    if _should_exclude_by_specific_criteria(participant, specific_experiment_criteria):
         return False
 
     return True
@@ -150,46 +132,6 @@ def check_default_criteria(participant: Participant, filters: dict) -> list:
             failed_criteria.append(attr)
 
     return failed_criteria
-
-
-def _should_exclude_by_specific_criteria(participant: Participant, specific_experiment_criteria) -> bool:
-    """
-    Determines if a participant should be excluded based upon their
-    :param participant:
-    :param specific_experiment_criteria:
-    :return:
-    """
-    # Create a list of all relevant Criterion objects
-    specific_criteria = [x.criterion for x in specific_experiment_criteria]
-
-    # Loop over all criteria answers
-    for specific_criterion_answer in participant.criterionanswer_set.all():
-        # Check if this answer is for any of the relevant criterions
-        # We do this in python to minimize db queries (it's way faster)
-        if specific_criterion_answer.criterion not in specific_criteria:
-            continue
-
-        # Get the experiment criterion
-        specific_criterion = _get_specific_criterion(specific_experiment_criteria, specific_criterion_answer.criterion)
-
-        if specific_criterion and not specific_criterion_answer.answer == specific_criterion.correct_value:
-            return True
-
-    return False
-
-
-def _get_specific_criterion(specific_experiment_criteria, criterion) -> Optional[ExperimentCriterion]:
-    """
-    Gets the experimentCriterion object for a criterion object
-    :param specific_experiment_criteria:
-    :param criterion:
-    :return:
-    """
-    for x in specific_experiment_criteria:
-        if x.criterion == criterion:
-            return x
-
-    return None
 
 
 def should_exclude_by_age(participant: Participant, criteria: DefaultCriteria) -> bool:

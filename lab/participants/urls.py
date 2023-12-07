@@ -6,7 +6,6 @@ from .views import (
     ParticipantDetailView,
     ParticipantsDemographicsView,
     ParticipantsHomeView,
-    ParticipantSpecificCriteriaUpdateView,
     ParticipantUpdateView,
     render_demograhpics,
 )
@@ -19,9 +18,6 @@ urlpatterns = [
     path("<int:pk>/", ParticipantDetailView.as_view(), name="detail"),
     path("<int:pk>/edit/", ParticipantUpdateView.as_view(), name="edit"),
     path("<int:pk>/del/", ParticipantDeleteView.as_view(), name="delete"),
-    path(
-        "<int:pk>/specific-criteria/", ParticipantSpecificCriteriaUpdateView.as_view(), name="update_specific_criteria"
-    ),
     path("<int:pk>/extradata/add", ExtraDataAddView.as_view(), name="extradata.add"),
 ]
 

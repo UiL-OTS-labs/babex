@@ -1,14 +1,6 @@
 from django.contrib import admin
 
-from .models import *
+from .models import Experiment, DefaultCriteria, TimeSlot, Appointment, Location
 
 # Register your models here.
-admin.site.register([
-    Experiment,
-    ExperimentCriterion,
-    Criterion,
-    DefaultCriteria,
-    TimeSlot,
-    Appointment,
-    Location
-])
+admin.site.register([Experiment, DefaultCriteria, TimeSlot, Appointment, Location])
