@@ -14,7 +14,6 @@ urlpatterns = [
     # Stand-alone location views
     path("locations/", include("experiments.urls.locations_urls")),
     # Stand-alone criteria views
-    path("criteria/", include("experiments.urls.criteria_urls.standalone")),
     path("", include("experiments.urls.call_urls")),
     # email preview
     path("email/preview/<str:template>/<int:experiment>/", email_preview, name="email_preview"),

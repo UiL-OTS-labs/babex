@@ -31,7 +31,6 @@ Menu.add_item("main", MenuItem(_("mainmenu:agenda"), reverse("agenda:home"), che
 experiments_menu = [
     MenuItem(_("mainmenu:experiments:overview"), reverse("experiments:home")),
     MenuItem(_("mainmenu:locations"), reverse("experiments:location_home")),
-    MenuItem(_("mainmenu:criteria"), reverse("experiments:criteria_home")),
 ]
 
 Menu.add_item(

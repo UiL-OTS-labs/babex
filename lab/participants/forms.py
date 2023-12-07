@@ -1,7 +1,7 @@
 from cdh.core.forms import BootstrapCheckboxInput, TemplatedModelForm
 from django import forms
 
-from .models import CriterionAnswer, ExtraData, Participant
+from .models import ExtraData, Participant
 from .widgets import ParticipantSexWidget
 
 
@@ -32,19 +32,6 @@ class ParticipantForm(TemplatedModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ParticipantForm, self).__init__(*args, **kwargs)
-
-
-class CriterionAnswerForm(forms.ModelForm):
-    class Meta:
-        model = CriterionAnswer
-        fields = ["answer"]
-        widgets = {"answer": forms.RadioSelect}
-
-    def __init__(self, *args, **kwargs):
-        super(CriterionAnswerForm, self).__init__(*args, **kwargs)
-
-        self.fields["answer"].label = self.instance.criterion.name_natural
-        self.fields["answer"].widget.choices = self.instance.criterion.choices_tuple
 
 
 class ExtraDataForm(TemplatedModelForm):
