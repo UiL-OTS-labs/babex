@@ -79,12 +79,12 @@ def test_dyslexia_required(admin_user, sample_participant):
         defaultcriteria=DefaultCriteria.objects.create(dyslexia=DefaultCriteria.Dyslexia.YES)
     )
     for value in [Participant.WhichParent.FEMALE, Participant.WhichParent.MALE, Participant.WhichParent.BOTH]:
-        sample_participant.dyslexic_parent = value
-        sample_participant.save()
+        sample_participant.data.dyslexic_parent = value
+        sample_participant.data.save()
         assert sample_participant in get_eligible_participants_for_experiment(experiment)
     for value in [Participant.WhichParent.NEITHER, Participant.WhichParent.UNKNOWN]:
-        sample_participant.dyslexic_parent = value
-        sample_participant.save()
+        sample_participant.data.dyslexic_parent = value
+        sample_participant.data.save()
         assert sample_participant not in get_eligible_participants_for_experiment(experiment)
 
 
@@ -98,12 +98,12 @@ def test_dyslexia_excluded(admin_user, sample_participant):
         Participant.WhichParent.BOTH,
         Participant.WhichParent.UNKNOWN,
     ]:
-        sample_participant.dyslexic_parent = value
-        sample_participant.save()
+        sample_participant.data.dyslexic_parent = value
+        sample_participant.data.save()
         assert sample_participant not in get_eligible_participants_for_experiment(experiment)
     for value in [Participant.WhichParent.NEITHER]:
-        sample_participant.dyslexic_parent = value
-        sample_participant.save()
+        sample_participant.data.dyslexic_parent = value
+        sample_participant.data.save()
         assert sample_participant in get_eligible_participants_for_experiment(experiment)
 
 
@@ -112,6 +112,6 @@ def test_dyslexia_indifferent(admin_user, sample_participant):
         defaultcriteria=DefaultCriteria.objects.create(dyslexia=DefaultCriteria.Dyslexia.INDIFFERENT)
     )
     for value in [choice[0] for choice in Participant.WhichParent.choices]:
-        sample_participant.dyslexic_parent = value
-        sample_participant.save()
+        sample_participant.data.dyslexic_parent = value
+        sample_participant.data.save()
         assert sample_participant in get_eligible_participants_for_experiment(experiment)

@@ -65,8 +65,8 @@ class AppointmentTests(TestCase):
         self.experiment.defaultcriteria.save()
 
         # participant should be too young to participate
-        self.participant.birth_date = timezone.now() - timedelta(days=8 * 30)
-        self.participant.save()
+        self.participant.data.birth_date = timezone.now() - timedelta(days=8 * 30)
+        self.participant.data.save()
 
         data = {
             "experiment": self.experiment.pk,
@@ -87,8 +87,8 @@ class AppointmentTests(TestCase):
         self.experiment.defaultcriteria.save()
 
         # participant should be too young to participate
-        self.participant.birth_date = timezone.now() - timedelta(days=60)
-        self.participant.save()
+        self.participant.data.birth_date = timezone.now() - timedelta(days=60)
+        self.participant.data.save()
 
         data = {
             "experiment": self.experiment.pk,
@@ -125,8 +125,8 @@ class InviteTests(TestCase):
 
     @freeze_time("2021-03-01")
     def test_can_invite_participant_correct_min_age(self):
-        self.participant.birth_date = date(2021, 1, 1)
-        self.participant.save()
+        self.participant.data.birth_date = date(2021, 1, 1)
+        self.participant.data.save()
 
         request = self.factory.get(f"/experiments/{self.experiment.pk}/invite/")
         request.user = self.user
@@ -136,8 +136,8 @@ class InviteTests(TestCase):
 
     @freeze_time("2021-03-01")
     def test_can_invite_participant_within_two_weeks(self):
-        self.participant.birth_date = date(2021, 1, 14)
-        self.participant.save()
+        self.participant.data.birth_date = date(2021, 1, 14)
+        self.participant.data.save()
 
         request = self.factory.get(f"/experiments/{self.experiment.pk}/invite/")
         request.user = self.user
@@ -147,8 +147,8 @@ class InviteTests(TestCase):
 
     @freeze_time("2021-03-01")
     def test_cannot_invite_participant_when_too_young(self):
-        self.participant.birth_date = date(2021, 1, 20)
-        self.participant.save()
+        self.participant.data.birth_date = date(2021, 1, 20)
+        self.participant.data.save()
 
         request = self.factory.get(f"/experiments/{self.experiment.pk}/invite/")
         request.user = self.user
