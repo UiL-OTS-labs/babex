@@ -75,8 +75,9 @@ class Appointment(models.Model):
         return self.experiment.location.name if self.experiment.location else "Unknown"
 
     def cancel(self):
-        self.outcome = Appointment.Outcome.CANCELED
-        self.save()
+        if self.outcome is None:
+            self.outcome = Appointment.Outcome.CANCELED
+            self.save()
 
     @property
     def is_canceled(self):

@@ -104,8 +104,9 @@ def test_parent_self_deactivate(sb, participant, login_as):
 
 
 def test_parent_login_deactivated(participant, apps, sb, link_from_mail, login_as):
+    email = participant.email
     participant.deactivate()
-    assert login_as(participant.email) is False
+    assert login_as(email) is False
 
 
 def test_signup_no_english(sb, apps, default_signup_fill_form):
