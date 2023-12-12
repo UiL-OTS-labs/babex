@@ -46,7 +46,6 @@ class Experiment(models.Model):
 <p>De proefleider is <strong>{{leader_name}}</strong>.
 <ul>
     <li>Duur: {{duration}}.</li>
-    <li>Vergoeding: {{compensation}}.</li>
     <li>{{task_description}}</li>
     <li>{{additional_instructions}}</li>
 </ul>
@@ -63,8 +62,6 @@ Met vriendelijke groet,<br/>
     name = models.TextField(_("experiment:attribute:name"))
 
     duration = models.TextField(_("experiment:attribute:duration"))
-
-    compensation = models.TextField(_("experiment:attribute:compensation"))
 
     # how many participants are aimed for
     recruitment_target = models.IntegerField(
@@ -110,12 +107,6 @@ Met vriendelijke groet,<br/>
         _("experiment:attribute:open"),
         default=False,
         help_text=_("experiment:attribute:open:help_text"),
-    )
-
-    public = models.BooleanField(
-        _("experiment:attribute:public"),
-        default=True,
-        help_text=_("experiment:attribute:public:help_text"),
     )
 
     excluded_experiments = models.ManyToManyField(

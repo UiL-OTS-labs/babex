@@ -19,7 +19,6 @@ class ExperimentForm(TemplatedModelForm):
         widgets = {
             "name": forms.TextInput,
             "duration": forms.TextInput,
-            "compensation": forms.TextInput,
             "use_timeslots": BootstrapRadioSelect(
                 choices=(
                     (True, _("experiment:form:use_timeslots:true")),
@@ -35,7 +34,6 @@ class ExperimentForm(TemplatedModelForm):
             "confirmation_email": EmailContentEditWidget(None),
             "invite_email": EmailContentEditWidget(None),
             "open": BootstrapCheckboxInput,
-            "public": BootstrapCheckboxInput,
         }
 
     def __init__(self, *args, **kwargs):
