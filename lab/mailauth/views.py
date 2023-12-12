@@ -29,11 +29,8 @@ class MailAuthView(views.APIView):
     def post(self, request, *args, **kwargs):
         email = request.data["email"]
 
-        participant = Participant.objects.efilter(deactivated=None, email=email)
-        try:
-            # read from generator
-            next(participant)
-        except StopIteration:
+        pps = Participant.find_by_email(email)
+        if len(pps) < 1:
             # TODO: perhaps better to display a message that says
             # "if the address exists in our system you will shortly receive an email"
             # instead of revealing whether an email address appears in our db or not

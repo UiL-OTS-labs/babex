@@ -67,7 +67,7 @@ def render_demograhpics(width: int, height: int) -> bytes:
     today = dt.date.today()
     fig = _setup_figure(width, height)
 
-    participants = Participant.objects.all()
+    participants = Participant.objects.filter(deactivated=None)
     ax_pp = fig.subplots()
 
     render_all_participants(ax_pp, list(participants), today)
@@ -84,7 +84,7 @@ def render_demograhpics_by_group(width: int, height: int) -> bytes:
     today = dt.date.today()
     fig = _setup_figure(width, height)
 
-    participants = Participant.objects.all()
+    participants = Participant.objects.all(deactivated=None)
     ax_group = fig.subplots()
 
     render_participants_by_group(ax_group, list(participants), today)

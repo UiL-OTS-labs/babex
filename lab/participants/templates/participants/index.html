@@ -26,11 +26,11 @@
         <table class="dt" width="100%" data-language="{% datatables_lang %}">
             <thead>
                 <tr>
-                    <th> {% get_verbose_field_name "participants" "Participant" "name" %} </th>
-                    <th> {% get_verbose_field_name "participants" "Participant" "birth_date" %} </th>
+                    <th> {% get_verbose_field_name "participants" "ParticipantData" "name" %} </th>
+                    <th> {% get_verbose_field_name "participants" "ParticipantData" "birth_date" %} </th>
                     <th> {% trans 'participants:age' %} </th>
-                    <th> {% get_verbose_field_name "participants" "Participant" "sex" %} </th>
-                    <th> {% get_verbose_field_name "participants" "Participant" "phonenumber" %} </th>
+                    <th> {% get_verbose_field_name "participants" "ParticipantData" "sex" %} </th>
+                    <th> {% get_verbose_field_name "participants" "ParticipantData" "phonenumber" %} </th>
                     <th> {% translate "participants:attribute:multilingual" %} </th>
                     <th> {% get_verbose_field_name "participants" "Participant" "created" %} </th>
                     {# The data-priority makes sure this column is always visible #}

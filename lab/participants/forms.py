@@ -1,13 +1,13 @@
 from cdh.core.forms import BootstrapCheckboxInput, TemplatedModelForm
 from django import forms
 
-from .models import ExtraData, Participant
+from .models import ExtraData, ParticipantData
 from .widgets import ParticipantSexWidget
 
 
 class ParticipantForm(TemplatedModelForm):
     class Meta:
-        model = Participant
+        model = ParticipantData
         # note: this form intentionally does not include the more sensitive fields,
         # because it's also less likely that an experiment leader would have to edit those
         fields = [

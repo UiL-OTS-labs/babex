@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from cdh.core.mail import TemplateEmail
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -74,9 +75,13 @@ class Appointment(models.Model):
         # TODO: temporary workaround for missing locations
         return self.experiment.location.name if self.experiment.location else "Unknown"
 
-    def cancel(self):
-        self.outcome = Appointment.Outcome.CANCELED
-        self.save()
+    def cancel(self, silent=False):
+        if self.outcome is None:
+            self.outcome = Appointment.Outcome.CANCELED
+            self.save()
+            if not silent:
+                _inform_leaders(self)
+                _send_confirmation(self)
 
     @property
     def is_canceled(self):
@@ -92,3 +97,33 @@ def make_appointment(experiment: Experiment, participant: Participant, leader: U
         participant=participant, timeslot=timeslot, experiment=experiment, leader=leader
     )
     return appointment
+
+def _inform_leaders(appointment: Appointment) -> None:
+    experiment = appointment.experiment
+    leaders = experiment.leaders.all()
+
+    for leader in leaders:
+        subject = "ILS appointment canceled by parent"
+        context = {
+            "appointment": appointment,
+            "leader": leader,
+        }
+
+        mail = TemplateEmail(
+            html_template="mail/appointment/canceled_leader.html",
+            context=context,
+            to=[leader.email],
+            subject=subject,
+        )
+        mail.send()
+
+def _send_confirmation(appointment: Appointment) -> None:
+    context = {"appointment": appointment}
+
+    mail = TemplateEmail(
+        html_template="mail/appointment/canceled.html",
+        context=context,
+        to=[appointment.participant.email],
+        subject="ILS appointment canceled",
+    )
+    mail.send()
