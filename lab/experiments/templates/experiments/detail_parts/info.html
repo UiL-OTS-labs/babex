@@ -67,14 +67,6 @@
                     </tr>
                     <tr>
                         <td>
-                            {% trans 'experiments:detail:info:compensation' %}
-                        </td>
-                        <td>
-                            {{ experiment.compensation }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
                             {% trans 'experiments:detail:info:task_description' %}
                         </td>
                         <td>
@@ -111,14 +103,6 @@
                         </td>
                         <td>
                             {{ experiment.open|yesno:_("yes,no") }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            {% trans 'experiments:detail:info:public' %}
-                        </td>
-                        <td>
-                            {{ experiment.public|yesno:_("yes,no") }}
                         </td>
                     </tr>
                     <tr>

@@ -23,7 +23,6 @@ def sample_context(experiment: Experiment):
         "leader_phonenumber": "064-12345678",
         "all_leaders_name_list": "First Leader en Second Leader",
         "duration": experiment.duration,
-        "compensation": experiment.compensation,
         "task_description": experiment.task_description,
         "additional_instructions": experiment.additional_instructions,
     }
