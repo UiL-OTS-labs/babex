@@ -180,10 +180,6 @@ msgstr "Name"
 msgid "experiment:attribute:duration"
 msgstr "Duration"
 
-#: experiments/models/experiment_models.py:67
-msgid "experiment:attribute:compensation"
-msgstr "Compensation"
-
 #: experiments/models/experiment_models.py:71
 msgid "experiment:attribute:recruitment_target"
 msgstr "Recruitment target"
@@ -216,7 +212,6 @@ msgstr ""
 "><code>{experiment_name}</code> The name of the experiment<br/"
 "><code>{experiment_location}</code> The location of the experiment (if "
 "set)<br/><code>{duration}</code> The set duration of the experiment<br/"
-"><code>{compensation}</code> The set compensation for this experiment<br/"
 "><code>{task_description}</code> The contents of the task description field."
 "<br/><code>{additional_instructions}</code> The contents of the additional "
 "instructions field<br/><code>{leader_name}</code> The name of the leader<br/"
@@ -249,18 +244,6 @@ msgstr "Open"
 #: experiments/models/experiment_models.py:112
 msgid "experiment:attribute:open:help_text"
 msgstr "Determines if the experiment is open for new participants."
-
-#: experiments/models/experiment_models.py:116
-msgid "experiment:attribute:public"
-msgstr "Public"
-
-#: experiments/models/experiment_models.py:118
-msgid "experiment:attribute:public:help_text"
-msgstr ""
-"Determines if the experiment should be advertised on the front page. If not, "
-"participants will only be able to find it through a direct link. Meant to be "
-"used for follow-up experiments where only participants who have participated "
-"in the original experiment should register."
 
 #: experiments/models/experiment_models.py:123
 msgid "experiment:attribute:excluded_experiments"
@@ -587,10 +570,6 @@ msgstr "Edit"
 msgid "experiments:detail:info:duration"
 msgstr "Duration"
 
-#: experiments/templates/experiments/detail_parts/info.html:70
-msgid "experiments:detail:info:compensation"
-msgstr "Compensation"
-
 #: experiments/templates/experiments/detail_parts/info.html:78
 msgid "experiments:detail:info:task_description"
 msgstr "Task description"
@@ -616,10 +595,6 @@ msgstr "Location"
 #: experiments/templates/experiments/detail_parts/info.html:110
 msgid "experiments:detail:info:open"
 msgstr "Open"
-
-#: experiments/templates/experiments/detail_parts/info.html:118
-msgid "experiments:detail:info:public"
-msgstr "Public"
 
 #: experiments/templates/experiments/detail_parts/info.html:126
 msgid "experiments:detail:info:leader"
