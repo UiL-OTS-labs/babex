@@ -144,6 +144,7 @@ class Participant(models.Model):
                 appointment.cancel()
             self.data.delete()
             self.data = None
+            self.extradata_set.all().delete()
             self.deactivated = timezone.now()
             self.save()
 
