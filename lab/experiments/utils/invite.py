@@ -42,7 +42,7 @@ def get_invite_mail_content(experiment: Experiment, leader: User) -> str:
 def mail_invite(participant_ids: List[str], content: str, experiment: Experiment) -> None:
     html_content = _parse_contents_html(content, experiment)
     plain_content = _parse_contents_plain(content, experiment)
-    participants = Participant.objects.filter(pk__in=participant_ids)
+    participants = Participant.objects.filter(deactivated=None, pk__in=participant_ids)
     participants.prefetch_related()
 
     subject = "ILS uitnodiging deelname experiment: {}".format(experiment.name)

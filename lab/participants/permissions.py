@@ -14,13 +14,13 @@ def participants_visible_to_leader(leader: User) -> QuerySet[Participant]:
     # look at experiments that leader has access to, and return only participants
     # that have participated, or are eligible for participation in those experiments
     experiments = leader.experiments.all().values_list("pk", flat=True)
-    participants = Participant.objects.filter(appointments__experiment__in=experiments)
+    participants = Participant.objects.filter(deactivated=None, appointments__experiment__in=experiments)
 
     eligible = [get_eligible_participants_for_experiment(experiment) for experiment in leader.experiments.all()]
     # flatten list of lists
     flat: List[Participant] = reduce(iconcat, eligible, [])
     # extract ids
-    participants |= Participant.objects.filter(pk__in=[participant.pk for participant in flat])
+    participants |= Participant.objects.filter(deactivated=None, pk__in=[participant.pk for participant in flat])
 
     return participants.distinct()
 

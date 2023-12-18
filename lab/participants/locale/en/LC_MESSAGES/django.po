@@ -436,3 +436,6 @@ msgstr "Participant deleted!"
 
 msgid "participants:demographics:header"
 msgstr "Demographics"
+
+msgid "participants:deactivated:name"
+msgstr "** Deactivated **"

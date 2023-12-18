@@ -1,11 +1,8 @@
-from cdh.core.views import FormSetUpdateView
 from cdh.core.views.mixins import DeleteSuccessMessageMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.forms.forms import BaseForm
-from django.http import Http404, HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy as reverse
-from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
@@ -27,7 +24,7 @@ class ParticipantsHomeView(RandomLeaderMixin, generic.ListView):
 
     def get_queryset(self):
         if self.request.user.is_staff:
-            return self.model.objects.all()
+            return self.model.objects.filter(deactivated=None)
 
         return participants_visible_to_leader(self.request.user)
 

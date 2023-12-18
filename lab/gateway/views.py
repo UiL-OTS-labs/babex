@@ -15,7 +15,6 @@ from survey_admin.serializers import (
     SurveyInviteSerializer,
     SurveyResponseSerializer,
 )
-from utils.cancel_appointment import cancel_appointment
 
 
 class GatewayHome(views.APIView):
@@ -46,7 +45,7 @@ class AppointmentViewSet(viewsets.ModelViewSet):
 
     def perform_destroy(self, appointment):
         # using DELETE to cancel appointment
-        cancel_appointment(appointment)
+        appointment.cancel()
 
 
 class SurveyView(generics.RetrieveAPIView):

@@ -80,18 +80,18 @@
             <table class="table">
                 <tr>
                     <td width="40%">
-                        {% get_verbose_field_name "participants" "Participant" "name" %}
+                        {% get_verbose_field_name "participants" "ParticipantData" "name" %}
                     </td>
                     <td width="60%">
                         {{ participant.name|default_if_none:'' }}
                     </td>
                 </tr>
                 <tr>
-                    <td> {% get_verbose_field_name "participants" "Participant" "birth_date" %} </td>
+                    <td> {% get_verbose_field_name "participants" "ParticipantData" "birth_date" %} </td>
                     <td> {{ participant.birth_date|date:"Y-m-d"|default_if_none:"" }} </td>
                 </tr>
                 <tr>
-                    <td> {% get_verbose_field_name "participants" "Participant" "birth_weight" %} </td>
+                    <td> {% get_verbose_field_name "participants" "ParticipantData" "birth_weight" %} </td>
                     <td> {{ participant.get_birth_weight_display|default_if_none:'' }} </td>
                 </tr>
                 <tr>
@@ -103,7 +103,7 @@
                     <td> {{ participant.age_long }} </td>
                 </tr>
                 <tr>
-                    <td> {% get_verbose_field_name "participants" "Participant" "dyslexic_parent" %} </td>
+                    <td> {% get_verbose_field_name "participants" "ParticipantData" "dyslexic_parent" %} </td>
                     <td> {{ participant.dyslexic_parent_display }} </td>
                 </tr>
                 <tr>
@@ -113,7 +113,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td> {% get_verbose_field_name "participants" "Participant" "sex" %} </td>
+                    <td> {% get_verbose_field_name "participants" "ParticipantData" "sex" %} </td>
                     <td> {{ participant.get_sex_display|default_if_none:"" }} </td>
                 </tr>
                 <tr>

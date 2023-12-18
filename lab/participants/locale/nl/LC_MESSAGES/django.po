@@ -262,3 +262,7 @@ msgstr "Participant verwijderd!"
 #: participants/views.py:150
 msgid "participants:messages:merged_participants"
 msgstr "Participanten samengevoegd!"
+
+
+msgid "participants:deactivated:name"
+msgstr "** Verwijderd **"

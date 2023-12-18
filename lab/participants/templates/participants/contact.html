@@ -8,15 +8,15 @@
         <td width="60%"> {{ participant.parent_name|default_if_none:'' }} </td>
     </tr>
     <tr>
-        <td> {% get_verbose_field_name "participants" "Participant" "phonenumber" %} </td>
+        <td> {% get_verbose_field_name "participants" "ParticipantData" "phonenumber" %} </td>
         <td> {{ participant.phonenumber|default_if_none:"" }} </td>
     </tr>
     <tr>
-        <td> {% get_verbose_field_name "participants" "Participant" "phonenumber_alt" %} </td>
+        <td> {% get_verbose_field_name "participants" "ParticipantData" "phonenumber_alt" %} </td>
         <td> {{ participant.phonenumber_alt|default_if_none:"" }} </td>
     </tr>
     <tr>
-        <td> {% get_verbose_field_name "participants" "Participant" "email" %} </td>
+        <td> {% get_verbose_field_name "participants" "ParticipantData" "email" %} </td>
         <td>
             <a href="mailto:{{ participant.email }}">
                 {{ participant.email }}
