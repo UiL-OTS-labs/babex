@@ -1,4 +1,8 @@
-from cdh.core.forms import BootstrapCheckboxInput, TemplatedModelForm
+from cdh.core.forms import (
+    BootstrapCheckboxInput,
+    BootstrapRadioSelect,
+    TemplatedModelForm,
+)
 from django import forms
 
 from .models import ExtraData, ParticipantData
@@ -25,7 +29,7 @@ class ParticipantForm(TemplatedModelForm):
             "name": forms.TextInput,
             "phonenumber": forms.TextInput,
             "phonenumber_alt": forms.TextInput,
-            "sex": ParticipantSexWidget,
+            "sex": BootstrapRadioSelect,
             "email_subscription": BootstrapCheckboxInput,
             "english_contact": BootstrapCheckboxInput,
         }

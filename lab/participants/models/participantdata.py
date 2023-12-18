@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 from utils.models import EncryptedManager
 
-from .enums import BirthWeight, PregnancyDuration, WhichParent
+from .enums import BirthWeight, PregnancyDuration, Sex, WhichParent
 from .language import Language
 
 
@@ -12,7 +12,7 @@ class ParticipantData(models.Model):
     objects = EncryptedManager()
 
     name = e_fields.EncryptedTextField(_("participant:attribute:name"), blank=True, null=True)
-    sex = e_fields.EncryptedTextField(_("participant:attribute:sex"), blank=True, null=True)
+    sex = e_fields.EncryptedTextField(_("participant:attribute:sex"), null=True, choices=Sex.choices)
     birth_date = e_fields.EncryptedDateField(_("participant:attribute:birth_date"), blank=True, null=True)
 
     birth_weight = e_fields.EncryptedCharField(

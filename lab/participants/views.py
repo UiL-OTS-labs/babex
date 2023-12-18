@@ -15,7 +15,7 @@ from participants.permissions import (
 
 from . import graphs
 from .forms import ExtraDataForm, ParticipantForm
-from .models import ExtraData, Participant
+from .models import ExtraData, Participant, ParticipantData
 
 
 class ParticipantsHomeView(RandomLeaderMixin, generic.ListView):
@@ -43,7 +43,7 @@ class ParticipantDetailView(RandomLeaderMixin, generic.DetailView):
 
 
 class ParticipantUpdateView(RandomLeaderMixin, SuccessMessageMixin, generic.UpdateView):
-    model = Participant
+    model = ParticipantData
     template_name = "participants/edit.html"
     success_message = _("participants:messages:updated_participant")
     form_class = ParticipantForm
