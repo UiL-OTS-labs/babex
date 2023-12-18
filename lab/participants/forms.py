@@ -6,7 +6,6 @@ from cdh.core.forms import (
 from django import forms
 
 from .models import ExtraData, ParticipantData
-from .widgets import ParticipantSexWidget
 
 
 class ParticipantForm(TemplatedModelForm):
