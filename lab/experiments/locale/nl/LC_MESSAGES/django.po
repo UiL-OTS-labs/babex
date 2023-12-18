@@ -88,11 +88,11 @@ msgid "default_criteria:attribute:sex:female"
 msgstr "Vrouw"
 
 #: experiments/models/criteria_models.py:28
-msgid "default_criteria:attribute:dyslexia:yes"
+msgid "default_criteria:attribute:dyslexic_parent:yes"
 msgstr "Ja"
 
 #: experiments/models/criteria_models.py:29
-msgid "default_criteria:attribute:dyslexia:no"
+msgid "default_criteria:attribute:dyslexic_parent:no"
 msgstr "Nee"
 
 #: experiments/models/criteria_models.py:45
@@ -108,7 +108,7 @@ msgid "default_criteria:attribute:sex"
 msgstr "Moet de participant man of vrouw zijn?"
 
 #: experiments/models/criteria_models.py:74
-msgid "default_criteria:attribute:dyslexia"
+msgid "default_criteria:attribute:dyslexic_parent"
 msgstr "Moet de participant dyslectisch zijn?"
 
 #: experiments/models/criteria_models.py:90
@@ -375,7 +375,7 @@ msgid "criteria:new_default_criteria:info_text"
 msgstr " "
 
 #: experiments/templates/experiments/criteria_snippit.html:11
-msgid "criteria_snippit:dyslexia"
+msgid "criteria_snippit:dyslexic_parent"
 msgstr "Dyslectisch:"
 
 #: experiments/templates/experiments/criteria_snippit.html:19
@@ -927,3 +927,16 @@ msgstr "Participant(en) succesvol uitgenodigd!"
 
 #~ msgid "experiments:detail:appointments"
 #~ msgstr "Afspraken"
+
+
+msgid "default_criteria:attribute:yes"
+msgstr "Ja"
+
+msgid "default_criteria:attribute:no"
+msgstr "Nee"
+
+msgid "criteria_snippit:birth_weight"
+msgstr "Geboortegewicht"
+
+msgid "criteria_snippit:pregnancy_duration"
+msgstr "Zwangerschapsduur"

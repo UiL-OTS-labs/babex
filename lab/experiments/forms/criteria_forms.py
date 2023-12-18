@@ -1,38 +1,32 @@
-from cdh.core.forms import BootstrapRadioSelect, TemplatedModelForm
+from cdh.core.forms import BootstrapCheckboxSelectMultiple, TemplatedModelForm
 from django import forms
 from django.core.exceptions import ValidationError
-from django.utils.text import slugify
-from django.utils.translation import gettext_lazy as _
 
 from ..models import DefaultCriteria
-from ..widgets import LanguageWidget
 
 
 class DefaultCriteriaForm(TemplatedModelForm):
     class Meta:
         model = DefaultCriteria
         fields = [
-            "multilingual",
             "sex",
-            "dyslexia",
+            "birth_weight",
+            "pregnancy_duration",
+            "multilingual",
+            "dyslexic_parent",
+            "tos_parent",
             "min_age_months",
             "min_age_days",
-            "max_age_months",
             "max_age_days",
+            "max_age_months",
         ]
 
-        widgets = {
-            "language": LanguageWidget,
-            "multilingual": BootstrapRadioSelect,
-            "sex": BootstrapRadioSelect,
-            "dyslexia": BootstrapRadioSelect,
-        }
-
     def __init__(self, *args, **kwargs):
-        # This removes the colon from the labels. Without it Django is very
-        # inconsistent in it's use, so we just remove it
-        kwargs.setdefault("label_suffix", "")
-        super(DefaultCriteriaForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
+        for field in ["sex", "birth_weight", "pregnancy_duration", "multilingual", "dyslexic_parent", "tos_parent"]:
+            self.fields[field] = forms.MultipleChoiceField(
+                choices=self.instance._meta.get_field(field).options, widget=BootstrapCheckboxSelectMultiple
+            )
 
     def clean(self):
         cleaned_data = super().clean()

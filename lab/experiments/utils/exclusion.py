@@ -97,19 +97,16 @@ def build_exclusion_filters(default_criteria, filters=None) -> dict:
     if filters is None:
         filters = {}
 
-    if default_criteria.dyslexia == DefaultCriteria.Dyslexia.YES:
-        # should have a dyslexic parent
-        filters["dyslexic_parent_bool"] = True
-    elif default_criteria.dyslexia == DefaultCriteria.Dyslexia.NO:
-        # should not have a dyslexic parent
-        filters["dyslexic_parent_bool"] = False
-    else:  # indifferent
-        pass
+    for field in ["sex", "birth_weight", "pregnancy_duration", "multilingual"]:
+        value = getattr(default_criteria, field)
+        if value is not None:
+            filters[field] = set(value)
 
-    # Rewrite this expected to a boolean value, as it's stored as a boolean
-    if default_criteria.multilingual != "I":
-        expected_value = default_criteria.multilingual == "Y"
-        filters["multilingual"] = expected_value
+    for field in ["dyslexic_parent", "tos_parent"]:
+        value = getattr(default_criteria, field)
+        str_to_bool = {"Y": True, "N": False}
+        if value is not None:
+            filters[field + "_bool"] = set(str_to_bool[v] for v in value)
 
     return filters
 
@@ -128,7 +125,7 @@ def check_default_criteria(participant: Participant, filters: dict) -> list:
     for attr, expected_value in filters.items():
         found_value = getattr(participant, attr, None)
 
-        if found_value != expected_value:
+        if found_value not in expected_value:
             failed_criteria.append(attr)
 
     return failed_criteria

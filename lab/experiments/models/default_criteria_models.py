@@ -1,55 +1,56 @@
+from functools import partialmethod
+
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from participants.models.enums import BirthWeight, PregnancyDuration
+
+
+class CriterionField(models.JSONField):
+    def __init__(self, *args, **kwargs):
+        if "choices" in kwargs:
+            # choices should always be defined, but sometimes they are not
+            # when this is called from within django's migration code
+            self.options = kwargs.pop("choices")
+        kwargs["null"] = True
+        kwargs["blank"] = False
+        super().__init__(*args, **kwargs)
+
+    def contribute_to_class(self, cls, name, private_only=False):
+        # this is based on Django's built-in code to generate a get_{field}_display method
+        def display_func(model, field):
+            values = set(getattr(model, field.attname) or [])
+            return ", ".join([str(choice[1]) for choice in self.options if choice[0] in values])
+
+        setattr(cls, "get_%s_display" % name, partialmethod(display_func, field=self))
+
+        super().contribute_to_class(cls, name, private_only)
+
 
 class DefaultCriteria(models.Model):
-    MULTILINGUAL = (
-        ("N", _("default_criteria:attribute:multilingual:no")),
-        ("Y", _("default_criteria:attribute:multilingual:yes")),
-        ("I", _("experiments:globals:indifferent")),
-    )
-
     SEX = (
         ("M", _("default_criteria:attribute:sex:male")),
         ("F", _("default_criteria:attribute:sex:female")),
-        ("I", _("experiments:globals:indifferent")),
     )
 
-    class Dyslexia(models.TextChoices):
-        YES = "Y"
-        NO = "N"
-        INDIFFERENT = "I"
-
-    DYSLEXIA = (
-        (Dyslexia.YES, _("default_criteria:attribute:dyslexia:yes")),
-        (Dyslexia.NO, _("default_criteria:attribute:dyslexia:no")),
-        (Dyslexia.INDIFFERENT, _("experiments:globals:indifferent")),
+    YESNO = (
+        ("Y", _("default_criteria:attribute:yes")),
+        ("N", _("default_criteria:attribute:no")),
     )
 
-    multilingual = models.CharField(
-        _("default_criteria:attribute:multilingual"),
-        choices=MULTILINGUAL,
-        max_length=1,
-        blank=False,
-        default="N",
+    multilingual = CriterionField(_("default_criteria:attribute:multilingual"), choices=YESNO)
+    sex = CriterionField(_("default_criteria:attribute:sex"), choices=SEX)
+    dyslexic_parent = CriterionField(_("default_criteria:attribute:dyslexic_parent"), choices=YESNO)
+    birth_weight = CriterionField(
+        _("default_criteria:attribute:birth_weight"),
+        choices=BirthWeight.choices,
     )
-
-    sex = models.CharField(
-        _("default_criteria:attribute:sex"),
-        choices=SEX,
-        max_length=1,
-        blank=False,
-        default="I",
+    pregnancy_duration = CriterionField(
+        _("default_criteria:attribute:pregnancy_duration"),
+        choices=PregnancyDuration.choices,
     )
-
-    dyslexia = models.CharField(
-        _("default_criteria:attribute:dyslexia"),
-        choices=DYSLEXIA,
-        max_length=1,
-        blank=False,
-        default="N",
-    )
+    tos_parent = CriterionField(_("default_criteria:attribute:tos_parent"), choices=YESNO)
 
     # age limits will be stored internally in two fields: months and days
     min_age_days = models.IntegerField(

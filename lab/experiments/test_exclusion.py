@@ -74,10 +74,8 @@ def test_required_experiment_multiple(admin_user, sample_participant):
     assert sample_participant in get_eligible_participants_for_experiment(experiment_3)
 
 
-def test_dyslexia_required(admin_user, sample_participant):
-    experiment = admin_user.experiments.create(
-        defaultcriteria=DefaultCriteria.objects.create(dyslexia=DefaultCriteria.Dyslexia.YES)
-    )
+def test_dyslexic_parent_required(admin_user, sample_participant):
+    experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create(dyslexic_parent="Y"))
     for value in [Participant.WhichParent.FEMALE, Participant.WhichParent.MALE, Participant.WhichParent.BOTH]:
         sample_participant.data.dyslexic_parent = value
         sample_participant.data.save()
@@ -88,10 +86,8 @@ def test_dyslexia_required(admin_user, sample_participant):
         assert sample_participant not in get_eligible_participants_for_experiment(experiment)
 
 
-def test_dyslexia_excluded(admin_user, sample_participant):
-    experiment = admin_user.experiments.create(
-        defaultcriteria=DefaultCriteria.objects.create(dyslexia=DefaultCriteria.Dyslexia.NO)
-    )
+def test_dyslexic_parent_excluded(admin_user, sample_participant):
+    experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create(dyslexic_parent="N"))
     for value in [
         Participant.WhichParent.FEMALE,
         Participant.WhichParent.MALE,
@@ -107,10 +103,8 @@ def test_dyslexia_excluded(admin_user, sample_participant):
         assert sample_participant in get_eligible_participants_for_experiment(experiment)
 
 
-def test_dyslexia_indifferent(admin_user, sample_participant):
-    experiment = admin_user.experiments.create(
-        defaultcriteria=DefaultCriteria.objects.create(dyslexia=DefaultCriteria.Dyslexia.INDIFFERENT)
-    )
+def test_dyslexic_parent_indifferent(admin_user, sample_participant):
+    experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
     for value in [choice[0] for choice in Participant.WhichParent.choices]:
         sample_participant.data.dyslexic_parent = value
         sample_participant.data.save()
