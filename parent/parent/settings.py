@@ -118,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = "nl"
 LANGUAGES = (
     ("nl", _("lang:nl")),
-    ("en", _("lang:en")),
+    # ("en", _("lang:en")),
 )
 
 TIME_ZONE = "UTC"
