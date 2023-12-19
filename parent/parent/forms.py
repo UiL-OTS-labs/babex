@@ -9,12 +9,26 @@ from cdh.core.forms import (
     TemplatedFormTextField,
 )
 from django import forms
+from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
 
 class LanguagesWidget(forms.widgets.SelectMultiple):
     template_name = "widgets/languages_widget.html"
+
+    def get_context(self, name, value, attrs):
+        context = super().get_context(name, value, attrs)
+        if value is None:
+            return context
+        
+        if value == ["Nederlands"]:
+            context["mono_dutch_checked"] = True
+        elif len(value) == 1:
+            context["mono_other_checked"] = True
+        elif len(value) > 1:
+            context["multi_checked"] = True
+        return context
 
     def value_from_datadict(self, data, files, name):
         value = data.getlist(name)
@@ -27,10 +41,17 @@ class LanguagesField(forms.MultipleChoiceField):
         if isinstance(v, str):
             v = [v]
 
-        return list(filter(None, v))  # remove empty values (TODO: why are they here to begin with?)
+        return list(filter(lambda x: x is not None and len(x), v))  # remove empty values
 
     def valid_value(self, value):
-        return isinstance(value, str)
+        return isinstance(value, str) and len(value) > 1
+
+    def validate(self, value):
+        super().validate(value)
+
+        if len(value) < 1:
+            # no languages
+            raise ValidationError(_("parent:forms:languages:error:missing"))
 
 
 def get_valid_year_range():
@@ -79,8 +100,7 @@ class SignupForm(TemplatedForm):
         widget=BootstrapRadioSelect(),
     )
     languages = LanguagesField(
-        # TODO: this should use a custom field object to support new values that are not part of the predetermined choices
-        # but it should still support prepopulating with known
+        required=True,
         label=_("parent:forms:signup:languages"),
         widget=LanguagesWidget,
         choices=[],

@@ -1,13 +1,17 @@
 {% load i18n %}
-<div class="form-check">
-    <input class="form-check-input" id="id_languages_mono_dutch" type="radio" name="languages" value="Nederlands" />
+<div class="form-check {{ widget.attrs.valid }}">
+    <input class="form-check-input" id="id_languages_mono_dutch" type="radio" name="languages" value="Nederlands"
+           {% if mono_dutch_checked %}checked{% endif %}
+    />
     <label class="form-check-label" for="id_languages_mono_dutch">
         {% translate 'parent:forms:signup:languages:mono_dutch' %}
     </label>
 </div>
 
-<div class="form-check">
-    <input class="form-check-input" id="id_languages_mono_other" type="radio" name="languages" value="" />
+<div class="form-check {{ widget.attrs.valid }}">
+    <input class="form-check-input" id="id_languages_mono_other" type="radio" name="languages" value=""
+           {% if mono_other_checked %}checked{% endif %}
+    />
     <label class="form-check-label" for="id_languages_mono_other">
         {% translate 'parent:forms:signup:languages:mono_other' %}
     </label>
@@ -25,8 +29,10 @@
     </select>
 </div>
 
-<div class="form-check">
-    <input class="form-check-input" id="id_languages_multi" type="radio" name="languages" value="" />
+<div class="form-check {{ widget.attrs.valid }}">
+    <input class="form-check-input" id="id_languages_multi" type="radio" name="languages" value=""
+           {% if multi_checked %}checked{% endif %}
+    />
     <label class="form-check-label" for="id_languages_multi">
         {% translate 'parent:forms:signup:languages:multi' %}
     </label>
@@ -45,6 +51,8 @@
 
 <script type="text/javascript" nonce="{{ request.csp_nonce }}">
     $(function () {
+        $('#id_languages_multi_select').prop('disabled', !$('#id_languages_multi').prop('checked'));
+        $('#id_languages_mono_select').prop('disabled', !$('#id_languages_mono_other').prop('checked'));
         $('input[type=radio]').change(() => {
             $('#id_languages_multi_select').prop('disabled', !$('#id_languages_multi').prop('checked'));
             $('#id_languages_mono_select').prop('disabled', !$('#id_languages_mono_other').prop('checked'));
