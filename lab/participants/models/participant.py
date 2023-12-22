@@ -175,6 +175,11 @@ class Participant(models.Model):
         return self.languages.count() > 1
 
     @property
+    def multilingual_bool(self):
+        """basically an alias for self.multilingual, but required because of the exclusion filter assumptions"""
+        return self.multilingual
+
+    @property
     def languages_pretty(self):
         return ", ".join(self.languages.all().values_list("name", flat=True))
 

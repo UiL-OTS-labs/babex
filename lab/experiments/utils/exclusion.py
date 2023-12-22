@@ -97,13 +97,13 @@ def build_exclusion_filters(default_criteria, filters=None) -> dict:
     if filters is None:
         filters = {}
 
-    for field in ["sex", "birth_weight", "pregnancy_duration", "multilingual"]:
+    for field in ["sex", "birth_weight", "pregnancy_duration"]:
         value = getattr(default_criteria, field)
         if value is not None:
             assert isinstance(value, list)
             filters[field] = set(value)
 
-    for field in ["dyslexic_parent", "tos_parent"]:
+    for field in ["dyslexic_parent", "tos_parent", "multilingual"]:
         value = getattr(default_criteria, field)
         if value is not None:
             if set(value) == {"Y"}:

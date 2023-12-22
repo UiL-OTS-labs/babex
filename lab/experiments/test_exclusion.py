@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 
 from experiments.models import DefaultCriteria, TimeSlot
 from experiments.utils.exclusion import get_eligible_participants_for_experiment
-from participants.models import Participant, ParticipantData
+from participants.models import Participant, ParticipantData, Language
 
 
 def test_excluded_experiment(admin_user, sample_participant):
@@ -126,3 +126,68 @@ def test_parent_criterion_indifferent(admin_user, sample_participant):
             assert sample_participant in get_eligible_participants_for_experiment(
                 experiment
             ), f"Participant with field {criterion} set to {value} is missing from eligible set"
+
+
+def test_participant_criteria(admin_user, sample_participant):
+    criteria = ["sex", "birth_weight", "pregnancy_duration"]
+    for criterion_name in criteria:
+        options = set(x[0] for x in getattr(DefaultCriteria, criterion_name).field.options)
+        for option in options:
+            set_participant_field(sample_participant, criterion_name, option)
+
+            # indifferent
+            experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
+            assert sample_participant in get_eligible_participants_for_experiment(
+                experiment
+            ), f"Participant with field {criterion_name} set to {option} is missing from eligible set"
+
+            # included
+            experiment = admin_user.experiments.create(
+                defaultcriteria=DefaultCriteria.objects.create(**{criterion_name: [option]})
+            )
+            assert sample_participant in get_eligible_participants_for_experiment(
+                experiment
+            ), f"Participant with field {criterion_name} set to {option} is missing from eligible set"
+
+            # excluded
+            experiment = admin_user.experiments.create(
+                defaultcriteria=DefaultCriteria.objects.create(**{criterion_name: list(options - set([option]))})
+            )
+            assert sample_participant not in get_eligible_participants_for_experiment(
+                experiment
+            ), f"Participant with field {criterion_name} set to {option} is present in eligible set"
+
+
+def test_multilingual_criterion(admin_user, sample_participant):
+    en = Language.objects.create(name="Engels")
+    nl = Language.objects.create(name="Nederlands")
+
+    # multilingual participant
+    sample_participant.data.languages.set([en, nl])
+
+    # indifferent
+    experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
+    assert sample_participant in get_eligible_participants_for_experiment(experiment)
+
+    # included
+    experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create(multilingual=["Y"]))
+    assert sample_participant in get_eligible_participants_for_experiment(experiment)
+
+    # excluded
+    experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create(multilingual=["N"]))
+    assert sample_participant not in get_eligible_participants_for_experiment(experiment)
+
+    # monolingual participant
+    sample_participant.data.languages.set([en])
+
+    # indifferent
+    experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
+    assert sample_participant in get_eligible_participants_for_experiment(experiment)
+
+    # included
+    experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create(multilingual=["N"]))
+    assert sample_participant in get_eligible_participants_for_experiment(experiment)
+
+    # excluded
+    experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create(multilingual=["Y"]))
+    assert sample_participant not in get_eligible_participants_for_experiment(experiment)
