@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 
 from experiments.models import DefaultCriteria, TimeSlot
 from experiments.utils.exclusion import get_eligible_participants_for_experiment
-from participants.models import Participant
+from participants.models import Participant, ParticipantData
 
 
 def test_excluded_experiment(admin_user, sample_participant):
@@ -74,38 +74,55 @@ def test_required_experiment_multiple(admin_user, sample_participant):
     assert sample_participant in get_eligible_participants_for_experiment(experiment_3)
 
 
-def test_dyslexic_parent_required(admin_user, sample_participant):
-    experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create(dyslexic_parent="Y"))
-    for value in [Participant.WhichParent.FEMALE, Participant.WhichParent.MALE, Participant.WhichParent.BOTH]:
-        sample_participant.data.dyslexic_parent = value
-        sample_participant.data.save()
-        assert sample_participant in get_eligible_participants_for_experiment(experiment)
-    for value in [Participant.WhichParent.NEITHER, Participant.WhichParent.UNKNOWN]:
-        sample_participant.data.dyslexic_parent = value
-        sample_participant.data.save()
-        assert sample_participant not in get_eligible_participants_for_experiment(experiment)
+def set_participant_field(participant, field_name, value):
+    ParticipantData.objects.filter(pk=participant.data.pk).update(**{field_name: value})
 
 
-def test_dyslexic_parent_excluded(admin_user, sample_participant):
-    experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create(dyslexic_parent="N"))
-    for value in [
-        Participant.WhichParent.FEMALE,
-        Participant.WhichParent.MALE,
-        Participant.WhichParent.BOTH,
-        Participant.WhichParent.UNKNOWN,
-    ]:
-        sample_participant.data.dyslexic_parent = value
-        sample_participant.data.save()
-        assert sample_participant not in get_eligible_participants_for_experiment(experiment)
-    for value in [Participant.WhichParent.NEITHER]:
-        sample_participant.data.dyslexic_parent = value
-        sample_participant.data.save()
-        assert sample_participant in get_eligible_participants_for_experiment(experiment)
+def test_parent_criterion_required(admin_user, sample_participant):
+    for criterion in ["dyslexic_parent", "tos_parent"]:
+        experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create(**{criterion: "Y"}))
+        for value in [Participant.WhichParent.FEMALE, Participant.WhichParent.MALE, Participant.WhichParent.BOTH]:
+            set_participant_field(sample_participant, criterion, value)
+            assert sample_participant in get_eligible_participants_for_experiment(
+                experiment
+            ), f"Participant with field {criterion} set to {value} is missing from eligible set"
+        for value in [Participant.WhichParent.NEITHER, Participant.WhichParent.UNKNOWN]:
+            set_participant_field(sample_participant, criterion, value)
+            assert sample_participant not in get_eligible_participants_for_experiment(
+                experiment
+            ), f"Participant with field {criterion} set to {value} is present in eligible set"
 
 
-def test_dyslexic_parent_indifferent(admin_user, sample_participant):
-    experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
-    for value in [choice[0] for choice in Participant.WhichParent.choices]:
-        sample_participant.data.dyslexic_parent = value
-        sample_participant.data.save()
-        assert sample_participant in get_eligible_participants_for_experiment(experiment)
+def test_parent_criterion_excluded(admin_user, sample_participant):
+    for criterion in ["dyslexic_parent", "tos_parent"]:
+        experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create(**{criterion: "N"}))
+        for value in [
+            Participant.WhichParent.FEMALE,
+            Participant.WhichParent.MALE,
+            Participant.WhichParent.BOTH,
+            Participant.WhichParent.UNKNOWN,
+        ]:
+            set_participant_field(sample_participant, criterion, value)
+            assert sample_participant not in get_eligible_participants_for_experiment(experiment)
+        for value in [Participant.WhichParent.NEITHER]:
+            set_participant_field(sample_participant, criterion, value)
+            assert sample_participant in get_eligible_participants_for_experiment(experiment)
+
+
+def test_parent_criterion_indifferent(admin_user, sample_participant):
+    for criterion in ["dyslexic_parent", "tos_parent"]:
+        experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
+        for value in [choice[0] for choice in Participant.WhichParent.choices]:
+            set_participant_field(sample_participant, criterion, value)
+            assert sample_participant in get_eligible_participants_for_experiment(
+                experiment
+            ), f"Participant with field {criterion} set to {value} is missing from eligible set"
+
+        experiment = admin_user.experiments.create(
+            defaultcriteria=DefaultCriteria.objects.create(**{criterion: ["Y", "N"]})
+        )
+        for value in [choice[0] for choice in Participant.WhichParent.choices]:
+            set_participant_field(sample_participant, criterion, value)
+            assert sample_participant in get_eligible_participants_for_experiment(
+                experiment
+            ), f"Participant with field {criterion} set to {value} is missing from eligible set"

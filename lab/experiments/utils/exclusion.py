@@ -100,13 +100,20 @@ def build_exclusion_filters(default_criteria, filters=None) -> dict:
     for field in ["sex", "birth_weight", "pregnancy_duration", "multilingual"]:
         value = getattr(default_criteria, field)
         if value is not None:
+            assert isinstance(value, list)
             filters[field] = set(value)
 
     for field in ["dyslexic_parent", "tos_parent"]:
         value = getattr(default_criteria, field)
-        str_to_bool = {"Y": True, "N": False}
         if value is not None:
-            filters[field + "_bool"] = set(str_to_bool[v] for v in value)
+            if set(value) == {"Y"}:
+                filters[field + "_bool"] = {True}
+            elif set(value) == {"N"}:
+                filters[field + "_bool"] = {False}
+            elif set(value) == {"Y", "N"}:
+                # if both Yes and No are allowed, consider this as an empty filter
+                # (which will also allow Unknown values)
+                pass
 
     return filters
 

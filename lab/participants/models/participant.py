@@ -98,6 +98,7 @@ class Participant(models.Model):
 
     @property
     def dyslexic_parent_bool(self) -> bool | None:
+        """this is used to translate the model field into a filter"""
         if self.dyslexic_parent in [
             self.WhichParent.FEMALE,
             self.WhichParent.MALE,
@@ -105,6 +106,19 @@ class Participant(models.Model):
         ]:
             return True
         elif self.dyslexic_parent == self.WhichParent.NEITHER:
+            return False
+        return None
+
+    @property
+    def tos_parent_bool(self) -> bool | None:
+        """this is used to translate the model field into a filter"""
+        if self.tos_parent in [
+            self.WhichParent.FEMALE,
+            self.WhichParent.MALE,
+            self.WhichParent.BOTH,
+        ]:
+            return True
+        elif self.tos_parent == self.WhichParent.NEITHER:
             return False
         return None
 
