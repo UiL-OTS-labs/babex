@@ -1,5 +1,7 @@
 from datetime import datetime, timedelta
 
+from django.utils import timezone
+
 from experiments.models import DefaultCriteria, TimeSlot
 from experiments.utils.exclusion import get_eligible_participants_for_experiment
 from participants.models import Participant, ParticipantData, Language
@@ -191,3 +193,54 @@ def test_multilingual_criterion(admin_user, sample_participant):
     # excluded
     experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create(multilingual=["Y"]))
     assert sample_participant not in get_eligible_participants_for_experiment(experiment)
+
+
+def test_age_filters(admin_user, sample_participant):
+    experiment = admin_user.experiments.create(
+        defaultcriteria=DefaultCriteria.objects.create(min_age_days=5, min_age_months=3)
+    )
+
+    # too young
+    sample_participant.data.birth_date = timezone.now().date() - timedelta(days=60)
+    sample_participant.data.save()
+    assert sample_participant not in get_eligible_participants_for_experiment(experiment)
+
+    # old enough
+    sample_participant.data.birth_date = timezone.now().date() - timedelta(days=120)
+    sample_participant.data.save()
+    assert sample_participant in get_eligible_participants_for_experiment(experiment)
+
+    experiment = admin_user.experiments.create(
+        defaultcriteria=DefaultCriteria.objects.create(max_age_days=5, max_age_months=3)
+    )
+
+    # too old
+    sample_participant.data.birth_date = timezone.now().date() - timedelta(days=120)
+    sample_participant.data.save()
+    assert sample_participant not in get_eligible_participants_for_experiment(experiment)
+
+    # young enough
+    sample_participant.data.birth_date = timezone.now().date() - timedelta(days=60)
+    sample_participant.data.save()
+    assert sample_participant in get_eligible_participants_for_experiment(experiment)
+
+    experiment = admin_user.experiments.create(
+        defaultcriteria=DefaultCriteria.objects.create(
+            min_age_days=5, min_age_months=3, max_age_days=15, max_age_months=6
+        )
+    )
+
+    # too old
+    sample_participant.data.birth_date = timezone.now().date() - timedelta(days=200)
+    sample_participant.data.save()
+    assert sample_participant not in get_eligible_participants_for_experiment(experiment)
+
+    # too young
+    sample_participant.data.birth_date = timezone.now().date() - timedelta(days=60)
+    sample_participant.data.save()
+    assert sample_participant not in get_eligible_participants_for_experiment(experiment)
+
+    # just fine
+    sample_participant.data.birth_date = timezone.now().date() - timedelta(days=97)
+    sample_participant.data.save()
+    assert sample_participant in get_eligible_participants_for_experiment(experiment)
