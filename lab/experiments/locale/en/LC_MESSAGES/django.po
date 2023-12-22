@@ -442,11 +442,12 @@ msgstr "Criterion"
 #: experiments/templates/criteria/update_default.html:9
 #: experiments/templates/criteria/update_default.html:16
 msgid "criteria:new_default_criteria:header"
-msgstr "Default criteria for {}"
+msgstr "Criteria for {}"
 
 #: experiments/templates/criteria/update_default.html:19
 msgid "criteria:new_default_criteria:info_text"
-msgstr " "
+msgstr "<p>For each of the selection criteria below, tick all the values that are to be <b>included</b>.</p>"
+"<p>If a selection criterion is not relevant for your experiment, tick all values.</p>"
 
 #: experiments/templates/experiments/criteria_snippit.html:8
 msgid "criteria_snippit:dyslexic_parent"
@@ -606,7 +607,7 @@ msgstr "Criteria"
 
 #: experiments/templates/experiments/detail_parts/info.html:141
 msgid "experiments:detail:edit_default_criteria"
-msgstr "Edit default criteria"
+msgstr "Edit"
 
 #: experiments/templates/experiments/detail_parts/participants.html:11
 msgid "experiments:detail:appointments"

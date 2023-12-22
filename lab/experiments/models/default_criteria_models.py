@@ -88,6 +88,3 @@ class DefaultCriteria(models.Model):
             return _("experiments:globals:indifferent")
 
         return "{}; {}".format(self.max_age_months or 0, self.max_age_days or 0)
-
-    def __str__(self):
-        return "Default criteria for {}".format(self.experiment.name)
