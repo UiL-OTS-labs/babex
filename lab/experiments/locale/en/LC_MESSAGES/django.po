@@ -98,14 +98,6 @@ msgstr "Correct value"
 msgid "experiment_criterion:attribute:message_failed"
 msgstr "Message when failed"
 
-#: experiments/forms/experiment_forms.py:25
-msgid "experiment:form:use_timeslots:true"
-msgstr "On location"
-
-#: experiments/forms/experiment_forms.py:26
-msgid "experiment:form:use_timeslots:false"
-msgstr "Online"
-
 #: experiments/models/appointment_models.py:15
 #: experiments/models/appointment_models.py:16
 msgid "time_slot:attribute:start"
@@ -225,17 +217,6 @@ msgstr ""
 #: experiments/models/experiment_models.py:97
 msgid "experiment:attribute:location"
 msgstr "Location"
-
-#: experiments/models/experiment_models.py:104
-msgid "experiment:attribute:use_timeslots"
-msgstr "Type"
-
-#: experiments/models/experiment_models.py:106
-msgid "experiment:attribute:use_timeslots:help_text"
-msgstr ""
-"If 'on location' is selected, a participant must choose a timeslot when "
-"registering for an experiment. When 'online' is selected, they only have to "
-"register for the experiment.  "
 
 #: experiments/models/experiment_models.py:110
 msgid "experiment:attribute:open"
@@ -578,10 +559,6 @@ msgstr "Task description"
 #: experiments/templates/experiments/detail_parts/info.html:86
 msgid "experiments:detail:info:additional_instructions"
 msgstr "Additional Instructions"
-
-#: experiments/templates/experiments/detail_parts/info.html:94
-msgid "experiments:detail:info:use_timeslots"
-msgstr "Location study"
 
 #: experiments/templates/experiments/detail_parts/info.html:97
 #: experiments/templates/experiments/detail_parts/info.html:113

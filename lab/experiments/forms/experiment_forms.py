@@ -19,12 +19,6 @@ class ExperimentForm(TemplatedModelForm):
         widgets = {
             "name": forms.TextInput,
             "duration": forms.TextInput,
-            "use_timeslots": BootstrapRadioSelect(
-                choices=(
-                    (True, _("experiment:form:use_timeslots:true")),
-                    (False, _("experiment:form:use_timeslots:false")),
-                )
-            ),
             "task_description": forms.Textarea(
                 {
                     "rows": 7,

@@ -48,14 +48,6 @@ msgstr "Correcte waarde"
 msgid "experiment_criterion:attribute:message_failed"
 msgstr "Melding indien incorrect"
 
-#: experiments/forms/experiment_forms.py:16
-msgid "experiment:form:use_timeslots:true"
-msgstr "Op locatie"
-
-#: experiments/forms/experiment_forms.py:17
-msgid "experiment:form:use_timeslots:false"
-msgstr "Online"
-
 #: experiments/models/appointment_models.py:18
 msgid "time_slot:attribute:datetime"
 msgstr "Tijd & Datum"
@@ -183,21 +175,6 @@ msgstr ""
 "van de huidige hoofd admin<br/><code>{link_to_subscribe:\"deze link\"}</"
 "code> Een link naar de inschrijfpagina. De tekst na de : wordt gebruikt als "
 "de linktekst"
-
-#: experiments/models/experiment_models.py:95
-msgid "experiment:attribute:location"
-msgstr "Locatie"
-
-#: experiments/models/experiment_models.py:102
-msgid "experiment:attribute:use_timeslots"
-msgstr "Type"
-
-#: experiments/models/experiment_models.py:104
-msgid "experiment:attribute:use_timeslots:help_text"
-msgstr ""
-"Indien 'op locatie' is gekozen, moeten participanten voor een tijdslot "
-"inschrijven. Als 'online' is gekozen, schrijven participanten alleen in voor "
-"een experiment."
 
 #: experiments/models/experiment_models.py:117
 msgid "experiment:attribute:open"
@@ -479,10 +456,6 @@ msgstr "Taak omschrijving"
 #: experiments/templates/experiments/detail_parts/info.html:45
 msgid "experiments:detail:info:additional_instructions"
 msgstr "Extra instructies"
-
-#: experiments/templates/experiments/detail_parts/info.html:53
-msgid "experiments:detail:info:use_timeslots"
-msgstr "Gebruikt timeslots"
 
 #: experiments/templates/experiments/detail_parts/info.html:56
 #: experiments/templates/experiments/detail_parts/info.html:72

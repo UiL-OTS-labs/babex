@@ -44,7 +44,6 @@ class ExperimentSerializer(serializers.ModelSerializer):
             "duration",
             "task_description",
             "additional_instructions",
-            "open",
             "location",
             "leaders",
             "excluded_experiments",
