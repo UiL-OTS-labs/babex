@@ -7,20 +7,13 @@ import random
 from datetime import datetime, timedelta
 from typing import List
 
+from faker import Faker
+
 from .models import Language, Participant
 
-DEFAULT_PREFIX = "Gener@t3d"
-DEFAULT_PHONE = "06-11"
+DEFAULT_PREFIX = "F_"
 
-
-def _generate_name(prefix: str, num: int) -> str:
-    """Generate a prefixed name for a generated participant"""
-    letter_pick = "abcdefghijklmnopqrstuvwxyz"
-    num_letters = random.choice(range(5, 13))
-    name = "".join([prefix, "_", str(num), "_"])
-    uniq = "".join([random.choice(letter_pick) for i in range(num_letters)])
-
-    return "".join([name, uniq])
+fake = Faker()
 
 
 def _generate_random_languages() -> list[Language]:
@@ -48,9 +41,8 @@ def simulate_recruitment(number: int, date: datetime, day_range: int = 60, name_
     :param str name_prefix: A prefix to prepend to the participant name
     """
     for i in range(number):
-        name = _generate_name(name_prefix, i)
+        name = DEFAULT_PREFIX + fake.name()
         email = "generated-{}@gen.mars".format(random.randint(int(1e6), int(1e7)))
-        phonenumber = DEFAULT_PHONE
         days_add = int(round((random.random() - 0.5) * day_range))
         birth_date = date + timedelta(days=days_add)
         sex = random.choice(list(Participant.Sex))
@@ -65,11 +57,11 @@ def simulate_recruitment(number: int, date: datetime, day_range: int = 60, name_
             birth_date=birth_date,
             birth_weight=birth_weight,
             pregnancy_duration=pregnancy_duration,
-            parent_first_name="parent_" + name,
-            parent_last_name="parent_" + name,
+            parent_first_name=fake.first_name(),
+            parent_last_name=fake.last_name(),
             email=email,
-            phonenumber=phonenumber,
-            phonenumber_alt=phonenumber,
+            phonenumber=fake.phone_number(),
+            phonenumber_alt=fake.phone_number(),
             dyslexic_parent=dyslexic_parent,
             tos_parent=tos_parent,
             save_longer=random.choice([True, False]),
@@ -87,7 +79,7 @@ def _get_simulated_participants(prefix) -> List[Participant]:
     This method finds the fake pp's in order to delete them
     """
     pps = Participant.objects.all()
-    return [pp for pp in pps if pp.name.startswith(prefix) and pp.phonenumber == DEFAULT_PHONE]
+    return [pp for pp in pps if pp.name.startswith(prefix)]
 
 
 def remove_simulated_participants(prefix: str = DEFAULT_PREFIX):

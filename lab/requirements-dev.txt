@@ -7,3 +7,4 @@ django-stubs>=1.13.0
 djangorestframework-stubs
 jedi
 autopep8
+faker
