@@ -94,7 +94,13 @@ class Participant(models.Model):
         return self.name
 
     def get_sex_display(self):
-        return self.Sex(self.sex).label
+        return self.data.get_sex_display()
+
+    def get_birth_weight_display(self):
+        return self.data.get_birth_weight_display()
+
+    def get_pregnancy_duration_display(self):
+        return self.data.get_pregnancy_duration_display()
 
     @property
     def dyslexic_parent_bool(self) -> bool | None:
