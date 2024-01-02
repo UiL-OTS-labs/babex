@@ -97,18 +97,6 @@ Met vriendelijke groet,<br/>
         blank=True,
     )
 
-    use_timeslots = models.BooleanField(
-        _("experiment:attribute:use_timeslots"),
-        default=True,
-        help_text=_("experiment:attribute:use_timeslots:help_text"),
-    )
-
-    open = models.BooleanField(
-        _("experiment:attribute:open"),
-        default=False,
-        help_text=_("experiment:attribute:open:help_text"),
-    )
-
     excluded_experiments = models.ManyToManyField(
         "self",
         verbose_name=_("experiment:attribute:excluded_experiments"),

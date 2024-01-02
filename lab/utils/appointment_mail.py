@@ -39,21 +39,12 @@ def send_appointment_mail(appointment: Appointment, override_content=None) -> No
         "leader_phonenumber": appointment.leader.phonenumber,
         "all_leaders_name_list": experiment.leader_names,
         "cancel_link": cancel_link,
+        "date": defaultfilters.date(localtime(time_slot.start), "l d-m-Y"),
+        "time": defaultfilters.date(localtime(time_slot.start), "H:i"),
     }
 
     if experiment.location:
         replacements["experiment_location"] = experiment.location.name
-
-    if experiment.use_timeslots and time_slot is not None:
-        # We don't use strftime because that's not _always_ timezone aware
-        # Also, using the template filter is a neat hack to have the same format
-        # string syntax everywhere
-        replacements.update(
-            {
-                "date": defaultfilters.date(localtime(time_slot.start), "l d-m-Y"),
-                "time": defaultfilters.date(localtime(time_slot.start), "H:i"),
-            }
-        )
 
     email = AppointmentConfirmEmail(
         [participant.email], subject, contents=override_content or experiment.confirmation_email
