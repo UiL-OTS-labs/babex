@@ -5,31 +5,7 @@
     <table class="table table-striped mt-1">
         <tr>
             <td>
-                {% trans 'criteria_snippit:dyslexia' %}
-            </td>
-            <td>
-                {{ experiment.defaultcriteria.get_dyslexia_display }}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                {% trans 'criteria_snippit:language' %}
-            </td>
-            <td>
-                {{ experiment.defaultcriteria.get_language_display }}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                {% trans 'criteria_snippit:multilingual' %}
-            </td>
-            <td>
-                {{ experiment.defaultcriteria.get_multilingual_display }}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                {% trans 'criteria_snippit:sex' %}
+                {% translate 'criteria_snippit:sex' %}
             </td>
             <td>
                 {{ experiment.defaultcriteria.get_sex_display }}
@@ -37,7 +13,48 @@
         </tr>
         <tr>
             <td>
-                {% trans 'criteria_snippit:min_age' %}
+                {% translate 'criteria_snippit:birth_weight' %}
+            </td>
+            <td>
+                {{ experiment.defaultcriteria.get_birth_weight_display }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% translate 'criteria_snippit:pregnancy_duration' %}
+            </td>
+            <td>
+                {{ experiment.defaultcriteria.get_pregnancy_duration_display }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% translate 'criteria_snippit:multilingual' %}
+            </td>
+            <td>
+                {{ experiment.defaultcriteria.get_multilingual_display }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% translate 'criteria_snippit:dyslexic_parent' %}
+            </td>
+            <td>
+                {{ experiment.defaultcriteria.get_dyslexic_parent_display }}
+            </td>
+
+        <tr>
+            <td>
+                {% translate 'criteria_snippit:tos_parent' %}
+            </td>
+            <td>
+                {{ experiment.defaultcriteria.get_tos_parent_display }}
+            </td>
+        </tr>
+        </tr>
+        <tr>
+            <td>
+                {% translate 'criteria_snippit:min_age' %}
             </td>
             <td>
                 {{ experiment.defaultcriteria.get_min_age_display }}
@@ -45,7 +62,7 @@
         </tr>
         <tr>
             <td>
-                {% trans 'criteria_snippit:max_age' %}
+                {% translate 'criteria_snippit:max_age' %}
             </td>
             <td>
                 {{ experiment.defaultcriteria.get_max_age_display }}

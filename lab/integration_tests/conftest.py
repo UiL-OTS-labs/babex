@@ -24,7 +24,7 @@ def as_admin(sb, admin_user, live_server):
 def as_leader(sb, django_user_model, live_server):
     username = "test_user"
     password = "test_user"
-    user = django_user_model.objects.create_user(username=username, password=password, name='Test Leader')
+    user = django_user_model.objects.create_user(username=username, password=password, name="Test Leader")
     sb.open(live_server.url + "/login")
     # sb.click('#djHideToolBarButton')
     sb.type("#id_username", username)
@@ -35,9 +35,7 @@ def as_leader(sb, django_user_model, live_server):
 
 @pytest.fixture
 def sample_experiment(admin_user, db):
-    yield admin_user.experiments.create(
-        defaultcriteria=DefaultCriteria.objects.create(dyslexia=DefaultCriteria.Dyslexia.INDIFFERENT)
-    )
+    yield admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
 
 
 @pytest.fixture
@@ -56,7 +54,6 @@ def sample_participant(db):
     )
     participant.languages.add(dutch)
     yield participant
-
 
 
 @pytest.fixture

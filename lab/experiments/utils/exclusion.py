@@ -97,19 +97,23 @@ def build_exclusion_filters(default_criteria, filters=None) -> dict:
     if filters is None:
         filters = {}
 
-    if default_criteria.dyslexia == DefaultCriteria.Dyslexia.YES:
-        # should have a dyslexic parent
-        filters["dyslexic_parent_bool"] = True
-    elif default_criteria.dyslexia == DefaultCriteria.Dyslexia.NO:
-        # should not have a dyslexic parent
-        filters["dyslexic_parent_bool"] = False
-    else:  # indifferent
-        pass
+    for field in ["sex", "birth_weight", "pregnancy_duration"]:
+        value = getattr(default_criteria, field)
+        if value is not None:
+            assert isinstance(value, list)
+            filters[field] = set(value)
 
-    # Rewrite this expected to a boolean value, as it's stored as a boolean
-    if default_criteria.multilingual != "I":
-        expected_value = default_criteria.multilingual == "Y"
-        filters["multilingual"] = expected_value
+    for field in ["dyslexic_parent", "tos_parent", "multilingual"]:
+        value = getattr(default_criteria, field)
+        if value is not None:
+            if set(value) == {"Y"}:
+                filters[field + "_bool"] = {True}
+            elif set(value) == {"N"}:
+                filters[field + "_bool"] = {False}
+            elif set(value) == {"Y", "N"}:
+                # if both Yes and No are allowed, consider this as an empty filter
+                # (which will also allow Unknown values)
+                pass
 
     return filters
 
@@ -128,7 +132,7 @@ def check_default_criteria(participant: Participant, filters: dict) -> list:
     for attr, expected_value in filters.items():
         found_value = getattr(participant, attr, None)
 
-        if found_value != expected_value:
+        if found_value not in expected_value:
             failed_criteria.append(attr)
 
     return failed_criteria

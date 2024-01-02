@@ -153,11 +153,11 @@ msgid "default_criteria:attribute:sex:female"
 msgstr "Female"
 
 #: experiments/models/default_criteria_models.py:25
-msgid "default_criteria:attribute:dyslexia:yes"
+msgid "default_criteria:attribute:dyslexic_parent:yes"
 msgstr "Yes"
 
 #: experiments/models/default_criteria_models.py:26
-msgid "default_criteria:attribute:dyslexia:no"
+msgid "default_criteria:attribute:dyslexic_parent:no"
 msgstr "No"
 
 #: experiments/models/default_criteria_models.py:31
@@ -169,7 +169,7 @@ msgid "default_criteria:attribute:sex"
 msgstr "Should the participant be Male or Female?"
 
 #: experiments/models/default_criteria_models.py:47
-msgid "default_criteria:attribute:dyslexia"
+msgid "default_criteria:attribute:dyslexic_parent"
 msgstr "Should the participant have a dyslectic parent?"
 
 #: experiments/models/experiment_models.py:63
@@ -442,14 +442,15 @@ msgstr "Criterion"
 #: experiments/templates/criteria/update_default.html:9
 #: experiments/templates/criteria/update_default.html:16
 msgid "criteria:new_default_criteria:header"
-msgstr "Default criteria for {}"
+msgstr "Criteria for {}"
 
 #: experiments/templates/criteria/update_default.html:19
 msgid "criteria:new_default_criteria:info_text"
-msgstr " "
+msgstr "<p>For each of the selection criteria below, tick all the values that are to be <b>included</b>.</p>"
+"<p>If a selection criterion is not relevant for your experiment, tick all values.</p>"
 
 #: experiments/templates/experiments/criteria_snippit.html:8
-msgid "criteria_snippit:dyslexia"
+msgid "criteria_snippit:dyslexic_parent"
 msgstr "Dyslectic:"
 
 #: experiments/templates/experiments/criteria_snippit.html:16
@@ -606,7 +607,7 @@ msgstr "Criteria"
 
 #: experiments/templates/experiments/detail_parts/info.html:141
 msgid "experiments:detail:edit_default_criteria"
-msgstr "Edit default criteria"
+msgstr "Edit"
 
 #: experiments/templates/experiments/detail_parts/participants.html:11
 msgid "experiments:detail:appointments"
@@ -919,3 +920,15 @@ msgstr "Something went wrong!"
 #: experiments/views/invite_views.py:55
 msgid "experiments:message:invite_success"
 msgstr "Successfully invited participants!"
+
+msgid "default_criteria:attribute:yes"
+msgstr "Yes"
+
+msgid "default_criteria:attribute:no"
+msgstr "No"
+
+msgid "criteria_snippit:birth_weight"
+msgstr "Birth weight"
+
+msgid "criteria_snippit:pregnancy_duration"
+msgstr "Pregnancy duration"
