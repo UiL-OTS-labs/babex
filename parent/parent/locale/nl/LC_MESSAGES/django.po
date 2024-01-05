@@ -281,14 +281,6 @@ msgstr ""
 msgid "parent:home:intro"
 msgstr ""
 
-#: parent/templates/parent/home.html:26
-msgid "parent:home:signup"
-msgstr ""
-
-#: parent/templates/parent/home.html:27
-msgid "parent:home:signin"
-msgstr ""
-
 #: parent/templates/parent/overview.html:14
 msgid "Some general information and instructions"
 msgstr ""
@@ -387,3 +379,8 @@ msgstr "Het is niet gelukt om uw e-mailadres te verifiëren. Neem alstublieft co
 msgid "parent:error:data_generic"
 msgstr "Er is een fout opgetreden tijdens het laden van uw gegevens"
 
+msgid "parent:home:signup"
+msgstr "Aanmelden bij het Babylab"
+
+msgid "parent:home:signin"
+msgstr "Inloggen bij Selfservice pagina"
