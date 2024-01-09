@@ -55,6 +55,8 @@ def approve_signup(signup: Signup):
         name=signup.name,
         sex=signup.sex,
         birth_date=signup.birth_date,
+        birth_weight=signup.birth_weight,
+        pregnancy_duration=signup.pregnancy_duration,
         parent_first_name=signup.parent_first_name,
         parent_last_name=signup.parent_last_name,
         email=signup.email,
