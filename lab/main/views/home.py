@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.views import generic
 
 from experiments.models.invite_models import Call
+from signups.models import Signup
 
 
 class HomeView(braces.LoginRequiredMixin, generic.TemplateView):
@@ -24,5 +25,10 @@ class HomeView(braces.LoginRequiredMixin, generic.TemplateView):
                 .filter(timeslot__start__lte=timezone.now())
                 .order_by("-timeslot__start")
             )
+
+            if self.request.user.is_staff:
+                context["signups"] = Signup.objects.filter(
+                    status=Signup.Status.NEW, email_verified__isnull=False
+                ).count()
 
         return context

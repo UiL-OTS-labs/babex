@@ -329,3 +329,12 @@ msgstr "Password changed!"
 
 #~ msgid "mainmenu:comments"
 #~ msgstr "Comments"
+
+msgid "main:home:signups:text:plural"
+msgstr "There are {} signups"
+
+msgid "main:home:signups:text:single"
+msgstr "There is one signup"
+
+msgid "main:home:signups:link"
+msgstr "waiting for approval"

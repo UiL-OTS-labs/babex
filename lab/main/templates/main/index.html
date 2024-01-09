@@ -52,6 +52,16 @@
                     {% endfor %}
                 </ul>
             {% endif %}
+
+            {% if signups > 1 %}
+                <p>
+                    {% transformat 'main:home:signups:text:plural' signups %} <a href="{% url 'signups:list' %}">{% translate 'main:home:signups:link' %}</a>
+                </p>
+            {% elif signups == 1 %}
+                <p>
+                    {% transformat 'main:home:signups:text:single' %} <a href="{% url 'signups:list' %}">{% translate 'main:home:signups:link' %}</a>
+                </p>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
