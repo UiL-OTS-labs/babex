@@ -236,3 +236,6 @@ msgstr "The requested page could not be found."
 
 msgid "parent:error:500"
 msgstr "Your request could not be processed due to an unexpected error. Please try again at a later."
+
+msgid "parent:appointments"
+msgstr "Appointments"
