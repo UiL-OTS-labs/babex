@@ -71,7 +71,7 @@ msgid "parent:forms:pregnancy_duration:less_than_37"
 msgstr "minder dan 37 weken"
 
 #: parent/forms.py:73
-msgid "parent:forms:pregnancy_duration:37_42_weeks"
+msgid "parent:forms:pregnancy_duration:37_to_42"
 msgstr "37 – 42 weken"
 
 #: parent/forms.py:74

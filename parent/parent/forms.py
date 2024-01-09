@@ -21,7 +21,7 @@ class LanguagesWidget(forms.widgets.SelectMultiple):
         context = super().get_context(name, value, attrs)
         if value is None:
             return context
-        
+
         if value == ["Nederlands"]:
             context["mono_dutch_checked"] = True
         elif len(value) == 1:
@@ -84,18 +84,18 @@ class SignupForm(TemplatedForm):
     birth_weight = forms.ChoiceField(
         label=_("parent:forms:signup:birth_weight"),
         choices=(
-            ("less_than_2500", _("parent:forms:birth_weight:less_than_2500")),
-            ("2500_to_4500", _("parent:forms:birth_weight:2500_to_4500")),
-            ("more_than_4500", _("parent:forms:birth_weight:more_than_4500")),
+            ("LESS_THAN_2500", _("parent:forms:birth_weight:less_than_2500")),
+            ("2500_TO_4500", _("parent:forms:birth_weight:2500_to_4500")),
+            ("MORE_THAN_4500", _("parent:forms:birth_weight:more_than_4500")),
         ),
         widget=BootstrapRadioSelect(),
     )
     pregnancy_duration = forms.ChoiceField(
         label=_("parent:forms:signup:pregnancy_duration"),
         choices=(
-            ("less_than_37", _("parent:forms:pregnancy_duration:less_than_37")),
-            ("37_42_weeks", _("parent:forms:pregnancy_duration:37_42_weeks")),
-            ("more_than_42", _("parent:forms:pregnancy_duration:more_than_42")),
+            ("LESS_THAN_37", _("parent:forms:pregnancy_duration:less_than_37")),
+            ("37_TO_42", _("parent:forms:pregnancy_duration:37_to_42")),
+            ("MORE_THAN_42", _("parent:forms:pregnancy_duration:more_than_42")),
         ),
         widget=BootstrapRadioSelect(),
     )
