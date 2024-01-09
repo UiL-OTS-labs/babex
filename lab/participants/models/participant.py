@@ -192,5 +192,7 @@ class Participant(models.Model):
     @classmethod
     def find_by_email(cls, email: str) -> List["Participant"]:
         return [
-            pd.participant for pd in ParticipantData.objects.efilter(email=email) if pd.participant.deactivated is None
+            pd.participant
+            for pd in ParticipantData.objects.efilter(email=email)
+            if hasattr(pd, "participant") and pd.participant.deactivated is None
         ]
