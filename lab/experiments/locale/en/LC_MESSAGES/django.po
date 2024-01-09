@@ -432,27 +432,23 @@ msgstr "<p>For each of the selection criteria below, tick all the values that ar
 
 #: experiments/templates/experiments/criteria_snippit.html:8
 msgid "criteria_snippit:dyslexic_parent"
-msgstr "Dyslectic:"
-
-#: experiments/templates/experiments/criteria_snippit.html:16
-msgid "criteria_snippit:language"
-msgstr "Language:"
+msgstr "Dyslectic parent"
 
 #: experiments/templates/experiments/criteria_snippit.html:24
 msgid "criteria_snippit:multilingual"
-msgstr "Multilingual:"
+msgstr "Multilingual"
 
 #: experiments/templates/experiments/criteria_snippit.html:32
 msgid "criteria_snippit:sex"
-msgstr "Sex:"
+msgstr "Sex"
 
 #: experiments/templates/experiments/criteria_snippit.html:40
 msgid "criteria_snippit:min_age"
-msgstr "Min Age:"
+msgstr "Min age"
 
 #: experiments/templates/experiments/criteria_snippit.html:48
 msgid "criteria_snippit:max_age"
-msgstr "Max Age:"
+msgstr "Max age"
 
 #: experiments/templates/experiments/delete.html:8
 #: experiments/templates/experiments/delete.html:16
@@ -909,3 +905,6 @@ msgstr "Birth weight"
 
 msgid "criteria_snippit:pregnancy_duration"
 msgstr "Pregnancy duration"
+
+msgid "criteria_snippit:tos_parent"
+msgstr "Parent with TOS"
