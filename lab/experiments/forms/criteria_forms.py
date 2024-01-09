@@ -17,8 +17,8 @@ class DefaultCriteriaForm(TemplatedModelForm):
             "tos_parent",
             "min_age_months",
             "min_age_days",
-            "max_age_days",
             "max_age_months",
+            "max_age_days",
         ]
 
     def __init__(self, *args, **kwargs):
