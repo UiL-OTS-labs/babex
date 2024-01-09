@@ -11,12 +11,12 @@
     </style>
     <div class="uu-sidebar-container uu-sidebar-right">
         <aside class="uu-sidebar" >
-            <p>{% trans 'Some general information and instructions' %}</p>
+            <p>{% translate 'parent:sidebar:general' %}</p>
             {% include 'parent/side_menu.html' %}
         </aside>
         <div class="uu-sidebar-content" >
             <section>
-                <h3>{% trans 'Appointments' %}</h3>
+                <h3>{% translate 'parent:appointments' %}</h3>
                 {% for appointment in appointments %}
                     <div class="card mt-3 {% if appointment.outcome == 'CANCELED' %} canceled {% endif %}">
                         <div class="card-body">
@@ -36,30 +36,30 @@
                         </div>
                     </div>
                 {% empty %}
-                    {% trans 'No appointments' %}
+                    {% translate 'parent:appointments:no_appointments' %}
                 {% endfor %}
             </section>
             <section class="mt-5">
-                <h3>{% trans 'Surveys' %}</h3>
+                <h3>{% translate 'parent:surveys:header' %}</h3>
                 {% for invitation in survey_invites %}
                     <div class="card mt-3">
                         <div class="card-body">
                             <h5 class="card-title">{{ invitation.survey_name }}</h5>
                             {% if invitation.response.completed %}
-                                {% trans 'Completed at: ' %} {{ invitation.response.completed | date }}, {{ invitation.response.completed | time }}
+                                {% translate 'parent:surveys:completed_at' %} {{ invitation.response.completed | date }}, {{ invitation.response.completed | time }}
                             {% else %}
                                 <a class="btn btn-primary" href="{% url 'survey' invitation.id %}">
                                     {% if invitation.response.updated %}
-                                        {% trans 'Continue survey' %}
+                                        {% translate 'parent:surveys:continue' %}
                                     {% else %}
-                                        {% trans 'Start survey' %}
+                                        {% translate 'parent:surveys:start' %}
                                     {% endif %}
                                 </a>
                             {% endif %}
                         </div>
                     </div>
                 {% empty %}
-                    {% trans 'No survey invitations' %}
+                    {% translate 'parent:surveys:no_surveys' %}
                 {% endfor %}
             </section>
 

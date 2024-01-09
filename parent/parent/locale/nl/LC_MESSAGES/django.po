@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-26 10:11+0000\n"
+"POT-Creation-Date: 2024-01-09 15:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,180 +18,186 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: parent/forms.py:42
+#: parent/forms.py:65
 msgid "parent:forms:signup:baby_header"
 msgstr "Gegevens Kind"
 
-#: parent/forms.py:44
+#: parent/forms.py:67
 msgid "parent:forms:signup:name"
 msgstr "Voornaam"
 
-#: parent/forms.py:46
+#: parent/forms.py:69
 msgid "parent:forms:signup:sex"
 msgstr "Geslacht"
 
-#: parent/forms.py:49
+#: parent/forms.py:72
 msgid "parent:forms:signup:sex:f"
 msgstr "Meisje"
 
-#: parent/forms.py:50
+#: parent/forms.py:73
 msgid "parent:forms:signup:sex:m"
 msgstr "Jongen"
 
-#: parent/forms.py:51
+#: parent/forms.py:74
 msgid "parent:forms:signup:sex:unk"
 msgstr "Wil ik liever niet zeggen"
 
-#: parent/forms.py:57
+#: parent/forms.py:80
 msgid "parent:forms:signup:birth_date"
 msgstr "Geboortedatum"
 
-#: parent/forms.py:61
+#: parent/forms.py:82
+msgid "parent:forms:signup:birth_date:help_text"
+msgstr ""
+"Kinderen mogen worden ingeschreven als ze minder dan 3 jaar oud zijn op het "
+"moment van inschrijving"
+
+#: parent/forms.py:85
 msgid "parent:forms:signup:birth_weight"
 msgstr "Geboortegewicht"
 
-#: parent/forms.py:63
+#: parent/forms.py:87
 msgid "parent:forms:birth_weight:less_than_2500"
 msgstr "minder dan 2500 gram"
 
-#: parent/forms.py:64
+#: parent/forms.py:88
 msgid "parent:forms:birth_weight:2500_to_4500"
 msgstr "2500 – 4500 gram"
 
-#: parent/forms.py:65
+#: parent/forms.py:89
 msgid "parent:forms:birth_weight:more_than_4500"
 msgstr "meer dan 4500 gram"
 
-#: parent/forms.py:70
+#: parent/forms.py:94
 msgid "parent:forms:signup:pregnancy_duration"
 msgstr "Zwangerschapsduur"
 
-#: parent/forms.py:72
+#: parent/forms.py:96
 msgid "parent:forms:pregnancy_duration:less_than_37"
 msgstr "minder dan 37 weken"
 
-#: parent/forms.py:73
+#: parent/forms.py:97
 msgid "parent:forms:pregnancy_duration:37_to_42"
 msgstr "37 – 42 weken"
 
-#: parent/forms.py:74
+#: parent/forms.py:98
 msgid "parent:forms:pregnancy_duration:more_than_42"
 msgstr "meer dan 42 weken"
 
-#: parent/forms.py:79
+#: parent/forms.py:104
 msgid "parent:forms:signup:languages"
 msgstr ""
 "In welke talen wordt er regelmatig tegen uw kind gesproken (niet via "
 "televisie e.d.)?"
 
-#: parent/forms.py:81
+#: parent/forms.py:108
 msgid "parent:forms:signup:parent_header"
 msgstr "Gegevens Ouder"
 
-#: parent/forms.py:82
+#: parent/forms.py:109
 msgid "parent:forms:signup:parent_first_name"
 msgstr "Voornaam ouder"
 
-#: parent/forms.py:83
+#: parent/forms.py:110
 msgid "parent:forms:signup:parent_last_name"
 msgstr "Achternaam ouder"
 
-#: parent/forms.py:85
+#: parent/forms.py:112
 msgid "parent:forms:signup:phonenumber"
 msgstr "Telefoonnummer"
 
-#: parent/forms.py:86
+#: parent/forms.py:113
 msgid "parent:forms:signup:phonenumber_alt"
 msgstr "Alternatief nummer"
 
-#: parent/forms.py:88
+#: parent/forms.py:115
 msgid "parent:forms:signup:email"
 msgstr "E-mailadres"
 
-#: parent/forms.py:89
+#: parent/forms.py:116
 msgid "parent:forms:signup:email:help_text"
 msgstr ""
 "Let op! Gebruik een persoonlijk e-mailadres. Met dit adres krijgt u toegang "
 "tot uw gegevens."
 
-#: parent/forms.py:91
+#: parent/forms.py:118
 msgid "parent:forms:signup:email_again"
 msgstr "E-mailadres (nogmaals)"
 
-#: parent/forms.py:94
+#: parent/forms.py:121
 msgid "parent:forms:signup:dyslexic_parent"
 msgstr ""
 "Zijn er aanwijzingen dat één van de (biologische) ouders dyslexie heeft?"
 
-#: parent/forms.py:97
+#: parent/forms.py:124
 msgid "parent:forms:signup:dyslexic_parent:f"
 msgstr "Ja, de biologische moeder"
 
-#: parent/forms.py:98
+#: parent/forms.py:125
 msgid "parent:forms:signup:dyslexic_parent:m"
 msgstr "Ja, de biologische vader"
 
-#: parent/forms.py:99
+#: parent/forms.py:126
 msgid "parent:forms:signup:dyslexic_parent:both"
 msgstr "Ja, beide biologische ouders"
 
-#: parent/forms.py:100
+#: parent/forms.py:127
 msgid "parent:forms:signup:dyslexic_parent:no"
 msgstr "Nee"
 
-#: parent/forms.py:101
+#: parent/forms.py:128
 msgid "parent:forms:signup:dyslexic_parent:unk"
 msgstr "Wil ik liever niet zeggen"
 
-#: parent/forms.py:104
+#: parent/forms.py:131
 msgid "parent:forms:signup:dyslexic_parent:help_text"
 msgstr ""
 "Kinderen met een biologische ouder die dyslexie heeft, hebben zelf ook een "
 "grotere kans om dyslexie te hebben. Daar wordt veel onderzoek naar gedaan."
 
-#: parent/forms.py:108
+#: parent/forms.py:135
 msgid "parent:forms:signup:tos_parent"
 msgstr ""
 "Heeft één van de biologische ouders een taalontwikkelingsstoornis (TOS, "
 "voorheen ESM)?"
 
-#: parent/forms.py:111
+#: parent/forms.py:138
 msgid "parent:forms:signup:tos_parent:f"
 msgstr "Ja, de biologische moeder"
 
-#: parent/forms.py:112
+#: parent/forms.py:139
 msgid "parent:forms:signup:tos_parent:m"
 msgstr "Ja, de biologische vader"
 
-#: parent/forms.py:113
+#: parent/forms.py:140
 msgid "parent:forms:signup:tos_parent:both"
 msgstr "Ja, beide biologische ouders"
 
-#: parent/forms.py:114
+#: parent/forms.py:141
 msgid "parent:forms:signup:tos_parent:no"
 msgstr "Nee"
 
-#: parent/forms.py:115
+#: parent/forms.py:142
 msgid "parent:forms:signup:tos_parent:unk"
 msgstr "Wil ik liever niet zeggen"
 
-#: parent/forms.py:118
+#: parent/forms.py:145
 msgid "parent:forms:signup:tos_parent:help_text"
 msgstr ""
 "Het is voor veel onderzoeken ook belangrijk om te weten of één van de "
 "biologische ouders een taalontwikkelingsstoornis heeft."
 
-#: parent/forms.py:121
+#: parent/forms.py:148
 msgid "parent:forms:signup:general_header"
 msgstr "Algemeen"
 
-#: parent/forms.py:123
+#: parent/forms.py:150
 msgid "parent:forms:signup:save_longer"
 msgstr ""
 "Mogen we uw gegevens langer bewaren, namelijk totdat uw kind ongeveer 10 "
 "jaar oud is? (U kunt zich altijd uitschrijven!)"
 
-#: parent/forms.py:124
+#: parent/forms.py:151
 msgid "parent:forms:signup:save_longer:help"
 msgstr ""
 "Meestal testen wij alleen baby’s, maar soms doen onderzoekers "
@@ -199,37 +205,37 @@ msgstr ""
 "testen wij alleen baby’s, maar soms doen onderzoekers vervolgonderzoek of "
 "willen onderzoekers oudere kinderen testen."
 
-#: parent/forms.py:126 parent/forms.py:132 parent/forms.py:138
+#: parent/forms.py:153 parent/forms.py:159 parent/forms.py:165
 msgid "Yes"
 msgstr ""
 
-#: parent/forms.py:126 parent/forms.py:132 parent/forms.py:138
+#: parent/forms.py:153 parent/forms.py:159 parent/forms.py:165
 msgid "No"
 msgstr ""
 
-#: parent/forms.py:129
+#: parent/forms.py:156
 msgid "parent:forms:signup:english_contact"
 msgstr ""
 "Vindt u het goed als er in het Engels contact met u wordt opgenomen "
 "(telefonisch of via de mail)?"
 
-#: parent/forms.py:130
+#: parent/forms.py:157
 msgid "parent:forms:signup:english_contact:help"
 msgstr "Sommige stagiaires in het Babylab spreken geen Nederlands."
 
-#: parent/forms.py:135
+#: parent/forms.py:162
 msgid "parent:forms:signup:newsletter"
 msgstr "Wilt u onze nieuwsbrief ontvangen?"
 
-#: parent/forms.py:136
+#: parent/forms.py:163
 msgid "parent:forms:signup:newsletter_help"
 msgstr "Ongeveer 1x per jaar brengen wij een nieuwsbrief uit."
 
-#: parent/forms.py:141
+#: parent/forms.py:168
 msgid "parent:forms:signup:consent_header"
 msgstr "Dataverwerking"
 
-#: parent/forms.py:144
+#: parent/forms.py:171
 msgid "parent:forms:signup:data_consent"
 msgstr ""
 "Ja, ik heb gelezen en begrepen wat er met mijn gegevens en die van mijn kind "
@@ -237,19 +243,31 @@ msgstr ""
 "toestemming om de gegevens te gebruiken zoals bovenaan deze pagina is "
 "beschreven."
 
-#: parent/settings.py:123
-msgid "lang:nl"
-msgstr ""
+#: parent/forms.py:184
+msgid "parent:forms:signup:birth_date:error:future"
+msgstr "U heeft een geboortedatum aangegeven die in de toekomst ligt"
 
-#: parent/settings.py:124
-msgid "lang:en"
+#: parent/forms.py:189
+msgid "parent:forms:signup:email_again:error:email"
+msgstr "Dit e-mailadres komt niet overeen met die bovenstaande"
+
+#: parent/settings.py:120
+msgid "lang:nl"
 msgstr ""
 
 #: parent/templates/appointment/canceled.html:6
 msgid "appointment:canceled"
 msgstr ""
 
-#: parent/templates/data/home.html:8
+#: parent/templates/base/babex_base.html:23
+#: parent/templates/base/babex_base.html:24
+#: parent/templates/base/babex_base.html:53
+#: parent/templates/base/babex_base.html:54
+#: parent/templates/base/babex_base.html:84
+msgid "cdh.core:uu"
+msgstr ""
+
+#: parent/templates/data/home.html:8 parent/templates/parent/overview.html:14
 msgid "parent:sidebar:general"
 msgstr ""
 
@@ -273,57 +291,71 @@ msgstr ""
 msgid "parent:date:removed"
 msgstr ""
 
-#: parent/templates/parent/home.html:17
+#: parent/templates/error/404.html:5
+msgid "parent:error:404"
+msgstr "De gevraagde pagina kon niet worden gevonden."
+
+#: parent/templates/error/500.html:5
+msgid "parent:error:500"
+msgstr ""
+"Uw verzoek kon niet worden verwerkt vanwege een onverwachte fout. Probeer "
+"het later nog een keer."
+
+#: parent/templates/parent/home.html:13
 msgid "parent:home:sidebar"
 msgstr ""
 
-#: parent/templates/parent/home.html:22
+#: parent/templates/parent/home.html:18
 msgid "parent:home:intro"
 msgstr ""
 
-#: parent/templates/parent/overview.html:14
-msgid "Some general information and instructions"
-msgstr ""
+#: parent/templates/parent/home.html:22
+msgid "parent:home:signup"
+msgstr "Aanmelden bij het Babylab"
+
+#: parent/templates/parent/home.html:23
+msgid "parent:home:signin"
+msgstr "Inloggen bij Selfservice pagina"
 
 #: parent/templates/parent/overview.html:19
-msgid "Appointments"
-msgstr ""
+msgid "parent:appointments"
+msgstr "Afspraken"
 
 #: parent/templates/parent/overview.html:39
-msgid "No appointments"
-msgstr ""
+msgid "parent:appointments:no_appointments"
+msgstr "Geen afspraken"
 
 #: parent/templates/parent/overview.html:43
-msgid "Surveys"
-msgstr ""
+msgid "parent:surveys:header"
+msgstr "Vragenlijsten"
 
 #: parent/templates/parent/overview.html:49
-msgid "Completed at: "
-msgstr ""
+msgid "parent:surveys:completed_at"
+msgstr "Afgemaakt om: "
 
 #: parent/templates/parent/overview.html:53
-msgid "Continue survey"
-msgstr ""
+msgid "parent:surveys:continue"
+msgstr "Doorgaan met invullen"
 
 #: parent/templates/parent/overview.html:55
-msgid "Start survey"
-msgstr ""
+msgid "parent:surveys:start"
+msgstr "Invullen"
 
 #: parent/templates/parent/overview.html:62
-msgid "No survey invitations"
-msgstr ""
+msgid "parent:surveys:no_surveys"
+msgstr "U heeft geen verzoek gekregen om een vragenlijst in te vullen."
 
 #: parent/templates/parent/side_menu.html:4
 msgid "parent:sidebar:overview"
-msgstr ""
+msgstr "Overzicht"
 
 #: parent/templates/parent/side_menu.html:5
 msgid "parent:sidebar:data"
-msgstr ""
+msgstr "Datamanagement"
 
 #: parent/templates/parent/side_menu.html:6
 msgid "parent:sidebar:contact"
-msgstr ""
+msgstr "Neem contact op"
 
 #: parent/templates/signup.html:7
 msgid "signup:header"
@@ -337,50 +369,39 @@ msgstr ""
 msgid "parent:signup_done:message"
 msgstr ""
 
-#: parent/templates/widgets/languages_widget.html:5
+#: parent/templates/widgets/languages_widget.html:7
 msgid "parent:forms:signup:languages:mono_dutch"
 msgstr "Alleen in het Nederlands"
 
-#: parent/templates/widgets/languages_widget.html:12
+#: parent/templates/widgets/languages_widget.html:16
 msgid "parent:forms:signup:languages:mono_other"
 msgstr "Alleen in een andere taal, namelijk:"
 
-#: parent/templates/widgets/languages_widget.html:41
+#: parent/templates/widgets/languages_widget.html:37
 msgid "parent:forms:signup:languages:multi"
 msgstr "In meerdere talen, namelijk:"
 
-msgid "parent:error:404"
-msgstr "De gevraagde pagina kon niet worden gevonden."
-
-msgid "parent:error:500"
-msgstr "Uw verzoek kon niet worden verwerkt vanwege een onverwachte fout. Probeer het later nog een keer."
-
-msgid "parent:forms:signup:birth_date:help_text"
-msgstr "Kinderen mogen worden ingeschreven als ze minder dan 3 jaar oud zijn op het moment van inschrijving"
-
-msgid "parent:forms:signup:birth_date:error:future"
-msgstr "U heeft een geboortedatum aangegeven die in de toekomst ligt"
-
-msgid "parent:forms:signup:email_again:error:email"
-msgstr "Dit e-mailadres komt niet overeen met die bovenstaande"
-
-msgid "parent:error:deactivate"
-msgstr "Het is niet gelukt om u uit te schirjven. Neem alstublieft contact met ons op via e-mail: babylab.ilslabs@uu.nl"
-
-msgid "parent:error:appointment_cancel"
-msgstr "Het is niet gelukt om de afspraak af te zeggen. Neem alstublieft contact met ons op via e-mail: babylab.ilslabs@uu.nl"
-
-msgid "parent:error:login_failed"
-msgstr "Inloggen is mislukt, probeer het later opnieuw"
-
+#: parent/views.py:84
 msgid "parent:error:signup_verify"
-msgstr "Het is niet gelukt om uw e-mailadres te verifiëren. Neem alstublieft contact met ons op via e-mail: babylab.ilslabs@uu.nl"
+msgstr ""
+"Het is niet gelukt om uw e-mailadres te verifiëren. Neem alstublieft contact "
+"met ons op via e-mail: babylab.ilslabs@uu.nl"
 
+#: parent/views.py:92 parent/views.py:97 parent/views.py:149
 msgid "parent:error:data_generic"
 msgstr "Er is een fout opgetreden tijdens het laden van uw gegevens"
 
-msgid "parent:home:signup"
-msgstr "Aanmelden bij het Babylab"
+#: parent/views.py:159
+msgid "parent:error:appointment_cancel"
+msgstr ""
+"Het is niet gelukt om de afspraak af te zeggen. Neem alstublieft contact met "
+"ons op via e-mail: babylab.ilslabs@uu.nl"
 
-msgid "parent:home:signin"
-msgstr "Inloggen bij Selfservice pagina"
+#: parent/views.py:174
+msgid "parent:error:deactivate"
+msgstr ""
+"Het is niet gelukt om u uit te schirjven. Neem alstublieft contact met ons "
+"op via e-mail: babylab.ilslabs@uu.nl"
+
+#~ msgid "parent:error:login_failed"
+#~ msgstr "Inloggen is mislukt, probeer het later opnieuw"
