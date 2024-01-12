@@ -25,3 +25,8 @@ class User(AbstractUser):
 
     def to_json(self):
         return json.dumps({"name": self.username, "isStaff": self.is_staff})
+
+    def __str__(self):
+        if self.name:
+            return self.name
+        return self.username
