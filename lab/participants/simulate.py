@@ -88,4 +88,5 @@ def remove_simulated_participants(prefix: str = DEFAULT_PREFIX):
     """
     rm_pps = _get_simulated_participants(prefix)
     for pp in rm_pps:
+        pp.data.delete()
         pp.delete()
