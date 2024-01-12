@@ -1,5 +1,4 @@
 from typing import List
-from django.utils.functional import cached_property
 
 from ..models import Experiment
 
@@ -17,7 +16,8 @@ class ExperimentObjectMixin:
     class variable, which defaults to 'experiment'. (Not pk, as in those
     cases the default views provides the self.object variable).
     """
-    experiment_kwargs_name = 'experiment'
+
+    experiment_kwargs_name = "experiment"
 
     experiment_select_related: List[str] = []
     experiment_prefetch_related: List[str] = []

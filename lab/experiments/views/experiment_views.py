@@ -66,9 +66,10 @@ class ExperimentUpdateView(LabManagerMixin, SuccessURLAllowedHostsMixin, Success
         return redirect_to if url_is_safe else ""
 
 
-class ExperimentDetailView(ExperimentLeaderMixin, generic.DetailView):
+class ExperimentDetailView(ExperimentLeaderMixin, ExperimentObjectMixin, generic.DetailView):
     template_name = "experiments/detail.html"
     model = Experiment
+    experiment_kwargs_name = "pk"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

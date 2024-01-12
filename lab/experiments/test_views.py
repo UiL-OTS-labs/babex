@@ -174,3 +174,22 @@ def test_experiment_detail_view(admin_client, admin_user, sample_experiment, sam
     response = admin_client.get(f"/experiments/{sample_experiment.pk}/")
 
     assert appointment in response.context["appointments"].all()
+
+
+def test_experiment_detail_view_as_leader(client, sample_leader, sample_experiment, sample_participant):
+    # make an appointment
+    timeslot = TimeSlot.objects.create(
+        start=datetime.now() + timedelta(hours=24),
+        end=datetime.now() + timedelta(hours=25),
+        experiment=sample_experiment,
+    )
+    appointment = sample_participant.appointments.create(
+        experiment=sample_experiment, leader=sample_leader, timeslot=timeslot
+    )
+    sample_experiment.leaders.add(sample_leader)
+    sample_experiment.save()
+
+    client.force_login(sample_leader)
+    response = client.get(f"/experiments/{sample_experiment.pk}/")
+
+    assert appointment in response.context["appointments"].all()
