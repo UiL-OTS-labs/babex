@@ -35,7 +35,7 @@ jobs:
         if: always()  # continue with build when linting fails
         run: |
           cd babex-vue
-          npm run dev
+          npm run build
       - name: Package app
         run: |
           cd lab/main/static/
