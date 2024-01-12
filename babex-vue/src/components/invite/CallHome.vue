@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+    import { _ } from '@/util';
     import {defineProps, ref} from 'vue';
     import AgendaCalendar from '../agenda/AgendaCalendar.vue';
     import {babexApi} from '../../api';
@@ -135,11 +136,11 @@
 <template>
     <div class="mb-5">
         <div class="btn-group">
-            <button class="btn btn-primary" @click="schedule()">Schedule appointment</button>
+            <button class="btn btn-primary" @click="schedule()">{{ _('Schedule appointment') }}</button>
         </div>
     </div>
     <div class="mb-3">
-        Alternative options:
+        {{ _('Alternative options:') }}
     </div>
     <div class="mb-3">
         <div class="form-check" v-for="(status, id) in statuses" :key="status">
@@ -148,11 +149,11 @@
         </div>
     </div>
     <div class="mb-3">
-        <label class="form-label">Comments:</label>
+        <label class="form-label">{{ _('Comments:') }}</label>
         <textarea class="form-control" v-model="comment"> </textarea>
     </div>
     <div class="mb-3">
-        <button class="btn btn-primary" :class="{'btn-loading': saving}" @click="saveStatus" :disabled="callStatus==null">Save</button>
+        <button class="btn btn-primary" :class="{'btn-loading': saving}" @click="saveStatus" :disabled="callStatus==null">{{ _('Save') }}</button>
     </div>
 
     <!-- dialog for picking appointment time and booking -->
@@ -166,33 +167,33 @@
                             <AgendaCalendar ref="calendar" @select="onSelect" :start="start" :end="end"></AgendaCalendar>
                         </div>
                         <div class="modal-footer">
-                            <button @click="step = 1" type="button" class="btn btn-primary" :disabled="event==null">Next</button>
-                            <button @click="modalVisible = false" type="button" class="btn btn-secondary">Cancel</button>
+                            <button @click="step = 1" type="button" class="btn btn-primary" :disabled="event==null">{{ _('Next') }}</button>
+                            <button @click="modalVisible = false" type="button" class="btn btn-secondary">{{ _('Cancel') }}</button>
                         </div>
                     </div>
                     <div v-if="step === 1 && event?.start && event?.end" class="modal-content">
                         <div class="modal-body">
-                            <h2>Appointment details</h2>
+                            <h2>{{ _('Appointment details') }}</h2>
                             <table class="table mt-3">
                                 <tr>
-                                    <th>Participant</th><td>{{ participant.name }}</td>
+                                    <th>{{ _('Participant') }}</th><td>{{ participant.name }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Date</th><td>{{ formatDate(event.start) }}</td>
+                                    <th>{{ _('Date') }}</th><td>{{ formatDate(event.start) }}</td>
                                 </tr>
                                 <tr>
-                                    <th>From</th>
+                                    <th>{{ _('From') }}</th>
                                     <td>{{ formatTime(event.start) }}</td>
                                 </tr>
                                 <tr>
-                                    <th>To</th>
+                                    <th>{{ _('To') }}</th>
                                     <td>{{ formatTime(event.end) }}</td>
                                 </tr>
                             </table>
 
                             <form>
                                 <div class="row mb-3 justift-content-center">
-                                    <label class="form-label">Leader:</label>
+                                    <label class="form-label">{{ _('Leader:') }}</label>
                                     <select class="form-select" v-model="confirmationForm.leader">
                                         <option v-for="leader in leaders" :value="leader.id" :key="leader.id">{{ leader.name }}</option>
                                     </select>
@@ -200,21 +201,21 @@
                                 <div class="row mb-3 justift-content-center">
                                     <label class="form-label">
                                         <input class="me-2 form-check-input" type="checkbox"
-                                               v-model="confirmationForm.emailParticipant"/>Send confirmation email
+                                               v-model="confirmationForm.emailParticipant"/>{{ _('Send confirmation email') }}
                                     </label>
                                 </div>
                                 <div class="row mb-3 justift-content-center">
                                     <label class="form-label">
                                         <input class="me-2 form-check-input" type="checkbox"
                                                :disabled="!confirmationForm.emailParticipant"
-                                               v-model="confirmationForm.editEmail"/>Edit mail before sending
+                                               v-model="confirmationForm.editEmail"/>{{ _('Edit mail before sending') }}
                                     </label>
                                 </div>
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button @click="confirm" type="button" class="btn btn-primary">Confirm</button>
-                            <button @click="modalVisible = false" type="button" class="btn btn-secondary">Cancel</button>
+                            <button @click="confirm" type="button" class="btn btn-primary">{{ _('Confirm') }}</button>
+                            <button @click="modalVisible = false" type="button" class="btn btn-secondary">{{ _('Cancel') }}</button>
                         </div>
                     </div>
                 </div>
@@ -230,13 +231,13 @@
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                         <div class="modal-body">
-                            <h2>Edit message</h2>
+                            <h2>{{ _('Edit message') }}</h2>
                             <textarea :ref="(el) => tinymcify(el as HTMLTextAreaElement)">
                             </textarea>
                         </div>
                         <div class="modal-footer">
-                            <button @click="confirmEmail" type="button" class="btn btn-primary">Confirm</button>
-                            <button @click="emailModalVisible = false" type="button" class="btn btn-secondary">Cancel</button>
+                            <button @click="confirmEmail" type="button" class="btn btn-primary">{{ _('Confirm') }}</button>
+                            <button @click="emailModalVisible = false" type="button" class="btn btn-secondary">{{ _('Cancel') }}</button>
                         </div>
                     </div>
                 </div>
@@ -244,6 +245,3 @@
         </div>
     </Teleport>
 </template>
-
-<style scoped>
-</style>

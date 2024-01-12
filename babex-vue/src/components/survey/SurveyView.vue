@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+    import { _ } from '@/util';
     import {defineProps, provide, reactive, ref} from 'vue';
     import SurveyPage from './SurveyPage.vue';
 
@@ -64,11 +65,11 @@
                     @ready="onPageReady" :key="currentPage" />
     </div>
     <div class="mt-3">
-        <button class="btn btn-secondary" @click="prev()" v-if="currentPage > 0">← Back</button>
+        <button class="btn btn-secondary" @click="prev()" v-if="currentPage > 0">{{ _('← Back') }}</button>
         <div class="btn-group float-end">
-            <button class="btn btn-secondary" @click="save(currentPage)" v-if="!isLastPage()">Save for later</button>
-            <button class="btn btn-primary" @click="next()" v-if="!isLastPage()">Continue →</button>
-            <button class="btn btn-primary" @click="send()" v-if="isLastPage()">Send</button>
+            <button class="btn btn-secondary" @click="save(currentPage)" v-if="!isLastPage()">{{ _('Save for later') }}</button>
+            <button class="btn btn-primary" @click="next()" v-if="!isLastPage()">{{ _('Continue →') }}</button>
+            <button class="btn btn-primary" @click="send()" v-if="isLastPage()">{{ _('Send') }}</button>
         </div>
     </div>
 </template>
