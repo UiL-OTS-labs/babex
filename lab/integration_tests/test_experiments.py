@@ -10,7 +10,7 @@ def test_create_experiment(sb, as_admin, sample_leader):
     sb.type('textarea[name="task_description"]', "task description")
     sb.type('textarea[name="additional_instructions"]', "additional instructions")
 
-    sb.select_option_by_text('select[name="leaders"]', sample_leader.username)
+    sb.select_option_by_text('select[name="leaders"]', sample_leader.name)
 
     sb.click('button:contains("Next")')
     sb.assert_text_visible("Successfully created")
