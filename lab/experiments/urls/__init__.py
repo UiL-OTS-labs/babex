@@ -17,4 +17,5 @@ urlpatterns = [
     path("", include("experiments.urls.call_urls")),
     # email preview
     path("email/preview/<str:template>/<int:experiment>/", email_preview, name="email_preview"),
+    path("email/preview/<str:template>/", email_preview, name="email_preview"),
 ]

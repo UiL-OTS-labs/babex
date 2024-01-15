@@ -38,4 +38,4 @@ class ExperimentForm(TemplatedModelForm):
     def preview_url_confirmation(self):
         if self.instance.pk is not None:
             return reverse("experiments:email_preview", args=("confirmation", self.instance.pk))
-        # TODO: how to preview with unsaved experiment?
+        return reverse("experiments:email_preview", args=("confirmation",))
