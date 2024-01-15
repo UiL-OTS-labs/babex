@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+    import { _ } from '@/util';
     import {defineEmits, defineProps, ref, onUnmounted, watchEffect} from 'vue';
     import {babexApi} from '../../api';
     import {Location} from '@/types';
@@ -101,16 +102,16 @@
 
 <template>
   <form @submit="onSubmit">
-    <div>From:</div>
+    <div>{{ _('From:') }}</div>
     <DateTimePicker class="closing-start" v-model="form.start" />
-    <div>To:</div>
+    <div>{{ _('To:') }}</div>
     <DateTimePicker class="closing-end" v-model="form.end" />
     <div>
         <div class="form-check">
-            <label><input class="form-check-input" v-model="form.is_global" type="radio" value="true" />Entire building</label>
+            <label><input class="form-check-input" v-model="form.is_global" type="radio" value="true" />{{ _('Entire building') }}</label>
         </div>
         <div class="form-check">
-            <label><input class="form-check-input" v-model="form.is_global" type="radio" value="false" />Location:</label>
+            <label><input class="form-check-input" v-model="form.is_global" type="radio" value="false" />{{ _('Location:') }}</label>
         </div>
         <select class="form-select" :disabled="form.is_global === true" v-model="form.location">
         <option v-for="location in locations"
@@ -121,21 +122,21 @@
         <div class="form-check">
             <label>
                 <input class="form-check-input" v-model="form.repeat" type="checkbox" value="false" />
-                Repeat for
+                {{ _('Repeat for') }}
             </label>
             <input type="number" class="ms-2 repeat-days form-control" min="1" v-model="form.repeatDays"
-                   :disabled="!form.repeat" /> days
+                   :disabled="!form.repeat" /> {{ _('days') }}
         </div>
     </div>
     <div>
-      <label>Comments:</label>
+      <label>{{ _('Comments:') }}</label>
       <textarea class="form-control" v-model="form.comment"></textarea>
     </div>
-    <div><button class="btn btn-primary save">Save</button></div>
+    <div><button class="btn btn-primary save">{{ _('Save') }}</button></div>
   </form>
 
   <div v-if="event">
-    <button class="btn btn-danger" @click="remove()">Remove</button>
+    <button class="btn btn-danger" @click="remove()">{{ _('Remove') }}</button>
   </div>
 </template>
 

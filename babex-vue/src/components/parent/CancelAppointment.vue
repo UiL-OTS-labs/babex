@@ -13,5 +13,5 @@
 </script>
 
 <template>
-    <button class="btn btn-danger" @click="cancel()">Cancel appointment</button>
+    <button class="btn btn-danger" @click="cancel()">{{ _('Cancel appointment') }}</button>
 </template>

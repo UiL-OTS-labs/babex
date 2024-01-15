@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+    import { _ } from '@/util';
     import {reactive, watch} from 'vue';
     import {inject, Ref} from 'vue';
     import { Response } from '@/types';
@@ -71,7 +72,7 @@
                     <QuestionMultiScale v-model="questionModel(index).value" :options="question.options" :items="question.items" :radio="question.radio ?? true" />
                 </div>
             </div>
-            <div v-if="showErrors && hasErrors(form[questionId(index)])" class="text-danger">please answer the question</div>
+            <div v-if="showErrors && hasErrors(form[questionId(index)])" class="text-danger">{{ _('please answer the question') }}</div>
         </div>
     </div>
 </template>
