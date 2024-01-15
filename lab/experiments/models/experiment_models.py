@@ -1,8 +1,6 @@
 from datetime import datetime, timedelta
 
-from django.core.validators import MinValueValidator
 from django.db import models
-from django.db.models import Count, F
 from django.utils.timezone import get_current_timezone
 from django.utils.translation import gettext_lazy as _
 
@@ -18,7 +16,6 @@ def _get_dt_2_hours_ago() -> datetime:
 
 
 class Experiment(models.Model):
-
     DEFAULT_CONFIRMATION_MAIL = """<p>Beste {{parent_name}},</p>
     <p>
         Je hebt een afspraak gemaakt om mee te doen met het experiment:
@@ -41,23 +38,7 @@ class Experiment(models.Model):
         het ILS lab
     </p>"""
 
-    DEFAULT_INVITE_MAIL = """<p>Je kunt je weer opgeven voor een nieuw
-    experiment: <strong>{{experiment_name}}</strong>.</p>
-<p>De proefleider is <strong>{{leader_name}}</strong>.
-<ul>
-    <li>Duur: {{duration}}.</li>
-    <li>{{task_description}}</li>
-    <li>{{additional_instructions}}</li>
-</ul>
-
-<p>Je kunt via {{link_to_subscribe:"deze link"}} inschrijven.</p>
-
-<p>Bedankt!</p>
-
-<p>
-Met vriendelijke groet,<br/>
-{{admin}}
-</p>"""
+    DEFAULT_INVITE_MAIL = ""
 
     name = models.TextField(_("experiment:attribute:name"))
 

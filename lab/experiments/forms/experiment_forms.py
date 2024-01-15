@@ -1,12 +1,7 @@
-from cdh.core.forms import (
-    BootstrapCheckboxInput,
-    BootstrapRadioSelect,
-    TemplatedModelForm,
-)
+from cdh.core.forms import BootstrapCheckboxInput, TemplatedModelForm
 from cdh.core.mail.widgets import EmailContentEditWidget
 from django import forms
 from django.urls import reverse
-from django.utils.translation import gettext_lazy as _
 
 from ..models import Experiment
 
@@ -15,7 +10,7 @@ class ExperimentForm(TemplatedModelForm):
     class Meta:
         model = Experiment
         fields = "__all__"
-        exclude = ("defaultcriteria",)
+        exclude = ("defaultcriteria", "invite_email")
         widgets = {
             "name": forms.TextInput,
             "duration": forms.TextInput,
@@ -26,7 +21,6 @@ class ExperimentForm(TemplatedModelForm):
             ),
             "additional_instructions": forms.Textarea({"rows": 7}),
             "confirmation_email": EmailContentEditWidget(None),
-            "invite_email": EmailContentEditWidget(None),
             "open": BootstrapCheckboxInput,
         }
 
@@ -34,7 +28,6 @@ class ExperimentForm(TemplatedModelForm):
         super(ExperimentForm, self).__init__(*args, **kwargs)
 
         self.fields["confirmation_email"].widget.preview_url = self.preview_url_confirmation()
-        self.fields["invite_email"].widget.preview_url = self.preview_url_invite()
 
         # If we are updating an experiment, make sure you cannot exclude the
         # experiment you are updating!
@@ -46,8 +39,3 @@ class ExperimentForm(TemplatedModelForm):
         if self.instance.pk is not None:
             return reverse("experiments:email_preview", args=("confirmation", self.instance.pk))
         # TODO: how to preview with unsaved experiment?
-
-    def preview_url_invite(self):
-        if self.instance.pk is not None:
-            return reverse("experiments:email_preview", args=("invite", self.instance.pk))
-        # TODO
