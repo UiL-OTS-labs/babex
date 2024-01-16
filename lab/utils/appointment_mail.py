@@ -4,6 +4,7 @@ import urllib.parse as parse
 from django.conf import settings
 from django.core.mail import get_connection
 from django.template import defaultfilters
+from django.utils import translation
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.timezone import localtime
@@ -29,19 +30,21 @@ def send_appointment_mail(appointment: Appointment, override_content=None) -> No
 
     cancel_link = mauth.get_link(f"/appointment/{appointment.pk}/cancel/")
 
-    replacements = {
-        "experiment_name": experiment.name,
-        "experiment_location": "",
-        "participant_name": participant.name,
-        "parent_name": participant.parent_name,
-        "leader_name": appointment.leader.name,
-        "leader_email": appointment.leader.email,
-        "leader_phonenumber": appointment.leader.phonenumber,
-        "all_leaders_name_list": experiment.leader_names,
-        "cancel_link": cancel_link,
-        "date": defaultfilters.date(localtime(time_slot.start), "l d-m-Y"),
-        "time": defaultfilters.date(localtime(time_slot.start), "H:i"),
-    }
+    # override locale to force dates to use Dutch weekdays
+    with translation.override("nl"):
+        replacements = {
+            "experiment_name": experiment.name,
+            "experiment_location": "",
+            "participant_name": participant.name,
+            "parent_name": participant.parent_name,
+            "leader_name": appointment.leader.name,
+            "leader_email": appointment.leader.email,
+            "leader_phonenumber": appointment.leader.phonenumber,
+            "all_leaders_name_list": experiment.leader_names,
+            "cancel_link": cancel_link,
+            "date": defaultfilters.date(localtime(time_slot.start), "l d-m-Y"),
+            "time": defaultfilters.date(localtime(time_slot.start), "H:i"),
+        }
 
     if experiment.location:
         replacements["experiment_location"] = experiment.location.name
@@ -92,7 +95,6 @@ def _parse_contents_plain(
 
 
 def _apply_replacements(content: str, replacements: dict) -> str:
-
     for key, value in replacements.items():
         content = content.replace(key, value)
 
