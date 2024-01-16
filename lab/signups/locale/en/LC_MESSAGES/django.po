@@ -64,7 +64,7 @@ msgstr "Signups"
 
 #: signups/templates/signups/signup_list.html:19
 msgid "signups:list:intro"
-msgstr ""
+msgstr "The following signups are waiting for approval:"
 
 #: signups/templates/signups/signup_list.html:55
 msgid "signups:list:detail"

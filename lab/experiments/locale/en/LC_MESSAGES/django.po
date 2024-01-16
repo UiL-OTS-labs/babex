@@ -186,7 +186,7 @@ msgstr "Task description"
 
 #: experiments/models/experiment_models.py:79
 msgid "experiment:attribute:additional_instructions"
-msgstr "Additional Instructions"
+msgstr "Additional instructions"
 
 #: experiments/models/experiment_models.py:84
 msgid "experiment:attribute:confirmation_email"
@@ -554,7 +554,7 @@ msgstr "Task description"
 
 #: experiments/templates/experiments/detail_parts/info.html:86
 msgid "experiments:detail:info:additional_instructions"
-msgstr "Additional Instructions"
+msgstr "Additional instructions"
 
 #: experiments/templates/experiments/detail_parts/info.html:97
 #: experiments/templates/experiments/detail_parts/info.html:113
