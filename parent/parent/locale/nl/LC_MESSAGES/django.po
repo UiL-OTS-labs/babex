@@ -50,7 +50,7 @@ msgstr "Geboortedatum"
 msgid "parent:forms:signup:birth_date:help_text"
 msgstr ""
 "Kinderen mogen worden ingeschreven als ze minder dan 3 jaar oud zijn op het "
-"moment van inschrijving"
+"moment van inschrijving."
 
 #: parent/forms.py:85
 msgid "parent:forms:signup:birth_weight"
@@ -201,9 +201,7 @@ msgstr ""
 msgid "parent:forms:signup:save_longer:help"
 msgstr ""
 "Meestal testen wij alleen baby’s, maar soms doen onderzoekers "
-"vervolgonderzoek of willen onderzoekers oudere kinderen testen. Meestal "
-"testen wij alleen baby’s, maar soms doen onderzoekers vervolgonderzoek of "
-"willen onderzoekers oudere kinderen testen."
+"vervolgonderzoek of willen onderzoekers oudere kinderen testen."
 
 #: parent/forms.py:153 parent/forms.py:159 parent/forms.py:165
 msgid "Yes"

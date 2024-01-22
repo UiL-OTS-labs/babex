@@ -4,15 +4,15 @@
 {% block content %}
     <div class="uu-container">
         <div class="col-12" >
-            <h2>{% trans 'parent:mailauth:login:header' %}</h2>
+            <h2>{% translate 'parent:mailauth:login:header' %}</h2>
             <p>
-                {% trans 'parent:mailauth:login:intro' %}
+                {% translate 'parent:mailauth:login:intro' %}
             </p>
             <form method="post" class="uu-form">
                 {% csrf_token %}
                 {{ form }}
                 <div>
-                    <button class="btn btn-primary">Send</button>
+                    <button class="btn btn-primary">{% translate 'parent:mailauth:login:submit' %}</button>
                 </div>
             </form>
         </div>
