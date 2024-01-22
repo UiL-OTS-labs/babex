@@ -239,3 +239,6 @@ msgstr "Your request could not be processed due to an unexpected error. Please t
 
 msgid "parent:appointments"
 msgstr "Appointments"
+
+msgid "parent:mailauth:login:submit"
+msgstr "Send"
