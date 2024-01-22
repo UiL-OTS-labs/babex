@@ -272,7 +272,7 @@ msgid "participant:attribute:birth_weight:less_than_2500"
 msgstr "minder dan 2500 gram"
 
 msgid "participant:attribute:birth_weight:2500_to_4500"
-msgstr "2500 - 4500 gram"
+msgstr "2500–4500 gram"
 
 msgid "participant:attribute:birth_weight:more_than_4500"
 msgstr "meer dan 4500 gram"
@@ -281,7 +281,7 @@ msgid "participant:attribute:pregnancy_duration:less_than_37"
 msgstr "minder dan 37 weken"
 
 msgid "participant:attribute:pregnancy_duration:37_to_42"
-msgstr "37 - 42 weken"
+msgstr "37–42 weken"
 
 msgid "participant:attribute:pregnancy_duration:more_than_42"
 msgstr "meer dan 42 weken"

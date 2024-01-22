@@ -62,7 +62,7 @@ msgstr "minder dan 2500 gram"
 
 #: parent/forms.py:88
 msgid "parent:forms:birth_weight:2500_to_4500"
-msgstr "2500 – 4500 gram"
+msgstr "2500–4500 gram"
 
 #: parent/forms.py:89
 msgid "parent:forms:birth_weight:more_than_4500"
@@ -78,7 +78,7 @@ msgstr "minder dan 37 weken"
 
 #: parent/forms.py:97
 msgid "parent:forms:pregnancy_duration:37_to_42"
-msgstr "37 – 42 weken"
+msgstr "37–42 weken"
 
 #: parent/forms.py:98
 msgid "parent:forms:pregnancy_duration:more_than_42"
