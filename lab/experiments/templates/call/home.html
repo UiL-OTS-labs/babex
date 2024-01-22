@@ -41,15 +41,6 @@
                 <section>
                     {% include 'participants/contact.html' %}
                 </section>
-
-                <section>
-                    <table class="table">
-                        <tr>
-                            <td> {% get_verbose_field_name "participants" "Participant" "created" %} </td>
-                            <td> {{ participant.created|date:"Y-m-d" }} </td>
-                        </tr>
-                    </table>
-                </section>
             </div>
             <div class="col-6 pe-5">
                 <section>

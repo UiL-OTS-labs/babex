@@ -23,4 +23,8 @@
             </a>
         </td>
     </tr>
+    <tr>
+        <td> {% get_verbose_field_name "participants" "ParticipantData" "birth_date" %} </td>
+        <td> {{ participant.birth_date|date:"Y-m-d" }} ({{ participant.age_long }})</td>
+    </tr>
 </table>
