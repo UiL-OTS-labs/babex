@@ -32,7 +32,7 @@ class Signup(rest.Resource):
     parent_first_name = rest.TextField()
     parent_last_name = rest.TextField()
     phonenumber = rest.TextField()
-    phonenumber_alt = rest.TextField()
+    phonenumber_alt = rest.TextField(blank=True)
     email = rest.TextField()
 
     save_longer = rest.BoolField()
