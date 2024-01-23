@@ -108,7 +108,7 @@ msgstr "Telefoonnummer"
 
 #: parent/forms.py:113
 msgid "parent:forms:signup:phonenumber_alt"
-msgstr "Alternatief nummer"
+msgstr "Alternatief nummer (optioneel)"
 
 #: parent/forms.py:115
 msgid "parent:forms:signup:email"
