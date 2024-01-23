@@ -58,7 +58,7 @@ def get_valid_year_range():
     """generates a list of valid birth years for the singup form"""
     end = date.today().year
     start = end - 3  # rough limit on 3 years old
-    return range(end, start, -1)
+    return range(end, start - 1, -1)
 
 
 class SignupForm(TemplatedForm):
