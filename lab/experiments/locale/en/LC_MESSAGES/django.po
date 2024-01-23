@@ -709,9 +709,8 @@ msgstr "Eligible participants"
 msgid "experiments:invite:last_call"
 msgstr "Last called"
 
-#: experiments/templates/experiments/invite.html:62
-msgid "experiments:invite:last_email"
-msgstr "Last mailed"
+msgid "experiments:invite:call_status"
+msgstr "Call status"
 
 #: experiments/templates/experiments/invite.html:65
 msgid "experiments:invite:actions"

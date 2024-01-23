@@ -59,7 +59,7 @@
                                 {% trans 'experiments:invite:last_call' %}
                             </th>
                             <th>
-                                {% trans 'experiments:invite:last_email' %}
+                                {% trans 'experiments:invite:call_status' %}
                             </th>
                             <th>
                                 {% trans 'experiments:invite:actions' %}
@@ -85,7 +85,7 @@
                                     {{ participant.last_call.creation_date }}
                                 </td>
                                 <td>
-                                    <!-- last email -->
+                                    {{ participant.last_call.status.title }}
 
                                 </td>
                                 <td class="actions">
