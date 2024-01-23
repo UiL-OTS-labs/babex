@@ -59,6 +59,10 @@
                             <td> {{ experiment.duration }} </td>
                         </tr>
                         <tr>
+                            <td> {% get_verbose_field_name "experiments" "Experiment" "session_duration" %} </td>
+                            <td> {{ experiment.session_duration }} </td>
+                        </tr>
+                        <tr>
                             <td> {% get_verbose_field_name "experiments" "Experiment" "location" %} </td>
                             <td> {{ experiment.location.name }} </td>
                         </tr>

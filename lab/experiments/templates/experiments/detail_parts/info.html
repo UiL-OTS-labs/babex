@@ -59,10 +59,18 @@
                 <table class="table table-striped mt-1">
                     <tr>
                         <td>
-                            {% trans 'experiments:detail:info:duration' %}
+                            {% trans 'experiment:attribute:duration' %}
                         </td>
                         <td>
                             {{ experiment.duration }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {% trans 'experiment:attribute:session_duration' %}
+                        </td>
+                        <td>
+                            {{ experiment.session_duration }}
                         </td>
                     </tr>
                     <tr>

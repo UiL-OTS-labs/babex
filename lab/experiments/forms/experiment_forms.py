@@ -14,6 +14,7 @@ class ExperimentForm(TemplatedModelForm):
         widgets = {
             "name": forms.TextInput,
             "duration": forms.TextInput,
+            "session_duration": forms.TextInput,
             "task_description": forms.Textarea(
                 {
                     "rows": 7,

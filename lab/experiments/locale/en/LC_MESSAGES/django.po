@@ -170,7 +170,10 @@ msgstr "Name"
 
 #: experiments/models/experiment_models.py:65
 msgid "experiment:attribute:duration"
-msgstr "Duration"
+msgstr "Task duration"
+
+msgid "experiment:attribute:session_duration"
+msgstr "Session duration"
 
 #: experiments/models/experiment_models.py:71
 msgid "experiment:attribute:recruitment_target"

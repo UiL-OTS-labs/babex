@@ -44,6 +44,8 @@ class Experiment(models.Model):
 
     duration = models.TextField(_("experiment:attribute:duration"))
 
+    session_duration = models.TextField(_("experiment:attribute:session_duration"))
+
     # how many participants are aimed for
     recruitment_target = models.IntegerField(
         _("experiment:attribute:recruitment_target"),

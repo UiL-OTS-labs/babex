@@ -20,6 +20,7 @@ def get_invite_mail_content(experiment: Experiment, leader: User) -> str:
 
     replacements = {
         "{duration}": experiment.duration,
+        "{session_duration}": experiment.session_duration,
         "{task_description}": experiment.task_description,
         "{additional_instructions}": experiment.additional_instructions,
         "{experiment_name}": experiment.name,
