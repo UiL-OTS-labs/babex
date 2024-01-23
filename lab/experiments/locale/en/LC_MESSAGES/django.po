@@ -745,6 +745,9 @@ msgstr "Expected"
 msgid "experiments:participants:past"
 msgstr "Past"
 
+msgid "experiments:participants:excluded"
+msgstr "Excluded"
+
 #: experiments/templates/experiments/participants_table.html:13
 #: experiments/templates/timeslots/index.html:41
 msgid "timeslots:day"

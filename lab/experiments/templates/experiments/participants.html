@@ -41,6 +41,10 @@
             {% with object_list=past_list %}
                 {% include 'experiments/participants_table.html' %}
             {% endwith %}
+            <h2>{% trans 'experiments:participants:excluded' %}</h2>
+            {% with object_list=excluded_list %}
+                {% include 'experiments/participants_table.html' %}
+            {% endwith %}
         </form>
         <br/>
     </div>
