@@ -14,6 +14,8 @@
         start?: string,
         // optional ending date of valid selection range (iso format)
         end?: string,
+
+        scheduling?: boolean,
     }>();
 
     function formatAppointment(event: EventInput) : EventInput {
@@ -59,8 +61,9 @@
             end: 'dayGridMonth timeGridWeek today prev,next',
         },
         allDaySlot: false,
-        slotMinTime: "05:00:00",
-        slotMaxTime: "22:00:00",
+        slotMinTime: "07:00:00",
+        slotMaxTime: "20:00:00",
+        slotDuration: props.scheduling ? "00:15:00" : "00:30:00",
         eventTimeFormat: {
             hour: '2-digit',
             minute: '2-digit',
