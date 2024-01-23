@@ -5,6 +5,7 @@ def test_create_experiment(sb, as_admin, sample_leader):
     sb.click('a:contains("Create experiment")')
     sb.type('input[name="name"]', "Experiment name")
     sb.type('input[name="duration"]', "10 minutes")
+    sb.type('input[name="session_duration"]', "25 minutes")
     sb.type('input[name="recruitment_target"]', "30")
 
     sb.type('textarea[name="task_description"]', "task description")
