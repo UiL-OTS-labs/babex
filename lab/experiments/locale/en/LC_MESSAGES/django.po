@@ -913,3 +913,6 @@ msgstr "Pregnancy duration"
 
 msgid "criteria_snippit:tos_parent"
 msgstr "Parent with TOS"
+
+msgid "experiments:invite:not_a_leader"
+msgstr "Note: you are not a leader of the experiment"

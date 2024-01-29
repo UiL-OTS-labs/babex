@@ -40,6 +40,12 @@
     </div>
 </div>
 
+{% if not is_leader %}
+<div class="uu-inner-container">
+    {% translate 'experiments:invite:not_a_leader' %}
+</div>
+{% endif %}
+
 <div class="uu-inner-container">
     <h2 class="mt-4">{% trans 'experiments:invite:participants' %}</h2>
     <form class="w-100" method="post">
@@ -89,8 +95,9 @@
 
                                 </td>
                                 <td class="actions">
-                                    <!-- actions -->
-                                    <a href="{% url 'experiments:call' experiment.pk participant.pk %}"><span class="icon-phone"></span> {% translate 'experiments:invite:actions:call' %}</a>
+                                    {% if is_leader %}
+                                        <a href="{% url 'experiments:call' experiment.pk participant.pk %}"><span class="icon-phone"></span> {% translate 'experiments:invite:actions:call' %}</a>
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% endfor %}

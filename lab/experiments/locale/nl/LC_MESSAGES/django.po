@@ -913,3 +913,6 @@ msgstr "Geboortegewicht"
 
 msgid "criteria_snippit:pregnancy_duration"
 msgstr "Zwangerschapsduur"
+
+msgid "experiments:invite:not_a_leader"
+msgstr "Opmerking: u bent geen leider van het experiment"
