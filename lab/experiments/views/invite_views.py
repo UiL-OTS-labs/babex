@@ -20,6 +20,7 @@ class InviteParticipantsForExperimentView(ExperimentLeaderMixin, ExperimentObjec
 
         context["object_list"] = self.get_object_list()
         context["experiment"] = self.experiment
+        context["is_leader"] = self.experiment in self.request.user.experiments.all()
 
         inviting_leader = self.request.user
         context["invite_text"] = get_invite_mail_content(self.experiment, inviting_leader)

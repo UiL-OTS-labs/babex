@@ -34,7 +34,6 @@ class CallHomeView(ExperimentLeaderMixin, TemplateView):
         context["experiment"] = experiment
         context["experiment_serialized"] = ExperimentSerializer(experiment).data
         context["leaders"] = [UserSerializer(leader).data for leader in experiment.leaders.all()]
-        context["is_leader"] = experiment in self.request.user.experiments.all()
 
         participant = Participant.objects.get(pk=kwargs["participant"])
         context["participant"] = participant
