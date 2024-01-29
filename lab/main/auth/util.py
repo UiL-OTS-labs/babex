@@ -7,7 +7,7 @@ class LabManagerMixin(StaffuserRequiredMixin):
 
 
 class ExperimentLeaderMixin(UserPassesTestMixin):
-    """checks that the current user is a leader of the relevant experiment a view.
+    """Checks that the current user is a leader of the relevant experiment.
     Assumes the existence of a self.experiment property on the view.
     Suitable for use with regular Django class-based views.
 
@@ -28,7 +28,7 @@ class ExperimentLeaderMixin(UserPassesTestMixin):
 
 
 class RandomLeaderMixin(UserPassesTestMixin):
-    """checks that the current user is a leader of ANY currently active experiment.
+    """Checks that the current user is a leader of ANY currently active experiment.
     Assumes the existence of a self.experiment property on the view.
     Suitable for use with regular Django class-based views"""
 
@@ -50,18 +50,20 @@ class IsLabManager(IsAdminUser):
 
 
 class IsExperimentLeader(IsAuthenticated):
-    """checks that the current user is a leader of the relevant experiment a view.
-    Assumes the existence of a self.experiment property on the view.
-    Suitable for use with DRF class-based views"""
-
-    pass
-
-
-class IsRandomLeader(IsAuthenticated):
-    """checks that the current user is a leader of the relevant experiment a view.
+    """Checks that the current user is a leader of the relevant experiment.
     Assumes the existence of a self.experiment property on the view.
     Suitable for use with DRF class-based views"""
 
     def has_permission(self, request, view):
-        # staff = lab managers, can access any experiment
-        return super().has_permission(request, view) and (self.request.user.is_staff or self.request.user.is_leader)
+        return super().has_permission(request, view) and (
+            request.user.is_staff or view.experiment in request.user.experiments.all()
+        )
+
+
+class IsRandomLeader(IsAuthenticated):
+    """checks that the current user is a leader of ANY currently active experiment.
+    Assumes the existence of a self.experiment property on the view.
+    Suitable for use with DRF class-based views"""
+
+    def has_permission(self, request, view):
+        return super().has_permission(request, view) and (request.user.is_staff or request.user.is_leader)

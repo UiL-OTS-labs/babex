@@ -1,7 +1,6 @@
 import datetime
 
 import ageutil
-import braces.views as braces
 from django.core.exceptions import BadRequest, PermissionDenied
 from django.http.response import JsonResponse
 from django.utils import timezone
@@ -12,7 +11,7 @@ from rest_framework import generics, serializers, views
 from experiments.models import Appointment, Experiment, make_appointment
 from experiments.models.invite_models import Call
 from experiments.serializers import AppointmentSerializer, ExperimentSerializer
-from main.auth.util import ExperimentLeaderMixin, IsExperimentLeader, IsRandomLeader
+from main.auth.util import ExperimentLeaderMixin, IsExperimentLeader
 from main.models import User
 from main.serializers import UserSerializer
 from participants.models import Participant
@@ -123,7 +122,8 @@ class AppointmentSendEmail(views.APIView):
 
     @property
     def experiment(self):
-        return Appointment.objects.get(pk=self.kwargs["pk"]).experiment
+        pk = self.request.data.get("id", self.kwargs.get("pk"))
+        return Appointment.objects.get(pk=pk).experiment
 
     def get(self, request, *args, **kwargs):
         """Returns the email template that's relevant for a given appointment.
