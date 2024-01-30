@@ -1,4 +1,4 @@
-{% extends "base/babex_base.html" %}
+{% extends "vue/base.html" %}
 {% load i18n %}
 {% load transformat %}
 {% load datatables %}
@@ -28,7 +28,7 @@
         <p>
             {% trans 'experiments:edit:info_text' %}
         </p>
-        <form method="post" class="uu-form">
+        <form method="post" class="uu-form" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form }}
             <div class="float-end mt-2">

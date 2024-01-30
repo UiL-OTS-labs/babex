@@ -125,3 +125,10 @@ class Experiment(models.Model):
 
     def is_leader(self, user: User) -> bool:
         return user.experiments.filter(pk=self.pk).exists()
+
+
+class ConfirmationMailAttachment(models.Model):
+    content = models.BinaryField()
+    filename = models.CharField(max_length=255)
+    experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE, related_name="attachments")
+    created = models.DateTimeField(auto_now_add=True)

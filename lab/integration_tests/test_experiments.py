@@ -1,3 +1,8 @@
+import tempfile
+
+from experiments.models import Experiment
+
+
 def test_create_experiment(sb, as_admin, sample_leader):
     sb.click("a:contains(Experiments)")
     sb.click("a:contains(Overview)")
@@ -13,7 +18,41 @@ def test_create_experiment(sb, as_admin, sample_leader):
 
     sb.select_option_by_text('select[name="leaders"]', sample_leader.name)
 
-    sb.click('button:contains("Next")')
-    sb.assert_text_visible("Successfully created")
-    sb.click('button:contains("Save")')
-    sb.assert_text_visible("Experiment name")
+    # upload an email attachment
+    test_file_content = b"this is a test file"
+    with tempfile.NamedTemporaryFile() as file:
+        file.write(test_file_content)
+        file.flush()
+
+        sb.choose_file('input[name="attachments"]', file.name)
+
+        sb.click('button:contains("Next")')
+        sb.assert_text_visible("Successfully created")
+        sb.click('button:contains("Save")')
+
+        sb.assert_text_visible("Experiment name")
+
+    experiment = Experiment.objects.last()
+    assert experiment.name == "Experiment name"
+
+    assert experiment.attachments.count() == 1
+    assert experiment.attachments.first().content == test_file_content
+
+
+def test_edit_experiment_add_attachment(sb, live_server, as_admin, sample_experiment):
+    sb.open(live_server.url + f"/experiments/{sample_experiment.pk}/update/")
+
+    # upload an email attachment
+    test_file_content = b"this is a test file"
+    with tempfile.NamedTemporaryFile() as file:
+        file.write(test_file_content)
+        file.flush()
+
+        sb.choose_file('input[name="attachments"]', file.name)
+
+        sb.click('button:contains("Save")')
+
+        sb.assert_text_visible("updated")
+
+    assert sample_experiment.attachments.count() == 1
+    assert sample_experiment.attachments.first().content == test_file_content
