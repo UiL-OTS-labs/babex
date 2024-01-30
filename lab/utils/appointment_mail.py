@@ -50,7 +50,10 @@ def send_appointment_mail(appointment: Appointment, override_content=None) -> No
         replacements["experiment_location"] = experiment.location.name
 
     email = AppointmentConfirmEmail(
-        [participant.email], subject, contents=override_content or experiment.confirmation_email
+        [participant.email],
+        subject,
+        contents=override_content or experiment.confirmation_email,
+        attachments=[(f.filename, f.content, "application/octet-stream") for f in experiment.attachments.all()],
     )
     email.context = replacements
     email.send(connection=get_connection())
