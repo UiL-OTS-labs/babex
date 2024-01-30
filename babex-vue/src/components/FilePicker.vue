@@ -5,7 +5,8 @@
     interface UploadedFile {
         pk: number
         name: string,
-        created: Date
+        created: Date,
+        link: string
     }
 
     const props = defineProps<{
@@ -33,7 +34,7 @@
     <div v-for="file in existing">
         <div class="existing-file">
             <div class="label" :class="{removed: toRemove.has(file.pk)}">
-                <div>{{ file.name }}</div>
+                <div><a :href="file.link">{{ file.name }}</a></div>
                 <div>{{ formatDateTime(new Date(file.created)) }}</div>
             </div>
             <button type="button" class="btn btn-danger" @click="removeExisting(file.pk)">Remove</button>

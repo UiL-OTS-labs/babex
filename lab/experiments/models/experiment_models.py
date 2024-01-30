@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 
 from django.db import models
+from django.urls import reverse
 from django.utils.timezone import get_current_timezone
 from django.utils.translation import gettext_lazy as _
 
@@ -132,3 +133,13 @@ class ConfirmationMailAttachment(models.Model):
     filename = models.CharField(max_length=255)
     experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE, related_name="attachments")
     created = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def link(self):
+        return reverse(
+            "experiments:attachment",
+            args=(
+                self.experiment.pk,
+                self.pk,
+            ),
+        )

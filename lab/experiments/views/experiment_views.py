@@ -3,11 +3,12 @@ from cdh.core.views.mixins import DeleteSuccessMessageMixin
 from django.contrib.auth.views import SuccessURLAllowedHostsMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count
+from django.http.response import HttpResponse
 from django.urls import reverse_lazy as reverse
 from django.utils import timezone
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.translation import gettext_lazy as _
-from django.views import generic
+from django.views import View, generic
 
 from main.auth.util import ExperimentLeaderMixin, LabManagerMixin, RandomLeaderMixin
 
@@ -113,3 +114,13 @@ class ExperimentAppointmentsView(ExperimentLeaderMixin, ExperimentObjectMixin, g
         context["future_list"] = queryset.filter(timeslot__start__gte=timezone.now())
         context["excluded_list"] = queryset.filter(outcome=Appointment.Outcome.EXCLUDED)
         return context
+
+
+class ExperimentAttachmentView(ExperimentLeaderMixin, ExperimentObjectMixin, View):
+    experiment_kwargs_name = "pk"
+
+    def get(self, request, *args, **kwargs):
+        attachment = self.experiment.attachments.get(pk=kwargs["attachment"])
+        response = HttpResponse(attachment.content, content_type="application/octet-stream")
+        response["Content-Disposition"] = "attachment; filename=" + attachment.filename
+        return response

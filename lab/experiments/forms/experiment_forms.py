@@ -59,7 +59,8 @@ class ExperimentForm(TemplatedModelForm):
         self.fields["confirmation_email"].widget.preview_url = self.preview_url_confirmation()
 
         self.fields["attachments"].initial = [
-            {"pk": f.pk, "name": f.filename, "created": f.created} for f in self.instance.attachments.all()
+            {"pk": f.pk, "name": f.filename, "created": f.created, "link": f.link}
+            for f in self.instance.attachments.all()
         ]
 
         # If we are updating an experiment, make sure you cannot exclude the
