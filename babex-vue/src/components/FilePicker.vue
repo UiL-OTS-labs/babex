@@ -1,6 +1,7 @@
 <script lang="ts" setup>
     import { defineProps, ref } from 'vue';
     import {formatDateTime} from '../util';
+    import { _ } from '@/util';
 
     interface UploadedFile {
         pk: number
@@ -38,22 +39,22 @@
     <div v-for="file in existing">
         <div class="existing-file">
             <div class="label" :class="{removed: toRemove.has(file.pk)}">
-                <div><a :href="file.link">{{ file.name }}</a></div>
+                <div><a :href="file.link"><span class="icon-file-text2">&#xe926;</span>{{ file.name }}</a></div>
                 <div>{{ formatDateTime(new Date(file.created)) }}</div>
             </div>
-            <button v-if="toRemove.has(file.pk)" type="button" class="btn btn-secondary" @click="undoRemove(file.pk)">Cancel</button>
-            <button v-if="!toRemove.has(file.pk)" type="button" class="btn btn-danger" @click="removeExisting(file.pk)">Remove</button>
+            <button v-if="toRemove.has(file.pk)" type="button" class="btn btn-secondary" @click="undoRemove(file.pk)">{{ _('Cancel') }}</button>
+            <button v-if="!toRemove.has(file.pk)" type="button" class="btn btn-danger" @click="removeExisting(file.pk)">{{ _('Remove') }}</button>
         </div>
     </div>
     <div v-for="i in fields" :key="i">
         <div class="field">
             <input type="file" :name="name" class="form-control">
-            <button type="button" class="btn btn-secondary" @click="remove(i)">Remove</button>
+            <button type="button" class="btn btn-secondary" @click="remove(i)">{{ _('Remove') }}</button>
         </div>
     </div>
 
     <div>
-        <button type="button" class="btn btn-secondary" @click="add()">+ add another</button>
+        <button type="button" class="btn btn-secondary" @click="add()">{{ _('+ add another') }}</button>
     </div>
 
     <div v-for="entry in toRemove">
@@ -74,6 +75,14 @@
         width: 100%;
         border: 1px solid #dedede;
         background: #dedede;
+    }
+
+    .existing-file a {
+        text-decoration: none;
+    }
+
+    .existing-file a span {
+        padding-right: 5px;
     }
 
     .field button, .existing-file button {
