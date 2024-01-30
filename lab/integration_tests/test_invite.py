@@ -1,11 +1,9 @@
 import time
 from datetime import date, datetime, timedelta
 
-import pytest
 from django.core import mail
 
-from experiments.models import Appointment, DefaultCriteria, TimeSlot
-from main.models import User
+from experiments.models import Appointment, TimeSlot
 
 
 def test_experiment_list(sb, sample_experiment, sample_participant, as_leader):
@@ -21,6 +19,10 @@ def test_schedule_appointment(sb, sample_experiment, sample_participant, sample_
     sample_experiment.leaders.add(as_leader)
     # test with a differnet leader than the currently logged user
     sample_experiment.leaders.add(sample_leader)
+
+    # add an email attachment to the experiment
+    test_file_content = b"this is a test file"
+    sample_experiment.attachments.create(filename="test-file", content=test_file_content)
 
     sb.click("a:contains(Experiments)")
     sb.click("a:contains(Overview)")
@@ -59,6 +61,9 @@ def test_schedule_appointment(sb, sample_experiment, sample_participant, sample_
     # check that a confirmation email was sent
     sb.assertEqual(len(mail.outbox), 1)
     sb.assertEqual(mail.outbox[0].to[0], sample_participant.email)
+
+    # check that the attachment is present
+    assert mail.outbox[0].attachments[0] == ("test-file", test_file_content, "application/octet-stream")
 
     # check that at least parent name and leader name are in the email contents
     sb.assertIn(sample_participant.parent_last_name, mail.outbox[0].body)
