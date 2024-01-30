@@ -16,7 +16,7 @@
     }>();
 
     const fields = ref([0]);
-    const toRemove = ref(new Set());
+    const toRemove = ref<Set<number>>(new Set());
 
     function add() {
         fields.value.push(fields.value.length);
@@ -36,7 +36,7 @@
 </script>
 
 <template>
-    <div v-for="file in existing">
+    <div v-for="file in existing" :key="file.pk">
         <div class="existing-file">
             <div class="label" :class="{removed: toRemove.has(file.pk)}">
                 <div><a :href="file.link"><span class="icon-file-text2">&#xe926;</span>{{ file.name }}</a></div>
@@ -57,7 +57,7 @@
         <button type="button" class="btn btn-secondary" @click="add()">{{ _('+ add another') }}</button>
     </div>
 
-    <div v-for="entry in toRemove">
+    <div v-for="entry in toRemove" :key="entry">
         <input type="hidden" :name="name + '_remove'" :value="entry">
     </div>
 </template>
