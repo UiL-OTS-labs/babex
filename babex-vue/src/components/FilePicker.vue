@@ -28,6 +28,10 @@
     function removeExisting(pk: number) {
         toRemove.value.add(pk);
     }
+
+    function undoRemove(pk: number) {
+        toRemove.value.delete(pk);
+    }
 </script>
 
 <template>
@@ -37,7 +41,8 @@
                 <div><a :href="file.link">{{ file.name }}</a></div>
                 <div>{{ formatDateTime(new Date(file.created)) }}</div>
             </div>
-            <button type="button" class="btn btn-danger" @click="removeExisting(file.pk)">Remove</button>
+            <button v-if="toRemove.has(file.pk)" type="button" class="btn btn-secondary" @click="undoRemove(file.pk)">Cancel</button>
+            <button v-if="!toRemove.has(file.pk)" type="button" class="btn btn-danger" @click="removeExisting(file.pk)">Remove</button>
         </div>
     </div>
     <div v-for="i in fields" :key="i">
@@ -73,6 +78,7 @@
 
     .field button, .existing-file button {
         margin-left: 5px;
+        width: 20%;
     }
 
     .field {
