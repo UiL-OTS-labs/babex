@@ -46,10 +46,10 @@
             <button v-if="!toRemove.has(file.pk)" type="button" class="btn btn-danger" @click="removeExisting(file.pk)">{{ _('Remove') }}</button>
         </div>
     </div>
-    <div v-for="i in fields" :key="i">
-        <div class="field">
+    <div v-for="i in fields" :key="i" class="mb-2">
+        <div class="input-group">
             <input type="file" :name="name" class="form-control">
-            <button type="button" class="btn btn-secondary" @click="remove(i)">{{ _('Remove') }}</button>
+            <button type="button" class="btn btn-danger" @click="remove(i)">{{ _('Remove') }}</button>
         </div>
     </div>
 
@@ -88,15 +88,6 @@
     .field button, .existing-file button {
         margin-left: 5px;
         width: 20%;
-    }
-
-    .field {
-        display: flex;
-        margin-bottom: 5px;
-    }
-
-    input {
-        margin-bottom: 5px;
     }
 
     .removed {
