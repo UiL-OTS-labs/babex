@@ -37,8 +37,8 @@
 
 <template>
     <div v-for="file in existing" :key="file.pk">
-        <div class="existing-file">
-            <div class="label" :class="{removed: toRemove.has(file.pk)}">
+        <div class="existing-file input-group">
+            <div class="input-group-text flex-grow-1 justify-content-between" :class="{'text-decoration-line-through': toRemove.has(file.pk)}">
                 <div><a :href="file.link"><span class="icon-file-text2">&#xe926;</span>{{ file.name }}</a></div>
                 <div>{{ formatDateTime(new Date(file.created)) }}</div>
             </div>
@@ -46,10 +46,10 @@
             <button v-if="!toRemove.has(file.pk)" type="button" class="btn btn-danger" @click="removeExisting(file.pk)">{{ _('Remove') }}</button>
         </div>
     </div>
-    <div v-for="i in fields" :key="i">
-        <div class="field">
+    <div v-for="i in fields" :key="i" class="mb-2">
+        <div class="input-group">
             <input type="file" :name="name" class="form-control">
-            <button type="button" class="btn btn-secondary" @click="remove(i)">{{ _('Remove') }}</button>
+            <button type="button" class="btn btn-danger" @click="remove(i)">{{ _('Remove') }}</button>
         </div>
     </div>
 
@@ -63,43 +63,11 @@
 </template>
 
 <style scoped>
-    .existing-file {
-        display: flex;
-        margin-bottom: 5px;
-    }
-
-    .existing-file .label {
-        display: flex;
-        justify-content: space-between;
-        padding: 5px;
-        width: 100%;
-        border: 1px solid #dedede;
-        background: #dedede;
-    }
-
     .existing-file a {
         text-decoration: none;
     }
 
     .existing-file a span {
-        padding-right: 5px;
-    }
-
-    .field button, .existing-file button {
-        margin-left: 5px;
-        width: 20%;
-    }
-
-    .field {
-        display: flex;
-        margin-bottom: 5px;
-    }
-
-    input {
-        margin-bottom: 5px;
-    }
-
-    .removed {
-        text-decoration: line-through;
+        padding-right: .3125rem;
     }
 </style>
