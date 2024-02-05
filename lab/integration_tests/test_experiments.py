@@ -36,7 +36,7 @@ def test_create_experiment(sb, as_admin, sample_leader):
     assert experiment.name == "Experiment name"
 
     assert experiment.attachments.count() == 1
-    assert experiment.attachments.first().content == test_file_content
+    assert experiment.attachments.first().file.read() == test_file_content
 
 
 def test_edit_experiment_add_attachment(sb, live_server, as_admin, sample_experiment):
@@ -55,4 +55,4 @@ def test_edit_experiment_add_attachment(sb, live_server, as_admin, sample_experi
         sb.assert_text_visible("updated")
 
     assert sample_experiment.attachments.count() == 1
-    assert sample_experiment.attachments.first().content == test_file_content
+    assert sample_experiment.attachments.first().file.read() == test_file_content

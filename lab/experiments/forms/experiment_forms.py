@@ -78,8 +78,7 @@ class ExperimentForm(TemplatedModelForm):
         experiment = super().save(*args, **kwargs)
 
         for entry in self.files.getlist("attachments"):
-            content = entry.file.read()
-            ConfirmationMailAttachment.objects.create(experiment=experiment, filename=entry.name, content=content)
+            ConfirmationMailAttachment.objects.create(experiment=experiment, file=entry, filename=entry.name)
 
         for entry in self.data.getlist("attachments_remove"):
             experiment.attachments.filter(pk=entry).delete()

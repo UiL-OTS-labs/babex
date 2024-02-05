@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "impersonate",
     # local apps
     "cdh.core",
+    "cdh.files",
     "cdh.vue",
     "main",
     "experiments",

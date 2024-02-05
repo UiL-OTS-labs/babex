@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 
+import cdh.files.db
 from django.db import models
 from django.urls import reverse
 from django.utils.timezone import get_current_timezone
@@ -129,10 +130,10 @@ class Experiment(models.Model):
 
 
 class ConfirmationMailAttachment(models.Model):
-    content = models.BinaryField()
     filename = models.CharField(max_length=255)
     experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE, related_name="attachments")
     created = models.DateTimeField(auto_now_add=True)
+    file = cdh.files.db.FileField()
 
     @property
     def link(self):
