@@ -49,7 +49,7 @@
     }
 
     async function tinymcify(el: HTMLTextAreaElement) {
-        emailEditor = (await window.tinymce.init({target: el}))[0];
+        emailEditor = (await window.tinymce.init({target: el, menubar: false}))[0];
         const response = await babexApi.call.appointment.getEmail(appointment);
         emailEditor.setContent(response.content);
         emailReady = true;
@@ -225,7 +225,7 @@
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                         <div class="modal-body">
-                            <h2>{{ _('Edit message') }}</h2>
+                            <h2>{{ _('Review confirmation mail') }}</h2>
                             <textarea :ref="(el) => tinymcify(el as HTMLTextAreaElement)">
                             </textarea>
                         </div>
@@ -239,3 +239,9 @@
         </div>
     </Teleport>
 </template>
+
+<style scoped>
+    textarea {
+        height: 650px;
+    }
+</style>
