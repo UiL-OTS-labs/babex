@@ -36,7 +36,6 @@ class AppointmentTests(TestCase):
             "end": timezone.now() + timedelta(days=1, hours=1),
             "leader": self.user.pk,
             "participant": self.participant.pk,
-            "emailParticipant": False,
         }
 
         request = self.factory.post("/experiments/call/appointment/", data, format="json")
@@ -51,7 +50,6 @@ class AppointmentTests(TestCase):
             "end": timezone.now() - timedelta(hours=1),
             "leader": self.user.pk,
             "participant": self.participant.pk,
-            "emailParticipant": False,
         }
 
         request = self.factory.post("/experiments/call/appointment/", data, format="json")
@@ -74,7 +72,6 @@ class AppointmentTests(TestCase):
             "end": timezone.now() + timedelta(days=7, hours=1),
             "leader": self.user.pk,
             "participant": self.participant.pk,
-            "emailParticipant": False,
         }
 
         request = self.factory.post("/experiments/call/appointment/", data, format="json")
@@ -96,7 +93,6 @@ class AppointmentTests(TestCase):
             "end": timezone.now() + timedelta(days=7, hours=1),
             "leader": self.user.pk,
             "participant": self.participant.pk,
-            "emailParticipant": False,
         }
 
         request = self.factory.post("/experiments/call/appointment/", data, format="json")

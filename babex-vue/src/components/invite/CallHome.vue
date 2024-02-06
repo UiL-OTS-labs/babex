@@ -34,7 +34,6 @@
     const confirmationForm = ref({
         leader: props.leaders[0].id,
         emailParticipant: true,
-        editEmail: false,
     });
 
     // we can probably skip type checking tinymce's interface
@@ -42,6 +41,7 @@
 
     let emailEditor: TinyMCE;
     let appointment: number;
+    let emailReady = false;
 
     function emailDialog() {
         modalVisible.value = false;
@@ -52,9 +52,13 @@
         emailEditor = (await window.tinymce.init({target: el}))[0];
         const response = await babexApi.call.appointment.getEmail(appointment);
         emailEditor.setContent(response.content);
+        emailReady = true;
     }
 
     function confirmEmail() {
+        // ignore send button clicked before email content was fetched
+        if (!emailReady) return;
+
         babexApi.call.appointment.sendEmail({
             id: appointment,
             content: emailEditor.getContent()
@@ -72,12 +76,9 @@
             experiment: props.experiment.id,
             participant: props.participant.id,
             leader: confirmationForm.value.leader,
-            // when editEmail is selected, suppress the normal email sending function, as we'll do
-            // that from a separate form
-            emailParticipant: confirmationForm.value.emailParticipant && !confirmationForm.value.editEmail
         }).then( (response) => {
-            if (confirmationForm.value.editEmail) {
-                appointment = response.id!;
+            appointment = response.id!;
+            if (confirmationForm.value.emailParticipant) {
                 emailDialog();
             }
             else {
@@ -204,13 +205,6 @@
                                                v-model="confirmationForm.emailParticipant"/>{{ _('Send confirmation email') }}
                                     </label>
                                 </div>
-                                <div class="row mb-3 justift-content-center">
-                                    <label class="form-label">
-                                        <input class="me-2 form-check-input" type="checkbox"
-                                               :disabled="!confirmationForm.emailParticipant"
-                                               v-model="confirmationForm.editEmail"/>{{ _('Edit mail before sending') }}
-                                    </label>
-                                </div>
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -236,7 +230,7 @@
                             </textarea>
                         </div>
                         <div class="modal-footer">
-                            <button @click="confirmEmail" type="button" class="btn btn-primary">{{ _('Confirm') }}</button>
+                            <button @click="confirmEmail" type="button" class="btn btn-primary">{{ _('Send') }}</button>
                             <button @click="emailModalVisible = false" type="button" class="btn btn-secondary">{{ _('Cancel') }}</button>
                         </div>
                     </div>
