@@ -81,7 +81,7 @@ class Appointment(models.Model):
             self.save()
             if not silent:
                 _inform_leaders(self)
-                _send_confirmation(self)
+                _send_cancel_confirmation(self)
 
     @property
     def is_canceled(self):
@@ -97,6 +97,7 @@ def make_appointment(experiment: Experiment, participant: Participant, leader: U
         participant=participant, timeslot=timeslot, experiment=experiment, leader=leader
     )
     return appointment
+
 
 def _inform_leaders(appointment: Appointment) -> None:
     experiment = appointment.experiment
@@ -117,7 +118,8 @@ def _inform_leaders(appointment: Appointment) -> None:
         )
         mail.send()
 
-def _send_confirmation(appointment: Appointment) -> None:
+
+def _send_cancel_confirmation(appointment: Appointment) -> None:
     context = {"appointment": appointment}
 
     mail = TemplateEmail(

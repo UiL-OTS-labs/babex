@@ -1,11 +1,9 @@
 import time
 from datetime import date, datetime, timedelta
 
-import pytest
 from django.core import mail
 
-from experiments.models import Appointment, DefaultCriteria, TimeSlot
-from main.models import User
+from experiments.models import Appointment, TimeSlot
 
 
 def test_experiment_list(sb, sample_experiment, sample_participant, as_leader):

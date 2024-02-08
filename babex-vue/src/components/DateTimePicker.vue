@@ -19,7 +19,10 @@
 
     function onChange(event: Event) {
         const element = event.target as HTMLInputElement;
-        emits('update:modelValue', parseDate(element.value));
+        let date = parseDate(element.value);
+        if (isFinite(Number(date))) {
+            emits('update:modelValue', date);
+        }
     }
 
     defineProps<{
