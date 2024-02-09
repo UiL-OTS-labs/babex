@@ -157,8 +157,11 @@ def should_exclude_by_age(participant: Participant, criteria: DefaultCriteria) -
 
 
 def should_exclude_by_call_status(participant: Participant, experiment: Experiment) -> bool:
-    """
-    When a parent indicates they cannot participate, there should be a Call object
-    for the relevant participant and experiment, with an EXCLUDE status
-    """
-    return participant.call_set.filter(experiment=experiment, status=Call.CallStatus.EXCLUDE).exists()
+    # When a parent indicates they cannot participate, there should be a Call object
+    # for the relevant participant and experiment, with an EXCLUDE status
+    exclude = participant.call_set.filter(experiment=experiment, status=Call.CallStatus.EXCLUDE).exists()
+    # also exclude participants who asked to be removed from the system but haven't yet
+    # completed the required actions.
+    # this is meant as a temporary filter until they are fully deactivated.
+    deactivate = participant.call_set.filter(experiment=experiment, status=Call.CallStatus.DEACTIVATE).exists()
+    return exclude or deactivate
