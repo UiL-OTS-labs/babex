@@ -338,3 +338,14 @@ msgstr "There is one signup"
 
 msgid "main:home:signups:link"
 msgstr "waiting for approval"
+
+msgid "main:mail:deactivate:banner"
+msgstr "Confirmation required"
+
+msgid "main:mail:deactivate:content"
+msgstr ""
+"Dear {}s,"
+""
+"TODO: real text"
+"<a href=\"{}\">click here</a>"
+""
