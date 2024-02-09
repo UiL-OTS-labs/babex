@@ -4,9 +4,9 @@
     import AgendaCalendar from '../agenda/AgendaCalendar.vue';
     import {babexApi} from '../../api';
     import {Call} from '../../types';
-    import {formatDate, formatTime} from '../../util';
     import {EventApi, DateSelectArg} from '@fullcalendar/core';
 
+    import DateTimePicker from '../DateTimePicker.vue';
 
     const props = defineProps<{
         participant: {id: number, name: string},
@@ -28,6 +28,11 @@
     const step = ref(0);
     const event = ref<EventApi|null>(null);
     const saving = ref(false);
+
+    // event start and end times saved as separate refs because
+    // our DateTimePicker doesn't play nicely with fullcalendar's event object
+    const eventStart = ref<Date|null>(null);
+    const eventEnd = ref<Date|null>(null);
 
     const callStatus = ref<string|null>(null);
     const comment = ref('');
@@ -62,13 +67,13 @@
     }
 
     function confirm() {
-        if(!event.value || !event.value.start || !event.value.end) {
+        if(!event.value || !eventStart.value || !eventEnd.value) {
             return;
         }
 
         babexApi.call.appointment.create({
-            start: event.value.start,
-            end: event.value.end,
+            start: eventStart.value,
+            end: eventEnd.value,
             experiment: props.experiment.id,
             participant: props.participant.id,
             leader: confirmationForm.value.leader,
@@ -101,6 +106,8 @@
                 start: selectionInfo.start,
                 end: selectionInfo.end
             });
+            eventStart.value = selectionInfo.start;
+            eventEnd.value = selectionInfo.end;
         }
         else {
             calendar.value?.calendar.getApi().changeView('timeGridDay', selectionInfo.start);
@@ -179,15 +186,12 @@
                                     <th>{{ _('Participant') }}</th><td>{{ participant.name }}</td>
                                 </tr>
                                 <tr>
-                                    <th>{{ _('Date') }}</th><td>{{ formatDate(event.start) }}</td>
-                                </tr>
-                                <tr>
                                     <th>{{ _('From') }}</th>
-                                    <td>{{ formatTime(event.start) }}</td>
+                                    <td><DateTimePicker v-model="eventStart" /></td>
                                 </tr>
                                 <tr>
                                     <th>{{ _('To') }}</th>
-                                    <td>{{ formatTime(event.end) }}</td>
+                                    <td><DateTimePicker v-model="eventEnd" /></td>
                                 </tr>
                             </table>
 
