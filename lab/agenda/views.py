@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from experiments.models import Appointment, Location
 from experiments.serializers import AppointmentSerializer
 from main.auth.util import IsExperimentLeader, LabManagerMixin, RandomLeaderMixin
-from utils.appointment_mail import send_appointment_mail
+from utils.appointment_mail import prepare_appointment_mail, send_appointment_mail
 
 from .models import Closing, ClosingSerializer
 
@@ -82,7 +82,7 @@ class AppointmentViewSet(viewsets.ModelViewSet):
 
         # check if we should inform the participant about changed time
         if original_timeslot.start != updated_timeslot.start or original_timeslot.end != updated_timeslot.end:
-            send_appointment_mail(updated)
+            send_appointment_mail(updated, prepare_appointment_mail(updated))
 
 
 class ClosingsAdminView(LabManagerMixin, generic.TemplateView):
