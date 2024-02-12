@@ -1,6 +1,7 @@
 import re
 import urllib.parse as parse
 
+from cdh.core.mail.classes import BaseEmail, _strip_tags
 from django.conf import settings
 from django.core.mail import get_connection
 from django.template import defaultfilters
@@ -16,13 +17,11 @@ from mailauth.models import create_mail_auth
 CANCEL_LINK_REGEX = r"{cancel_link(?::\"(.*)\")?}"
 
 
-def send_appointment_mail(appointment: Appointment, override_content=None) -> None:
+def prepare_appointment_mail(appointment: Appointment):
     experiment = appointment.experiment
     participant = appointment.participant
     time_slot = appointment.timeslot
     assert time_slot
-
-    subject = "Bevestiging inschrijving experiment ILS: {}".format(experiment.name)
 
     # generate auth link for cancelation
     expiry = time_slot.end
@@ -49,13 +48,35 @@ def send_appointment_mail(appointment: Appointment, override_content=None) -> No
     if experiment.location:
         replacements["experiment_location"] = experiment.location.name
 
+    subject = "Bevestiging inschrijving experiment ILS: {}".format(appointment.experiment.name)
     email = AppointmentConfirmEmail(
         [participant.email],
         subject,
-        contents=override_content or experiment.confirmation_email,
+        contents=experiment.confirmation_email,
         attachments=[(f.filename, f.file.read(), f.file.content_type) for f in experiment.attachments.all()],
     )
     email.context = replacements
+    return email._get_html_body()
+
+
+def send_appointment_mail(appointment: Appointment, contents: str) -> None:
+    subject = "Bevestiging inschrijving experiment ILS: {}".format(appointment.experiment.name)
+
+    class SimpleHTMLMail(BaseEmail):
+        def __init__(self, to, subject, contents):
+            super().__init__(to, subject)
+            self.contents = contents
+
+        def _get_html_context(self):
+            return dict()
+
+        def _get_html_body(self):
+            return self.contents
+
+        def _get_plain_body(self):
+            return _strip_tags(self._get_html_body())
+
+    email = SimpleHTMLMail([appointment.participant.email], subject, contents)
     email.send(connection=get_connection())
 
 
