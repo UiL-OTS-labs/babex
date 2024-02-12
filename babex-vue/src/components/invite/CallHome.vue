@@ -178,7 +178,7 @@
                             <button @click="modalVisible = false" type="button" class="btn btn-secondary">{{ _('Cancel') }}</button>
                         </div>
                     </div>
-                    <div v-if="step === 1 && event?.start && event?.end" class="modal-content">
+                    <div v-if="step === 1 && eventStart && eventEnd" class="modal-content">
                         <div class="modal-body">
                             <h2>{{ _('Appointment details') }}</h2>
                             <table class="table mt-3">
