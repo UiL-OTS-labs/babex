@@ -1,11 +1,9 @@
 import time
 from datetime import date, datetime, timedelta
 
-import pytest
 from django.core import mail
 
-from experiments.models import Appointment, DefaultCriteria, TimeSlot
-from main.models import User
+from experiments.models import Appointment, TimeSlot
 
 
 def test_experiment_list(sb, sample_experiment, sample_participant, as_leader):
@@ -40,6 +38,12 @@ def test_schedule_appointment(sb, sample_experiment, sample_participant, sample_
 
     sb.click("button:contains(Confirm)")
     sb.wait_for_element_not_visible('button:contains("Confirm")')
+
+    # wait for email content to be ready
+    while not sb.execute_script("return (tinymce.activeEditor && tinymce.activeEditor.getContent())"):
+        time.sleep(0.2)
+    sb.click("button:contains(Send)")
+    sb.wait_for_element_not_visible('button:contains("Send")')
 
     # baby mcbaby shouldn't be available anymore
     sb.click("a:contains(Experiments)")
@@ -86,21 +90,19 @@ def test_schedule_appointment_edit_email(sb, sample_experiment, sample_participa
 
     # pick leader
     sb.select_option_by_text(".modal-content select", "Leader McLeader")
-    # choose to edit mail
-    sb.click('label:contains("Edit mail")')
     sb.click("button:contains(Confirm)")
 
     while not sb.execute_script("return (tinymce.activeEditor && tinymce.activeEditor.getContent())"):
         time.sleep(0.2)
 
-    # set tinymce editor with a custon email string
+    # set tinymce editor with a custom email string
     test_email = "<em>this is a test email</em>"
     test_email_plain = "this is a test email"
     sb.execute_script('tinymce.activeEditor.setContent("{}")'.format(test_email))
 
     sb.assertEqual(len(mail.outbox), 0)
-    sb.click("button:contains(Confirm)")
-    sb.wait_for_element_not_visible('button:contains("Confirm")')
+    sb.click("button:contains(Send)")
+    sb.wait_for_element_not_visible('button:contains("Send")')
 
     # check the email was sent
     sb.assertEqual(len(mail.outbox), 1)
