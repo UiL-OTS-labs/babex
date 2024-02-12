@@ -81,7 +81,7 @@ class AppointmentViewSet(viewsets.ModelViewSet):
         updated_timeslot = updated.timeslot
 
         # check if we should inform the participant about changed time
-        if original_timeslot.start != updated_timeslot.start or original_timeslot.start != updated_timeslot.start:
+        if original_timeslot.start != updated_timeslot.start or original_timeslot.end != updated_timeslot.end:
             send_appointment_mail(updated)
 
 
