@@ -16,7 +16,7 @@ from main.models import User
 from main.serializers import UserSerializer
 from participants.models import Participant
 from participants.serializers import ParticipantSerializer
-from utils.appointment_mail import send_appointment_mail
+from utils.appointment_mail import prepare_appointment_mail, send_appointment_mail
 
 
 class CallHomeView(ExperimentLeaderMixin, TemplateView):
@@ -102,9 +102,6 @@ class AppointmentConfirm(generics.CreateAPIView):
         )
 
         appointment = make_appointment(experiment, participant, leader, start, end)
-        if request.data["emailParticipant"]:
-            send_appointment_mail(appointment)
-
         return JsonResponse(self.serializer_class(appointment).data)
 
     def check_age_at_appointment(self, participant: Participant, experiment: Experiment, start: datetime.date) -> bool:
@@ -129,7 +126,7 @@ class AppointmentSendEmail(views.APIView):
         """Returns the email template that's relevant for a given appointment.
         Used to populate client-side editor"""
         appointment = Appointment.objects.get(pk=int(kwargs["pk"]))
-        return JsonResponse(dict(content=appointment.experiment.confirmation_email))
+        return JsonResponse(dict(content=prepare_appointment_mail(appointment)))
 
     def post(self, request, *args, **kwargs):
         """Sends a custom email"""

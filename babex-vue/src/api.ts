@@ -163,7 +163,6 @@ interface AppointmentCreate {
     experiment: number,
     leader: number,
     participant: number,
-    emailParticipant: boolean
 }
 
 interface AppointmentEmail {
