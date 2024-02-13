@@ -1,4 +1,4 @@
-{% extends 'cdh.core/mail_template.html' %}
+{% extends 'mail/base_new.html' %}
 
 {% block banner %}
     Appointment canceled: {{ appointment.experiment.name }}
@@ -24,3 +24,7 @@
         ILS Labs
     </p>
 {% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+{% endblock footer %}

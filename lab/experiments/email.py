@@ -1,5 +1,6 @@
 from cdh.core.mail import BaseCustomTemplateEmail, CTEVarDef
 from django.utils.translation import gettext_lazy as _
+from django.template.loader import render_to_string
 
 
 class AppointmentConfirmEmail(BaseCustomTemplateEmail):
@@ -19,3 +20,4 @@ class AppointmentConfirmEmail(BaseCustomTemplateEmail):
 
         self.banner = self.subject
         self.language = "nl"
+        self.footer = render_to_string("mail/footer.html")
