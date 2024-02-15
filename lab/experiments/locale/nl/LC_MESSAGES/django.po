@@ -217,6 +217,9 @@ msgstr ""
 "account.<br/>Je kunt zoeken door de lijst door in dit veld te typen, als je "
 "een proefleider selecteert zal die als een blokje verschijnen in het veld."
 
+msgid "experiment:attribute:responsible_researcher"
+msgstr "Eindverantwoordelijk onderzoeker"
+
 #: experiments/models/location_models.py:8
 msgid "location:attribute:name"
 msgstr "Naam"
