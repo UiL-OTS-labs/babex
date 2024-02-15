@@ -1,4 +1,4 @@
-{% extends 'cdh.core/mail_template.html' %}
+{% extends 'mail/base_new.html' %}
 
 {% block banner %}
     Survey
@@ -8,3 +8,8 @@
     <p>Please complete the following survey:</p>
     <a href="{{link}}">{{link}}</a>
 {% endblock %}
+
+
+{% block footer %}
+    {{ block.super }}
+{% endblock footer %}

@@ -1,4 +1,4 @@
-{% extends 'cdh.core/mail_template.html' %}
+{% extends 'mail/base_new.html' %}
 
 {% block banner %}
     Herinnering afspraak experiment <strong>{{ appointment.experiment.name }}</strong>
@@ -32,7 +32,5 @@
 
 
 {% block footer %}
-    <p>
-        Dit bericht is automatisch verzonden omdat je je hebt ingeschreven voor een experiment.
-    </p>
+    {{ block.super }}
 {% endblock %}
