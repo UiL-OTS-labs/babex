@@ -254,6 +254,9 @@ msgstr "Experiment leaders"
 msgid "experiment:attribute:leaders:help_text"
 msgstr "Users listed here can call participants, manage appointments etc."
 
+msgid "experiment:attribute:responsible_researcher"
+msgstr "Responsible researcher"
+
 #: experiments/models/invite_models.py:25
 msgid "experiments:call:status:started"
 msgstr "Started"

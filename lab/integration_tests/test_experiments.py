@@ -10,6 +10,7 @@ def test_create_experiment(sb, as_admin, sample_leader):
 
     sb.type('textarea[name="task_description"]', "task description")
     sb.type('textarea[name="additional_instructions"]', "additional instructions")
+    sb.type('input[name="responsible_researcher"]', "dr. Lin Guist")
 
     sb.select_option_by_text('select[name="leaders"]', sample_leader.name)
 

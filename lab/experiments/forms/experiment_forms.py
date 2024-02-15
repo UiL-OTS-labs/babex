@@ -23,6 +23,7 @@ class ExperimentForm(TemplatedModelForm):
             "additional_instructions": forms.Textarea({"rows": 7}),
             "confirmation_email": EmailContentEditWidget(None),
             "open": BootstrapCheckboxInput,
+            "responsible_researcher": forms.TextInput,
         }
 
     def __init__(self, *args, **kwargs):
