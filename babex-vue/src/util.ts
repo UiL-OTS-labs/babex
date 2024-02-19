@@ -9,6 +9,10 @@ function formatDate(date: Date): string {
     return formatter.format(date);
 }
 
+function formatDateISO(date: Date): string {
+    return date.toISOString().slice(0, 10);
+}
+
 function formatTime(date: Date): string {
     const options = {
         timeStyle: 'short',
@@ -38,4 +42,4 @@ function _(str: string): string {
     return m[str] ?? str;
 }
 
-export {formatDate, formatTime, formatDateTime, _};
+export {formatDate, formatDateISO, formatTime, formatDateTime, _};

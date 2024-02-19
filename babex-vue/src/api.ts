@@ -1,5 +1,6 @@
 import {urls, parentUrls} from './urls';
 import type {Appointment, Closing, Call} from './types';
+import {formatDateISO} from './util';
 
 function getCookie(name: string): string | null {
     let cookieValue = null;
@@ -37,8 +38,18 @@ class ApiClient {
         };
     }
 
-    async get<T>(url: string): Promise<T> {
-        const result = await fetch(url, {
+    async get<T>(url: string, params?: Record<string, any>): Promise<T> {
+        let u = new URL(url, window.location.href);
+
+        if (params !== undefined) {
+            for(let key of Object.keys(params)) {
+                if (params[key] !== null) {
+                    u.searchParams.append(key, params[key]);
+                }
+            }
+        }
+
+        const result = await fetch(u.toString(), {
             credentials: 'include',
             method: 'GET',
             headers: this.headers()
@@ -195,6 +206,15 @@ class BabexApi {
             },
         },
         log: new GenericApiPart<Call>(this.client, urls.call.log),
+    }
+
+    participants = {
+        demographics: {
+            get: (date: Date, experiment?: number) => {
+                let dateStr = date ? formatDateISO(date) : '';
+                return this.client.get(urls.participants.demographics , {date: dateStr, experiment});
+            }
+        }
     }
 }
 
