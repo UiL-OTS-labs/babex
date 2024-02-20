@@ -124,14 +124,27 @@ class DemographicsDataView(views.APIView):
             return date_of_birth(pp.birth_date).on(date).age_ym()
 
         all = [age(pp) for pp in participants]
-        dyslexia = [age(pp) for pp in participants if pp.dyslexic_parent not in (None, Participant.WhichParent.NEITHER)]
-        multilingual = [age(pp) for pp in participants if pp.multilingual]
-        premature = [
-            age(pp) for pp in participants if pp.pregnancy_duration == Participant.PregnancyDuration.LESS_THAN_37
-        ]
-        rest = [age(pp) for pp in participants if pp not in set(dyslexia + multilingual + premature)]
+        dyslexia = {
+            "Yes": [
+                age(pp) for pp in participants if pp.dyslexic_parent not in (None, Participant.WhichParent.NEITHER)
+            ],
+            "No": [age(pp) for pp in participants if pp.dyslexic_parent in (None, Participant.WhichParent.NEITHER)],
+        }
+        multilingual = {
+            "Yes": [age(pp) for pp in participants if pp.multilingual],
+            "No": [age(pp) for pp in participants if not pp.multilingual],
+        }
 
-        return JsonResponse(dict(all=all, dyslexia=dyslexia, multilingual=multilingual, premature=premature, rest=rest))
+        premature = {
+            "Yes": [
+                age(pp) for pp in participants if pp.pregnancy_duration == Participant.PregnancyDuration.LESS_THAN_37
+            ],
+            "No": [
+                age(pp) for pp in participants if pp.pregnancy_duration != Participant.PregnancyDuration.LESS_THAN_37
+            ],
+        }
+
+        return JsonResponse(dict(all=all, dyslexia=dyslexia, multilingual=multilingual, premature=premature))
 
 
 class ExtraDataAddView(RandomLeaderMixin, SuccessMessageMixin, generic.CreateView):
