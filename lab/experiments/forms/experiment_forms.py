@@ -36,6 +36,7 @@ class ExperimentForm(TemplatedModelForm):
             "excluded_experiments",
             "required_experiments",
             "leaders",
+            "responsible_researcher",
         ]
 
         exclude = ("defaultcriteria", "invite_email")
