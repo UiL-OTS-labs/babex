@@ -35,7 +35,15 @@ def as_leader(sb, django_user_model, live_server):
 
 @pytest.fixture
 def sample_experiment(admin_user, db):
-    yield admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
+    yield admin_user.experiments.create(
+        defaultcriteria=DefaultCriteria.objects.create(),
+        name="sample experiment",
+        duration="10 minutes",
+        session_duration="30 minutes",
+        recruitment_target=50,
+        task_description="task description",
+        additional_instructions="additional instructions",
+    )
 
 
 @pytest.fixture

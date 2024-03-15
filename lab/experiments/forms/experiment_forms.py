@@ -3,13 +3,41 @@ from cdh.core.mail.widgets import EmailContentEditWidget
 from django import forms
 from django.urls import reverse
 
-from ..models import Experiment
+from ..models.experiment_models import ConfirmationMailAttachment, Experiment
+
+
+class MultiUploadWidget(forms.Widget):
+    template_name = "experiments/forms/multi_upload.html"
+    needs_multipart_form = True
+
+    def format_value(self, value):
+        return value
+
+
+class MultiUploadField(forms.Field):
+    widget = MultiUploadWidget
 
 
 class ExperimentForm(TemplatedModelForm):
+    attachments = MultiUploadField(required=False)
+
     class Meta:
         model = Experiment
-        fields = "__all__"
+        fields = [
+            "name",
+            "duration",
+            "session_duration",
+            "recruitment_target",
+            "task_description",
+            "additional_instructions",
+            "confirmation_email",
+            "attachments",
+            "location",
+            "excluded_experiments",
+            "required_experiments",
+            "leaders",
+        ]
+
         exclude = ("defaultcriteria", "invite_email")
         widgets = {
             "name": forms.TextInput,
@@ -31,6 +59,11 @@ class ExperimentForm(TemplatedModelForm):
 
         self.fields["confirmation_email"].widget.preview_url = self.preview_url_confirmation()
 
+        self.fields["attachments"].initial = [
+            {"pk": f.pk, "name": f.filename, "created": f.created, "link": f.link}
+            for f in self.instance.attachments.all()
+        ]
+
         # If we are updating an experiment, make sure you cannot exclude the
         # experiment you are updating!
         if self.instance:
@@ -41,3 +74,14 @@ class ExperimentForm(TemplatedModelForm):
         if self.instance.pk is not None:
             return reverse("experiments:email_preview", args=("confirmation", self.instance.pk))
         return reverse("experiments:email_preview", args=("confirmation",))
+
+    def save(self, *args, **kwargs):
+        experiment = super().save(*args, **kwargs)
+
+        for entry in self.files.getlist("attachments"):
+            ConfirmationMailAttachment.objects.create(experiment=experiment, file=entry, filename=entry.name)
+
+        for entry in self.data.getlist("attachments_remove"):
+            experiment.attachments.filter(pk=entry).delete()
+
+        return experiment
