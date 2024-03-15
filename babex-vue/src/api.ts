@@ -44,7 +44,7 @@ class ApiRequest<T> {
         }
     }
 
-    success(callback: any) {
+    success(callback: (response: T) => void) {
         this._promise = this._promise.then(async result => {
             if (result.status >= 400) {
                 throw new ApiError(result.status, result.statusText);
@@ -54,7 +54,7 @@ class ApiRequest<T> {
         })
     }
 
-    error(callback: any) {
+    error(callback: (error: Error) => void) {
         this._promise = this._promise.catch(e => {
             callback(e);
         });
@@ -88,7 +88,7 @@ class ApiClient {
         }
 
         let abortController = new AbortController();
-        let request = new ApiRequest(
+        let request = new ApiRequest<T>(
             fetch(u.toString(), {
                 credentials: 'include',
                 method: 'GET',
@@ -103,7 +103,7 @@ class ApiClient {
 
     post<T, D>(url: string, values: D): ApiRequest<T> {
         let abortController = new AbortController();
-        let request =  new ApiRequest(
+        let request =  new ApiRequest<T>(
             fetch(url, {
                 credentials: 'include',
                 method: 'POST',
@@ -119,7 +119,7 @@ class ApiClient {
 
     put<T, D>(url: string, id: string, values: D): ApiRequest<T> {
         let abortController = new AbortController();
-        let request = new ApiRequest(
+        let request = new ApiRequest<T>(
             fetch(`${url}${id}/`, {
                 credentials: 'include',
                 method: 'PUT',
@@ -133,25 +133,27 @@ class ApiClient {
     }
 
     delete(url: string, id: string): ApiRequest<void> {
-        let result = fetch(url + id, {
+        let request = fetch(url + id, {
             credentials: 'include',
             method: 'DELETE',
             headers: this.headers()
         });
 
-        return new ApiRequest(new Promise<void>(async (resolve, reject) => {
-            if ((await result).status == 204) {
-                resolve();
-            }
-            else {
-                reject();
-            }
+        return new ApiRequest(new Promise<void>((resolve, reject) => {
+            request.then(result => {
+                if (result.status == 204) {
+                    resolve();
+                }
+                else {
+                    reject();
+                }
+            });
         }));
     }
 
     patch<T, D>(url: string, id: string, values: D): ApiRequest<T> {
         let abortController = new AbortController();
-        let request = new ApiRequest(fetch(`${url}${id}/`, {
+        let request = new ApiRequest<T>(fetch(`${url}${id}/`, {
             credentials: 'include',
             method: 'PATCH',
             headers: this.headers(),

@@ -89,7 +89,7 @@
             };
             let barWidth = (d)=> (x(d.x1) - x(d.x0))/groups.length - 4;
 
-            Object.entries(series).forEach(([key, value] , idx) => {
+            Object.values(series).forEach((value, idx) => {
                 svg.selectAll("rect" + idx)
                    .data(value)
                    .enter()
