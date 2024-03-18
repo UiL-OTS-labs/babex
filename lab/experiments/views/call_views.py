@@ -1,16 +1,20 @@
 import datetime
 
 import ageutil
+from cdh.core.mail import TemplateEmail
+from django.conf import settings
 from django.core.exceptions import BadRequest, PermissionDenied
 from django.http.response import JsonResponse
-from django.utils import timezone
+from django.utils import timezone, translation
 from django.utils.dateparse import parse_datetime
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView
 from rest_framework import generics, serializers, views
 
 from experiments.models import Appointment, Experiment, make_appointment
 from experiments.models.invite_models import Call
 from experiments.serializers import AppointmentSerializer, ExperimentSerializer
+from mailauth.models import create_mail_auth
 from main.auth.util import ExperimentLeaderMixin, IsExperimentLeader
 from main.models import User
 from main.serializers import UserSerializer
@@ -162,5 +166,22 @@ class UpdateCall(generics.UpdateAPIView):
         call.save()
 
         if call.status == Call.CallStatus.DEACTIVATE:
-            call.participant.deactivate()
+            # this happens when an experiment leader talks to a parent on the phone and they ask
+            # to be removed from the database.
+            # we decided that we don't want to apply this directly, but rather send the parent a link
+            # to the page where they can deregister themselves.
+            expiry = timezone.now() + datetime.timedelta(days=7)
+            mauth = create_mail_auth(expiry, participant=call.participant)
+            deactivate_link = mauth.get_link("/data/")
+
+            with translation.override("nl"):
+                mail = TemplateEmail(
+                    html_template="mail/deactivate.html",
+                    context=dict(
+                        base_url=settings.PARENT_URI, name=call.participant.parent_name, deactivate_link=deactivate_link
+                    ),
+                    to=[call.participant.email],
+                    subject=_("experiments:call:deactivate:mail:subject"),
+                )
+            mail.send()
         return JsonResponse(self.serializer_class(call).data)

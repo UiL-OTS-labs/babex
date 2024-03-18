@@ -1,0 +1,11 @@
+{% extends 'cdh.core/mail_template.html' %}
+{% load i18n %}
+{% load transformat %}
+
+{% block banner %}
+    {% translate 'main:mail:deactivate:banner' %}
+{% endblock %}
+
+{% block content %}
+    {% transformat 'main:mail:deactivate:content' name deactivate_link %}
+{% endblock %}
