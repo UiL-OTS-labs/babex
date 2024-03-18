@@ -1,4 +1,4 @@
-{% extends 'cdh.core/mail_template.html' %}
+{% extends 'mail/base_new.html' %}
 
 {% block banner %}
     Herinnering afspraak experiment <strong>{{ appointment.experiment.name }}</strong>
@@ -27,12 +27,5 @@
         Als je vlak vantevoren ontdekt dat je verhinderd bent, neem dan svp even
         persoonlijk contact op met de proefleider ({{ appointment.leader.name }}, email: {{ appointment.leader.email }}
         tel.: {{ appointment.leader.phonenumber }}).
-    </p>
-{% endblock %}
-
-
-{% block footer %}
-    <p>
-        Dit bericht is automatisch verzonden omdat je je hebt ingeschreven voor een experiment.
     </p>
 {% endblock %}

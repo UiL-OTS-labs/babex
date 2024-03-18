@@ -7,7 +7,7 @@
     import {formatDateTime} from '../util';
 
     function parseDate(dateStr: string) : Date {
-        // unfortunately, the Intl date api doesn't provide a paring function,
+        // unfortunately, the Intl date api doesn't provide a parsing function,
         // so this is manually written to parse nl-NL date strings
         const parts = dateStr.split(' ');
         const datePart = parts[0];

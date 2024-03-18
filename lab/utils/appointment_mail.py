@@ -49,7 +49,11 @@ def prepare_appointment_mail(appointment: Appointment):
         replacements["experiment_location"] = experiment.location.name
 
     subject = "Bevestiging inschrijving experiment ILS: {}".format(appointment.experiment.name)
-    email = AppointmentConfirmEmail([participant.email], subject, contents=experiment.confirmation_email)
+    email = AppointmentConfirmEmail(
+        [participant.email],
+        subject,
+        contents=experiment.confirmation_email,
+    )
     email.context = replacements
     return email._get_html_body()
 
@@ -58,8 +62,8 @@ def send_appointment_mail(appointment: Appointment, contents: str) -> None:
     subject = "Bevestiging inschrijving experiment ILS: {}".format(appointment.experiment.name)
 
     class SimpleHTMLMail(BaseEmail):
-        def __init__(self, to, subject, contents):
-            super().__init__(to, subject)
+        def __init__(self, to, subject, contents, **kwargs):
+            super().__init__(to, subject, **kwargs)
             self.contents = contents
 
         def _get_html_context(self):
@@ -71,7 +75,14 @@ def send_appointment_mail(appointment: Appointment, contents: str) -> None:
         def _get_plain_body(self):
             return _strip_tags(self._get_html_body())
 
-    email = SimpleHTMLMail([appointment.participant.email], subject, contents)
+    email = SimpleHTMLMail(
+        [appointment.participant.email],
+        subject,
+        contents,
+        attachments=[
+            (f.filename, f.file.read(), f.file.content_type) for f in appointment.experiment.attachments.all()
+        ],
+    )
     email.send(connection=get_connection())
 
 

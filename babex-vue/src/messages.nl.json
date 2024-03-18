@@ -1,5 +1,13 @@
 {
 
+"//": "src/components/FilePicker.vue:44",
+"Cancel": "Annuleren",
+"//": "src/components/FilePicker.vue:45",
+"Remove": "Verwijderen",
+"//": "src/components/FilePicker.vue:51",
+"Remove": "Verwijderen",
+"//": "src/components/FilePicker.vue:56",
+"+ add another": "+ meer toevoegen",
 "//": "src/components/parent/CancelAppointment.vue:8",
 "Are you sure?": "Weet je het zeker?",
 "//": "src/components/parent/CancelAppointment.vue:15",

@@ -6,6 +6,7 @@ import SurveyView from './components/survey/SurveyView.vue'
 import ParentSurveyView from './components/survey/ParentSurveyView.vue'
 import CancelAppointment from './components/parent/CancelAppointment.vue'
 import ParticipantDemographics from './components/participants/ParticipantDemographics.vue'
+import FilePicker from './components/FilePicker.vue'
 import * as Toaster from './toaster'
 
 
@@ -26,6 +27,7 @@ Object.defineProperty(window, 'babex', {
         CancelAppointment,
 
         ParticipantDemographics
+        FilePicker
     }
 });
 

@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
 
+import cdh.files.db
 from django.db import models
+from django.urls import reverse
 from django.utils.timezone import get_current_timezone
 from django.utils.translation import gettext_lazy as _
 
@@ -127,3 +129,20 @@ class Experiment(models.Model):
 
     def is_leader(self, user: User) -> bool:
         return user.experiments.filter(pk=self.pk).exists()
+
+
+class ConfirmationMailAttachment(models.Model):
+    filename = models.CharField(max_length=255)
+    experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE, related_name="attachments")
+    created = models.DateTimeField(auto_now_add=True)
+    file = cdh.files.db.FileField()
+
+    @property
+    def link(self):
+        return reverse(
+            "experiments:attachment",
+            args=(
+                self.experiment.pk,
+                self.pk,
+            ),
+        )
