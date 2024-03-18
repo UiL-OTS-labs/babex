@@ -26,7 +26,7 @@ Object.defineProperty(window, 'babex', {
         ParentSurveyView,
         CancelAppointment,
 
-        ParticipantDemographics
+        ParticipantDemographics,
         FilePicker
     }
 });
