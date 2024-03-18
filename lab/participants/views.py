@@ -1,19 +1,24 @@
+import datetime
+
+from ageutil import date_of_birth
 from cdh.core.views.mixins import DeleteSuccessMessageMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.http import HttpRequest, HttpResponse
+from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
+from rest_framework import views
 
 from comments.forms import CommentForm
-from main.auth.util import LabManagerMixin, RandomLeaderMixin
+from experiments.models import Experiment
+from experiments.utils.exclusion import get_eligible_participants_for_experiment
+from main.auth.util import IsLabManager, LabManagerMixin, RandomLeaderMixin
 from participants.permissions import (
     can_leader_access_participant,
     participants_visible_to_leader,
 )
 
-from . import graphs
 from .forms import ExtraDataForm, ParticipantForm
 from .models import ExtraData, Participant, ParticipantData
 
@@ -83,21 +88,63 @@ class ParticipantDeleteView(LabManagerMixin, DeleteSuccessMessageMixin, generic.
 class ParticipantsDemographicsView(LabManagerMixin, generic.TemplateView):
     template_name = "participants/demographics.html"
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data()
+        context.update(
+            dict(
+                experiments={
+                    e.pk: dict(
+                        pk=e.pk,
+                        name=e.name,
+                        min_months=e.defaultcriteria.min_age_months,
+                        max_months=e.defaultcriteria.max_age_months,
+                    )
+                    for e in Experiment.objects.all()
+                }
+            )
+        )
+        return context
 
-def render_demograhpics(request: HttpRequest, kind: str, width: int = 850, height: int = 0):
-    """Renders the histograms for the
-    render_demograhpics_png and render_demograhpics_svg views
-    """
 
-    if not height:
-        height = (width * 9) // 16
+class DemographicsDataView(views.APIView):
+    permission_classes = [IsLabManager]
 
-    if kind == "histo":
-        img_bytes = graphs.render_demograhpics(width, height)
-    elif kind == "histo_grouped":
-        img_bytes = graphs.render_demograhpics_by_group(width, height)
-    content_type = "image/svg+xml"
-    return HttpResponse(img_bytes, content_type=content_type)
+    def get(self, request):
+        participants = Participant.objects.filter(deactivated=None)
+        date = datetime.date.today()
+        if "date" in request.GET:
+            date = datetime.datetime.strptime(request.GET["date"], "%Y-%m-%d").date()
+
+        if "experiment" in request.GET:
+            participants = get_eligible_participants_for_experiment(
+                Experiment.objects.get(pk=request.GET["experiment"])
+            )
+
+        def age(pp):
+            return date_of_birth(pp.birth_date).on(date).age_ym()
+
+        all = [age(pp) for pp in participants]
+        dyslexia = {
+            "Yes": [
+                age(pp) for pp in participants if pp.dyslexic_parent not in (None, Participant.WhichParent.NEITHER)
+            ],
+            "No": [age(pp) for pp in participants if pp.dyslexic_parent in (None, Participant.WhichParent.NEITHER)],
+        }
+        multilingual = {
+            "Yes": [age(pp) for pp in participants if pp.multilingual],
+            "No": [age(pp) for pp in participants if not pp.multilingual],
+        }
+
+        premature = {
+            "Yes": [
+                age(pp) for pp in participants if pp.pregnancy_duration == Participant.PregnancyDuration.LESS_THAN_37
+            ],
+            "No": [
+                age(pp) for pp in participants if pp.pregnancy_duration != Participant.PregnancyDuration.LESS_THAN_37
+            ],
+        }
+
+        return JsonResponse(dict(all=all, dyslexia=dyslexia, multilingual=multilingual, premature=premature))
 
 
 class ExtraDataAddView(RandomLeaderMixin, SuccessMessageMixin, generic.CreateView):

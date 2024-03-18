@@ -1,5 +1,6 @@
 import {urls, parentUrls} from './urls';
 import type {Appointment, Closing, Call} from './types';
+import {formatDateISO} from './util';
 
 function getCookie(name: string): string | null {
     let cookieValue = null;
@@ -23,6 +24,44 @@ class ApiError extends Error {
     }
 }
 
+class ApiRequest<T> {
+    _promise: Promise<any>;
+    _abort: AbortController | null = null;
+
+    constructor(promise: Promise<any>, abort?: AbortController) {
+        this._promise = promise;
+        if (abort) {
+            this._abort = abort;
+        }
+    }
+
+    cancel() {
+        if (this._abort) {
+            this._abort.abort();
+        }
+        else {
+            throw new Error("Cannot cancel request");
+        }
+    }
+
+    success(callback: (response: T) => void) {
+        this._promise = this._promise.then(async result => {
+            if (result.status >= 400) {
+                throw new ApiError(result.status, result.statusText);
+            }
+
+            callback(await result.json() as T);
+        })
+    }
+
+    error(callback: (error: Error) => void) {
+        this._promise = this._promise.catch(e => {
+            callback(e);
+        });
+    }
+}
+
+
 class ApiClient {
     csrfToken: string;
 
@@ -37,80 +76,92 @@ class ApiClient {
         };
     }
 
-    async get<T>(url: string): Promise<T> {
-        const result = await fetch(url, {
-            credentials: 'include',
-            method: 'GET',
-            headers: this.headers()
-        });
+    get<T>(url: string, params?: Record<string, any>): ApiRequest<T> {
+        let u = new URL(url, window.location.href);
 
-        if (result.status >= 400) {
-            throw new ApiError(result.status, result.statusText);
+        if (params !== undefined) {
+            for(let key of Object.keys(params)) {
+                if (params[key] !== null) {
+                    u.searchParams.append(key, params[key]);
+                }
+            }
         }
 
-        return await result.json();
+        let abortController = new AbortController();
+        let request = new ApiRequest<T>(
+            fetch(u.toString(), {
+                credentials: 'include',
+                method: 'GET',
+                headers: this.headers(),
+                signal: abortController.signal
+            }),
+            abortController
+        );
+
+        return request;
     }
 
-    async post<T, D>(url: string, values: D): Promise<T> {
-        const result = await fetch(url, {
-            credentials: 'include',
-            method: 'POST',
-            headers: this.headers(),
-            body: JSON.stringify(values),
-        });
+    post<T, D>(url: string, values: D): ApiRequest<T> {
+        let abortController = new AbortController();
+        let request =  new ApiRequest<T>(
+            fetch(url, {
+                credentials: 'include',
+                method: 'POST',
+                headers: this.headers(),
+                body: JSON.stringify(values),
+                signal: abortController.signal
+            }),
+            abortController
+        );
 
-        if (result.status >= 400) {
-            throw new ApiError(result.status, result.statusText);
-        }
-
-        return await result.json();
+        return request;
     }
 
-    async put<T, D>(url: string, id: string, values: D): Promise<T> {
-        const result = await fetch(`${url}${id}/`, {
-            credentials: 'include',
-            method: 'PUT',
-            headers: this.headers(),
-            body: JSON.stringify(values),
-        });
+    put<T, D>(url: string, id: string, values: D): ApiRequest<T> {
+        let abortController = new AbortController();
+        let request = new ApiRequest<T>(
+            fetch(`${url}${id}/`, {
+                credentials: 'include',
+                method: 'PUT',
+                headers: this.headers(),
+                body: JSON.stringify(values),
+                signal: abortController.signal
+            }),
+            abortController);
 
-        if (result.status >= 400) {
-            throw new ApiError(result.status, result.statusText);
-        }
-
-        return await result.json();
+        return request;
     }
 
-    async delete(url: string, id: string): Promise<void> {
-        const result = await fetch(url + id, {
+    delete(url: string, id: string): ApiRequest<void> {
+        let request = fetch(url + id, {
             credentials: 'include',
             method: 'DELETE',
             headers: this.headers()
         });
 
-        return new Promise((resolve, reject) => {
-            if (result.status == 204) {
-                resolve();
-            }
-            else {
-                reject();
-            }
-        });
+        return new ApiRequest(new Promise<void>((resolve, reject) => {
+            request.then(result => {
+                if (result.status == 204) {
+                    resolve();
+                }
+                else {
+                    reject();
+                }
+            });
+        }));
     }
 
-    async patch<T, D>(url: string, id: string, values: D): Promise<T> {
-        const result = await fetch(`${url}${id}/`, {
+    patch<T, D>(url: string, id: string, values: D): ApiRequest<T> {
+        let abortController = new AbortController();
+        let request = new ApiRequest<T>(fetch(`${url}${id}/`, {
             credentials: 'include',
             method: 'PATCH',
             headers: this.headers(),
             body: JSON.stringify(values),
-        });
+            signal: abortController.signal
+        }), abortController);
 
-        if (result.status >= 400) {
-            throw new ApiError(result.status, result.statusText);
-        }
-
-        return await result.json();
+        return request;
     }
 }
 
@@ -131,7 +182,7 @@ class GenericApiPart<T> extends ApiPart {
         this.endpoint = endpoint;
     }
 
-    async list(): Promise<T[]> {
+    async list(): Promise<ApiRequest<T[]>> {
         return this.client.get(this.endpoint);
     }
 
@@ -195,6 +246,15 @@ class BabexApi {
             },
         },
         log: new GenericApiPart<Call>(this.client, urls.call.log),
+    }
+
+    participants = {
+        demographics: {
+            get: (date: Date, experiment?: number) => {
+                let dateStr = date ? formatDateISO(date) : '';
+                return this.client.get(urls.participants.demographics , {date: dateStr, experiment});
+            }
+        }
     }
 }
 

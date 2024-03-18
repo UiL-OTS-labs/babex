@@ -55,9 +55,10 @@
 
     async function tinymcify(el: HTMLTextAreaElement) {
         emailEditor = (await window.tinymce.init({target: el, menubar: false}))[0];
-        const response = await babexApi.call.appointment.getEmail(appointment);
-        emailEditor.setContent(response.content);
-        emailReady = true;
+        babexApi.call.appointment.getEmail(appointment).success(response => {
+            emailEditor.setContent(response.content);
+            emailReady = true;
+        });
     }
 
     function confirmEmail() {
@@ -67,7 +68,7 @@
         babexApi.call.appointment.sendEmail({
             id: appointment,
             content: emailEditor.getContent()
-        }).then(complete);
+        }).success(complete);
     }
 
     function confirm() {
@@ -81,7 +82,7 @@
             experiment: props.experiment.id,
             participant: props.participant.id,
             leader: confirmationForm.value.leader,
-        }).then( (response) => {
+        }).success(response => {
             appointment = response.id!;
             if (confirmationForm.value.emailParticipant) {
                 emailDialog();
@@ -230,7 +231,7 @@
                     <div class="modal-content">
                         <div class="modal-body">
                             <h2>{{ _('Review confirmation mail') }}</h2>
-                            <textarea :ref="(el) => tinymcify(el as HTMLTextAreaElement)">
+                            <textarea :ref="(el: any) => tinymcify(el as HTMLTextAreaElement)">
                             </textarea>
                         </div>
                         <div class="modal-footer">

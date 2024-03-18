@@ -11,6 +11,9 @@ export const urls = {
         sendEmail: '/experiments/call/appointment/email/',
     },
 
+    participants: {
+        demographics: '/participants/demographics/data/',
+    }
 };
 
 // urls for the parent app
