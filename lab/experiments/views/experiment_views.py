@@ -45,6 +45,12 @@ class ExperimentCreateView(LabManagerMixin, SuccessMessageMixin, generic.CreateV
     form_class = ExperimentForm
     success_message = _("experiments:message:create:success")
 
+    # need to pass the CSP nonce from the view to form widgets
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["csp_nonce"] = str(self.request.csp_nonce) if hasattr(self.request, "csp_nonce") else ""
+        return kwargs
+
     def get_success_url(self):
         return reverse("experiments:default_criteria", args=[self.object.pk])
 
@@ -54,6 +60,12 @@ class ExperimentUpdateView(LabManagerMixin, SuccessURLAllowedHostsMixin, Success
     form_class = ExperimentForm
     model = Experiment
     success_message = _("experiments:message:update:success")
+
+    # need to pass the CSP nonce from the view to form widgets
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["csp_nonce"] = str(self.request.csp_nonce) if hasattr(self.request, "csp_nonce") else ""
+        return kwargs
 
     def get_success_url(self):
         url = reverse("experiments:home")

@@ -9,6 +9,10 @@ from ..models.experiment_models import ConfirmationMailAttachment, Experiment
 class MultiUploadWidget(forms.Widget):
     template_name = "experiments/forms/multi_upload.html"
     needs_multipart_form = True
+    nonce = ""
+
+    def get_context(self, *args, **kwargs):
+        return dict(nonce=self.nonce, **super().get_context(*args, **kwargs))
 
     def format_value(self, value):
         return value
@@ -55,7 +59,7 @@ class ExperimentForm(TemplatedModelForm):
             "responsible_researcher": forms.TextInput,
         }
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, csp_nonce="", **kwargs):
         super(ExperimentForm, self).__init__(*args, **kwargs)
 
         self.fields["confirmation_email"].widget.preview_url = self.preview_url_confirmation()
@@ -64,6 +68,7 @@ class ExperimentForm(TemplatedModelForm):
             {"pk": f.pk, "name": f.filename, "created": f.created, "link": f.link}
             for f in self.instance.attachments.all()
         ]
+        self.fields["attachments"].widget.nonce = csp_nonce
 
         # If we are updating an experiment, make sure you cannot exclude the
         # experiment you are updating!
