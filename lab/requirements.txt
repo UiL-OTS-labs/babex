@@ -18,7 +18,7 @@ bpython==0.22.1
     # via
     #   -r requirements.in
     #   cdh-django-core
-cdh-django-core[all,core,federated-auth,files,recommended,rest,vue] @ git+https://github.com/DH-IT-Portal-Development/django-shared-core@develop
+cdh-django-core[all,core,federated-auth,files,recommended,rest,vue] @ git+https://github.com/CentreForDigitalHumanities/django-shared-core@develop
     # via -r requirements.in
 certifi==2021.10.8
     # via requests
@@ -59,6 +59,7 @@ django==4.0.7
     #   django-csp
     #   django-debug-toolbar
     #   django-extensions
+    #   django-filter
     #   django-modeltranslation
     #   django-simple-menu
     #   djangorestframework
@@ -81,6 +82,8 @@ django-extensions==3.1.5
     # via
     #   -r requirements.in
     #   cdh-django-core
+django-filter==23.5
+    # via cdh-django-core
 django-impersonate==1.8.2
     # via
     #   -r requirements.in
