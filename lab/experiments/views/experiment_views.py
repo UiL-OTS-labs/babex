@@ -1,6 +1,6 @@
 import braces.views as braces
 from cdh.core.views.mixins import DeleteSuccessMessageMixin
-from django.contrib.auth.views import SuccessURLAllowedHostsMixin
+from django.contrib.auth.views import RedirectURLMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count
 from django.http.response import HttpResponse
@@ -55,7 +55,7 @@ class ExperimentCreateView(LabManagerMixin, SuccessMessageMixin, generic.CreateV
         return reverse("experiments:default_criteria", args=[self.object.pk])
 
 
-class ExperimentUpdateView(LabManagerMixin, SuccessURLAllowedHostsMixin, SuccessMessageMixin, generic.UpdateView):
+class ExperimentUpdateView(LabManagerMixin, RedirectURLMixin, SuccessMessageMixin, generic.UpdateView):
     template_name = "experiments/edit.html"
     form_class = ExperimentForm
     model = Experiment
