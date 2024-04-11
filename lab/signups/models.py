@@ -3,7 +3,7 @@ from secrets import token_urlsafe
 
 import cdh.core.fields as e_fields
 from cdh.core.fields.mixin import EncryptedMixin
-from cdh.core.mail import TemplateEmail
+from cdh.mail.classes import TemplateEmail
 from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _

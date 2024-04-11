@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     # local apps
     "cdh.core",
     "cdh.files",
+    "cdh.mail",
     "cdh.vue",
     "main",
     "experiments",

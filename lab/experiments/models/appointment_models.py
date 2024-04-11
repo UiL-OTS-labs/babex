@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from cdh.core.mail import TemplateEmail
+from cdh.mail.classes import TemplateEmail
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 

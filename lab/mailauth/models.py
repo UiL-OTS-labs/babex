@@ -3,7 +3,7 @@ from secrets import token_urlsafe
 from typing import List, Optional, Tuple
 
 import cdh.core.fields as e_fields
-from cdh.core.mail import TemplateEmail
+from cdh.mail.classes import TemplateEmail
 from django.conf import settings
 from django.db import models
 

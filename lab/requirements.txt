@@ -16,7 +16,7 @@ bpython==0.24
     # via
     #   -r requirements.in
     #   cdh-django-core
-cdh-django-core[all,core,federated-auth,files,recommended,rest,vue] @ git+https://github.com/CentreForDigitalHumanities/django-shared-core@develop
+cdh-django-core[all,core,federated-auth,files,mail,recommended,rest,vue] @ git+https://github.com/CentreForDigitalHumanities/django-shared-core@develop
     # via -r requirements.in
 certifi==2024.2.2
     # via requests
@@ -96,19 +96,19 @@ djangorestframework==3.15.1
     # via
     #   -r requirements.in
     #   cdh-django-core
-djangosaml2==1.6.0
+djangosaml2==1.9.2
     # via cdh-django-core
 elementpath==4.4.0
     # via xmlschema
 exceptiongroup==1.2.0
     # via pytest
-fonttools==4.50.0
+fonttools==4.51.0
     # via matplotlib
 freezegun==1.4.0
     # via -r requirements.in
 greenlet==3.0.3
     # via bpython
-idna==3.6
+idna==3.7
     # via requests
 iniconfig==2.0.0
     # via pytest
@@ -184,7 +184,7 @@ sqlparse==0.4.4
     #   django-debug-toolbar
 tomli==2.0.1
     # via pytest
-typing-extensions==4.10.0
+typing-extensions==4.11.0
     # via
     #   asgiref
     #   django-modeltranslation

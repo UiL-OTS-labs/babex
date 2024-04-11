@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-from cdh.core.mail import TemplateEmail
+from cdh.mail.classes import TemplateEmail
 from django.db import models
 
 from mailauth.models import create_mail_auth

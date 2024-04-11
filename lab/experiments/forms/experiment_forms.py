@@ -1,5 +1,5 @@
 from cdh.core.forms import BootstrapCheckboxInput, TemplatedModelForm
-from cdh.core.mail.widgets import EmailContentEditWidget
+from cdh.mail.widgets import EmailContentEditWidget
 from django import forms
 from django.urls import reverse
 
