@@ -1,4 +1,4 @@
-from django.contrib.auth.views import SuccessURLAllowedHostsMixin
+from django.contrib.auth.views import RedirectURLMixin
 from django.http import Http404
 from django.urls import reverse_lazy as reverse
 from django.utils.http import url_has_allowed_host_and_scheme
@@ -11,7 +11,7 @@ from ..forms import DefaultCriteriaForm
 from ..models import DefaultCriteria
 
 
-class DefaultCriteriaUpdateView(LabManagerMixin, SuccessURLAllowedHostsMixin, generic.UpdateView):
+class DefaultCriteriaUpdateView(LabManagerMixin, RedirectURLMixin, generic.UpdateView):
     template_name = "criteria/update_default.html"
     form_class = DefaultCriteriaForm
     model = DefaultCriteria

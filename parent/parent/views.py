@@ -9,6 +9,7 @@ from django.http.response import JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 
@@ -117,6 +118,7 @@ def status(request):
     return JsonResponse(dict(ok=True))
 
 
+@ensure_csrf_cookie
 @session_required
 def survey_view(request, invite_id):
     ok, survey_response = gateway(request, f"/gateway/survey/{invite_id}/response/")

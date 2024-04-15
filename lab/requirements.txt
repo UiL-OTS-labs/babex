@@ -8,49 +8,47 @@
     # via -r requirements.in
 -e git+https://github.com/UiL-OTS-labs/django-vue3-tag@main#egg=django-vue3-tag
     # via -r requirements.in
-asgiref==3.5.2
+asgiref==3.8.1
     # via django
-attrs==22.1.0
-    # via pytest
-blessings==1.7
+blessed==1.20.0
     # via curtsies
-bpython==0.22.1
+bpython==0.24
     # via
     #   -r requirements.in
     #   cdh-django-core
-cdh-django-core[all,core,federated-auth,files,recommended,rest,vue] @ git+https://github.com/CentreForDigitalHumanities/django-shared-core@develop
+cdh-django-core[all,core,federated-auth,files,mail,recommended,rest,vue] @ git+https://github.com/CentreForDigitalHumanities/django-shared-core@develop
     # via -r requirements.in
-certifi==2021.10.8
+certifi==2024.2.2
     # via requests
-cffi==1.15.0
+cffi==1.16.0
     # via cryptography
-charset-normalizer==2.0.12
+charset-normalizer==3.3.2
     # via requests
 closure==20191111
     # via cdh-django-core
-contourpy==1.0.6
+contourpy==1.2.1
     # via matplotlib
-cryptography==36.0.2
+cryptography==42.0.5
     # via
     #   -r requirements.in
     #   cdh-django-core
     #   pyopenssl
     #   pysaml2
-curtsies==0.3.10
+curtsies==0.4.2
     # via bpython
-cwcwidth==0.1.6
+cwcwidth==0.1.9
     # via
     #   bpython
     #   curtsies
-cycler==0.11.0
+cycler==0.12.1
     # via matplotlib
 defusedxml==0.7.1
     # via
     #   djangosaml2
     #   pysaml2
-deprecated==1.2.13
+deprecated==1.2.14
     # via cdh-django-core
-django==4.0.7
+django==4.2.11
     # via
     #   -r requirements.in
     #   cdh-django-core
@@ -64,109 +62,101 @@ django==4.0.7
     #   django-simple-menu
     #   djangorestframework
     #   djangosaml2
-django-axes==5.32.0
+django-axes==6.4.0
     # via -r requirements.in
 django-braces==1.15.0
     # via
     #   -r requirements.in
     #   cdh-django-core
-django-csp==3.7
+django-csp==3.8
     # via
     #   -r requirements.in
     #   cdh-django-core
-django-debug-toolbar==3.2.4
+django-debug-toolbar==4.3.0
     # via
     #   -r requirements.in
     #   cdh-django-core
-django-extensions==3.1.5
+django-extensions==3.2.3
     # via
     #   -r requirements.in
     #   cdh-django-core
-django-filter==23.5
-    # via cdh-django-core
-django-impersonate==1.8.2
+django-impersonate==1.9.2
     # via
     #   -r requirements.in
     #   cdh-django-core
-django-ipware==4.0.2
-    # via django-axes
-django-json-widget==1.1.1
+django-json-widget==2.0.1
     # via -r requirements.in
 django-modeltranslation==0.18.11
     # via cdh-django-core
-django-simple-menu==1.2.1
+django-simple-menu==2.1.3
     # via
     #   -r requirements.in
     #   cdh-django-core
-djangorestframework==3.13.1
+djangorestframework==3.15.1
     # via
     #   -r requirements.in
     #   cdh-django-core
-djangosaml2==1.6.0
+djangosaml2==1.9.2
     # via cdh-django-core
-elementpath==4.1.5
+elementpath==4.4.0
     # via xmlschema
-fonttools==4.38.0
-    # via matplotlib
-freezegun==1.2.2
-    # via -r requirements.in
-future==0.18.3
-    # via django-json-widget
-greenlet==1.1.2
-    # via bpython
-idna==3.3
-    # via requests
-iniconfig==1.1.1
+exceptiongroup==1.2.0
     # via pytest
-kiwisolver==1.4.4
+fonttools==4.51.0
+    # via matplotlib
+freezegun==1.4.0
+    # via -r requirements.in
+greenlet==3.0.3
+    # via bpython
+idna==3.7
+    # via requests
+iniconfig==2.0.0
+    # via pytest
+kiwisolver==1.4.5
     # via matplotlib
 lesscpy==0.15.1
     # via cdh-django-core
-matplotlib==3.6.2
+matplotlib==3.8.4
     # via -r requirements.in
-mysqlclient==2.1.0
+mysqlclient==2.2.4
     # via -r requirements.in
-numpy==1.23.5
+numpy==1.26.4
     # via
     #   contourpy
     #   matplotlib
-packaging==21.3
+packaging==24.0
     # via
     #   matplotlib
     #   pytest
-pillow==9.3.0
+pillow==10.3.0
     # via matplotlib
-pluggy==1.0.0
+pluggy==1.4.0
     # via pytest
 ply==3.11
     # via lesscpy
 pscript==0.7.7
     # via vbuild
-py==1.11.0
-    # via pytest
-pycparser==2.21
+pycparser==2.22
     # via cffi
-pygments==2.12.0
+pygments==2.17.2
     # via bpython
-pyjwt==2.3.0
+pyjwt==2.8.0
     # via
     #   -r requirements.in
     #   cdh-django-core
-pyopenssl==22.0.0
+pyopenssl==24.1.0
     # via pysaml2
-pyparsing==3.0.9
-    # via
-    #   matplotlib
-    #   packaging
-pysaml2==7.4.2
+pyparsing==3.1.2
+    # via matplotlib
+pysaml2==7.5.0
     # via djangosaml2
 pyscss==1.4.0
     # via cdh-django-core
-pytest==7.1.3
+pytest==8.1.1
     # via pytest-django
-pytest-django==4.5.2
+pytest-django==4.8.0
     # via -r requirements.in
-python-dateutil==2.8.2
+python-dateutil==2.9.0.post0
     # via
     #   -r requirements.in
     #   freezegun
@@ -174,40 +164,37 @@ python-dateutil==2.8.2
     #   pysaml2
 python-magic==0.4.27
     # via cdh-django-core
-pytz==2022.1
-    # via
-    #   djangorestframework
-    #   pysaml2
-pyxdg==0.27
+pytz==2024.1
+    # via pysaml2
+pyxdg==0.28
     # via bpython
-requests==2.27.1
+requests==2.31.0
     # via
     #   bpython
     #   cdh-django-core
     #   pysaml2
 six==1.16.0
     # via
-    #   blessings
+    #   blessed
     #   pyscss
     #   python-dateutil
-sqlparse==0.4.2
+sqlparse==0.4.4
     # via
     #   django
     #   django-debug-toolbar
 tomli==2.0.1
     # via pytest
-typing-extensions==4.2.0
+typing-extensions==4.11.0
     # via
-    #   bpython
+    #   asgiref
     #   django-modeltranslation
-urllib3==1.26.9
+urllib3==2.2.1
     # via requests
 vbuild==0.8.2
     # via cdh-django-core
-wrapt==1.14.1
+wcwidth==0.2.13
+    # via blessed
+wrapt==1.16.0
     # via deprecated
-xmlschema==2.4.0
+xmlschema==2.5.1
     # via pysaml2
-
-# The following packages are considered to be unsafe in a requirements file:
-# setuptools

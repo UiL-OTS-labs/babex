@@ -1,7 +1,7 @@
 import re
 import urllib.parse as parse
 
-from cdh.core.mail.classes import BaseEmail, _strip_tags
+from cdh.mail.classes import BaseEmail, _strip_tags
 from django.conf import settings
 from django.core.mail import get_connection
 from django.template import defaultfilters
