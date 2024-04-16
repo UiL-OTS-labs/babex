@@ -6,20 +6,12 @@ from menu import Menu, MenuItem
 
 
 def _user_is_authenticated(x: WSGIRequest) -> bool:
-    """
-    Checks whether the user x is is_authenticated
-    """
     return x.user.is_authenticated
 
-
-def _user_is_not_authenticated(x: WSGIRequest) -> bool:
-    """
-    Checks whether the user x is not authenticated
-    """
-    return not _user_is_authenticated(x)
-
-
 def _user_is_admin(req: WSGIRequest) -> bool:
+    return req.user.is_authenticated and req.user.is_superuser
+
+def _user_is_lab_manager(req: WSGIRequest) -> bool:
     return req.user.is_authenticated and req.user.is_staff
 
 
@@ -30,7 +22,7 @@ Menu.add_item("main", MenuItem(_("mainmenu:agenda"), reverse("agenda:home"), che
 
 experiments_menu = [
     MenuItem(_("mainmenu:experiments:overview"), reverse("experiments:home")),
-    MenuItem(_("mainmenu:locations"), reverse("experiments:location_home")),
+    MenuItem(_("mainmenu:locations"), reverse("experiments:location_home"), check=_user_is_admin),
 ]
 
 Menu.add_item(
@@ -40,15 +32,15 @@ Menu.add_item(
 
 users_menu = [
     MenuItem(_("mainmenu:leaders"), reverse("main:users_leaders"), check=_user_is_authenticated),
-    MenuItem(_("mainmenu:admins"), reverse("main:users_admins"), check=_user_is_authenticated),
+    MenuItem(_("mainmenu:admins"), reverse("main:users_admins"), check=_user_is_admin),
 ]
 
-Menu.add_item("main", MenuItem(_("mainmenu:users"), check=_user_is_authenticated, children=users_menu, url=None))
+Menu.add_item("main", MenuItem(_("mainmenu:users"), check=_user_is_lab_manager, children=users_menu, url=None))
 
 participants_menu = [
     MenuItem(_("mainmenu:participants"), reverse("participants:home"), check=_user_is_authenticated),
-    MenuItem(_("mainmenu:demographics"), reverse("participants:demographics"), check=_user_is_authenticated),
-    MenuItem(_("mainmenu:signups"), reverse("signups:list"), check=_user_is_authenticated),
+    MenuItem(_("mainmenu:demographics"), reverse("participants:demographics"), check=_user_is_lab_manager),
+    MenuItem(_("mainmenu:signups"), reverse("signups:list"), check=_user_is_lab_manager),
 ]
 
 Menu.add_item(
@@ -69,7 +61,3 @@ if "datamanagement" in settings.INSTALLED_APPS:
 Menu.add_item(
     "main", MenuItem(_("mainmenu:survey_admin"), reverse("survey_admin:overview"), check=_user_is_authenticated)
 )
-
-Menu.add_item("footer", MenuItem(_("footermenu:login"), reverse("main:login"), check=_user_is_not_authenticated))
-
-Menu.add_item("footer", MenuItem(_("main:globals:logout"), reverse("main:logout"), check=_user_is_authenticated))
