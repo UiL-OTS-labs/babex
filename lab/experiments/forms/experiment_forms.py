@@ -71,11 +71,12 @@ class ExperimentForm(TemplatedModelForm):
             ]
         self.fields["attachments"].widget.nonce = csp_nonce
 
-        # If we are updating an experiment, make sure you cannot exclude the
+        # If we are updating an experiment, make sure you cannot exclude or require the
         # experiment you are updating!
         if self.instance:
             other_experiments = Experiment.objects.exclude(pk=self.instance.pk)
             self.fields["excluded_experiments"].choices = [(x.pk, x.name) for x in other_experiments]
+            self.fields["required_experiments"].choices = [(x.pk, x.name) for x in other_experiments]
 
     def preview_url_confirmation(self):
         if self.instance.pk is not None:
