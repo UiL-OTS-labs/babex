@@ -368,8 +368,8 @@ msgid "participants:globals:actions"
 msgstr "Actions"
 
 #: participants/templates/participants/index.html:53
-msgid "options:yes,no"
-msgstr "yes,no"
+msgid "options:yes,empty"
+msgstr "✔,"
 
 #: participants/templates/participants/index.html:57
 msgid "participants:home:update:title"

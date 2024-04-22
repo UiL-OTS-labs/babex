@@ -59,7 +59,7 @@
                 </tr>
                 <tr>
                     <td> {% get_verbose_field_name "signups" "Signup" "english_contact" %} </td>
-                    <td> {{ signup.english_contact|yesno:_("yes,no")  }} </td>
+                    <td> {{ signup.english_contact|yesno:_("yes,empty")  }} </td>
                 </tr>
             </table>
 

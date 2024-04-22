@@ -22,44 +22,47 @@
 {% endblock %}
 
 {% block content %}
+{% if not is_leader %}
 <div class="uu-inner-container">
     <div class="col-12">
         <h1>
             {% transformat 'experiments:invite:header' experiment.name %}
         </h1>
     </div>
-</div>
-<div class="uu-inner-container">
-    <div class="col-6">
-        {% include 'experiments/criteria_snippit.html' %}
-    </div>
-    <div class="col-6">
-        <p>
-            {% trans 'experiments:invite:info_text' %}
-        </p>
-    </div>
-</div>
-
-{% if not is_leader %}
-<div class="uu-inner-container">
     {% translate 'experiments:invite:not_a_leader' %}
 </div>
 {% endif %}
 
-<div class="uu-inner-container">
-    <h2 class="mt-4">{% trans 'experiments:invite:participants' %}</h2>
+<div class="uu-fullwidth-container">
+    <div class="col-12">
+        <h1>
+            {% transformat 'experiments:invite:header' experiment.name %}
+        </h1>
+    </div>
     <form class="w-100" method="post">
         <div>
             <div class="col-12">
                 {% csrf_token %}
-                <table class="dt_custom" width="100%" data-language="{% datatables_lang %}" data-responsive="">
+                <table class="dt_custom table table-striped" width="100%" data-language="{% datatables_lang %}" data-responsive="">
                     <thead>
                         <tr>
                             <th>
                                 {% get_verbose_field_name "participants" "ParticipantData" "name" %}
                             </th>
                             <th>
-                                {% get_verbose_field_name "participants" "ParticipantData" "email" %}
+                                {% trans 'experiments:invite:age' %}
+                            </th>
+                            <th>
+                                {% get_verbose_field_name "participants" "ParticipantData" "birth_date" %}
+                            </th>
+                            <th>
+                                {% get_verbose_field_name "participants" "ParticipantData" "dyslexic_parent" %}
+                            </th>
+                            <th>
+                                {% trans 'experiments:invite:multilingual' %}
+                            </th>
+                            <th>
+                                {% trans 'experiments:invite:english' %}
                             </th>
                             <th>
                                 {% trans 'experiments:invite:last_call' %}
@@ -83,8 +86,19 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <!-- email -->
-                                    {{ participant.email }}
+                                    {{ participant.age }}
+                                </td>
+                                <td>
+                                    {{ participant.birth_date }}
+                                </td>
+                                <td>
+                                    {{ participant.dyslexic_parent_bool|yesno:_('options:yes,empty') }}
+                                </td>
+                                <td>
+                                    {{ participant.multilingual_bool|yesno:_('options:yes,empty') }}
+                                </td>
+                                <td>
+                                    {{ participant.english_contact|yesno:_('options:yes,empty') }}
                                 </td>
                                 <td>
                                     <!-- last call -->
