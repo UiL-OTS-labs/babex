@@ -919,3 +919,24 @@ msgstr "Zwangerschapsduur"
 
 msgid "experiments:invite:not_a_leader"
 msgstr "Opmerking: u bent geen leider van het experiment"
+
+msgid "experiments:invite:age"
+msgstr "Leeftijd"
+
+msgid "experiments:invite:multilingual"
+msgstr "Meertalig"
+
+msgid "experiments:invite:english"
+msgstr "Engelse communicatie"
+
+msgid "experiments:invite:last_call"
+msgstr "Laatst gebeld"
+
+msgid "experiments:invite:call_status"
+msgstr "Status"
+
+msgid "experiments:invite:actions"
+msgstr "Acties"
+
+msgid "experiments:invite:actions:call"
+msgstr "Bel"
