@@ -4,46 +4,46 @@
 {% load get_field_name %}
 {% load static %}
 
-<div class="uu-inner-container">
-    <div class="col-12">
-        <div class="bg-primary p-2 mb-2">
-            <h3 class="d-inline">
-                {% trans 'experiments:detail:appointments' %}
-            </h3>
-            <a href="{% url 'experiments:participants' experiment.pk %}">
-                {% trans 'experiments:detail:view_participants' %}
-            </a>
-        </div>
-        <table class="w-100 dt_custom table">
-            <thead>
-                <tr>
-                    <th class="w-50">
-                        {% trans 'experiments:detail:participants:name' %}
-                    </th>
-                    <th class="w-25">
-                        {% trans 'experiments:detail:participants:appointment' %}
-                    </th>
-                    <th class="w-25">
-                        {% trans 'experiments:detail:participants:outcome' %}
-                    </th>
-                </tr>
-            </thead>
-            {% for appointment in appointments %}
-                <tr>
-                    <td>
-                        {{ appointment.participant.name }}
-                    </td>
-                    <td data-order="{{ appointment.start|date:'U' }}">
-                        {{ appointment.start|date:"l d M Y, H:i"|capfirst }}
-                    </td>
-                    <td>
-                        {{ appointment.outcome|lower }}
-                    </td>
-                </tr>
-            {% endfor %}
-        </table>
-    </div>
+
+
+<div class="bg-primary p-2 mb-2 mt-2">
+    <h3 class="d-inline">
+        {% trans 'experiments:detail:appointments' %}
+    </h3>
+    <a href="{% url 'experiments:participants' experiment.pk %}">
+        {% trans 'experiments:detail:view_participants' %}
+    </a>
 </div>
+<table class="w-100 dt_custom table">
+    <thead>
+        <tr>
+            <th class="w-50">
+                {% trans 'experiments:detail:participants:name' %}
+            </th>
+            <th class="w-25">
+                {% trans 'experiments:detail:participants:appointment' %}
+            </th>
+            <th class="w-25">
+                {% trans 'experiments:detail:participants:outcome' %}
+            </th>
+        </tr>
+    </thead>
+    {% for appointment in appointments %}
+        <tr>
+            <td>
+                {{ appointment.participant.name }}
+            </td>
+            <td data-order="{{ appointment.start|date:'U' }}">
+                {{ appointment.start|date:"l d M Y, H:i"|capfirst }}
+            </td>
+            <td>
+                {{ appointment.outcome|lower }}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+
 <script>
     $('.dt_custom').DataTable({
         dom: 'tip',
