@@ -4,14 +4,14 @@
 
 <script lang="ts" setup>
     import {defineEmits, defineProps } from 'vue';
-    import {formatDateTime} from '../util';
+    import {formatDate, formatDateTime} from '../util';
 
     function parseDate(dateStr: string) : Date {
         // unfortunately, the Intl date api doesn't provide a parsing function,
         // so this is manually written to parse nl-NL date strings
         const parts = dateStr.split(' ');
         const datePart = parts[0];
-        const timePart = parts[1];
+        const timePart = props.time ? parts[1] : '00:00';
         return new Date(
             datePart.split('-').reverse().join('-') + 'T' + timePart
         );
@@ -25,18 +25,21 @@
         }
     }
 
-    defineProps<{
+    const props = withDefaults(defineProps<{
         modelValue: Date,
-        readonly?: boolean
-    }>();
+        readonly?: boolean,
+        time?: boolean
+    }>(), {
+        time: true
+    });
 
     const emits = defineEmits(['update:modelValue']);
 </script>
 
 <template>
-  <div>
-      <input :readonly="readonly" class="form-control" type="text" :value="formatDateTime(modelValue)" @change="onChange">
-  </div>
+    <div>
+        <input :readonly="readonly" class="form-control" type="text" :value="props.time ? formatDateTime(modelValue): formatDate(modelValue)" @change="onChange">
+    </div>
 </template>
 
 <style scoped>
