@@ -6,7 +6,7 @@
 {% load static %}
 
 {% block header_title %}
-   {% transformat 'experiments:detail:header' experiment.name %} - {{ block.super }}
+    {% transformat 'experiments:detail:header' experiment.name %} - {{ block.super }}
 {% endblock %}
 
 {% block pre-messages-content %}
@@ -18,8 +18,12 @@
 {% endblock %}
 
 {% block content %}
-{% include 'experiments/detail_parts/info.html' %}
-
-{% include 'experiments/detail_parts/participants.html' %}
-
+    <div class="uu-container" >
+        <div class="col-6">
+            {% include 'experiments/detail_parts/info.html' %}
+        </div>
+        <div class="col-12">
+            {% include 'experiments/detail_parts/participants.html' %}
+        </div>
+    </div>
 {% endblock %}
