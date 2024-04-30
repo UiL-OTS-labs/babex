@@ -44,7 +44,7 @@
 </table>
 
 
-<script>
+<script nonce="{{ request.csp_nonce }}">
     $('.dt_custom').DataTable({
         dom: 'tip',
         searching: false,
