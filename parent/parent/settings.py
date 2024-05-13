@@ -149,3 +149,9 @@ MIDDLEWARE.append(
 
 VUE_MANIFEST = BASE_DIR / "parent/static/vue/manifest.json"
 VUE_URL = "/static/vue/"
+
+
+# used for loading secrets when deployed with docker
+def secret(name):
+    path = Path("/run/secrets") / name
+    return path.read_text().strip()
