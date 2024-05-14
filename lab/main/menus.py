@@ -38,7 +38,7 @@ users_menu = [
 Menu.add_item("main", MenuItem(_("mainmenu:users"), check=_user_is_lab_manager, children=users_menu, url=None))
 
 participants_menu = [
-    MenuItem(_("mainmenu:participants"), reverse("participants:home"), check=_user_is_authenticated),
+    MenuItem(_("mainmenu:participants:overview"), reverse("participants:home"), check=_user_is_authenticated),
     MenuItem(_("mainmenu:demographics"), reverse("participants:demographics"), check=_user_is_lab_manager),
     MenuItem(_("mainmenu:signups"), reverse("signups:list"), check=_user_is_lab_manager),
 ]
@@ -58,6 +58,6 @@ if "datamanagement" in settings.INSTALLED_APPS:
         "main", MenuItem(_("mainmenu:datamanagement"), reverse("datamanagement:overview"), check=_user_is_authenticated)
     )
 
-Menu.add_item(
-    "main", MenuItem(_("mainmenu:survey_admin"), reverse("survey_admin:overview"), check=_user_is_authenticated)
-)
+# Menu.add_item(
+#     "main", MenuItem(_("mainmenu:survey_admin"), reverse("survey_admin:overview"), check=_user_is_authenticated)
+# )

@@ -254,8 +254,10 @@ msgid "lang:nl"
 msgstr ""
 
 #: parent/templates/appointment/canceled.html:6
-msgid "appointment:canceled"
-msgstr ""
+msgid "appointment:canceled:message"
+msgstr "<p>De afspraak met {} is geannuleerd. Als u de afspraak wil verplaatsen, neem dan contact op met de onderzoeker.</p>"
+"<p>E-mail: babylab.ilslabs@uu.nl</p>"
+"<p>Telefoonnummer: {}</p>"
 
 #: parent/templates/base/babex_base.html:23
 #: parent/templates/base/babex_base.html:24
@@ -403,3 +405,6 @@ msgstr ""
 
 #~ msgid "parent:error:login_failed"
 #~ msgstr "Inloggen is mislukt, probeer het later opnieuw"
+
+msgid "parent:appointment:canceled"
+msgstr "Geannuleerd"

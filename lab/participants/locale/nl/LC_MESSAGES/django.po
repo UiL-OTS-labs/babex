@@ -297,3 +297,6 @@ msgstr "Dyslectisch ouder"
 
 msgid "options:yes,empty"
 msgstr "✔,"
+
+msgid "participants:demographics:header"
+msgstr "Demografie"

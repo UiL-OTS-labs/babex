@@ -14,10 +14,11 @@
     </div>
     <div class="uu-inner-container">
         <div class="col-10">
-            <p>Hello {{ user.get_full_name }}!</p>
+            <p>{% transformat 'main:home:hello' user.get_full_name %}</p>
+            <p>{% translate 'main:home:welcome' %}</p>
 
             {% if user.is_leader %}
-            <p>You are a leader for the following experiments:</p>
+            <p>{% translate 'main:home:leader' %}
             <ul>
                 {% for experiment in experiments %}
                     <li><a href="{% url 'experiments:detail' experiment.pk %}">{{ experiment.name }}</a></li>
@@ -26,7 +27,7 @@
             {% endif %}
 
             {% if missing_outcome %}
-                <p>Please update the outcome of the following appointments:</p>
+                <p>{% translate 'main:home:appointment_outcome' %}</p>
                 <ul>
                     {% for appointment in missing_outcome %}
                         <li>{{ appointment.timeslot.start | date }}:
@@ -36,7 +37,7 @@
                 </ul>
             {% endif %}
             {% if open_calls %}
-                <p>{% trans 'main:home:open_calls:text' %}
+                <p>{% trans 'main:home:open_calls:text' %}</p>
                 <ul>
                     {% for call in open_calls %}
                         <li><a href="{% url 'experiments:call' call.experiment.pk call.participant.pk %}">{{ call.participant.name }}</a> ({{ call.creation_date | date:'Y-m-d H:i' }})</li>
@@ -45,7 +46,7 @@
             {% endif %}
 
             {% if call_back %}
-                <p>You should call back these parents:</p>
+                <p>{% translate "main:home:call_back" %}</p>
                 <ul>
                     {% for participant in call_back %}
                         <li><a href="{% url 'participants:detail' participant.pk %}">{{ participant.name }}</a></li>

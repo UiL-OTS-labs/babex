@@ -4,4 +4,4 @@ from cdh.core.forms import TemplatedForm
 
 
 class LoginForm(TemplatedForm):
-    email = forms.EmailField()
+    email = forms.EmailField(label="E-mail")

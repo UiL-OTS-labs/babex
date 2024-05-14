@@ -338,3 +338,21 @@ msgstr "There is one signup"
 
 msgid "main:home:signups:link"
 msgstr "waiting for approval"
+
+msgid "mainmenu:participants:overview"
+msgstr "Overview"
+
+msgid "main:home:appointment_outcome"
+msgstr "Please update the outcome of the following appointments:"
+
+msgid "main:home:hello"
+msgstr "Hello {}!"
+
+msgid "main:home:welcome"
+msgstr "Welcome to the Babylab administration system"
+
+msgid "main:home:leader"
+msgstr "You are a leader of the following experiments:"
+
+msgid "main:home:call_back"
+msgstr "These participants should be called back:"
