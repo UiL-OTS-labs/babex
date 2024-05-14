@@ -6,6 +6,7 @@ import cdh.core.fields as e_fields
 from cdh.mail.classes import TemplateEmail
 from django.conf import settings
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from participants.models import Participant
 
@@ -19,17 +20,19 @@ class MailAuth(models.Model):
     # null by default, generated upon succesful login. Has to be present in any (non-login) request.
     session_token = models.CharField(max_length=64, null=True, unique=True)
 
+    # note that self.participant is None until the login has been succesful
     participant = models.ForeignKey("participants.Participant", on_delete=models.CASCADE, null=True)
 
-    def send(self):
+    def send(self, addressee: str):
         mail = TemplateEmail(
             html_template="mailauth/link.html",
             context=dict(
+                addressee=addressee,  # parent name
                 base_url=settings.PARENT_URI,
                 link_token=self.link_token,
             ),
             to=[self.email],
-            subject="login link",
+            subject=_("mailauth:send:subject"),
         )
         mail.send()
 

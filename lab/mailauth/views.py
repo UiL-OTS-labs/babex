@@ -39,7 +39,11 @@ class MailAuthView(views.APIView):
         # email exists, generate token and send it
         expiry = datetime.now() + timedelta(hours=24)
         mauth = create_mail_auth(expiry, email)
-        mauth.send()
+
+        # while there might be multiple participants matching the given email address,
+        # we assume they all use the same parent name.
+        parent_name = pps[-1].parent_name
+        mauth.send(parent_name)
         return Response(dict())
 
 
