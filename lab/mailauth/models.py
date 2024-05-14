@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 from secrets import token_urlsafe
 from typing import List, Optional, Tuple
 
@@ -6,6 +6,7 @@ import cdh.core.fields as e_fields
 from cdh.mail.classes import TemplateEmail
 from django.conf import settings
 from django.db import models
+from django.utils import translation
 from django.utils.translation import gettext_lazy as _
 
 from participants.models import Participant
@@ -24,17 +25,18 @@ class MailAuth(models.Model):
     participant = models.ForeignKey("participants.Participant", on_delete=models.CASCADE, null=True)
 
     def send(self, addressee: str):
-        mail = TemplateEmail(
-            html_template="mailauth/link.html",
-            context=dict(
-                addressee=addressee,  # parent name
-                base_url=settings.PARENT_URI,
-                link_token=self.link_token,
-            ),
-            to=[self.email],
-            subject=_("mailauth:send:subject"),
-        )
-        mail.send()
+        with translation.override("nl"):
+            mail = TemplateEmail(
+                html_template="mailauth/link.html",
+                context=dict(
+                    addressee=addressee,  # parent name
+                    base_url=settings.PARENT_URI,
+                    link_token=self.link_token,
+                ),
+                to=[self.email],
+                subject=_("mailauth:send:subject"),
+            )
+            mail.send()
 
     def get_link(self, redirect=None):
         return settings.PARENT_URI + f"auth/{self.link_token}?redirect={redirect}"
