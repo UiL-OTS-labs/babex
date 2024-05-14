@@ -126,6 +126,6 @@ def _send_cancel_confirmation(appointment: Appointment) -> None:
         html_template="mail/appointment/canceled.html",
         context=context,
         to=[appointment.participant.email],
-        subject="ILS appointment canceled",
+        subject=_("experiments:mail:appointment:canceled:subject")
     )
     mail.send()

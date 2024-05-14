@@ -842,3 +842,6 @@ msgstr "Acties"
 
 msgid "experiments:invite:actions:call"
 msgstr "Bel"
+
+msgid "experiments:mail:appointment:canceled:subject"
+msgstr "Babylab voor Taalonderzoek: Afspraak geannuleerd"
