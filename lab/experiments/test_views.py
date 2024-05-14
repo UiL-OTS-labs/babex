@@ -24,7 +24,10 @@ class AppointmentTests(TestCase):
         cls.experiment = Experiment.objects.create()
         cls.experiment.leaders.add(cls.user)
 
-        cls.participant = Participant.objects.create(dyslexic_parent=Participant.WhichParent.UNKNOWN)
+        cls.participant = Participant.objects.create(
+            birth_date=datetime(2021, 4, 1),
+            dyslexic_parent=Participant.WhichParent.UNKNOWN
+        )
 
     def setUp(self):
         self.factory = APIRequestFactory()
@@ -109,6 +112,7 @@ class InviteTests(TestCase):
         cls.experiment.leaders.add(cls.user)
 
         cls.participant = Participant.objects.create(
+            birth_date=datetime(2021, 4, 1),
             dyslexic_parent=Participant.WhichParent.NEITHER,
         )
 
