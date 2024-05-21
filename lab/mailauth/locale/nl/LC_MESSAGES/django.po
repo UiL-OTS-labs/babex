@@ -20,4 +20,4 @@ msgstr ""
 
 #: mailauth/models.py:33
 msgid "mailauth:send:subject"
-msgstr "Babylab voor Taalonderzoek: Link voor Selfservice"
+msgstr "Babylab voor Taalonderzoek: Link voor Babylabportaal"

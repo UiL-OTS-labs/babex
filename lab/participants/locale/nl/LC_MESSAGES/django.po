@@ -78,11 +78,11 @@ msgstr "Geslacht"
 
 #: participants/models.py:111
 msgid "participant:attribute:email_subscription"
-msgstr "Op maillijst"
+msgstr "Nieuwsbrief ontvangen"
 
 #: participants/models.py:128
 msgid "participant:attribute:created"
-msgstr "Aangemaakt op"
+msgstr "Aanmelddatum"
 
 #: participants/models.py:137 participants/models.py:178
 msgid "participant:name:unknown"
@@ -293,10 +293,112 @@ msgid "default_criteria:attribute:no"
 msgstr "Nee"
 
 msgid "participant:attribute:dyslexic_parent"
-msgstr "Dyslectisch ouder"
+msgstr "Dyslectische ouder"
 
 msgid "options:yes,empty"
 msgstr "✔,"
 
 msgid "participants:demographics:header"
 msgstr "Demografie"
+
+msgid "participant:attribute:birth_weight"
+msgstr "Geboortegewicht"
+
+msgid "participant:attribute:pregnancy_duration"
+msgstr "Zwangerschapsduur"
+
+msgid "participant:attribute:age"
+msgstr "Leeftijd"
+
+msgid "participant:attribute:languages"
+msgstr "Talen"
+
+msgid "participants:age:years"
+msgstr "jaar"
+
+msgid "participants:age:months"
+msgstr "maand"
+
+msgid "participants:age:days"
+msgstr "dagen"
+
+msgid "participant:attribute:which_parent:m"
+msgstr "Vader"
+
+msgid "participant:attribute:which_parent:f"
+msgstr "Moeder"
+
+msgid "participant:attribute:which_parent:both"
+msgstr "Moeder en vader"
+
+msgid "participant:attribute:which_parent:neither"
+msgstr "Nee"
+
+msgid "participant:attribute:which_parent:unk"
+msgstr "Onbekend"
+
+msgid "participant:attribute:parent_name"
+msgstr "Naam ouder"
+
+msgid "participant:attribute:phonenumber_alt"
+msgstr "Tweede telefoonnummer"
+
+msgid "participants:detail:appointment:location"
+msgstr "Locatie"
+
+msgid "participants:detail:appointment:outcome"
+msgstr "Uitslag"
+
+msgid "participants:detail:calls"
+msgstr "Gesprekken"
+
+msgid "participants:detail:calls:status"
+msgstr "Status"
+
+msgid "participants:detail:calls:called_by"
+msgstr "Gebeld door"
+
+msgid "participants:detail:comments"
+msgstr "Opmerkingen"
+
+msgid "participants:detail:comments:new"
+msgstr "+ Opmerking toevoegen"
+
+msgid "participants:detail:comments:submit"
+msgstr "Toevoegen"
+
+msgid "participants:detail:general"
+msgstr "Gegevens"
+
+msgid "participants:detail:contact"
+msgstr "Contactgegevens"
+
+msgid "participants:detail:appointments"
+msgstr "Afspraken"
+
+msgid "participants:detail:extradata"
+msgstr "Extra data"
+
+msgid "participants:detail:extradata:title"
+msgstr "Beschrijving"
+
+msgid "participants:detail:extradata:content"
+msgstr "Inhoud"
+
+msgid "participants:detail:extradata:new"
+msgstr "+ Toevoegen"
+
+msgid "participants:detail:manage"
+msgstr "Administratie"
+
+msgid "participants:detail:sections"
+msgstr "Menu"
+
+msgid "participants:detail:edit"
+msgstr "Aanpassen"
+
+msgid "participants:age"
+msgstr "Aanpassen"
+
+msgid "participant:attribute:english_contact"
+msgstr "Engelse communicatie"

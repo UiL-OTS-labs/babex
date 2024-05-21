@@ -66,6 +66,9 @@ class Signup(models.Model):
                 context=dict(
                     base_url=settings.PARENT_URI,
                     link_token=self.link_token,
+                    parent_first_name=self.parent_first_name,
+                    parent_last_name=self.parent_last_name,
+                    name=self.name,
                 ),
                 to=[self.email],
                 subject=_("signups:mail:validation:subject"),

@@ -1,13 +1,13 @@
 {% extends 'mail/base_new.html' %}
 
 {% block banner %}
-    Link voor Selfservice
+    Link voor Babylabportaal
 {% endblock %}
 
 {% block content %}
     <p>Beste {{ addressee }},</p>
     <p>
-        U wilt inloggen op de selfservice-pagina van het Babylab voor Taalonderzoek. U kunt in de selfservice-pagina uw contactgegevens aanpassen en u kunt uw deelnemende kind(eren) aan- en afmelden voor het Babylab voor Taalonderzoek.
+        U wilt inloggen bij het Babylabportaal. U kunt hier uw contactgegevens aanpassen en u kunt uw deelnemende kind(eren) aanmelden of afmelden voor onderzoeken van het Babylab voor Taalonderzoek.
     </p>
     <p>
         U kunt inloggen via <a href="{{ base_url }}auth/{{ link_token }}">deze link</a>. Deze link is 24 uur geldig.
@@ -17,7 +17,7 @@
         {{ base_url }}auth/{{ link_token }}
     </p>
     <p>
-        Mocht de link verlopen zijn, dan kunt u opnieuw een verzoek tot aanpassen doen via de <a href="">Babylab voor Taalonderzoek selfservice</a>. Mocht u verder nog vragen of opmerkingen hebben, dan kunt u contact met ons opnemen via
+        Mocht de link verlopen zijn, dan kunt u opnieuw een verzoek tot aanpassen doen via het <a href="https://www.babylabportaal.ilslabs.hum.uu.nl/">Babylabportaal</a>. Mocht u verder nog vragen of opmerkingen hebben, dan kunt u contact met ons opnemen via
         <a href="mailto:babylab.ilslabs@uu.nl">babylab.ilslabs@uu.nl</a>.
     </p>
     <p>

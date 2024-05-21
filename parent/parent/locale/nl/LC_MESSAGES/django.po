@@ -255,7 +255,7 @@ msgstr ""
 
 #: parent/templates/appointment/canceled.html:6
 msgid "appointment:canceled:message"
-msgstr "<p>De afspraak met {} is geannuleerd. Als u de afspraak wil verplaatsen, neem dan contact op met de onderzoeker.</p>"
+msgstr "<p>De afspraak met {} is geannuleerd. Als u de afspraak wilt verplaatsen, neem dan contact op met de onderzoeker.</p>"
 "<p>E-mail: babylab.ilslabs@uu.nl</p>"
 "<p>Telefoonnummer: {}</p>"
 
@@ -285,7 +285,7 @@ msgstr ""
 
 #: parent/templates/data/home.html:23
 msgid "parent:data:remove:button"
-msgstr ""
+msgstr "Uitschrijven"
 
 #: parent/templates/data/removed.html:7
 msgid "parent:date:removed"
@@ -315,7 +315,7 @@ msgstr "Aanmelden bij het Babylab"
 
 #: parent/templates/parent/home.html:23
 msgid "parent:home:signin"
-msgstr "Inloggen bij Selfservice pagina"
+msgstr "Inloggen bij het Babylabportaal"
 
 #: parent/templates/parent/overview.html:19
 msgid "parent:appointments"
@@ -347,11 +347,11 @@ msgstr "U heeft geen verzoek gekregen om een vragenlijst in te vullen."
 
 #: parent/templates/parent/side_menu.html:4
 msgid "parent:sidebar:overview"
-msgstr "Overzicht"
+msgstr "Afspraken"
 
 #: parent/templates/parent/side_menu.html:5
 msgid "parent:sidebar:data"
-msgstr "Datamanagement"
+msgstr "Uitschrijven"
 
 #: parent/templates/parent/side_menu.html:6
 msgid "parent:sidebar:contact"
@@ -361,13 +361,6 @@ msgstr "Neem contact op"
 msgid "signup:header"
 msgstr "Aanmelden bij het Babylab"
 
-#: parent/templates/signup_confirmed.html:7
-msgid "parent:signup_confirmed:message"
-msgstr ""
-
-#: parent/templates/signup_done.html:7
-msgid "parent:signup_done:message"
-msgstr ""
 
 #: parent/templates/widgets/languages_widget.html:7
 msgid "parent:forms:signup:languages:mono_dutch"

@@ -1,10 +1,29 @@
 {% extends 'mail/base_new.html' %}
 
 {% block banner %}
-    Verify your email address
+    Bevestiging e-mailadres
 {% endblock %}
 
 {% block content %}
-    <p><a href="{{ base_url }}signup/verify/{{ link_token }}">Click here</a> to verify your email address.</p>
-    <p><em>Note: this link will expire in 24 hours</em></p>
+    <p>Beste {{ parent_first_name }} {{ parent_last_name }},</p>
+
+    <p>
+        Hartelijk dank voor het aanmelden van {{ name }}. Leuk dat jullie mee willen doen!
+    </p>
+    <p>
+        <a href="{{ base_url }}signup/verify/{{ link_token }}">Klik a.u.b. hier</a> om uw e-mailadres te bevestigen. Deze link is 24 uur geldig. Na deze tijd moeten wij uw gegevens verwijderen en staat uw kind niet bij ons ingeschreven.
+    </p>
+
+    <p>
+        Na bevestiging van uw e-mailadres staat uw kind ingeschreven in het systeem van het Babylab voor Taalonderzoek.
+        Zodra er een onderzoek is waaraan {{ name }} kan meedoen, dan wordt er telefonisch contact met u opgenomen. Wanneer het telefonisch niet lukt, zal de assistent van het Babylab via de e-mail contact met u proberen op te nemen.
+    </p>
+    <p>
+        Hopelijk tot snel in het Babylab!
+    </p>
+
+    <p>
+        Vriendelijke groet,<br>
+        Het team van het Babylab voor Taalonderzoek
+    </p>
 {% endblock %}

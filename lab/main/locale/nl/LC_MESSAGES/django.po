@@ -292,3 +292,9 @@ msgstr "Proefleiders"
 
 msgid "users:admins:header"
 msgstr "Labmanagers"
+
+msgid "main:home:appointment_outcome"
+msgstr "Bij de volgende participanten is het resultaat van het testen nog niet ingevuld:"
+
+msgid "main:home:signups:link"
+msgstr "nieuwe aanmeldingen"
