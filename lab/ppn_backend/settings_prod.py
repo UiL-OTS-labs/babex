@@ -54,11 +54,11 @@ MIDDLEWARE += [
 FRONTEND_URI = "https://" + getenv('LAB_SERVER')
 PARENT_URI = "https://" + getenv('PARENT_SERVER')
 
-# try:
-#     from .saml_settings import enable_saml
-#     enable_saml(globals())
-# except ImportError:
-#     print("Proceeding without SAML")
+try:
+    from .saml_settings import enable_saml
+    enable_saml(globals())
+except ImportError:
+    print("Proceeding without SAML")
 
 
 # Email

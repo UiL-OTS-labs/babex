@@ -1,4 +1,4 @@
-from os import path
+from os import getenv
 
 from cdh.federated_auth.saml.settings import (
     SAML_APPS,
@@ -9,17 +9,14 @@ from django.urls import reverse_lazy
 
 
 def enable_saml(namespace):
-    base_dir = path.dirname(path.dirname(__file__))
-
     namespace["SAML_CONFIG"] = create_saml_config(
-        base_url="http://localhost:8000",
+        base_url="https://" + getenv("LAB_SERVER"),
         name="babex",
-        key_file=path.join(base_dir, "certs/private.key"),
-        cert_file=path.join(base_dir, "certs/public.cert"),
-        # idp_metadata="https://login.uu.nl/nidp/saml2/metadata",
-        idp_metadata="http://localhost:7000/saml/idp/metadata/",
-        contact_given_name="Ben",
-        contact_email="ben@localhost.local",
+        key_file="/run/secrets/SAML_KEY",
+        cert_file="/run/secrets/SAML_CERT",
+        idp_metadata=getenv("SAML_IDP_METADATA"),
+        contact_given_name=getenv("SAML_CONTACT_NAME"),
+        contact_email=getenv("SAML_CONTACT_EMAIL")
     )
 
     namespace["SAML_ATTRIBUTE_MAPPING"] = {
