@@ -23,12 +23,22 @@ function formatTime(date: Date): string {
 
 
 function formatDateTime(date: Date): string {
-    const options = {
-        timeStyle: 'short',
-        dateStyle: 'short',
-    } as const;
-    const formatter = new Intl.DateTimeFormat('nl-NL', options);
-    return formatter.format(date);
+    const format = '%Y-%m-%d %H:%M';
+    const parts = {
+        Y: date.getFullYear(),
+        m: date.getMonth() + 1,
+        d: date.getDate(),
+        H: date.getHours(),
+        M: date.getMinutes()
+    } as Record<string, number>;
+
+    return format.replace(/%(\w)/g, (_, key: string) => {
+        let part = parts[key].toString();
+        if (part.length < 2) {
+            return '0' + part;
+        }
+        return part;
+    });
 }
 
 
