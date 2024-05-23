@@ -52,7 +52,6 @@ django==4.2.11
     # via
     #   -r requirements.in
     #   cdh-django-core
-    #   django-axes
     #   django-braces
     #   django-csp
     #   django-debug-toolbar
@@ -62,8 +61,6 @@ django==4.2.11
     #   django-simple-menu
     #   djangorestframework
     #   djangosaml2
-django-axes==6.4.0
-    # via -r requirements.in
 django-braces==1.15.0
     # via
     #   -r requirements.in
@@ -80,6 +77,8 @@ django-extensions==3.2.3
     # via
     #   -r requirements.in
     #   cdh-django-core
+django-filter==24.2
+    # via cdh-django-core
 django-impersonate==1.9.2
     # via
     #   -r requirements.in
