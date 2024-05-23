@@ -12,7 +12,6 @@ from collections import namedtuple
 from datetime import date
 
 import django
-from django.utils.translation import gettext_lazy as _
 import pytest
 
 from lab_settings import EMAIL_FILE_PATH
@@ -147,6 +146,7 @@ def as_admin(sb, lab_app):
     sb.type("#id_username", "admin")
     sb.type("#id_password", "admin")
     sb.click('button:contains("Log in")')
+    sb.click('button:contains("English")')
     sb.switch_to_default_driver()
     return driver
 
@@ -200,7 +200,7 @@ def login_as(sb, apps, link_from_mail, mailbox):
         sb.click('button:contains("Send")')
 
         # use login link from (second) email
-        if link := link_from_mail(email, _('mailauth:send:subject')):
+        if link := link_from_mail(email, 'Link'):
             sb.open(link)
             return True
         return False
