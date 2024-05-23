@@ -23,7 +23,7 @@ function formatTime(date: Date): string {
 
 
 function formatDateTime(date: Date): string {
-    const format = '%Y-%m-%d %H:%M';
+    const format = '%d-%m-%Y %H:%M';
     const parts = {
         Y: date.getFullYear(),
         m: date.getMonth() + 1,
