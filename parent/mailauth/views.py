@@ -47,6 +47,7 @@ class LoginFormView(FormView):
     def form_valid(self, form):
         ok, result = gateway(self.request, "/gateway/mailauth/", data=dict(email=form.cleaned_data["email"]))
         if ok:
+            self.request.session['email'] = form.cleaned_data['email']
             return super().form_valid(form)
         messages.error(self.request, _("parent:error:login_failed"))
         return super().get(self.request)

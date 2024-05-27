@@ -31,10 +31,8 @@ class MailAuthView(views.APIView):
 
         pps = Participant.find_by_email(email)
         if len(pps) < 1:
-            # TODO: perhaps better to display a message that says
-            # "if the address exists in our system you will shortly receive an email"
-            # instead of revealing whether an email address appears in our db or not
-            raise exceptions.AuthenticationFailed()
+            # fail silently to avoid revealing whether an email address appears in our db
+            return Response(dict())
 
         # email exists, generate token and send it
         expiry = datetime.now() + timedelta(hours=24)

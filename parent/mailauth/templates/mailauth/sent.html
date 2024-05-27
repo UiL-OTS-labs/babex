@@ -1,10 +1,10 @@
 {% extends 'base/babex_base.html' %}
-{% load i18n %}
+{% load transformat %}
 
 {% block content %}
     <div class="uu-container">
         <div class="col-12" >
-            {% trans 'parent:mailauth:sent' %}
+            {% transformat 'parent:mailauth:sent' request.session.email %}
         </div>
     </div>
 {% endblock %}
