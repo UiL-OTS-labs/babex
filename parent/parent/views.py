@@ -98,7 +98,8 @@ def overview(request):
         messages.error(request, _("parent:error:data_generic"))
         return render(request, "parent/overview.html")
 
-    appointments = sorted(appointments, key=itemgetter("start"))
+    # sorting by outcome is a simple way to push canceled appointments to the bottom of the list
+    appointments = sorted(appointments, key=lambda a: (a["outcome"] is not None, a["start"]))
     # only show future appointments
     appointments = [a for a in appointments if a["start"].date() >= datetime.date.today()]
 
