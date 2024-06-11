@@ -3,9 +3,20 @@
 {% load transformat %}
 
 {% block banner %}
-    {% translate 'main:mail:deactivate:banner' %}
+    {% translate 'experiments:call:deactivate:mail:subject' %}
 {% endblock %}
 
 {% block content %}
-    {% transformat 'main:mail:deactivate:content' name deactivate_link %}
+    <p>
+        Beste {{parent_name}},
+    </p>
+
+    <p>
+        U wilt uw kind {{participant_name}} uitschrijven. Om de uitschrijving definitief te maken vragen wij u om dit te bevestigen
+        door op <a href="">deze link</a> te klikken.
+    </p>
+
+    <p>
+        Hartelijk dank dat u met uw kind heeft bijgedragen (of bij heeft willen dragen) aan het onderzoek in ons Babylab.
+    </p>
 {% endblock %}

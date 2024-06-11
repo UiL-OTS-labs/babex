@@ -16,11 +16,7 @@ $(function () {
         ],
         responsive: true,
         paginationType: "full_numbers",
-        columnDefs: [ {
-            targets: 4,
-            orderable: false
-        }
-        ]
+
     });
 
     $('#master_checkbox').click(function () {

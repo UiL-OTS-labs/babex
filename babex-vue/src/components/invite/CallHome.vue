@@ -4,9 +4,9 @@
     import AgendaCalendar from '../agenda/AgendaCalendar.vue';
     import {babexApi} from '../../api';
     import {Call} from '../../types';
-    import {formatDate, formatTime} from '../../util';
     import {EventApi, DateSelectArg} from '@fullcalendar/core';
 
+    import DateTimePicker from '../DateTimePicker.vue';
 
     const props = defineProps<{
         participant: {id: number, name: string},
@@ -29,12 +29,16 @@
     const event = ref<EventApi|null>(null);
     const saving = ref(false);
 
+    // event start and end times saved as separate refs because
+    // our DateTimePicker doesn't play nicely with fullcalendar's event object
+    const eventStart = ref<Date|null>(null);
+    const eventEnd = ref<Date|null>(null);
+
     const callStatus = ref<string|null>(null);
     const comment = ref('');
     const confirmationForm = ref({
         leader: props.leaders[0].id,
         emailParticipant: true,
-        editEmail: false,
     });
 
     // we can probably skip type checking tinymce's interface
@@ -42,6 +46,7 @@
 
     let emailEditor: TinyMCE;
     let appointment: number;
+    let emailReady = false;
 
     function emailDialog() {
         modalVisible.value = false;
@@ -49,35 +54,37 @@
     }
 
     async function tinymcify(el: HTMLTextAreaElement) {
-        emailEditor = (await window.tinymce.init({target: el}))[0];
-        const response = await babexApi.call.appointment.getEmail(appointment);
-        emailEditor.setContent(response.content);
+        emailEditor = (await window.tinymce.init({target: el, menubar: false}))[0];
+        babexApi.call.appointment.getEmail(appointment).success(response => {
+            emailEditor.setContent(response.content);
+            emailReady = true;
+        });
     }
 
     function confirmEmail() {
+        // ignore send button clicked before email content was fetched
+        if (!emailReady) return;
+
         babexApi.call.appointment.sendEmail({
             id: appointment,
             content: emailEditor.getContent()
-        }).then(complete);
+        }).success(complete);
     }
 
     function confirm() {
-        if(!event.value || !event.value.start || !event.value.end) {
+        if(!event.value || !eventStart.value || !eventEnd.value) {
             return;
         }
 
         babexApi.call.appointment.create({
-            start: event.value.start,
-            end: event.value.end,
+            start: eventStart.value,
+            end: eventEnd.value,
             experiment: props.experiment.id,
             participant: props.participant.id,
             leader: confirmationForm.value.leader,
-            // when editEmail is selected, suppress the normal email sending function, as we'll do
-            // that from a separate form
-            emailParticipant: confirmationForm.value.emailParticipant && !confirmationForm.value.editEmail
-        }).then( (response) => {
-            if (confirmationForm.value.editEmail) {
-                appointment = response.id!;
+        }).success(response => {
+            appointment = response.id!;
+            if (confirmationForm.value.emailParticipant) {
                 emailDialog();
             }
             else {
@@ -101,6 +108,8 @@
                 start: selectionInfo.start,
                 end: selectionInfo.end
             });
+            eventStart.value = selectionInfo.start;
+            eventEnd.value = selectionInfo.end;
         }
         else {
             calendar.value?.calendar.getApi().changeView('timeGridDay', selectionInfo.start);
@@ -171,7 +180,7 @@
                             <button @click="modalVisible = false" type="button" class="btn btn-secondary">{{ _('Cancel') }}</button>
                         </div>
                     </div>
-                    <div v-if="step === 1 && event?.start && event?.end" class="modal-content">
+                    <div v-if="step === 1 && eventStart && eventEnd" class="modal-content">
                         <div class="modal-body">
                             <h2>{{ _('Appointment details') }}</h2>
                             <table class="table mt-3">
@@ -179,15 +188,12 @@
                                     <th>{{ _('Participant') }}</th><td>{{ participant.name }}</td>
                                 </tr>
                                 <tr>
-                                    <th>{{ _('Date') }}</th><td>{{ formatDate(event.start) }}</td>
-                                </tr>
-                                <tr>
                                     <th>{{ _('From') }}</th>
-                                    <td>{{ formatTime(event.start) }}</td>
+                                    <td><DateTimePicker v-model="eventStart" /></td>
                                 </tr>
                                 <tr>
                                     <th>{{ _('To') }}</th>
-                                    <td>{{ formatTime(event.end) }}</td>
+                                    <td><DateTimePicker v-model="eventEnd" /></td>
                                 </tr>
                             </table>
 
@@ -202,13 +208,6 @@
                                     <label class="form-label">
                                         <input class="me-2 form-check-input" type="checkbox"
                                                v-model="confirmationForm.emailParticipant"/>{{ _('Send confirmation email') }}
-                                    </label>
-                                </div>
-                                <div class="row mb-3 justift-content-center">
-                                    <label class="form-label">
-                                        <input class="me-2 form-check-input" type="checkbox"
-                                               :disabled="!confirmationForm.emailParticipant"
-                                               v-model="confirmationForm.editEmail"/>{{ _('Edit mail before sending') }}
                                     </label>
                                 </div>
                             </form>
@@ -231,12 +230,12 @@
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                         <div class="modal-body">
-                            <h2>{{ _('Edit message') }}</h2>
-                            <textarea :ref="(el) => tinymcify(el as HTMLTextAreaElement)">
+                            <h2>{{ _('Review confirmation mail') }}</h2>
+                            <textarea :ref="(el: any) => tinymcify(el as HTMLTextAreaElement)">
                             </textarea>
                         </div>
                         <div class="modal-footer">
-                            <button @click="confirmEmail" type="button" class="btn btn-primary">{{ _('Confirm') }}</button>
+                            <button @click="confirmEmail" type="button" class="btn btn-primary">{{ _('Send') }}</button>
                             <button @click="emailModalVisible = false" type="button" class="btn btn-secondary">{{ _('Cancel') }}</button>
                         </div>
                     </div>
@@ -245,3 +244,9 @@
         </div>
     </Teleport>
 </template>
+
+<style scoped>
+    textarea {
+        height: 650px;
+    }
+</style>

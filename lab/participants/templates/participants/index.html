@@ -28,10 +28,10 @@
                 <tr>
                     <th> {% get_verbose_field_name "participants" "ParticipantData" "name" %} </th>
                     <th> {% get_verbose_field_name "participants" "ParticipantData" "birth_date" %} </th>
-                    <th> {% trans 'participants:age' %} </th>
+                    <th> {% trans 'participant:age' %} </th>
                     <th> {% get_verbose_field_name "participants" "ParticipantData" "sex" %} </th>
                     <th> {% get_verbose_field_name "participants" "ParticipantData" "phonenumber" %} </th>
-                    <th> {% translate "participants:attribute:multilingual" %} </th>
+                    <th> {% translate "participant:attribute:multilingual" %} </th>
                     <th> {% get_verbose_field_name "participants" "Participant" "created" %} </th>
                     {# The data-priority makes sure this column is always visible #}
                     <th data-priority="1">
@@ -50,7 +50,7 @@
                         <td> {{ participant.age }} </td>
                         <td> {{ participant.get_sex_display|default_if_none:"" }} </td>
                         <td> {{ participant.phonenumber }} </td>
-                        <td> {{ participant.multilingual|yesno:_('options:yes,no') }} </td>
+                        <td> {{ participant.multilingual|yesno:_('options:yes,empty') }} </td>
                         <td> {{ participant.created|date:'Y-m-d' }} </td>
                         <td>
                             <a href="{% url 'participants:edit' participant.pk %}"

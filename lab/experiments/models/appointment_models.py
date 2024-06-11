@@ -1,7 +1,8 @@
 from datetime import datetime
 
-from cdh.core.mail import TemplateEmail
+from cdh.mail.classes import TemplateEmail
 from django.db import models
+from django.utils import translation
 from django.utils.translation import gettext_lazy as _
 
 from main.models import User
@@ -81,7 +82,7 @@ class Appointment(models.Model):
             self.save()
             if not silent:
                 _inform_leaders(self)
-                _send_confirmation(self)
+                _send_cancel_confirmation(self)
 
     @property
     def is_canceled(self):
@@ -97,6 +98,7 @@ def make_appointment(experiment: Experiment, participant: Participant, leader: U
         participant=participant, timeslot=timeslot, experiment=experiment, leader=leader
     )
     return appointment
+
 
 def _inform_leaders(appointment: Appointment) -> None:
     experiment = appointment.experiment
@@ -117,13 +119,15 @@ def _inform_leaders(appointment: Appointment) -> None:
         )
         mail.send()
 
-def _send_confirmation(appointment: Appointment) -> None:
+
+def _send_cancel_confirmation(appointment: Appointment) -> None:
     context = {"appointment": appointment}
 
-    mail = TemplateEmail(
-        html_template="mail/appointment/canceled.html",
-        context=context,
-        to=[appointment.participant.email],
-        subject="ILS appointment canceled",
-    )
-    mail.send()
+    with translation.override("nl"):
+        mail = TemplateEmail(
+            html_template="mail/appointment/canceled.html",
+            context=context,
+            to=[appointment.participant.email],
+            subject=_("experiments:mail:appointment:canceled:subject")
+        )
+        mail.send()

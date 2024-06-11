@@ -39,18 +39,30 @@
                 {{ appointment.timeslot.start|date:"l" }}
             </td>
             <td>
-                <a href="{% url 'participants:detail' appointment.participant.pk %}">{{ appointment.participant.fullname }}</a>
+                {% if appointment.participant.data %}
+                    <a href="{% url 'participants:detail' appointment.participant.pk %}">
+                {% endif %}
+                {{ appointment.participant.fullname }}
+                {% if appointment.participant.data %}
+                    </a>
+                {% endif %}
             </td>
             <td>
-                <a href="mailto:{{ appointment.participant.email }}">
-                    {{ appointment.participant.email }}
-                </a>
+                {% if appointment.participant.data %}
+                    <a href="mailto:{{ appointment.participant.email }}">
+                        {{ appointment.participant.email }}
+                    </a>
+                {% endif %}
             </td>
             <td>
-                {{ appointment.participant.phonenumber }}
+                {% if appointment.participant.data %}
+                    {{ appointment.participant.phonenumber }}
+                {% endif %}
             </td>
             <td>
-                {{ appointment.participant.birth_date|date:"Y-m-d" }}
+                {% if appointment.participant.data %}
+                    {{ appointment.participant.birth_date|date:"Y-m-d" }}
+                {% endif %}
             </td>
             <td>
                 <!-- actions -->

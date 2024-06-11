@@ -1,6 +1,7 @@
 import re
 import urllib.parse as parse
 
+from cdh.mail.classes import BaseEmail, _strip_tags
 from django.conf import settings
 from django.core.mail import get_connection
 from django.template import defaultfilters
@@ -8,6 +9,7 @@ from django.utils import translation
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.timezone import localtime
+from django.utils.translation import gettext as _
 
 from experiments.email import AppointmentConfirmEmail
 from experiments.models import Appointment
@@ -16,13 +18,11 @@ from mailauth.models import create_mail_auth
 CANCEL_LINK_REGEX = r"{cancel_link(?::\"(.*)\")?}"
 
 
-def send_appointment_mail(appointment: Appointment, override_content=None) -> None:
+def prepare_appointment_mail(appointment: Appointment):
     experiment = appointment.experiment
     participant = appointment.participant
     time_slot = appointment.timeslot
     assert time_slot
-
-    subject = "Bevestiging inschrijving experiment ILS: {}".format(experiment.name)
 
     # generate auth link for cancelation
     expiry = time_slot.end
@@ -35,6 +35,8 @@ def send_appointment_mail(appointment: Appointment, override_content=None) -> No
         replacements = {
             "experiment_name": experiment.name,
             "experiment_location": "",
+            "experiment_duration": experiment.duration,
+            "session_duration": experiment.session_duration,
             "participant_name": participant.name,
             "parent_name": participant.parent_name,
             "leader_name": appointment.leader.name,
@@ -46,13 +48,46 @@ def send_appointment_mail(appointment: Appointment, override_content=None) -> No
             "time": defaultfilters.date(localtime(time_slot.start), "H:i"),
         }
 
+    subject = _("experiment:mail:appointment:confirm:subject").format(appointment.experiment.name)
+
     if experiment.location:
         replacements["experiment_location"] = experiment.location.name
 
     email = AppointmentConfirmEmail(
-        [participant.email], subject, contents=override_content or experiment.confirmation_email
+        [participant.email],
+        subject,
+        contents=experiment.confirmation_email,
     )
     email.context = replacements
+    return email._get_html_body()
+
+
+def send_appointment_mail(appointment: Appointment, contents: str) -> None:
+    with translation.override("nl"):
+        subject = _("experiment:mail:appointment:confirm:subject").format(appointment.experiment.name)
+
+    class SimpleHTMLMail(BaseEmail):
+        def __init__(self, to, subject, contents, **kwargs):
+            super().__init__(to, subject, **kwargs)
+            self.contents = contents
+
+        def _get_html_context(self):
+            return dict()
+
+        def _get_html_body(self):
+            return self.contents
+
+        def _get_plain_body(self):
+            return _strip_tags(self._get_html_body())
+
+    email = SimpleHTMLMail(
+        [appointment.participant.email],
+        subject,
+        contents,
+        attachments=[
+            (f.filename, f.file.read(), f.file.content_type) for f in appointment.experiment.attachments.all()
+        ],
+    )
     email.send(connection=get_connection())
 
 

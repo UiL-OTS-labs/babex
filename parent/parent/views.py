@@ -9,6 +9,7 @@ from django.http.response import JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 
@@ -97,7 +98,8 @@ def overview(request):
         messages.error(request, _("parent:error:data_generic"))
         return render(request, "parent/overview.html")
 
-    appointments = sorted(appointments, key=itemgetter("start"))
+    # sorting by outcome is a simple way to push canceled appointments to the bottom of the list
+    appointments = sorted(appointments, key=lambda a: (a["outcome"] is not None, a["start"]))
     # only show future appointments
     appointments = [a for a in appointments if a["start"].date() >= datetime.date.today()]
 
@@ -117,6 +119,7 @@ def status(request):
     return JsonResponse(dict(ok=True))
 
 
+@ensure_csrf_cookie
 @session_required
 def survey_view(request, invite_id):
     ok, survey_response = gateway(request, f"/gateway/survey/{invite_id}/response/")
@@ -153,13 +156,21 @@ def survey_response_view(request):
 
 @session_required
 def cancel_appointment_view(request, appointment_id):
-    # TODO: handle appointment already canceled
+    ok, appointment = gateway(request, f"/gateway/appointment/{appointment_id}/")
+    if not ok:
+        messages.error(request, _("parent:error:data_generic"))
+        return render(request, "parent/overview.html")
+
+    if appointment['outcome'] == 'CANCELED':
+        # appointment already canceled
+        return render(request, "appointment/canceled.html", dict(appointment=appointment))
+
     ok, result = gateway(request, f"/gateway/appointment/{appointment_id}/", method="delete")
     if not ok:
         messages.error(request, _("parent:error:appointment_cancel"))
         return JsonResponse(dict(ok=False))
 
-    return render(request, "appointment/canceled.html")
+    return render(request, "appointment/canceled.html", dict(appointment=appointment))
 
 
 @session_required

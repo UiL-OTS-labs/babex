@@ -81,10 +81,10 @@ class DefaultCriteria(models.Model):
         if self.min_age_days is None and self.min_age_months is None:
             return _("experiments:globals:indifferent")
 
-        return "{}; {}".format(self.min_age_months or 0, self.min_age_days or 0)
+        return "{};{}".format(self.min_age_months or 0, self.min_age_days or 0)
 
     def get_max_age_display(self):
         if self.max_age_days is None and self.max_age_months is None:
             return _("experiments:globals:indifferent")
 
-        return "{}; {}".format(self.max_age_months or 0, self.max_age_days or 0)
+        return "{};{}".format(self.max_age_months or 0, self.max_age_days or 0)

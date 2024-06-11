@@ -35,7 +35,7 @@ def test_cancel_appointment_from_email(apps, participant, mailbox, link_from_mai
 
     # somewhat abusing the get_model() calls above to setup django for the following to work
     from experiments.models import make_appointment
-    from utils.appointment_mail import send_appointment_mail
+    from utils.appointment_mail import send_appointment_mail, prepare_appointment_mail
 
     leader = User.objects.first()  # admin
     start = timezone.now()
@@ -44,7 +44,7 @@ def test_cancel_appointment_from_email(apps, participant, mailbox, link_from_mai
     experiment.save()
     appointment = make_appointment(experiment, participant, leader, start, end)
 
-    send_appointment_mail(appointment)
+    send_appointment_mail(appointment, prepare_appointment_mail(appointment))
 
     sb.open(link_from_mail(participant.email))
 

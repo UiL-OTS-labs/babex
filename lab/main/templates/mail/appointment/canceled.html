@@ -1,26 +1,26 @@
-{% extends 'cdh.core/mail_template.html' %}
+{% extends 'mail/base_new.html' %}
 
 {% block banner %}
-    Appointment canceled: {{ appointment.experiment.name }}
+    Afspraak afgezegd: {{ appointment.experiment.name }}
 {% endblock %}
 
 {% block content %}
     <p>
-        Dear {{  appointment.participant.parent_name }},
+        Beste {{  appointment.participant.parent_name }},
     </p>
 
     <p>
-        This is a confirmation that you have canceled the following appointment:
+        De volgende afspraak is geannuleerd:
     </p>
 
     <p>
         Experiment: {{ appointment.experiment.name }}<br>
-        Date: {{ appointment.start|date }}<br>
-        Time: {{ appointment.start|time }}<br>
+        Datum: {{ appointment.start|date:"l d M Y, H:i"|lower }}<br>
+        Tijd: {{ appointment.start|time }}<br>
     </p>
 
     <p>
-        Regards,<br>
-        ILS Labs
+        Vriendelijke groet,<br>
+        Het team van het Babylab voor Taalonderzoek
     </p>
 {% endblock %}

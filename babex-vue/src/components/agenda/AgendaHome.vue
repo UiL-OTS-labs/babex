@@ -63,6 +63,8 @@
         if (props.date) {
             calendar.value?.calendar.getApi().changeView('timeGridDay', props.date);
         }
+
+        setInterval(() => calendar.value?.calendar.getApi().refetchEvents(), 5000);
     })
 
 </script>

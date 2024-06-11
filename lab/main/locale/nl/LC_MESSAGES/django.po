@@ -239,3 +239,62 @@ msgstr "Nieuw admin account aangemaakt!"
 #: main/views/users.py:84
 msgid "users:message:changed_password"
 msgstr "Wachtwoord gewijzigd!"
+
+
+msgid "mainmenu:agenda"
+msgstr "Agenda"
+
+msgid "mainmenu:experiments:overview"
+msgstr "Overzicht"
+
+msgid "mainmenu:participants:overview"
+msgstr "Overzicht"
+
+msgid "mainmenu:users"
+msgstr "Gebruikers"
+
+msgid "mainmenu:demographics"
+msgstr "Demografie"
+
+msgid "mainmenu:signups"
+msgstr "Nieuwe aanmeldingen"
+
+msgid "mainmenu:admin"
+msgstr "Administratie"
+
+msgid "mainmenu:admin:closings"
+msgstr "Sluitingen"
+
+msgid "main:home:open_calls:text"
+msgstr ""
+"Bij de volgende gebelde participanten is het resultaat van het bellen nog niet ingevuld:"
+
+msgid "main:home:signups:text:plural"
+msgstr "Er wachten nog {} aanmeldingen op goedkeuring:"
+
+msgid "main:home:signups:text:single"
+msgstr "Er wacht nog één aanmelding op goedkeuring:"
+
+msgid "main:home:hello"
+msgstr "Hallo {}!"
+
+msgid "main:home:welcome"
+msgstr "Welkom bij het administratiesysteem van het Babylab voor taalonderzoek!"
+
+msgid "main:home:leader"
+msgstr "Jij bent leider van de volgende experimenten:"
+
+msgid "main:home:call_back"
+msgstr "De volgende participanten moeten teruggebeld worden:"
+
+msgid "users:leaders:header"
+msgstr "Proefleiders"
+
+msgid "users:admins:header"
+msgstr "Labmanagers"
+
+msgid "main:home:appointment_outcome"
+msgstr "Bij de volgende participanten is het resultaat van het testen nog niet ingevuld:"
+
+msgid "main:home:signups:link"
+msgstr "nieuwe aanmeldingen"

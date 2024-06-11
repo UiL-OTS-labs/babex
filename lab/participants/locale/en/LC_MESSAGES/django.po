@@ -52,27 +52,27 @@ msgstr "Unknown"
 
 #: participants/models.py:29
 msgid "participant:attribute:birth_weight:less_than_2500"
-msgstr "Less than 2500 grams"
+msgstr "< 2500 grams"
 
 #: participants/models.py:30
 msgid "participant:attribute:birth_weight:2500_to_4500"
-msgstr "Between 2500 to 4500 grams"
+msgstr "2500–4500 grams"
 
 #: participants/models.py:31
 msgid "participant:attribute:birth_weight:more_than_4500"
-msgstr "More than 4500 grams"
+msgstr "> 4500 grams"
 
 #: participants/models.py:34
 msgid "participant:attribute:pregnancy_duration:less_than_37"
-msgstr "Less than 37 weeks"
+msgstr "< 37 weeks"
 
 #: participants/models.py:35
 msgid "participant:attribute:pregnancy_duration:37_to_42"
-msgstr "Between 37 to 42 weeks"
+msgstr "37–42 weeks"
 
 #: participants/models.py:36
 msgid "participant:attribute:pregnancy_duration:more_than_42"
-msgstr "More than 42 weeks"
+msgstr "> 42 weeks"
 
 #: participants/models.py:40
 msgid "participant:attribute:name"
@@ -368,8 +368,8 @@ msgid "participants:globals:actions"
 msgstr "Actions"
 
 #: participants/templates/participants/index.html:53
-msgid "options:yes,no"
-msgstr "yes,no"
+msgid "options:yes,empty"
+msgstr "✔,"
 
 #: participants/templates/participants/index.html:57
 msgid "participants:home:update:title"

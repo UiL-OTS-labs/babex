@@ -1,0 +1,91 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-14 15:24+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: signups/models.py:45
+msgid "participant:attribute:birth_weight"
+msgstr ""
+
+#: signups/models.py:47
+msgid "participant:attribute:pregnancy_weeks"
+msgstr ""
+
+#: signups/models.py:51
+msgid "signups:stats:new"
+msgstr ""
+
+#: signups/models.py:52
+msgid "signups:stats:approved"
+msgstr ""
+
+#: signups/models.py:53
+msgid "signups:stats:rejected"
+msgstr ""
+
+#: signups/templates/signups/signup_detail.html:10
+msgid "signups:detail:header"
+msgstr "Gegevens aanmelding"
+
+#: signups/templates/signups/signup_detail.html:41
+msgid "signup:attribute:parent_name"
+msgstr ""
+
+#: signups/templates/signups/signup_detail.html:62
+msgid "yes,empty"
+msgstr ""
+
+#: signups/templates/signups/signup_detail.html:68
+msgid "signups:detail:approve"
+msgstr "Goedkeuren"
+
+#: signups/templates/signups/signup_detail.html:69
+msgid "signups:detail:reject"
+msgstr "Verwijderen"
+
+#: signups/templates/signups/signup_list.html:10
+msgid "signups:list:header"
+msgstr "Nieuwe aanmeldingen"
+
+#: signups/templates/signups/signup_list.html:19
+msgid "signups:list:intro"
+msgstr ""
+"Hier staan alle nieuw aangemelde participanten. Klik bij iedere participant op de gegevens om ze individueel goed te keuren (of te verwijderen). <p>Pas na goedkeuring komen ze in het systeem te staan.</p>"
+
+#: signups/templates/signups/signup_list.html:55
+msgid "signups:list:detail"
+msgstr "Gegevens"
+
+#: signups/templates/signups/signup_list.html:62
+msgid "signups:list:remove"
+msgstr "Verwijderen"
+
+#: signups/templates/signups/signup_list.html:65
+msgid "signups:list:empty"
+msgstr ""
+
+#: signups/views.py:39
+msgid "signups:messages:approved"
+msgstr ""
+
+#: signups/views.py:42
+msgid "signups:messages:rejected"
+msgstr ""
+
+msgid "signups:mail:validation:subject"
+msgstr "Babylab voor Taalonderzoek: Bevestiging e-mailadres"

@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-from cdh.core.mail import TemplateEmail
+from cdh.mail.classes import TemplateEmail
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
@@ -12,19 +12,21 @@ class Command(BaseCommand):
     help = "Sends notifications about new signups, intended to be run as a cronjob"
 
     def handle(self, *args, **options):
-        # fetch new signups from the last 24 hours
-        threshold = datetime.now() - timedelta(days=1)
+        # fetch new signups from the last 7 days
+        threshold = datetime.now() - timedelta(days=7)
         new_signups = Signup.objects.filter(status=Signup.Status.NEW, created__gte=threshold).count()
-        total_waiting = Signup.objects.filter(status=Signup.Status.NEW).count()
+        total_waiting = Signup.objects.filter(status=Signup.Status.NEW).exclude(email_verified=None).count()
+        unverified = Signup.objects.filter(status=Signup.Status.NEW, email_verified=None).count()
 
-        # mail should reach all experiment leaders and lab managers
-        recipients = User.objects.filter(experiments__isnull=False) | User.objects.filter(is_staff=True)
+        # mail should reach all lab managers
+        recipients = User.objects.filter(is_staff=True)
         if new_signups > 0:
             mail = TemplateEmail(
                 html_template="signups/mail/notification.html",
                 context=dict(
                     count=new_signups,
                     total=total_waiting,
+                    unverified=unverified,
                     base_url=settings.FRONTEND_URI,
                 ),
                 to=[],

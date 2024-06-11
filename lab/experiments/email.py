@@ -1,4 +1,4 @@
-from cdh.core.mail import BaseCustomTemplateEmail, CTEVarDef
+from cdh.mail.classes import BaseCustomTemplateEmail, CTEVarDef
 from django.utils.translation import gettext_lazy as _
 
 

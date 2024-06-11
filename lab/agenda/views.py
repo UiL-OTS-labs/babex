@@ -1,13 +1,12 @@
 import dateutil.parser
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
 from django.views import generic
 from rest_framework import generics, permissions, status, viewsets
 from rest_framework.response import Response
 
 from experiments.models import Appointment, Location
 from experiments.serializers import AppointmentSerializer
-from main.auth.util import LabManagerMixin, RandomLeaderMixin
+from main.auth.util import IsExperimentLeader, LabManagerMixin, RandomLeaderMixin
+from utils.appointment_mail import prepare_appointment_mail, send_appointment_mail
 
 from .models import Closing, ClosingSerializer
 
@@ -63,6 +62,11 @@ class ClosingViewSet(viewsets.ModelViewSet):
 
 class AppointmentViewSet(viewsets.ModelViewSet):
     serializer_class = AppointmentSerializer
+    permission_classes = [IsExperimentLeader]
+
+    @property
+    def experiment(self):
+        return self.get_object().experiment
 
     def get_queryset(self):
         queryset = Appointment.objects.all()
@@ -70,6 +74,15 @@ class AppointmentViewSet(viewsets.ModelViewSet):
 
     def perform_destroy(self, appointment: Appointment):
         appointment.cancel()
+
+    def perform_update(self, serializer):
+        original_timeslot = self.get_object().timeslot
+        updated = serializer.save()
+        updated_timeslot = updated.timeslot
+
+        # check if we should inform the participant about changed time
+        if original_timeslot.start != updated_timeslot.start or original_timeslot.end != updated_timeslot.end:
+            send_appointment_mail(updated, prepare_appointment_mail(updated))
 
 
 class ClosingsAdminView(LabManagerMixin, generic.TemplateView):

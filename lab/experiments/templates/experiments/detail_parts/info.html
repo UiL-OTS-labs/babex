@@ -5,119 +5,117 @@
 {% load static %}
 
 
-<div class="uu-container">
-    <div class="row gx-3 w-100">
-        <div class="col-4">
-            <div class="p-2">
-                <h3 class="d-inline">
-                    {% trans 'experiments:detail:progress' %}
-                </h3>
-            </div>
-            <div>
-                <table class="table table-striped mt-1">
-                    <tbody>
-                        <tr>
-                            <td>{% trans 'experiments:detail:progress:target' %}</td>
-                            <td>{{ progress.target }}</td>
-                        </tr>
-                        <tr>
-                            <td>{% trans 'experiments:detail:progress:tested' %}</td>
-                            <td>{{ progress.tested }}</td>
-                        </tr>
-                        <tr>
-                            <td>{% trans 'experiments:detail:progress:planned' %}</td>
-                            <td>{{ progress.planned }}</td>
-                        </tr>
-                        <tr>
-                            <td>{% trans 'experiments:detail:progress:excluded' %}</td>
-                            <td>{{ progress.excluded }}</td>
-                        </tr>
-                    </tbody>
-                    <tbody class="table-group-divider">
-                        <tr>
-                            <td>{% trans 'experiments:detail:progress:to_plan' %}</td>
-                            <td>{{ progress.to_plan }}</td>
-                        </tr>
-                        <tr>
-                            <td>{% trans 'experiments:detail:progress:to_test' %}</td>
-                            <td>{{ progress.to_test }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+
+
+<ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#progress">{% trans 'experiments:detail:progress' %}</button>
+    </li>
+    <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#info">{% trans 'experiments:detail:info' %}</button>
+    </li>
+    <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#criteria">{% trans 'experiments:detail:criteria' %}</button>
+    </li>
+</ul>
+<div class="tab-content">
+    <div class="tab-pane fade show active" id="progress" role="tabpanel">
+        <table class="table table-striped mt-1">
+            <tbody>
+                <tr>
+                    <td>{% trans 'experiments:detail:progress:target' %}</td>
+                    <td>{{ progress.target }}</td>
+                </tr>
+                <tr>
+                    <td>{% trans 'experiments:detail:progress:tested' %}</td>
+                    <td>{{ progress.tested }}</td>
+                </tr>
+                <tr>
+                    <td>{% trans 'experiments:detail:progress:planned' %}</td>
+                    <td>{{ progress.planned }}</td>
+                </tr>
+                <tr>
+                    <td>{% trans 'experiments:detail:progress:excluded' %}</td>
+                    <td>{{ progress.excluded }}</td>
+                </tr>
+            </tbody>
+            <tbody class="table-group-divider">
+                <tr>
+                    <td>{% trans 'experiments:detail:progress:to_plan' %}</td>
+                    <td>{{ progress.to_plan }}</td>
+                </tr>
+                <tr>
+                    <td>{% trans 'experiments:detail:progress:to_test' %}</td>
+                    <td>{{ progress.to_test }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="tab-pane fade" id="info" role="tabpanel">
+        <table class="table table-striped mt-1">
+            <tr>
+                <td>
+                    {% trans 'experiment:attribute:duration' %}
+                </td>
+                <td>
+                    {{ experiment.duration }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {% trans 'experiment:attribute:session_duration' %}
+                </td>
+                <td>
+                    {{ experiment.session_duration }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {% trans 'experiments:detail:info:task_description' %}
+                </td>
+                <td>
+                    {{ experiment.task_description }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {% trans 'experiments:detail:info:additional_instructions' %}
+                </td>
+                <td>
+                    {{ experiment.additional_instructions }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {% trans 'experiments:detail:info:location' %}
+                </td>
+                <td>
+                    {{ experiment.location }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {% trans 'experiments:detail:info:leader' %}
+                </td>
+                <td>
+                    {{ experiment.leader_names }}
+                </td>
+            </tr>
+        </table>
+        <div class="p-2">
+            <h3 class="d-inline">
+            </h3>
+            <a class="btn btn-secondary" href="{% url 'experiments:update' experiment.pk %}?next={{ request.path }}">
+                {% trans 'experiments:detail:edit_info' %}
+            </a>
         </div>
-        <div class="col-4">
-            <div class="p-2">
-                <h3 class="d-inline">
-                    {% trans 'experiments:detail:info' %}
-                </h3>
-                <a href="{% url 'experiments:update' experiment.pk %}?next={{ request.path }}">
-                    {% trans 'experiments:detail:edit_info' %}
-                </a>
-            </div>
-            <div>
-                <table class="table table-striped mt-1">
-                    <tr>
-                        <td>
-                            {% trans 'experiment:attribute:duration' %}
-                        </td>
-                        <td>
-                            {{ experiment.duration }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            {% trans 'experiment:attribute:session_duration' %}
-                        </td>
-                        <td>
-                            {{ experiment.session_duration }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            {% trans 'experiments:detail:info:task_description' %}
-                        </td>
-                        <td>
-                            {{ experiment.task_description }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            {% trans 'experiments:detail:info:additional_instructions' %}
-                        </td>
-                        <td>
-                            {{ experiment.additional_instructions }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            {% trans 'experiments:detail:info:location' %}
-                        </td>
-                        <td>
-                            {{ experiment.location }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            {% trans 'experiments:detail:info:leader' %}
-                        </td>
-                        <td>
-                            {{ experiment.leader_names }}
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="p-2">
-                <h3 class="d-inline">
-                    {% trans 'experiments:detail:criteria' %}
-                </h3>
-                <a href="{% url 'experiments:default_criteria' experiment.pk %}?next={{ request.path }}">
-                    {% trans 'experiments:detail:edit_default_criteria' %}
-                </a>
-            </div>
-            {% include 'experiments/criteria_snippit.html' %}
+    </div>
+    <div class="tab-pane fade" id="criteria" role="tabpanel">
+        {% include 'experiments/criteria_snippit.html' %}
+        <div class="p-2">
+            <a class="btn btn-secondary" href="{% url 'experiments:default_criteria' experiment.pk %}?next={{ request.path }}">
+                {% trans 'experiments:detail:edit_default_criteria' %}
+            </a>
         </div>
     </div>
 </div>

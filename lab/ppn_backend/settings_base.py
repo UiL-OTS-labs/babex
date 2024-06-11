@@ -14,7 +14,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "axes",
     # Django extensions
     "django_extensions",
     "vue3_tag",
@@ -26,6 +25,8 @@ INSTALLED_APPS = [
     "impersonate",
     # local apps
     "cdh.core",
+    "cdh.files",
+    "cdh.mail",
     "cdh.vue",
     "main",
     "experiments",
@@ -51,7 +52,6 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "impersonate.middleware.ImpersonateMiddleware",
-    "axes.middleware.AxesMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "cdh.core.middleware.ThreadLocalUserMiddleware",
@@ -59,7 +59,6 @@ MIDDLEWARE = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-    "axes.backends.AxesBackend",
     "django.contrib.auth.backends.ModelBackend",
 ]
 
@@ -194,3 +193,9 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 60 * 60 * 12  # 12 hours
 VUE_MANIFEST = BASE_DIR / "main/static/vue/manifest.json"
 VUE_URL = "/static/vue/"
+
+
+# used for loading secrets when deployed with docker
+def secret(name):
+    path = Path('/run/secrets') / name
+    return path.read_text().strip()
