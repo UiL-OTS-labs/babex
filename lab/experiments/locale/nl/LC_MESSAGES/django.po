@@ -217,6 +217,9 @@ msgstr ""
 "account.<br/>Je kunt zoeken door de lijst door in dit veld te typen, als je "
 "een proefleider selecteert zal die als een blokje verschijnen in het veld."
 
+msgid "experiment:attribute:responsible_researcher"
+msgstr "Eindverantwoordelijk onderzoeker"
+
 #: experiments/models/location_models.py:8
 msgid "location:attribute:name"
 msgstr "Naam"
@@ -290,7 +293,6 @@ msgstr "Aantal gelinkte experimenten"
 #: experiments/templates/experiments/detail_parts/comments.html:32
 #: experiments/templates/experiments/participants.html:64
 #: experiments/templates/locations/index.html:39
-#: experiments/templates/timeslots/index.html:59
 msgid "experiments:globals:actions"
 msgstr "Acties"
 
@@ -330,7 +332,6 @@ msgstr "Voeg nieuw criterium toe"
 
 #: experiments/templates/criteria/specific_list.html:93
 #: experiments/templates/criteria/specific_list.html:153
-#: experiments/templates/timeslots/index.html:172
 msgid "experiments:globals:add_button"
 msgstr "Toevoegen"
 
@@ -506,30 +507,6 @@ msgstr "Naam"
 msgid "experiments:detail:participants:date_added"
 msgstr "Ingeschreven op"
 
-#: experiments/templates/experiments/detail_parts/timeslots.html:10
-msgid "experiments:detail:timeslots"
-msgstr "Timeslots"
-
-#: experiments/templates/experiments/detail_parts/timeslots.html:13
-msgid "experiments:detail:timeslots:edit_timeslots"
-msgstr "Bewerk timeslots"
-
-#: experiments/templates/experiments/detail_parts/timeslots.html:17
-msgid "experiments:detail:timeslots:view_participants"
-msgstr "Bekijk alle participanten"
-
-#: experiments/templates/experiments/detail_parts/timeslots.html:25
-msgid "experiments:detail:timeslots:datetime"
-msgstr "Datum en tijd"
-
-#: experiments/templates/experiments/detail_parts/timeslots.html:28
-msgid "experiments:detail:timeslots:free_places"
-msgstr "Vrije plekken"
-
-#: experiments/templates/experiments/detail_parts/timeslots.html:31
-msgid "experiments:detail:timeslots:taken_places"
-msgstr "Ingeplande plekken"
-
 #: experiments/templates/experiments/edit.html:8
 #: experiments/templates/experiments/edit.html:15
 msgid "experiments:edit:header"
@@ -559,14 +536,6 @@ msgstr "Neem experiment op"
 #: experiments/templates/experiments/excluded_experiments.html:71
 msgid "experiments:excluded_experiments:included:title"
 msgstr "Sluit experiment uit"
-
-#: experiments/templates/experiments/experiment_actions_snippit.html:7
-msgid "experiments:home:edit_timeslots:title"
-msgstr "Pas timeslots aan"
-
-#: experiments/templates/experiments/experiment_actions_snippit.html:14
-msgid "experiments:home:edit_timeslots:title:disabled"
-msgstr "Dit experiment gebruikt geen timeslots."
 
 #: experiments/templates/experiments/experiment_actions_snippit.html:22
 msgid "experiments:home:edit_experiment:title"
@@ -679,7 +648,6 @@ msgstr " "
 
 #: experiments/templates/experiments/participants.html:51
 #: experiments/templates/experiments/participants.html:183
-#: experiments/templates/timeslots/index.html:41
 msgid "timeslots:day"
 msgstr "Dag"
 
@@ -727,18 +695,6 @@ msgstr "Meerdere talen"
 msgid "experiments:participants:sex"
 msgstr "Geslacht"
 
-#: experiments/templates/experiments/participants.html:123
-#: experiments/templates/timeslots/index.html:123
-msgid "timeslots:remove_participant:title"
-msgstr "Verwijder participant uit dit timeslot."
-
-#: experiments/templates/experiments/participants.html:130
-#: experiments/templates/timeslots/index.html:130
-msgid "timeslots:silent_remove_participant:title"
-msgstr ""
-"Verwijder participant uit dit timeslot (zonder automatische bevestigings-"
-"mail)."
-
 #: experiments/templates/experiments/participants.html:194
 msgid "experiments:participants:send"
 msgstr "Verstuur"
@@ -773,57 +729,6 @@ msgstr "Nieuwe locatie"
 #: experiments/templates/locations/new.html:19
 msgid "locations:new:info_text"
 msgstr " "
-
-#: experiments/templates/timeslots/index.html:9
-#: experiments/templates/timeslots/index.html:24
-msgid "timeslots:home:header"
-msgstr "Timeslots voor experiment '{}'"
-
-#: experiments/templates/timeslots/index.html:27
-msgid "timeslots:home:info_text"
-msgstr ""
-"Hier kun je de timeslots voor dit experiment aanpassen. Standaard is alleen "
-"de laatste plek binnen een timeslot verwijderbaar. <br/> Indien je meerdere "
-"timeslots wilt verwijderen, kun je de checkboxes gebruiken. Alleen de laaste "
-"checkbox is klikbaar, maar zodra deze is aangeklikt wordt de checkbox van de "
-"plaats eronder geactiveerd. Op deze manier zijn meerdere plaatsen in een "
-"timeslot te verwijderen.<br/><br/>Met de knop 'group rows by slot' kun je "
-"plaatsen onder het tijdstip groeperen. Het is bedoeld om de leesbaarheid te "
-"verbeteren als je tijdsloten meerdere plaatsen hebben, maar het kan het "
-"tegenovergestelde effect hebben als de meeste van je tijdsloten slechts 1 "
-"plaats heeft."
-
-#: experiments/templates/timeslots/index.html:44
-msgid "timeslots:date"
-msgstr "Datum"
-
-#: experiments/templates/timeslots/index.html:47
-msgid "timeslots:time"
-msgstr "Tijd"
-
-#: experiments/templates/timeslots/index.html:50
-msgid "timeslots:place"
-msgstr "Plaats #"
-
-#: experiments/templates/timeslots/index.html:53
-msgid "timeslots:participant:name"
-msgstr "Participant"
-
-#: experiments/templates/timeslots/index.html:56
-msgid "timeslots:participant:email"
-msgstr "Participant email"
-
-#: experiments/templates/timeslots/index.html:166
-msgid "timeslots:home:new_timeslots:header"
-msgstr "Nieuw timeslot"
-
-#: experiments/views/appointment_views.py:96
-msgid "timeslots:message:deleted_timeslot"
-msgstr "Timeslot verwijderd!"
-
-#: experiments/views/appointment_views.py:114
-msgid "timeslots:message:deleted_timeslots"
-msgstr "Timeslots verwijderd!"
 
 #: experiments/views/appointment_views.py:129
 msgid "timeslots:message:unsubscribed_participant"
@@ -916,3 +821,36 @@ msgstr "Zwangerschapsduur"
 
 msgid "experiments:invite:not_a_leader"
 msgstr "Opmerking: u bent geen leider van het experiment"
+
+msgid "experiments:invite:age"
+msgstr "Leeftijd"
+
+msgid "experiments:invite:multilingual"
+msgstr "Meertalig"
+
+msgid "experiments:invite:english"
+msgstr "Engelse communicatie"
+
+msgid "experiments:invite:last_call"
+msgstr "Laatst gebeld"
+
+msgid "experiments:invite:call_status"
+msgstr "Status"
+
+msgid "experiments:invite:actions"
+msgstr "Acties"
+
+msgid "experiments:invite:actions:call"
+msgstr "Bel"
+
+msgid "experiments:mail:appointment:canceled:subject"
+msgstr "Babylab voor Taalonderzoek: Afspraak geannuleerd"
+
+msgid "experiment:attribute:leaders"
+msgstr "Proefleiders"
+
+msgid "experiment:mail:appointment:confirm:subject"
+msgstr "Bevestiging inschrijving experiment Babylab voor Taalonderzoek: {}"
+
+msgid "experiments:call:deactivate:mail:subject"
+msgstr "E-mail bevestiging van uitschrijven"
