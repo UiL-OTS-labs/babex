@@ -53,7 +53,7 @@ def gateway(
     except Exception:
         log.exception("Could not reach gateway")
         return False, dict()
-        
+
     if not response.ok:
         log.error("Gateway request %s failed: %s", url, response.text)
     if len(response.text):

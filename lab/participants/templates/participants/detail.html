@@ -55,7 +55,7 @@
                         <li class="nav-item"><a href="#participant-appointments" class="nav-link">{% trans 'participants:detail:appointments' %}</a></li>
                         <li class="nav-item"><a href="#participant-appointments" class="nav-link">{% trans 'participants:detail:calls' %}</a></li>
                         <li class="nav-item"><a href="#participant-comments" class="nav-link">{% trans 'participants:detail:comments' %}</a></li>
-                        <li class="nav-item"><a href="#participant-surveys" class="nav-link">{% trans 'participants:detail:surveys' %}</a></li>
+                        <!-- <li class="nav-item"><a href="#participant-surveys" class="nav-link">{% trans 'participants:detail:surveys' %}</a></li> -->
                         <li class="nav-item"><a href="#participant-extradata" class="nav-link">{% trans 'participants:detail:extradata' %}</a></li>
                         {% if request.user.is_staff %}
                             <li class="nav-item"><a href="#participant-manage" class="nav-link">{% trans 'participants:detail:manage' %}</a></li>
@@ -76,7 +76,7 @@
             <a href="{% url 'participants:edit' participant.data.pk %}" class="btn btn-secondary float-end">
                 {% trans 'participants:detail:edit' %}
             </a>
-            <h2>General information</h2>
+            <h2>{% translate "participants:detail:general" %}</h2>
             <table class="table">
                 <tr>
                     <td width="40%">
@@ -95,11 +95,11 @@
                     <td> {{ participant.get_birth_weight_display|default_if_none:'' }} </td>
                 </tr>
                 <tr>
-                    <td> {% trans "participants:attribute:pregnancy_duration" %} </td>
+                    <td> {% trans "participant:attribute:pregnancy_duration" %} </td>
                     <td> {{ participant.get_pregnancy_duration_display }} </td>
                 </tr>
                 <tr>
-                    <td> {% trans "participants:attribute:age" %} </td>
+                    <td> {% trans "participant:attribute:age" %} </td>
                     <td> {{ participant.age_long }} </td>
                 </tr>
                 <tr>
@@ -107,7 +107,7 @@
                     <td> {{ participant.dyslexic_parent_display }} </td>
                 </tr>
                 <tr>
-                    <td> {% translate "participants:attribute:languages" %} </td>
+                    <td> {% translate "participant:attribute:languages" %} </td>
                     <td>
                         {{ participant.languages_pretty }}
                     </td>
@@ -128,7 +128,7 @@
         </section>
 
         <section id="participant-appointments">
-            <h2>Appointments</h2>
+            <h2>{% translate "participants:detail:appointments" %}</h2>
             <table class="dt_custom" width="100%">
                 <thead>
                     <tr>
@@ -211,10 +211,10 @@
             {% include 'participants/comments.html' %}
         </section>
 
-        <section id="participant-surveys">
-            {% include 'participants/surveys.html' %}
-        </section>
-
+        <!-- <section id="participant-surveys">
+             {% include 'participants/surveys.html' %}
+             </section>
+        -->
         <section id="participant-extradata">
             {% include 'participants/extradata.html' %}
         </section>

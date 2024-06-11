@@ -6,6 +6,7 @@ from cdh.core.fields.mixin import EncryptedMixin
 from cdh.mail.classes import TemplateEmail
 from django.conf import settings
 from django.db import models
+from django.utils import translation
 from django.utils.translation import gettext_lazy as _
 
 
@@ -59,13 +60,17 @@ class Signup(models.Model):
     link_token = models.CharField(max_length=64, default=token_urlsafe, unique=True)
 
     def send_email_validation(self):
-        mail = TemplateEmail(
-            html_template="signups/mail/validation.html",
-            context=dict(
-                base_url=settings.PARENT_URI,
-                link_token=self.link_token,
-            ),
-            to=[self.email],
-            subject="please validate your email",
-        )
-        mail.send()
+        with translation.override("nl"):
+            mail = TemplateEmail(
+                html_template="signups/mail/validation.html",
+                context=dict(
+                    base_url=settings.PARENT_URI,
+                    link_token=self.link_token,
+                    parent_first_name=self.parent_first_name,
+                    parent_last_name=self.parent_last_name,
+                    name=self.name,
+                ),
+                to=[self.email],
+                subject=_("signups:mail:validation:subject"),
+            )
+            mail.send()

@@ -34,7 +34,7 @@
                 {{ appointment.participant.name }}
             </td>
             <td data-order="{{ appointment.start|date:'U' }}">
-                {{ appointment.start|date:"l d M Y, H:i"|capfirst }}
+                {{ appointment.start|date:"l d M Y, H:i"|lower|capfirst }}
             </td>
             <td>
                 {{ appointment.outcome|lower }}

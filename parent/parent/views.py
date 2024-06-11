@@ -156,13 +156,21 @@ def survey_response_view(request):
 
 @session_required
 def cancel_appointment_view(request, appointment_id):
-    # TODO: handle appointment already canceled
+    ok, appointment = gateway(request, f"/gateway/appointment/{appointment_id}/")
+    if not ok:
+        messages.error(request, _("parent:error:data_generic"))
+        return render(request, "parent/overview.html")
+
+    if appointment['outcome'] == 'CANCELED':
+        # appointment already canceled
+        return render(request, "appointment/canceled.html", dict(appointment=appointment))
+
     ok, result = gateway(request, f"/gateway/appointment/{appointment_id}/", method="delete")
     if not ok:
         messages.error(request, _("parent:error:appointment_cancel"))
         return JsonResponse(dict(ok=False))
 
-    return render(request, "appointment/canceled.html")
+    return render(request, "appointment/canceled.html", dict(appointment=appointment))
 
 
 @session_required

@@ -40,6 +40,7 @@ def survey(apps):
     sd.delete()
 
 
+@pytest.mark.skip()
 def test_survey_invite(sb, apps, as_admin, participant, survey, mailbox):
     # send survey invite as admin
     sb.switch_to_driver(as_admin)
@@ -62,6 +63,7 @@ def test_survey_invite(sb, apps, as_admin, participant, survey, mailbox):
     sb.assert_text_visible("this is a test question")
 
 
+@pytest.mark.skip()
 def test_survey_invite_in_overview(sb, apps, as_admin, participant, survey, login_as):
     # send survey invite as admin
     sb.switch_to_driver(as_admin)

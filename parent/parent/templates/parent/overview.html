@@ -22,22 +22,29 @@
                         <div class="card-body">
                             <h5 class="card-title"> {{ appointment.experiment }}
                                 {% if appointment.outcome == 'CANCELED' %}
-                                    - Canceled
+                                    - {% translate 'parent:appointment:canceled' %}
                                 {% endif %}
                             </h5>
-                            <div>{{ appointment.participant }}</div>
-                            <div>{{ appointment.start|date:'l M d, Y' }}, {{ appointment.start|time }}</div>
-                            <div>{{ appointment.leader }}</div>
-                            <div>Contact: {{ appointment.contact_phone }}</div>
-                            <div class="mt-3">{{ appointment.instructions }}</div>
+                            <div>Participant: {{ appointment.participant }}</div>
+                            <div>Datum: {{ appointment.start|date:"l d M Y, H:i"|lower }}</div>
+                            <div>Tijd:  {{ appointment.start|time }}</div>
+                            <div>Totale duur bezoek:  {{ appointment.session_duration }}</div>
+                            <div class="mt-3">Naam onderzoeker: {{ appointment.leader }}</div>
+                            <div>Telefoonnummer onderzoeker: {{ appointment.contact_phone }}</div>
+
+                            <div class="mt-3">
                             {% if appointment.outcome != 'CANCELED' %}
                                 {% vue babex.CancelAppointment :id=appointment.id %}
                             {% endif %}
+                            </div>
                         </div>
                     </div>
                 {% empty %}
                     {% translate 'parent:appointments:no_appointments' %}
                 {% endfor %}
+                {% if appointments %}
+                    <p class="mt-2">Als u een afspraak wilt verplaatsen, neem dan contact op met de onderzoeker via bovenstaand telefoonnummer of via e-mail: <a href="mailto:babylab.ilslabs@uu.nl">babylab.ilslabs@uu.nl</a>.</p>
+                {% endif %}
             </section>
             <section class="mt-5">
                 <h3>{% translate 'parent:surveys:header' %}</h3>

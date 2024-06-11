@@ -3,7 +3,10 @@
 {% block content %}
 <div class="uu-container">
     <div class="col-12" >
-        <h2>Please choose the relevant participant:</h2>
+        <div>
+            <p>Op deze pagina kunt u de kinderen zien die zijn ingeschreven onder uw e-mailadres.</p>
+            <p>Kies het kind waarvoor u het Babylabportaal wilt gebruiken:</p>
+        </div>
         <ul>
             {% for pp in possible_pps %}
                 <li><a href="{% url 'mailauth:resolve' pp.id %}">{{ pp.name }}</a></li>

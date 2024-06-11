@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 
 from cdh.mail.classes import TemplateEmail
 from django.db import models
+from django.utils import translation
 
 from mailauth.models import create_mail_auth
 from participants.models import Participant
@@ -31,13 +32,14 @@ class SurveyInvite(models.Model):
 
     def send(self):
         context = dict(link=self.get_link())
-        mail = TemplateEmail(
-            html_template="survey_admin/mail/invite.html",
-            context=context,
-            to=[self.participant.email],
-            subject="invitation to fill survey",
-        )
-        mail.send()
+        with translation.override("nl"):
+            mail = TemplateEmail(
+                html_template="survey_admin/mail/invite.html",
+                context=context,
+                to=[self.participant.email],
+                subject="invitation to fill survey",
+            )
+            mail.send()
 
 
 class SurveyResponse(models.Model):

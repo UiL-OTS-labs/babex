@@ -374,7 +374,6 @@ msgstr "Number of linked experiments"
 #: experiments/templates/experiments/detail_parts/comments.html:32
 #: experiments/templates/experiments/participants_table.html:28
 #: experiments/templates/locations/index.html:42
-#: experiments/templates/timeslots/index.html:59
 msgid "experiments:globals:actions"
 msgstr "Actions"
 
@@ -414,7 +413,6 @@ msgstr "Add new criterion"
 
 #: experiments/templates/criteria/specific_list.html:93
 #: experiments/templates/criteria/specific_list.html:153
-#: experiments/templates/timeslots/index.html:164
 msgid "experiments:globals:add_button"
 msgstr "Add"
 
@@ -608,30 +606,6 @@ msgstr "Appointment"
 msgid "experiments:detail:participants:outcome"
 msgstr "Outcome"
 
-#: experiments/templates/experiments/detail_parts/timeslots.html:10
-msgid "experiments:detail:timeslots"
-msgstr "Timeslots"
-
-#: experiments/templates/experiments/detail_parts/timeslots.html:13
-msgid "experiments:detail:timeslots:edit_timeslots"
-msgstr "Edit timeslots"
-
-#: experiments/templates/experiments/detail_parts/timeslots.html:17
-msgid "experiments:detail:timeslots:view_participants"
-msgstr "View participants"
-
-#: experiments/templates/experiments/detail_parts/timeslots.html:25
-msgid "experiments:detail:timeslots:datetime"
-msgstr "Date & Time"
-
-#: experiments/templates/experiments/detail_parts/timeslots.html:28
-msgid "experiments:detail:timeslots:free_places"
-msgstr "Free places"
-
-#: experiments/templates/experiments/detail_parts/timeslots.html:31
-msgid "experiments:detail:timeslots:taken_places"
-msgstr "Taken places"
-
 #: experiments/templates/experiments/edit.html:8
 #: experiments/templates/experiments/edit.html:26
 msgid "experiments:edit:header"
@@ -754,7 +728,6 @@ msgid "experiments:participants:excluded"
 msgstr "Excluded"
 
 #: experiments/templates/experiments/participants_table.html:13
-#: experiments/templates/timeslots/index.html:41
 msgid "timeslots:day"
 msgstr "Day"
 
@@ -800,58 +773,6 @@ msgstr "New Location"
 #: experiments/templates/locations/new.html:19
 msgid "locations:new:info_text"
 msgstr " "
-
-#: experiments/templates/timeslots/index.html:9
-#: experiments/templates/timeslots/index.html:24
-msgid "timeslots:home:header"
-msgstr "Timeslots for experiment '{}'"
-
-#: experiments/templates/timeslots/index.html:27
-msgid "timeslots:home:info_text"
-msgstr ""
-"Timeslots can be edited here.<br/>If your timeslot has multiple 'places', "
-"(that is, if you are running multiple participants in the same timeslot), "
-"please note that you can only delete the last place in a certain timeslot."
-"<br/>If you need to delete multiple (or all) places, you can use the "
-"checkboxes. By default you can only check the last checkbox for a timeslot. "
-"Once a checkbox has been clicked, the one above it (within the same "
-"timeslot) can be checked too.<br/><br/>The 'group rows by slot' button "
-"toggles grouping places under a timeslot. It is designed to improve "
-"readability if your timeslots have multiple places, but it can have the "
-"opposite effect if most of your timeslots only have 1 place."
-
-#: experiments/templates/timeslots/index.html:44
-msgid "timeslots:date"
-msgstr "Date"
-
-#: experiments/templates/timeslots/index.html:47
-msgid "timeslots:time"
-msgstr "Time"
-
-#: experiments/templates/timeslots/index.html:50
-msgid "timeslots:place"
-msgstr "Place #"
-
-#: experiments/templates/timeslots/index.html:53
-msgid "timeslots:participant:name"
-msgstr "Participant"
-
-#: experiments/templates/timeslots/index.html:56
-msgid "timeslots:participant:email"
-msgstr "Participant email"
-
-#: experiments/templates/timeslots/index.html:118
-msgid "timeslots:remove_participant:title"
-msgstr "Unsubscribe participant"
-
-#: experiments/templates/timeslots/index.html:125
-msgid "timeslots:silent_remove_participant:title"
-msgstr ""
-"Unsubscribe participant (without sending an automatic confirmation email)"
-
-#: experiments/templates/timeslots/index.html:158
-msgid "timeslots:home:new_timeslots:header"
-msgstr "New timeslot"
 
 #: experiments/views/criteria_views.py:42
 msgid "criteria:messages:created"

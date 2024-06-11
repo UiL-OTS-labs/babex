@@ -59,7 +59,7 @@ def signup(sb, apps, default_signup_fill_form):
 
 def test_parent_login(sb, apps, signup, as_admin, link_from_mail, login_as):
     # confirm signup email
-    if link := link_from_mail(signup, 'validate'):
+    if link := link_from_mail(signup, 'Bevestiging'):
         sb.open(link)
     else:
         pytest.fail('could not find validation link')
@@ -80,7 +80,7 @@ def test_parent_login(sb, apps, signup, as_admin, link_from_mail, login_as):
 
 def test_parent_login_unapproved(signup, apps, sb, link_from_mail, login_as):
     # confirm signup email
-    if link := link_from_mail(signup, 'validate'):
+    if link := link_from_mail(signup, 'Bevestiging'):
         sb.open(link)
     else:
         pytest.fail('could not find validation link')

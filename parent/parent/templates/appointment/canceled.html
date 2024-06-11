@@ -1,8 +1,11 @@
 {% extends 'base/babex_base.html' %}
+{% load transformat %}
 {% load i18n %}
 
 {% block content %}
 <div class="uu-container">
-    {% trans 'appointment:canceled' %}
+    <div class="row">
+        {% transformat 'appointment:canceled:message' appointment.participant appointment.contact_phone %}
+    </div>
 </div>
 {% endblock %}

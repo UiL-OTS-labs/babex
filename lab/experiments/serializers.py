@@ -17,7 +17,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
             "comment",
             "outcome",
             "contact_phone",
-            "instructions",
+            "session_duration"
         ]
 
     experiment = serializers.StringRelatedField()  # type: ignore
@@ -31,7 +31,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
     start = serializers.DateTimeField()
     end = serializers.DateTimeField()
 
-    instructions = serializers.ReadOnlyField(source="experiment.additional_instructions")
+    session_duration = serializers.ReadOnlyField(source="experiment.session_duration")
 
 
 class ExperimentSerializer(serializers.ModelSerializer):

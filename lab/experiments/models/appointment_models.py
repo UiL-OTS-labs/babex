@@ -2,6 +2,7 @@ from datetime import datetime
 
 from cdh.mail.classes import TemplateEmail
 from django.db import models
+from django.utils import translation
 from django.utils.translation import gettext_lazy as _
 
 from main.models import User
@@ -122,10 +123,11 @@ def _inform_leaders(appointment: Appointment) -> None:
 def _send_cancel_confirmation(appointment: Appointment) -> None:
     context = {"appointment": appointment}
 
-    mail = TemplateEmail(
-        html_template="mail/appointment/canceled.html",
-        context=context,
-        to=[appointment.participant.email],
-        subject="ILS appointment canceled",
-    )
-    mail.send()
+    with translation.override("nl"):
+        mail = TemplateEmail(
+            html_template="mail/appointment/canceled.html",
+            context=context,
+            to=[appointment.participant.email],
+            subject=_("experiments:mail:appointment:canceled:subject")
+        )
+        mail.send()
