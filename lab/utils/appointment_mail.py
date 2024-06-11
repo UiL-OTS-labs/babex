@@ -9,6 +9,7 @@ from django.utils import translation
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.timezone import localtime
+from django.utils.translation import gettext as _
 
 from experiments.email import AppointmentConfirmEmail
 from experiments.models import Appointment
@@ -34,6 +35,8 @@ def prepare_appointment_mail(appointment: Appointment):
         replacements = {
             "experiment_name": experiment.name,
             "experiment_location": "",
+            "experiment_duration": experiment.duration,
+            "session_duration": experiment.session_duration,
             "participant_name": participant.name,
             "parent_name": participant.parent_name,
             "leader_name": appointment.leader.name,
@@ -45,10 +48,11 @@ def prepare_appointment_mail(appointment: Appointment):
             "time": defaultfilters.date(localtime(time_slot.start), "H:i"),
         }
 
+    subject = _("experiment:mail:appointment:confirm:subject").format(appointment.experiment.name)
+
     if experiment.location:
         replacements["experiment_location"] = experiment.location.name
 
-    subject = "Bevestiging inschrijving experiment ILS: {}".format(appointment.experiment.name)
     email = AppointmentConfirmEmail(
         [participant.email],
         subject,
@@ -59,7 +63,8 @@ def prepare_appointment_mail(appointment: Appointment):
 
 
 def send_appointment_mail(appointment: Appointment, contents: str) -> None:
-    subject = "Bevestiging inschrijving experiment ILS: {}".format(appointment.experiment.name)
+    with translation.override("nl"):
+        subject = _("experiment:mail:appointment:confirm:subject").format(appointment.experiment.name)
 
     class SimpleHTMLMail(BaseEmail):
         def __init__(self, to, subject, contents, **kwargs):

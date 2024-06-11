@@ -20,24 +20,48 @@ def _get_dt_2_hours_ago() -> datetime:
 class Experiment(models.Model):
     DEFAULT_CONFIRMATION_MAIL = """<p>Beste {{parent_name}},</p>
     <p>
-        Je hebt een afspraak gemaakt om mee te doen met het experiment:
+        U heeft een afspraak gemaakt om mee te doen met het experiment:
         <strong>{{experiment_name}}</strong><br/><br/>
-        We verwachten je op:<br/><br/>
+        We verwachten u en {{participant_name}} op:<br/><br/>
         Datum: <strong>{{date}}</strong><br/>
         Tijd: <strong>{{time}} uur</strong><br/>
-        Locatie: <strong>{{experiment_location}}</strong><br/>
+        Locatie: <strong>Janskerkhof 13a</strong> (let op: dit is de groene voordeur met de helling ervoor).<br/>
     </p>
     <p>
-        Als je deze afspraak wilt afzeggen, kun je dat doen via
-        <a href="{{cancel_link}}">deze link</a>.
-        Doe dat alsjeblieft minstens 24 uur vantevoren. Als je vlak vantevoren
-        ontdekt dat je verhinderd bent, neem dan svp even persoonlijk contact
-        op met de proefleider
-        ({{leader_name}}, email: {{leader_email}} tel.: {{leader_phonenumber}}).
+        <strong>Gezondheidsklachten</strong><br/>
+        Wij vragen u de afspraak te verzetten wanneer uw kind vlak voor de afspraak gehoorproblemen
+        en/of oorontsteking heeft en dus mogelijk minder goed hoort.
     </p>
     <p>
-        Met vriendelijke groet,<br/>
-        het ILS lab
+        <strong>Aankomst in het Babylab</strong><br/>
+        Als u aanbelt bij Janskerkhof 13a en via de intercom zegt dat u voor het Babylab komt, dan wordt de deur voor u geopend.
+        Wanneer u binnenkomt, kunt u gelijk na de hal met de lift (of met de trap) naar beneden.
+        Aan uw rechterhand vindt u de wachtkamer, waar u plaats kunt nemen. De Babylab-assistent zal u daar komen ophalen.
+    </p>
+    <p>
+        <strong>Het experiment</strong><br/>
+        Het experiment duurt maximaal {{experiment_duration}}.
+        Omdat we ook de procedure uitleggen en er achteraf tijd is voor vragen, zult u ongeveer {{session_duration}} kwijt zijn
+        aan uw bezoek aan het Babylab. In de bijlage van deze mail vindt u meer informatie over het experiment en onze werkwijze.
+    </p>
+    <p>
+        Het is belangrijk voor ons onderzoek dat er geen broertje of zusje meekomt tijdens het bezoek aan het lab.
+        Als u hierover van tevoren een andere afspraak heeft gemaakt met de assistent van het Babylab, dan geldt uiteraard die afspraak.
+    </p>
+    <p>
+        <strong>Afspraak verzetten/afzeggen</strong><br/>
+        Als u deze afspraak wilt afzeggen, kunt u dat doen via <a href="{{cancel_link}}">deze link</a>.
+        Doe dat a.u.b. minstens 24 uur van tevoren. Als u vlak van tevoren ontdekt dat u verhinderd bent,
+        neem dan contact op met de proefleider ({{leader_name}}, email: {{leader_email}} tel.: {{leader_phonenumber}}).
+    </p>
+    <p>
+        Meer informatie over het Babylab, bijvoorbeeld de routebeschrijving, kunt u vinden op de
+        <a href="https://babylab.wp.hum.uu.nl/">website van het Babylab</a>.
+        Wij danken u alvast hartelijk voor uw medewerking. Zonder uw deelname kunnen wij geen onderzoek doen!
+    </p>
+    <p>
+        Vriendelijke groet,<br/>
+        Het team van het Babylab voor Taalonderzoek
     </p>"""
 
     DEFAULT_INVITE_MAIL = ""

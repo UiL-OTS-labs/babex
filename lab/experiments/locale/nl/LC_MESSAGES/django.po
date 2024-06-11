@@ -848,3 +848,6 @@ msgstr "Babylab voor Taalonderzoek: Afspraak geannuleerd"
 
 msgid "experiment:attribute:leaders"
 msgstr "Proefleiders"
+
+msgid "experiment:mail:appointment:confirm:subject"
+msgstr "Bevestiging inschrijving experiment Babylab voor Taalonderzoek: {}"
