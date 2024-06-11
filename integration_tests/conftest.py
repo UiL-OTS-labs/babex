@@ -13,6 +13,7 @@ from datetime import date
 
 import django
 import pytest
+from seleniumbase.common.exceptions import NoSuchElementException
 
 from lab_settings import EMAIL_FILE_PATH
 
@@ -146,7 +147,12 @@ def as_admin(sb, lab_app):
     sb.type("#id_username", "admin")
     sb.type("#id_password", "admin")
     sb.click('button:contains("Log in")')
-    sb.click('button:contains("English")')
+    try:
+        sb.click('button:contains("English")')
+    except NoSuchElementException:
+        # ugly workaround for language setting
+        pass
+
     sb.switch_to_default_driver()
     return driver
 
