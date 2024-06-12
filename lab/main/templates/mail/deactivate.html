@@ -1,0 +1,27 @@
+{% extends 'cdh.core/mail_template.html' %}
+{% load i18n %}
+{% load transformat %}
+
+{% block banner %}
+    {% translate 'experiments:call:deactivate:mail:subject' %}
+{% endblock %}
+
+{% block content %}
+    <p>
+        Beste {{parent_name}},
+    </p>
+
+    <p>
+        U wilt uw kind {{participant_name}} uitschrijven. Om de uitschrijving definitief te maken vragen wij u om dit te bevestigen
+        door op <a href="{{deactivate_link}}">deze link</a> te klikken.
+    </p>
+
+    <p>
+        Hartelijk dank dat u met uw kind heeft bijgedragen (of bij heeft willen dragen) aan het onderzoek in ons Babylab.
+    </p>
+
+    <p>
+        Vriendelijke groet,<br/>
+        Het team van het Babylab voor Taalonderzoek
+    </p>
+{% endblock %}

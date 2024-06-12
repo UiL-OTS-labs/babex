@@ -851,3 +851,6 @@ msgstr "Proefleiders"
 
 msgid "experiment:mail:appointment:confirm:subject"
 msgstr "Bevestiging inschrijving experiment Babylab voor Taalonderzoek: {}"
+
+msgid "experiments:call:deactivate:mail:subject"
+msgstr "E-mail bevestiging van uitschrijven"
