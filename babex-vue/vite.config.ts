@@ -22,14 +22,14 @@ export default defineConfig({
         {
             name: 'duplicate-output',
             closeBundle: async () => {
-                exec("bash -c 'rm -rf ../lab/main/static/vue; rm -rf ../parent/parent/static/vue'",
+                exec("bash -c 'rm -rf ../lab/main/static/vue; cp -R dist ../lab/main/static/vue'",
                      (error, stdout, stderr) => {
                          console.log(stdout);
                          console.log(stderr);
                          if (error) console.log('error:', error);
                      });
                 console.log('copying assets');
-                exec("bash -c 'cp -vR dist ../lab/main/static/vue && cp -vR dist ../parent/parent/static/vue'",
+                exec("bash -c 'rm -rf ../parent/parent/static/vue; cp -R dist ../parent/parent/static/vue'",
                      (error, stdout, stderr) => {
                          console.log(stdout);
                          console.log(stderr);
