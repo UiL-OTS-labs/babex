@@ -4,14 +4,14 @@ from django.utils.translation import gettext_lazy as _
 
 class AppointmentConfirmEmail(BaseCustomTemplateEmail):
     user_variable_defs = [
-        CTEVarDef("baby", _("experiments.email.appointmentconfirm.var.baby")),
-        CTEVarDef("experiment_name", _("experiments.email.appointmentconfirm.var.experiment_name")),
-        CTEVarDef("date", _("experiments.email.appointmentconfirm.var.date")),
-        CTEVarDef("time", _("experiments.email.appointmentconfirm.var.time")),
-        CTEVarDef("experiment_location", _("experiments.email.appointmentconfirm.var.experiment_location")),
-        CTEVarDef("leader_name", _("experiments.email.appointmentconfirm.var.leader_name")),
-        CTEVarDef("leader_email", _("experiments.email.appointmentconfirm.var.leader_email")),
-        CTEVarDef("leader_phonenumber", _("experiments.email.appointmentconfirm.var.leader_phonenumber")),
+        CTEVarDef("participant_name", ""),
+        CTEVarDef("experiment_name", ""),
+        CTEVarDef("date", ""),
+        CTEVarDef("time", ""),
+        CTEVarDef("experiment_location", ""),
+        CTEVarDef("leader_name", ""),
+        CTEVarDef("leader_email", ""),
+        CTEVarDef("leader_phonenumber", ""),
     ]
 
     def __init__(self, *args, **kwargs):

@@ -849,3 +849,27 @@ msgstr "Multilingual"
 
 msgid "experiments:invite:english"
 msgstr "English contact"
+
+msgid "experiments:views:email_preview:experiment_name"
+msgstr "Experiment Name"
+
+msgid "experiments:views:email_preview:location"
+msgstr "Location"
+
+msgid "experiments:views:email_preview:parent_name"
+msgstr "Parent Name"
+
+msgid "experiments:views:email_preview:leader_name"
+msgstr "Leader Name"
+
+msgid "experiments:views:email_preview:leader_names"
+msgstr "Leader Names"
+
+msgid "experiments:views:email_preview:duration"
+msgstr "Duration"
+
+msgid "experiments:views:email_preview:task_description"
+msgstr "Task Description"
+
+msgid "experiments:views:email_preview:additional_instructions"
+msgstr "Additional Instructions"

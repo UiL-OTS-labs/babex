@@ -139,43 +139,6 @@ msgstr "Extra instructies"
 msgid "experiment:attribute:confirmation_email"
 msgstr "Bevestigingsmail text"
 
-#: experiments/models/experiment_models.py:83
-msgid "experiment:attribute:confirmation_email:help_text"
-msgstr ""
-"Er zijn enkele variabelen:<br/><code>{experiment_name}</code> De naam van "
-"het experiment<br/><code>{experiment_location}</code> De locatie van het "
-"experiment (indien ingesteld)<br/><code>{participant_name}</code> De naam "
-"van de participant<br/><code>{date}</code> De datum van het gekozen "
-"timeslot<br/><code>{time}</code> De tijd van het gekozen timeslot<br/"
-"><code>{leader_name}</code> De naam van de proefleider<br/"
-"><code>{leader_email}</code> De e-mail van de proefleider<br/"
-"><code>{leader_phonenumber}</code> Het telefoonnummer van de proefleider<br/"
-"><code>{all_leaders_name_list}</code> Een opsomming van alle proefleiders, in "
-"goed Nederlands geformat<br/>"
-
-#: experiments/models/experiment_models.py:88
-msgid "experiment:attribute:invite_email"
-msgstr "Uitnodigingsmail sjabloon"
-
-#: experiments/models/experiment_models.py:89
-msgid "experiment:attribute:invite_email:help_text"
-msgstr ""
-"De sjabloon die is gebruikt om de uitnodigingsmail te maken; het resultaat "
-"kan worden bewerkt voordat het wordt verzonden. Er zijn enkele variabelen:"
-"<br/><code>{experiment_name}</code> De naam van het experiment<br/"
-"><code>{experiment_location}</code> De locatie van het experiment (indien "
-"van toepassing)<br/><code>{duration}</code> De opgegeven tijdsduur van het "
-"experiment<br/><code>{task_description}</code> De inhoud van het taak "
-"omschrijving veld<br/><code>{additional_instructions}</code> De inhoud van "
-"het extra instructies veld<br/><code>{leader_name}</code> De naam van de "
-"proefleider<br/><code>{leader_email}</code> Het emailadres van de "
-"proefleider<br/><code>{leader_phonenumber}</code> Het telefoonnummer van de "
-"proefleider<br/><code>{all_leaders_name_list}</code> Een opsomming van alle "
-"proefleiders, in goed Nederlands geformat<br/><code>{admin}</code> De naam "
-"van de huidige hoofd admin<br/><code>{link_to_subscribe:\"deze link\"}</"
-"code> Een link naar de inschrijfpagina. De tekst na de : wordt gebruikt als "
-"de linktekst"
-
 #: experiments/models/experiment_models.py:117
 msgid "experiment:attribute:open"
 msgstr "Open voor participanten"
