@@ -1,23 +1,25 @@
 import tempfile
 
+from playwright.sync_api import expect
+
 from experiments.models import Experiment
 
 
-def test_create_experiment(sb, as_admin, sample_leader):
-    sb.click("a:contains(Experiments)")
-    sb.click("a:contains(Overview)")
+def test_create_experiment(page, as_admin, sample_leader):
+    page.get_by_role("button", name="Experiments").click()
+    page.get_by_role("link", name="Overview").click()
 
-    sb.click('a:contains("Create experiment")')
-    sb.type('input[name="name"]', "Experiment name")
-    sb.type('input[name="duration"]', "10 minutes")
-    sb.type('input[name="session_duration"]', "25 minutes")
-    sb.type('input[name="recruitment_target"]', "30")
+    page.get_by_role("link", name="Create experiment").click()
+    page.get_by_role("textbox", name="Name").fill("Experiment name")
+    page.get_by_role("textbox", name="Task duration").fill("10 minutes")
+    page.get_by_role("textbox", name="Session duration").fill("25 minutes")
+    page.get_by_role("spinbutton", name="Recruitment target").fill("30")
 
-    sb.type('textarea[name="task_description"]', "task description")
-    sb.type('textarea[name="additional_instructions"]', "additional instructions")
-    sb.type('input[name="responsible_researcher"]', "dr. Lin Guist")
+    page.get_by_role("textbox", name="Task description").fill("task description")
+    page.get_by_role("textbox", name="Additional instructions").fill("additional instructions")
+    page.get_by_role("textbox", name="Responsible researcher").fill("dr. Lin Guist")
 
-    sb.select_option_by_text('select[name="leaders"]', sample_leader.name)
+    page.locator('select[name="leaders"]').select_option(sample_leader.name)
 
     # upload an email attachment
     test_file_content = b"this is a test file"
@@ -25,13 +27,14 @@ def test_create_experiment(sb, as_admin, sample_leader):
         file.write(test_file_content)
         file.flush()
 
-        sb.choose_file('input[name="attachments"]', file.name)
+        page.on("filechooser", lambda file_chooser: file_chooser.set_files(file.name))
+        page.click('input[name="attachments"]')
 
-        sb.click('button:contains("Next")')
-        sb.assert_text_visible("Successfully created")
-        sb.click('button:contains("Save")')
+        page.get_by_role("button", name="Next").click()
+        expect(page.get_by_text("Successfully created")).to_be_visible()
+        page.get_by_role("button", name="Save").click()
 
-        sb.assert_text_visible("Experiment name")
+        expect(page.get_by_text("Experiment name")).to_be_visible()
 
     experiment = Experiment.objects.last()
     assert experiment.name == "Experiment name"
@@ -40,8 +43,8 @@ def test_create_experiment(sb, as_admin, sample_leader):
     assert experiment.attachments.first().file.read() == test_file_content
 
 
-def test_edit_experiment_add_attachment(sb, live_server, as_admin, sample_experiment):
-    sb.open(live_server.url + f"/experiments/{sample_experiment.pk}/update/")
+def test_edit_experiment_add_attachment(page, live_server, as_admin, sample_experiment):
+    page.goto(live_server.url + f"/experiments/{sample_experiment.pk}/update/")
 
     # upload an email attachment
     test_file_content = b"this is a test file"
@@ -49,11 +52,12 @@ def test_edit_experiment_add_attachment(sb, live_server, as_admin, sample_experi
         file.write(test_file_content)
         file.flush()
 
-        sb.choose_file('input[name="attachments"]', file.name)
+        page.on("filechooser", lambda file_chooser: file_chooser.set_files(file.name))
+        page.click('input[name="attachments"]')
 
-        sb.click('button:contains("Save")')
+        page.get_by_role("button", name="Save").click()
 
-        sb.assert_text_visible("updated")
+        expect(page.get_by_text("updated")).to_be_visible()
 
     assert sample_experiment.attachments.count() == 1
     assert sample_experiment.attachments.first().file.read() == test_file_content

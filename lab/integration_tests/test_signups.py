@@ -2,6 +2,7 @@ from datetime import datetime
 
 import pytest
 from django.utils import timezone
+from playwright.sync_api import expect
 
 from participants.models import Participant
 from signups.models import Signup
@@ -29,38 +30,38 @@ def sample_signup(db):
     )
 
 
-def test_signup_approve(sb, sample_signup, live_server, as_admin):
-    sb.click("a:contains(Participants)")
-    sb.click("a:contains(Signups)")
+def test_signup_approve(page, sample_signup, live_server, as_admin):
+    page.get_by_role("button", name="Participants").click()
+    page.locator("a").get_by_text("Signups").click()
 
     # check that the signup is visible somewhere within a table tag
-    sb.assert_text(sample_signup.name, "table")
+    expect(page.locator("table").get_by_text(sample_signup.name)).to_be_visible()
 
-    sb.click("tr:contains(details) a")
-    sb.click("button:contains(Approve)")
+    page.locator("a").get_by_text("details").click()
+    page.locator("button").get_by_text("Approve").click()
 
     # check that the signup is no longer visible
-    sb.click("a:contains(Participants)")
-    sb.click("a:contains(Signups)")
-    sb.assert_text_not_visible(sample_signup.name, "table")
+    page.get_by_role("button", name="Participants").click()
+    page.locator("a").get_by_text("Signups").click()
+    expect(page.locator("table").get_by_text(sample_signup.name)).not_to_be_visible()
 
     # check that a new participant is visible in the system
-    sb.open(live_server.url + "/participants/")
-    sb.assert_text(sample_signup.name, "table")
+    page.goto(live_server.url + "/participants/")
+    expect(page.locator("table").get_by_text(sample_signup.name)).to_be_visible()
 
 
-def test_signup_reject(sb, sample_signup, live_server, as_admin):
-    sb.click("a:contains(Participants)")
-    sb.click("a:contains(Signups)")
+def test_signup_reject(page, sample_signup, live_server, as_admin):
+    page.get_by_role("button", name="Participants").click()
+    page.locator("a").get_by_text("Signups").click()
 
-    sb.click("tr:contains(details) a")
-    sb.click("button:contains(Reject)")
+    page.locator("a").get_by_text("details").click()
+    page.locator("button").get_by_text("Reject").click()
 
     # check that the signup is no longer visible
-    sb.click("a:contains(Participants)")
-    sb.click("a:contains(Signups)")
-    sb.assert_text_not_visible(sample_signup.name, "table")
+    page.get_by_role("button", name="Participants").click()
+    page.locator("a").get_by_text("Signups").click()
+    expect(page.locator("table").get_by_text(sample_signup.name)).not_to_be_visible()
 
     # check that no new participant is visible in the system
-    sb.open(live_server.url + "/participants/")
-    sb.assert_text_not_visible(sample_signup.name, "table")
+    page.goto(live_server.url + "/participants/")
+    expect(page.locator("table").get_by_text(sample_signup.name)).not_to_be_visible()

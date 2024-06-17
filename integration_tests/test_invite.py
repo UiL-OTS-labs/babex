@@ -6,6 +6,8 @@ from django.utils import timezone
 
 import pytest
 
+from playwright.sync_api import expect
+
 
 @pytest.fixture
 def participant(apps):
@@ -25,7 +27,7 @@ def participant(apps):
     participant.delete()
 
 
-def test_cancel_appointment_from_email(apps, participant, mailbox, link_from_mail, sb):
+def test_cancel_appointment_from_email(apps, participant, mailbox, link_from_mail, page):
     apps.lab.load('admin')  # generate admin user
     Experiment = apps.lab.get_model('experiments', 'Experiment')
     DefaultCriteria = apps.lab.get_model('experiments', 'DefaultCriteria')
@@ -46,7 +48,7 @@ def test_cancel_appointment_from_email(apps, participant, mailbox, link_from_mai
 
     send_appointment_mail(appointment, prepare_appointment_mail(appointment))
 
-    sb.open(link_from_mail(participant.email))
+    page.goto(link_from_mail(participant.email))
 
     # check that the appointment was canceled
     appointment.refresh_from_db()
@@ -64,13 +66,13 @@ def test_cancel_appointment_from_email(apps, participant, mailbox, link_from_mai
         appointment.delete()
 
 
-def test_appointment_in_parent_overview(apps, participant, mailbox, sb, login_as):
+def test_appointment_in_parent_overview(apps, participant, mailbox, page, login_as):
     apps.lab.load('admin')  # generate admin user
     Experiment = apps.lab.get_model('experiments', 'Experiment')
     DefaultCriteria = apps.lab.get_model('experiments', 'DefaultCriteria')
     User = apps.lab.get_model('main', 'User')
     experiment = Experiment.objects.create(defaultcriteria=DefaultCriteria.objects.create(),
-                                           name='Text Experiment')
+                                           name='Test Experiment')
 
     # somewhat abusing the get_model() calls above to setup django for the following to work
     from experiments.models import make_appointment
@@ -84,21 +86,21 @@ def test_appointment_in_parent_overview(apps, participant, mailbox, sb, login_as
 
     login_as(participant.email)
     try:
-        sb.assert_text_visible('Appointments')
-        sb.assert_text_visible(experiment.name)
-        sb.assert_text_visible(leader.name)
+        expect(page.get_by_text('Appointments')).to_be_visible()
+        expect(page.get_by_text(experiment.name)).to_be_visible()
+        expect(page.get_by_text(leader.name)).to_be_visible()
     finally:
         # delete appointment so that the participant can be deleted as well
         appointment.delete()
 
 
-def test_past_appointment_not_in_parent_overview(apps, participant, mailbox, sb, login_as):
+def test_past_appointment_not_in_parent_overview(apps, participant, mailbox, page, login_as):
     apps.lab.load('admin')  # generate admin user
     Experiment = apps.lab.get_model('experiments', 'Experiment')
     DefaultCriteria = apps.lab.get_model('experiments', 'DefaultCriteria')
     User = apps.lab.get_model('main', 'User')
     experiment = Experiment.objects.create(defaultcriteria=DefaultCriteria.objects.create(),
-                                           name='Text Experiment')
+                                           name='Test Experiment')
 
     # somewhat abusing the get_model() calls above to setup django for the following to work
     from experiments.models import make_appointment
@@ -112,9 +114,9 @@ def test_past_appointment_not_in_parent_overview(apps, participant, mailbox, sb,
 
     login_as(participant.email)
     try:
-        sb.assert_text_visible('Appointments')
-        sb.assert_text_not_visible(experiment.name)
-        sb.assert_text_not_visible(leader.name)
+        expect(page.get_by_text('Appointments')).to_be_visible()
+        expect(page.get_by_text(experiment.name)).not_to_be_visible()
+        expect(page.get_by_text(leader.name)).not_to_be_visible()
     finally:
         # delete appointment so that the participant can be deleted as well
         appointment.delete()

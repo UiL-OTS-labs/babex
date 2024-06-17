@@ -13,9 +13,10 @@ from datetime import date
 
 import django
 import pytest
-from seleniumbase.common.exceptions import NoSuchElementException
 
 from lab_settings import EMAIL_FILE_PATH
+
+from playwright.sync_api import Page, Browser
 
 LAB_PORT = 18000
 PARENT_PORT = 19000
@@ -139,22 +140,14 @@ def apps(lab_app, parent_app):
 
 
 @pytest.fixture
-def as_admin(sb, lab_app):
+def as_admin(browser: Browser, lab_app):
     lab_app.load("admin")
-    driver = sb.get_new_driver()
-    sb.switch_to_driver(driver)
-    sb.open(lab_app.url + '/login')
-    sb.type("#id_username", "admin")
-    sb.type("#id_password", "admin")
-    sb.click('button:contains("Log in")')
-    try:
-        sb.click('button:contains("English")')
-    except NoSuchElementException:
-        # ugly workaround for language setting
-        pass
-
-    sb.switch_to_default_driver()
-    return driver
+    page_admin = browser.new_context().new_page()
+    page_admin.goto(lab_app.url + '/login')
+    page_admin.fill("#id_username", "admin")
+    page_admin.fill("#id_password", "admin")
+    page_admin.locator('button').get_by_text("Log in").click()
+    return page_admin
 
 
 def read_mail(address):
@@ -197,17 +190,16 @@ def link_from_mail(mailbox):
 
 
 @pytest.fixture
-def login_as(sb, apps, link_from_mail, mailbox):
+def login_as(page: Page, apps, link_from_mail, mailbox):
 
     def _delegate(email):
-        sb.switch_to_default_driver()
-        sb.open(apps.parent.url + 'auth/')
-        sb.type('input[name="email"]', email)
-        sb.click('button:contains("Send")')
+        page.goto(apps.parent.url + 'auth/')
+        page.fill('input[name="email"]', email)
+        page.locator('button').get_by_text('Send').click()
 
         # use login link from (second) email
         if link := link_from_mail(email, 'Link'):
-            sb.open(link)
+            page.goto(link)
             return True
         return False
 

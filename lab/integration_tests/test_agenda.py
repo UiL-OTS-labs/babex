@@ -3,34 +3,35 @@ from datetime import date, datetime, timedelta
 import pytest
 from django.core import mail
 from django.utils import timezone
+from playwright.sync_api import expect
 
 from agenda.models import Closing
 from experiments.models import Appointment, TimeSlot
 
 
 @pytest.fixture
-def agenda(sb):
-    sb.click('a:contains("Agenda")')
+def agenda(page):
+    page.locator("a").get_by_text("Agenda").click()
 
 
-def test_agenda_add_closing(sb, as_admin, agenda):
-    sb.click(f'td[data-date="{date.today()}"]')
+def test_agenda_add_closing(page, as_admin, agenda):
+    page.click(f'td[data-date="{date.today()}"]')
 
     start = date.today().strftime("%d-%m-%Y 00:00")
     end = (date.today() + timedelta(days=1)).strftime("%d-%m-%Y 00:00")
 
-    sb.assert_attribute(".closing-start input", "value", start)
-    sb.assert_attribute(".closing-end input", "value", end)
+    expect(page.locator(".closing-start input")).to_have_value(start)
+    expect(page.locator(".closing-end input")).to_have_value(end)
 
-    sb.click('button:contains("Save")')
+    page.locator("button").get_by_text("Save").click()
 
-    sb.wait_for_element_absent(".action-panel")
+    expect(page.locator(".action-panel")).not_to_be_visible()
 
     # expect our event to be there after refresh
-    sb.refresh()
-    sb.assert_element(f'td[data-date="{date.today()}"] .fc-event')
-    sb.assert_text("Closed", ".fc-event")
-    sb.assert_text("Entire building", ".fc-event")
+    page.reload()
+    expect(page.locator(f'td[data-date="{date.today()}"] .fc-event')).to_be_attached()
+    expect(page.locator(".fc-event")).to_contain_text("Closed")
+    expect(page.locator(".fc-event")).to_contain_text("Entire building")
 
 
 @pytest.fixture
@@ -38,10 +39,10 @@ def sample_closing(db):
     yield Closing.objects.create(start=datetime.today(), end=datetime.today() + timedelta(days=1), is_global=True)
 
 
-def test_agenda_edit_closing(sb, sample_closing, as_admin, agenda):
-    sb.click(f'td[data-date="{date.today()}"]')
-    sb.assert_element_visible(".action-panel")
-    sb.assert_text("Edit closing", ".action-panel")
+def test_agenda_edit_closing(page, sample_closing, as_admin, agenda):
+    page.click(f'td[data-date="{date.today()}"]')
+    expect(page.locator(".action-panel")).to_be_visible()
+    expect(page.locator(".action-panel")).to_contain_text("Edit closing")
 
 
 @pytest.fixture
@@ -74,52 +75,52 @@ def appointment_tomorrow(db, sample_experiment, sample_leader, sample_participan
     )
 
 
-def test_agenda_set_appointment_outcome(sb, appointment_yesterday, as_leader):
+def test_agenda_set_appointment_outcome(page, appointment_yesterday, as_leader):
     appointment_yesterday.experiment.leaders.add(as_leader)
-    sb.click('a:contains("Agenda")')
+    page.locator("a").get_by_text("Agenda").click()
 
-    sb.assert_text_visible(appointment_yesterday.participant.name)
-    sb.click(f'td[data-date="{appointment_yesterday.start.date()}"]')
-    sb.assert_element_visible(".action-panel")
-    sb.assert_text("Edit appointment", ".action-panel")
+    expect(page.get_by_text(appointment_yesterday.participant.name)).to_be_visible()
+    page.click(f'td[data-date="{appointment_yesterday.start.date()}"]')
+    expect(page.locator(".action-panel")).to_be_visible()
+    expect(page.locator(".action-panel")).to_contain_text("Edit appointment")
 
     # appointment is in the past, should not be possible to remove
-    sb.assert_element_not_visible("button:contains('Remove')")
+    expect(page.locator("button").get_by_text("Remove")).not_to_be_visible()
 
     # set outcome
-    sb.click("label:contains('No-show')")
-    sb.click("Button:contains('Save')")
-    sb.assert_element_not_visible(".action-panel")
+    page.locator("label").get_by_text("No-show").click()
+    page.locator("Button").get_by_text("Save").click()
+    expect(page.locator(".action-panel")).not_to_be_visible()
 
     # check that outcome is saved after refresh
-    sb.reload()
-    sb.click(f'td[data-date="{appointment_yesterday.start.date()}"]')
-    sb.assert_element_visible('input[value="NOSHOW"]:checked')
+    page.reload()
+    page.click(f'td[data-date="{appointment_yesterday.start.date()}"]')
+    expect(page.locator('input[value="NOSHOW"]:checked')).to_be_visible()
 
     # participant should be available again after a no-show
-    sb.click("a:contains(Experiments)")
-    sb.click("a:contains(Overview)")
-    sb.click("button.icon-menu")
-    sb.click("a:contains(Invite)")
-    sb.assert_text_visible(appointment_yesterday.participant.name)
+    page.get_by_role("button", name="Experiments").click()
+    page.get_by_role("link", name="Overview").click()
+    page.click("button.icon-menu")
+    page.locator("a").get_by_text("Invite").click()
+    expect(page.get_by_text(appointment_yesterday.participant.name)).to_be_visible()
 
 
-def test_agenda_modify_appointment(sb, appointment_tomorrow, as_leader):
+def test_agenda_modify_appointment(page, appointment_tomorrow, as_leader):
     appointment_tomorrow.experiment.leaders.add(as_leader)
-    sb.click('a:contains("Agenda")')
+    page.locator("a").get_by_text("Agenda").click()
 
-    sb.click(f'td[data-date="{appointment_tomorrow.start.date()}"]')
+    page.click(f'td[data-date="{appointment_tomorrow.start.date()}"]')
     original_time = appointment_tomorrow.timeslot.start
     new_time = original_time + timedelta(days=3)
 
-    sb.type(".appointment-start input", new_time.strftime("%d-%m-%Y %H:%M"))
-    sb.type(".appointment-end input", (new_time + timedelta(hours=1)).strftime("%d-%m-%Y %H:%M"))
-    sb.click(".action-panel .save")
+    page.fill(".appointment-start input", new_time.strftime("%d-%m-%Y %H:%M"))
+    page.fill(".appointment-end input", (new_time + timedelta(hours=1)).strftime("%d-%m-%Y %H:%M"))
+    page.click(".action-panel .save")
 
-    sb.assert_element_not_visible(".action-panel .save")
+    page.locator(".action-panel .save").wait_for(state="hidden")
     appointment_tomorrow.refresh_from_db()
     assert appointment_tomorrow.timeslot.start == new_time
 
     # check that an appointment update email was sent
-    sb.assertEqual(len(mail.outbox), 1)
-    sb.assertEqual(mail.outbox[0].to[0], appointment_tomorrow.participant.email)
+    assert len(mail.outbox) == 1
+    assert mail.outbox[0].to[0] == appointment_tomorrow.participant.email

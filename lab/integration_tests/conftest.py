@@ -7,29 +7,37 @@ from main.models import User
 from participants.models import Language, Participant
 
 
+def set_language_english(page):
+    loc = page.locator("button").get_by_text("English")
+    if loc.count():
+        loc.click()
+
+
 @pytest.fixture
-def as_admin(sb, admin_user, live_server):
+def as_admin(page, admin_user, live_server):
     admin_user.name = "Admin McAdmin"
     admin_user.phonenumber = "12345678"
     admin_user.save()
 
-    sb.open(live_server.url + "/login")
-    # sb.click('#djHideToolBarButton')
-    sb.type("#id_username", "admin")
-    sb.type("#id_password", "password")
-    sb.click('button:contains("Log in")')
+    page.goto(live_server.url + "/login")
+    set_language_english(page)
+
+    page.fill("#id_username", "admin")
+    page.fill("#id_password", "password")
+    page.locator("button").get_by_text("Log in").click()
 
 
 @pytest.fixture
-def as_leader(sb, django_user_model, live_server):
+def as_leader(page, django_user_model, live_server):
     username = "test_user"
     password = "test_user"
     user = django_user_model.objects.create_user(username=username, password=password, name="Test Leader")
-    sb.open(live_server.url + "/login")
-    # sb.click('#djHideToolBarButton')
-    sb.type("#id_username", username)
-    sb.type("#id_password", password)
-    sb.click('button:contains("Log in")')
+    page.goto(live_server.url + "/login")
+    set_language_english(page)
+
+    page.fill("#id_username", username)
+    page.fill("#id_password", password)
+    page.locator("button").get_by_text("Log in").click()
     yield user
 
 
