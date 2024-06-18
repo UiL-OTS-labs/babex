@@ -133,6 +133,6 @@ class ExperimentAttachmentView(ExperimentLeaderMixin, ExperimentObjectMixin, Vie
 
     def get(self, request, *args, **kwargs):
         attachment = self.experiment.attachments.get(pk=kwargs["attachment"])
-        response = HttpResponse(attachment)
+        response = HttpResponse(attachment.file, content_type=attachment.file.content_type)
         response["Content-Disposition"] = "attachment; filename=" + attachment.filename
         return response
