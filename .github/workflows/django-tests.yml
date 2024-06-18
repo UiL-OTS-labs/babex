@@ -110,6 +110,7 @@ jobs:
         run: |
           cd ${{ matrix.app }}
           playwright install
+          export DJANGO_ALLOW_ASYNC_UNSAFE=1
           make testint
       - uses: actions/upload-artifact@v1
         if: failure()
@@ -167,7 +168,8 @@ jobs:
         run: |
           cd integration_tests
           playwright install
-          pytest --headless2
+          export DJANGO_ALLOW_ASYNC_UNSAFE=1
+          pytest
       - uses: actions/upload-artifact@v1
         if: failure()
         with:
