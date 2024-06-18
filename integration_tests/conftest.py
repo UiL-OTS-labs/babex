@@ -139,11 +139,19 @@ def apps(lab_app, parent_app):
     return namedtuple("Apps", "lab,parent")(lab_app, parent_app)
 
 
+def set_language_english(page):
+    loc = page.locator("button").get_by_text("English")
+    if loc.count():
+        loc.click()
+
+
 @pytest.fixture
 def as_admin(browser: Browser, lab_app):
     lab_app.load("admin")
-    page_admin = browser.new_context().new_page()
+    context = browser.new_context()
+    page_admin = context.new_page()
     page_admin.goto(lab_app.url + '/login')
+    set_language_english(page_admin)
     page_admin.fill("#id_username", "admin")
     page_admin.fill("#id_password", "admin")
     page_admin.locator('button').get_by_text("Log in").click()
