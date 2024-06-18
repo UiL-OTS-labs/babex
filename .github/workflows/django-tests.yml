@@ -109,6 +109,7 @@ jobs:
       - name: Integration tests
         run: |
           cd ${{ matrix.app }}
+          playwright install
           make testint
       - uses: actions/upload-artifact@v1
         if: failure()
@@ -165,6 +166,7 @@ jobs:
       - name: Integration tests
         run: |
           cd integration_tests
+          playwright install
           pytest --headless2
       - uses: actions/upload-artifact@v1
         if: failure()

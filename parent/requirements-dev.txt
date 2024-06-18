@@ -1,2 +1,2 @@
-seleniumbase
+playwright
 pytest-django
