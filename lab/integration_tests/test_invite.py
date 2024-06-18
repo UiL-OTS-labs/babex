@@ -3,20 +3,21 @@ from datetime import date, datetime, timedelta
 
 from django.core import mail
 from django.core.files.uploadedfile import SimpleUploadedFile
+from playwright.sync_api import expect
 
 from experiments.models import Appointment, TimeSlot
 
 
-def test_experiment_list(sb, sample_experiment, sample_participant, as_leader):
+def test_experiment_list(page, sample_experiment, sample_participant, as_leader):
     as_leader.experiments.add(sample_experiment)
-    sb.click("a:contains(Experiments)")
-    sb.click("a:contains(Overview)")
-    sb.click("button.icon-menu")
-    sb.click("a:contains(Invite)")
-    sb.assert_text("Baby McBaby")
+    page.get_by_role("button", name="Experiments").click()
+    page.get_by_role("link", name="Overview").click()
+    page.click("button.icon-menu")
+    page.locator("a").get_by_text("Invite").click()
+    expect(page.get_by_text("Baby McBaby")).to_be_visible()
 
 
-def test_schedule_appointment(sb, sample_experiment, sample_participant, sample_leader, as_leader):
+def test_schedule_appointment(page, sample_experiment, sample_participant, sample_leader, as_leader):
     sample_experiment.leaders.add(as_leader)
     # test with a differnet leader than the currently logged user
     sample_experiment.leaders.add(sample_leader)
@@ -27,122 +28,122 @@ def test_schedule_appointment(sb, sample_experiment, sample_participant, sample_
         filename="test-file", file=SimpleUploadedFile("test.txt", test_file_content.encode())
     )
 
-    sb.click("a:contains(Experiments)")
-    sb.click("a:contains(Overview)")
-    sb.click("button.icon-menu")
-    sb.click("a:contains(Invite)")
-    sb.click("td.actions a:contains(Call)")
-    sb.click("button:contains(Schedule)")
+    page.get_by_role("button", name="Experiments").click()
+    page.get_by_role("link", name="Overview").click()
+    page.click("button.icon-menu")
+    page.locator("a").get_by_text("Invite").click()
+    page.locator("td.actions").get_by_text("Call").click()
+    page.locator("button").get_by_text("Schedule").click()
 
     # pick time
     tomorrow = date.today() + timedelta(days=1)
-    sb.click(f'td[data-date="{tomorrow}"]')
-    sb.click('td.fc-timegrid-slot-lane[data-time="10:00:00"]')
-    sb.click("button:contains(Next)")
+    page.click(f'td[data-date="{tomorrow}"]')
+    page.click('td.fc-timegrid-slot-lane[data-time="10:00:00"]')
+    page.locator("button").get_by_text("Next").click()
 
     # pick leader
-    sb.select_option_by_text(".modal-content select", "Leader McLeader")
+    page.locator(".modal-content select").select_option("Leader McLeader")
 
-    sb.click("button:contains(Confirm)")
-    sb.wait_for_element_not_visible('button:contains("Confirm")')
+    page.locator("button").get_by_text("Confirm").click()
+    page.get_by_role("button", name="Confirm").wait_for(state="hidden")
 
     # wait for email content to be ready
-    while not sb.execute_script("return (tinymce.activeEditor && tinymce.activeEditor.getContent())"):
+    while not page.evaluate("() => (tinymce.activeEditor && tinymce.activeEditor.getContent())"):
         time.sleep(0.2)
-    sb.click("button:contains(Send)")
-    sb.wait_for_element_not_visible('button:contains("Send")')
+    page.locator("button").get_by_text("Send").click()
+    page.get_by_role("button", name="Send").wait_for(state="hidden")
 
     # baby mcbaby shouldn't be available anymore
-    sb.click("a:contains(Experiments)")
-    sb.click("a:contains(Overview)")
-    sb.click("button.icon-menu")
-    sb.click("a:contains(Invite)")
-    sb.assert_text_not_visible("Baby McBaby")
+    page.get_by_role("button", name="Experiments").click()
+    page.get_by_role("link", name="Overview").click()
+    page.click("button.icon-menu")
+    page.locator("a").get_by_text("Invite").click()
+    expect(page.get_by_text("Baby McBaby")).not_to_be_visible()
 
     # check that appointment is visible on agenda
-    sb.click("a:contains(Agenda)")
-    sb.assert_element(f'td[data-date="{tomorrow}"] .fc-event')
+    page.locator("a").get_by_text("Agenda").click()
+    expect(page.locator(f'td[data-date="{tomorrow}"] .fc-event')).to_be_visible()
 
     # appointment should contain both participant and leader names
-    sb.assert_text("Baby McBaby", ".fc-event")
-    sb.assert_text("Leader McLeader", ".fc-event")
+    expect(page.locator(".fc-event").get_by_text("Baby McBaby")).to_be_visible()
+    expect(page.locator(".fc-event").get_by_text("Leader McLeader")).to_be_visible()
 
     # check that a confirmation email was sent
-    sb.assertEqual(len(mail.outbox), 1)
-    sb.assertEqual(mail.outbox[0].to[0], sample_participant.email)
+    assert len(mail.outbox) == 1
+    assert mail.outbox[0].to[0] == sample_participant.email
 
     # check that the attachment is present
     assert mail.outbox[0].attachments[0] == ("test-file", test_file_content, "text/plain")
 
     # check that at least parent name and leader name are in the email contents
-    sb.assertIn(sample_participant.parent_last_name, mail.outbox[0].body)
-    sb.assertIn(sample_leader.name, mail.outbox[0].body)
-    sb.assertIn(sample_participant.parent_last_name, mail.outbox[0].alternatives[0][0])
-    sb.assertIn(sample_leader.name, mail.outbox[0].alternatives[0][0])
+    assert sample_participant.parent_last_name in mail.outbox[0].body
+    assert sample_leader.name in mail.outbox[0].body
+    assert sample_participant.parent_last_name in mail.outbox[0].alternatives[0][0]
+    assert sample_leader.name in mail.outbox[0].alternatives[0][0]
 
 
-def test_schedule_appointment_edit_email(sb, sample_experiment, sample_participant, sample_leader, as_leader):
+def test_schedule_appointment_edit_email(page, sample_experiment, sample_participant, sample_leader, as_leader):
     sample_experiment.leaders.add(as_leader)
     sample_experiment.leaders.add(sample_leader)
 
-    sb.click("a:contains(Experiments)")
-    sb.click("a:contains(Overview)")
-    sb.click("button.icon-menu")
-    sb.click("a:contains(Invite)")
-    sb.click("td.actions a:contains(Call)")
-    sb.click("button:contains(Schedule)")
+    page.get_by_role("button", name="Experiments").click()
+    page.get_by_role("link", name="Overview").click()
+    page.click("button.icon-menu")
+    page.locator("a").get_by_text("Invite").click()
+    page.locator("td.actions").get_by_text("Call").click()
+    page.locator("button").get_by_text("Schedule").click()
 
     # pick time
     tomorrow = date.today() + timedelta(days=1)
-    sb.click(f'td[data-date="{tomorrow}"]')
-    sb.click('td.fc-timegrid-slot-lane[data-time="10:00:00"]')
-    sb.click("button:contains(Next)")
+    page.click(f'td[data-date="{tomorrow}"]')
+    page.click('td.fc-timegrid-slot-lane[data-time="10:00:00"]')
+    page.locator("button").get_by_text("Next").click()
 
     # pick leader
-    sb.select_option_by_text(".modal-content select", "Leader McLeader")
-    sb.click("button:contains(Confirm)")
+    page.locator(".modal-content select").select_option("Leader McLeader")
+    page.locator("button").get_by_text("Confirm").click()
 
-    while not sb.execute_script("return (tinymce.activeEditor && tinymce.activeEditor.getContent())"):
+    while not page.evaluate("() => (tinymce.activeEditor && tinymce.activeEditor.getContent())"):
         time.sleep(0.2)
 
     # set tinymce editor with a custom email string
     test_email = "<em>this is a test email</em>"
     test_email_plain = "this is a test email"
-    sb.execute_script('tinymce.activeEditor.setContent("{}")'.format(test_email))
+    page.evaluate('() => tinymce.activeEditor.setContent("{}")'.format(test_email))
 
-    sb.assertEqual(len(mail.outbox), 0)
-    sb.click("button:contains(Send)")
-    sb.wait_for_element_not_visible('button:contains("Send")')
+    assert len(mail.outbox) == 0
+    page.locator("button").get_by_text("Send").click()
+    page.get_by_role("button", name="Send").wait_for(state="hidden")
 
     # check the email was sent
-    sb.assertEqual(len(mail.outbox), 1)
-    sb.assertEqual(mail.outbox[0].to[0], sample_participant.email)
-    sb.assertIn(test_email_plain, mail.outbox[0].body)
-    sb.assertIn(test_email, mail.outbox[0].alternatives[0][0])
+    assert len(mail.outbox) == 1
+    assert mail.outbox[0].to[0] == sample_participant.email
+    assert test_email_plain in mail.outbox[0].body
+    assert test_email in mail.outbox[0].alternatives[0][0]
 
 
-def test_call_exclusion(sb, sample_experiment, sample_participant, sample_leader, as_admin):
+def test_call_exclusion(page, sample_experiment, sample_participant, sample_leader, as_admin):
     sample_experiment.leaders.add(sample_leader)
 
-    sb.click("a:contains(Experiments)")
-    sb.click("a:contains(Overview)")
-    sb.click("button.icon-menu")
-    sb.click("a:contains(Invite)")
-    sb.click("td.actions a:contains(Call)")
+    page.get_by_role("button", name="Experiments").click()
+    page.get_by_role("link", name="Overview").click()
+    page.click("button.icon-menu")
+    page.locator("a").get_by_text("Invite").click()
+    page.locator("td.actions").get_by_text("Call").click()
 
     # indicates participant can't participate
-    sb.click('input[value="EXCLUDE"]')
-    sb.click("button:contains(Save)")
+    page.click('input[value="EXCLUDE"]')
+    page.locator("button").get_by_text("Save").click()
 
     # baby mcbaby shouldn't be available anymore
-    sb.click("a:contains(Experiments)")
-    sb.click("a:contains(Overview)")
-    sb.click("button.icon-menu")
-    sb.click("a:contains(Invite)")
-    sb.assert_text_not_visible("Baby McBaby")
+    page.get_by_role("button", name="Experiments").click()
+    page.get_by_role("link", name="Overview").click()
+    page.click("button.icon-menu")
+    page.locator("a").get_by_text("Invite").click()
+    expect(page.get_by_text("Baby McBaby")).not_to_be_visible()
 
 
-def test_reschedule_participant(sb, sample_experiment, sample_participant, sample_leader, as_leader):
+def test_reschedule_participant(page, sample_experiment, sample_participant, sample_leader, as_leader):
     """it should be possible to make a new appointment with the same participant, if a previous appointment was canceled"""
 
     sample_experiment.leaders.add(as_leader)
@@ -158,17 +159,17 @@ def test_reschedule_participant(sb, sample_experiment, sample_participant, sampl
     )
 
     # baby mcbaby shouldn't be available anymore
-    sb.click("a:contains(Experiments)")
-    sb.click("a:contains(Overview)")
-    sb.click("button.icon-menu")
-    sb.click("a:contains(Invite)")
-    sb.assert_text_not_visible("Baby McBaby")
+    page.get_by_role("button", name="Experiments").click()
+    page.get_by_role("link", name="Overview").click()
+    page.click("button.icon-menu")
+    page.locator("a").get_by_text("Invite").click()
+    expect(page.get_by_text("Baby McBaby")).not_to_be_visible()
 
     appointment.cancel()
 
     # baby mcbaby should be available again
-    sb.click("a:contains(Experiments)")
-    sb.click("a:contains(Overview)")
-    sb.click("button.icon-menu")
-    sb.click("a:contains(Invite)")
-    sb.assert_text_visible("Baby McBaby")
+    page.get_by_role("button", name="Experiments").click()
+    page.get_by_role("link", name="Overview").click()
+    page.click("button.icon-menu")
+    page.locator("a").get_by_text("Invite").click()
+    expect(page.get_by_text("Baby McBaby")).to_be_visible()
