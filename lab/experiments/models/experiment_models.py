@@ -34,9 +34,9 @@ class Experiment(models.Model):
     </p>
     <p>
         <strong>Aankomst in het Babylab</strong><br/>
-        Als u aanbelt bij Janskerkhof 13a en via de intercom zegt dat u voor het Babylab komt, dan wordt de deur voor u geopend.
+        Als u aanbelt bij Janskerkhof 13a en via de intercom zegt dat u voor het Babylab komt, dan wordt de deur op afstand voor u geopend.
         Wanneer u binnenkomt, kunt u gelijk na de hal met de lift (of met de trap) naar beneden.
-        Aan uw rechterhand vindt u de wachtkamer, waar u plaats kunt nemen. De Babylab-assistent zal u daar komen ophalen.
+        Daar vindt u aan uw rechterhand de wachtkamer, waar u plaats kunt nemen. De onderzoeksassistent zal u daar komen ophalen.
     </p>
     <p>
         <strong>Het experiment</strong><br/>
@@ -52,7 +52,7 @@ class Experiment(models.Model):
         <strong>Afspraak verzetten/afzeggen</strong><br/>
         Als u deze afspraak wilt afzeggen, kunt u dat doen via <a href="{{cancel_link}}">deze link</a>.
         Doe dat a.u.b. minstens 24 uur van tevoren. Als u vlak van tevoren ontdekt dat u verhinderd bent,
-        neem dan contact op met de proefleider ({{leader_name}}, email: {{leader_email}} tel.: {{leader_phonenumber}}).
+        neem dan contact op met de proefleider ({{leader_name}}, email: babylab.ilslabs@uu.nl tel.: {{leader_phonenumber}}).
     </p>
     <p>
         Meer informatie over het Babylab, bijvoorbeeld de routebeschrijving, kunt u vinden op de
@@ -60,7 +60,7 @@ class Experiment(models.Model):
         Wij danken u alvast hartelijk voor uw medewerking. Zonder uw deelname kunnen wij geen onderzoek doen!
     </p>
     <p>
-        Vriendelijke groet,<br/>
+        Vriendelijke groet,<br/><br/>
         Het team van het Babylab voor Taalonderzoek
     </p>"""
 

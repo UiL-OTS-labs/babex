@@ -9,23 +9,33 @@
         Beste {{ appointment.participant.parent_name }},
     </p>
     <p>
-        <strong>Dit is een reminder!</strong>
+        <strong>Dit is een herinnering aan uw afspraak.</strong>
     </p>
     <p>
-        Je hebt een afspraak gemaakt om mee te doen met het experiment: <strong> {{ appointment.experiment.name }}</strong>.
+        U heeft een afspraak gemaakt om met {{ appointmant.participant.name }} mee te doen aan het experiment: <strong> {{ appointment.experiment.name }}</strong>.
     </p>
     <p>
-        We verwachten {{ appointment.participant.name }} op: <br/>
+        We verwachten u op: <br/>
         Datum: <strong>{{ appointment.timeslot.datetime|date:"l d-m-Y" }}</strong><br/>
         Tijd: <strong>{{ appointment.timeslot.datetime|date:"H:i" }} uur</strong><br/>
-        Locatie: <strong>{{ appointment.experiment.location }}</strong><br/>
+        Locatie: <strong>Janskerkhof 13a</strong> (let op: dit is de groene voordeur met de helling ervoor).<br/>
     </p>
     <p>
-        TODO: text over mogelijk oorontsteking
+        <strong>Gezondheidsklachten</strong><br>
+        Wij vragen u de afspraak te verzetten wanneer uw kind vlak voor de afspraak gehoorproblemen en/of oorontsteking heeft en dus mogelijk minder goed hoort.
     </p>
     <p>
-        Als je vlak vantevoren ontdekt dat je verhinderd bent, neem dan svp even
-        persoonlijk contact op met de proefleider ({{ appointment.leader.name }}, email: {{ appointment.leader.email }}
-        tel.: {{ appointment.leader.phonenumber }}).
+        <strong>Afspraak verzetten/afzeggen</strong><br>
+        Als u deze afspraak wilt afzeggen, kunt u dat doen via deze link. Doe dat a.u.b. minstens 24 uur van tevoren. Als u vlak van tevoren ontdekt dat u verhinderd bent, neem dan contact op met de proefleider ({{ appointment.leader.name }}, email: babylab.ilslabs@uu.nl, tel.: {{ appointment.leader.phonenumber }}).
+    </p>
+    <p>
+        Meer informatie over het Babylab, bijvoorbeeld de routebeschrijving, kunt u vinden op de <a href="https://babylab.wp.hum.uu.nl/">website van het Babylab</a>. Wij danken u alvast hartelijk voor uw medewerking. Zonder uw deelname kunnen wij geen onderzoek doen!
+
+
+
+    </p>
+    <p>
+        Vriendelijke groet,<br><br>
+        Het team van het Babylab voor Taalonderzoek
     </p>
 {% endblock %}
