@@ -1,13 +1,22 @@
 {% load i18n %}
+<style>
+    details summary {
+        text-decoration: underline;
+        list-style: none;
+    }
+    details[open] summary {
+        display: none;
+    }
+</style>
 <h2>{% translate "participants:detail:extradata" %}</h2>
 <table class="dt_custom" width="100%">
     <thead>
         <tr>
             <th width="40%">
-                {% trans 'participants:detail:extradata:title' %}
+                {% translate 'participants:detail:extradata:title' %}
             </th>
             <th>
-                {% trans 'participants:detail:extradata:content' %}
+                {% translate 'participants:detail:extradata:content' %}
             </th>
         </tr>
     </thead>
@@ -17,7 +26,10 @@
                 {{ datum.title }}
             </td>
             <td>
-                {{ datum.content }}
+                <details>
+                    <summary>{% translate "participants:detail:extradata:click" %}</summary>
+                    {{ datum.content }}
+                </details>
             </td>
         </tr>
     {% endfor %}

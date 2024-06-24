@@ -439,3 +439,6 @@ msgstr "Demographics"
 
 msgid "participants:deactivated:name"
 msgstr "** Deactivated **"
+
+msgid "participants:detail:extradata:click"
+msgstr "click to show"

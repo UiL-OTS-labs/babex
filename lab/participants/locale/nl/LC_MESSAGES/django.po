@@ -402,3 +402,6 @@ msgstr "Aanpassen"
 
 msgid "participant:attribute:english_contact"
 msgstr "Engelse communicatie"
+
+msgid "participants:detail:extradata:click"
+msgstr "klik om weer te geven"
