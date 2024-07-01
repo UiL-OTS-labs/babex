@@ -10,7 +10,7 @@ CSRF_TRUSTED_ORIGINS = ["https://" + getenv("PARENT_SERVER")]
 
 STATIC_ROOT = "/static"
 
-API_HOST = getenv("LAB_SERVER")
+API_HOST = "https://" + getenv("LAB_SERVER")
 
 
 # Email
