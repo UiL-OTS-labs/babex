@@ -442,3 +442,6 @@ msgstr "** Deactivated **"
 
 msgid "participants:detail:extradata:click"
 msgstr "click to show"
+
+msgid "participant:attribute:multilingual"
+msgstr "Multilingual"
