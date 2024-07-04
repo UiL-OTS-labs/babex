@@ -51,8 +51,8 @@ MIDDLEWARE += [
     "csp.middleware.CSPMiddleware",
 ]
 
-FRONTEND_URI = "https://" + getenv('LAB_SERVER')
-PARENT_URI = "https://" + getenv('PARENT_SERVER')
+FRONTEND_URI = "https://" + getenv("LAB_SERVER") + "/"
+PARENT_URI = "https://" + getenv("PARENT_SERVER") + "/"
 
 if not getenv('NO_SAML'):
     try:
