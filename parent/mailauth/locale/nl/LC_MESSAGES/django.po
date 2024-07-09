@@ -1,0 +1,41 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-09 15:12+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: mailauth/templates/mailauth/login.html:7
+msgid "parent:mailauth:login:header"
+msgstr "Inloggen bij Babylabportaal"
+
+#: mailauth/templates/mailauth/login.html:9
+msgid "parent:mailauth:login:intro"
+msgstr "Vul a.u.b. het e-mailadres in waarme u bij het Babylab voor Taalonderzoek geregistreerd staat."
+
+#: mailauth/templates/mailauth/sent.html:7
+msgid "parent:mailauth:sent"
+msgstr ""
+"<p>Een e-mail met instructies is verstuurd naar {}. Gebruik de link in de e-mail om in te loggen bij het Babylabportaal.</p>"
+"<p>Mocht u op het ingevulde emailadres geen link ontvangen, neem dan a.u.b. contact op met babylab.ilslabs@uu.nl.</p>"
+"<p>Mocht u het emailadres niet correct hebben ingevuld, dan kunt u het opnieuw proberen.</p>"
+
+#: mailauth/views.py:17 mailauth/views.py:51
+msgid "parent:error:login_failed"
+msgstr ""
+
+msgid "parent:mailauth:login:submit"
+msgstr "Bevestigen"
