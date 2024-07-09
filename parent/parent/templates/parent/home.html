@@ -10,18 +10,37 @@
     </style>
     <div class="uu-sidebar-container uu-sidebar-right">
         <aside class="uu-sidebar" >
-            <p>{% trans 'parent:home:sidebar' %}</p>
+            <h5>Babylab voor Taalonderzoek</h5>
+            <p>
+Het Babylab voor Taalonderzoek is onderdeel van de labs van het Institute for Language Sciences (ILS), Universiteit Utrecht.
+            </p>
+            <p>In het Babylab doen wij onderzoek naar de manier waarop kinderen hun moedertaal/talen leren.</p>
+            <h5>Contact</h5>
+            <p>
+                Voor vragen en meer informatie kunt u altijd contact met ons opnemen.
+            </p>
+            <p>
+                Website: <a href="https://babylab.wp.hum.uu.nl/">https://babylab.wp.hum.uu.nl/</a>
+            </p>
+            <p>
+                E-mail: <a href="mailto:babylab.ilslabs@uu.nl">babylab.ilslabs@uu.nl</a>
+            </p>
         </aside>
         <div class="uu-sidebar-content" >
             <section>
+                <h3>Welkom bij het Babylab voor Taalonderzoek</h3>
                 <p>
-                    {% trans 'parent:home:intro' %}
+                    U kunt uw kind/kinderen aanmelden bij het Babylab voor Taalonderzoek.
                 </p>
-
-                <ul>
-                    <li><a href="{% url 'signup' %}">{% trans 'parent:home:signup' %}</a></li>
-                    <li><a href="{% url 'overview' %}">{% trans 'parent:home:signin' %}</a></li>
-                </ul>
+                <p>
+                    <a href="{% url 'signup' %}" class="btn btn-primary">AANMELDEN</a>
+                </p>
+                <p>
+                    Wilt u weten welke afspraken u gemaakt heeft of wilt u uw kind/kinderen uitschrijven, log dan in op het Babylabportaal.
+                </p>
+                <p>
+                    <a href="{% url 'overview' %}" class="btn btn-secondary">BABYLABPORTAAL</a>
+                </p>
         </div>
     </div>
 {% endblock %}
