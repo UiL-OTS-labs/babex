@@ -17,6 +17,8 @@ urlpatterns = [
     path("", views.GatewayHome.as_view(), name="home"),
     path("", include(router.urls)),
     #
+    path("session/", views.SessionView.as_view()),
+    #
     path("signup/verify/<str:token>/", SignupVerifyView.as_view()),
     #
     path("mailauth/", MailAuthView.as_view()),

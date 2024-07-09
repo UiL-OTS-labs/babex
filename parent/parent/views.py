@@ -1,7 +1,6 @@
 import datetime
 import json
 import logging
-from operator import itemgetter
 
 from cdh.rest import client as rest
 from django.contrib import messages
@@ -161,7 +160,7 @@ def cancel_appointment_view(request, appointment_id):
         messages.error(request, _("parent:error:data_generic"))
         return render(request, "parent/overview.html")
 
-    if appointment['outcome'] == 'CANCELED':
+    if appointment["outcome"] == "CANCELED":
         # appointment already canceled
         return render(request, "appointment/canceled.html", dict(appointment=appointment))
 
@@ -175,7 +174,8 @@ def cancel_appointment_view(request, appointment_id):
 
 @session_required
 def data_management_view(request):
-    return render(request, "data/home.html")
+    ok, result = gateway(request, "/gateway/session/")
+    return render(request, "data/home.html", dict(name=result["name"]))
 
 
 @session_required

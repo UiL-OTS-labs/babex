@@ -12,10 +12,8 @@
         <div class="uu-sidebar-content" >
             <section>
                 <p>
-                    {% translate 'parent:data:intro' %}
-                </p>
-                <p>
-                    {% translate 'parent:data:remove' %}
+                    Wilt u {{ name }} uitschrijven voor onderzoek bij het Babylab voor Taalonderzoek?
+                    De gegevens van {{ name }} worden dan uit ons systeem verwijderd. Dit betekent dat uw kind niet meer kan deelnemen aan één van onze onderzoeken.
                 </p>
                 {% with msg=_('parent:data:remove:confirm') %}
                     <form action="{% url 'data.deactivate' %}" method="post" onsubmit="return confirm('{{msg}}')">

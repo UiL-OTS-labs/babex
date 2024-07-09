@@ -36,6 +36,13 @@ class HasParticipant(permissions.BasePermission):
         return request.participant is not None
 
 
+class SessionView(views.APIView):
+    permission_classes = [HasParticipant]
+
+    def get(self, request, *args, **kwargs):
+        return Response(dict(name=self.request.participant.name))
+
+
 class AppointmentViewSet(viewsets.ModelViewSet):
     permission_classes = [HasParticipant]
     serializer_class = AppointmentSerializer
