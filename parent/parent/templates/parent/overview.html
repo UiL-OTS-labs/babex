@@ -46,30 +46,6 @@
                     <p class="mt-2">Als u een afspraak wilt verplaatsen, neem dan contact op met de onderzoeker via bovenstaand telefoonnummer of via e-mail: <a href="mailto:babylab.ilslabs@uu.nl">babylab.ilslabs@uu.nl</a>.</p>
                 {% endif %}
             </section>
-            <section class="mt-5">
-                <h3>{% translate 'parent:surveys:header' %}</h3>
-                {% for invitation in survey_invites %}
-                    <div class="card mt-3">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ invitation.survey_name }}</h5>
-                            {% if invitation.response.completed %}
-                                {% translate 'parent:surveys:completed_at' %} {{ invitation.response.completed | date }}, {{ invitation.response.completed | time }}
-                            {% else %}
-                                <a class="btn btn-primary" href="{% url 'survey' invitation.id %}">
-                                    {% if invitation.response.updated %}
-                                        {% translate 'parent:surveys:continue' %}
-                                    {% else %}
-                                        {% translate 'parent:surveys:start' %}
-                                    {% endif %}
-                                </a>
-                            {% endif %}
-                        </div>
-                    </div>
-                {% empty %}
-                    {% translate 'parent:surveys:no_surveys' %}
-                {% endfor %}
-            </section>
-
         </div>
     </div>
 {% endblock %}
