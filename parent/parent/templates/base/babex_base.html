@@ -5,6 +5,7 @@
 {% load include_if_exists %}
 {% load menu %}
 {% load messages %}
+{% load transformat %}
 
 {% block html_head %}
     <style>
@@ -44,6 +45,11 @@
             {% endblock %}
         </div>
         <div>{# language box used to be here #}</div>
+        {% if request.session.email %}
+            <div class="border-left ps-3 pe-3">
+                <a href="{% url 'mailauth:logout' %}" class="text-decoration-underline">Log uit</a>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 
