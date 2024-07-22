@@ -809,6 +809,9 @@ msgstr "Bel"
 msgid "experiments:mail:appointment:canceled:subject"
 msgstr "Babylab voor Taalonderzoek: Afspraak geannuleerd"
 
+msgid "experiments:mail:reminder:subject"
+msgstr "Babylab voor Taalonderzoek: Herinnering aan uw afspraak"
+
 msgid "experiment:attribute:leaders"
 msgstr "Proefleiders"
 
