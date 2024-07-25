@@ -26,39 +26,39 @@
         <div class="uu-sidebar-content" >
             <table class="table">
                 <tr>
-                    <td> {% get_verbose_field_name "signups" "Signup" "name" %} </td>
+                    <td> {% translate "participant:attribute:name" %} </td>
                     <td> {{ signup.name }} </td>
                 </tr>
                 <tr>
-                    <td> {% get_verbose_field_name "signups" "Signup" "sex" %} </td>
+                    <td> {% translate "participant:attribute:sex" %} </td>
                     <td> {{ signup.sex }} </td>
                 </tr>
                 <tr>
-                    <td> {% get_verbose_field_name "signups" "Signup" "birth_date" %} </td>
+                    <td> {% translate "participant:attribute:birth_date" %} </td>
                     <td> {{ signup.birth_date }} </td>
                 </tr>
                 <tr>
-                    <td> {% translate "signup:attribute:parent_name" %} </td>
+                    <td> {% translate "participant:attribute:parent_name" %} </td>
                     <td> {{ signup.parent_first_name }} {{ signup.parent_last_name }} </td>
                 </tr>
                 <tr>
-                    <td> {% get_verbose_field_name "signups" "Signup" "phonenumber" %} </td>
+                    <td> {% translate "participant:attribute:phonenumber" %} </td>
                     <td> {{ signup.phonenumber }} </td>
                 </tr>
                 <tr>
-                    <td> {% get_verbose_field_name "signups" "Signup" "phonenumber_alt" %} </td>
+                    <td> {% translate "participant:attribute:phonenumber_alt" %} </td>
                     <td> {{ signup.phonenumber_alt }} </td>
                 </tr>
                 <tr>
-                    <td> {% get_verbose_field_name "signups" "Signup" "languages" %} </td>
+                    <td> {% translate "participant:attribute:languages" %} </td>
                     <td> {{ signup.languages|join:", "}} </td>
                 </tr>
                 <tr>
-                    <td> {% get_verbose_field_name "signups" "Signup" "email" %} </td>
+                    <td> {% translate "participant:attribute:email" %} </td>
                     <td> {{ signup.email }} </td>
                 </tr>
                 <tr>
-                    <td> {% get_verbose_field_name "signups" "Signup" "english_contact" %} </td>
+                    <td> {% translate "participant:attribute:english_contact" %} </td>
                     <td> {{ signup.english_contact|yesno:_("yes,empty")  }} </td>
                 </tr>
             </table>
