@@ -74,7 +74,7 @@
                             {{ experiment.leader_names }}
                         </td>
                         <td>
-                            {{ experiment.n_participants|default_if_none:0 }}
+                            {{ experiment.n_participants|default_if_none:0 }} ({{ experiment.recruitment_target }})
                         </td>
                         <td>
                             {% include 'experiments/experiment_actions_snippit.html' %}
