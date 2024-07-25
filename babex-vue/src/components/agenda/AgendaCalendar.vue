@@ -6,6 +6,7 @@
     import timeGridPlugin from '@fullcalendar/timegrid';
     import interactionPlugin from '@fullcalendar/interaction';
     import type { EventInput, EventContentArg, CalendarOptions, EventSourceApi } from '@fullcalendar/core';
+    import nlLocale from '@fullcalendar/core/locales/nl';
     import { defineEmits, defineExpose, defineProps, ref } from 'vue';
 
     import DateTimePicker from '../DateTimePicker.vue';
@@ -111,7 +112,8 @@
         selectConstraint: {
             start: props.start,
             end: props.end
-        }
+        },
+        locale: window.getLanguage() == 'nl' ? nlLocale : undefined
     };
 
     // override built-in template with multiline support and styling for canceled appointments
