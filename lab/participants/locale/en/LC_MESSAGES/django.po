@@ -116,7 +116,7 @@ msgstr "Phone number (secondary)"
 
 #: participants/models.py:62 participants/models.py:65
 msgid "participant:attribute:dyslexic_parent"
-msgstr "Dyslexic parent"
+msgstr "Parent with Dyslexia"
 
 #: participants/models.py:69
 msgid "participant:attribute:save_longer"

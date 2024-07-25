@@ -54,7 +54,7 @@ def render_participants_by_group(ax: matplotlib.axes.SubplotBase, participants: 
         [delta_dys, delta_mult, delta_premature, delta_rest],
         bins=num_bins,
         histtype="bar",
-        label=["Dyslexic parent", "Multilingual", "Premature", "Other"],
+        label=["Parent with Dyslexia", "Multilingual", "Premature", "Other"],
     )
     ax.legend(loc="upper right")
     ax.set_xlabel("Current age (months)")

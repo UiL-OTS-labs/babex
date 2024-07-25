@@ -165,7 +165,7 @@
             <div class="m-1">{{ _('Group by:') }}</div>
             <select class="form-control experiments" v-model="group">
                 <option :value="null">---</option>
-                <option value="dyslexia">{{ _('Dyslexic parent') }}</option>
+                <option value="dyslexia">{{ _('Parent with Dyslexia') }}</option>
                 <option value="multilingual">{{ _('Multilingual') }}</option>
                 <option value="premature">{{ _('Premature') }}</option>
             </select>

@@ -293,7 +293,7 @@ msgid "default_criteria:attribute:no"
 msgstr "Nee"
 
 msgid "participant:attribute:dyslexic_parent"
-msgstr "Dyslectische ouder"
+msgstr "Ouder met Dyslexie"
 
 msgid "options:yes,empty"
 msgstr "✔,"

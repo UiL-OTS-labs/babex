@@ -313,7 +313,10 @@ msgstr " "
 
 #: experiments/templates/experiments/criteria_snippit.html:11
 msgid "criteria_snippit:dyslexic_parent"
-msgstr "Dyslectisch:"
+msgstr "Ouder met Dyslexia:"
+
+msgid "criteria_snippit:tos_parent"
+msgstr "Ouder met TOS:"
 
 #: experiments/templates/experiments/criteria_snippit.html:19
 msgid "criteria_snippit:language"

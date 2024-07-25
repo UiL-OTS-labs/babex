@@ -431,7 +431,7 @@ msgstr "<p>For each of the selection criteria below, tick all the values that ar
 
 #: experiments/templates/experiments/criteria_snippit.html:8
 msgid "criteria_snippit:dyslexic_parent"
-msgstr "Dyslectic parent"
+msgstr "Parent with Dyslexia"
 
 #: experiments/templates/experiments/criteria_snippit.html:24
 msgid "criteria_snippit:multilingual"
@@ -521,7 +521,7 @@ msgstr "Tested"
 
 #: experiments/templates/experiments/detail_parts/info.html:28
 msgid "experiments:detail:progress:planned"
-msgstr "Planned"
+msgstr "Scheduled"
 
 #: experiments/templates/experiments/detail_parts/info.html:32
 msgid "experiments:detail:progress:excluded"
@@ -567,7 +567,7 @@ msgstr "Open"
 
 #: experiments/templates/experiments/detail_parts/info.html:126
 msgid "experiments:detail:info:leader"
-msgstr "Main leader"
+msgstr "Leaders"
 
 #: experiments/templates/experiments/detail_parts/info.html:138
 msgid "experiments:detail:criteria"
