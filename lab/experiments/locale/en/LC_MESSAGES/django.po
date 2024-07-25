@@ -187,10 +187,6 @@ msgstr "How many participants are aimed for"
 msgid "experiment:attribute:task_description"
 msgstr "Task description"
 
-#: experiments/models/experiment_models.py:79
-msgid "experiment:attribute:additional_instructions"
-msgstr "Additional instructions"
-
 #: experiments/models/experiment_models.py:84
 msgid "experiment:attribute:confirmation_email"
 msgstr "Confirmation mail text"
@@ -208,8 +204,7 @@ msgstr ""
 "><code>{experiment_location}</code> The location of the experiment (if "
 "set)<br/><code>{duration}</code> The set duration of the experiment<br/"
 "><code>{task_description}</code> The contents of the task description field."
-"<br/><code>{additional_instructions}</code> The contents of the additional "
-"instructions field<br/><code>{leader_name}</code> The name of the leader<br/"
+"<br/><code>{leader_name}</code> The name of the leader<br/"
 "><code>{leader_email}</code> The e-mail of the leader<br/"
 "><code>{leader_phonenumber}</code> The phonenumber of the leader<br/"
 "><code>{all_leaders_name_list}</code> A list of all leaders, nicely "
@@ -556,10 +551,6 @@ msgstr "Duration"
 msgid "experiments:detail:info:task_description"
 msgstr "Task description"
 
-#: experiments/templates/experiments/detail_parts/info.html:86
-msgid "experiments:detail:info:additional_instructions"
-msgstr "Additional instructions"
-
 #: experiments/templates/experiments/detail_parts/info.html:97
 #: experiments/templates/experiments/detail_parts/info.html:113
 #: experiments/templates/experiments/detail_parts/info.html:121
@@ -870,6 +861,3 @@ msgstr "Duration"
 
 msgid "experiments:views:email_preview:task_description"
 msgstr "Task Description"
-
-msgid "experiments:views:email_preview:additional_instructions"
-msgstr "Additional Instructions"

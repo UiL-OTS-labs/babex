@@ -22,7 +22,6 @@ def get_invite_mail_content(experiment: Experiment, leader: User) -> str:
         "{duration}": experiment.duration,
         "{session_duration}": experiment.session_duration,
         "{task_description}": experiment.task_description,
-        "{additional_instructions}": experiment.additional_instructions,
         "{experiment_name}": experiment.name,
         "{experiment_location}": "",
         "{leader_name}": leader.name,

@@ -131,10 +131,6 @@ msgstr "Tijdsduur"
 msgid "experiment:attribute:task_description"
 msgstr "Taak omschrijving"
 
-#: experiments/models/experiment_models.py:77
-msgid "experiment:attribute:additional_instructions"
-msgstr "Extra instructies"
-
 #: experiments/models/experiment_models.py:82
 msgid "experiment:attribute:confirmation_email"
 msgstr "Bevestigingsmail text"
@@ -416,10 +412,6 @@ msgstr "Tijdsduur"
 #: experiments/templates/experiments/detail_parts/info.html:37
 msgid "experiments:detail:info:task_description"
 msgstr "Taak omschrijving"
-
-#: experiments/templates/experiments/detail_parts/info.html:45
-msgid "experiments:detail:info:additional_instructions"
-msgstr "Extra instructies"
 
 #: experiments/templates/experiments/detail_parts/info.html:56
 #: experiments/templates/experiments/detail_parts/info.html:72

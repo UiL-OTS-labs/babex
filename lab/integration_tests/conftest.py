@@ -50,7 +50,6 @@ def sample_experiment(admin_user, db):
         session_duration="30 minutes",
         recruitment_target=50,
         task_description="task description",
-        additional_instructions="additional instructions",
         responsible_researcher="dr. Lin Guist",
     )
 

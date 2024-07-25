@@ -21,7 +21,6 @@ def email_preview(request, template, experiment=None):
         "all_leaders_name_list": "Lijst van proefleiders",
         "duration": "duur",
         "task_description": "Taak omschrijving",
-        "additional_instructions": "Extra instructies",
     }
 
     if experiment is not None:
@@ -29,7 +28,6 @@ def email_preview(request, template, experiment=None):
         context["experiment_location"] = experiment.location.name
         context["experiment_name"] = experiment.name
         context["duration"] = experiment.duration
-        context["additional_instructions"] = experiment.additional_instructions
 
     email_kwargs = {
         "to": "example@example.org",

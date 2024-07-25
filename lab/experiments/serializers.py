@@ -17,7 +17,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
             "comment",
             "outcome",
             "contact_phone",
-            "session_duration"
+            "session_duration",
         ]
 
     experiment = serializers.StringRelatedField()  # type: ignore
@@ -43,7 +43,6 @@ class ExperimentSerializer(serializers.ModelSerializer):
             "name",
             "duration",
             "task_description",
-            "additional_instructions",
             "location",
             "leaders",
             "excluded_experiments",

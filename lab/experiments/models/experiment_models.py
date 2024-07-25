@@ -81,11 +81,6 @@ class Experiment(models.Model):
 
     task_description = models.TextField(_("experiment:attribute:task_description"))
 
-    additional_instructions = models.TextField(
-        _("experiment:attribute:additional_instructions"),
-        blank=True,
-    )
-
     confirmation_email = models.TextField(
         _("experiment:attribute:confirmation_email"),
         help_text=AppointmentConfirmEmail.help_text,

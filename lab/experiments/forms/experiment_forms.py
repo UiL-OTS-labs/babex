@@ -33,7 +33,6 @@ class ExperimentForm(TemplatedModelForm):
             "session_duration",
             "recruitment_target",
             "task_description",
-            "additional_instructions",
             "confirmation_email",
             "attachments",
             "location",
@@ -53,7 +52,6 @@ class ExperimentForm(TemplatedModelForm):
                     "rows": 7,
                 }
             ),
-            "additional_instructions": forms.Textarea({"rows": 7}),
             "confirmation_email": EmailContentEditWidget(None),
             "open": BootstrapCheckboxInput,
             "responsible_researcher": forms.TextInput,
