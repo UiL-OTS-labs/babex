@@ -73,7 +73,7 @@ class Experiment(models.Model):
     session_duration = models.TextField(_("experiment:attribute:session_duration"))
 
     # how many participants are aimed for
-    recruitment_target = models.IntegerField(
+    recruitment_target = models.PositiveIntegerField(
         _("experiment:attribute:recruitment_target"),
         help_text=_("experiment:attribute:recruitment_target:help"),
         default=0,
