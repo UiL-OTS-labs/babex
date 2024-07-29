@@ -109,13 +109,20 @@ class SignupForm(TemplatedForm):
     parent_first_name = forms.CharField(label=_("parent:forms:signup:parent_first_name"))
     parent_last_name = forms.CharField(label=_("parent:forms:signup:parent_last_name"))
 
-    phonenumber = forms.CharField(label=_("parent:forms:signup:phonenumber"))
-    phonenumber_alt = forms.CharField(label=_("parent:forms:signup:phonenumber_alt"), required=False)
+    phonenumber = forms.CharField(
+        label=_("parent:forms:signup:phonenumber"), widget=forms.TextInput(attrs={"type": "tel"})
+    )
+    phonenumber_alt = forms.CharField(
+        label=_("parent:forms:signup:phonenumber_alt"), widget=forms.TextInput(attrs={"type": "tel"}), required=False
+    )
     email = forms.CharField(
         label=_("parent:forms:signup:email"),
         help_text=_("parent:forms:signup:email:help_text"),
+        widget=forms.TextInput(attrs={"type": "email"}),
     )
-    email_again = forms.CharField(label=_("parent:forms:signup:email_again"))
+    email_again = forms.CharField(
+        label=_("parent:forms:signup:email_again"), widget=forms.TextInput(attrs={"type": "email"})
+    )
 
     dyslexic_parent = forms.ChoiceField(
         label=_("parent:forms:signup:dyslexic_parent"),
