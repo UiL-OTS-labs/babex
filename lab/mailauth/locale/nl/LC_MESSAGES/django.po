@@ -21,3 +21,6 @@ msgstr ""
 #: mailauth/models.py:33
 msgid "mailauth:send:subject"
 msgstr "Babylab voor Taalonderzoek: Link voor Babylabportaal"
+
+msgid "mailauth:error:expired"
+msgstr "Helaas is deze link verlopen. U kunt opnieuw inloggen via BABYLABPORTAAL hieronder."

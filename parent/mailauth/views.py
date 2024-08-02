@@ -14,7 +14,7 @@ def link_verify(request, token):
 
     # upon successful authentication, the lab app should respond with a session token
     if not ok or "session_token" not in response:
-        messages.error(request, _("parent:error:login_failed"))
+        messages.error(request, response.get("reason", _("parent:error:login_failed")))
         return redirect("home")
 
     request.session["token"] = response["session_token"]

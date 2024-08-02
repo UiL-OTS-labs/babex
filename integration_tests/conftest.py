@@ -186,7 +186,7 @@ def _dj_autoclear_mailbox() -> None:
 @pytest.fixture
 def link_from_mail(mailbox):
 
-    def _delegate(email, subject=None):
+    def _delegate(email: str, subject=None):
         for message in mailbox(email):
             if subject is None or subject in message['subject']:
                 html = message.get_payload()[1].get_payload()
