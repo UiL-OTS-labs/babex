@@ -16,7 +16,6 @@ def test_create_experiment(page, as_admin, sample_leader):
     page.get_by_role("spinbutton", name="Recruitment target").fill("30")
 
     page.get_by_role("textbox", name="Task description").fill("task description")
-    page.get_by_role("textbox", name="Additional instructions").fill("additional instructions")
     page.get_by_role("textbox", name="Responsible researcher").fill("dr. Lin Guist")
 
     page.locator('select[name="leaders"]').select_option(sample_leader.name)
