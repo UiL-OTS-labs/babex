@@ -106,6 +106,9 @@ jobs:
           # deploy vue app twice
           tar xzf babex-vue.tar.gz -C lab/main/static/
           tar xzf babex-vue.tar.gz -C parent/parent/static/
+      - name: Get installed Playwright version
+        id: playwright-version
+        run: echo "PLAYWRIGHT_VERSION=$(pip freeze | grep ^playwright | cut -d= -f3)" >> $GITHUB_ENV
       - name: Cache playwright binaries
         uses: actions/cache@v3
         id: playwright-cache
@@ -113,9 +116,6 @@ jobs:
           path: |
             ~/.cache/ms-playwright
             key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
-      - name: Get installed Playwright version
-        id: playwright-version
-        run: echo "PLAYWRIGHT_VERSION=$(pip freeze | grep ^playwright | cut -d= -f3)" >> $GITHUB_ENV
       - name: Integration tests
         run: |
           cd ${{ matrix.app }}
