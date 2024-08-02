@@ -115,7 +115,7 @@ jobs:
             key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
       - name: Get installed Playwright version
         id: playwright-version
-        run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package-lock.json').dependencies['@playwright/test'].version)")" >> $GITHUB_ENV
+        run: echo "PLAYWRIGHT_VERSION=$(pip freeze | grep ^playwright | cut -d= -f3)" >> $GITHUB_ENV
       - name: Integration tests
         run: |
           cd ${{ matrix.app }}
