@@ -89,3 +89,9 @@ msgstr ""
 
 msgid "signups:mail:validation:subject"
 msgstr "Babylab voor Taalonderzoek: Bevestiging e-mailadres"
+
+msgid "signups:verify:error:expired"
+msgstr ""
+"<p>Deze link is niet meer geldig. Uw gegevens hebben wij daarom helaas moeten verwijderen.</p>"
+"<p>Wilt u uw kind toch graag aanmelden voor het Babylab voor Taalonderzoek, "
+"dan verzoeken wij u vriendelijk om dit opnieuw te doen via AANMELDEN hieronder.</p>"

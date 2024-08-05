@@ -396,8 +396,8 @@ msgstr ""
 "Het is niet gelukt om u uit te schirjven. Neem alstublieft contact met ons "
 "op via e-mail: babylab.ilslabs@uu.nl"
 
-#~ msgid "parent:error:login_failed"
-#~ msgstr "Inloggen is mislukt, probeer het later opnieuw"
+msgid "parent:error:login_failed"
+msgstr "Er is een fout opgetreden tijdens het inloggen"
 
 msgid "parent:appointment:canceled"
 msgstr "Geannuleerd"

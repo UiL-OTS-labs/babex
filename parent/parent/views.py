@@ -5,6 +5,7 @@ import logging
 from cdh.rest import client as rest
 from django.contrib import messages
 from django.http.response import JsonResponse
+from django.utils.safestring import mark_safe
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
@@ -81,7 +82,7 @@ def signup_verify(request, token):
     ok, result = gateway(request, f"/gateway/signup/verify/{token}")
     if ok:
         return render(request, "signup_confirmed.html")
-    messages.error(request, _("parent:error:signup_verify"))
+    messages.error(request, mark_safe(result.get("reason", _("parent:error:signup_verify"))))
     return redirect("home")
 
 

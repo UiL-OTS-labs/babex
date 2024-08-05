@@ -1,12 +1,19 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
 
+from django.utils import timezone, translation
+from django.utils.translation import gettext as _
 from rest_framework import exceptions, views
 from rest_framework.response import Response
 
 from participants.models import Participant
 from participants.serializers import ParticipantSerializer
 
-from .models import create_mail_auth, resolve_participant, try_authenticate
+from .models import (
+    MailAuthReason,
+    create_mail_auth,
+    resolve_participant,
+    try_authenticate,
+)
 
 
 class MailAuthView(views.APIView):
@@ -15,15 +22,20 @@ class MailAuthView(views.APIView):
             return Response(dict())
 
         # look for valid auth object for token
-        mauth, possible_pps = try_authenticate(kwargs["token"])
-        if mauth is not None:
+        result = try_authenticate(kwargs["token"])
+        if result.mauth is not None:
             # valid token
             return Response(
                 dict(
-                    session_token=mauth.session_token,
-                    possible_pps=[ParticipantSerializer(pp).data for pp in possible_pps],
+                    session_token=result.mauth.session_token,
+                    possible_pps=[ParticipantSerializer(pp).data for pp in result.possible_pps],
                 )
             )
+
+        if result.reason == MailAuthReason.EXPIRED:
+            with translation.override("nl"):
+                return Response(dict(reason=_("mailauth:error:expired")), status=410)
+
         raise exceptions.AuthenticationFailed()
 
     def post(self, request, *args, **kwargs):
@@ -35,7 +47,7 @@ class MailAuthView(views.APIView):
             return Response(dict())
 
         # email exists, generate token and send it
-        expiry = datetime.now() + timedelta(hours=24)
+        expiry = timezone.now() + timedelta(hours=24)
         mauth = create_mail_auth(expiry, email)
 
         # while there might be multiple participants matching the given email address,
