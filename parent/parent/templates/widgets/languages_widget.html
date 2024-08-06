@@ -23,7 +23,7 @@
         <option></option>
         {% for group_name, group_choices, group_index in widget.optgroups %}
             {% for option in group_choices %}
-                <option value="{{ option.value }}">{{ option.label }}</option>
+                <option value="{{ option.value }}" {% if mono_other_checked and option.value in value %}selected{% endif %}>{{ option.label }}</option>
             {% endfor %}
         {% endfor %}
     </select>
@@ -43,7 +43,7 @@
         <option></option>
         {% for group_name, group_choices, group_index in widget.optgroups %}
             {% for option in group_choices %}
-                <option value="{{ option.value }}">{{ option.label }}</option>
+                <option value="{{ option.value }}" {% if multi_checked and option.value in value %}selected{% endif %}>{{ option.label }}</option>
             {% endfor %}
         {% endfor %}
     </select>

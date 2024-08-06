@@ -28,12 +28,14 @@ class LanguagesWidget(forms.widgets.SelectMultiple):
             context["mono_dutch_checked"] = True
         elif len(value) == 1:
             context["mono_other_checked"] = True
+            context["value"] = value
         elif len(value) > 1:
             context["multi_checked"] = True
+            context["value"] = value
         return context
 
     def value_from_datadict(self, data, files, name):
-        value = data.getlist(name)
+        value = [v for v in data.getlist(name) if v]
         return value
 
 
