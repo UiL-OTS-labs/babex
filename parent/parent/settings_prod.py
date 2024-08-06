@@ -22,4 +22,4 @@ EMAIL_HOST_USER = getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = secret("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 
-VUE_MANIFEST = "/static/vue/manifest.json"
+VUE_MANIFEST = "/static/vue/.vite/manifest.json"

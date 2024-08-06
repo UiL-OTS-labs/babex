@@ -191,11 +191,11 @@ CSP_IMG_SRC = [
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 60 * 60 * 12  # 12 hours
-VUE_MANIFEST = BASE_DIR / "main/static/vue/manifest.json"
+VUE_MANIFEST = BASE_DIR / "main/static/vue/.vite/manifest.json"
 VUE_URL = "/static/vue/"
 
 
 # used for loading secrets when deployed with docker
 def secret(name):
-    path = Path('/run/secrets') / name
+    path = Path("/run/secrets") / name
     return path.read_text().strip()
