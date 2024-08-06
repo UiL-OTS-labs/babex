@@ -7,6 +7,7 @@ from django.utils import timezone
 
 from playwright.sync_api import Page, expect
 
+
 @pytest.fixture
 def default_signup_fill_form(page: Page, apps):
     """opens the signup form and fills some default values. individual tests should overwrite as necessary"""
@@ -41,23 +42,26 @@ def default_signup_fill_form(page: Page, apps):
 
 @pytest.fixture
 def signup(page: Page, apps, default_signup_fill_form):
-    suffix = ''.join(random.choice(string.digits) for i in range(4))
-    email = f'parent{suffix}@localhost.local'
+    def delegate():
+        suffix = ''.join(random.choice(string.digits) for i in range(4))
+        email = f'parent{suffix}@localhost.local'
 
-    page.fill('#id_email', email)
-    page.fill('#id_email_again', email)
-    page.click('input[type="submit"]')
+        page.fill('#id_email', email)
+        page.fill('#id_email_again', email)
+        page.click('input[type="submit"]')
 
-    # check that the form was submitted
-    expect(page.locator('input[type="submit"]')).not_to_be_visible()
-    assert 'signup/done' in page.url
+        # check that the form was submitted
+        expect(page.locator('input[type="submit"]')).not_to_be_visible()
+        assert 'signup/done' in page.url
 
-    return email
+        return email
+    return delegate
 
 
 def test_parent_login(page, apps, signup, as_admin, link_from_mail, login_as):
     # confirm signup email
-    if link := link_from_mail(signup, 'Bevestiging'):
+    address = signup()
+    if link := link_from_mail(address, 'Bevestiging'):
         page.goto(link)
     else:
         pytest.fail('could not find validation link')
@@ -69,7 +73,7 @@ def test_parent_login(page, apps, signup, as_admin, link_from_mail, login_as):
     as_admin.locator("button").get_by_text("Approve").click()
 
     # try to login via email
-    login_as(signup)
+    login_as(address)
 
     # check that login worked
     expect(page.get_by_text('Appointments')).to_be_visible()
@@ -77,13 +81,14 @@ def test_parent_login(page, apps, signup, as_admin, link_from_mail, login_as):
 
 def test_parent_login_unapproved(signup, apps, page, link_from_mail, login_as):
     # confirm signup email
-    if link := link_from_mail(signup, 'Bevestiging'):
+    address = signup()
+    if link := link_from_mail(address, 'Bevestiging'):
         page.goto(link)
     else:
         pytest.fail('could not find validation link')
 
     # make sure that no login email has arrived
-    assert login_as(signup) is False
+    assert login_as(address) is False
 
 
 def test_parent_self_deactivate(page, participant, login_as):
@@ -187,8 +192,6 @@ def test_signup_save_longer(page, apps, default_signup_fill_form):
 
 
 def test_signup_unborn(page, apps, default_signup_fill_form):
-    Signup = apps.lab.get_model('signups', 'Signup')
-
     now = datetime.datetime.now()
     page.locator('#id_birth_date_year').select_option(str(now.year))
     page.locator('#id_birth_date_month').select_option(now.strftime('%B'))
@@ -198,3 +201,40 @@ def test_signup_unborn(page, apps, default_signup_fill_form):
 
     # check that the form was submitted
     expect(page.locator('select.is-invalid')).to_have_count(3)
+
+
+def test_signup_confirmation_expired(page, apps, signup, as_admin, link_from_mail):
+    # confirm signup email
+    address = signup()
+
+    Signup = apps.lab.get_model('signups', 'Signup')
+    s = Signup.objects.last()
+    s.created = timezone.now() - datetime.timedelta(hours=25)
+    s.save()
+
+    if link := link_from_mail(address, 'Bevestiging'):
+        page.goto(link)
+        expect(page.get_by_text('niet meer geldig')).to_be_visible()
+    else:
+        pytest.fail('could not find validation link')
+
+    s = Signup.objects.last()
+    assert s.email_verified is None
+
+
+def test_parent_login_expired(participant, apps, page, link_from_mail, login_as):
+    MailAuth = apps.lab.get_model('mailauth', 'MailAuth')
+
+    page.goto(apps.parent.url + 'auth/')
+    page.fill('input[name="email"]', participant.email)
+    page.locator('button').get_by_text('Send').click()
+
+    mauth = MailAuth.objects.last()
+    mauth.expiry = timezone.now() - datetime.timedelta(seconds=1)
+    mauth.save()
+
+    link = link_from_mail(participant.email, 'Link')
+    page.goto(link)
+    expect(page.get_by_text('verlopen')).to_be_visible()
+
+    expect(page.get_by_text('Appointments')).not_to_be_visible()

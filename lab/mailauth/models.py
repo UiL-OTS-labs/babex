@@ -1,4 +1,6 @@
+import dataclasses
 from datetime import datetime
+from enum import Enum, auto
 from secrets import token_urlsafe
 from typing import List, Optional, Tuple
 
@@ -6,7 +8,7 @@ import cdh.core.fields as e_fields
 from cdh.mail.classes import TemplateEmail
 from django.conf import settings
 from django.db import models
-from django.utils import translation
+from django.utils import timezone, translation
 from django.utils.translation import gettext_lazy as _
 
 from participants.models import Participant
@@ -64,15 +66,28 @@ def create_mail_auth(
     return MailAuth.objects.create(expiry=expiry, email=email, participant=participant)
 
 
-def try_authenticate(token: str) -> Tuple[Optional[MailAuth], List[Participant]]:
+class MailAuthReason(Enum):
+    SUCCESS = auto()
+    NOT_FOUND = auto()
+    EXPIRED = auto()
+
+
+@dataclasses.dataclass
+class MailAuthResult:
+    reason: MailAuthReason
+    mauth: Optional[MailAuth] = None
+    possible_pps: List[Participant] = dataclasses.field(default_factory=list)
+
+
+def try_authenticate(token: str) -> MailAuthResult:
     try:
-        mauth = MailAuth.objects.get(
-            link_token=token,
-            # link should not be too old
-            expiry__gte=datetime.now(),
-        )
+        mauth = MailAuth.objects.get(link_token=token)
     except MailAuth.DoesNotExist:
-        return None, []
+        return MailAuthResult(reason=MailAuthReason.NOT_FOUND)
+
+    if mauth.expiry < timezone.now():
+        # link should not be too old
+        return MailAuthResult(reason=MailAuthReason.EXPIRED)
 
     possible_pps = []
     if not mauth.participant:
@@ -91,7 +106,7 @@ def try_authenticate(token: str) -> Tuple[Optional[MailAuth], List[Participant]]
 
     mauth.session_token = token_urlsafe()
     mauth.save()
-    return mauth, possible_pps
+    return MailAuthResult(mauth=mauth, possible_pps=possible_pps, reason=MailAuthReason.SUCCESS)
 
 
 def lookup_session_token(token: str) -> Optional[Participant]:
