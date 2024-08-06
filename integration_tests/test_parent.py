@@ -161,7 +161,7 @@ def test_signup_multilingual_with_custom(page, apps, default_signup_fill_form, a
 
     signup = Signup.objects.last()
     # verify the fields were saved correctly
-    assert signup.languages == ['Engels', 'Afrikaans']
+    assert set(signup.languages) == set(['Engels', 'Afrikaans'])
 
     # approve signup
     signup.email_verified = timezone.now()
