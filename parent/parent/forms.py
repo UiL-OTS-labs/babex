@@ -1,15 +1,17 @@
-from datetime import date
+from datetime import date, timedelta
 
+from ageutil import age
 from cdh.core.forms import (
     BootstrapCheckboxInput,
     BootstrapCheckboxSelectMultiple,
     BootstrapRadioSelect,
-    DateField,
     TemplatedForm,
     TemplatedFormTextField,
 )
 from django import forms
 from django.core.exceptions import ValidationError
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
@@ -54,11 +56,34 @@ class LanguagesField(forms.MultipleChoiceField):
             raise ValidationError(_("parent:forms:languages:error:missing"))
 
 
-def get_valid_year_range():
-    """generates a list of valid birth years for the singup form"""
-    end = date.today().year
-    start = end - 3  # rough limit on 3 years old
-    return range(end, start - 1, -1)
+class BirthDateWidget(forms.SelectDateWidget):
+    template_name = "django/forms/widgets/birth_date.html"
+
+    def __init__(self, min_date, max_date):
+        super().__init__()
+        self.min_date = min_date
+        self.max_date = max_date
+
+    def get_context(self, name, value, attrs):
+        return dict(
+            months={k: str(v) for k, v in self.months.items()},
+            min_date=self.min_date,
+            max_date=self.max_date,
+            name=name,
+            value=value,
+        )
+
+    def value_from_datadict(self, data, files, name):
+        if all((data.get(name + "_year"), data.get(name + "_month"), data.get(name + "_day"))):
+            return date(int(data[name + "_year"]), int(data[name + "_month"]), int(data[name + "_day"]))
+
+
+class BirthDateField(forms.DateField):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        min_date, max_date = age(0).to(3).range()
+        self.widget = BirthDateWidget(min_date=min_date, max_date=max_date)
+        self.validators = [MaxValueValidator(max_date), MinValueValidator(min_date)]
 
 
 class SignupForm(TemplatedForm):
@@ -76,9 +101,8 @@ class SignupForm(TemplatedForm):
         widget=BootstrapRadioSelect(),
     )
 
-    birth_date = DateField(
+    birth_date = BirthDateField(
         label=_("parent:forms:signup:birth_date"),
-        widget=forms.SelectDateWidget(years=get_valid_year_range()),
         help_text=_("parent:forms:signup:birth_date:help_text"),
     )
     birth_weight = forms.ChoiceField(
@@ -185,11 +209,6 @@ class SignupForm(TemplatedForm):
         for key, field in self.fields.items():
             if isinstance(field.widget, forms.CheckboxInput):
                 field.widget = BootstrapCheckboxInput()
-
-    def clean_birth_date(self):
-        if self.cleaned_data["birth_date"] >= date.today():
-            raise forms.ValidationError(_("parent:forms:signup:birth_date:error:future"))
-        return self.cleaned_data["birth_date"]
 
     def clean(self):
         if self.cleaned_data["email"] != self.cleaned_data["email_again"]:

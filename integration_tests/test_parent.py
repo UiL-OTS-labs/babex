@@ -197,4 +197,4 @@ def test_signup_unborn(page, apps, default_signup_fill_form):
     page.click('input[type="submit"]')
 
     # check that the form was submitted
-    assert page.locator('select.is-invalid').count() == 3
+    expect(page.locator('select.is-invalid')).to_have_count(3)
