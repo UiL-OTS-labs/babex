@@ -5,7 +5,7 @@
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -15,10 +15,11 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
-      "webpack-env"
+	"vite/client"
     ],
     "typeRoots": [
-      "src/stubs.d.ts"
+	"src/stubs.d.ts",
+	"node_modules"
     ],
     "paths": {
       "@/*": [
