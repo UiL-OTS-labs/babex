@@ -10,7 +10,7 @@
         link: string
     }
 
-    const props = defineProps<{
+    defineProps<{
         name: string
         existing: UploadedFile[]
     }>();

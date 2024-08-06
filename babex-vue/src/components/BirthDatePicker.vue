@@ -28,7 +28,7 @@
     }
     const isValid = computed(() => {
         if (year.value && month.value && day.value) {
-            let d = new Date(year.value, month.value - 1, day.value);
+            let d = new Date(parseInt(year.value, 10), parseInt(month.value, 10) - 1, parseInt(day.value, 10));
             return d >= minDateParsed && d < maxDateParsed;
         }
         return undefined;
@@ -40,7 +40,7 @@
         <select :id="'id_' + name + '_day'" class="form-control" :name="name + '_day'" v-model="day" :class="{'is-invalid': isValid === false}">
 
             <option value="">dag</option>
-            <option v-for="day in days">
+            <option v-for="day in days" :key="day">
                 {{ day }}
             </option>
         </select>
@@ -52,7 +52,7 @@
         </select>
         <select :id="'id_' + name + '_year'" class="form-control" :name="name + '_year'" v-model="year" :class="{'is-invalid': isValid === false}">
             <option value="">jaar</option>
-            <option v-for="year in years">{{ year }}</option>
+            <option v-for="year in years" :key="year">{{ year }}</option>
         </select>
     </div>
 </template>
