@@ -147,7 +147,7 @@ MIDDLEWARE.append(
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 )
 
-VUE_MANIFEST = BASE_DIR / "parent/static/vue/manifest.json"
+VUE_MANIFEST = BASE_DIR / "parent/static/vue/.vite/manifest.json"
 VUE_URL = "/static/vue/"
 
 

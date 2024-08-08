@@ -161,7 +161,7 @@ def test_signup_multilingual_with_custom(page, apps, default_signup_fill_form, a
 
     signup = Signup.objects.last()
     # verify the fields were saved correctly
-    assert signup.languages == ['Engels', 'Afrikaans']
+    assert set(signup.languages) == set(['Engels', 'Afrikaans'])
 
     # approve signup
     signup.email_verified = timezone.now()
@@ -200,7 +200,7 @@ def test_signup_unborn(page, apps, default_signup_fill_form):
     page.click('input[type="submit"]')
 
     # check that the form was submitted
-    assert page.locator('select.is-invalid').count() == 3
+    expect(page.locator('select.is-invalid')).to_have_count(3)
 
 
 def test_signup_confirmation_expired(page, apps, signup, as_admin, link_from_mail):

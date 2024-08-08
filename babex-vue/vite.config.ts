@@ -6,7 +6,7 @@ import {exec} from 'child_process'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    base: '/static/',
+    base: '/static/vue/',
     build: {
         outDir: 'dist',
         manifest: true,

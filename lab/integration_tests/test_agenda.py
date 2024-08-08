@@ -1,3 +1,4 @@
+import time
 from datetime import date, datetime, timedelta
 
 import pytest
@@ -120,6 +121,9 @@ def test_agenda_modify_appointment(page, appointment_tomorrow, as_leader):
     page.locator(".action-panel .save").wait_for(state="hidden")
     appointment_tomorrow.refresh_from_db()
     assert appointment_tomorrow.timeslot.start == new_time
+
+    # FIXME
+    time.sleep(1)
 
     # check that an appointment update email was sent
     assert len(mail.outbox) == 1

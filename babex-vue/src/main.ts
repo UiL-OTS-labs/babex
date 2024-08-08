@@ -7,7 +7,9 @@ import ParentSurveyView from './components/survey/ParentSurveyView.vue'
 import CancelAppointment from './components/parent/CancelAppointment.vue'
 import ParticipantDemographics from './components/participants/ParticipantDemographics.vue'
 import FilePicker from './components/FilePicker.vue'
+import BirthDatePicker from './components/BirthDatePicker.vue'
 import * as Toaster from './toaster'
+import * as tel from './tel'
 
 
 // using object.defineProperty instead of window.foo to satisfy typescript
@@ -25,6 +27,7 @@ Object.defineProperty(window, 'babex', {
         SurveyView,
         ParentSurveyView,
         CancelAppointment,
+        BirthDatePicker,
 
         ParticipantDemographics,
         FilePicker
@@ -36,3 +39,5 @@ Object.defineProperty(window, 'babex', {
 window.addEventListener('unhandledrejection', function (error) {
     Toaster.error(error.reason);
 });
+
+tel.init();

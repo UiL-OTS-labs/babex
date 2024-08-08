@@ -4,6 +4,8 @@
 #
 #    pip-compile
 #
+-e git+https://github.com/UiL-OTS-labs/ageutil@main#egg=ageutil
+    # via -r requirements.in
 -e git+https://github.com/UiL-OTS-labs/django-vue3-tag@main#egg=django-vue3-tag
     # via -r requirements.in
 asgiref==3.8.1

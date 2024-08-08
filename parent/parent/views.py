@@ -67,8 +67,15 @@ class SignupView(FormView):
             raise RuntimeError("Could not fetch language list")
 
         choices = []
-        for lang in languages:
-            choices.append((lang["name"], lang["name"]))
+        language_names = set(lang["name"] for lang in languages)
+        for language in language_names:
+            choices.append((language, language))
+
+        # append any new languages the user may have typed in but are not yet saved in the backend
+        # (for when the form is invalid and we want to refill the form)
+        for language in context["form"].data.getlist("languages"):
+            if language not in language_names:
+                choices.append((language, language))
 
         context["form"].fields["languages"].choices = choices
         return context
