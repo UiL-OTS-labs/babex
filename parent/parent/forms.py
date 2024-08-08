@@ -77,7 +77,10 @@ class BirthDateWidget(forms.SelectDateWidget):
 
     def value_from_datadict(self, data, files, name):
         if all((data.get(name + "_year"), data.get(name + "_month"), data.get(name + "_day"))):
-            return date(int(data[name + "_year"]), int(data[name + "_month"]), int(data[name + "_day"]))
+            # it seems logical to return here a date() object directly, however, Django doesn't
+            # handle exceptions thrown here. if we return a string instead, it will be parsed in DateField.to_python()
+            # which does  handle exceptions.
+            return "{}-{}-{}".format(int(data[name + "_year"]), int(data[name + "_month"]), int(data[name + "_day"]))
 
 
 class BirthDateField(forms.DateField):
