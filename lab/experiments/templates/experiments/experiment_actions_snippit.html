@@ -14,6 +14,11 @@
             </a>
         </li>
         <li>
+            <a href="{% url 'experiments:default_criteria' experiment.pk %}" class="dropdown-item">
+                {% trans 'experiments:detail:edit_default_criteria' %}
+            </a>
+        </li>
+        <li>
             <a href="{% url 'experiments:invite' experiment.pk %}" class="dropdown-item">
                 {% trans 'experiments:home:invite:title' %}
             </a>
