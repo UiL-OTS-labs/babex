@@ -155,3 +155,7 @@ VUE_URL = "/static/vue/"
 def secret(name):
     path = Path("/run/secrets") / name
     return path.read_text().strip()
+
+
+JWT_SECRET = "jwt_secret"
+JWT_ALGORITHM = "HS512"
