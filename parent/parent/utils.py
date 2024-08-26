@@ -3,6 +3,7 @@ import logging
 import re
 from typing import Optional, Tuple
 
+import jwt
 import requests
 from django.conf import settings
 from django.http.request import HttpRequest
@@ -31,11 +32,16 @@ def gateway(
     """
 
     headers = dict()
-    if "token" in request.session:
-        # in the authorization header we store the session token we
-        # receive from the lab app after a succesful authentication flow.
-        # see mailauth.views.link_verify()
-        headers["Authorization"] = "Bearer {}".format(request.session["token"])
+
+    # in the authorization header we store a JWT holding the session token we
+    # receive from the lab app after a succesful authentication flow.
+    # see mailauth.views.link_verify()
+    jwt_token = jwt.encode(
+        dict(t=datetime.datetime.now().timestamp(), session=request.session.get("token")),
+        key=settings.JWT_SECRET,
+        algorithm=settings.JWT_ALGORITHM,
+    )
+    headers["Authorization"] = "Bearer {}".format(jwt_token)
 
     if method is None:
         if data is not None:

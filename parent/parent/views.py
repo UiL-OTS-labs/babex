@@ -2,7 +2,6 @@ import datetime
 import json
 import logging
 
-from cdh.rest import client as rest
 from django.contrib import messages
 from django.http.response import JsonResponse
 from django.utils.safestring import mark_safe
@@ -19,32 +18,6 @@ from .utils import gateway, session_required
 log = logging.getLogger()
 
 
-class Signup(rest.Resource):
-    class Meta:
-        path = "/gateway/signup/"
-        supported_operations = [rest.Operations.put]
-
-    name = rest.TextField()
-    sex = rest.TextField()
-    birth_date = rest.DateField()
-    birth_weight = rest.TextField()
-    pregnancy_duration = rest.TextField()
-
-    parent_first_name = rest.TextField()
-    parent_last_name = rest.TextField()
-    phonenumber = rest.TextField()
-    phonenumber_alt = rest.TextField(blank=True)
-    email = rest.TextField()
-
-    save_longer = rest.BoolField()
-    english_contact = rest.BoolField()
-    newsletter = rest.BoolField()
-
-    dyslexic_parent = rest.TextField()
-    tos_parent = rest.TextField()
-    languages = rest.CollectionField(rest.StringCollection)
-
-
 class SignupView(FormView):
     template_name = "signup.html"
     form_class = SignupForm
@@ -53,8 +26,9 @@ class SignupView(FormView):
     def form_valid(self, form):
         # filter out blank fields
         fields = {key: value for key, value in form.cleaned_data.items() if value is not None}
-        signup = Signup(**fields)
-        if signup.put(as_json=True):
+        fields["birth_date"] = fields["birth_date"].isoformat()
+        ok, result = gateway(self.request, "/gateway/signup/", data=fields)
+        if ok:
             return super().form_valid(form)
 
         log.error("Couldn't reach server while processing signup")

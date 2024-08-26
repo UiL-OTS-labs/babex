@@ -11,6 +11,7 @@ CSRF_TRUSTED_ORIGINS = ["https://" + getenv("PARENT_SERVER")]
 STATIC_ROOT = "/static"
 
 API_HOST = "https://" + getenv("LAB_SERVER")
+JWT_SECRET = secret("JWT_SECRET")
 
 
 # Email

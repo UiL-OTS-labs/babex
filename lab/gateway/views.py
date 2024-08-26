@@ -17,7 +17,19 @@ from survey_admin.serializers import (
 )
 
 
+class HasParticipant(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.participant is not None
+
+
+class SignedSource(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.signed is True
+
+
 class GatewayHome(views.APIView):
+    permission_classes = [SignedSource]
+
     def get(self, request, *args, **kwargs):
         return Response(dict())
 
@@ -25,26 +37,22 @@ class GatewayHome(views.APIView):
 class Signups(viewsets.GenericViewSet, mixins.CreateModelMixin):
     queryset = Signup.objects.all()
     serializer_class = SignupSerializer
+    permission_classes = [SignedSource]
 
     def perform_create(self, serializer):
         super().perform_create(serializer)
         serializer.instance.send_email_validation()
 
 
-class HasParticipant(permissions.BasePermission):
-    def has_permission(self, request, view):
-        return request.participant is not None
-
-
 class SessionView(views.APIView):
-    permission_classes = [HasParticipant]
+    permission_classes = [HasParticipant, SignedSource]
 
     def get(self, request, *args, **kwargs):
         return Response(dict(name=self.request.participant.name))
 
 
 class AppointmentViewSet(viewsets.ModelViewSet):
-    permission_classes = [HasParticipant]
+    permission_classes = [HasParticipant, SignedSource]
     serializer_class = AppointmentSerializer
 
     def get_queryset(self):
@@ -56,7 +64,7 @@ class AppointmentViewSet(viewsets.ModelViewSet):
 
 
 class SurveyView(generics.RetrieveAPIView):
-    permission_classes = [HasParticipant]
+    permission_classes = [HasParticipant, SignedSource]
     serializer_class = SurveyDefinitionSerializer
     queryset = SurveyDefinition.objects.all()
 
@@ -70,7 +78,7 @@ class SurveyView(generics.RetrieveAPIView):
 
 
 class SurveyInvitesView(generics.ListAPIView):
-    permission_classes = [HasParticipant]
+    permission_classes = [HasParticipant, SignedSource]
     serializer_class = SurveyInviteSerializer
 
     def get_queryset(self):
@@ -78,7 +86,7 @@ class SurveyInvitesView(generics.ListAPIView):
 
 
 class SurveyViewSet(viewsets.ModelViewSet):
-    permission_classes = [HasParticipant]
+    permission_classes = [HasParticipant, SignedSource]
     serializer_class = SurveyDefinitionSerializer
     lookup_field = "surveyinvite"
     lookup_url_kwarg = "pk"
@@ -112,7 +120,7 @@ class SurveyViewSet(viewsets.ModelViewSet):
 
 
 class DeactivateView(views.APIView):
-    permission_classes = [HasParticipant]
+    permission_classes = [HasParticipant, SignedSource]
 
     def post(self, request, *args, **kwargs):
         self.request.participant.deactivate()
@@ -120,5 +128,7 @@ class DeactivateView(views.APIView):
 
 
 class LanguagesView(generics.ListAPIView):
+    permission_classes = [SignedSource]
+
     serializer_class = LanguageSerializer
     queryset = Language.objects.all()
