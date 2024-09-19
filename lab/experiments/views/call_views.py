@@ -47,7 +47,7 @@ class CallHomeView(ExperimentLeaderMixin, TemplateView):
         context["statuses"] = {
             id: str(title)
             for id, title in Call.CallStatus.choices
-            if id not in [Call.CallStatus.STARTED, Call.CallStatus.CONFIRMED]
+            if id not in [Call.CallStatus.STARTED, Call.CallStatus.CONFIRMED, Call.CallStatus.CANCELLED]
         }
 
         context["previous_calls"] = (
