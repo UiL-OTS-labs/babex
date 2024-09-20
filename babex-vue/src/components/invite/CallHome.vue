@@ -136,10 +136,6 @@
             complete();
         });
     }
-            saving.value = false;
-            complete();
-        });
-    }
 
     function complete() {
         location.href = props.completeUrl;
