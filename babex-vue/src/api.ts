@@ -182,27 +182,27 @@ class GenericApiPart<T> extends ApiPart {
         this.endpoint = endpoint;
     }
 
-    async list(): Promise<ApiRequest<T[]>> {
+    list(): ApiRequest<T[]> {
         return this.client.get(this.endpoint);
     }
 
-    async delete(id: string) {
+    delete(id: string) {
         return this.client.delete(this.endpoint, id);
     }
 
-    async update(id: string, values: T) {
+    update(id: string, values: T) {
         return this.client.put(this.endpoint, id, values);
     }
 
-    async updatePartial(id: string, values: Partial<T>) {
+    updatePartial(id: string, values: Partial<T>) {
         return this.client.patch(this.endpoint, id, values);
     }
 
-    async create(values: T) {
+    create(values: T) {
         return this.client.post(this.endpoint, values);
     }
 
-    async createMany(values: T[]) {
+    createMany(values: T[]) {
         return this.client.post(this.endpoint, values);
     }
 }
