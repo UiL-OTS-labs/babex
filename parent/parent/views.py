@@ -41,7 +41,7 @@ class SignupView(FormView):
             raise RuntimeError("Could not fetch language list")
 
         choices = []
-        language_names = set(lang["name"] for lang in languages)
+        language_names = sorted(set(lang["name"] for lang in languages))
         for language in language_names:
             choices.append((language, language))
 
