@@ -761,10 +761,6 @@ msgstr "Er is iets fout gegaan..."
 msgid "experiments:message:invite_success"
 msgstr "Participant(en) succesvol uitgenodigd!"
 
-#~ msgid "experiments:detail:appointments"
-#~ msgstr "Afspraken"
-
-
 msgid "default_criteria:attribute:yes"
 msgstr "Ja"
 
@@ -815,3 +811,102 @@ msgstr "Bevestiging inschrijving experiment Babylab voor Taalonderzoek: {}"
 
 msgid "experiments:call:deactivate:mail:subject"
 msgstr "E-mail bevestiging van uitschrijven"
+
+#: experiments/models/invite_models.py:25
+msgid "experiments:call:status:started"
+msgstr "Aan het bellen"
+
+#: experiments/models/invite_models.py:27
+msgid "experiments:call:status:noreply"
+msgstr "Geen gehoor"
+
+#: experiments/models/invite_models.py:29
+msgid "experiments:call:status:callback"
+msgstr "Terugbellen"
+
+#: experiments/models/invite_models.py:31
+msgid "experiments:call:status:voicemail"
+msgstr "Voicemail"
+
+#: experiments/models/invite_models.py:33
+msgid "experiments:call:status:email"
+msgstr "Wil verder contact via e-mail"
+
+#: experiments/models/invite_models.py:35
+msgid "experiments:call:status:confirmed"
+msgstr "Afspraak gemaakt"
+
+#: experiments/models/invite_models.py:37
+msgid "experiments:call:status:cancelled"
+msgstr "Annuleeren"
+
+msgid "experiments:call:status:exclude"
+msgstr "Kan/wil niet meedoen"
+
+#: experiments/models/invite_models.py:42
+msgid "experiments:call:status:deactivate"
+msgstr "Wil uitschrijven"
+
+msgid "experiments:call:home:actions"
+msgstr "Nadat u gebeld heeft, klik dan alstublieft op de actie die van toepassing is:"
+
+msgid "experiments:call:home:participation_prefix"
+msgstr "{} mag met deze experiment meedoen"
+
+msgid "experiments:call:home:participation_from"
+msgstr "vanaf {}"
+
+msgid "experiments:call:home:participation_to"
+msgstr "tot/met {}"
+
+msgid "experiment:attribute:session_duration"
+msgstr "Tijdsduur (sessie)"
+
+msgid "experiment:attribute:location"
+msgstr "Locatie"
+
+msgid "experiment:attribute:age_range"
+msgstr "Leeftijdgrens"
+
+msgid "experiments:detail:progress"
+msgstr "Voortgang"
+
+#: experiments/templates/experiments/detail_parts/info.html:20
+msgid "experiments:detail:progress:target"
+msgstr "Doel"
+
+#: experiments/templates/experiments/detail_parts/info.html:24
+msgid "experiments:detail:progress:tested"
+msgstr "Getest"
+
+#: experiments/templates/experiments/detail_parts/info.html:28
+msgid "experiments:detail:progress:planned"
+msgstr "Gepland"
+
+#: experiments/templates/experiments/detail_parts/info.html:32
+msgid "experiments:detail:progress:excluded"
+msgstr "Geëxcludeerd"
+
+#: experiments/templates/experiments/detail_parts/info.html:38
+msgid "experiments:detail:progress:to_plan"
+msgstr "Nog te plannen"
+
+#: experiments/templates/experiments/detail_parts/info.html:42
+msgid "experiments:detail:progress:to_test"
+msgstr "Nog te testen"
+
+#: experiments/templates/experiments/detail_parts/participants.html:11
+msgid "experiments:detail:appointments"
+msgstr "Afspraken"
+
+#: experiments/templates/experiments/detail_parts/participants.html:14
+msgid "experiments:detail:view_participants"
+msgstr "Participanten"
+
+#: experiments/templates/experiments/detail_parts/participants.html:24
+msgid "experiments:detail:participants:appointment"
+msgstr "Afspraak"
+
+#: experiments/templates/experiments/detail_parts/participants.html:27
+msgid "experiments:detail:participants:outcome"
+msgstr "Uitslag"

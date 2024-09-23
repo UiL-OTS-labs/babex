@@ -30,8 +30,8 @@ msgstr "Vul a.u.b. het e-mailadres in waarme u bij het Babylab voor Taalonderzoe
 msgid "parent:mailauth:sent"
 msgstr ""
 "<p>Een e-mail met instructies is verstuurd naar {}. Gebruik de link in de e-mail om in te loggen bij het Babylabportaal.</p>"
-"<p>Mocht u op het ingevulde emailadres geen link ontvangen, neem dan a.u.b. contact op met babylab.ilslabs@uu.nl.</p>"
-"<p>Mocht u het emailadres niet correct hebben ingevuld, dan kunt u het opnieuw proberen.</p>"
+"<p>Mocht u op het ingevulde e-mailadres geen link ontvangen, neem dan a.u.b. contact op met babylab.ilslabs@uu.nl.</p>"
+"<p>Mocht u het e-mailadres niet correct hebben ingevuld, dan kunt u het opnieuw proberen.</p>"
 
 #: mailauth/views.py:17 mailauth/views.py:51
 msgid "parent:error:login_failed"

@@ -77,15 +77,15 @@ msgstr "Verwijderen"
 
 #: signups/templates/signups/signup_list.html:65
 msgid "signups:list:empty"
-msgstr ""
+msgstr "Geen nieuwe aanmeldingen"
 
 #: signups/views.py:39
 msgid "signups:messages:approved"
-msgstr ""
+msgstr "Aanmelding goedgekeurd"
 
 #: signups/views.py:42
 msgid "signups:messages:rejected"
-msgstr ""
+msgstr "Aanmelding afgewezen"
 
 msgid "signups:mail:validation:subject"
 msgstr "Babylab voor Taalonderzoek: Bevestiging e-mailadres"

@@ -1,5 +1,6 @@
 {% extends 'vue/base.html' %}
 {% load i18n %}
+{% load transformat %}
 {% load vue3 %}
 {% load static %}
 {% load get_field_name %}
@@ -78,13 +79,13 @@
         </div>
 
         {% if participation_range %}
-            <p>
-                {{ participant.name }} can participate in this experiment
-                {% if participation_range.0 %}
-                from {{ participation_range.0|date:"Y-m-d" }}
+            <p class="alert alert-info">
+                {% transformat 'experiments:call:home:participation_prefix' participant.name %}
+                {% if participation_from %}
+                    {% transformat 'experiments:call:home:participation_from' participation_from %}
                 {% endif %}
-                {% if participation_range.1 %}
-                until {{ participation_range.1|date:"Y-m-d" }}
+                {% if participation_to %}
+                    {% transformat 'experiments:call:home:participation_to' participation_to %}
                 {% endif %}
             </p>
         {% endif %}

@@ -23,4 +23,4 @@ msgid "mailauth:send:subject"
 msgstr "Babylab voor Taalonderzoek: Link voor Babylabportaal"
 
 msgid "mailauth:error:expired"
-msgstr "Helaas is deze link verlopen. U kunt opnieuw inloggen via BABYLABPORTAAL hieronder."
+msgstr "Helaas is deze link verlopen. Hieronder kunt u opnieuw inloggen bij het Babylabportaal."

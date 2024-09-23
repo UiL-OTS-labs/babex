@@ -133,7 +133,7 @@ msgid "parent:data:remove:button"
 msgstr "Remove from database"
 
 #: parent/templates/data/removed.html:7
-msgid "parent:date:removed"
+msgid "parent:data:removed"
 msgstr "You have been succesfully removed from the babylab database"
 
 #: parent/templates/parent/home.html:17

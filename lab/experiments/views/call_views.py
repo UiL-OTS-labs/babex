@@ -69,7 +69,10 @@ class CallHomeView(ExperimentLeaderMixin, TemplateView):
             months=dc.max_age_months, days=dc.max_age_days
         )
 
-        context["participation_range"] = ageutil.date_of_birth(participant.birth_date).range_for(age_pred)
+        participation_from, participation_to = ageutil.date_of_birth(participant.birth_date).range_for(age_pred)
+        context["participation_range"] = (participation_from, participation_to)
+        context["participation_from"] = participation_from.strftime("%Y-%m-%d") if participation_from else None
+        context["participation_to"] = participation_to.strftime("%Y-%m-%d") if participation_to else None
 
         return context
 

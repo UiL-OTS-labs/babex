@@ -118,7 +118,7 @@ msgstr "E-mailadres"
 msgid "parent:forms:signup:email:help_text"
 msgstr ""
 "Let op! Gebruik een persoonlijk e-mailadres. Met dit adres krijgt u toegang "
-"tot uw gegevens."
+"tot het Babylabportaal."
 
 #: parent/forms.py:118
 msgid "parent:forms:signup:email_again"
@@ -281,15 +281,15 @@ msgstr ""
 
 #: parent/templates/data/home.html:20
 msgid "parent:data:remove:confirm"
-msgstr ""
+msgstr "Weet u het zeker dat u uw kind wilt uitschrijven?"
 
 #: parent/templates/data/home.html:23
 msgid "parent:data:remove:button"
 msgstr "Uitschrijven"
 
 #: parent/templates/data/removed.html:7
-msgid "parent:date:removed"
-msgstr ""
+msgid "parent:data:removed"
+msgstr "Uw kind is successvol uitgeschreven uit het Babylabportaal."
 
 #: parent/templates/error/404.html:5
 msgid "parent:error:404"
