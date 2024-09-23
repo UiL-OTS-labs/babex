@@ -267,10 +267,6 @@ msgstr "<p>De afspraak met {} is geannuleerd. Als u de afspraak wilt verplaatsen
 msgid "cdh.core:uu"
 msgstr ""
 
-#: parent/templates/data/home.html:8 parent/templates/parent/overview.html:14
-msgid "parent:sidebar:general"
-msgstr ""
-
 #: parent/templates/data/home.html:15
 msgid "parent:data:intro"
 msgstr ""
