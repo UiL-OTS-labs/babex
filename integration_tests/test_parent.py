@@ -236,3 +236,22 @@ def test_parent_login_expired(participant, apps, page, link_from_mail, login_as)
     expect(page.get_by_text('verlopen')).to_be_visible()
 
     expect(page.get_by_text('Appointments')).not_to_be_visible()
+
+
+def test_parent_login_multiple_children(participant, apps, page, login_as):
+    first = participant
+    Participant = apps.lab.get_model("participants", "Participant")
+    second = Participant.objects.create(
+        email=first.email,
+        name="BabyTwo McBaby",
+        parent_first_name=first.parent_first_name,
+        parent_last_name=first.parent_last_name,
+        birth_date=datetime.date(2023, 1, 1),
+        phonenumber=first.phonenumber,
+        dyslexic_parent=first.dyslexic_parent,
+        email_subscription=True,
+    )
+    assert login_as(first.email) is True
+    page.locator('a').get_by_text(first.name).click()
+    page.wait_for_url('**/overview')
+    expect(page.locator('.alert-error')).to_have_count(0)

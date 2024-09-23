@@ -1,5 +1,7 @@
 from datetime import timedelta
 
+import jwt
+from django.conf import settings
 from django.utils import timezone, translation
 from django.utils.translation import gettext as _
 from rest_framework import exceptions, views
@@ -64,6 +66,7 @@ class SetParticipantView(views.APIView):
         except Exception:
             raise exceptions.PermissionDenied()
 
-        if resolve_participant(token, request.data["participant_id"]):
+        decoded = jwt.decode(token, settings.JWT_SECRET, algorithms=[settings.JWT_ALGORITHM])
+        if resolve_participant(decoded["session"], request.data["participant_id"]):
             return Response(dict())
         raise exceptions.PermissionDenied()
