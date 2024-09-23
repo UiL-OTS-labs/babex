@@ -3,7 +3,7 @@
 
     const props = defineProps<{
         name: string, // form field name
-        monthNames: string[],
+        monthNames: { [num: number]: string },
         // getting date values from python, means they're strings
         value: string,
         minDate: string,
@@ -29,7 +29,7 @@
     const isValid = computed(() => {
         if (year.value && month.value && day.value) {
             let d = new Date(parseInt(year.value, 10), parseInt(month.value, 10) - 1, parseInt(day.value, 10));
-            return d >= minDateParsed && d < maxDateParsed;
+            return d >= minDateParsed && d <= maxDateParsed;
         }
         return undefined;
     })
