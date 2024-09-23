@@ -26,7 +26,7 @@
 
     async function cancel() {
         if (confirm(_('Are you sure?'))) {
-            babexApi.agenda.appointment.delete(props.event.id).then(() => {
+            babexApi.agenda.appointment.delete(props.event.id).success(() => {
                 emit('done');
             });
         }
@@ -45,7 +45,7 @@
             promise = babexApi.agenda.appointment.update(props.event.id, form.value);
         }
 
-        promise.then(() => emit('done'));
+        promise.success(() => emit('done'));
 
         event.preventDefault();
         event.stopPropagation();

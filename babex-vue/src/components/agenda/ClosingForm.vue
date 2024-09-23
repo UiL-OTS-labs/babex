@@ -33,7 +33,7 @@
     const temporaryEvents = ref<EventApi[]>([]);
 
     async function remove() {
-        babexApi.agenda.closing.delete(props.event.id).then(() => {
+        babexApi.agenda.closing.delete(props.event.id).success(() => {
             emit('done');
         });
     }
@@ -57,7 +57,7 @@
             promise = babexApi.agenda.closing.createMany(closings);
         }
 
-        promise.then(() => emit('done'));
+        promise.success(() => emit('done'));
 
         ev.preventDefault();
         ev.stopPropagation();

@@ -41,7 +41,7 @@ jobs:
           cd lab/main/static/
           tar cvf babex-vue.tar vue
           gzip babex-vue.tar
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v4
         with:
           name: babex-vue
           path: lab/main/static/babex-vue.tar.gz
@@ -98,7 +98,7 @@ jobs:
           cd ${{ matrix.app }}
           make test
       - name: Download vue app
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: babex-vue
       - name: Unpack vue app
@@ -121,7 +121,7 @@ jobs:
           playwright install
           export DJANGO_ALLOW_ASYNC_UNSAFE=1
           make testint
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: ${{ matrix.app }}-pytest_logs
@@ -166,7 +166,7 @@ jobs:
           cd parent
           python manage.py compilemessages
       - name: Download vue app
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: babex-vue
       - name: Unpack vue app
@@ -179,7 +179,7 @@ jobs:
           playwright install
           export DJANGO_ALLOW_ASYNC_UNSAFE=1
           pytest
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: integration-pytest_logs

@@ -131,7 +131,7 @@
         babexApi.call.log.update(props.call.id.toString(), {
             status: callStatus.value,
             comment: comment.value,
-        }).then( () => {
+        }).success( () => {
             saving.value = false;
             complete();
         });
