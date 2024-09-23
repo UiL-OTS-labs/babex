@@ -137,6 +137,21 @@
         });
     }
 
+    function cancel() {
+        if (!props.call.id) {
+            return;
+        }
+
+        saving.value = true;
+        babexApi.call.log.update(props.call.id.toString(), {
+            status: 'CANCELLED',
+            comment: comment.value,
+        }).success( () => {
+            saving.value = false;
+            complete();
+        });
+    }
+
     function complete() {
         location.href = props.completeUrl;
     }
@@ -163,6 +178,7 @@
     </div>
     <div class="mb-3">
         <button class="btn btn-primary" :class="{'btn-loading': saving}" @click="saveStatus" :disabled="callStatus==null">{{ _('Save') }}</button>
+        <button class="btn btn-secondary m-3" :class="{'btn-loading': saving}" @click="cancel">{{ _('Cancel') }}</button>
     </div>
 
     <!-- dialog for picking appointment time and booking -->
