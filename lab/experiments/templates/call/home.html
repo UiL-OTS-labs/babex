@@ -14,17 +14,17 @@
 {% block content %}
 <div class="uu-container">
     <div class="col-12">
-        <p>You are about to call the parents of {{ participant.name }}</p>
+        <p>{% transformat "experiments:call:home:intro" participant.name %}</p>
         {% if call_open %}
             <p class="alert alert-warning">
-                Currently ({{ call_open.creation_date|date:"Y-m-d" }} {{ call_open.creation_date|time }}) called by {{ call_open.leader }}!
+                {% transformat "experiments:call:home:call_open" call_open_started call_open.leader %}
             </p>
         {% endif %}
 
 
         {% if previous_calls %}
             <details class="mb-3">
-                <summary>Previously called {{ previous_calls|length }} time{{ previous_calls|length|pluralize}} for this experiment:</summary>
+                <summary>{% transformat "experiments:call:home:previous_call" previous_calls.count %}</summary>
                 <ul>
                     {% for call in previous_calls %}
                         <li>{{ call.creation_date|date:"Y-m-d" }} ({{ call.leader }}): {{ call.get_status_display }}

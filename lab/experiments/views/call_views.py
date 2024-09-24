@@ -63,6 +63,7 @@ class CallHomeView(ExperimentLeaderMixin, TemplateView):
 
         if not created:
             context["call_open"] = call
+            context["call_open_started"] = call.creation_date.strftime("%Y-%m-%d %H:%M")
 
         dc = experiment.defaultcriteria
         age_pred = ageutil.age(months=dc.min_age_months, days=dc.min_age_days).to(
