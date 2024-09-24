@@ -192,14 +192,12 @@ def test_signup_save_longer(page, apps, default_signup_fill_form):
 
 
 def test_signup_unborn(page, apps, default_signup_fill_form):
-    now = datetime.datetime.now()
-    page.locator('#id_birth_date_year').select_option(str(now.year))
-    page.locator('#id_birth_date_month').select_option(now.strftime('%B'))
-    page.locator('#id_birth_date_day').select_option(str(now.day + 1))
+    tomorrow = datetime.datetime.now() + datetime.timedelta(days=1)
+    page.locator('#id_birth_date_year').select_option(str(tomorrow.year))
+    page.locator('#id_birth_date_month').select_option(tomorrow.strftime('%B'))
+    page.locator('#id_birth_date_day').select_option(str(tomorrow.day))
 
-    page.click('input[type="submit"]')
-
-    # check that the form was submitted
+    # should immediately show error
     expect(page.locator('select.is-invalid')).to_have_count(3)
 
 
