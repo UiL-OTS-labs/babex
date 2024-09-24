@@ -247,7 +247,7 @@
                     <div class="modal-content">
                         <div class="modal-body">
                             <h2>{{ _('Review confirmation mail') }}</h2>
-                            <textarea :ref="(el: any) => tinymcify(el as HTMLTextAreaElement)">
+                            <textarea class="mail-preview" :ref="(el: any) => tinymcify(el as HTMLTextAreaElement)">
                             </textarea>
                         </div>
                         <div class="modal-footer">
@@ -262,7 +262,7 @@
 </template>
 
 <style scoped>
-    textarea {
+    textarea.mail-preview {
         height: 650px;
     }
 </style>
