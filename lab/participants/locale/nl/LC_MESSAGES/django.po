@@ -405,3 +405,13 @@ msgstr "Engelse communicatie"
 
 msgid "participants:detail:extradata:click"
 msgstr "klik om weer te geven"
+
+#: participants/templates/participants/delete.html:24
+msgid "participants:delete:delete:text"
+msgstr ""
+"Deze participant heeft nooit met een experiment mee gedaan en mag dus "
+"veilig verwijderd worden vanuit het database."
+
+#: participants/templates/participants/delete.html:27
+msgid "participants:delete:delete:prompt"
+msgstr "Weet u het zeker dat u participant '{}' wilt verwijderen?"

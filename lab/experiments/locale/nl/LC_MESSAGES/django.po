@@ -626,12 +626,12 @@ msgstr "Email"
 #: experiments/templates/experiments/participants.html:70
 #: experiments/templates/experiments/participants.html:204
 msgid "experiments:participants:phone_number"
-msgstr "Telefoon- nummer"
+msgstr "Telefoonnummer"
 
 #: experiments/templates/experiments/participants.html:73
 #: experiments/templates/experiments/participants.html:207
 msgid "experiments:participants:birth_date"
-msgstr "Geboorte- datum"
+msgstr "Geboortedatum"
 
 #: experiments/templates/experiments/participants.html:76
 #: experiments/templates/experiments/participants.html:210
@@ -919,3 +919,6 @@ msgstr "Wordt gebeld ({}) door {}!"
 
 msgid "experiments:call:home:previous_call"
 msgstr "Eerder al {} keer gebeld voor deze experiment:"
+
+msgid "time_slot:attribute:start"
+msgstr "Tijdstip"
