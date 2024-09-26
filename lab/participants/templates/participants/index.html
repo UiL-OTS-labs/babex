@@ -23,7 +23,7 @@
         <p>
             {% trans 'participants:home:info_text' %}
         </p>
-        <table class="dt" width="100%" data-language="{% datatables_lang %}">
+        <table class="dt_custom" width="100%" data-language="{% datatables_lang %}">
             <thead>
                 <tr>
                     <th> {% get_verbose_field_name "participants" "ParticipantData" "name" %} </th>
@@ -69,4 +69,11 @@
         <br/>
     </div>
 </div>
+
+<script>
+    $('.dt_custom').DataTable({
+        dom: 'Bfrtip',
+        buttons : ['pageLength'],
+    });
+</script>
 {% endblock %}
