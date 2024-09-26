@@ -153,7 +153,7 @@ msgstr "Opslaan"
 
 #: main/templates/users/create.html:8 main/templates/users/create.html:22
 msgid "users:create:header"
-msgstr "Maak nieuw admin account aan"
+msgstr "Maak nieuw proefleider account aan"
 
 #: main/templates/users/create.html:25
 msgid "users:create:info_text"
@@ -298,3 +298,18 @@ msgstr "Bij de volgende participanten is het resultaat van het testen nog niet i
 
 msgid "main:home:signups:link"
 msgstr "nieuwe aanmeldingen"
+
+msgid "users:home:create_leader"
+msgstr "Proefleider toevoegen"
+
+msgid "user:attribute:name"
+msgstr "Naam"
+
+msgid "users:action:edit"
+msgstr "Bewerken"
+
+msgid "users:action:password"
+msgstr "Wachtwoord instellen"
+
+msgid "users:action:delete"
+msgstr "Verwijderen"
