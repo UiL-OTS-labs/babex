@@ -17,16 +17,16 @@
     function makeGraph(container) {
         let graph = d3.select(container);
 
+        const margin = { left: 30, right: 10, bottom: 40, top: 20 };
         const width = 1024;
         const height = 400;
-        const margin = { left: 30, right: 10, bottom: 30, top: 20 };
 
         request = babexApi.participants.demographics.get(new Date(date.value), experiment.value);
         request.success(data => {
             let svg = graph
                 .append("svg")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
+                .attr("width", width)
+                .attr("height", height)
                 .append("g")
                 .attr("transform",
                       "translate(" + margin.left + "," + margin.top + ")");
@@ -42,7 +42,7 @@
                       .domain([minMonth, maxMonth])
                       .range([0, width]);
             svg.append("g")
-               .attr("transform", "translate(0," + height + ")")
+               .attr("transform", "translate(0," + (height - margin.bottom) + ")")
                .call(d3.axisBottom(x));
 
             let histogram = d3.bin()
@@ -64,12 +64,12 @@
             });
 
 
-            let y = d3.scaleLinear().range([height, 0]);
+            let y = d3.scaleLinear().range([height - margin.bottom, 0]);
             let maxCount = 0;
             Object.values(series).forEach(bins => {
                 maxCount = Math.max(maxCount, Math.max(...bins.map(bin => bin.length)));
             });
-            y.domain([0, Math.ceil(maxCount * 1.1)]);
+            y.domain([0, Math.max(1, Math.ceil(maxCount * 1.1))]);
 
             svg.append("g")
                .call(d3.axisLeft(y));
@@ -96,9 +96,9 @@
                    .append("rect")
                    .attr("class", "color" + idx)
                    .attr("x", d => barWidth(d)*idx + x(d.x0) - barWidth(d)/2)
-                   .attr("y", d =>y(d.length))
+                   .attr("y", d => y(d.length))
                    .attr("width", barWidth)
-                   .attr("height", d => { return height - y(d.length); })
+                   .attr("height", d => { return height - margin.bottom - y(d.length); })
                    .on('mouseover', showTooltip)
                    .on('mouseleave', hideTooltip);
 
@@ -183,7 +183,7 @@
 
 <style>
     .graph {
-        width: 1024;
+        width: 1024px;
         height: 400px;
     }
 
