@@ -74,19 +74,6 @@
             svg.append("g")
                .call(d3.axisLeft(y));
 
-            let showTooltip = (e, d) => {
-                let barCenter = e.target.x.baseVal.value + e.target.width.baseVal.value / 2;
-                let count = d.length;
-                let top = y(d.length) - 5;
-                tooltip.text(count);
-                tooltip.style('opacity', 1)
-                       .attr('x', barCenter)
-                       .attr('y', top);
-            };
-
-            let hideTooltip = () => {
-                tooltip.style('opacity', 0);
-            };
             let barWidth = (d)=> (x(d.x1) - x(d.x0))/groups.length - 4;
 
             Object.values(series).forEach((value, idx) => {
@@ -95,19 +82,22 @@
                    .enter()
                    .append("rect")
                    .attr("class", "color" + idx)
-                   .attr("x", d => barWidth(d)*idx + x(d.x0) - barWidth(d)/2)
+                   .attr("x", d => barWidth(d) * idx + x(d.x0) - barWidth(d) / 2)
                    .attr("y", d => y(d.length))
                    .attr("width", barWidth)
-                   .attr("height", d => { return height - margin.bottom - y(d.length); })
-                   .on('mouseover', showTooltip)
-                   .on('mouseleave', hideTooltip);
+                   .attr("height", d => { return height - margin.bottom - y(d.length); });
+
+                svg.selectAll("text" + idx)
+                   .data(value)
+                   .enter()
+                   .append('text')
+                   .attr('class', 'tip')
+                   .attr('x', d => barWidth(d) * idx + x(d.x0))
+                   .attr('y', d => y(d.length) - 4)
+                   .text(d => d.length)
+                   .style('opacity', d => d.length > 0 ? 1 : 0);
 
             });
-            let tooltip = svg.append('text')
-                             .attr('class', 'tooltip')
-                             .style('opacity', 0)
-                             .attr('x', 0)
-                             .attr('y', 0);
 
             if (groups.length > 1) {
                 svg.selectAll('legend')
@@ -195,7 +185,7 @@
         align-items: center;
     }
 
-    text.tooltip {
+    text.tip {
         fill: #000;
         text-anchor: middle;
     }
