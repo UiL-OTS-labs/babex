@@ -86,7 +86,7 @@ class BirthDateWidget(forms.SelectDateWidget):
 class BirthDateField(forms.DateField):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        min_date, max_date = age(0).to(3).range()
+        min_date, max_date = age(0).to(years=2, months=6).range()
         self.widget = BirthDateWidget(min_date=min_date, max_date=max_date)
         self.validators = [MaxValueValidator(max_date), MinValueValidator(min_date)]
 

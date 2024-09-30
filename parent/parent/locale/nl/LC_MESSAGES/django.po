@@ -49,7 +49,7 @@ msgstr "Geboortedatum"
 #: parent/forms.py:82
 msgid "parent:forms:signup:birth_date:help_text"
 msgstr ""
-"Kinderen mogen worden ingeschreven als ze minder dan 3 jaar oud zijn op het "
+"Kinderen mogen worden ingeschreven als ze minder dan 2,5 jaar oud zijn op het "
 "moment van inschrijving."
 
 #: parent/forms.py:85
