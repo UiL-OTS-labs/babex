@@ -838,7 +838,7 @@ msgstr "Afspraak gemaakt"
 
 #: experiments/models/invite_models.py:37
 msgid "experiments:call:status:cancelled"
-msgstr "Annuleeren"
+msgstr "Annuleren"
 
 msgid "experiments:call:status:exclude"
 msgstr "Kan/wil niet meedoen"
@@ -851,13 +851,13 @@ msgid "experiments:call:home:actions"
 msgstr "Nadat u gebeld heeft, klik dan alstublieft op de actie die van toepassing is:"
 
 msgid "experiments:call:home:participation_prefix"
-msgstr "{} mag met deze experiment meedoen"
+msgstr "{} mag met dit experiment meedoen"
 
 msgid "experiments:call:home:participation_from"
 msgstr "vanaf {}"
 
 msgid "experiments:call:home:participation_to"
-msgstr "tot/met {}"
+msgstr "t/m {}"
 
 msgid "experiment:attribute:session_duration"
 msgstr "Tijdsduur (sessie)"
@@ -918,7 +918,7 @@ msgid "experiments:call:home:call_open"
 msgstr "Wordt gebeld ({}) door {}!"
 
 msgid "experiments:call:home:previous_call"
-msgstr "Eerder al {} keer gebeld voor deze experiment:"
+msgstr "Eerder al {} keer gebeld voor dit experiment:"
 
 msgid "time_slot:attribute:start"
 msgstr "Tijdstip"

@@ -63,7 +63,7 @@ class CallHomeView(ExperimentLeaderMixin, TemplateView):
 
         if not created:
             context["call_open"] = call
-            context["call_open_started"] = call.creation_date.strftime("%Y-%m-%d %H:%M")
+            context["call_open_started"] = call.creation_date.strftime("%d-%m-%Y %H:%M")
 
         dc = experiment.defaultcriteria
         age_pred = ageutil.age(months=dc.min_age_months, days=dc.min_age_days).to(
@@ -72,8 +72,8 @@ class CallHomeView(ExperimentLeaderMixin, TemplateView):
 
         participation_from, participation_to = ageutil.date_of_birth(participant.birth_date).range_for(age_pred)
         context["participation_range"] = (participation_from, participation_to)
-        context["participation_from"] = participation_from.strftime("%Y-%m-%d") if participation_from else None
-        context["participation_to"] = participation_to.strftime("%Y-%m-%d") if participation_to else None
+        context["participation_from"] = participation_from.strftime("%d-%m-%Y") if participation_from else None
+        context["participation_to"] = participation_to.strftime("%d-%m-%Y") if participation_to else None
 
         return context
 
