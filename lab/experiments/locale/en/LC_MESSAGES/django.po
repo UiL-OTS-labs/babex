@@ -254,7 +254,7 @@ msgstr "Responsible researcher"
 
 #: experiments/models/invite_models.py:25
 msgid "experiments:call:status:started"
-msgstr "Started"
+msgstr "Calling"
 
 #: experiments/models/invite_models.py:27
 msgid "experiments:call:status:noreply"
@@ -861,3 +861,13 @@ msgstr "Duration"
 
 msgid "experiments:views:email_preview:task_description"
 msgstr "Task Description"
+
+
+msgid "experiments:call:home:participation_prefix"
+msgstr "{} can participate"
+
+msgid "experiments:call:home:participation_from"
+msgstr "from {}"
+
+msgid "experiments:call:home:participation_to"
+msgstr "to {} (inclusive)"
