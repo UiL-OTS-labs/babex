@@ -38,7 +38,7 @@
 
 <template>
     <div>
-        <input :readonly="readonly" class="form-control" type="text" :value="props.time ? formatDateTime(modelValue): formatDate(modelValue)" @change="onChange">
+        <input :readonly="readonly" class="form-control" type="text" :value="props.time ? formatDateTime(modelValue): formatDate(modelValue)" @input="onChange">
     </div>
 </template>
 
