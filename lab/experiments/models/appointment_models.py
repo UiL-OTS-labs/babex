@@ -17,6 +17,11 @@ class TimeSlot(models.Model):
     start = models.DateTimeField(_("time_slot:attribute:start"))
     end = models.DateTimeField(_("time_slot:attribute:start"))
 
+    class Meta:
+        constraints = [
+            models.CheckConstraint(check=models.Q(end__gt=models.F('start')), name='end_after_start')
+        ]
+    
     @property
     def datetime(self):
         return self.start  # temporarily keep compatability

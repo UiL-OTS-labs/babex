@@ -92,7 +92,7 @@
             </div>
         </div>
 
-        <div class="mt-4"><button class="btn btn-primary save">{{ _('Save') }}</button></div>
+        <div class="mt-4"><button class="btn btn-primary save" :disabled="form.end <= form.start">{{ _('Save') }}</button></div>
     </form>
 
     <div v-if="!isPast() && !isCanceled()">
