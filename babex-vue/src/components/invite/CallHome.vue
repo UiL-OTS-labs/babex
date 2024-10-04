@@ -89,14 +89,13 @@
                 status: 'CONFIRMED',
                 comment: comment.value,
             }).success( () => {
+                if (confirmationForm.value.emailParticipant) {
+                    emailDialog();
+                }
+                else {
+                    complete();
+                }
             });
-
-            if (confirmationForm.value.emailParticipant) {
-                emailDialog();
-            }
-            else {
-                complete();
-            }
         });
     }
 
