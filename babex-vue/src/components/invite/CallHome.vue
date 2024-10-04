@@ -84,6 +84,13 @@
             leader: confirmationForm.value.leader,
         }).success(response => {
             appointment = response.id!;
+            // mark call as completed
+            babexApi.call.log.update(props.call.id!.toString(), {
+                status: 'CONFIRMED',
+                comment: comment.value,
+            }).success( () => {
+            });
+
             if (confirmationForm.value.emailParticipant) {
                 emailDialog();
             }
