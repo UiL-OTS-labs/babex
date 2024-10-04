@@ -189,7 +189,7 @@
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div v-if="step === 0" class="modal-content">
                         <div class="modal-body">
-                            <AgendaCalendar ref="calendar" @select="onSelect" :start="start" :end="end" :scheduling="true"></AgendaCalendar>
+                            <AgendaCalendar ref="calendar" @select="onSelect" :start="start" :end="end" :experiment="experiment.id" :scheduling="true"></AgendaCalendar>
                         </div>
                         <div class="modal-footer">
                             <button @click="step = 1" type="button" class="btn btn-primary" :disabled="event==null">{{ _('Next') }}</button>

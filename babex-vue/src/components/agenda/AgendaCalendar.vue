@@ -17,6 +17,8 @@
         start?: string,
         // optional ending date of valid selection range (iso format)
         end?: string,
+        // optional experiment id for limiting feeds
+        experiment?: number,
 
         scheduling?: boolean,
     }>();
@@ -93,12 +95,15 @@
         eventSources: [
             {
                 url: urls.agenda.feed,
-                eventDataTransform: formatAppointment
+                eventDataTransform: formatAppointment,
+                // syntax trick to set object property only when experiment is defined
+                ...(props.experiment && {extraParams: {experiment: props.experiment}})
             },
             {
                 url: urls.agenda.closing,
                 eventDataTransform: formatClosing,
-                color: 'gray'
+                color: 'gray',
+                ...(props.experiment && {extraParams: {experiment: props.experiment}})
             },
         ],
         eventContent: eventRender,

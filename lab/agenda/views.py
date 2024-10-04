@@ -3,7 +3,7 @@ from django.views import generic
 from rest_framework import generics, permissions, status, viewsets
 from rest_framework.response import Response
 
-from experiments.models import Appointment, Location
+from experiments.models import Appointment, Experiment, Location
 from experiments.serializers import AppointmentSerializer
 from main.auth.util import IsExperimentLeader, LabManagerMixin, RandomLeaderMixin
 from utils.appointment_mail import prepare_appointment_mail, send_appointment_mail
@@ -11,13 +11,21 @@ from utils.appointment_mail import prepare_appointment_mail, send_appointment_ma
 from .models import Closing, ClosingSerializer
 
 
-class AppointmentFeed(generics.ListAPIView):
+class AppointmentFeed(RandomLeaderMixin, generics.ListAPIView):
     serializer_class = AppointmentSerializer
 
     def get_queryset(self):
         from_date = dateutil.parser.parse(self.request.GET["start"])
         to_date = dateutil.parser.parse(self.request.GET["end"])
-        return Appointment.objects.filter(timeslot__start__gte=from_date, timeslot__end__lt=to_date)
+        
+        # the experiment parameter is used to retrieve a feed that's relevant for a given experiment
+        # practically, that means appointments of any experiement taking place at the relevant location
+        experiment_id = self.request.GET.get("experiment")
+        appointments = Appointment.objects.filter(timeslot__start__gte=from_date, timeslot__end__lt=to_date)
+        if experiment_id:
+            experiment = Experiment.objects.get(pk=experiment_id)
+            appointments = appointments.filter(experiment__location=experiment.location)
+        return appointments 
 
 
 class AgendaHome(RandomLeaderMixin, generic.TemplateView):
@@ -48,7 +56,14 @@ class ClosingViewSet(viewsets.ModelViewSet):
         if self.request.method == "GET":
             from_date = dateutil.parser.parse(self.request.GET["start"])
             to_date = dateutil.parser.parse(self.request.GET["end"])
+            
+            # the experiment parameter is used to retrieve a feed that's relevant for a given experiment
+            # practically, that means closings of the relevant location, or the entire building
+            experiment_id = self.request.GET.get("experiment")
             queryset = queryset.filter(end__gte=from_date, start__lt=to_date)
+            if experiment_id:
+                experiment = Experiment.objects.get(pk=experiment_id)
+                queryset = queryset.filter(location=experiment.location).union(queryset.filter(is_global=True))
 
         return queryset
 
