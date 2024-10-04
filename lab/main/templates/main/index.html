@@ -48,8 +48,10 @@
             {% if call_back %}
                 <p>{% translate "main:home:call_back" %}</p>
                 <ul>
-                    {% for participant in call_back %}
-                        <li><a href="{% url 'participants:detail' participant.pk %}">{{ participant.name }}</a></li>
+                    {% for call in call_back %}
+                        <li><a href="{% url 'experiments:call' call.experiment.pk call.participant.pk %}">{{ call.participant.name }}</a>
+                            {% if call.comment %}({{ call.comment }}){% endif %}
+                        </li>
                     {% endfor %}
                 </ul>
             {% endif %}

@@ -16,9 +16,13 @@ class HomeView(braces.LoginRequiredMixin, generic.TemplateView):
 
         if self.request.user.is_leader:
             context["experiments"] = user.experiments.all()
-            context["call_back"] = set(
-                call.participant for call in user.call_set.filter(status=Call.CallStatus.CALLBACK)
-            )
+            call_back = user.call_set.filter(status=Call.CallStatus.CALLBACK)
+            last_per_pp = dict()
+            for call in call_back:
+                if call.participant not in last_per_pp or call.creation_date > last_per_pp[call.participant]:
+                    last_per_pp[call.participant] = call
+
+            context["call_back"] = last_per_pp.values()
             context["open_calls"] = user.call_set.filter(status=Call.CallStatus.STARTED)
             context["missing_outcome"] = (
                 user.appointment_set.filter(outcome=None)
