@@ -18,7 +18,6 @@
     const form = ref({
         start: props.event.start,
         end: props.event.end,
-        participant: props.event.title,
         comment: props.event ? props.event.extendedProps.comment : null,
         location: props.event.extendedProps.location,
         outcome: props.event.extendedProps.outcome ?? undefined,
@@ -42,7 +41,7 @@
             promise = babexApi.agenda.appointment.updatePartial(props.event.id, update);
         }
         else {
-            promise = babexApi.agenda.appointment.update(props.event.id, form.value);
+            promise = babexApi.agenda.appointment.updatePartial(props.event.id, form.value);
         }
 
         promise.success(() => emit('done'));
@@ -63,9 +62,18 @@
 
 <template>
     <div class="mt-4 mb-4">
-        <div><b>{{ _('Participant:') }}</b> {{form.participant}}</div>
-        <div><b>{{ _('Experiment:') }}</b> {{event.extendedProps.experiment}}</div>
-        <div><b>{{ _('Location:') }}</b> {{form.location}}</div>
+        <div>
+            <strong>{{ _('Participant:') }}</strong>&nbsp;
+            <a :href="'/participants/' + event.extendedProps.participant.id">
+                {{event.extendedProps.participant.name}}
+            </a>
+        </div>
+        <div><strong>{{ _('Experiment:') }}</strong>&nbsp;
+            <a :href="'/experiments/' + event.extendedProps.experiment.id">
+                {{event.extendedProps.experiment.name}}
+            </a>
+        </div>
+        <div><strong>{{ _('Location:') }}</strong> {{form.location}}</div>
     </div>
     <form @submit="onSubmit">
         <div>{{ _('From:') }}</div>

@@ -1,9 +1,20 @@
 from rest_framework import serializers
 
+from participants.models import Participant
 from .models import Appointment, Experiment
 
 
 class AppointmentSerializer(serializers.ModelSerializer):
+    class AppointmentExperimentSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Experiment
+            fields = ["id", "name"]
+
+    class AppointmentParticipantSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Participant
+            fields = ["id", "name"]
+
     class Meta:
         model = Appointment
         fields = [
@@ -20,8 +31,8 @@ class AppointmentSerializer(serializers.ModelSerializer):
             "session_duration",
         ]
 
-    experiment = serializers.StringRelatedField()  # type: ignore
-    participant = serializers.SlugRelatedField("name", read_only=True)  # type: ignore
+    experiment = AppointmentExperimentSerializer(read_only=True)
+    participant = AppointmentParticipantSerializer(read_only=True)
 
     location = serializers.ReadOnlyField()
     leader = serializers.ReadOnlyField(source="leader.name")

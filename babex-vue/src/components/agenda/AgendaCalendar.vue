@@ -28,7 +28,7 @@
             id: event.id,
             start: event.start,
             end: event.end,
-            title: event.participant,
+            title: event.participant.name,
             location: event.location,
             // extra field will be displayed in a separate line
             extra: `${event.location} (${event.leader})`,
@@ -36,7 +36,8 @@
             category: 'appointment',
             comment: event.comment,
             outcome: event.outcome,
-            experiment: event.experiment
+            experiment: event.experiment,
+            participant: event.participant
         };
     }
 
