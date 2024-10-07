@@ -75,7 +75,6 @@ class Experiment(models.Model):
     # how many participants are aimed for
     recruitment_target = models.PositiveIntegerField(
         _("experiment:attribute:recruitment_target"),
-        help_text=_("experiment:attribute:recruitment_target:help"),
         default=0,
     )
 

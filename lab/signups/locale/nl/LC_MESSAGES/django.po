@@ -48,7 +48,7 @@ msgstr ""
 
 #: signups/templates/signups/signup_detail.html:62
 msgid "yes,empty"
-msgstr ""
+msgstr "ja,"
 
 #: signups/templates/signups/signup_detail.html:68
 msgid "signups:detail:approve"

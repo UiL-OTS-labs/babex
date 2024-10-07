@@ -931,3 +931,16 @@ msgstr "Getest"
 
 msgid "experiments:participants:excluded"
 msgstr "Geëxcludeerd"
+
+msgid "experiment:attribute:recruitment_target"
+msgstr "Gewenst aantal proefpersonen"
+
+msgid "experiment:attribute:required_experiments"
+msgstr "Verplichte voorafgaande experimenten"
+
+msgid "experiment:attribute:required_experiments:help_text"
+msgstr ""
+"Om mee te kunnen doen bij het huidige experiment, participanten moeten hebben meegedaan bij de genoteerd experimenten"
+
+msgid "experiment:attribute:leaders:help_text"
+msgstr "Geselecteerd gebruikers mogen participanten bellen, afspraken inplannen enz."

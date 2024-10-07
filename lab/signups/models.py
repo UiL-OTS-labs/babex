@@ -19,7 +19,7 @@ class EncryptedJSONListField(EncryptedMixin, models.JSONField):
 
 
 class Signup(models.Model):
-    name = e_fields.EncryptedCharField(max_length=100)
+    name = e_fields.EncryptedCharField(max_length=100, verbose_name=_("participant:attribute:name"))
     sex = e_fields.EncryptedCharField(max_length=50)
     birth_date = e_fields.EncryptedDateField()
 
@@ -55,7 +55,7 @@ class Signup(models.Model):
 
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.NEW)
 
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True, verbose_name=_("participant:attribute:created"))
     email_verified = models.DateTimeField(null=True, blank=True)
     link_token = models.CharField(max_length=64, default=token_urlsafe, unique=True)
 
