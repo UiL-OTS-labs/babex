@@ -52,3 +52,6 @@ class Call(models.Model):
 
     creation_date = models.DateTimeField(auto_now_add=True)
     comment = models.TextField(null=True)
+
+    # currently used to silence CALLBACK calls, but keep them in the call log
+    hidden = models.BooleanField(default=False)

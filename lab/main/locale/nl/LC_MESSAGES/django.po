@@ -287,6 +287,9 @@ msgstr "Jij bent leider van de volgende experimenten:"
 msgid "main:home:call_back"
 msgstr "De volgende participanten moeten teruggebeld worden:"
 
+msgid "main:home:call_back:remove"
+msgstr "X"
+
 msgid "users:leaders:header"
 msgstr "Proefleiders"
 

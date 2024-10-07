@@ -5,6 +5,7 @@ from cdh.core.mail import TemplateEmail
 from django.conf import settings
 from django.core.exceptions import BadRequest, PermissionDenied
 from django.http.response import JsonResponse
+from django.shortcuts import redirect
 from django.utils import timezone, translation
 from django.utils.dateparse import parse_datetime
 from django.utils.translation import gettext_lazy as _
@@ -189,3 +190,17 @@ class UpdateCall(generics.UpdateAPIView):
                 )
             mail.send()
         return JsonResponse(self.serializer_class(call).data)
+
+
+class HideCall(views.APIView):
+    permission_classes = [IsExperimentLeader]
+
+    @property
+    def experiment(self):
+        return Call.objects.get(pk=self.kwargs["pk"]).experiment
+
+    def get(self, request, *args, **kwargs):
+        call = Call.objects.get(pk=kwargs["pk"])
+        call.hidden = True
+        call.save()
+        return redirect("/")

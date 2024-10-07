@@ -25,7 +25,6 @@
 
         </aside>
         <div class="uu-sidebar-content">
-            <p>{% transformat 'main:home:hello' user.get_full_name %}</p>
             <p>{% translate 'main:home:welcome' %}</p>
 
             {% if missing_outcome %}
@@ -39,7 +38,7 @@
                 </ul>
             {% endif %}
             {% if open_calls %}
-                <p>{% trans 'main:home:open_calls:text' %}</p>
+                <p class="mt-5">{% trans 'main:home:open_calls:text' %}</p>
                 <ul>
                     {% for call in open_calls %}
                         <li><a href="{% url 'experiments:call' call.experiment.pk call.participant.pk %}">{{ call.participant.name }}</a> ({{ call.creation_date | date:'Y-m-d H:i' }})</li>
@@ -48,11 +47,14 @@
             {% endif %}
 
             {% if call_back %}
-                <p>{% translate "main:home:call_back" %}</p>
+                <p class="mt-5">{% translate "main:home:call_back" %}</p>
                 <ul>
                     {% for call in call_back %}
                         <li><a href="{% url 'experiments:call' call.experiment.pk call.participant.pk %}">{{ call.participant.name }}</a>
                             {% if call.comment %}({{ call.comment }}){% endif %}
+                            <a class="text-danger m-5" href="{% url 'experiments:call_hide' call.pk %}">
+                                [{% translate "main:home:call_back:remove" %}]
+                            </a>
                         </li>
                     {% endfor %}
                 </ul>
