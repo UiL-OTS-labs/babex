@@ -98,7 +98,7 @@ jobs:
           cd ${{ matrix.app }}
           make test
       - name: Download vue app
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: babex-vue
       - name: Unpack vue app
@@ -125,7 +125,7 @@ jobs:
         if: failure()
         with:
           name: ${{ matrix.app }}-pytest_logs
-          path: ${{ matrix.app }}/integration_tests/latest_logs/
+          path: ${{ matrix.app }}/test-results
 
   integration:
     needs: build
@@ -178,9 +178,9 @@ jobs:
           cd integration_tests
           playwright install
           export DJANGO_ALLOW_ASYNC_UNSAFE=1
-          pytest
+          pytest --tracing retain-on-failure
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: integration-pytest_logs
-          path: integration_tests/latest_logs/
+          path: integration_tests/test-results
