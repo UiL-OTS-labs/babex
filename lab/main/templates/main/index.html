@@ -12,19 +12,21 @@
             {% trans 'main:home:header' %}
         </h1>
     </div>
-    <div class="uu-inner-container">
-        <div class="col-10">
+    <div class="uu-sidebar-container uu-sidebar-right">
+        <aside class="uu-sidebar">
+            {% if user.is_leader %}
+                <p>{% translate 'main:home:leader' %}
+                <ul>
+                    {% for experiment in experiments %}
+                        <li><a href="{% url 'experiments:detail' experiment.pk %}">{{ experiment.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+        </aside>
+        <div class="uu-sidebar-content">
             <p>{% transformat 'main:home:hello' user.get_full_name %}</p>
             <p>{% translate 'main:home:welcome' %}</p>
-
-            {% if user.is_leader %}
-            <p>{% translate 'main:home:leader' %}
-            <ul>
-                {% for experiment in experiments %}
-                    <li><a href="{% url 'experiments:detail' experiment.pk %}">{{ experiment.name }}</a></li>
-                {% endfor %}
-            </ul>
-            {% endif %}
 
             {% if missing_outcome %}
                 <p>{% translate 'main:home:appointment_outcome' %}</p>
