@@ -24,9 +24,6 @@
             <th>
                 {% trans 'experiments:participants:birth_date' %}
             </th>
-            <th>
-                {% trans 'experiments:globals:actions' %}
-            </th>
         </tr>
     </thead>
     <tbody>
@@ -63,9 +60,6 @@
                 {% if appointment.participant.data %}
                     {{ appointment.participant.birth_date|date:"Y-m-d" }}
                 {% endif %}
-            </td>
-            <td>
-                <!-- actions -->
             </td>
         </tr>
         {% endfor %}

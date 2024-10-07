@@ -922,3 +922,12 @@ msgstr "Eerder al {} keer gebeld voor dit experiment:"
 
 msgid "time_slot:attribute:start"
 msgstr "Tijdstip"
+
+msgid "experiments:participants:expected"
+msgstr "Verwacht"
+
+msgid "experiments:participants:past"
+msgstr "Getest"
+
+msgid "experiments:participants:excluded"
+msgstr "Geëxcludeerd"
