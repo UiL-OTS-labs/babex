@@ -36,6 +36,10 @@ class InviteParticipantsForExperimentView(ExperimentLeaderMixin, ExperimentObjec
                     participant.invitation_set.filter(experiment=self.experiment).order_by("-creation_date").first()
                 )
                 participant.invite = invite
+
+                participant.last_call = (
+                    participant.call_set.filter(experiment=self.experiment).order_by("-creation_date").first()
+                )
             except ObjectDoesNotExist:
                 participant.invite = None
 

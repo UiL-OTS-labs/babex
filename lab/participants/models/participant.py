@@ -154,10 +154,6 @@ class Participant(models.Model):
     def gestational_age(self):
         return self.PregnancyDuration[self.pregnancy_duration].label
 
-    @property
-    def last_call(self):
-        return self.call_set.order_by("-creation_date").first()
-
     def deactivate(self):
         with transaction.atomic():
             for appointment in self.appointments.all():
