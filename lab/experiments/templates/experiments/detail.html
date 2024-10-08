@@ -14,6 +14,11 @@
         <h1 class="h2">
             {% transformat 'experiments:detail:header' experiment.name %}
         </h1>
+        <div class="btn-group btn-group-sm" role="group">
+            <a href="{% url 'experiments:invite' experiment.pk %}" class="btn btn-secondary">
+                {% translate "experiments:home:invite:title" %}
+            </a>
+        </div>
     </div>
 {% endblock %}
 
