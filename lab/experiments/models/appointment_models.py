@@ -19,9 +19,9 @@ class TimeSlot(models.Model):
 
     class Meta:
         constraints = [
-            models.CheckConstraint(check=models.Q(end__gt=models.F('start')), name='end_after_start')
+            models.CheckConstraint(check=models.Q(end__gt=models.F("start")), name="end_after_start"),
         ]
-    
+
     @property
     def datetime(self):
         return self.start  # temporarily keep compatability
@@ -30,19 +30,20 @@ class TimeSlot(models.Model):
         return "{}: {}".format(self.experiment.name, self.datetime)
 
 
-class Appointment(models.Model):
-    class Meta:
-        ordering = ["creation_date"]
+class _Outcome(models.TextChoices):
+    # appointment was succesfully completed
+    COMPLETED = "COMPLETED", _("experiments:appointment:outcome:completed")
+    # participant did not participate
+    NOSHOW = "NOSHOW", _("experiments:appointment:outcome:noshow")
+    # participant had to be excluded
+    EXCLUDED = "EXCLUDED", _("experiments:appointment:outcome:excluded")
+    # canceled appointment
+    CANCELED = "CANCELED", _("experiments:appointment:outcome:canceled")
 
-    class Outcome(models.TextChoices):
-        # appointment was succesfully completed
-        COMPLETED = "COMPLETED", _("experiments:appointment:outcome:completed")
-        # participant did not participate
-        NOSHOW = "NOSHOW", _("experiments:appointment:outcome:noshow")
-        # participant had to be excluded
-        EXCLUDED = "EXCLUDED", _("experiments:appointment:outcome:excluded")
-        # canceled appointment
-        CANCELED = "CANCELED", _("experiments:appointment:outcome:canceled")
+
+class Appointment(models.Model):
+    # declaring _Outcome above is requried for refering to it in the UniqueConstraint
+    Outcome = _Outcome
 
     participant = models.ForeignKey(Participant, on_delete=models.PROTECT, related_name="appointments")
     timeslot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE, related_name="appointments", null=True, blank=True)
@@ -53,6 +54,16 @@ class Appointment(models.Model):
     outcome = models.CharField(max_length=20, choices=Outcome.choices, null=True)
     updated = models.DateTimeField(auto_now=True)
     reminder_sent = models.DateTimeField(null=True)
+
+    class Meta:
+        ordering = ["creation_date"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["participant", "experiment"],
+                condition=~models.Q(outcome__in=[_Outcome.CANCELED, _Outcome.EXCLUDED]),
+                name="unique_appointment",
+            )
+        ]
 
     def save(self, *args, **kwargs):
         self.timeslot.save()
@@ -133,6 +144,6 @@ def _send_cancel_confirmation(appointment: Appointment) -> None:
             html_template="mail/appointment/canceled.html",
             context=context,
             to=[appointment.participant.email],
-            subject=_("experiments:mail:appointment:canceled:subject")
+            subject=_("experiments:mail:appointment:canceled:subject"),
         )
         mail.send()
