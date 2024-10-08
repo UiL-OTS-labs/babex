@@ -44,13 +44,20 @@ class ApiRequest<T> {
         }
     }
 
-    success(callback: (response: T) => void) {
+    success(callback: ((response: T) => void) | (() => void)) {
         this._promise = this._promise.then(async result => {
-            if (result.status >= 400) {
+            if (result.status == 204) {
+                // used by DELETE requests
+                // assert that callback doesn't take a response argument
+                let cb = callback as () => void;
+                cb();
+            }
+            else if (result.status >= 400) {
                 throw new ApiError(result.status, result.statusText);
             }
-
-            callback(await result.json() as T);
+            else {
+                callback(await result.json() as T);
+            }
         })
     }
 
@@ -139,10 +146,10 @@ class ApiClient {
             headers: this.headers()
         });
 
-        return new ApiRequest(new Promise<void>((resolve, reject) => {
+        return new ApiRequest(new Promise((resolve, reject) => {
             request.then(result => {
                 if (result.status == 204) {
-                    resolve();
+                    resolve(result);
                 }
                 else {
                     reject();
