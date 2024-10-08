@@ -356,3 +356,6 @@ msgstr "You are a leader of the following experiments:"
 
 msgid "main:home:call_back"
 msgstr "These participants should be called back:"
+
+msgid "main:home:call_back:remove"
+msgstr "X"
