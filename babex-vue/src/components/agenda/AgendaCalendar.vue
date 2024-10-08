@@ -23,6 +23,33 @@
         scheduling?: boolean,
     }>();
 
+    // from https://stackoverflow.com/a/64090995
+    function hsl2rgb(h, s, l) {
+        let a = s * Math.min(l, 1 - l);
+        let f = (n) => {
+            let k = (n + h / 30) % 12;
+            return l - a * Math.max(Math.min(k-3, 9-k, 1), -1);
+        };
+        return [f(0), f(8), f(4)];
+    }
+
+    function rgb2hex(r, g, b) {
+        return "#" + [r,g,b].map(x => Math.round(x * 255).toString(16).padStart(2, 0)).join('');
+    }
+
+    function eventColor(event) {
+        // javascript doesn't have a built-in way to manipulate Math.random()'s seed
+        // nor a built-in hash function, so the code below is a very simple deterministic RNG
+        // that is using the relevant experiment id to generate a hue value
+        // cf. https://en.wikipedia.org/wiki/Linear_congruential_generator
+        let r = 0;
+        for(let i = 0; i < event.experiment.id; i++) {
+            r = (r * 75 + 74) % 65537;
+        }
+        r /= 65536;
+        return rgb2hex(...hsl2rgb(r * 360, 0.7, 0.5));
+    }
+
     function formatAppointment(event: EventInput): EventInput {
         return {
             id: event.id,
@@ -37,7 +64,8 @@
             comment: event.comment,
             outcome: event.outcome,
             experiment: event.experiment,
-            participant: event.participant
+            participant: event.participant,
+            color: eventColor(event),
         };
     }
 
