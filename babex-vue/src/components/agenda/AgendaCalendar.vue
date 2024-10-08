@@ -24,20 +24,20 @@
     }>();
 
     // from https://stackoverflow.com/a/64090995
-    function hsl2rgb(h, s, l) {
+    function hsl2rgb(h: number, s: number, l: number): [number, number, number] {
         let a = s * Math.min(l, 1 - l);
-        let f = (n) => {
+        let f = (n: number) => {
             let k = (n + h / 30) % 12;
             return l - a * Math.max(Math.min(k-3, 9-k, 1), -1);
         };
         return [f(0), f(8), f(4)];
     }
 
-    function rgb2hex(r, g, b) {
-        return "#" + [r,g,b].map(x => Math.round(x * 255).toString(16).padStart(2, 0)).join('');
+    function rgb2hex(r: number, g:number, b:number) {
+        return "#" + [r, g, b].map(x => Math.round(x * 255).toString(16).padStart(2, '0')).join('');
     }
 
-    function eventColor(event) {
+    function eventColor(event: EventInput) {
         // javascript doesn't have a built-in way to manipulate Math.random()'s seed
         // nor a built-in hash function, so the code below is a very simple deterministic RNG
         // that is using the relevant experiment id to generate a hue value
