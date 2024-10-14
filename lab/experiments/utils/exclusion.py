@@ -49,7 +49,7 @@ def get_eligible_participants_for_experiment(experiment: Experiment, on_mailingl
         # filtering in python to take advantage of prefetch_related
         for appointment in participant.appointments.all():
             if appointment.outcome not in (Appointment.Outcome.NOSHOW, Appointment.Outcome.CANCELED):
-                participated_in.add(appointment.experiment)
+                participated_in.add(appointment.experiment.pk)
 
         if experiment.pk in participated_in:
             # participant has/had an appointment for this experiment
