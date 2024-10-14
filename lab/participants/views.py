@@ -42,9 +42,11 @@ class ParticipantListDataView(views.APIView):
 
     def get_queryset(self):
         if self.request.user.is_staff:
-            return Participant.objects.filter(deactivated=None)
+            q = Participant.objects.filter(deactivated=None)
+        else:
+            q = participants_visible_to_leader(self.request.user)
 
-        return participants_visible_to_leader(self.request.user)
+        return q.select_related("data").prefetch_related("data__languages")
 
     def format_row(self, pp: Participant):
         pp_url = "#"
