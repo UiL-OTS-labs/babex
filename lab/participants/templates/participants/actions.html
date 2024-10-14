@@ -1,0 +1,9 @@
+{% load i18n %}
+<a href="{% url 'participants:edit' participant.pk %}"
+    class="icon-update" title="{% trans 'participants:home:update:title'  %}" > </a>
+{% if request.user.is_staff %}
+    {% if not participant.deactivated %}
+        <a href="{% url 'participants:delete' participant.pk %}" class="icon-delete"
+            title="{% trans 'participants:home:delete:title' %}"></a>
+    {% endif %}
+{% endif %}

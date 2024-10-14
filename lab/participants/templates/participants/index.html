@@ -39,32 +39,6 @@
                     </th>
                 </tr>
             </thead>
-
-            <tbody>
-                {% for participant in object_list %}
-                    <tr {% if participant.deactivated %}class="deactivated"{% endif %}>
-                        <td>
-                          <a href="{% url 'participants:detail' participant.pk %}">{{ participant.fullname }}</a>
-                        </td>
-                        <td> {{ participant.birth_date|date:'Y-m-d' }} </td>
-                        <td> {{ participant.age }} </td>
-                        <td> {{ participant.get_sex_display|default_if_none:"" }} </td>
-                        <td> {{ participant.phonenumber }} </td>
-                        <td> {{ participant.multilingual|yesno:_('options:yes,empty') }} </td>
-                        <td> {{ participant.created|date:'Y-m-d' }} </td>
-                        <td>
-                            <a href="{% url 'participants:edit' participant.pk %}"
-                               class="icon-update" title="{% trans 'participants:home:update:title'  %}" > </a>
-                            {% if request.user.is_staff %}
-                                {% if not participant.deactivated %}
-                                    <a href="{% url 'participants:delete' participant.pk %}" class="icon-delete"
-                                       title="{% trans 'participants:home:delete:title' %}"></a>
-                                {% endif %}
-                            {% endif %}
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
         </table>
         <br/>
     </div>
@@ -74,6 +48,8 @@
     $('.dt_custom').DataTable({
         dom: 'Bfrtip',
         buttons : ['pageLength'],
+        serverSide: true,
+        ajax: '{% url "participants:datalist" %}',
     });
 </script>
 {% endblock %}

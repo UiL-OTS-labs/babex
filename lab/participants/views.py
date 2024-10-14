@@ -5,6 +5,7 @@ from cdh.core.views.mixins import DeleteSuccessMessageMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import JsonResponse
 from django.shortcuts import redirect
+from django.template.loader import render_to_string
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
@@ -13,25 +14,63 @@ from rest_framework import views
 from comments.forms import CommentForm
 from experiments.models import Experiment
 from experiments.utils.exclusion import get_eligible_participants_for_experiment
-from main.auth.util import IsLabManager, LabManagerMixin, RandomLeaderMixin
-from participants.permissions import (
-    can_leader_access_participant,
-    participants_visible_to_leader,
+from main.auth.util import (
+    IsLabManager,
+    IsRandomLeader,
+    LabManagerMixin,
+    RandomLeaderMixin,
 )
 
 from .forms import ExtraDataForm, ParticipantForm
 from .models import ExtraData, Participant, ParticipantData
+from .permissions import can_leader_access_participant, participants_visible_to_leader
 
 
-class ParticipantsHomeView(RandomLeaderMixin, generic.ListView):
+class ParticipantsHomeView(RandomLeaderMixin, generic.TemplateView):
     template_name = "participants/index.html"
-    model = Participant
+
+
+class ParticipantListDataView(views.APIView):
+    permission_classes = [IsRandomLeader]
 
     def get_queryset(self):
         if self.request.user.is_staff:
-            return self.model.objects.filter(deactivated=None)
-
+            return (
+                Participant.objects.filter(deactivated=None).select_related("data").prefetch_related("data__languages")
+            )
         return participants_visible_to_leader(self.request.user)
+
+    def format_row(self, pp: Participant):
+        pp_url = reverse("participants:detail", args=(pp.pk,))
+
+        return [
+            f'<a href="{pp_url}">{pp.fullname}</a>',
+            pp.birth_date.strftime("%Y-%m-%d"),
+            pp.age,
+            pp.get_sex_display() or "",
+            pp.phonenumber,
+            _("options:yes,empty").split(",")[pp.multilingual],
+            pp.created.strftime("%Y-%m-%d"),
+            render_to_string("participants/actions.html", dict(participant=pp), request=self.request),
+        ]
+
+    def get(self, request, *args, **kwargs):
+        start = int(request.GET["start"])
+        length = int(request.GET["length"])
+        order_by = int(request.GET.get("order[0][column]", 0))
+        order_asc = request.GET.get("order[0][dir]") in [None, "asc"]
+        search = request.GET.get("search[value]")
+
+        columns = ["name", "birth_date", "age", "sex", "phonenumber", "multilingual", "created"]
+        qs = self.get_queryset()
+        total = qs.count()
+        filtered = qs
+        if search is not None:
+            search = search.lower()
+            filtered = [row for row in qs if search in row.name.lower() or search in row.phonenumber]
+        as_list = sorted(filtered, key=lambda row: getattr(row, columns[order_by]), reverse=not order_asc)
+        pps = [self.format_row(pp) for pp in as_list[start : start + length]]
+        return JsonResponse(dict(draw=int(request.GET["draw"]), recordsTotal=total, recordsFiltered=total, data=pps))
 
 
 class ParticipantDetailView(RandomLeaderMixin, generic.DetailView):

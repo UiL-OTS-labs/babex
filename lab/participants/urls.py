@@ -5,6 +5,7 @@ from .views import (
     ExtraDataAddView,
     ParticipantDeleteView,
     ParticipantDetailView,
+    ParticipantListDataView,
     ParticipantsDemographicsView,
     ParticipantsHomeView,
     ParticipantUpdateView,
@@ -14,6 +15,7 @@ app_name = "participants"
 
 urlpatterns = [
     path("", ParticipantsHomeView.as_view(), name="home"),
+    path("list/", ParticipantListDataView.as_view(), name="datalist"),
     path("demographics/data/", DemographicsDataView.as_view(), name="demographics_data"),
     path("demographics/", ParticipantsDemographicsView.as_view(), name="demographics"),
     path("<int:pk>/", ParticipantDetailView.as_view(), name="detail"),

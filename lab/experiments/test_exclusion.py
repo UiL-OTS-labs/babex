@@ -22,7 +22,7 @@ def test_excluded_experiment(admin_user, sample_participant):
 
     assert sample_participant in get_eligible_participants_for_experiment(experiment_2)
 
-    # cannot participat in #3 if participated in #1
+    # cannot participate in #3 if participated in #1
     experiment_3.excluded_experiments.add(experiment_1)
 
     assert sample_participant not in get_eligible_participants_for_experiment(experiment_3)
@@ -32,7 +32,7 @@ def test_required_experiment(admin_user, sample_participant):
     experiment_1 = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
     experiment_2 = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
 
-    # cannot participat in #2 unless participated in #1
+    # cannot participate in #2 unless participated in #1
     experiment_2.required_experiments.add(experiment_1)
 
     assert sample_participant not in get_eligible_participants_for_experiment(experiment_2)
