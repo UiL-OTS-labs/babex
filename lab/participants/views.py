@@ -65,9 +65,19 @@ class ParticipantListDataView(views.APIView):
     def get(self, request, *args, **kwargs):
         start = int(request.GET["start"])
         length = int(request.GET["length"])
+        order_by = int(request.GET.get("order[0][column]", 0))
+        order_asc = request.GET.get("order[0][dir]") in [None, "asc"]
+        search = request.GET.get("search[value]")
+
+        columns = ["name", "birth_date", "age", "sex", "phonenumber", "multilingual", "created"]
         qs = self.get_queryset()
         total = qs.count()
-        pps = [self.format_row(pp) for pp in qs[start : start + length]]
+        filtered = qs
+        if search is not None:
+            search = search.lower()
+            filtered = [row for row in qs if search in row.name.lower() or search in row.phonenumber]
+        as_list = sorted(filtered, key=lambda row: getattr(row, columns[order_by]), reverse=not order_asc)
+        pps = [self.format_row(pp) for pp in as_list[start : start + length]]
         return JsonResponse(dict(draw=int(request.GET["draw"]), recordsTotal=total, recordsFiltered=total, data=pps))
 
 
