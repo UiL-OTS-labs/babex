@@ -41,7 +41,7 @@ class ParticipantListDataView(views.APIView):
         return participants_visible_to_leader(self.request.user)
 
     def format_row(self, pp: Participant):
-        pp_url = "#"
+        pp_url = reverse("participants:detail", args=(pp.pk,))
 
         return [
             f'<a href="{pp_url}">{pp.fullname}</a>',
