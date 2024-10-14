@@ -26,15 +26,8 @@ from .models import ExtraData, Participant, ParticipantData
 from .permissions import can_leader_access_participant, participants_visible_to_leader
 
 
-class ParticipantsHomeView(RandomLeaderMixin, generic.ListView):
+class ParticipantsHomeView(RandomLeaderMixin, generic.TemplateView):
     template_name = "participants/index.html"
-    model = Participant
-
-    def get_queryset(self):
-        if self.request.user.is_staff:
-            return self.model.objects.filter(deactivated=None)
-
-        return participants_visible_to_leader(self.request.user)
 
 
 class ParticipantListDataView(views.APIView):
@@ -42,11 +35,10 @@ class ParticipantListDataView(views.APIView):
 
     def get_queryset(self):
         if self.request.user.is_staff:
-            q = Participant.objects.filter(deactivated=None)
-        else:
-            q = participants_visible_to_leader(self.request.user)
-
-        return q.select_related("data").prefetch_related("data__languages")
+            return (
+                Participant.objects.filter(deactivated=None).select_related("data").prefetch_related("data__languages")
+            )
+        return participants_visible_to_leader(self.request.user)
 
     def format_row(self, pp: Participant):
         pp_url = "#"

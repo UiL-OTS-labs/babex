@@ -6,6 +6,7 @@ straightforward as you'd expect.
 Also, because we use application-level database encryption, we cannot compare
 inside the database. This is why everything is done in python.
 """
+
 from datetime import datetime, timedelta
 from typing import List
 
@@ -27,7 +28,13 @@ def get_eligible_participants_for_experiment(experiment: Experiment, on_mailingl
     filters = build_exclusion_filters(default_criteria)
 
     # Exclude deactivated participants
-    participants = Participant.objects.filter(deactivated=None)
+    participants = (
+        Participant.objects.filter(deactivated=None)
+        .select_related("data")
+        .prefetch_related("data__languages")
+        .prefetch_related("appointments")
+        .prefetch_related("appointments__experiment")
+    )
     # Exclude all participants with an appointment for an experiment that was
     # marked as an exclusion criteria
     participants = participants.exclude(appointments__experiment__in=experiment.excluded_experiments.all())
@@ -35,21 +42,19 @@ def get_eligible_participants_for_experiment(experiment: Experiment, on_mailingl
     # List of all allowed participants
     filtered = []
 
+    required = experiment.required_experiments.values_list("pk", flat=True)
+
     for participant in participants:
-        appointments = participant.appointments.all()
-
-        # exclude appointments that didn't happen
-        appointments = appointments.exclude(outcome=Appointment.Outcome.NOSHOW).exclude(
-            outcome=Appointment.Outcome.CANCELED
-        )
-
-        participated_in = appointments.values_list("experiment", flat=True)
+        participated_in = set()
+        # filtering in python to take advantage of prefetch_related
+        for appointment in participant.appointments.all():
+            if appointment.outcome not in (Appointment.Outcome.NOSHOW, Appointment.Outcome.CANCELED):
+                participated_in.add(appointment.experiment)
 
         if experiment.pk in participated_in:
             # participant has/had an appointment for this experiment
             continue
 
-        required = experiment.required_experiments.values_list("pk", flat=True)
         if not set(required).issubset(participated_in):
             # missing a required experiment
             continue
@@ -159,9 +164,15 @@ def should_exclude_by_age(participant: Participant, criteria: DefaultCriteria) -
 def should_exclude_by_call_status(participant: Participant, experiment: Experiment) -> bool:
     # When a parent indicates they cannot participate, there should be a Call object
     # for the relevant participant and experiment, with an EXCLUDE status
-    exclude = participant.call_set.filter(experiment=experiment, status=Call.CallStatus.EXCLUDE).exists()
     # also exclude participants who asked to be removed from the system but haven't yet
     # completed the required actions.
     # this is meant as a temporary filter until they are fully deactivated.
-    deactivate = participant.call_set.filter(experiment=experiment, status=Call.CallStatus.DEACTIVATE).exists()
-    return exclude or deactivate
+
+    # filtering in python to take advantage of prefetch_related
+    return any(
+        (
+            (call.status == Call.CallStatus.EXCLUDE or call.status == Call.CallStatus.DEACTIVATE)
+            and call.participant == participant
+        )
+        for call in experiment.call_set.all()
+    )
