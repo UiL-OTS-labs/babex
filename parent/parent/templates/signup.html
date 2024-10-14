@@ -1,5 +1,6 @@
 {% extends 'vue/base.html' %}
 {% load i18n %}
+{% load static %}
 
 {% block content %}
 <div class="uu-container">
@@ -32,7 +33,7 @@
         </li>
         <li>
             Wilt u meer weten over de manier waarop wij omgaan met uw persoonsgegevens en die van uw kind? Lees dan onze
-            <a href="#TODO">privacyverklaring</a>
+            <a href="{% static 'privacy.pdf' %}">privacyverklaring</a>
         </li>
     </ul>
     <p>
