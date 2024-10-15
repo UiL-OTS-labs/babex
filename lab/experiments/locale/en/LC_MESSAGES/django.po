@@ -895,3 +895,12 @@ msgstr "to {} (inclusive)"
 
 msgid "experiments:forms:attachments"
 msgstr "Attachments"
+
+msgid "experiments:call:home:intro"
+msgstr "You are about to call the parents of {}:"
+
+msgid "experiments:call:home:call_open"
+msgstr "Being called ({}) by {}!"
+
+msgid "experiments:call:home:previous_call"
+msgstr "Previously called {} time(s) for this experiment:"
