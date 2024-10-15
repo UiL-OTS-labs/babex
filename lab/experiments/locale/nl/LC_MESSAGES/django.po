@@ -438,7 +438,7 @@ msgstr "Open"
 
 #: experiments/templates/experiments/detail_parts/info.html:93
 msgid "experiments:detail:info:leader"
-msgstr "Hoofd testleider"
+msgstr "Testleiders"
 
 #: experiments/templates/experiments/detail_parts/info.html:104
 msgid "experiments:detail:criteria"
