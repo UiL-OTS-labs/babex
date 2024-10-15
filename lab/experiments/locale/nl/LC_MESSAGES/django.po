@@ -303,6 +303,12 @@ msgstr "Geslacht"
 msgid "default_criteria:attribute:pregnancy_duration"
 msgstr "Zwangerschapsduur"
 
+msgid "default_criteria:attribute:min_age"
+msgstr "Min. leeftijd"
+
+msgid "default_criteria:attribute:max_age"
+msgstr "Max. leeftijd"
+
 #: experiments/templates/experiments/criteria_snippit.html:59
 msgid "default_criteria:attribute:min_age_days"
 msgstr "Min. leeftijd (dagen)"

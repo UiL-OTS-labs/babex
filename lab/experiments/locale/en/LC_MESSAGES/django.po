@@ -271,6 +271,9 @@ msgid "experiment:attribute:leaders:help_text"
 msgstr "Users listed here can call participants, manage appointments etc."
 
 msgid "experiment:attribute:responsible_researcher"
+msgstr "Responsible researcher"
+
+msgid "experiment:attribute:responsible_researcher:help_text"
 msgstr "This is the researcher who is responsible for the experiment, and serves as the contact person for the Babylab."
 
 #: experiments/models/invite_models.py:25
@@ -904,3 +907,9 @@ msgstr "Being called ({}) by {}!"
 
 msgid "experiments:call:home:previous_call"
 msgstr "Previously called {} time(s) for this experiment:"
+
+msgid "default_criteria:attribute:min_age"
+msgstr "Min. age"
+
+msgid "default_criteria:attribute:max_age"
+msgstr "Max. age"
