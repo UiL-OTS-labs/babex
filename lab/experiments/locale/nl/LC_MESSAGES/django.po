@@ -101,7 +101,7 @@ msgstr "Moet de participant man of vrouw zijn?"
 
 #: experiments/models/criteria_models.py:74
 msgid "default_criteria:attribute:dyslexic_parent"
-msgstr "Moet de participant dyslectisch zijn?"
+msgstr "Ouder met dyslexie"
 
 #: experiments/models/criteria_models.py:90
 msgid "default_criteria:attribute:min_age"
@@ -133,7 +133,7 @@ msgstr "Taak omschrijving"
 
 #: experiments/models/experiment_models.py:82
 msgid "experiment:attribute:confirmation_email"
-msgstr "Bevestigingsmail text"
+msgstr "Tekst bevestigingsmail"
 
 #: experiments/models/experiment_models.py:117
 msgid "experiment:attribute:open"
@@ -150,9 +150,9 @@ msgstr "Uitgesloten experimenten"
 #: experiments/models/experiment_models.py:138
 msgid "experiment:attribute:excluded_experiments:help_text"
 msgstr ""
-"Experimenten waar een participant niet aan mee heeft mogen doen voor dit "
-"experiment. <br/>Je kunt zoeken door de lijst door in dit veld te typen, als "
-"je een experiment selecteert zal die als een blokje verschijnen in het veld."
+"Experimenten die deelname aan het huidige experiment uitsluiten."
+" Om deze expeirmenten te kiezen dubbelklik je in het veld zodat je de lijst experimenten te zien krijgt."
+" Als je een experiment selecteert, dan zal die als een blokje verschijnen in het veld."
 
 #: experiments/models/experiment_models.py:143
 msgid "experiment:attribute:leader"
@@ -178,6 +178,9 @@ msgstr ""
 
 msgid "experiment:attribute:responsible_researcher"
 msgstr "Eindverantwoordelijk onderzoeker"
+
+msgid "experiment:attribute:responsible_researcher:help_text"
+msgstr "Deze onderzoeker is eindverantwoordelijk voor het experiment en geldt als eerste contactpersoon voor het Babylab."
 
 #: experiments/models/location_models.py:8
 msgid "location:attribute:name"
@@ -477,7 +480,7 @@ msgstr " "
 #: experiments/templates/experiments/excluded_experiments.html:8
 #: experiments/templates/experiments/excluded_experiments.html:15
 msgid "experiments:excluded_experiments:header"
-msgstr "Uitgesloten experimenten"
+msgstr "Experimenten die deelname nu uitsluiten"
 
 #: experiments/templates/experiments/excluded_experiments.html:18
 msgid "experiments:excluded_experiments:info_text"
@@ -940,7 +943,10 @@ msgstr "Verplichte voorafgaande experimenten"
 
 msgid "experiment:attribute:required_experiments:help_text"
 msgstr ""
-"Om mee te kunnen doen bij het huidige experiment, participanten moeten hebben meegedaan bij de genoteerd experimenten"
+"Deelname aan genoemde experimenten geldt als voorwaarde om mee te mogen doen aan dit experiment."
 
 msgid "experiment:attribute:leaders:help_text"
-msgstr "Geselecteerd gebruikers mogen participanten bellen, afspraken inplannen enz."
+msgstr "Geselecteerde gebruikers mogen participanten bellen, afspraken inplannen enz."
+
+msgid "experiments:forms:attachments"
+msgstr "Bijlagen"

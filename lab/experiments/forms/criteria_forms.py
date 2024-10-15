@@ -25,7 +25,9 @@ class DefaultCriteriaForm(TemplatedModelForm):
         super().__init__(*args, **kwargs)
         for field in ["sex", "birth_weight", "pregnancy_duration", "multilingual", "dyslexic_parent", "tos_parent"]:
             self.fields[field] = forms.MultipleChoiceField(
-                choices=self.instance._meta.get_field(field).options, widget=BootstrapCheckboxSelectMultiple
+                label=self.instance._meta.get_field(field).verbose_name,
+                choices=self.instance._meta.get_field(field).options,
+                widget=BootstrapCheckboxSelectMultiple,
             )
 
     def clean(self):

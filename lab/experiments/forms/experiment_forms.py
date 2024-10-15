@@ -2,6 +2,7 @@ from cdh.core.forms import BootstrapCheckboxInput, TemplatedModelForm
 from cdh.mail.widgets import EmailContentEditWidget
 from django import forms
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
 from ..models.experiment_models import ConfirmationMailAttachment, Experiment
 
@@ -23,7 +24,7 @@ class MultiUploadField(forms.Field):
 
 
 class ExperimentForm(TemplatedModelForm):
-    attachments = MultiUploadField(required=False)
+    attachments = MultiUploadField(required=False, label=_("experiments:forms:attachments"))
 
     class Meta:
         model = Experiment

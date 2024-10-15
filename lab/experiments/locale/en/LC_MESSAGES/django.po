@@ -162,7 +162,7 @@ msgstr "Should the participant be Male or Female?"
 
 #: experiments/models/default_criteria_models.py:47
 msgid "default_criteria:attribute:dyslexic_parent"
-msgstr "Should the participant have a dyslectic parent?"
+msgstr "Parent with dyslexia"
 
 #: experiments/models/experiment_models.py:63
 msgid "experiment:attribute:name"
@@ -250,7 +250,7 @@ msgid "experiment:attribute:leaders:help_text"
 msgstr "Users listed here can call participants, manage appointments etc."
 
 msgid "experiment:attribute:responsible_researcher"
-msgstr "Responsible researcher"
+msgstr "This is the researcher who is responsible for the experiment, and serves as the contact person for the Babylab."
 
 #: experiments/models/invite_models.py:25
 msgid "experiments:call:status:started"
@@ -871,3 +871,6 @@ msgstr "from {}"
 
 msgid "experiments:call:home:participation_to"
 msgstr "to {} (inclusive)"
+
+msgid "experiments:forms:attachments"
+msgstr "Attachments"

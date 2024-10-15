@@ -122,7 +122,10 @@ class Experiment(models.Model):
         help_text=_("experiment:attribute:leaders:help_text"),
     )
 
-    responsible_researcher = models.TextField(_("experiment:attribute:responsible_researcher"))
+    responsible_researcher = models.TextField(
+        _("experiment:attribute:responsible_researcher"),
+        help_text=_("experiment:attribute:responsible_researcher:help_text"),
+    )
 
     defaultcriteria = models.OneToOneField(DefaultCriteria, on_delete=models.CASCADE)
 
