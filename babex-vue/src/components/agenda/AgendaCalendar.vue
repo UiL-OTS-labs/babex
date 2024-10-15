@@ -51,6 +51,17 @@
     }
 
     function formatAppointment(event: EventInput): EventInput {
+        let icon = '';
+        if (event.outcome == "COMPLETED") {
+            icon = '<img src="/static/done.png">';
+        }
+        else if (event.outcome == "NOSHOW") {
+            icon = '<img src="/static/noshow.png">';
+        }
+        else if (event.outcome == "EXCLUDED") {
+            icon = '<img src="/static/excluded.png">';
+        }
+
         return {
             id: event.id,
             start: event.start,
@@ -58,7 +69,7 @@
             title: event.participant.name,
             location: event.location,
             // extra field will be displayed in a separate line
-            extra: `${event.location} (${event.leader})`,
+            extra: `${icon} ${event.location} (${event.leader})`,
             display: 'block',
             category: 'appointment',
             comment: event.comment,
