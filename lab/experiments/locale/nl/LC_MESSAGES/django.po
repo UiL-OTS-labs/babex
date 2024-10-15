@@ -104,6 +104,9 @@ msgstr "Taak omschrijving"
 msgid "experiment:attribute:confirmation_email"
 msgstr "Tekst bevestigingsmail"
 
+msgid "experiment:attribute:reminder_email"
+msgstr "Tekst herinneringsmail"
+
 #: experiments/models/experiment_models.py:117
 msgid "experiment:attribute:open"
 msgstr "Open voor participanten"
@@ -785,13 +788,13 @@ msgstr "Bel"
 msgid "experiments:mail:appointment:canceled:subject"
 msgstr "Babylab voor Taalonderzoek: Afspraak geannuleerd"
 
-msgid "experiments:mail:reminder:subject"
+msgid "experiments:mail:appointment:reminder:subject"
 msgstr "Babylab voor Taalonderzoek: Herinnering aan uw afspraak"
 
 msgid "experiment:attribute:leaders"
 msgstr "Testleiders"
 
-msgid "experiment:mail:appointment:confirm:subject"
+msgid "experiments:mail:appointment:confirm:subject"
 msgstr "Bevestiging inschrijving experiment Babylab voor Taalonderzoek: {}"
 
 msgid "experiments:call:deactivate:mail:subject"

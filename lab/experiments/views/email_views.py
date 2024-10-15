@@ -3,7 +3,7 @@ from datetime import datetime
 from django.http import HttpResponse
 from django.template import defaultfilters
 
-from ..email import AppointmentConfirmEmail
+from ..email import AppointmentConfirmEmail, AppointmentReminderEmail
 from ..models import Experiment
 
 
@@ -41,4 +41,8 @@ def email_preview(request, template, experiment=None):
 
     if template == "confirmation":
         msg = AppointmentConfirmEmail(**email_kwargs)
+        return HttpResponse(msg.render_preview())
+
+    if template == "reminder":
+        msg = AppointmentReminderEmail(**email_kwargs)
         return HttpResponse(msg.render_preview())

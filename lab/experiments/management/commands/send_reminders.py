@@ -1,11 +1,80 @@
+import logging
 from datetime import datetime, timedelta
 
-from cdh.mail.classes import TemplateEmail
-from django.conf import settings
+from cdh.mail.classes import BaseEmail, _strip_tags
+from django.core.mail import get_connection
 from django.core.management.base import BaseCommand
+from django.template import defaultfilters
+from django.utils import translation
+from django.utils.timezone import localtime
 from django.utils.translation import gettext_lazy as _
 
+from experiments.email import AppointmentReminderEmail
 from experiments.models import Appointment
+
+log = logging.getLogger("send_reminders")
+
+
+def prepare_reminder_mail(appointment: Appointment):
+    experiment = appointment.experiment
+    participant = appointment.participant
+    time_slot = appointment.timeslot
+
+    # override locale to force dates to use Dutch weekdays
+    with translation.override("nl"):
+        replacements = {
+            "experiment_name": experiment.name,
+            "experiment_location": "",
+            "experiment_duration": experiment.duration,
+            "session_duration": experiment.session_duration,
+            "participant_name": participant.name,
+            "parent_name": participant.parent_name,
+            "leader_name": appointment.leader.name,
+            "leader_email": appointment.leader.email,
+            "leader_phonenumber": appointment.leader.phonenumber,
+            "all_leaders_name_list": experiment.leader_names,
+            "date": defaultfilters.date(localtime(time_slot.start), "l d-m-Y"),
+            "time": defaultfilters.date(localtime(time_slot.start), "H:i"),
+        }
+
+    subject = _("experiments:mail:appointment:reminder:subject").format(appointment.experiment.name)
+
+    if experiment.location:
+        replacements["experiment_location"] = experiment.location.name
+
+    email = AppointmentReminderEmail(
+        [participant.email],
+        subject,
+        contents=experiment.confirmation_email,
+    )
+    email.context = replacements
+    return email._get_html_body()
+
+
+def send_reminder_mail(appointment: Appointment, contents: str) -> None:
+    with translation.override("nl"):
+        subject = _("experiments:mail:appointment:confirm:subject").format(appointment.experiment.name)
+
+    class SimpleHTMLMail(BaseEmail):
+        def __init__(self, to, subject, contents, **kwargs):
+            super().__init__(to, subject, **kwargs)
+            self.contents = contents
+
+        def _get_html_context(self):
+            return dict()
+
+        def _get_html_body(self):
+            return self.contents
+
+        def _get_plain_body(self):
+            return _strip_tags(self._get_html_body())
+
+    email = SimpleHTMLMail(
+        [appointment.participant.email],
+        subject,
+        contents,
+    )
+    email.send(connection=get_connection())
 
 
 class Command(BaseCommand):
@@ -22,16 +91,9 @@ class Command(BaseCommand):
         ).exclude(outcome=Appointment.Outcome.CANCELED)
 
         for appointment in appointments:
-            mail = TemplateEmail(
-                html_template="experiments/mail/reminder.html",
-                context=dict(
-                    appointment=appointment,
-                    base_url=settings.FRONTEND_URI,
-                ),
-                to=[appointment.participant.email],
-                subject=_("experiments:mail:reminder:subject"),
-            )
-
-            appointment.reminder_sent = now
-            appointment.save()
-            mail.send()
+            try:
+                send_reminder_mail(appointment, prepare_reminder_mail(appointment))
+                appointment.reminder_sent = now
+                appointment.save()
+            except Exception:
+                log.exception("Error sending reminder mail")

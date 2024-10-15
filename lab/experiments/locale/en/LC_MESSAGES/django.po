@@ -212,6 +212,9 @@ msgstr "Task description"
 msgid "experiment:attribute:confirmation_email"
 msgstr "Confirmation mail text"
 
+msgid "experiment:attribute:reminder_email"
+msgstr "Reminder mail text"
+
 #: experiments/models/experiment_models.py:90
 msgid "experiment:attribute:invite_email"
 msgstr "Invite mail template"

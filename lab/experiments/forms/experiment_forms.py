@@ -34,16 +34,17 @@ class ExperimentForm(TemplatedModelForm):
             "session_duration",
             "recruitment_target",
             "task_description",
+            "location",
             "confirmation_email",
             "attachments",
-            "location",
+            "reminder_email",
             "excluded_experiments",
             "required_experiments",
             "leaders",
             "responsible_researcher",
         ]
 
-        exclude = ("defaultcriteria", "invite_email")
+        exclude = ("defaultcriteria",)
         widgets = {
             "name": forms.TextInput,
             "duration": forms.TextInput,
@@ -54,6 +55,7 @@ class ExperimentForm(TemplatedModelForm):
                 }
             ),
             "confirmation_email": EmailContentEditWidget(None),
+            "reminder_email": EmailContentEditWidget(None),
             "open": BootstrapCheckboxInput,
             "responsible_researcher": forms.TextInput,
         }
@@ -62,6 +64,7 @@ class ExperimentForm(TemplatedModelForm):
         super(ExperimentForm, self).__init__(*args, **kwargs)
 
         self.fields["confirmation_email"].widget.preview_url = self.preview_url_confirmation()
+        self.fields["reminder_email"].widget.preview_url = self.preview_url_reminder()
 
         if self.instance.pk:
             self.fields["attachments"].initial = [
@@ -81,6 +84,11 @@ class ExperimentForm(TemplatedModelForm):
         if self.instance.pk is not None:
             return reverse("experiments:email_preview", args=("confirmation", self.instance.pk))
         return reverse("experiments:email_preview", args=("confirmation",))
+
+    def preview_url_reminder(self):
+        if self.instance.pk is not None:
+            return reverse("experiments:email_preview", args=("reminder", self.instance.pk))
+        return reverse("experiments:email_preview", args=("reminder",))
 
     def save(self, *args, **kwargs):
         experiment = super().save(*args, **kwargs)

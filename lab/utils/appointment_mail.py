@@ -48,7 +48,7 @@ def prepare_appointment_mail(appointment: Appointment):
             "time": defaultfilters.date(localtime(time_slot.start), "H:i"),
         }
 
-    subject = _("experiment:mail:appointment:confirm:subject").format(appointment.experiment.name)
+    subject = _("experiments:mail:appointment:confirm:subject").format(appointment.experiment.name)
 
     if experiment.location:
         replacements["experiment_location"] = experiment.location.name
@@ -64,7 +64,7 @@ def prepare_appointment_mail(appointment: Appointment):
 
 def send_appointment_mail(appointment: Appointment, contents: str) -> None:
     with translation.override("nl"):
-        subject = _("experiment:mail:appointment:confirm:subject").format(appointment.experiment.name)
+        subject = _("experiments:mail:appointment:confirm:subject").format(appointment.experiment.name)
 
     class SimpleHTMLMail(BaseEmail):
         def __init__(self, to, subject, contents, **kwargs):
