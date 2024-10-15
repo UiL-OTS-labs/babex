@@ -6,6 +6,8 @@ from ..models import DefaultCriteria
 
 
 class DefaultCriteriaForm(TemplatedModelForm):
+    show_valid_fields = False
+
     class Meta:
         model = DefaultCriteria
         fields = [

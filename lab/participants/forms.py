@@ -9,6 +9,8 @@ from .models import ExtraData, ParticipantData
 
 
 class ParticipantForm(TemplatedModelForm):
+    show_valid_fields = False
+
     class Meta:
         model = ParticipantData
         # note: this form intentionally does not include the more sensitive fields,
@@ -38,6 +40,8 @@ class ParticipantForm(TemplatedModelForm):
 
 
 class ExtraDataForm(TemplatedModelForm):
+    show_valid_fields = False
+
     class Meta:
         model = ExtraData
         fields = ["title", "content"]

@@ -25,6 +25,7 @@ class MultiUploadField(forms.Field):
 
 class ExperimentForm(TemplatedModelForm):
     attachments = MultiUploadField(required=False, label=_("experiments:forms:attachments"))
+    show_valid_fields = False
 
     class Meta:
         model = Experiment
