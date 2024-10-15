@@ -82,7 +82,7 @@
                    .enter()
                    .append("rect")
                    .attr("class", "color" + idx)
-                   .attr("x", d => barWidth(d) * idx + x(d.x0) - barWidth(d) / 2)
+                   .attr("x", d => barWidth(d) * idx + x(d.x0))
                    .attr("y", d => y(d.length))
                    .attr("width", barWidth)
                    .attr("height", d => { return height - margin.bottom - y(d.length); });
@@ -92,7 +92,7 @@
                    .enter()
                    .append('text')
                    .attr('class', 'tip')
-                   .attr('x', d => barWidth(d) * idx + x(d.x0))
+                   .attr('x', d => barWidth(d) * idx + x(d.x0) + barWidth(d)/2)
                    .attr('y', d => y(d.length) - 4)
                    .text(d => d.length)
                    .style('opacity', d => d.length > 0 ? 1 : 0);
@@ -186,6 +186,7 @@
     }
 
     text.tip {
+        font-size: 12px;
         fill: #000;
         text-anchor: middle;
     }
@@ -194,17 +195,8 @@
         fill: #95d7ff;
     }
 
-    .color0:hover {
-        stroke: #59a1ff;
-        stroke-width: 2;
-    }
-
     .color1 {
         fill: #ff85be;
     }
 
-    .color1:hover {
-        stroke: #fc3bbb;
-        stroke-width: 2;
-    }
 </style>
