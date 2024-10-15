@@ -9,7 +9,7 @@ Tijd: {{ time_slot.datetime|date:"H:i" }} uur
 Locatie: {{ experiment.location }}
 
 Als je deze afspraak wilt afzeggen, kun je dat doen via deze link: {{ cancel_link }}.
-Doe dat alsjeblieft minstens 24 uur vantevoren. Als je vlak vantevoren ontdekt dat je verhinderd bent, neem dan svp even persoonlijk contact op met de proefleider ({{ leader.name }}, email: {{ leader.api_user.email }} tel.: {{ leader.phonenumber }}).
+Doe dat alsjeblieft minstens 24 uur vantevoren. Als je vlak vantevoren ontdekt dat je verhinderd bent, neem dan svp even persoonlijk contact op met de testleider ({{ leader.name }}, email: {{ leader.api_user.email }} tel.: {{ leader.phonenumber }}).
 
 Met vriendelijke groet,
 het ILS lab.

@@ -21,6 +21,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='experiment',
             name='invite_email',
-            field=models.TextField(default='<p>Je kunt je weer opgeven voor een nieuw\n    experiment: <strong>{{experiment_name}}</strong>.</p>\n<p>De proefleider is <strong>{{leader_name}}</strong>.\n<ul>\n    <li>Duur: {{duration}}.</li>\n    <li>{{task_description}}</li>\n    <li>{{additional_instructions}}</li>\n</ul>\n\n<p>Je kunt via {{link_to_subscribe:"deze link"}} inschrijven.</p>\n\n<p>Bedankt!</p>\n\n<p>\nMet vriendelijke groet,<br/>\n{{admin}}\n</p>', help_text='experiment:attribute:invite_email:help_text', verbose_name='experiment:attribute:invite_email'),
+            field=models.TextField(default='<p>Je kunt je weer opgeven voor een nieuw\n    experiment: <strong>{{experiment_name}}</strong>.</p>\n<p>De testleider is <strong>{{leader_name}}</strong>.\n<ul>\n    <li>Duur: {{duration}}.</li>\n    <li>{{task_description}}</li>\n    <li>{{additional_instructions}}</li>\n</ul>\n\n<p>Je kunt via {{link_to_subscribe:"deze link"}} inschrijven.</p>\n\n<p>Bedankt!</p>\n\n<p>\nMet vriendelijke groet,<br/>\n{{admin}}\n</p>', help_text='experiment:attribute:invite_email:help_text', verbose_name='experiment:attribute:invite_email'),
         ),
     ]

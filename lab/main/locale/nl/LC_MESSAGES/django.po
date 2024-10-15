@@ -44,7 +44,7 @@ msgstr "Criteria"
 
 #: main/menus.py:26
 msgid "mainmenu:leaders"
-msgstr "Proefleiders"
+msgstr "Testleiders"
 
 #: main/menus.py:31
 msgid "mainmenu:participants"
@@ -153,7 +153,7 @@ msgstr "Opslaan"
 
 #: main/templates/users/create.html:8 main/templates/users/create.html:22
 msgid "users:create:header"
-msgstr "Maak nieuw proefleider account aan"
+msgstr "Maak nieuw testleider account aan"
 
 #: main/templates/users/create.html:25
 msgid "users:create:info_text"
@@ -291,7 +291,7 @@ msgid "main:home:call_back:remove"
 msgstr "X"
 
 msgid "users:leaders:header"
-msgstr "Proefleiders"
+msgstr "Testleiders"
 
 msgid "users:admins:header"
 msgstr "Labmanagers"
@@ -303,7 +303,7 @@ msgid "main:home:signups:link"
 msgstr "nieuwe aanmeldingen"
 
 msgid "users:home:create_leader"
-msgstr "Proefleider toevoegen"
+msgstr "Testleider toevoegen"
 
 msgid "user:attribute:name"
 msgstr "Naam"

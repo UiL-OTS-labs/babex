@@ -156,25 +156,25 @@ msgstr ""
 
 #: experiments/models/experiment_models.py:143
 msgid "experiment:attribute:leader"
-msgstr "Proefleider"
+msgstr "Testleider"
 
 #: experiments/models/experiment_models.py:147
 msgid "experiment:attribute:leader:help_text"
 msgstr ""
-"De hoofd-proefleider. Deze proefleider zal getoond worden als het "
+"De hoofd-testleider. Deze proefleider zal getoond worden als het "
 "contactpersoon op de experiment pagina."
 
 #: experiments/models/experiment_models.py:152
 msgid "experiment:attribute:additional_leaders"
-msgstr "Extra proefleiders"
+msgstr "Extra testleiders"
 
 #: experiments/models/experiment_models.py:155
 msgid "experiment:attribute:additional_leaders:help_text"
 msgstr ""
-"Enige andere proefleiders van dit experiment. Indien opgegeven kunnen deze "
-"proefleiders de afspraken van dit experiment zien in hun persoonlijke "
+"Enige andere testleiders van dit experiment. Indien opgegeven kunnen deze "
+"testleiders de afspraken van dit experiment zien in hun persoonlijke "
 "account.<br/>Je kunt zoeken door de lijst door in dit veld te typen, als je "
-"een proefleider selecteert zal die als een blokje verschijnen in het veld."
+"een testleider selecteert zal die als een blokje verschijnen in het veld."
 
 msgid "experiment:attribute:responsible_researcher"
 msgstr "Eindverantwoordelijk onderzoeker"
@@ -438,7 +438,7 @@ msgstr "Open"
 
 #: experiments/templates/experiments/detail_parts/info.html:93
 msgid "experiments:detail:info:leader"
-msgstr "Hoofd proefleider"
+msgstr "Hoofd testleider"
 
 #: experiments/templates/experiments/detail_parts/info.html:104
 msgid "experiments:detail:criteria"
@@ -807,7 +807,7 @@ msgid "experiments:mail:reminder:subject"
 msgstr "Babylab voor Taalonderzoek: Herinnering aan uw afspraak"
 
 msgid "experiment:attribute:leaders"
-msgstr "Proefleiders"
+msgstr "Testleiders"
 
 msgid "experiment:mail:appointment:confirm:subject"
 msgstr "Bevestiging inschrijving experiment Babylab voor Taalonderzoek: {}"

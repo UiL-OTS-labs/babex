@@ -15,10 +15,10 @@ def email_preview(request, template, experiment=None):
         "experiment_location": "Locatie",
         "parent_name": "Naam ouder",
         "participant_name": "Kind",
-        "leader_name": "Naam proefleider",
+        "leader_name": "Naam testleider",
         "leader_email": "leader@uu.nl",
         "leader_phonenumber": "064-12345678",
-        "all_leaders_name_list": "Lijst van proefleiders",
+        "all_leaders_name_list": "Lijst van testleiders",
         "duration": "duur",
         "task_description": "Taak omschrijving",
     }

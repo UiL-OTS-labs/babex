@@ -13,7 +13,7 @@ Als je deze afspraak wilt afzeggen, kun je dat doen via de volgende link:
 {{ cancel_link }}
 
 Doe dat alsjeblieft minstens 24 uur vantevoren. Als je vlak vantevoren ontdekt dat je verhinderd bent, neem dan svp even
-persoonlijk contact op met de proefleider ({{ leader.name }}, email: {{ leader.email }}
+persoonlijk contact op met de testleider ({{ leader.name }}, email: {{ leader.email }}
 tel.: {{ leader.phonenumber }}).
 
 Dit bericht is automatisch verzonden omdat je je hebt ingeschreven voor een experiment.

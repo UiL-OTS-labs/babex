@@ -52,7 +52,7 @@ class Experiment(models.Model):
         <strong>Afspraak verzetten/afzeggen</strong><br/>
         Als u deze afspraak wilt afzeggen, kunt u dat doen via <a href="{{cancel_link}}">deze link</a>.
         Doe dat a.u.b. minstens 24 uur van tevoren. Als u vlak van tevoren ontdekt dat u verhinderd bent,
-        neem dan contact op met de proefleider ({{leader_name}}, email: babylab.ilslabs@uu.nl tel.: {{leader_phonenumber}}).
+        neem dan contact op met de testleider ({{leader_name}}, email: babylab.ilslabs@uu.nl tel.: {{leader_phonenumber}}).
     </p>
     <p>
         Meer informatie over het Babylab, bijvoorbeeld de routebeschrijving, kunt u vinden op de
