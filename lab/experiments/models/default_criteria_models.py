@@ -54,6 +54,7 @@ class DefaultCriteria(models.Model):
 
     # age limits will be stored internally in two fields: months and days
     min_age_days = models.IntegerField(
+        _("default_criteria:attribute:min_age_days"),
         validators=[
             MinValueValidator(0),
             # 'months;days' age definitions are a bit wonky.
@@ -66,8 +67,11 @@ class DefaultCriteria(models.Model):
         null=True,
         blank=True,
     )
-    min_age_months = models.IntegerField(validators=[MinValueValidator(0)], null=True, blank=True)
+    min_age_months = models.IntegerField(
+        _("default_criteria:attribute:min_age_months"), validators=[MinValueValidator(0)], null=True, blank=True
+    )
     max_age_days = models.IntegerField(
+        _("default_criteria:attribute:max_age_days"),
         validators=[
             MinValueValidator(0),
             MaxValueValidator(28),
@@ -75,7 +79,9 @@ class DefaultCriteria(models.Model):
         null=True,
         blank=True,
     )
-    max_age_months = models.IntegerField(validators=[MinValueValidator(0)], null=True, blank=True)
+    max_age_months = models.IntegerField(
+        _("default_criteria:attribute:max_age_months"), validators=[MinValueValidator(0)], null=True, blank=True
+    )
 
     def get_min_age_display(self):
         if self.min_age_days is None and self.min_age_months is None:

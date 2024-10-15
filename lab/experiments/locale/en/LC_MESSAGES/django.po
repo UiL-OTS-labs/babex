@@ -154,15 +154,36 @@ msgstr "No"
 
 #: experiments/models/default_criteria_models.py:31
 msgid "default_criteria:attribute:multilingual"
-msgstr "Does the participant have to be monolingual or multilingual?"
+msgstr "Multilingual"
 
 #: experiments/models/default_criteria_models.py:39
 msgid "default_criteria:attribute:sex"
-msgstr "Should the participant be Male or Female?"
+msgstr "Sex"
+
+msgid "default_criteria:attribute:birth_weight"
+msgstr "Birth weight"
+
+msgid "default_criteria:attribute:pregnancy_duration"
+msgstr "Pregnancy duration"
 
 #: experiments/models/default_criteria_models.py:47
 msgid "default_criteria:attribute:dyslexic_parent"
 msgstr "Parent with dyslexia"
+
+msgid "default_criteria:attribute:tos_parent"
+msgstr "Parent with TOS"
+
+msgid "default_criteria:attribute:min_age_months"
+msgstr "Min. age (months)"
+
+msgid "default_criteria:attribute:min_age_days"
+msgstr "Min. age (days)"
+
+msgid "default_criteria:attribute:max_age_days"
+msgstr "Max. age (days)"
+
+msgid "default_criteria:attribute:max_age_months"
+msgstr "Max. age (months)"
 
 #: experiments/models/experiment_models.py:63
 msgid "experiment:attribute:name"

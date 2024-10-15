@@ -87,38 +87,7 @@ msgstr "Ja"
 msgid "default_criteria:attribute:dyslexic_parent:no"
 msgstr "Nee"
 
-#: experiments/models/criteria_models.py:45
-msgid "default_criteria:attribute:language"
-msgstr "Wat moet de moedertaal van de participant zijn?"
-
-#: experiments/models/criteria_models.py:50
-msgid "default_criteria:attribute:multilingual"
-msgstr "Moet de participant een of meerdere talen spreken?"
-
-#: experiments/models/criteria_models.py:58
-msgid "default_criteria:attribute:sex"
-msgstr "Moet de participant man of vrouw zijn?"
-
-#: experiments/models/criteria_models.py:74
-msgid "default_criteria:attribute:dyslexic_parent"
-msgstr "Ouder met dyslexie"
-
-#: experiments/models/criteria_models.py:90
-msgid "default_criteria:attribute:min_age"
-msgstr "Wat moet de ondergrens van de participant's leeftijd zijn?"
-
-#: experiments/models/criteria_models.py:93
-msgid "default_criteria:attribute:min_age:help_text"
-msgstr "Zet dit op -1 als er geen ondergrens is."
-
 #: experiments/models/criteria_models.py:97
-msgid "default_criteria:attribute:max_age"
-msgstr "Wat moet de bovengrens van de participant's leeftijd zijn?"
-
-#: experiments/models/criteria_models.py:100
-msgid "default_criteria:attribute:max_age:help_text"
-msgstr "Zet dit op -1 als er geen bovengrens is."
-
 #: experiments/models/experiment_models.py:61
 msgid "experiment:attribute:name"
 msgstr "Naam"
@@ -315,31 +284,38 @@ msgid "criteria:new_default_criteria:info_text"
 msgstr " "
 
 #: experiments/templates/experiments/criteria_snippit.html:11
-msgid "criteria_snippit:dyslexic_parent"
-msgstr "Ouder met Dyslexia:"
+msgid "default_criteria:attribute:dyslexic_parent"
+msgstr "Ouder met Dyslexia"
 
-msgid "criteria_snippit:tos_parent"
-msgstr "Ouder met TOS:"
+msgid "default_criteria:attribute:tos_parent"
+msgstr "Ouder met TOS"
 
-#: experiments/templates/experiments/criteria_snippit.html:19
-msgid "criteria_snippit:language"
-msgstr "Taal:"
+msgid "default_criteria:attribute:multilingual"
+msgstr "Meertalig"
 
-#: experiments/templates/experiments/criteria_snippit.html:27
-msgid "criteria_snippit:multilingual"
-msgstr "Meertalig:"
+msgid "default_criteria:attribute:birth_weight"
+msgstr "Geboortegewicht"
 
 #: experiments/templates/experiments/criteria_snippit.html:43
-msgid "criteria_snippit:sex"
-msgstr "Geslacht:"
+msgid "default_criteria:attribute:sex"
+msgstr "Geslacht"
+
+msgid "default_criteria:attribute:pregnancy_duration"
+msgstr "Zwangerschapsduur"
 
 #: experiments/templates/experiments/criteria_snippit.html:59
-msgid "criteria_snippit:min_age"
-msgstr "Min. leeftijd:"
+msgid "default_criteria:attribute:min_age_days"
+msgstr "Min. leeftijd (dagen)"
+
+msgid "default_criteria:attribute:min_age_months"
+msgstr "Min. leeftijd (maanden)"
 
 #: experiments/templates/experiments/criteria_snippit.html:67
-msgid "criteria_snippit:max_age"
-msgstr "Max. leeftijd:"
+msgid "default_criteria:attribute:max_age_days"
+msgstr "Max. leeftijd (dagen)"
+
+msgid "default_criteria:attribute:max_age_months"
+msgstr "Max. leeftijd (maanden)"
 
 #: experiments/templates/experiments/delete.html:8
 #: experiments/templates/experiments/delete.html:16
