@@ -149,7 +149,9 @@ class DemographicsDataView(views.APIView):
     permission_classes = [IsLabManager]
 
     def get(self, request):
-        participants = Participant.objects.filter(deactivated=None)
+        participants = (
+            Participant.objects.filter(deactivated=None).select_related("data").prefetch_related("data__languages")
+        )
         date = datetime.date.today()
         if "date" in request.GET:
             date = datetime.datetime.strptime(request.GET["date"], "%Y-%m-%d").date()
