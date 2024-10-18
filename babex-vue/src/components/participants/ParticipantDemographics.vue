@@ -183,12 +183,10 @@
             </div>
         </div>
     </div>
-    <h4>{{ _('Participants per age (in months)') }}</h4>
+    <h4>{{ _('Participants per age') }}</h4>
     <div class="graph">
         <div v-if="loading" class="loading">
-            <div class="spinner-border" role="status">
-                <span class="visually-hidden">{{ _('Loading...') }}</span>
-            </div>
+            <div class="spinner-border" role="status"></div>
         </div>
     </div>
     <div>{{ _('* 1 = 1;0 to 1;31') }}</div>
@@ -222,17 +220,14 @@
         fill: #ff85be;
     }
 
-    ul.criteria {
+    .criteria {
         font-size: 14px;
         list-style: none;
         padding: 0;
 
         input[type="checkbox"] {
             margin-right: 5px;
-            margin-left: 5px;
-        }
-        input[type="checkbox"]:first-child {
-            margin-left: 0px;
+            margin-left: 8px;
         }
     }
 
