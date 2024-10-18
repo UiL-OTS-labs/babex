@@ -17,7 +17,7 @@
         premature_no: true,
     });
 
-    let props = defineProps(['experiments']);
+    defineProps(['experiments']);
 
     let request = null;
 
