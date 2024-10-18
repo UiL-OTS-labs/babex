@@ -66,8 +66,6 @@
                .attr("transform", "translate(0," + (height - margin.bottom * 2) + ")")
                .call(d3.axisBottom(x));
 
-            console.log(series);
-
             let y = d3.scaleLinear().range([height - margin.bottom * 2, 0]);
             let maxCount = Math.max(...series.map(bin => bin.length));
             y.domain([0, Math.max(1, Math.ceil(maxCount * 1.1))]);
