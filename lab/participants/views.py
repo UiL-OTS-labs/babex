@@ -194,7 +194,6 @@ class DemographicsDataView(views.APIView):
 
         result = dyslexia_result.intersection(multilingual_result).intersection(premature_result)
         ages = [age(pp) for pp in result]
-        ages = [age for age in ages if age[0] >= 0 and age[1] >= 0]
         return JsonResponse(dict(all=ages))
 
 
