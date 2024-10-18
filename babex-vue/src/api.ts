@@ -232,6 +232,12 @@ interface AppointmentSendEmail {
     content: string
 }
 
+interface DemographicsCriteria {
+    dyslexia?: boolean,
+    multilingual?: boolean,
+    premature?: boolean
+}
+
 class BabexApi {
     protected client = new ApiClient();
 
@@ -257,9 +263,10 @@ class BabexApi {
 
     participants = {
         demographics: {
-            get: (date: Date, experiment?: number) => {
+            get: (date: Date, criteria: DemographicsCriteria, experiment?: number) => {
                 let dateStr = date ? formatDateISO(date) : '';
-                return this.client.get(urls.participants.demographics , {date: dateStr, experiment});
+                return this.client.get(urls.participants.demographics,
+                                       {date: dateStr, experiment, criteria: JSON.stringify(criteria)});
             }
         }
     }
