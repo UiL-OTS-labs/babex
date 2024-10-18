@@ -45,12 +45,12 @@
                 if (counter[m]) counter[m]++;
                 else counter[m] = 1;
             });
-            histogram = Object.keys(counter).map(key => { return {x0: parseInt(key, 10), length: counter[key]}; });
+            histogram = Object.keys(counter).map(key => { return {age: parseInt(key, 10), count: counter[key]}; });
 
             let series = histogram;
 
-            let minMonth = Math.min(...series.map(d => d.x0));
-            let maxMonth = Math.max(...series.map(d => d.x0));
+            let minMonth = Math.min(...series.map(d => d.age));
+            let maxMonth = Math.max(...series.map(d => d.age));
 
             let months = [];
             for (let i=minMonth; i<=maxMonth; i++) {
@@ -67,7 +67,7 @@
                .call(d3.axisBottom(x));
 
             let y = d3.scaleLinear().range([height - margin.bottom * 2, 0]);
-            let maxCount = Math.max(...series.map(bin => bin.length));
+            let maxCount = Math.max(...series.map(bin => bin.count));
             y.domain([0, Math.max(1, Math.ceil(maxCount * 1.1))]);
 
             svg.append("g")
@@ -79,17 +79,24 @@
             selection
                 .append("rect")
                 .attr("class", "color0")
-                .attr("x", d => x(d.x0))
-                .attr("y", d => y(d.length))
+                .attr("x", d => x(d.age))
+                .attr("y", d => y(d.count))
                 .attr("width", x.bandwidth())
-                .attr("height", d => { return height - margin.bottom * 2 - y(d.length); });
+                .attr("height", d => { return height - margin.bottom * 2 - y(d.count); });
             selection
                 .append('text')
                 .attr('class', 'tip')
-                .attr('x', d => x(d.x0) + x.bandwidth()/2)
-                .attr('y', d => y(d.length) - 4)
-                .text(d => d.length)
-                .style('opacity', d => d.length > 0 ? 1 : 0);
+                .attr('x', d => x(d.age) + x.bandwidth()/2)
+                .attr('y', d => y(d.count) - 4)
+                .text(d => d.count)
+                .style('opacity', d => d.count > 0 ? 1 : 0);
+
+            let total = series.reduce((sum, d) => d.count + sum, 0);
+
+            svg.append('text')
+               .attr('x', width - margin.right)
+               .attr('text-anchor', 'end')
+               .text(_('Total: ') + total);
 
             svg.append('text')
                .attr("x", margin.left)
