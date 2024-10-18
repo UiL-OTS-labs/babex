@@ -1,4 +1,5 @@
 import datetime
+import json
 
 from ageutil import date_of_birth
 from cdh.core.views.mixins import DeleteSuccessMessageMixin
@@ -149,6 +150,7 @@ class DemographicsDataView(views.APIView):
     permission_classes = [IsLabManager]
 
     def get(self, request):
+        criteria = json.loads(request.GET.get("criteria", "{}"))
         participants = (
             Participant.objects.filter(deactivated=None).select_related("data").prefetch_related("data__languages")
         )
@@ -164,28 +166,36 @@ class DemographicsDataView(views.APIView):
         def age(pp):
             return date_of_birth(pp.birth_date).on(date).age_ym()
 
-        all = [age(pp) for pp in participants]
-        dyslexia = {
-            "Yes": [
-                age(pp) for pp in participants if pp.dyslexic_parent not in (None, Participant.WhichParent.NEITHER)
-            ],
-            "No": [age(pp) for pp in participants if pp.dyslexic_parent in (None, Participant.WhichParent.NEITHER)],
-        }
-        multilingual = {
-            "Yes": [age(pp) for pp in participants if pp.multilingual],
-            "No": [age(pp) for pp in participants if not pp.multilingual],
-        }
+        dyslexia_result = set()
+        if criteria.get("dyslexia_yes"):
+            dyslexia_result.update(
+                [pp for pp in participants if pp.dyslexic_parent not in (None, Participant.WhichParent.NEITHER)]
+            )
+        if criteria.get("dyslexia_no"):
+            dyslexia_result.update(
+                [pp for pp in participants if pp.dyslexic_parent in (None, Participant.WhichParent.NEITHER)],
+            )
 
-        premature = {
-            "Yes": [
-                age(pp) for pp in participants if pp.pregnancy_duration == Participant.PregnancyDuration.LESS_THAN_37
-            ],
-            "No": [
-                age(pp) for pp in participants if pp.pregnancy_duration != Participant.PregnancyDuration.LESS_THAN_37
-            ],
-        }
+        multilingual_result = set()
+        if criteria.get("multilingual_yes"):
+            multilingual_result.update([pp for pp in participants if pp.multilingual])
+        if criteria.get("multilingual_no"):
+            multilingual_result.update([pp for pp in participants if not pp.multilingual])
 
-        return JsonResponse(dict(all=all, dyslexia=dyslexia, multilingual=multilingual, premature=premature))
+        premature_result = set()
+        if criteria.get("premature_yes"):
+            premature_result.update(
+                [pp for pp in participants if pp.pregnancy_duration == Participant.PregnancyDuration.LESS_THAN_37]
+            )
+        if criteria.get("premature_no"):
+            premature_result.update(
+                [pp for pp in participants if pp.pregnancy_duration != Participant.PregnancyDuration.LESS_THAN_37]
+            )
+
+        result = dyslexia_result.intersection(multilingual_result).intersection(premature_result)
+        ages = [age(pp) for pp in result]
+        ages = [age for age in ages if age[0] >= 0 and age[1] >= 0]
+        return JsonResponse(dict(all=ages))
 
 
 class ExtraDataAddView(RandomLeaderMixin, SuccessMessageMixin, generic.CreateView):
