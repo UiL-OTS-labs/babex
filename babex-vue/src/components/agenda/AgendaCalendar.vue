@@ -50,7 +50,7 @@
         return rgb2hex(...hsl2rgb(r * 360, 0.7, 0.5));
     }
 
-    function formatAppointment(event: EventInput): EventInput {
+    function formatAppointment(event: EventInput): EventInput | boolean {
         let icon = '';
         if (event.outcome == "COMPLETED") {
             icon = '<img src="/static/done.png">';
@@ -60,6 +60,9 @@
         }
         else if (event.outcome == "EXCLUDED") {
             icon = '<img src="/static/excluded.png">';
+        }
+        else if (!showCanceled.value && event.outcome == 'CANCELED') {
+            return false;
         }
 
         return {
@@ -109,6 +112,7 @@
     const calendar = ref<typeof FullCalendar | null>(null);
     const goToModal = ref<boolean>(false);
     const date = ref<Date>(new Date());
+    const showCanceled = ref<boolean>(false);
 
     const calendarOptions: CalendarOptions = {
         plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
@@ -135,7 +139,8 @@
         eventSources: [
             {
                 url: urls.agenda.feed,
-                eventDataTransform: formatAppointment,
+                // formatAppointment may return false, but the type signature of eventDataTransform doesn't like it
+                eventDataTransform: formatAppointment as any,
                 // syntax trick to set object property only when experiment is defined
                 ...(props.experiment && {extraParams: {experiment: props.experiment}})
             },
@@ -184,6 +189,9 @@
 
 <template>
     <FullCalendar ref="calendar" :options="calendarOptions" />
+    <div class="mt-2">
+        <label><input type="checkbox" v-model="showCanceled" @change="refresh()"> {{ _('Show canceled appointments') }}</label>
+    </div>
 
     <Teleport to="body">
         <div v-if="goToModal">
