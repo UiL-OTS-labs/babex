@@ -194,7 +194,7 @@
             <div class="spinner-border" role="status"></div>
         </div>
     </div>
-    <div>{{ _('* 1 = 1;0 to 1;31') }}</div>
+    <div>{{ _('* 1 = 1;0 to (including) 1;31') }}</div>
 </template>
 
 <style>

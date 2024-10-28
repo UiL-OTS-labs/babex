@@ -94,7 +94,7 @@ msgstr "Naam"
 
 #: experiments/models/experiment_models.py:65
 msgid "experiment:attribute:duration"
-msgstr "Tijdsduur"
+msgstr "Tijdsduur experiment"
 
 #: experiments/models/experiment_models.py:73
 msgid "experiment:attribute:task_description"
@@ -123,8 +123,7 @@ msgstr "Uitgesloten experimenten"
 msgid "experiment:attribute:excluded_experiments:help_text"
 msgstr ""
 "Experimenten die deelname aan het huidige experiment uitsluiten."
-" Om deze expeirmenten te kiezen dubbelklik je in het veld zodat je de lijst experimenten te zien krijgt."
-" Als je een experiment selecteert, dan zal die als een blokje verschijnen in het veld."
+" Klik in het veld om deze experimenten te kiezen."
 
 #: experiments/models/experiment_models.py:143
 msgid "experiment:attribute:leader"
@@ -288,7 +287,7 @@ msgstr " "
 
 #: experiments/templates/experiments/criteria_snippit.html:11
 msgid "default_criteria:attribute:dyslexic_parent"
-msgstr "Ouder met Dyslexia"
+msgstr "Ouder met dyslexie"
 
 msgid "default_criteria:attribute:tos_parent"
 msgstr "Ouder met TOS"
@@ -848,7 +847,7 @@ msgid "experiments:call:home:participation_to"
 msgstr "t/m {}"
 
 msgid "experiment:attribute:session_duration"
-msgstr "Tijdsduur (sessie)"
+msgstr "Tijdsduur sessie (incl. ontvangst e.d.)"
 
 msgid "experiment:attribute:location"
 msgstr "Locatie"
@@ -929,6 +928,7 @@ msgstr "Verplichte voorafgaande experimenten"
 msgid "experiment:attribute:required_experiments:help_text"
 msgstr ""
 "Deelname aan genoemde experimenten geldt als voorwaarde om mee te mogen doen aan dit experiment."
+" Klik in het veld om deze experimenten te kiezen."
 
 msgid "experiment:attribute:leaders:help_text"
 msgstr "Geselecteerde gebruikers mogen participanten bellen, afspraken inplannen enz."

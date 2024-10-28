@@ -254,7 +254,8 @@ msgstr "Excluded experiments"
 
 #: experiments/models/experiment_models.py:125
 msgid "experiment:attribute:excluded_experiments:help_text"
-msgstr "Exclude participants who participated in any of the chosen experiments"
+msgstr "Exclude participants who participated in any of the chosen experiments."
+" Click on the field to choose experiments."
 
 #: experiments/models/experiment_models.py:130
 msgid "experiment:attribute:required_experiments"
@@ -263,7 +264,8 @@ msgstr "Required experiments"
 #: experiments/models/experiment_models.py:132
 msgid "experiment:attribute:required_experiments:help_text"
 msgstr ""
-"Participants are required to have completed all of the chosen experiments"
+"Participants are required to have completed all of the chosen experiments."
+" Click on the field to choose experiments."
 
 #: experiments/models/experiment_models.py:137
 msgid "experiment:attribute:leaders"
