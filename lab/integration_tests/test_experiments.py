@@ -5,7 +5,7 @@ from playwright.sync_api import expect
 from experiments.models import Experiment
 
 
-def test_create_experiment(page, as_admin, sample_leader):
+def test_create_experiment(page, as_admin, sample_leader, sample_location):
     page.get_by_role("button", name="Experiments").click()
     page.get_by_role("link", name="Overview").click()
 
@@ -15,6 +15,7 @@ def test_create_experiment(page, as_admin, sample_leader):
     page.get_by_role("textbox", name="Session duration").fill("25 minutes")
     page.get_by_role("spinbutton", name="Recruitment target").fill("30")
 
+    page.locator('select[name="location"]').select_option(sample_location.name)
     page.get_by_role("textbox", name="Task description").fill("task description")
     page.get_by_role("textbox", name="Responsible researcher").fill("dr. Lin Guist")
 

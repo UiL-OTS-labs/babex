@@ -54,7 +54,6 @@ class Experiment(models.Model):
         verbose_name=_("experiment:attribute:location"),
         on_delete=models.SET_NULL,
         null=True,
-        blank=True,
     )
 
     excluded_experiments = models.ManyToManyField(

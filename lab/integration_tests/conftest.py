@@ -2,7 +2,7 @@ from datetime import date
 
 import pytest
 
-from experiments.models import DefaultCriteria
+from experiments.models import DefaultCriteria, Location
 from main.models import User
 from participants.models import Language, Participant
 
@@ -42,7 +42,7 @@ def as_leader(page, django_user_model, live_server):
 
 
 @pytest.fixture
-def sample_experiment(admin_user, db):
+def sample_experiment(admin_user, db, sample_location):
     yield admin_user.experiments.create(
         defaultcriteria=DefaultCriteria.objects.create(),
         name="sample experiment",
@@ -51,6 +51,7 @@ def sample_experiment(admin_user, db):
         recruitment_target=50,
         task_description="task description",
         responsible_researcher="dr. Lin Guist",
+        location=sample_location,
     )
 
 
@@ -75,3 +76,8 @@ def sample_participant(db):
 @pytest.fixture
 def sample_leader(db):
     yield User.objects.create(name="Leader McLeader", username="leader", phonenumber="23456789")
+
+
+@pytest.fixture
+def sample_location(db):
+    yield Location.objects.create(name="Location")
