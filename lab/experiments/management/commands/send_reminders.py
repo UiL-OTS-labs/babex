@@ -5,8 +5,7 @@ from cdh.mail.classes import BaseEmail, _strip_tags
 from django.core.mail import get_connection
 from django.core.management.base import BaseCommand
 from django.template import defaultfilters
-from django.utils import translation
-from django.utils.timezone import localtime
+from django.utils import timezone, translation
 from django.utils.translation import gettext_lazy as _
 
 from experiments.email import AppointmentReminderEmail
@@ -33,8 +32,8 @@ def prepare_reminder_mail(appointment: Appointment):
             "leader_email": appointment.leader.email,
             "leader_phonenumber": appointment.leader.phonenumber,
             "all_leaders_name_list": experiment.leader_names,
-            "date": defaultfilters.date(localtime(time_slot.start), "l d-m-Y"),
-            "time": defaultfilters.date(localtime(time_slot.start), "H:i"),
+            "date": defaultfilters.date(timezone.localtime(time_slot.start), "l d-m-Y"),
+            "time": defaultfilters.date(timezone.localtime(time_slot.start), "H:i"),
         }
 
     subject = _("experiments:mail:appointment:reminder:subject").format(appointment.experiment.name)
@@ -82,12 +81,13 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # fetch appoinments 24 hours from now
-        now = datetime.now()
+        now = timezone.now()
         threshold_from = now + timedelta(days=1)
-        threshold_to = now + timedelta(days=2)
+        d_to = now + timedelta(days=2)
+        threshold_to = timezone.make_aware(datetime(d_to.year, d_to.month, d_to.day, 0, 0))
 
         appointments = Appointment.objects.filter(
-            timeslot__start__gt=threshold_from, timeslot__start__lte=threshold_to, reminder_sent=None
+            timeslot__start__gt=threshold_from, timeslot__start__lt=threshold_to, reminder_sent=None
         ).exclude(outcome=Appointment.Outcome.CANCELED)
 
         for appointment in appointments:
