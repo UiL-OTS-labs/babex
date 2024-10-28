@@ -118,8 +118,16 @@
             eventEnd.value = selectionInfo.end;
         }
         else {
+            step.value = 1;
             calendar.value?.calendar.getApi().changeView('timeGridDay', selectionInfo.start);
         }
+    }
+
+    function reset() {
+        step.value = 0;
+        event.value?.remove();
+        event.value = null;
+        calendar.value?.calendar.getApi().changeView('dayGridMonth');
     }
 
     function schedule() {
@@ -193,16 +201,17 @@
             <div id="modal-backdrop" class="modal-backdrop fade show" style="display:block;"></div>
             <div id="modal" class="modal fade show" tabindex="-1" style="display:block;">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div v-if="step === 0" class="modal-content">
+                    <div v-if="step < 2" class="modal-content">
                         <div class="modal-body">
                             <AgendaCalendar ref="calendar" @select="onSelect" :start="start" :end="end" :experiment="experiment.id" :scheduling="true"></AgendaCalendar>
                         </div>
                         <div class="modal-footer">
-                            <button @click="step = 1" type="button" class="btn btn-primary" :disabled="event==null">{{ _('Next') }}</button>
+                            <button @click="reset()" type="button" class="btn btn-secondary" :disabled="step < 1">{{ _('Back') }}</button>
+                            <button @click="step = 2" type="button" class="btn btn-primary" :disabled="event==null">{{ _('Next') }}</button>
                             <button @click="modalVisible = false" type="button" class="btn btn-secondary">{{ _('Cancel') }}</button>
                         </div>
                     </div>
-                    <div v-if="step === 1 && eventStart && eventEnd" class="modal-content">
+                    <div v-if="step === 2 && eventStart && eventEnd" class="modal-content">
                         <div class="modal-body">
                             <h2>{{ _('Appointment details') }}</h2>
                             <table class="table mt-3">
@@ -235,6 +244,7 @@
                             </form>
                         </div>
                         <div class="modal-footer">
+                            <button @click="reset()" type="button" class="btn btn-secondary" :disabled="event==null">{{ _('Back') }}</button>
                             <button @click="confirm" type="button" class="btn btn-primary">{{ _('Confirm') }}</button>
                             <button @click="modalVisible = false" type="button" class="btn btn-secondary">{{ _('Cancel') }}</button>
                         </div>
