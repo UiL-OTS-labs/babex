@@ -935,3 +935,18 @@ msgstr "Geselecteerde gebruikers mogen participanten bellen, afspraken inplannen
 
 msgid "experiments:forms:attachments"
 msgstr "Bijlagen"
+
+msgid "experiments:appointment:outcome:completed"
+msgstr "Vooltoid"
+
+#: experiments/models/appointment_models.py:34
+msgid "experiments:appointment:outcome:noshow"
+msgstr "No-show"
+
+#: experiments/models/appointment_models.py:36
+msgid "experiments:appointment:outcome:excluded"
+msgstr "Geëxcludeerd"
+
+#: experiments/models/appointment_models.py:38
+msgid "experiments:appointment:outcome:canceled"
+msgstr "Geannuleerd"

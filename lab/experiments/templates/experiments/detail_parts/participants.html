@@ -37,7 +37,7 @@
                 {{ appointment.start|date:"l d M Y, H:i"|lower|capfirst }}
             </td>
             <td>
-                {{ appointment.outcome|lower }}
+                {{ appointment.get_outcome_display }}
             </td>
         </tr>
     {% endfor %}
