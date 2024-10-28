@@ -77,7 +77,15 @@
                             {{ experiment.n_participants|default_if_none:0 }} ({{ experiment.recruitment_target }})
                         </td>
                         <td>
-                            {% include 'experiments/experiment_actions_snippit.html' %}
+                            <div class="d-flex">
+                            <div class="p-1">
+                                <a href="{% url 'experiments:invite' experiment.pk %}"
+                                   class="icon-phone" title="{% trans 'experiments:home:invite:title'  %}" ></a>
+                            </div>
+                            <div>
+                                {% include 'experiments/experiment_actions_snippit.html' %}
+                            </div>
+                            </div>
                         </td>
                     </tr>
                 {% endfor %}
