@@ -145,7 +145,7 @@
         </div>
         <div class="col-3">
             <div>{{ _('Criteria:') }}</div>
-            <div class="criteria">
+            <div class="criteria" :class="experiment && 'disabled'">
                 <div>
                     {{ _('Parent with Dyslexia') }}
                     <div class="float-end">
@@ -233,6 +233,11 @@
         input[type="checkbox"] {
             margin-right: 5px;
             margin-left: 8px;
+        }
+
+        &.disabled {
+            opacity: 0.3;
+            pointer-events: none;
         }
     }
 

@@ -162,37 +162,41 @@ class DemographicsDataView(views.APIView):
             participants = get_eligible_participants_for_experiment(
                 Experiment.objects.get(pk=request.GET["experiment"])
             )
+            result = set(participants)
 
         def age(pp):
             return date_of_birth(pp.birth_date).on(date).age_ym()
 
-        dyslexia_result = set()
-        if criteria.get("dyslexia_yes"):
-            dyslexia_result.update(
-                [pp for pp in participants if pp.dyslexic_parent not in (None, Participant.WhichParent.NEITHER)]
-            )
-        if criteria.get("dyslexia_no"):
-            dyslexia_result.update(
-                [pp for pp in participants if pp.dyslexic_parent in (None, Participant.WhichParent.NEITHER)],
-            )
+        if "experiment" not in request.GET:
+            # only apply criteria if not looking at a specific experiment
 
-        multilingual_result = set()
-        if criteria.get("multilingual_yes"):
-            multilingual_result.update([pp for pp in participants if pp.multilingual])
-        if criteria.get("multilingual_no"):
-            multilingual_result.update([pp for pp in participants if not pp.multilingual])
+            dyslexia_result = set()
+            if criteria.get("dyslexia_yes"):
+                dyslexia_result.update(
+                    [pp for pp in participants if pp.dyslexic_parent not in (None, Participant.WhichParent.NEITHER)]
+                )
+            if criteria.get("dyslexia_no"):
+                dyslexia_result.update(
+                    [pp for pp in participants if pp.dyslexic_parent in (None, Participant.WhichParent.NEITHER)],
+                )
 
-        premature_result = set()
-        if criteria.get("premature_yes"):
-            premature_result.update(
-                [pp for pp in participants if pp.pregnancy_duration == Participant.PregnancyDuration.LESS_THAN_37]
-            )
-        if criteria.get("premature_no"):
-            premature_result.update(
-                [pp for pp in participants if pp.pregnancy_duration != Participant.PregnancyDuration.LESS_THAN_37]
-            )
+            multilingual_result = set()
+            if criteria.get("multilingual_yes"):
+                multilingual_result.update([pp for pp in participants if pp.multilingual])
+            if criteria.get("multilingual_no"):
+                multilingual_result.update([pp for pp in participants if not pp.multilingual])
 
-        result = dyslexia_result.intersection(multilingual_result).intersection(premature_result)
+            premature_result = set()
+            if criteria.get("premature_yes"):
+                premature_result.update(
+                    [pp for pp in participants if pp.pregnancy_duration == Participant.PregnancyDuration.LESS_THAN_37]
+                )
+            if criteria.get("premature_no"):
+                premature_result.update(
+                    [pp for pp in participants if pp.pregnancy_duration != Participant.PregnancyDuration.LESS_THAN_37]
+                )
+
+            result = dyslexia_result.intersection(multilingual_result).intersection(premature_result)
         ages = [age(pp) for pp in result]
         return JsonResponse(dict(all=ages))
 
