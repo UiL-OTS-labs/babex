@@ -88,7 +88,7 @@
         </div>
 
         <!-- only show outcome when the appointment (start time) is in the past -->
-        <div v-if="isPast()" class="mt-4">
+        <div v-if="isPast() && !isCanceled()" class="mt-4">
             <div class="form-check">
                 <label class="form-check-label"><input class="form-check-input" type="radio" value="COMPLETED" v-model="form.outcome">{{ _('Complete') }}</label>
             </div>
