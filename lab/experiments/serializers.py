@@ -76,3 +76,34 @@ class ExperimentSerializer(serializers.ModelSerializer):
             "excluded_experiments",
             "defaultcriteria",
         ]
+
+
+class ParentAppointmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Appointment
+        fields = [
+            "id",
+            "experiment",
+            "leader",
+            "participant",
+            "location",
+            "start",
+            "end",
+            "comment",
+            "outcome",
+            "contact_phone",
+            "session_duration",
+        ]
+
+    experiment = serializers.ReadOnlyField(source="experiment.name")
+    participant = serializers.ReadOnlyField(source="participant.name")
+
+    location = serializers.ReadOnlyField()
+    leader = serializers.ReadOnlyField(source="leader.name")
+
+    contact_phone = serializers.ReadOnlyField(source="leader.phonenumber")
+
+    start = serializers.DateTimeField()
+    end = serializers.DateTimeField()
+
+    session_duration = serializers.ReadOnlyField(source="experiment.session_duration")
