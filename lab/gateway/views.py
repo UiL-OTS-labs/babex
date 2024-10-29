@@ -4,7 +4,7 @@ from rest_framework.decorators import action
 from rest_framework.exceptions import APIException
 from rest_framework.response import Response
 
-from experiments.serializers import AppointmentSerializer
+from experiments.serializers import ParentAppointmentSerializer
 from participants.models import Language
 from participants.serializers import LanguageSerializer
 from signups.models import Signup
@@ -53,7 +53,7 @@ class SessionView(views.APIView):
 
 class AppointmentViewSet(viewsets.ModelViewSet):
     permission_classes = [HasParticipant, SignedSource]
-    serializer_class = AppointmentSerializer
+    serializer_class = ParentAppointmentSerializer
 
     def get_queryset(self):
         return self.request.participant.appointments.all()
