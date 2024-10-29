@@ -1,8 +1,4 @@
-from cdh.core.forms import (
-    BootstrapCheckboxInput,
-    BootstrapRadioSelect,
-    TemplatedModelForm,
-)
+from cdh.core.forms import BootstrapCheckboxInput, TemplatedModelForm
 from django import forms
 
 from .models import ExtraData, ParticipantData
@@ -13,30 +9,37 @@ class ParticipantForm(TemplatedModelForm):
 
     class Meta:
         model = ParticipantData
-        # note: this form intentionally does not include the more sensitive fields,
-        # because it's also less likely that an experiment leader would have to edit those
-        fields = [
-            "name",
-            "email",
-            "birth_date",
-            "languages",
-            "phonenumber",
-            "phonenumber_alt",
-            "sex",
-            "email_subscription",
-            "english_contact",
-        ]
+        exclude = []
         widgets = {
             "name": forms.TextInput,
             "phonenumber": forms.TextInput,
             "phonenumber_alt": forms.TextInput,
-            "sex": BootstrapRadioSelect,
+            "parent_first_name": forms.TextInput,
+            "parent_last_name": forms.TextInput,
+            "save_longer": BootstrapCheckboxInput,
             "email_subscription": BootstrapCheckboxInput,
             "english_contact": BootstrapCheckboxInput,
         }
 
-    def __init__(self, *args, **kwargs):
-        super(ParticipantForm, self).__init__(*args, **kwargs)
+
+class LeaderParticipantForm(TemplatedModelForm):
+    show_valid_fields = False
+
+    class Meta:
+        model = ParticipantData
+        # note: this form intentionally does not include the more sensitive fields,
+        # because it's also less likely that an experiment leader would have to edit those
+        exclude = ["pregnancy_duration", "birth_weight", "dyslexic_parent", "tos_parent", "save_longer"]
+        widgets = {
+            "name": forms.TextInput,
+            "phonenumber": forms.TextInput,
+            "phonenumber_alt": forms.TextInput,
+            "parent_first_name": forms.TextInput,
+            "parent_last_name": forms.TextInput,
+            "save_longer": BootstrapCheckboxInput,
+            "email_subscription": BootstrapCheckboxInput,
+            "english_contact": BootstrapCheckboxInput,
+        }
 
 
 class ExtraDataForm(TemplatedModelForm):

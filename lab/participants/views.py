@@ -22,7 +22,7 @@ from main.auth.util import (
     RandomLeaderMixin,
 )
 
-from .forms import ExtraDataForm, ParticipantForm
+from .forms import ExtraDataForm, ParticipantForm, LeaderParticipantForm
 from .models import ExtraData, Participant, ParticipantData
 from .permissions import can_leader_access_participant, participants_visible_to_leader
 
@@ -91,7 +91,11 @@ class ParticipantUpdateView(RandomLeaderMixin, SuccessMessageMixin, generic.Upda
     model = ParticipantData
     template_name = "participants/edit.html"
     success_message = _("participants:messages:updated_participant")
-    form_class = ParticipantForm
+
+    def get_form_class(self):
+        if self.request.user.is_staff:
+            return ParticipantForm
+        return LeaderParticipantForm
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
