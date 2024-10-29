@@ -72,13 +72,14 @@
             title: event.participant.name,
             location: event.location,
             // extra field will be displayed in a separate line
-            extra: `${icon} ${event.location} (${event.leader})`,
+            extra: `${icon} ${event.location} (${event.leader.name})`,
             display: 'block',
             category: 'appointment',
             comment: event.comment,
             outcome: event.outcome,
             experiment: event.experiment,
             participant: event.participant,
+            leader: event.leader,
             color: eventColor(event),
         };
     }

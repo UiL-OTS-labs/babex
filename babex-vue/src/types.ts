@@ -9,6 +9,7 @@ interface Appointment {
     comment: string
     experiment?: string,
     leader?: string,
+    leader_id?: number,
     outcome?: string,
 }
 
@@ -28,6 +29,11 @@ interface Location {
     name: string
 }
 
+interface Leader {
+    id: number,
+    name: string
+}
+
 interface Call {
     id?: number,
     experiment?: number,
@@ -41,6 +47,8 @@ interface ActionContext {
     type?: string,
     event?: Dictionary,
     locations?: Location[],
+    leaders?: Leader[],
+    leader?: Leader,
 
     start?: Date,
     end?: Date
@@ -65,4 +73,4 @@ interface Response {
     value?: any;
 }
 
-export {Appointment, Closing, Location, Call, ActionContext, User, Question, Response};
+export {Appointment, Closing, Location, Call, ActionContext, User, Question, Response, Leader};

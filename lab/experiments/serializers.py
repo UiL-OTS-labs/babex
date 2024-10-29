@@ -1,14 +1,25 @@
 from rest_framework import serializers
 
 from participants.models import Participant
+from main.models import User
 from .models import Appointment, Experiment
+
+
+class ExperimentLeadersSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField()
+
+    class Meta:
+        model = User
+        fields = ["id", "name"]
 
 
 class AppointmentSerializer(serializers.ModelSerializer):
     class AppointmentExperimentSerializer(serializers.ModelSerializer):
         class Meta:
             model = Experiment
-            fields = ["id", "name"]
+            fields = ["id", "name", "leaders"]
+
+        leaders = ExperimentLeadersSerializer(read_only=True, many=True)
 
     class AppointmentParticipantSerializer(serializers.ModelSerializer):
         class Meta:
@@ -21,6 +32,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
             "id",
             "experiment",
             "leader",
+            "leader_id",
             "participant",
             "location",
             "start",
@@ -35,7 +47,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
     participant = AppointmentParticipantSerializer(read_only=True)
 
     location = serializers.ReadOnlyField()
-    leader = serializers.ReadOnlyField(source="leader.name")
+    leader = ExperimentLeadersSerializer()
 
     contact_phone = serializers.ReadOnlyField(source="leader.phonenumber")
 
@@ -43,6 +55,14 @@ class AppointmentSerializer(serializers.ModelSerializer):
     end = serializers.DateTimeField()
 
     session_duration = serializers.ReadOnlyField(source="experiment.session_duration")
+
+    def update(self, instance, validated_data):
+        if "leader" in validated_data:
+            leader = User.objects.get(pk=validated_data["leader"]["id"])
+            if leader in instance.experiment.leaders.all():
+                instance.leader = leader
+                instance.save()
+                return instance
 
 
 class ExperimentSerializer(serializers.ModelSerializer):

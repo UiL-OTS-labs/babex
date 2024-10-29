@@ -1,12 +1,13 @@
 <script lang="ts" setup>
     import {defineEmits, defineProps, ref} from 'vue';
     import {babexApi} from '../../api';
+    import {Location} from '../../types';
     import { _ } from '@/util';
 
     import DateTimePicker from '../DateTimePicker.vue';
 
     const props = defineProps<{
-        locations: {id: number, name: string}[],
+        locations: Location[],
         // eslint-disable-next-line
         event: any,
         comment?: string,
@@ -20,6 +21,7 @@
         end: props.event.end,
         comment: props.event ? props.event.extendedProps.comment : null,
         location: props.event.extendedProps.location,
+        leader: props.event.extendedProps.leader,
         outcome: props.event.extendedProps.outcome ?? undefined,
     });
 
@@ -37,7 +39,7 @@
         if (isPast()) {
             // when the appointment is in the past, we only allow adding a comment and
             // setting the outcome value
-            let update = {comment:form.value.comment, outcome: form.value.outcome};
+            let update = {comment:form.value.comment, outcome: form.value.outcome, leader: form.value.leader};
             promise = babexApi.agenda.appointment.updatePartial(props.event.id, update);
         }
         else {
@@ -63,17 +65,32 @@
 <template>
     <div class="mt-4 mb-4">
         <div>
-            <strong>{{ _('Participant:') }}</strong>&nbsp;
-            <a :href="'/participants/' + event.extendedProps.participant.id">
-                {{event.extendedProps.participant.name}}
-            </a>
+            <strong>{{ _('Participant:') }}</strong>
+            <div>
+                <a :href="'/participants/' + event.extendedProps.participant.id">
+                    {{event.extendedProps.participant.name}}
+                </a>
+            </div>
         </div>
-        <div><strong>{{ _('Experiment:') }}</strong>&nbsp;
-            <a :href="'/experiments/' + event.extendedProps.experiment.id">
-                {{event.extendedProps.experiment.name}}
-            </a>
+        <div>
+            <strong>{{ _('Experiment:') }}</strong>&nbsp;
+            <div>
+                <a :href="'/experiments/' + event.extendedProps.experiment.id">
+                    {{event.extendedProps.experiment.name}}
+                </a>
+            </div>
         </div>
-        <div><strong>{{ _('Location:') }}</strong> {{form.location}}</div>
+        <div>
+            <strong>{{ _('Location:') }}</strong>
+            <div>{{form.location}}</div>
+        </div>
+        <div>
+            <strong>{{ _('Leader:') }}</strong>
+            <select class="form-select" v-model="form.leader">
+            <option v-for="leader in event.extendedProps.experiment.leaders"
+                :key="leader.id" :value="leader">{{ leader.name }}</option>
+            </select>
+        </div>
     </div>
     <form @submit="onSubmit">
         <div>{{ _('From:') }}</div>
