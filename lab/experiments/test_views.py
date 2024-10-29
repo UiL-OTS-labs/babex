@@ -25,8 +25,7 @@ class AppointmentTests(TestCase):
         cls.experiment.leaders.add(cls.user)
 
         cls.participant = Participant.objects.create(
-            birth_date=datetime(2021, 4, 1),
-            dyslexic_parent=Participant.WhichParent.UNKNOWN
+            birth_date=datetime(2021, 4, 1), dyslexic_parent=Participant.WhichParent.UNKNOWN
         )
 
     def setUp(self):
@@ -183,11 +182,11 @@ def test_experiment_detail_view_as_leader(client, sample_leader, sample_experime
         end=datetime.now() + timedelta(hours=25),
         experiment=sample_experiment,
     )
+    sample_experiment.leaders.add(sample_leader)
+    sample_experiment.save()
     appointment = sample_participant.appointments.create(
         experiment=sample_experiment, leader=sample_leader, timeslot=timeslot
     )
-    sample_experiment.leaders.add(sample_leader)
-    sample_experiment.save()
 
     client.force_login(sample_leader)
     response = client.get(f"/experiments/{sample_experiment.pk}/")

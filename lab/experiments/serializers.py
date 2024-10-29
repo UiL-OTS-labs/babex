@@ -32,7 +32,6 @@ class AppointmentSerializer(serializers.ModelSerializer):
             "id",
             "experiment",
             "leader",
-            "leader_id",
             "participant",
             "location",
             "start",
@@ -58,11 +57,9 @@ class AppointmentSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         if "leader" in validated_data:
-            leader = User.objects.get(pk=validated_data["leader"]["id"])
-            if leader in instance.experiment.leaders.all():
-                instance.leader = leader
-                instance.save()
-                return instance
+            instance.leader = User.objects.get(pk=validated_data["leader"]["id"])
+            del validated_data["leader"]
+        return super().update(instance, validated_data)
 
 
 class ExperimentSerializer(serializers.ModelSerializer):

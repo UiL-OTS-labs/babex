@@ -146,6 +146,7 @@ def test_call_exclusion(page, sample_experiment, sample_participant, sample_lead
 def test_reschedule_participant(page, sample_experiment, sample_participant, sample_leader, as_leader):
     """it should be possible to make a new appointment with the same participant, if a previous appointment was canceled"""
 
+    sample_experiment.leaders.add(sample_leader)
     sample_experiment.leaders.add(as_leader)
 
     # create a test appointment

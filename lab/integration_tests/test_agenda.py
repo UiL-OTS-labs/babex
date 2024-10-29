@@ -48,6 +48,7 @@ def test_agenda_edit_closing(page, sample_closing, as_admin, agenda):
 
 @pytest.fixture
 def appointment_yesterday(db, sample_experiment, sample_leader, sample_participant):
+    sample_experiment.leaders.add(sample_leader)
     midnight = datetime(
         date.today().year, date.today().month, date.today().day, 0, 0, tzinfo=timezone.get_current_timezone()
     )
@@ -63,6 +64,7 @@ def appointment_yesterday(db, sample_experiment, sample_leader, sample_participa
 
 @pytest.fixture
 def appointment_tomorrow(db, sample_experiment, sample_leader, sample_participant):
+    sample_experiment.leaders.add(sample_leader)
     start = datetime(
         date.today().year, date.today().month, date.today().day, 12, 0, tzinfo=timezone.get_current_timezone()
     ) + timedelta(days=1)
@@ -128,6 +130,7 @@ def test_agenda_modify_appointment(page, appointment_tomorrow, as_leader):
     # check that an appointment update email was sent
     assert len(mail.outbox) == 1
     assert mail.outbox[0].to[0] == appointment_tomorrow.participant.email
+
 
 def test_agenda_modify_appointment_illegal(page, appointment_tomorrow, as_leader):
     appointment_tomorrow.experiment.leaders.add(as_leader)

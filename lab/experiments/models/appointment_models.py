@@ -62,10 +62,13 @@ class Appointment(models.Model):
                 fields=["participant", "experiment"],
                 condition=~models.Q(outcome__in=[_Outcome.CANCELED, _Outcome.EXCLUDED]),
                 name="unique_appointment",
-            )
+            ),
         ]
 
     def save(self, *args, **kwargs):
+        # verify that the leader is valid
+        if self.leader not in self.experiment.leaders.all():
+            raise ValueError("Leader {} is not part of experiment {}".format(self.leader, self.experiment))
         self.timeslot.save()
         super().save(*args, **kwargs)
 
