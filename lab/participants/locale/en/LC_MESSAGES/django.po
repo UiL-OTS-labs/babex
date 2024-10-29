@@ -283,21 +283,18 @@ msgstr "Participant deactivated on "
 msgid "participants:detail:edit"
 msgstr "Edit"
 
-#: participants/templates/participants/detail.html:96
-msgid "participants:attribute:pregnancy_duration"
-msgstr "Pregnancy duration"
 
 #: participants/templates/participants/detail.html:100
-msgid "participants:attribute:age"
+msgid "participant:attribute:age"
 msgstr "Age"
 
 #: participants/templates/participants/detail.html:108
-msgid "participants:attribute:languages"
+msgid "participant:attribute:languages"
 msgstr "Languages"
 
-#: participants/templates/participants/detail.html:134
+#: /templates/participants/detail.html:134
 #: participants/templates/participants/detail.html:176
-msgid "participants:detail:experiments"
+msgid "participant:detail:experiments"
 msgstr "Experiment"
 
 #: participants/templates/participants/detail.html:137
