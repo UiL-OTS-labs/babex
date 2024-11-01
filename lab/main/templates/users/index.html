@@ -100,6 +100,7 @@
                                     {% trans 'users:action:edit' %}
                                             </a>
                                 </li>
+                                {% if not is_saml %}
                                 <li>
                                     {% if is_admins %}
                                         <a class="dropdown-item" href="{% url 'main:admin_password' user.pk %}" >
@@ -109,6 +110,7 @@
                                     {% trans 'users:action:password' %}
                                             </a>
                                 </li>
+                                {% endif %}
 
                                 {# We should not allow a user to delete their own account, that will we AWKWARD #}
                                 {# https://www.youtube.com/watch?v=q9kDT44DBXs #}

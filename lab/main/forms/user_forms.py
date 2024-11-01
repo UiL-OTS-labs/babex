@@ -1,4 +1,5 @@
 import django.contrib.auth.forms as auth_forms
+from django import forms
 
 from main.models import User
 
@@ -17,3 +18,9 @@ class UserUpdateForm(auth_forms.UserChangeForm):
         fields = ("username", "name", "is_active")
         model = User
         field_classes = {"username": auth_forms.UsernameField}
+
+
+class SAMLUserCreationForm(forms.ModelForm):
+    class Meta:
+        fields = ("username", "name")
+        model = User

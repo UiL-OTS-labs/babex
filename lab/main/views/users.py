@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.forms import SetPasswordForm
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
@@ -5,7 +6,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
-from main.forms.user_forms import UserUpdateForm
+from main.forms.user_forms import SAMLUserCreationForm, UserUpdateForm
 
 from ..forms import UserCreationForm
 from ..models import User
@@ -53,6 +54,7 @@ class UserHome(BaseUserView, generic.ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
+        context["is_saml"] = hasattr(settings, "SAML_CONFIG")
         return context
 
 
@@ -64,8 +66,12 @@ class UserUpdateView(BaseUserView, SuccessMessageMixin, generic.UpdateView):
 
 class UserCreateView(BaseUserView, SuccessMessageMixin, generic.CreateView):
     template_name = "users/create.html"
-    form_class = UserCreationForm
     success_message = _("users:message:created")
+
+    def get_form_class(self):
+        if hasattr(settings, "SAML_CONFIG"):
+            return SAMLUserCreationForm
+        return UserCreationForm
 
 
 class UserChangePasswordView(BaseUserView, SuccessMessageMixin, generic.UpdateView):
