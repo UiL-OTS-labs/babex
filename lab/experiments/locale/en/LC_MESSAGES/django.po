@@ -604,7 +604,7 @@ msgstr "Criteria"
 
 #: experiments/templates/experiments/detail_parts/info.html:141
 msgid "experiments:detail:edit_default_criteria"
-msgstr "Edit"
+msgstr "Edit criteria"
 
 #: experiments/templates/experiments/detail_parts/participants.html:11
 msgid "experiments:detail:appointments"
