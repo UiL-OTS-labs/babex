@@ -19,9 +19,9 @@
             <p>{% transformat 'users:delete:text' object %}</p>
             <div class="button" style="display: inline-block">
                 {% if object.is_staff %}
-                    <a href="{% url 'main:admins_home' %}" >
+                    <a href="{% url 'main:users_admins' %}" >
                 {% else %}
-                    <a href="{% url 'main:leaders_home' %}" >
+                    <a href="{% url 'main:users_leaders' %}" >
                 {% endif %}
                     {% trans 'global:delete:cancel' %}
                 </a>
