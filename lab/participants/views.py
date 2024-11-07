@@ -22,7 +22,7 @@ from main.auth.util import (
     RandomLeaderMixin,
 )
 
-from .forms import ExtraDataForm, ParticipantForm, LeaderParticipantForm
+from .forms import ExtraDataForm, LeaderParticipantForm, ParticipantForm
 from .models import ExtraData, Participant, ParticipantData
 from .permissions import can_leader_access_participant, participants_visible_to_leader
 
@@ -103,7 +103,7 @@ class ParticipantUpdateView(RandomLeaderMixin, SuccessMessageMixin, generic.Upda
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        form = self.form_class(request.POST, instance=self.object)
+        form = self.get_form_class()(request.POST, instance=self.object)
 
         if form.is_valid():
             return self.form_valid(form)
