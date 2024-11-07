@@ -31,13 +31,19 @@
     {% for appointment in appointments %}
         <tr>
             <td>
-                {{ appointment.participant.name }}
+                {% if not appointment.participant.deactivated %}
+                    <a href="{% url 'participants:detail' appointment.participant.pk %}">
+                {% endif %}
+                    {{ appointment.participant.name }}
+                {% if not appointment.participant.deactivated %}
+                    </a>
+                {% endif %}
             </td>
             <td data-order="{{ appointment.start|date:'U' }}">
                 {{ appointment.start|date:"l d M Y, H:i"|lower|capfirst }}
             </td>
             <td>
-                {{ appointment.get_outcome_display }}
+                {{ appointment.get_outcome_display|default_if_none:'-' }}
             </td>
         </tr>
     {% endfor %}

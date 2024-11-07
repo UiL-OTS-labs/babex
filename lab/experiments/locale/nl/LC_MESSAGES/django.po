@@ -117,7 +117,7 @@ msgstr "Bepaald of participanten zich kunnen opgeven voor dit experiment."
 
 #: experiments/models/experiment_models.py:136
 msgid "experiment:attribute:excluded_experiments"
-msgstr "Uitgesloten experimenten"
+msgstr "Ongeoorloofde voorafgaande experimenten"
 
 #: experiments/models/experiment_models.py:138
 msgid "experiment:attribute:excluded_experiments:help_text"
@@ -937,7 +937,7 @@ msgid "experiments:forms:attachments"
 msgstr "Bijlagen"
 
 msgid "experiments:appointment:outcome:completed"
-msgstr "Vooltoid"
+msgstr "Voltooid"
 
 #: experiments/models/appointment_models.py:34
 msgid "experiments:appointment:outcome:noshow"

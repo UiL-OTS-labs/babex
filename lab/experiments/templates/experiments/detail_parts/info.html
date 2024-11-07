@@ -95,6 +95,30 @@
             </tr>
             <tr>
                 <td>
+                    {% trans 'experiment:attribute:required_experiments' %}
+                </td>
+                <td>
+                    {% if experiment.required_experiments.all %}
+                        {{ experiment.required_experiments.all|join:', ' }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {% trans 'experiment:attribute:excluded_experiments' %}
+                </td>
+                <td>
+                    {% if experiment.excluded_experiments.all %}
+                        {{ experiment.excluded_experiments.all|join:', ' }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>
                     {% trans 'experiment:attribute:responsible_researcher' %}
                 </td>
                 <td>

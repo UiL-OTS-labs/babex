@@ -162,7 +162,7 @@
                         {{ appointment.location }}
                     </td>
                     <td>
-                        {{ appointment.get_outcome_display }}
+                        {{ appointment.get_outcome_display|default_if_none:'-' }}
                     </td>
                 </tr>
                 {% endfor %}

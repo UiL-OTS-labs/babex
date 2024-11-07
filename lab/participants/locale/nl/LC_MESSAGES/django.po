@@ -409,8 +409,8 @@ msgstr "klik om weer te geven"
 #: participants/templates/participants/delete.html:24
 msgid "participants:delete:delete:text"
 msgstr ""
-"Deze participant heeft nooit met een experiment meegedaan en mag dus "
-"veilig verwijderd worden vanuit de database."
+"Deze participant heeft nooit met een experiment meegedaan en kan dus "
+"veilig verwijderd worden uit de database."
 
 #: participants/templates/participants/delete.html:27
 msgid "participants:delete:delete:prompt"
@@ -425,3 +425,12 @@ msgstr ""
 
 msgid "participants:delete:deactivate:prompt"
 msgstr "U kunt alsnog de participant deactiveren"
+
+msgid "participant:attribute:parent_first_name"
+msgstr "Voorname ouder"
+
+msgid "participant:attribute:parent_last_name"
+msgstr "Achternaam ouder"
+
+msgid "participant:attribute:save_longer"
+msgstr "Gegevens mogen tot 10 jaar bewaard worden"
