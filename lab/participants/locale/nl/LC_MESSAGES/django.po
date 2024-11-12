@@ -421,13 +421,13 @@ msgstr "Participant deactiveren"
 
 msgid "participants:delete:deactivate:text"
 msgstr ""
-"Deze participant heeft bij een of meer experimenten mee gedaan en kan niet verwijderen worden: "
+"Deze participant heeft bij een of meer experimenten meegedaan en kan niet verwijderen worden: "
 
 msgid "participants:delete:deactivate:prompt"
 msgstr "U kunt alsnog de participant deactiveren"
 
 msgid "participant:attribute:parent_first_name"
-msgstr "Voorname ouder"
+msgstr "Voornaam ouder"
 
 msgid "participant:attribute:parent_last_name"
 msgstr "Achternaam ouder"
