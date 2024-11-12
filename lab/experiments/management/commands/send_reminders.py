@@ -11,6 +11,7 @@ from django.utils.translation import gettext_lazy as _
 from experiments.email import AppointmentReminderEmail
 from experiments.models import Appointment
 
+logging.basicConfig(format="%(asctime)s %(levelname)-8s %(message)s", level=logging.INFO, datefmt="%Y-%m-%d %H:%M:%S")
 log = logging.getLogger("send_reminders")
 
 
@@ -52,7 +53,7 @@ def prepare_reminder_mail(appointment: Appointment):
 
 def send_reminder_mail(appointment: Appointment, contents: str) -> None:
     with translation.override("nl"):
-        subject = _("experiments:mail:appointment:confirm:subject").format(appointment.experiment.name)
+        subject = _("experiments:mail:appointment:reminder:subject").format(appointment.experiment.name)
 
     class SimpleHTMLMail(BaseEmail):
         def __init__(self, to, subject, contents, **kwargs):
@@ -92,6 +93,7 @@ class Command(BaseCommand):
 
         for appointment in appointments:
             try:
+                log.info("Sending reminder, appointment %d", appointment.pk)
                 send_reminder_mail(appointment, prepare_reminder_mail(appointment))
                 appointment.reminder_sent = now
                 appointment.save()
