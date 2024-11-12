@@ -1,7 +1,7 @@
 import datetime
 
 import ageutil
-from cdh.core.mail import TemplateEmail
+from cdh.mail.classes import TemplateEmail
 from django.conf import settings
 from django.core.exceptions import BadRequest, PermissionDenied
 from django.http.response import JsonResponse
@@ -183,7 +183,10 @@ class UpdateCall(generics.UpdateAPIView):
                 mail = TemplateEmail(
                     html_template="mail/deactivate.html",
                     context=dict(
-                        base_url=settings.PARENT_URI, name=call.participant.parent_name, deactivate_link=deactivate_link
+                        base_url=settings.PARENT_URI,
+                        parent_name=call.participant.parent_name,
+                        participant_name=call.participant.name,
+                        deactivate_link=deactivate_link,
                     ),
                     to=[call.participant.email],
                     subject=_("experiments:call:deactivate:mail:subject"),

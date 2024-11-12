@@ -174,3 +174,22 @@ def test_reschedule_participant(page, sample_experiment, sample_participant, sam
     page.click("button.icon-menu")
     page.locator("a").get_by_text("Invite").click()
     expect(page.get_by_text("Baby McBaby")).to_be_visible()
+
+
+def test_call_deactivate(page, sample_experiment, sample_participant, sample_leader, as_admin):
+    sample_experiment.leaders.add(sample_leader)
+
+    page.get_by_role("button", name="Experiments").click()
+    page.get_by_role("link", name="Overview").click()
+    page.click("button.icon-menu")
+    page.locator("a").get_by_text("Invite").click()
+    page.locator("td.actions").get_by_text("Call").click()
+
+    page.click('input[value="DEACTIVATE"]')
+    btn = page.locator("button").get_by_text("Save")
+    btn.click()
+    btn.wait_for(state="hidden")
+
+    # check that confirmation mail was sent to parent
+    assert len(mail.outbox) == 1
+    assert mail.outbox[0].to[0] == sample_participant.email
