@@ -172,11 +172,13 @@
         let className = arg.event.extendedProps.outcome && 'event-' + arg.event.extendedProps.outcome.toLowerCase();
 
         return {
-            html: `<div class="fc-event-main-frame ${className}"><div class="fc-event-time">${arg.timeText}</div>
-                <div class="fc-event-title-container">
-                    <div class="fc-event-title fc-sticky">${arg.event.title}</div>
-                </div></div>
-            <div>${arg.event.extendedProps.extra ?? ''}</div>`
+            html: `<div class="fc-event-main-frame ${className}">
+                        <div class="fc-event-time">${arg.timeText}</div>
+                        <div class="fc-event-title-container">
+                            <div class="fc-event-title fc-sticky">${arg.event.title}</div>
+                            <div>${arg.event.extendedProps.extra ?? ''}</div>
+                        </div>
+                    </div>`
         }
     }
 
@@ -249,6 +251,10 @@
 
     .fc-event {
         cursor: pointer;
+    }
+
+    .fc-event-main-frame {
+        flex-direction: column;
     }
 
     .event-selected {

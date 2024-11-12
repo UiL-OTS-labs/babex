@@ -112,7 +112,8 @@
             }
             event.value = calendar.value?.calendar.getApi().addEvent({
                 start: selectionInfo.start,
-                end: selectionInfo.end
+                end: selectionInfo.end,
+                startEditable: true
             });
             eventStart.value = selectionInfo.start;
             eventEnd.value = selectionInfo.end;
