@@ -36,10 +36,10 @@
     function onSubmit(event: Event) {
         let promise;
 
-        if (isPast()) {
-            // when the appointment is in the past, we only allow adding a comment and
-            // setting the outcome value
-            let update = {comment:form.value.comment, outcome: form.value.outcome, leader: form.value.leader};
+        // when the appointment doesn't already have an outcome specified, we allow full modification.
+        // otherwise, we only allow adding a comment or changing leader
+        if (hasOutcome()) {
+            let update = {comment:form.value.comment, leader: form.value.leader};
             promise = babexApi.agenda.appointment.updatePartial(props.event.id, update);
         }
         else {
@@ -51,6 +51,10 @@
         event.preventDefault();
         event.stopPropagation();
         return false;
+    }
+
+    function hasOutcome() {
+        return props.event.extendedProps.outcome;
     }
 
     function isPast() {
@@ -94,26 +98,26 @@
     </div>
     <form @submit="onSubmit">
         <div>{{ _('From:') }}</div>
-        <DateTimePicker class="appointment-start" v-model="form.start" :readonly="isPast()" />
+        <DateTimePicker class="appointment-start" v-model="form.start" :readonly="hasOutcome()" />
 
         <div>{{ _('To:') }}</div>
-        <DateTimePicker class="appointment-end" v-model="form.end" :readonly="isPast()" />
+        <DateTimePicker class="appointment-end" v-model="form.end" :readonly="hasOutcome()" />
 
         <div>
             <label>{{ _('Comments:') }}</label>
-            <textarea class="form-control" v-model="form.comment" :readonly="isPast()"></textarea>
+            <textarea class="form-control" v-model="form.comment"></textarea>
         </div>
 
         <!-- only show outcome when the appointment (start time) is in the past -->
         <div v-if="isPast() && !isCanceled()" class="mt-4">
             <div class="form-check">
-                <label class="form-check-label"><input class="form-check-input" type="radio" value="COMPLETED" v-model="form.outcome">{{ _('Complete') }}</label>
+                <label class="form-check-label"><input class="form-check-input" type="radio" value="COMPLETED" v-model="form.outcome" :disabled="hasOutcome()">{{ _('Complete') }}</label>
             </div>
             <div class="form-check">
-                <label class="form-check-label"><input class="form-check-input" type="radio" value="NOSHOW" v-model="form.outcome">{{ _('No-show') }}</label>
+                <label class="form-check-label"><input class="form-check-input" type="radio" value="NOSHOW" v-model="form.outcome" :disabled="hasOutcome()">{{ _('No-show') }}</label>
             </div>
             <div class="form-check">
-                <label class="form-check-label"><input class="form-check-input" type="radio" value="EXCLUDED" v-model="form.outcome">{{ _('Exclude') }}</label>
+                <label class="form-check-label"><input class="form-check-input" type="radio" value="EXCLUDED" v-model="form.outcome" :disabled="hasOutcome()">{{ _('Exclude') }}</label>
             </div>
         </div>
 
