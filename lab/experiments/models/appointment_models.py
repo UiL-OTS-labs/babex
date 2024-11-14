@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from cdh.mail.classes import TemplateEmail
 from django.db import models
@@ -108,10 +108,12 @@ class Appointment(models.Model):
         return self.outcome == Appointment.Outcome.CANCELED
 
 
-def make_appointment(experiment: Experiment, participant: Participant, leader: User, start: datetime, end: datetime):
+def make_appointment(experiment: Experiment, participant: Participant, leader: User, start: datetime):
     if leader not in experiment.leaders.all():
         raise ValueError(f'{leader} is not a leader in the experiment "{experiment}"')
 
+    # appointment end is determined by the experiment's session duration
+    end = start + timedelta(minutes=experiment.session_duration)
     timeslot = TimeSlot.objects.create(start=start, end=end, experiment=experiment)
     appointment = Appointment.objects.create(
         participant=participant, timeslot=timeslot, experiment=experiment, leader=leader

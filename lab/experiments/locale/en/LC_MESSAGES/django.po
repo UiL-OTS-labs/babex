@@ -918,3 +918,6 @@ msgstr "Min. age"
 
 msgid "default_criteria:attribute:max_age"
 msgstr "Max. age"
+
+msgid "experiments:duration:minutes"
+msgstr "minutes"

@@ -33,7 +33,7 @@ def test_cancel_appointment_from_email(apps, participant, mailbox, link_from_mai
     DefaultCriteria = apps.lab.get_model('experiments', 'DefaultCriteria')
     User = apps.lab.get_model('main', 'User')
     Appointment = apps.lab.get_model('experiments', 'Appointment')
-    experiment = Experiment.objects.create(defaultcriteria=DefaultCriteria.objects.create())
+    experiment = Experiment.objects.create(duration=10, session_duration=20)
 
     # somewhat abusing the get_model() calls above to setup django for the following to work
     from experiments.models import make_appointment
@@ -41,10 +41,9 @@ def test_cancel_appointment_from_email(apps, participant, mailbox, link_from_mai
 
     leader = User.objects.first()  # admin
     start = timezone.now()
-    end = start + timedelta(hours=1)
     experiment.leaders.add(leader)
     experiment.save()
-    appointment = make_appointment(experiment, participant, leader, start, end)
+    appointment = make_appointment(experiment, participant, leader, start)
 
     send_appointment_mail(appointment, prepare_appointment_mail(appointment))
 
@@ -71,7 +70,8 @@ def test_appointment_in_parent_overview(apps, participant, mailbox, page, login_
     Experiment = apps.lab.get_model('experiments', 'Experiment')
     DefaultCriteria = apps.lab.get_model('experiments', 'DefaultCriteria')
     User = apps.lab.get_model('main', 'User')
-    experiment = Experiment.objects.create(defaultcriteria=DefaultCriteria.objects.create(),
+    experiment = Experiment.objects.create(duration=10,
+                                           session_duration=20,
                                            name='Test Experiment')
 
     # somewhat abusing the get_model() calls above to setup django for the following to work
@@ -79,10 +79,9 @@ def test_appointment_in_parent_overview(apps, participant, mailbox, page, login_
 
     leader = User.objects.first()  # admin
     start = timezone.now()
-    end = start + timedelta(hours=1)
     experiment.leaders.add(leader)
     experiment.save()
-    appointment = make_appointment(experiment, participant, leader, start, end)
+    appointment = make_appointment(experiment, participant, leader, start)
 
     login_as(participant.email)
     try:
@@ -99,7 +98,8 @@ def test_past_appointment_not_in_parent_overview(apps, participant, mailbox, pag
     Experiment = apps.lab.get_model('experiments', 'Experiment')
     DefaultCriteria = apps.lab.get_model('experiments', 'DefaultCriteria')
     User = apps.lab.get_model('main', 'User')
-    experiment = Experiment.objects.create(defaultcriteria=DefaultCriteria.objects.create(),
+    experiment = Experiment.objects.create(duration=10,
+                                           session_duration=20,
                                            name='Test Experiment')
 
     # somewhat abusing the get_model() calls above to setup django for the following to work
@@ -107,10 +107,9 @@ def test_past_appointment_not_in_parent_overview(apps, participant, mailbox, pag
 
     leader = User.objects.first()  # admin
     start = timezone.now() - timedelta(days=30)
-    end = start + timedelta(hours=1)
     experiment.leaders.add(leader)
     experiment.save()
-    appointment = make_appointment(experiment, participant, leader, start, end)
+    appointment = make_appointment(experiment, participant, leader, start)
 
     login_as(participant.email)
     try:

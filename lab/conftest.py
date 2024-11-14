@@ -9,7 +9,7 @@ from participants.models import Language, Participant
 
 @pytest.fixture
 def sample_experiment(admin_user, db):
-    yield admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
+    yield admin_user.experiments.create(duration=15, session_duration=30)
 
 
 @pytest.fixture

@@ -11,8 +11,8 @@ def test_create_experiment(page, as_admin, sample_leader, sample_location):
 
     page.get_by_role("link", name="Create experiment").click()
     page.get_by_role("textbox", name="Name").fill("Experiment name")
-    page.get_by_role("textbox", name="Task duration").fill("10 minutes")
-    page.get_by_role("textbox", name="Session duration").fill("25 minutes")
+    page.get_by_role("textbox", name="Task duration").fill("10")
+    page.get_by_role("textbox", name="Session duration").fill("25")
     page.get_by_role("spinbutton", name="Recruitment target").fill("30")
 
     page.locator('select[name="location"]').select_option(sample_location.name)

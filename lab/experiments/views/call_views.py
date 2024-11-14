@@ -93,9 +93,8 @@ class AppointmentConfirm(generics.CreateAPIView):
             raise PermissionDenied
 
         start = parse_datetime(request.data["start"])
-        end = parse_datetime(request.data["end"])
 
-        if end < start or start < timezone.now():
+        if start < timezone.now():
             raise BadRequest("Invalid appointment time")
 
         participant = Participant.objects.get(pk=request.data["participant"])
@@ -110,7 +109,7 @@ class AppointmentConfirm(generics.CreateAPIView):
             pk=request.data["leader"],
         )
 
-        appointment = make_appointment(experiment, participant, leader, start, end)
+        appointment = make_appointment(experiment, participant, leader, start)
         return JsonResponse(self.serializer_class(appointment).data)
 
     def check_age_at_appointment(self, participant: Participant, experiment: Experiment, start: datetime.date) -> bool:

@@ -21,7 +21,7 @@ class AppointmentTests(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.user = User.objects.create(username="test", is_staff=True)
-        cls.experiment = Experiment.objects.create()
+        cls.experiment = Experiment.objects.create(duration=15, session_duration=30)
         cls.experiment.leaders.add(cls.user)
 
         cls.participant = Participant.objects.create(
@@ -35,7 +35,6 @@ class AppointmentTests(TestCase):
         data = {
             "experiment": self.experiment.pk,
             "start": timezone.now() + timedelta(days=1),
-            "end": timezone.now() + timedelta(days=1, hours=1),
             "leader": self.user.pk,
             "participant": self.participant.pk,
         }
@@ -49,7 +48,6 @@ class AppointmentTests(TestCase):
         data = {
             "experiment": self.experiment.pk,
             "start": timezone.now() - timedelta(hours=2),
-            "end": timezone.now() - timedelta(hours=1),
             "leader": self.user.pk,
             "participant": self.participant.pk,
         }
@@ -71,7 +69,6 @@ class AppointmentTests(TestCase):
         data = {
             "experiment": self.experiment.pk,
             "start": timezone.now() + timedelta(days=7),
-            "end": timezone.now() + timedelta(days=7, hours=1),
             "leader": self.user.pk,
             "participant": self.participant.pk,
         }
@@ -92,7 +89,6 @@ class AppointmentTests(TestCase):
         data = {
             "experiment": self.experiment.pk,
             "start": timezone.now() + timedelta(days=7),
-            "end": timezone.now() + timedelta(days=7, hours=1),
             "leader": self.user.pk,
             "participant": self.participant.pk,
         }
@@ -107,7 +103,7 @@ class InviteTests(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.user = User.objects.create(username="test", is_staff=True)
-        cls.experiment = Experiment.objects.create()
+        cls.experiment = Experiment.objects.create(duration=15, session_duration=30)
         cls.experiment.leaders.add(cls.user)
 
         cls.participant = Participant.objects.create(
