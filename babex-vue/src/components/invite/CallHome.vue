@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     import { _ } from '@/util';
-    import {defineProps, ref} from 'vue';
+    import {defineProps, ref, computed} from 'vue';
     import AgendaCalendar from '../agenda/AgendaCalendar.vue';
     import {babexApi} from '../../api';
     import {Call} from '../../types';
@@ -10,7 +10,7 @@
 
     const props = defineProps<{
         participant: {id: number, name: string},
-        experiment: {id: number, name: string},
+        experiment: {id: number, name: string, session_duration: number},
         leaders: {id: number, name: string}[],
         statuses: { [id: string]: string},
         call: Call,
@@ -32,7 +32,7 @@
     // event start and end times saved as separate refs because
     // our DateTimePicker doesn't play nicely with fullcalendar's event object
     const eventStart = ref<Date|null>(null);
-    const eventEnd = ref<Date|null>(null);
+    const eventEnd = computed(() => new Date(eventStart.value.getTime() + 60 * 1000 * props.experiment.session_duration));
 
     const callStatus = ref<string|null>(null);
     const comment = ref('');
@@ -72,13 +72,12 @@
     }
 
     function confirm() {
-        if(!event.value || !eventStart.value || !eventEnd.value) {
+        if(!event.value || !eventStart.value) {
             return;
         }
 
         babexApi.call.appointment.create({
             start: eventStart.value,
-            end: eventEnd.value,
             experiment: props.experiment.id,
             participant: props.participant.id,
             leader: confirmationForm.value.leader,
@@ -112,11 +111,9 @@
             }
             event.value = calendar.value?.calendar.getApi().addEvent({
                 start: selectionInfo.start,
-                end: selectionInfo.end,
                 startEditable: true
             });
-            eventStart.value = selectionInfo.start;
-            eventEnd.value = selectionInfo.end;
+            eventStart.value = event.value.start;
         }
         else {
             step.value = 1;
@@ -170,6 +167,7 @@
     function complete() {
         location.href = props.completeUrl;
     }
+
 </script>
 
 <template>
@@ -204,7 +202,7 @@
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div v-if="step < 2" class="modal-content">
                         <div class="modal-body">
-                            <AgendaCalendar ref="calendar" @select="onSelect" :start="start" :end="end" :experiment="experiment.id" :scheduling="true"></AgendaCalendar>
+                            <AgendaCalendar ref="calendar" @select="onSelect" :start="start" :end="end" :experiment="experiment.id" :duration="experiment.session_duration"></AgendaCalendar>
                         </div>
                         <div class="modal-footer">
                             <button @click="reset()" type="button" class="btn btn-secondary" :disabled="step < 1">{{ _('Back') }}</button>
@@ -212,7 +210,7 @@
                             <button @click="modalVisible = false" type="button" class="btn btn-secondary">{{ _('Cancel') }}</button>
                         </div>
                     </div>
-                    <div v-if="step === 2 && eventStart && eventEnd" class="modal-content">
+                    <div v-if="step === 2 && eventStart" class="modal-content">
                         <div class="modal-body">
                             <h2>{{ _('Appointment details') }}</h2>
                             <table class="table mt-3">
@@ -225,7 +223,7 @@
                                 </tr>
                                 <tr>
                                     <th>{{ _('To') }}</th>
-                                    <td><DateTimePicker v-model="eventEnd" /></td>
+                                    <td><DateTimePicker :readonly="true" v-model="eventEnd" /></td>
                                 </tr>
                             </table>
 

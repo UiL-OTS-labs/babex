@@ -69,7 +69,11 @@ class Appointment(models.Model):
         # verify that the leader is valid
         if self.leader not in self.experiment.leaders.all():
             raise ValueError("Leader {} is not part of experiment {}".format(self.leader, self.experiment))
+
+        # make sure the end time is correct
+        self.end = self.start + timedelta(minutes=self.experiment.session_duration)
         self.timeslot.save()
+
         super().save(*args, **kwargs)
 
     def __str__(self):

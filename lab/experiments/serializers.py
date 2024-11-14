@@ -51,7 +51,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
     contact_phone = serializers.ReadOnlyField(source="leader.phonenumber")
 
     start = serializers.DateTimeField()
-    end = serializers.DateTimeField()
+    end = serializers.ReadOnlyField()
 
     session_duration = serializers.ReadOnlyField(source="experiment.session_duration")
 
@@ -70,6 +70,7 @@ class ExperimentSerializer(serializers.ModelSerializer):
             "id",
             "name",
             "duration",
+            "session_duration",
             "task_description",
             "location",
             "leaders",
@@ -104,6 +105,6 @@ class ParentAppointmentSerializer(serializers.ModelSerializer):
     contact_phone = serializers.ReadOnlyField(source="leader.phonenumber")
 
     start = serializers.DateTimeField()
-    end = serializers.DateTimeField()
+    end = serializers.ReadOnlyField()
 
     session_duration = serializers.ReadOnlyField(source="experiment.session_duration")

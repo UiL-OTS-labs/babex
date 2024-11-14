@@ -101,7 +101,7 @@
         <DateTimePicker class="appointment-start" v-model="form.start" :readonly="hasOutcome()" />
 
         <div>{{ _('To:') }}</div>
-        <DateTimePicker class="appointment-end" v-model="form.end" :readonly="hasOutcome()" />
+        <DateTimePicker class="appointment-end" v-model="form.end" :readonly="true" />
 
         <div>
             <label>{{ _('Comments:') }}</label>

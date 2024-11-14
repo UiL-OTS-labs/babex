@@ -20,7 +20,7 @@
         // optional experiment id for limiting feeds
         experiment?: number,
 
-        scheduling?: boolean,
+        duration?: number,
     }>();
 
     // from https://stackoverflow.com/a/64090995
@@ -130,7 +130,9 @@
         allDaySlot: false,
         slotMinTime: "07:00:00",
         slotMaxTime: "20:00:00",
-        slotDuration: props.scheduling ? "00:15:00" : "00:30:00",
+        slotDuration: {minutes: props.duration ?? 30},
+        defaultTimedEventDuration: {minutes: props.duration},
+        forceEventDuration: props.duration ? true : false,
         eventTimeFormat: {
             hour: '2-digit',
             minute: '2-digit',
