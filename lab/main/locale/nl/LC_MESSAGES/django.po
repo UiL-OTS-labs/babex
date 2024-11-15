@@ -127,7 +127,7 @@ msgstr "Uitgelogd"
 
 #: main/templates/registration/logged_out.html:9
 msgid "main:logged_out_text"
-msgstr "U bent succesvol uitgelogd!"
+msgstr "Je bent succesvol uitgelogd!"
 
 #: main/templates/registration/login.html:9
 msgid "login:header:login"
