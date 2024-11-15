@@ -17,7 +17,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
     class AppointmentExperimentSerializer(serializers.ModelSerializer):
         class Meta:
             model = Experiment
-            fields = ["id", "name", "leaders"]
+            fields = ["id", "name", "leaders", "session_duration"]
 
         leaders = ExperimentLeadersSerializer(read_only=True, many=True)
 

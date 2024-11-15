@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import {defineEmits, defineProps, ref} from 'vue';
+    import {computed, defineEmits, defineProps, ref} from 'vue';
     import {babexApi} from '../../api';
     import {Location} from '../../types';
     import { _ } from '@/util';
@@ -18,7 +18,6 @@
 
     const form = ref({
         start: props.event.start,
-        end: props.event.end,
         comment: props.event ? props.event.extendedProps.comment : null,
         location: props.event.extendedProps.location,
         leader: props.event.extendedProps.leader,
@@ -64,6 +63,9 @@
     function isCanceled() {
         return props.event.extendedProps.outcome == 'CANCELED';
     }
+
+    const eventEnd = computed(
+        () => new Date(form.value!.start.getTime() + 60 * 1000 * props.event.extendedProps.experiment.session_duration));
 </script>
 
 <template>
@@ -101,7 +103,7 @@
         <DateTimePicker class="appointment-start" v-model="form.start" :readonly="hasOutcome()" />
 
         <div>{{ _('To:') }}</div>
-        <DateTimePicker class="appointment-end" v-model="form.end" :readonly="true" />
+        <DateTimePicker class="appointment-end" v-model="eventEnd" :readonly="true" />
 
         <div>
             <label>{{ _('Comments:') }}</label>
@@ -121,7 +123,7 @@
             </div>
         </div>
 
-        <div class="mt-4"><button class="btn btn-primary save" :disabled="form.end <= form.start">{{ _('Save') }}</button></div>
+        <div class="mt-4"><button class="btn btn-primary save">{{ _('Save') }}</button></div>
     </form>
 
     <div v-if="!isPast() && !isCanceled()">
