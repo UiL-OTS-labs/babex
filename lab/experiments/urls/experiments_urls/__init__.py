@@ -3,6 +3,7 @@ from django.urls import path
 from experiments.views import (
     ExperimentAttachmentView,
     ExperimentCreateView,
+    ExperimentCriteriaView,
     ExperimentDeleteView,
     ExperimentDetailView,
     ExperimentHomeView,
@@ -16,4 +17,5 @@ urlpatterns = [
     path("<int:pk>/update/", ExperimentUpdateView.as_view(), name="update"),
     path("<int:pk>/delete/", ExperimentDeleteView.as_view(), name="delete"),
     path("<int:pk>/attachment/<int:attachment>", ExperimentAttachmentView.as_view(), name="attachment"),
+    path("<int:pk>/criteria/", ExperimentCriteriaView.as_view(), name="criteria"),
 ]

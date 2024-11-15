@@ -17,6 +17,9 @@
         premature_no: true,
     });
 
+
+    let criteriaSnippet = ref('');
+
     defineProps(['experiments']);
 
     let request = null;
@@ -127,6 +130,15 @@
         d3.select('.graph svg').remove();
         loading.value = true;
         makeGraph('.graph');
+
+        if (experiment) {
+            fetch(`/experiments/${experiment.value}/criteria/`, {
+                credentials: 'include',
+                method: 'GET',
+            }).then(async (response) => {
+                criteriaSnippet.value = await response.text()
+            });
+        }
     }, {deep: true});
 </script>
 
@@ -145,7 +157,8 @@
         </div>
         <div class="col-3">
             <div>{{ _('Criteria:') }}</div>
-            <div class="criteria" :class="experiment && 'disabled'">
+            <div v-if="experiment" v-html="criteriaSnippet"></div>
+            <div class="criteria" v-if="!experiment">
                 <div>
                     {{ _('Parent with Dyslexia') }}
                     <div class="float-end">

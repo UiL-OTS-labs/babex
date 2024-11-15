@@ -136,3 +136,15 @@ class ExperimentAttachmentView(ExperimentLeaderMixin, ExperimentObjectMixin, Vie
         response = HttpResponse(attachment.file, content_type=attachment.file.content_type)
         response["Content-Disposition"] = "attachment; filename=" + attachment.filename
         return response
+
+
+class ExperimentCriteriaView(LabManagerMixin, ExperimentObjectMixin, generic.TemplateView):
+    """used to display an html table with filter criteria on the demographics view"""
+
+    experiment_kwargs_name = "pk"
+    template_name = "experiments/criteria_snippet.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["experiment"] = self.experiment
+        return context

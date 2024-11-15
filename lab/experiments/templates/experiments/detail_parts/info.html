@@ -135,7 +135,7 @@
         </div>
     </div>
     <div class="tab-pane fade" id="criteria" role="tabpanel">
-        {% include 'experiments/criteria_snippit.html' %}
+        {% include 'experiments/criteria_snippet.html' %}
         <div class="p-2">
             <a class="btn btn-secondary" href="{% url 'experiments:default_criteria' experiment.pk %}?next={{ request.path }}">
                 {% trans 'experiments:detail:edit_default_criteria' %}
