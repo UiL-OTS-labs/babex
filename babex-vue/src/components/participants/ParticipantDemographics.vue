@@ -131,7 +131,7 @@
         loading.value = true;
         makeGraph('.graph');
 
-        if (experiment) {
+        if (experiment.value) {
             fetch(`/experiments/${experiment.value}/criteria/`, {
                 credentials: 'include',
                 method: 'GET',
