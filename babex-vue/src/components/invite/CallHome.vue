@@ -32,7 +32,7 @@
     // event start and end times saved as separate refs because
     // our DateTimePicker doesn't play nicely with fullcalendar's event object
     const eventStart = ref<Date|null>(null);
-    const eventEnd = computed(() => new Date(eventStart.value.getTime() + 60 * 1000 * props.experiment.session_duration));
+    const eventEnd = computed(() => new Date(eventStart.value!.getTime() + 60 * 1000 * props.experiment.session_duration));
 
     const callStatus = ref<string|null>(null);
     const comment = ref('');
@@ -113,7 +113,7 @@
                 start: selectionInfo.start,
                 startEditable: true
             });
-            eventStart.value = event.value.start;
+            eventStart.value = event.value!.start;
         }
         else {
             step.value = 1;
