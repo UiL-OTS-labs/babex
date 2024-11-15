@@ -44,10 +44,9 @@ def as_leader(page, django_user_model, live_server):
 @pytest.fixture
 def sample_experiment(admin_user, db, sample_location):
     yield admin_user.experiments.create(
-        defaultcriteria=DefaultCriteria.objects.create(),
         name="sample experiment",
-        duration="10 minutes",
-        session_duration="30 minutes",
+        duration=10,
+        session_duration=30,
         recruitment_target=50,
         task_description="task description",
         responsible_researcher="dr. Lin Guist",

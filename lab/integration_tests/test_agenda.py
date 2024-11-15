@@ -117,7 +117,6 @@ def test_agenda_modify_appointment(page, appointment_tomorrow, as_leader):
     new_time = original_time + timedelta(days=3)
 
     page.fill(".appointment-start input", new_time.strftime("%d-%m-%Y %H:%M"))
-    page.fill(".appointment-end input", (new_time + timedelta(hours=1)).strftime("%d-%m-%Y %H:%M"))
     page.click(".action-panel .save")
 
     page.locator(".action-panel .save").wait_for(state="hidden")
@@ -130,16 +129,3 @@ def test_agenda_modify_appointment(page, appointment_tomorrow, as_leader):
     # check that an appointment update email was sent
     assert len(mail.outbox) == 1
     assert mail.outbox[0].to[0] == appointment_tomorrow.participant.email
-
-
-def test_agenda_modify_appointment_illegal(page, appointment_tomorrow, as_leader):
-    appointment_tomorrow.experiment.leaders.add(as_leader)
-    page.locator("a").get_by_text("Agenda").click()
-
-    page.click(f'td[data-date="{appointment_tomorrow.start.date()}"]')
-    original_time = appointment_tomorrow.timeslot.start
-    new_time = original_time + timedelta(days=3)
-
-    page.fill(".appointment-start input", new_time.strftime("%d-%m-%Y %H:%M"))
-
-    expect(page.locator(".action-panel .save")).to_be_disabled()

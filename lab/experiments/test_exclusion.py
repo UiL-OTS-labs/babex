@@ -8,9 +8,9 @@ from participants.models import Participant, ParticipantData, Language
 
 
 def test_excluded_experiment(admin_user, sample_participant):
-    experiment_1 = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
-    experiment_2 = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
-    experiment_3 = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
+    experiment_1 = admin_user.experiments.create(duration=10, session_duration=20)
+    experiment_2 = admin_user.experiments.create(duration=10, session_duration=20)
+    experiment_3 = admin_user.experiments.create(duration=10, session_duration=20)
 
     # mark participant as having participated in experiment #1
     timeslot = TimeSlot.objects.create(
@@ -29,8 +29,8 @@ def test_excluded_experiment(admin_user, sample_participant):
 
 
 def test_required_experiment(admin_user, sample_participant):
-    experiment_1 = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
-    experiment_2 = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
+    experiment_1 = admin_user.experiments.create(duration=10, session_duration=20)
+    experiment_2 = admin_user.experiments.create(duration=10, session_duration=20)
 
     # cannot participate in #2 unless participated in #1
     experiment_2.required_experiments.add(experiment_1)
@@ -50,9 +50,9 @@ def test_required_experiment(admin_user, sample_participant):
 
 
 def test_required_experiment_multiple(admin_user, sample_participant):
-    experiment_1 = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
-    experiment_2 = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
-    experiment_3 = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
+    experiment_1 = admin_user.experiments.create(duration=10, session_duration=20)
+    experiment_2 = admin_user.experiments.create(duration=10, session_duration=20)
+    experiment_3 = admin_user.experiments.create(duration=10, session_duration=20)
 
     # cannot participat in #3 unless participated in #1 and #2
     experiment_3.required_experiments.add(experiment_1)
@@ -82,7 +82,9 @@ def set_participant_field(participant, field_name, value):
 
 def test_parent_criterion_required(admin_user, sample_participant):
     for criterion in ["dyslexic_parent", "tos_parent"]:
-        experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create(**{criterion: "Y"}))
+        experiment = admin_user.experiments.create(
+            duration=10, session_duration=20, defaultcriteria=DefaultCriteria.objects.create(**{criterion: "Y"})
+        )
         for value in [Participant.WhichParent.FEMALE, Participant.WhichParent.MALE, Participant.WhichParent.BOTH]:
             set_participant_field(sample_participant, criterion, value)
             assert sample_participant in get_eligible_participants_for_experiment(
@@ -97,7 +99,9 @@ def test_parent_criterion_required(admin_user, sample_participant):
 
 def test_parent_criterion_excluded(admin_user, sample_participant):
     for criterion in ["dyslexic_parent", "tos_parent"]:
-        experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create(**{criterion: "N"}))
+        experiment = admin_user.experiments.create(
+            duration=10, session_duration=20, defaultcriteria=DefaultCriteria.objects.create(**{criterion: "N"})
+        )
         for value in [
             Participant.WhichParent.FEMALE,
             Participant.WhichParent.MALE,
@@ -113,7 +117,7 @@ def test_parent_criterion_excluded(admin_user, sample_participant):
 
 def test_parent_criterion_indifferent(admin_user, sample_participant):
     for criterion in ["dyslexic_parent", "tos_parent"]:
-        experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
+        experiment = admin_user.experiments.create(duration=10, session_duration=20)
         for value in [choice[0] for choice in Participant.WhichParent.choices]:
             set_participant_field(sample_participant, criterion, value)
             assert sample_participant in get_eligible_participants_for_experiment(
@@ -121,7 +125,7 @@ def test_parent_criterion_indifferent(admin_user, sample_participant):
             ), f"Participant with field {criterion} set to {value} is missing from eligible set"
 
         experiment = admin_user.experiments.create(
-            defaultcriteria=DefaultCriteria.objects.create(**{criterion: ["Y", "N"]})
+            duration=10, session_duration=20, defaultcriteria=DefaultCriteria.objects.create(**{criterion: ["Y", "N"]})
         )
         for value in [choice[0] for choice in Participant.WhichParent.choices]:
             set_participant_field(sample_participant, criterion, value)
@@ -138,14 +142,16 @@ def test_participant_criteria(admin_user, sample_participant):
             set_participant_field(sample_participant, criterion_name, option)
 
             # indifferent
-            experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
+            experiment = admin_user.experiments.create(duration=10, session_duration=20)
             assert sample_participant in get_eligible_participants_for_experiment(
                 experiment
             ), f"Participant with field {criterion_name} set to {option} is missing from eligible set"
 
             # included
             experiment = admin_user.experiments.create(
-                defaultcriteria=DefaultCriteria.objects.create(**{criterion_name: [option]})
+                duration=10,
+                session_duration=20,
+                defaultcriteria=DefaultCriteria.objects.create(**{criterion_name: [option]}),
             )
             assert sample_participant in get_eligible_participants_for_experiment(
                 experiment
@@ -153,7 +159,9 @@ def test_participant_criteria(admin_user, sample_participant):
 
             # excluded
             experiment = admin_user.experiments.create(
-                defaultcriteria=DefaultCriteria.objects.create(**{criterion_name: list(options - set([option]))})
+                duration=10,
+                session_duration=20,
+                defaultcriteria=DefaultCriteria.objects.create(**{criterion_name: list(options - set([option]))}),
             )
             assert sample_participant not in get_eligible_participants_for_experiment(
                 experiment
@@ -168,36 +176,46 @@ def test_multilingual_criterion(admin_user, sample_participant):
     sample_participant.data.languages.set([en, nl])
 
     # indifferent
-    experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
+    experiment = admin_user.experiments.create(duration=10, session_duration=20)
     assert sample_participant in get_eligible_participants_for_experiment(experiment)
 
     # included
-    experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create(multilingual=["Y"]))
+    experiment = admin_user.experiments.create(
+        duration=10, session_duration=20, defaultcriteria=DefaultCriteria.objects.create(multilingual=["Y"])
+    )
     assert sample_participant in get_eligible_participants_for_experiment(experiment)
 
     # excluded
-    experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create(multilingual=["N"]))
+    experiment = admin_user.experiments.create(
+        duration=10, session_duration=20, defaultcriteria=DefaultCriteria.objects.create(multilingual=["N"])
+    )
     assert sample_participant not in get_eligible_participants_for_experiment(experiment)
 
     # monolingual participant
     sample_participant.data.languages.set([en])
 
     # indifferent
-    experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create())
+    experiment = admin_user.experiments.create(duration=10, session_duration=20)
     assert sample_participant in get_eligible_participants_for_experiment(experiment)
 
     # included
-    experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create(multilingual=["N"]))
+    experiment = admin_user.experiments.create(
+        duration=10, session_duration=20, defaultcriteria=DefaultCriteria.objects.create(multilingual=["N"])
+    )
     assert sample_participant in get_eligible_participants_for_experiment(experiment)
 
     # excluded
-    experiment = admin_user.experiments.create(defaultcriteria=DefaultCriteria.objects.create(multilingual=["Y"]))
+    experiment = admin_user.experiments.create(
+        duration=10, session_duration=20, defaultcriteria=DefaultCriteria.objects.create(multilingual=["Y"])
+    )
     assert sample_participant not in get_eligible_participants_for_experiment(experiment)
 
 
 def test_age_filters(admin_user, sample_participant):
     experiment = admin_user.experiments.create(
-        defaultcriteria=DefaultCriteria.objects.create(min_age_days=5, min_age_months=3)
+        duration=10,
+        session_duration=20,
+        defaultcriteria=DefaultCriteria.objects.create(min_age_days=5, min_age_months=3),
     )
 
     # too young
@@ -211,7 +229,9 @@ def test_age_filters(admin_user, sample_participant):
     assert sample_participant in get_eligible_participants_for_experiment(experiment)
 
     experiment = admin_user.experiments.create(
-        defaultcriteria=DefaultCriteria.objects.create(max_age_days=5, max_age_months=3)
+        duration=10,
+        session_duration=20,
+        defaultcriteria=DefaultCriteria.objects.create(max_age_days=5, max_age_months=3),
     )
 
     # too old
@@ -225,9 +245,11 @@ def test_age_filters(admin_user, sample_participant):
     assert sample_participant in get_eligible_participants_for_experiment(experiment)
 
     experiment = admin_user.experiments.create(
+        duration=10,
+        session_duration=20,
         defaultcriteria=DefaultCriteria.objects.create(
             min_age_days=5, min_age_months=3, max_age_days=15, max_age_months=6
-        )
+        ),
     )
 
     # too old

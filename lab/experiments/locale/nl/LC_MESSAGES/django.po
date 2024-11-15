@@ -950,3 +950,6 @@ msgstr "Geëxcludeerd"
 #: experiments/models/appointment_models.py:38
 msgid "experiments:appointment:outcome:canceled"
 msgstr "Geannuleerd"
+
+msgid "experiments:duration:minutes"
+msgstr "minuten"

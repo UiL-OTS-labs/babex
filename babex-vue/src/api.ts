@@ -217,7 +217,6 @@ class GenericApiPart<T> extends ApiPart {
 
 interface AppointmentCreate {
     start: Date,
-    end: Date,
     experiment: number,
     leader: number,
     participant: number,

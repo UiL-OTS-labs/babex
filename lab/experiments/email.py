@@ -43,8 +43,8 @@ DEFAULT_CONFIRMATION_MAIL = """<p>Beste {{parent_name}},</p>
     </p>
     <p>
         <strong>Het experiment</strong><br/>
-        Het experiment duurt maximaal {{experiment_duration}}.
-        Omdat we ook de procedure uitleggen en er achteraf tijd is voor vragen, zult u ongeveer {{session_duration}} kwijt zijn
+        Het experiment duurt maximaal {{experiment_duration}} minuten.
+        Omdat we ook de procedure uitleggen en er achteraf tijd is voor vragen, zult u ongeveer {{session_duration}} minuten kwijt zijn
         aan uw bezoek aan het Babylab. In de bijlage van deze mail vindt u meer informatie over het experiment en onze werkwijze.
     </p>
     <p>
