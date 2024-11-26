@@ -84,8 +84,7 @@ class Command(BaseCommand):
         # fetch appoinments 24 hours from now
         now = timezone.now()
         threshold_from = now + timedelta(days=1)
-        d_to = now + timedelta(days=2)
-        threshold_to = timezone.make_aware(datetime(d_to.year, d_to.month, d_to.day, 0, 0))
+        threshold_to = threshold_from + timedelta(hours=1)
 
         appointments = Appointment.objects.filter(
             timeslot__start__gt=threshold_from, timeslot__start__lt=threshold_to, reminder_sent=None
