@@ -130,7 +130,7 @@
         allDaySlot: false,
         slotMinTime: "07:00:00",
         slotMaxTime: "20:00:00",
-        slotDuration: {minutes: props.duration ?? 30},
+        slotDuration: {minutes: 15},
         defaultTimedEventDuration: {minutes: props.duration},
         forceEventDuration: props.duration ? true : false,
         eventTimeFormat: {
