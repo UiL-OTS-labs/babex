@@ -414,7 +414,7 @@ msgstr ""
 
 #: participants/templates/participants/delete.html:27
 msgid "participants:delete:delete:prompt"
-msgstr "Weet je het zeker dat je participant '{}' wilt verwijderen?"
+msgstr "Weet je zeker dat je participant '{}' wilt verwijderen?"
 
 msgid "participants:delete:deactivate"
 msgstr "Participant deactiveren"
@@ -424,7 +424,7 @@ msgstr ""
 "Deze participant heeft bij een of meer experimenten meegedaan en kan niet verwijderen worden: "
 
 msgid "participants:delete:deactivate:prompt"
-msgstr "Je kan alsnog de participant deactiveren"
+msgstr "Je kunt alsnog de participant deactiveren"
 
 msgid "participant:attribute:parent_first_name"
 msgstr "Voornaam ouder"

@@ -835,7 +835,7 @@ msgid "experiments:call:status:deactivate"
 msgstr "Wil uitschrijven"
 
 msgid "experiments:call:home:actions"
-msgstr "Nadat je gebeld hebt, klik dan alsjeblieft op de actie die van toepassing is:"
+msgstr "Klik nadat je gebeld hebt op de actie die van toepassing is:"
 
 msgid "experiments:call:home:participation_prefix"
 msgstr "{} mag met dit experiment meedoen"
