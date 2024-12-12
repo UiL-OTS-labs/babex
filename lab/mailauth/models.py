@@ -104,7 +104,11 @@ def try_authenticate(token: str) -> MailAuthResult:
             # the parent app sets it via an api call
             possible_pps = participants
 
-    mauth.session_token = token_urlsafe()
+    if mauth.session_token is None:
+        # link might be visited several times, and we don't want to invalidate a session
+        # (this causes issues with e.g. outlook link protection visiting the auth link for you)
+        mauth.session_token = token_urlsafe()
+
     mauth.save()
     return MailAuthResult(mauth=mauth, possible_pps=possible_pps, reason=MailAuthReason.SUCCESS)
 
