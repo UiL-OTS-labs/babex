@@ -23,6 +23,36 @@
         duration?: number,
     }>();
 
+
+    // instead of directly using fullcalendar's url event source,
+    // we manually load data using the fetch api and check for changes.
+    // this lets us avoid re-rendering the agenda when there are no changes on the server.
+    function funcSource(url: string) {
+        let last: Array<any> | null = null;
+        let lastArgs: {start: string, end: string} | null = null;
+
+        return (info, success, fail) => {
+            let args = {start: info.startStr, end: info.endStr};
+            fetch(
+                url + '?' + new URLSearchParams(args)
+            ).then(async response => {
+                let skip = false;
+                let data = await response.json();
+                if (last != null && JSON.stringify(lastArgs) == JSON.stringify(args)) {
+                    if (JSON.stringify(last) == JSON.stringify(data)) {
+                        skip = true;
+                    }
+                }
+
+                if (!skip) {
+                    last = data;
+                    lastArgs = args;
+                    success(data);
+                }
+            })
+        };
+    }
+
     // from https://stackoverflow.com/a/64090995
     function hsl2rgb(h: number, s: number, l: number): [number, number, number] {
         let a = s * Math.min(l, 1 - l);
@@ -116,6 +146,7 @@
     const showCanceled = ref<boolean>(false);
 
     const calendarOptions: CalendarOptions = {
+        progressiveEventRendering: true,
         plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
         initialView: 'dayGridMonth',
         customButtons: {
@@ -141,18 +172,18 @@
         displayEventEnd: true,
         eventSources: [
             {
-                url: urls.agenda.feed,
+                events: funcSource(urls.agenda.feed),
                 // formatAppointment may return false, but the type signature of eventDataTransform doesn't like it
                 eventDataTransform: formatAppointment as any,
                 // syntax trick to set object property only when experiment is defined
                 ...(props.experiment && {extraParams: {experiment: props.experiment}})
             },
             {
-                url: urls.agenda.closing,
+                events: funcSource(urls.agenda.closing),
                 eventDataTransform: formatClosing,
                 color: 'gray',
                 ...(props.experiment && {extraParams: {experiment: props.experiment}})
-            },
+            }
         ],
         eventContent: eventRender,
         selectable: true,
