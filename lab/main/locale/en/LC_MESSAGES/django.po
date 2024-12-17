@@ -112,11 +112,11 @@ msgid "user:attribute:phonenumber"
 msgstr ""
 
 #: main/templates/403.html:7
-msgid "main:error:permission_deined:header"
+msgid "main:error:permission_denied:header"
 msgstr "Permission Denied"
 
 #: main/templates/403.html:11
-msgid "main:error:permission_deined:text"
+msgid "main:error:permission_denied:text"
 msgstr ""
 "You do not have permissions to access the requested page. Please contact the "
 "lab managers for assistance."

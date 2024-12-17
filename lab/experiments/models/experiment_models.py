@@ -25,9 +25,13 @@ def _get_dt_2_hours_ago() -> datetime:
 class Experiment(models.Model):
     name = models.TextField(_("experiment:attribute:name"))
 
-    duration = models.IntegerField(_("experiment:attribute:duration"))
+    duration = models.IntegerField(
+        _("experiment:attribute:duration"), help_text=_("experiment:attribute:duration:help_text")
+    )
 
-    session_duration = models.IntegerField(_("experiment:attribute:session_duration"))
+    session_duration = models.IntegerField(
+        _("experiment:attribute:session_duration"), help_text=_("experiment:attribute:session_duration:help_text")
+    )
 
     # how many participants are aimed for
     recruitment_target = models.PositiveIntegerField(

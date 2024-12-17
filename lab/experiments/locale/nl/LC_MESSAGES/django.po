@@ -94,7 +94,14 @@ msgstr "Naam"
 
 #: experiments/models/experiment_models.py:65
 msgid "experiment:attribute:duration"
-msgstr "Tijdsduur experiment"
+msgstr "Tijdsduur experiment (minuten)"
+
+msgid "experiment:attribute:duration:help_text"
+msgstr "Hoelang duurt het experiment zelf."
+
+msgid "experiment:attribute:session_duration:help_text"
+msgstr "Hoelang duurt het volledige bezoek, incl. onvangst e.d."
+" Dit wordt gebruikt om de duur van de afspraak in de agenda te bepalen."
 
 #: experiments/models/experiment_models.py:73
 msgid "experiment:attribute:task_description"
@@ -847,7 +854,7 @@ msgid "experiments:call:home:participation_to"
 msgstr "t/m {}"
 
 msgid "experiment:attribute:session_duration"
-msgstr "Tijdsduur sessie (incl. ontvangst e.d.)"
+msgstr "Tijdsduur sessie (minuten)"
 
 msgid "experiment:attribute:location"
 msgstr "Locatie"

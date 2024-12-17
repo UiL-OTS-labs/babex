@@ -191,10 +191,17 @@ msgstr "Name"
 
 #: experiments/models/experiment_models.py:65
 msgid "experiment:attribute:duration"
-msgstr "Task duration"
+msgstr "Task duration (minutes)"
 
 msgid "experiment:attribute:session_duration"
-msgstr "Session duration"
+msgstr "Session duration (minutes)"
+
+msgid "experiment:attribute:duration:help_text"
+msgstr "How long does it take to complete the experiment."
+
+msgid "experiment:attribute:session_duration:help_text"
+msgstr "How long does the whole visit to the lab take, including welcoming the participant etc."
+" This is used to determine the duration of appointments."
 
 #: experiments/models/experiment_models.py:71
 msgid "experiment:attribute:recruitment_target"
