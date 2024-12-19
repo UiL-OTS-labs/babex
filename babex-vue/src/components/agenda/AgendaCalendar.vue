@@ -31,7 +31,7 @@
         let last: Array<any> | null = null;
         let lastArgs: {start: string, end: string} | null = null;
 
-        return (info, success, fail) => {
+        return (info: any, success: any) => {
             let args = {start: info.startStr, end: info.endStr};
             fetch(
                 url + '?' + new URLSearchParams(args)

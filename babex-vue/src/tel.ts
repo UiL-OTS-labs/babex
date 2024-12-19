@@ -4,7 +4,6 @@ import imgFlags from 'intl-tel-input/build/img/flags.webp';
 import imgFlags2 from 'intl-tel-input/build/img/flags@2x.webp';
 import imgGlobe from 'intl-tel-input/build/img/globe.webp';
 import imgGlobe2 from 'intl-tel-input/build/img/globe@2x.webp';
-// @ts-expect-error i18n module has no types
 import { nl } from 'intl-tel-input/i18n';
 
 
