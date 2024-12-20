@@ -14,7 +14,9 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # fetch new signups from the last 7 days
         threshold = datetime.now() - timedelta(days=7)
-        new_signups = Signup.objects.filter(status=Signup.Status.NEW, created__gte=threshold).count()
+        new_signups = (
+            Signup.objects.filter(status=Signup.Status.NEW, created__gte=threshold).exclude(email_verified=None).count()
+        )
         total_waiting = Signup.objects.filter(status=Signup.Status.NEW).exclude(email_verified=None).count()
         unverified = Signup.objects.filter(status=Signup.Status.NEW, email_verified=None).count()
 
