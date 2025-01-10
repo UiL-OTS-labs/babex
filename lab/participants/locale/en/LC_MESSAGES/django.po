@@ -294,7 +294,7 @@ msgstr "Languages"
 
 #: /templates/participants/detail.html:134
 #: participants/templates/participants/detail.html:176
-msgid "participant:detail:experiments"
+msgid "participants:detail:experiment"
 msgstr "Experiment"
 
 #: participants/templates/participants/detail.html:137

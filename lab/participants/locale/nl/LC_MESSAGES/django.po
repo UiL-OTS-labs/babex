@@ -163,8 +163,8 @@ msgid "yes,no"
 msgstr "ja,nee"
 
 #: participants/templates/participants/detail.html:169
-msgid "participants:detail:experiments"
-msgstr "Experimenten"
+msgid "participants:detail:experiment"
+msgstr "Experiment"
 
 #: participants/templates/participants/detail.html:172
 msgid "participants:detail:datetime"
