@@ -1,12 +1,12 @@
 import logging
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 from cdh.mail.classes import BaseEmail, _strip_tags
 from django.core.mail import get_connection
 from django.core.management.base import BaseCommand
 from django.template import defaultfilters
 from django.utils import timezone, translation
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext
 
 from experiments.email import AppointmentReminderEmail
 from experiments.models import Appointment
@@ -37,7 +37,7 @@ def prepare_reminder_mail(appointment: Appointment):
             "time": defaultfilters.date(timezone.localtime(time_slot.start), "H:i"),
         }
 
-    subject = _("experiments:mail:appointment:reminder:subject").format(appointment.experiment.name)
+        subject = gettext("experiments:mail:appointment:reminder:subject").format(appointment.experiment.name)
 
     if experiment.location:
         replacements["experiment_location"] = experiment.location.name
@@ -53,7 +53,7 @@ def prepare_reminder_mail(appointment: Appointment):
 
 def send_reminder_mail(appointment: Appointment, contents: str) -> None:
     with translation.override("nl"):
-        subject = _("experiments:mail:appointment:reminder:subject").format(appointment.experiment.name)
+        subject = gettext("experiments:mail:appointment:reminder:subject").format(appointment.experiment.name)
 
     class SimpleHTMLMail(BaseEmail):
         def __init__(self, to, subject, contents, **kwargs):

@@ -7,6 +7,7 @@ from cdh.mail.classes import TemplateEmail
 from django.conf import settings
 from django.db import models
 from django.utils import translation
+from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
 
@@ -71,6 +72,6 @@ class Signup(models.Model):
                     name=self.name,
                 ),
                 to=[self.email],
-                subject=_("signups:mail:validation:subject"),
+                subject=gettext("signups:mail:validation:subject"),
             )
             mail.send()

@@ -8,7 +8,7 @@ from django.http.response import JsonResponse
 from django.shortcuts import redirect
 from django.utils import timezone, translation
 from django.utils.dateparse import parse_datetime
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext
 from django.views.generic import TemplateView
 from rest_framework import generics, serializers, views
 
@@ -188,7 +188,7 @@ class UpdateCall(generics.UpdateAPIView):
                         deactivate_link=deactivate_link,
                     ),
                     to=[call.participant.email],
-                    subject=_("experiments:call:deactivate:mail:subject"),
+                    subject=gettext("experiments:call:deactivate:mail:subject"),
                 )
             mail.send()
         return JsonResponse(self.serializer_class(call).data)

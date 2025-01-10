@@ -2,14 +2,14 @@ import dataclasses
 from datetime import datetime
 from enum import Enum, auto
 from secrets import token_urlsafe
-from typing import List, Optional, Tuple
+from typing import List, Optional
 
 import cdh.core.fields as e_fields
 from cdh.mail.classes import TemplateEmail
 from django.conf import settings
 from django.db import models
 from django.utils import timezone, translation
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext
 
 from participants.models import Participant
 
@@ -36,7 +36,7 @@ class MailAuth(models.Model):
                     link_token=self.link_token,
                 ),
                 to=[self.email],
-                subject=_("mailauth:send:subject"),
+                subject=gettext("mailauth:send:subject"),
             )
             mail.send()
 

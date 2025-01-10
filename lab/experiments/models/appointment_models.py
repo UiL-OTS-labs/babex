@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from cdh.mail.classes import TemplateEmail
 from django.db import models
 from django.utils import translation
+from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
 from main.models import User
@@ -153,6 +154,6 @@ def _send_cancel_confirmation(appointment: Appointment) -> None:
             html_template="mail/appointment/canceled.html",
             context=context,
             to=[appointment.participant.email],
-            subject=_("experiments:mail:appointment:canceled:subject"),
+            subject=gettext("experiments:mail:appointment:canceled:subject"),
         )
         mail.send()

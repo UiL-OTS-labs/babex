@@ -6,6 +6,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils import timezone, translation
+from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, ListView
 from rest_framework import views
@@ -87,7 +88,7 @@ class SignupVerifyView(views.APIView):
         if timezone.now() - signup.created > timedelta(days=1):
             # expired
             with translation.override("nl"):
-                return Response(dict(reason=_("signups:verify:error:expired")), status=410)
+                return Response(dict(reason=gettext("signups:verify:error:expired")), status=410)
         else:
             signup.email_verified = timezone.now()
             signup.save()

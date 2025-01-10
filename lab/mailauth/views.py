@@ -3,7 +3,7 @@ from datetime import timedelta
 import jwt
 from django.conf import settings
 from django.utils import timezone, translation
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext
 from rest_framework import exceptions, views
 from rest_framework.response import Response
 
@@ -36,7 +36,7 @@ class MailAuthView(views.APIView):
 
         if result.reason == MailAuthReason.EXPIRED:
             with translation.override("nl"):
-                return Response(dict(reason=_("mailauth:error:expired")), status=410)
+                return Response(dict(reason=gettext("mailauth:error:expired")), status=410)
 
         raise exceptions.AuthenticationFailed()
 
