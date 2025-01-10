@@ -85,3 +85,6 @@ msgstr "Approved"
 #: signups/views.py:41
 msgid "signups:messages:rejected"
 msgstr "Rejected"
+
+msgid "yes,empty"
+msgstr "yes,"
