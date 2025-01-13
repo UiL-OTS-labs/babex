@@ -25,7 +25,10 @@
         <option></option>
         {% for group_name, group_choices, group_index in widget.optgroups %}
             {% for option in group_choices %}
+                {# kinda ugly but avoid confusion by hiding the Dutch option under "other language" #}
+                {% if option.value.strip != "Nederlands" %}
                 <option value="{{ option.value }}" {% if mono_other_checked and option.value in value %}selected{% endif %}>{{ option.label }}</option>
+                {% endif %}
             {% endfor %}
         {% endfor %}
     </select>
