@@ -50,7 +50,7 @@ class ParticipantListDataView(views.APIView):
             pp.age,
             pp.get_sex_display() or "",
             pp.phonenumber,
-            _("options:yes,empty").split(",")[pp.multilingual],
+            _("options:yes,empty").split(",")[not pp.multilingual],
             pp.created.strftime("%Y-%m-%d"),
             render_to_string("participants/actions.html", dict(participant=pp), request=self.request),
         ]
