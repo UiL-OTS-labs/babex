@@ -31,9 +31,16 @@ class SignupListView(LabManagerMixin, ListView):
 class SignupDetailView(braces.StaffuserRequiredMixin, DetailView):
     queryset = Signup.objects.all()
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["languages"] = Language.objects.all()
+        return context
+
     def post(self, request, *args, **kwargs):
         action = self.request.POST["action"]
         signup = Signup.objects.get(pk=self.kwargs["pk"])
+        languages = self.request.POST.getlist("languages")
+        signup.languages = [lang.strip() for lang in languages]
         if signup.status != Signup.Status.NEW:
             return HttpResponse("already processed")
 

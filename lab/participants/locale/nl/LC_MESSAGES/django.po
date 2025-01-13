@@ -313,6 +313,9 @@ msgstr "Leeftijd"
 msgid "participant:attribute:languages"
 msgstr "Talen"
 
+msgid "participant:attribute:languages_clean"
+msgstr "Talen (schoon)"
+
 msgid "participants:age:years"
 msgstr "jaar"
 

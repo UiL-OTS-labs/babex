@@ -292,6 +292,9 @@ msgstr "Age"
 msgid "participant:attribute:languages"
 msgstr "Languages"
 
+msgid "participant:attribute:languages_clean"
+msgstr "Talen (clean)"
+
 #: /templates/participants/detail.html:134
 #: participants/templates/participants/detail.html:176
 msgid "participants:detail:experiment"
