@@ -2,6 +2,7 @@
 <div class="form-check {{ widget.attrs.valid }}">
     <input class="form-check-input" id="id_languages_mono_dutch" type="radio" name="languages" value="Nederlands"
            {% if mono_dutch_checked %}checked{% endif %}
+           required
     />
     <label class="form-check-label" for="id_languages_mono_dutch">
         {% translate 'parent:forms:signup:languages:mono_dutch' %}
@@ -11,6 +12,7 @@
 <div class="form-check {{ widget.attrs.valid }}">
     <input class="form-check-input" id="id_languages_mono_other" type="radio" name="languages" value=""
            {% if mono_other_checked %}checked{% endif %}
+           required
     />
     <label class="form-check-label" for="id_languages_mono_other">
         {% translate 'parent:forms:signup:languages:mono_other' %}
@@ -19,7 +21,7 @@
 
 
 <div class="uu-form-field">
-    <select class="w-100" id="id_languages_mono_select" name="languages" disabled>
+    <select class="w-100" id="id_languages_mono_select" name="languages" disabled required>
         <option></option>
         {% for group_name, group_choices, group_index in widget.optgroups %}
             {% for option in group_choices %}
@@ -32,6 +34,7 @@
 <div class="form-check {{ widget.attrs.valid }}">
     <input class="form-check-input" id="id_languages_multi" type="radio" name="languages" value=""
            {% if multi_checked %}checked{% endif %}
+           required
     />
     <label class="form-check-label" for="id_languages_multi">
         {% translate 'parent:forms:signup:languages:multi' %}
@@ -39,7 +42,7 @@
 </div>
 
 <div class="uu-form-field">
-    <select class="w-100" id="id_languages_multi_select" name="languages" multiple="true" disabled>
+    <select class="w-100" id="id_languages_multi_select" name="languages" multiple="true" disabled required>
         <option></option>
         {% for group_name, group_choices, group_index in widget.optgroups %}
             {% for option in group_choices %}
