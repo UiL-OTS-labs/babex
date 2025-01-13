@@ -54,8 +54,20 @@
         $('#id_languages_multi_select').prop('disabled', !$('#id_languages_multi').prop('checked'));
         $('#id_languages_mono_select').prop('disabled', !$('#id_languages_mono_other').prop('checked'));
         $('input[type=radio]').change(() => {
-            $('#id_languages_multi_select').prop('disabled', !$('#id_languages_multi').prop('checked'));
-            $('#id_languages_mono_select').prop('disabled', !$('#id_languages_mono_other').prop('checked'));
+            if (!$('#id_languages_multi').prop('checked')) {
+                $('#id_languages_multi_select').prop('disabled', true);
+                $('#id_languages_multi_select').val([]).trigger('change');
+            }
+            else {
+                $('#id_languages_multi_select').prop('disabled', false);
+            }
+            if (!$('#id_languages_mono_other').prop('checked')) {
+                $('#id_languages_mono_select').prop('disabled', true);
+                $('#id_languages_mono_select').val(null).trigger('change');
+            }
+            else {
+                $('#id_languages_mono_select').prop('disabled', false);
+            }
         });
 
         $('#id_languages_multi_select').select2({ tags: true });
