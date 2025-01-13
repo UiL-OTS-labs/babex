@@ -397,3 +397,7 @@ msgstr "Er is een fout opgetreden tijdens het inloggen"
 
 msgid "parent:appointment:canceled"
 msgstr "Geannuleerd"
+
+msgid "parent:forms:signup:languages:help_text"
+msgstr ""
+"Als een taal niet in de lijst staat, dan kunt u die zelf intypen."

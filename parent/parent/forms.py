@@ -131,6 +131,7 @@ class SignupForm(TemplatedForm):
         label=_("parent:forms:signup:languages"),
         widget=LanguagesWidget,
         choices=[],
+        help_text=_("parent:forms:signup:languages:help_text")
     )
     parent_header = TemplatedFormTextField(header=_("parent:forms:signup:parent_header"))
     parent_first_name = forms.CharField(label=_("parent:forms:signup:parent_first_name"))
