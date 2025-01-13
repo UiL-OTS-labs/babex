@@ -106,10 +106,8 @@ class SignupForm(TemplatedForm):
         widget=BootstrapRadioSelect(),
     )
 
-    birth_date = BirthDateField(
-        label=_("parent:forms:signup:birth_date"),
-        help_text=_("parent:forms:signup:birth_date:help_text"),
-    )
+    # birth_date: BirthDateField(  # re-initialized later because it uses current date in constructor
+
     birth_weight = forms.ChoiceField(
         label=_("parent:forms:signup:birth_weight"),
         choices=(
@@ -209,6 +207,13 @@ class SignupForm(TemplatedForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.fields["birth_date"] = BirthDateField(
+            label=_("parent:forms:signup:birth_date"),
+            help_text=_("parent:forms:signup:birth_date:help_text"),
+        )
+
+        self.order_fields(['baby_header', 'name', 'sex', 'birth_date'])
 
         # replace the default django checkbox fields with bootstrap compatible ones
         for key, field in self.fields.items():
