@@ -7,7 +7,7 @@
     import interactionPlugin from '@fullcalendar/interaction';
     import type { EventInput, EventContentArg, CalendarOptions, EventSourceApi } from '@fullcalendar/core';
     import nlLocale from '@fullcalendar/core/locales/nl';
-    import { defineEmits, defineExpose, defineProps, ref } from 'vue';
+    import { defineEmits, defineExpose, defineProps, ref, watch } from 'vue';
 
     import DateTimePicker from '../DateTimePicker.vue';
     import { urls } from '../../urls';
@@ -27,30 +27,44 @@
     // instead of directly using fullcalendar's url event source,
     // we manually load data using the fetch api and check for changes.
     // this lets us avoid re-rendering the agenda when there are no changes on the server.
-    function funcSource(url: string) {
-        let last: Array<any> | null = null;
-        let lastArgs: {start: string, end: string} | null = null;
+    class Source {
+        last: Array<any> | null;
+        lastArgs: {start: string, end: string} | null;
+        url: string;
 
-        return (info: any, success: any) => {
-            let args = {start: info.startStr, end: info.endStr};
-            fetch(
-                url + '?' + new URLSearchParams(args)
-            ).then(async response => {
-                let skip = false;
-                let data = await response.json();
-                if (last != null && JSON.stringify(lastArgs) == JSON.stringify(args)) {
-                    if (JSON.stringify(last) == JSON.stringify(data)) {
-                        skip = true;
+        constructor(url: string) {
+            this.url = url;
+            this.last = null;
+            this.lastArgs = null;
+        }
+
+        source() {
+            return (info: any, success: any) => {
+                let args = {start: info.startStr, end: info.endStr};
+                fetch(
+                    this.url + '?' + new URLSearchParams(args)
+                ).then(async response => {
+                    let skip = false;
+                    let data = await response.json();
+                    if (this.last != null && JSON.stringify(this.lastArgs) == JSON.stringify(args)) {
+                        if (JSON.stringify(this.last) == JSON.stringify(data)) {
+                            skip = true;
+                        }
                     }
-                }
 
-                if (!skip) {
-                    last = data;
-                    lastArgs = args;
-                    success(data);
-                }
-            })
-        };
+                    if (!skip) {
+                        this.last = data;
+                        this.lastArgs = args;
+                        success(data);
+                    }
+                })
+            };
+        }
+
+        reset() {
+            this.last = null;
+            this.lastArgs = null;
+        }
     }
 
     // from https://stackoverflow.com/a/64090995
@@ -145,6 +159,9 @@
     const date = ref<Date>(new Date());
     const showCanceled = ref<boolean>(false);
 
+    const eventSource = new Source(urls.agenda.feed);
+    const closingSource = new Source(urls.agenda.closing);
+
     const calendarOptions: CalendarOptions = {
         progressiveEventRendering: true,
         plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
@@ -172,14 +189,14 @@
         displayEventEnd: true,
         eventSources: [
             {
-                events: funcSource(urls.agenda.feed),
+                events: eventSource.source(),
                 // formatAppointment may return false, but the type signature of eventDataTransform doesn't like it
                 eventDataTransform: formatAppointment as any,
                 // syntax trick to set object property only when experiment is defined
                 ...(props.experiment && {extraParams: {experiment: props.experiment}})
             },
             {
-                events: funcSource(urls.agenda.closing),
+                events: closingSource.source(),
                 eventDataTransform: formatClosing,
                 color: 'gray',
                 ...(props.experiment && {extraParams: {experiment: props.experiment}})
@@ -217,7 +234,8 @@
 
     function refresh() {
         const calendarApi = calendar.value!.getApi();
-        calendarApi.getEventSources().forEach((src: EventSourceApi) => src.refetch());
+        eventSource.reset();
+        calendarApi.refetchEvents();
     }
 
     defineExpose({ calendar, refresh });
