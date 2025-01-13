@@ -37,20 +37,20 @@
 
 <template>
     <div class="d-flex">
-        <select :id="'id_' + name + '_day'" class="form-control" :name="name + '_day'" v-model="day" :class="{'is-invalid': isValid === false}">
+        <select required :id="'id_' + name + '_day'" class="form-control" :name="name + '_day'" v-model="day" :class="{'is-invalid': isValid === false}">
 
             <option value="">dag</option>
             <option v-for="day in days" :key="day">
                 {{ day }}
             </option>
         </select>
-        <select :id="'id_' + name + '_month'" class="form-control" :name="name + '_month'" v-model="month" :class="{'is-invalid': isValid === false}">
+        <select required :id="'id_' + name + '_month'" class="form-control" :name="name + '_month'" v-model="month" :class="{'is-invalid': isValid === false}">
             <option value="">maand</option>
             <option v-for="(month, index) in monthNames" :key="index" :value="index">
                 {{ month }}
             </option>
         </select>
-        <select :id="'id_' + name + '_year'" class="form-control" :name="name + '_year'" v-model="year" :class="{'is-invalid': isValid === false}">
+        <select required :id="'id_' + name + '_year'" class="form-control" :name="name + '_year'" v-model="year" :class="{'is-invalid': isValid === false}">
             <option value="">jaar</option>
             <option v-for="year in years" :key="year">{{ year }}</option>
         </select>
