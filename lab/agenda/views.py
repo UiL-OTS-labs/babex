@@ -1,4 +1,6 @@
 import dateutil.parser
+from django.core.exceptions import BadRequest
+from django.utils import timezone
 from django.views import generic
 from rest_framework import generics, permissions, status, viewsets
 from rest_framework.response import Response
@@ -91,6 +93,10 @@ class AppointmentViewSet(viewsets.ModelViewSet):
         appointment.cancel()
 
     def perform_update(self, serializer):
+        # check that new time is valid
+        if serializer.validated_data["start"] < timezone.now():
+            raise BadRequest("Invalid appointment time")
+
         original_timeslot = self.get_object().timeslot
         updated = serializer.save()
         updated_timeslot = updated.timeslot
