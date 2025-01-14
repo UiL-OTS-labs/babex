@@ -2,6 +2,7 @@
     import {computed, defineEmits, defineProps, ref} from 'vue';
     import {babexApi} from '../../api';
     import {Location} from '../../types';
+    import {formatDateTime} from '../../util';
     import { _ } from '@/util';
 
     import DateTimePicker from '../DateTimePicker.vue';
@@ -42,10 +43,17 @@
             promise = babexApi.agenda.appointment.updatePartial(props.event.id, update);
         }
         else {
-            promise = babexApi.agenda.appointment.updatePartial(props.event.id, form.value);
+            if (form.value.start - props.event.start != 0) {
+                if (confirm(_('Move appointment to') + ' ' + formatDateTime(form.value.start) + '?')) {
+                    promise = babexApi.agenda.appointment.updatePartial(props.event.id, form.value);
+                }
+            }
+            else {
+                promise = babexApi.agenda.appointment.updatePartial(props.event.id, form.value);
+            }
         }
 
-        promise.success(() => emit('done'));
+        if (promise) promise.success(() => emit('done'));
 
         event.preventDefault();
         event.stopPropagation();
