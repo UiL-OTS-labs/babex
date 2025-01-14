@@ -50,7 +50,17 @@
         buttons : ['pageLength'],
         serverSide: true,
         ajax: '{% url "participants:datalist" %}',
-        processing: true
+        processing: true,
+        columns: [
+            {orderable: true},  // name
+            {orderable: true},  // date of birth
+            {orderable: true},  // age
+            {orderable: true},  // sex
+            {orderable: false}, // phonenumber
+            {orderable: true},  // multilingual
+            {orderable: true},  // created
+            {orderable: false}, // actions
+        ]
     });
 </script>
 {% endblock %}
