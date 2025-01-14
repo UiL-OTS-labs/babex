@@ -28,8 +28,9 @@
     }
     const isValid = computed(() => {
         if (year.value && month.value && day.value) {
-            let d = new Date(parseInt(year.value, 10), parseInt(month.value, 10) - 1, parseInt(day.value, 10));
-            return d >= minDateParsed && d <= maxDateParsed;
+            let m = parseInt(month.value, 10) - 1;
+            let d = new Date(parseInt(year.value, 10), m, parseInt(day.value, 10));
+            return d >= minDateParsed && d <= maxDateParsed && d.getMonth() == m;
         }
         return undefined;
     })
