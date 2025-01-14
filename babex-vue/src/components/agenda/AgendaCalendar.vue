@@ -163,6 +163,7 @@
     const closingSource = new Source(urls.agenda.closing);
 
     const calendarOptions: CalendarOptions = {
+        height: 'auto',
         progressiveEventRendering: true,
         plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
         initialView: 'dayGridMonth',
