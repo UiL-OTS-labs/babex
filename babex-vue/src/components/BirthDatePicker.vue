@@ -21,7 +21,7 @@
     let day = ref('');
 
     if (props.value){
-        let d = new Date(props.maxDate);
+        let d = new Date(props.value);
         year.value = d.getFullYear().toString();
         month.value = (d.getMonth() + 1).toString();
         day.value = d.getDate().toString();
