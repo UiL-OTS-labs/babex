@@ -5,9 +5,9 @@
     import dayGridPlugin from '@fullcalendar/daygrid';
     import timeGridPlugin from '@fullcalendar/timegrid';
     import interactionPlugin from '@fullcalendar/interaction';
-    import type { EventInput, EventContentArg, CalendarOptions, EventSourceApi } from '@fullcalendar/core';
+    import type { EventInput, EventContentArg, CalendarOptions } from '@fullcalendar/core';
     import nlLocale from '@fullcalendar/core/locales/nl';
-    import { defineEmits, defineExpose, defineProps, ref, watch } from 'vue';
+    import { defineEmits, defineExpose, defineProps, ref } from 'vue';
 
     import DateTimePicker from '../DateTimePicker.vue';
     import { urls } from '../../urls';
