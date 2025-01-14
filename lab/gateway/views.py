@@ -123,7 +123,7 @@ class DeactivateView(views.APIView):
     permission_classes = [HasParticipant, SignedSource]
 
     def post(self, request, *args, **kwargs):
-        self.request.participant.deactivate()
+        self.request.participant.deactivate(send_mail=True)
         return Response(dict())
 
 

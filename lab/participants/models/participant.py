@@ -1,8 +1,11 @@
 from typing import List
 
 import ageutil
+from cdh.mail.classes import TemplateEmail
+from django.conf import settings
 from django.db import models, transaction
-from django.utils import timezone
+from django.utils import timezone, translation
+from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
 from .participantdata import ParticipantData
@@ -154,7 +157,16 @@ class Participant(models.Model):
     def gestational_age(self):
         return self.PregnancyDuration[self.pregnancy_duration].label
 
-    def deactivate(self):
+    def deactivate(self, send_mail=False):
+        # prepare mail before we remove all data
+        with translation.override("nl"):
+            mail = TemplateEmail(
+                html_template="mail/removed.html",
+                context=dict(parent_name=self.parent_name, participant_name=self.name),
+                to=[self.email],
+                subject=gettext("experiments:call:deactivate:mail:subject"),
+            )
+
         with transaction.atomic():
             for appointment in self.appointments.all():
                 appointment.cancel()
@@ -163,6 +175,9 @@ class Participant(models.Model):
             self.extradata_set.all().delete()
             self.deactivated = timezone.now()
             self.save()
+
+        if send_mail:
+            mail.send()
 
     def can_be_deleted(self):
         # participants who have never participated may be removed without consequences

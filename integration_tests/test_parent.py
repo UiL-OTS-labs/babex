@@ -91,8 +91,9 @@ def test_parent_login_unapproved(signup, apps, page, link_from_mail, login_as):
     assert login_as(address) is False
 
 
-def test_parent_self_deactivate(page, participant, login_as):
-    login_as(participant.email)
+def test_parent_self_deactivate(page, participant, login_as, mailbox):
+    email = participant.email
+    login_as(email)
 
     page.get_by_text("Data management").click()
     page.on("dialog", lambda dialog: dialog.accept())
@@ -101,6 +102,9 @@ def test_parent_self_deactivate(page, participant, login_as):
 
     participant.refresh_from_db()
     assert participant.deactivated
+
+    assert len(mailbox(email)) == 2
+    assert 'bevestiging van uitschrijven' in mailbox(email)[-1]['subject']
 
 
 def test_parent_login_deactivated(participant, apps, page, link_from_mail, login_as):
