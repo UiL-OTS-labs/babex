@@ -40,7 +40,10 @@ class SignupDetailView(braces.StaffuserRequiredMixin, DetailView):
         action = self.request.POST["action"]
         signup = Signup.objects.get(pk=self.kwargs["pk"])
         languages = self.request.POST.getlist("languages")
-        signup.languages = [lang.strip() for lang in languages]
+        # languages field is non-empty only when the approver has edited the field
+        # otherwise, we should keep whatever the user has entered
+        if len(languages):
+            signup.languages = [lang.strip() for lang in languages]
         if signup.status != Signup.Status.NEW:
             return HttpResponse("already processed")
 
