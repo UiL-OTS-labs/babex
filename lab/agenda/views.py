@@ -93,16 +93,16 @@ class AppointmentViewSet(viewsets.ModelViewSet):
         appointment.cancel()
 
     def perform_update(self, serializer):
+        original_start = self.get_object().timeslot.start
+        updated_start = serializer.validated_data["start"]
         # check that new time is valid
-        if serializer.validated_data["start"] < timezone.now():
+        if original_start != updated_start and updated_start < timezone.now():
             raise BadRequest("Invalid appointment time")
 
-        original_timeslot = self.get_object().timeslot
         updated = serializer.save()
-        updated_timeslot = updated.timeslot
 
         # check if we should inform the participant about changed time
-        if original_timeslot.start != updated_timeslot.start:
+        if original_start != updated_start:
             send_appointment_mail(updated, prepare_appointment_mail(updated))
 
 
