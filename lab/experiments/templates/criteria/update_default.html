@@ -3,7 +3,6 @@
 {% load transformat %}
 {% load datatables %}
 {% load get_field_name %}
-{% load transformat %}
 
 {% block header_title %}
      {% transformat 'criteria:new_default_criteria:header' form.instance.experiment.name %} - {{ block.super }}
