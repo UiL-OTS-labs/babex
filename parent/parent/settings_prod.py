@@ -24,3 +24,37 @@ EMAIL_HOST_PASSWORD = secret("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 
 VUE_MANIFEST = "/static/vue/.vite/manifest.json"
+
+
+# Security
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = False
+X_FRAME_OPTIONS = "DENY"
+
+
+# Django CSP
+# http://django-csp.readthedocs.io/en/latest/index.html
+CSP_REPORT_ONLY = False
+CSP_UPGRADE_INSECURE_REQUESTS = True
+CSP_INCLUDE_NONCE_IN = ["script-src"]
+
+CSP_DEFAULT_SRC = [
+    "'self'",
+]
+CSP_SCRIPT_SRC = [
+    "'self'",
+]
+CSP_FONT_SRC = [
+    "'self'",
+    "data:",
+]
+CSP_STYLE_SRC = ["'self'", "'unsafe-inline'"]
+CSP_IMG_SRC = [
+    "'self'",
+    "data:",
+]
+
+MIDDLEWARE += [
+    "csp.middleware.CSPMiddleware",
+]
