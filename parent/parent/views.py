@@ -23,6 +23,12 @@ class SignupView(FormView):
     form_class = SignupForm
     success_url = reverse_lazy("signup.done")
 
+    # need to pass the CSP nonce from the view to form widgets
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["csp_nonce"] = str(self.request.csp_nonce) if hasattr(self.request, "csp_nonce") else ""
+        return kwargs
+
     def form_valid(self, form):
         # filter out blank fields
         fields = {key: value for key, value in form.cleaned_data.items() if value is not None}

@@ -55,7 +55,7 @@
     </select>
 </div>
 
-<script type="text/javascript" nonce="{{ request.csp_nonce }}">
+<script type="text/javascript" nonce="{{ nonce }}">
     $(function () {
         $('#id_languages_multi_select').prop('disabled', !$('#id_languages_multi').prop('checked'));
         $('#id_languages_mono_select').prop('disabled', !$('#id_languages_mono_other').prop('checked'));

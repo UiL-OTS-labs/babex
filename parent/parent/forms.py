@@ -18,9 +18,11 @@ from django.utils.translation import gettext_lazy as _
 
 class LanguagesWidget(forms.widgets.SelectMultiple):
     template_name = "widgets/languages_widget.html"
+    nonce = ""
 
     def get_context(self, name, value, attrs):
         context = super().get_context(name, value, attrs)
+        context["nonce"] = self.nonce
         if value is None:
             return context
 
@@ -60,6 +62,7 @@ class LanguagesField(forms.MultipleChoiceField):
 
 class BirthDateWidget(forms.SelectDateWidget):
     template_name = "django/forms/widgets/birth_date.html"
+    nonce = ""
 
     def __init__(self, min_date, max_date):
         super().__init__()
@@ -68,6 +71,7 @@ class BirthDateWidget(forms.SelectDateWidget):
 
     def get_context(self, name, value, attrs):
         return dict(
+            nonce=self.nonce,
             months={k: str(v) for k, v in self.months.items()},
             min_date=self.min_date,
             max_date=self.max_date,
@@ -131,7 +135,7 @@ class SignupForm(TemplatedForm):
         label=_("parent:forms:signup:languages"),
         widget=LanguagesWidget,
         choices=[],
-        help_text=_("parent:forms:signup:languages:help_text")
+        help_text=_("parent:forms:signup:languages:help_text"),
     )
     parent_header = TemplatedFormTextField(header=_("parent:forms:signup:parent_header"))
     parent_first_name = forms.CharField(label=_("parent:forms:signup:parent_first_name"))
@@ -206,15 +210,17 @@ class SignupForm(TemplatedForm):
         label="", widget=BootstrapCheckboxSelectMultiple(choices=((True, _("parent:forms:signup:data_consent")),))
     )
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, csp_nonce="", **kwargs):
         super().__init__(*args, **kwargs)
 
         self.fields["birth_date"] = BirthDateField(
             label=_("parent:forms:signup:birth_date"),
             help_text=_("parent:forms:signup:birth_date:help_text"),
         )
+        self.fields["birth_date"].widget.nonce = csp_nonce
+        self.fields["languages"].widget.nonce = csp_nonce
 
-        self.order_fields(['baby_header', 'name', 'sex', 'birth_date'])
+        self.order_fields(["baby_header", "name", "sex", "birth_date"])
 
         # replace the default django checkbox fields with bootstrap compatible ones
         for key, field in self.fields.items():
