@@ -59,6 +59,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "cdh.core.middleware.ThreadLocalUserMiddleware",
+    "csp.middleware.CSPMiddleware",
 ]
 
 ROOT_URLCONF = "parent.urls"
@@ -159,3 +160,41 @@ def secret(name):
 
 JWT_SECRET = "jwt_secret"
 JWT_ALGORITHM = "HS512"
+
+CSP_REPORT_ONLY = False
+CSP_UPGRADE_INSECURE_REQUESTS = True
+CSP_INCLUDE_NONCE_IN = ["script-src"]
+
+CSP_DEFAULT_SRC = [
+    "'self'",
+]
+CSP_SCRIPT_SRC = [
+    "'self'",
+]
+CSP_FONT_SRC = [
+    "'self'",
+    "data:",
+]
+CSP_STYLE_SRC = ["'self'", "'unsafe-inline'"]
+CSP_IMG_SRC = [
+    "'self'",
+    "data:",
+]
+
+CSP_FRAME_ANCESTORS = ["none"]
+
+
+# Security
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+LANGUAGE_COOKIE_SECURE = True
+
+LANGUAGE_COOKIE_HTTPONLY = True
+SESSION_COOKIE_HTTPONLY = True
+CSRF_COOKIE_HTTPONLY = True
+
+SECURE_SSL_REDIRECT = False
+X_FRAME_OPTIONS = "DENY"
+
+
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"

@@ -165,9 +165,12 @@ LANGUAGE_COOKIE_HTTPONLY = True
 SESSION_COOKIE_HTTPONLY = True
 CSRF_COOKIE_HTTPONLY = False
 
+LANGUAGE_COOKIE_SAMESITE = "strict"
+
 SECURE_SSL_REDIRECT = False
 X_FRAME_OPTIONS = "DENY"
 
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
 FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 
@@ -195,6 +198,8 @@ CSP_IMG_SRC = [
     "'self'",
     "data:",
 ]
+
+CSP_FRAME_ANCESTORS = ["none"]
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 60 * 60 * 12  # 12 hours
