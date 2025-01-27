@@ -1,10 +1,6 @@
 from django.contrib import admin
 
-from .models import Participant
+from .models import Language, Participant
 
 # Register your models here.
-admin.site.register(
-    [
-        Participant,
-    ]
-)
+admin.site.register([Participant, Language])
