@@ -437,3 +437,9 @@ msgstr "Achternaam ouder"
 
 msgid "participant:attribute:save_longer"
 msgstr "Gegevens mogen tot 10 jaar bewaard worden"
+
+msgid "extradata:attribute:title"
+msgstr "Extra data"
+
+msgid "participants:extradata:add:submit"
+msgstr "Opslaan"
