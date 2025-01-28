@@ -4,6 +4,7 @@ from django.core.exceptions import ObjectDoesNotExist, ViewDoesNotExist
 from django.utils.translation import gettext as _
 from django.views import generic
 
+from experiments.models.invite_models import Call
 from experiments.utils.invite import _parse_contents_html as parse_contents
 from main.auth.util import ExperimentLeaderMixin, RandomLeaderMixin
 
@@ -20,8 +21,6 @@ class InviteParticipantsForExperimentView(ExperimentLeaderMixin, ExperimentObjec
         context["object_list"] = self.get_object_list()
         context["experiment"] = self.experiment
         context["is_leader"] = self.experiment in self.request.user.experiments.all()
-
-        inviting_leader = self.request.user
         return context
 
     def get_object_list(self):
@@ -34,9 +33,16 @@ class InviteParticipantsForExperimentView(ExperimentLeaderMixin, ExperimentObjec
                 )
                 participant.invite = invite
 
-                participant.last_call = (
-                    participant.call_set.filter(experiment=self.experiment).order_by("-creation_date").first()
-                )
+                calls = participant.call_set.filter(experiment=self.experiment).order_by("-creation_date")
+                # find the last status that's not cancelled
+                last_call = None
+                for c in calls:
+                    if c.status != Call.CallStatus.CANCELLED:
+                        last_call = c
+                        break
+
+                participant.last_call = last_call
+
             except ObjectDoesNotExist:
                 participant.invite = None
 
