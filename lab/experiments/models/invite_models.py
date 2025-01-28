@@ -55,3 +55,8 @@ class Call(models.Model):
 
     # currently used to silence CALLBACK calls, but keep them in the call log
     hidden = models.BooleanField(default=False)
+
+    def status_short(self):
+        if self.status == Call.CallStatus.EMAIL:
+            return "E-mail"
+        return self.get_status_display()
