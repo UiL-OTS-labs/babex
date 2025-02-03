@@ -35,6 +35,7 @@ class SignupView(FormView):
         fields["birth_date"] = fields["birth_date"].isoformat()
         ok, result = gateway(self.request, "/gateway/signup/", data=fields)
         if ok:
+            self.request.session["email"] = form.cleaned_data["email"]
             return super().form_valid(form)
 
         log.error("Couldn't reach server while processing signup")
