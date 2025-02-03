@@ -24,3 +24,5 @@ EMAIL_HOST_PASSWORD = secret("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 
 VUE_MANIFEST = "/static/vue/.vite/manifest.json"
+
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
