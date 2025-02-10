@@ -928,3 +928,9 @@ msgstr "Max. age"
 
 msgid "experiments:duration:minutes"
 msgstr "minutes"
+
+msgid "experiment:attribute:send_reminders"
+msgstr "Send reminders"
+
+msgid "experiment:attribute:send_reminders:help_text"
+msgstr "Appointment reminders are sent to parents on the day before the appointment. Untick this box to disable reminders."

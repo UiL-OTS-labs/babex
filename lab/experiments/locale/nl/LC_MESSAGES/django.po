@@ -960,3 +960,9 @@ msgstr "Geannuleerd"
 
 msgid "experiments:duration:minutes"
 msgstr "minuten"
+
+msgid "experiment:attribute:send_reminders"
+msgstr "Stuur herinneringsmail"
+
+msgid "experiment:attribute:send_reminders:help_text"
+msgstr "Een herinneringsmail wordt een dag voor de afspraak naar de ouders verstuurd. Vink deze uit om de herinneringsmail uit te schakelen."

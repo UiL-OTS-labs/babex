@@ -53,6 +53,12 @@ class Experiment(models.Model):
         default=DEFAULT_REMINDER_MAIL,
     )
 
+    send_reminders = models.BooleanField(
+        _("experiment:attribute:send_reminders"),
+        help_text=_("experiment:attribute:send_reminders:help_text"),
+        default=True,
+    )
+
     location = models.ForeignKey(
         Location,
         verbose_name=_("experiment:attribute:location"),

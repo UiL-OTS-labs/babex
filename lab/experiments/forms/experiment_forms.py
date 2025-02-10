@@ -39,6 +39,7 @@ class ExperimentForm(TemplatedModelForm):
             "confirmation_email",
             "attachments",
             "reminder_email",
+            "send_reminders",
             "excluded_experiments",
             "required_experiments",
             "leaders",
@@ -55,7 +56,7 @@ class ExperimentForm(TemplatedModelForm):
             ),
             "confirmation_email": EmailContentEditWidget(None),
             "reminder_email": EmailContentEditWidget(None),
-            "open": BootstrapCheckboxInput,
+            "send_reminders": BootstrapCheckboxInput,
             "responsible_researcher": forms.TextInput,
         }
 

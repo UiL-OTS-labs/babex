@@ -87,7 +87,10 @@ class Command(BaseCommand):
         threshold_to = threshold_from + timedelta(hours=1)
 
         appointments = Appointment.objects.filter(
-            timeslot__start__gt=threshold_from, timeslot__start__lt=threshold_to, reminder_sent=None
+            experiment__send_reminders=True,
+            timeslot__start__gt=threshold_from,
+            timeslot__start__lt=threshold_to,
+            reminder_sent=None,
         ).exclude(outcome=Appointment.Outcome.CANCELED)
 
         for appointment in appointments:
