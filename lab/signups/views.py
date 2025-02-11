@@ -65,6 +65,7 @@ def approve_signup(signup: Signup):
         languages.append(lang)
 
     participant = Participant.objects.create(
+        created=signup.created,
         name=signup.name,
         sex=signup.sex,
         birth_date=signup.birth_date,
