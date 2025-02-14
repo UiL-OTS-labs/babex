@@ -14,6 +14,7 @@ from rest_framework import views
 
 from comments.forms import CommentForm
 from experiments.models import Experiment
+from experiments.models.invite_models import Call
 from experiments.utils.exclusion import get_eligible_participants_for_experiment
 from main.auth.util import (
     IsLabManager,
@@ -84,6 +85,7 @@ class ParticipantDetailView(RandomLeaderMixin, generic.DetailView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context["comment_form"] = CommentForm(initial=dict(participant=self.get_object()))
+        context["calls"] = self.get_object().call_set.exclude(status=Call.CallStatus.CANCELLED)
         return context
 
 
