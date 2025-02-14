@@ -55,7 +55,7 @@ def get_eligible_participants_for_experiment(experiment: Experiment, on_mailingl
             # participant has/had an appointment for this experiment
             continue
 
-        if not set(required).issubset(participated_in):
+        if required and not set(required).intersection(participated_in):
             # missing a required experiment
             continue
 

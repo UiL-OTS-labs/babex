@@ -934,7 +934,7 @@ msgstr "Verplichte voorafgaande experimenten"
 
 msgid "experiment:attribute:required_experiments:help_text"
 msgstr ""
-"Deelname aan genoemde experimenten geldt als voorwaarde om mee te mogen doen aan dit experiment."
+"Deelname aan minstens een van de genoemde experimenten geldt als voorwaarde om mee te mogen doen aan dit experiment."
 " Klik in het veld om deze experimenten te kiezen."
 
 msgid "experiment:attribute:leaders:help_text"

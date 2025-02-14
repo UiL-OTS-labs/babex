@@ -271,7 +271,7 @@ msgstr "Required experiments"
 #: experiments/models/experiment_models.py:132
 msgid "experiment:attribute:required_experiments:help_text"
 msgstr ""
-"Participants are required to have completed all of the chosen experiments."
+"Participants are required to have completed any of the chosen experiments."
 " Click on the field to choose experiments."
 
 #: experiments/models/experiment_models.py:137
