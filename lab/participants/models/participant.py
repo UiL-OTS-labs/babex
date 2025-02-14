@@ -139,7 +139,11 @@ class Participant(models.Model):
 
     @property
     def age(self):
-        return "{};{};{}".format(*ageutil.date_of_birth(self.birth_date).age_ymd())
+        return ageutil.date_of_birth(self.birth_date).age_ymd()
+
+    @property
+    def age_short(self):
+        return "{};{};{}".format(*self.age)
 
     @property
     def age_long(self):

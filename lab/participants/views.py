@@ -47,7 +47,7 @@ class ParticipantListDataView(views.APIView):
         return [
             f'<a href="{pp_url}">{pp.fullname}</a>',
             pp.birth_date.strftime("%Y-%m-%d"),
-            pp.age,
+            pp.age_short,
             pp.get_sex_display() or "",
             pp.phonenumber,
             _("options:yes,empty").split(",")[not pp.multilingual],
