@@ -55,6 +55,7 @@ class UserHome(BaseUserView, generic.ListView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context["is_saml"] = hasattr(settings, "SAML_CONFIG")
+        context["is_admins"] = self.is_admins
         return context
 
 
@@ -72,6 +73,13 @@ class UserCreateView(BaseUserView, SuccessMessageMixin, generic.CreateView):
         if hasattr(settings, "SAML_CONFIG"):
             return SAMLUserCreationForm
         return UserCreationForm
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        if self.is_admins:
+            self.object.is_staff = True
+            self.object.save()
+        return response
 
 
 class UserChangePasswordView(BaseUserView, SuccessMessageMixin, generic.UpdateView):

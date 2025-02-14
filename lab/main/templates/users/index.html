@@ -15,7 +15,11 @@
             </h1>
 
             <div class="btn-group btn-group-sm" role="group">
-                <a href="{% url 'main:user_create' %}" class="btn btn-secondary">
+                {% if is_admins %}
+                    <a href="{% url 'main:admin_create' %}" class="btn btn-secondary">
+                {% else %}
+                    <a href="{% url 'main:user_create' %}" class="btn btn-secondary">
+                {% endif %}
                     {% trans 'users:home:create_admin' %}
                 </a>
             </div>
