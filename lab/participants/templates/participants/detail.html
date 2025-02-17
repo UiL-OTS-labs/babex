@@ -188,7 +188,7 @@
                         </th>
                     </tr>
                 </thead>
-                {% for call in participant.call_set.all %}
+                {% for call in calls %}
                 <tr>
                     <td>
                         <a class="experiment" href="{% url 'experiments:detail' call.experiment.pk %}">{{ call.experiment }}</a>
