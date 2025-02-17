@@ -8,12 +8,13 @@ from .models import User
 class LeaderAdmin(UserAdmin):
     fieldsets = (
         (None, {"fields": ("username", "password")}),
-        (_("Personal info"), {"fields": ("email", "phonenumber")}),
+        (_("Personal info"), {"fields": ("email",)}),
         (
             _("Permissions"),
             {
                 "fields": (
                     "is_active",
+                    "is_support",
                     "is_staff",
                     "is_superuser",
                     "groups",
@@ -22,6 +23,13 @@ class LeaderAdmin(UserAdmin):
             },
         ),
         (_("Important dates"), {"fields": ("last_login", "date_joined")}),
+    )
+    list_display = (
+        "username",
+        "name",
+        "is_support",
+        "is_staff",
+        "is_superuser",
     )
 
 

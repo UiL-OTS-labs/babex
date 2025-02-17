@@ -13,12 +13,17 @@ class User(AbstractUser):
     name = models.CharField(_("user:attribute:name"), max_length=150)
     phonenumber = models.CharField(_("user:attribute:phonenumber"), max_length=100)
 
+    # specific role for support users which behaves the same as a leader
+    # that is not assigned to any experiment.
+    # useful for lab support to be able to see the agenda
+    is_support = models.BooleanField(_("user:attribute:is_support"), default=False)
+
     def __audit_repr__(self):
         return "<User: {}>".format(self.email)
 
     @property
     def is_leader(self):
-        return self.experiments.count() > 0
+        return self.experiments.count() > 0 or self.is_support
 
     def get_full_name(self):
         return self.name

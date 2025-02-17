@@ -359,3 +359,6 @@ msgstr "These participants should be called back:"
 
 msgid "main:home:call_back:remove"
 msgstr "X"
+
+msgid "user:attribute:is_support"
+msgstr "Lab support"

@@ -324,3 +324,6 @@ msgstr "Geen Toegang"
 msgid "main:error:permission_denied:text"
 msgstr ""
 "Je hebt geen toegang tot de gevraagd pagina. Neem contact op met de labmanagers voor assistentie."
+
+msgid "user:attribute:is_support"
+msgstr "Lab support"
