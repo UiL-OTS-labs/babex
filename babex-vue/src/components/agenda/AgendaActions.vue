@@ -9,7 +9,7 @@
         context: ActionContext,
     }>();
 
-    let canEditClosings = window.getUser().isStaff;
+    let canEditClosings = window.getUser().isSupport;
 
     defineEmits(['done']);
 </script>

@@ -7,7 +7,12 @@ from rest_framework.response import Response
 
 from experiments.models import Appointment, Experiment, Location
 from experiments.serializers import AppointmentSerializer
-from main.auth.util import IsExperimentLeader, LabManagerMixin, RandomLeaderMixin
+from main.auth.util import (
+    IsExperimentLeader,
+    LabManagerMixin,
+    LabSupportMixin,
+    RandomLeaderMixin,
+)
 from utils.appointment_mail import prepare_appointment_mail, send_appointment_mail
 
 from .models import Closing, ClosingSerializer
@@ -46,7 +51,7 @@ class ClosingPermission(permissions.BasePermission):
     def has_permission(self, request, view):
         if view.action == "list":
             return True
-        return request.user.is_staff
+        return request.user.is_support or request.user.is_staff
 
 
 class ClosingViewSet(viewsets.ModelViewSet):
@@ -106,7 +111,7 @@ class AppointmentViewSet(viewsets.ModelViewSet):
             send_appointment_mail(updated, prepare_appointment_mail(updated))
 
 
-class ClosingsAdminView(LabManagerMixin, generic.TemplateView):
+class ClosingsAdminView(LabSupportMixin, generic.TemplateView):
     template_name = "agenda/closings_admin.html"
 
     def get_context_data(self, **kwargs):

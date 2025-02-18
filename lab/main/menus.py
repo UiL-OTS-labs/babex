@@ -55,7 +55,15 @@ Menu.add_item(
 
 admin_menu = [MenuItem(_("mainmenu:admin:closings"), reverse("agenda:admin.closings"))]
 
-Menu.add_item("main", MenuItem(_("mainmenu:admin"), children=admin_menu, check=_user_is_admin, url=blank_url))
+Menu.add_item(
+    "main",
+    MenuItem(
+        _("mainmenu:admin"),
+        children=admin_menu,
+        check=lambda req: req.user.is_authenticated and req.user.is_support,
+        url=blank_url,
+    ),
+)
 
 
 if "datamanagement" in settings.INSTALLED_APPS:

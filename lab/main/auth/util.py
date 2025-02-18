@@ -6,6 +6,13 @@ class LabManagerMixin(StaffuserRequiredMixin):
     raise_exception = True
 
 
+class LabSupportMixin(UserPassesTestMixin):
+    raise_exception = True
+
+    def test_func(self, user):
+        return user.is_authenticated and (user.is_support or user.is_staff)
+
+
 class ExperimentLeaderMixin(UserPassesTestMixin):
     """Checks that the current user is a leader of the relevant experiment.
     Assumes the existence of a self.experiment property on the view.
