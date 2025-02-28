@@ -25,9 +25,11 @@
             {% trans 'experiments:home:header' %}
         </h1>
 
-        <a href="{% url 'experiments:create' %}" class="btn btn-secondary">
-            {% trans 'experiments:home:create_experiment' %}
-        </a>
+        {% if request.user.is_staff %}
+            <a href="{% url 'experiments:create' %}" class="btn btn-secondary">
+                {% trans 'experiments:home:create_experiment' %}
+            </a>
+        {% endif %}
     </div>
 {% endblock %}
 
