@@ -23,7 +23,7 @@ class Participant(models.Model):
     objects = ParticipantManager()
 
     data = models.OneToOneField(ParticipantData, on_delete=models.SET_NULL, null=True)
-    created = models.DateTimeField(verbose_name=_("participant:attribute:created"), auto_now_add=True)
+    created = models.DateTimeField(verbose_name=_("participant:attribute:created"), default=timezone.now)
     deactivated = models.DateTimeField(verbose_name=_("participant:attribute:deactivated"), null=True)
 
     @property
