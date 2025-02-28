@@ -40,7 +40,11 @@
 
         source() {
             return (info: any, success: any) => {
-                let args = {start: info.startStr, end: info.endStr};
+                let args = {start: info.startStr, end: info.endStr} as any;
+                if (props.experiment) {
+                    args.experiment = props.experiment;
+                }
+
                 fetch(
                     this.url + '?' + new URLSearchParams(args)
                 ).then(async response => {
@@ -193,14 +197,11 @@
                 events: eventSource.source(),
                 // formatAppointment may return false, but the type signature of eventDataTransform doesn't like it
                 eventDataTransform: formatAppointment as any,
-                // syntax trick to set object property only when experiment is defined
-                ...(props.experiment && {extraParams: {experiment: props.experiment}})
             },
             {
                 events: closingSource.source(),
                 eventDataTransform: formatClosing,
                 color: 'gray',
-                ...(props.experiment && {extraParams: {experiment: props.experiment}})
             }
         ],
         eventContent: eventRender,

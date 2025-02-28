@@ -70,7 +70,10 @@ class ClosingViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(end__gte=from_date, start__lt=to_date)
             if experiment_id:
                 experiment = Experiment.objects.get(pk=experiment_id)
-                queryset = queryset.filter(location=experiment.location).union(queryset.filter(is_global=True))
+                if experiment.location.part_of_building:
+                    queryset = queryset.filter(location=experiment.location).union(queryset.filter(is_global=True))
+                else:
+                    queryset = queryset.filter(location=experiment.location)
 
         return queryset
 
