@@ -107,7 +107,7 @@ class AppointmentViewSet(viewsets.ModelViewSet):
         updated = serializer.save()
 
         # check if we should inform the participant about changed time
-        if original_start != updated_start:
+        if not self.request.data.get("silent") and original_start != updated_start:
             send_appointment_mail(updated, prepare_appointment_mail(updated))
 
 

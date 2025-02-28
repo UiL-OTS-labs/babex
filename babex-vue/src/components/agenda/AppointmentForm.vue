@@ -23,6 +23,7 @@
         location: props.event.extendedProps.location,
         leader: props.event.extendedProps.leader,
         outcome: props.event.extendedProps.outcome ?? undefined,
+        silent: false
     });
 
     async function cancel() {
@@ -45,6 +46,8 @@
         else {
             if (form.value.start - props.event.start != 0) {
                 if (confirm(_('Move appointment to') + ' ' + formatDateTime(form.value.start) + '?')) {
+                    let mail = confirm(_('Send confirmation e-mail?'));
+                    form.value.silent = !mail;
                     promise = babexApi.agenda.appointment.updatePartial(props.event.id, form.value);
                 }
             }
