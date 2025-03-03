@@ -94,7 +94,10 @@ def try_authenticate(token: str) -> MailAuthResult:
         # specific participant wasn't already chosen
 
         participants = Participant.find_by_email(mauth.email)
-        if len(participants) == 1:
+        if len(participants) < 1:
+            # it makes no sense to authenticate the client when there are no available participants
+            return MailAuthResult(reason=MailAuthReason.NOT_FOUND)
+        elif len(participants) == 1:
             # only one participant associated with email, assign it immediately
             mauth.participant = participants[0]
         else:

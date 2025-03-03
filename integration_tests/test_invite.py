@@ -30,7 +30,6 @@ def participant(apps):
 def test_cancel_appointment_from_email(apps, participant, mailbox, link_from_mail, page):
     apps.lab.load('admin')  # generate admin user
     Experiment = apps.lab.get_model('experiments', 'Experiment')
-    DefaultCriteria = apps.lab.get_model('experiments', 'DefaultCriteria')
     User = apps.lab.get_model('main', 'User')
     Appointment = apps.lab.get_model('experiments', 'Appointment')
     experiment = Experiment.objects.create(duration=10, session_duration=20)
@@ -68,7 +67,6 @@ def test_cancel_appointment_from_email(apps, participant, mailbox, link_from_mai
 def test_appointment_in_parent_overview(apps, participant, mailbox, page, login_as):
     apps.lab.load('admin')  # generate admin user
     Experiment = apps.lab.get_model('experiments', 'Experiment')
-    DefaultCriteria = apps.lab.get_model('experiments', 'DefaultCriteria')
     User = apps.lab.get_model('main', 'User')
     experiment = Experiment.objects.create(duration=10,
                                            session_duration=20,
@@ -96,7 +94,6 @@ def test_appointment_in_parent_overview(apps, participant, mailbox, page, login_
 def test_past_appointment_not_in_parent_overview(apps, participant, mailbox, page, login_as):
     apps.lab.load('admin')  # generate admin user
     Experiment = apps.lab.get_model('experiments', 'Experiment')
-    DefaultCriteria = apps.lab.get_model('experiments', 'DefaultCriteria')
     User = apps.lab.get_model('main', 'User')
     experiment = Experiment.objects.create(duration=10,
                                            session_duration=20,

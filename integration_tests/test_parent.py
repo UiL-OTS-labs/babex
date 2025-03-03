@@ -267,3 +267,18 @@ def test_parent_login_multiple_children(participant, apps, page, login_as):
     page.locator("a").get_by_text(first.name).click()
     page.wait_for_url("**/overview")
     expect(page.locator(".alert-error")).to_have_count(0)
+
+
+def test_parent_login_with_existing_link_after_removal(participant, apps, page, link_from_mail, login_as):
+    page.goto(apps.parent.url + "auth/")
+    page.fill('input[name="email"]', participant.email)
+    page.locator("button").get_by_text("Send").click()
+
+    email = participant.email
+    participant.deactivate()
+
+    link = link_from_mail(email, "Link")
+    page.goto(link)
+
+    expect(page.get_by_text("login_failed")).to_be_visible()
+    expect(page.get_by_text("Appointments")).not_to_be_visible()
