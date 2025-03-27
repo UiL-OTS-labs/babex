@@ -3,7 +3,7 @@
     import {babexApi} from '../../api';
     import {Location} from '../../types';
     import {formatDateTime} from '../../util';
-    import { _ } from '@/util';
+    import { _, confirm } from '@/util';
 
     import DateTimePicker from '../DateTimePicker.vue';
 
@@ -27,14 +27,15 @@
     });
 
     async function cancel() {
-        if (confirm(_('Are you sure?'))) {
+        let ok = await confirm(_('Are you sure?'));
+        if (ok) {
             babexApi.agenda.appointment.delete(props.event.id).success(() => {
                 emit('done');
             });
         }
     }
 
-    function onSubmit(event: Event) {
+    async function onSubmit(event: Event) {
         let promise;
 
         // when the appointment doesn't already have an outcome specified, we allow full modification.
@@ -45,8 +46,9 @@
         }
         else {
             if (form.value.start - props.event.start != 0) {
-                if (confirm(_('Move appointment to') + ' ' + formatDateTime(form.value.start) + '?')) {
-                    let mail = confirm(_('Send confirmation e-mail?'));
+                let ok = await confirm(_('Move appointment to') + ' ' + formatDateTime(form.value.start) + '?');
+                if (ok) {
+                    let mail = await confirm(_('Send confirmation e-mail?'));
                     form.value.silent = !mail;
                     promise = babexApi.agenda.appointment.updatePartial(props.event.id, form.value);
                 }
@@ -57,10 +59,6 @@
         }
 
         if (promise) promise.success(() => emit('done'));
-
-        event.preventDefault();
-        event.stopPropagation();
-        return false;
     }
 
     function hasOutcome() {
@@ -109,7 +107,7 @@
             </select>
         </div>
     </div>
-    <form @submit="onSubmit">
+    <form @submit.prevent="onSubmit">
         <div>{{ _('From:') }}</div>
         <DateTimePicker class="appointment-start" v-model="form.start" :readonly="hasOutcome()" />
 

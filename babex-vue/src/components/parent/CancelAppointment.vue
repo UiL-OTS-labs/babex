@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-    import { _ } from '@/util';
+    import { _, confirm } from '@/util';
 
     let props = defineProps<{
         id: number
     }>();
 
-    function cancel() {
-        if (confirm(_('Are you sure?'))) {
+    async function cancel() {
+        if (await confirm(_('Are you sure?'))) {
             window.location.href = `/appointment/${props.id}/cancel/`;
         }
     }
