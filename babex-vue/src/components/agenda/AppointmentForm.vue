@@ -35,7 +35,7 @@
         }
     }
 
-    async function onSubmit(event: Event) {
+    async function onSubmit() {
         let promise;
 
         // when the appointment doesn't already have an outcome specified, we allow full modification.
