@@ -117,8 +117,12 @@ def test_agenda_modify_appointment(page, appointment_tomorrow, as_leader):
     new_time = original_time + timedelta(days=3)
 
     page.fill(".appointment-start input", new_time.strftime("%d-%m-%Y %H:%M"))
-    page.on("dialog", lambda dialog: dialog.accept())
     page.click(".action-panel .save")
+    # confirm change
+    page.get_by_text("Ok").click()
+
+    # confirm send mail
+    page.get_by_text("Ok").click()
 
     page.locator(".action-panel .save").wait_for(state="hidden")
     appointment_tomorrow.refresh_from_db()

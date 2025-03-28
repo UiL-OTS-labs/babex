@@ -1,5 +1,7 @@
+import { createApp } from 'vue'
 import messages_en from '@/messages.en.json';
 import messages_nl from '@/messages.nl.json';
+import MessageBox from './components/MessageBox.vue';
 
 function formatDate(date: Date): string {
     const options = {
@@ -52,4 +54,19 @@ function _(str: string): string {
     return m[str] ?? str;
 }
 
-export {formatDate, formatDateISO, formatTime, formatDateTime, _};
+function confirm(message: string) {
+    let promise = new Promise((resolve) => {
+        let div = document.createElement('div');
+        let mb = createApp(MessageBox, {
+            message,
+            onOk: () => {resolve(true); mb.unmount()},
+            onCancel: () => {resolve(false); mb.unmount()}
+        });
+        let el = mb.mount(div).$el;
+        document.body.appendChild(el);
+    });
+
+    return promise;
+}
+
+export {confirm, formatDate, formatDateISO, formatTime, formatDateTime, _};
