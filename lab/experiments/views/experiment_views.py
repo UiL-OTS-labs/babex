@@ -122,7 +122,9 @@ class ExperimentAppointmentsView(ExperimentLeaderMixin, ExperimentObjectMixin, g
             .exclude(outcome=Appointment.Outcome.CANCELED)
             .exclude(outcome=Appointment.Outcome.NOSHOW)
         )
-        context["past_list"] = queryset.filter(timeslot__start__lt=timezone.now())
+        context["complete_list"] = queryset.filter(
+            timeslot__start__lt=timezone.now(), outcome=Appointment.Outcome.COMPLETED
+        )
         context["future_list"] = queryset.filter(timeslot__start__gte=timezone.now())
         context["excluded_list"] = queryset.filter(outcome=Appointment.Outcome.EXCLUDED)
         return context

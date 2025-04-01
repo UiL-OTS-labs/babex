@@ -748,8 +748,8 @@ msgid "experiments:participants:expected"
 msgstr "Expected"
 
 #: experiments/templates/experiments/participants.html:40
-msgid "experiments:participants:past"
-msgstr "Past"
+msgid "experiments:participants:completed"
+msgstr "Completed"
 
 msgid "experiments:participants:excluded"
 msgstr "Excluded"

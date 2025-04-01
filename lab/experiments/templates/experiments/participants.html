@@ -37,8 +37,8 @@
             {% with object_list=future_list %}
                 {% include 'experiments/participants_table.html' %}
             {% endwith %}
-            <h2>{% trans 'experiments:participants:past' %}</h2>
-            {% with object_list=past_list %}
+            <h2>{% trans 'experiments:participants:completed' %}</h2>
+            {% with object_list=complete_list %}
                 {% include 'experiments/participants_table.html' %}
             {% endwith %}
             <h2>{% trans 'experiments:participants:excluded' %}</h2>

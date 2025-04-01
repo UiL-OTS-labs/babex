@@ -920,8 +920,8 @@ msgstr "Tijdstip"
 msgid "experiments:participants:expected"
 msgstr "Verwacht"
 
-msgid "experiments:participants:past"
-msgstr "Getest"
+msgid "experiments:participants:completed"
+msgstr "Vooltoid"
 
 msgid "experiments:participants:excluded"
 msgstr "Geëxcludeerd"
