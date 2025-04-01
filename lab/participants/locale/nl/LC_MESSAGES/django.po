@@ -443,3 +443,6 @@ msgstr "Extra data"
 
 msgid "participants:extradata:add:submit"
 msgstr "Opslaan"
+
+msgid "participants:remove_old:mail:subject"
+msgstr "Babylab voor Taalonderzoek: Bevestiging van uitschrijven"
