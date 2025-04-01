@@ -2,7 +2,7 @@ import braces.views as braces
 from cdh.core.views.mixins import DeleteSuccessMessageMixin
 from django.contrib.auth.views import RedirectURLMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.http.response import HttpResponse
 from django.urls import reverse_lazy as reverse
 from django.utils import timezone
@@ -31,12 +31,12 @@ class ExperimentHomeView(RandomLeaderMixin, generic.ListView):
         if not self.request.user.is_staff:
             qs = qs.filter(pk__in=self.request.user.experiments.all())
 
-        count_participants = Count("timeslot__appointments", distinct=True)
-        count_excluded_experiments = Count("excluded_experiments", distinct=True)
+        count_participants = Count(
+            "timeslot__appointments", filter=Q(timeslot__appointments__outcome=Appointment.Outcome.COMPLETED)
+        )
 
         return qs.annotate(
             n_participants=count_participants,
-            n_excluded_experiments=count_excluded_experiments,
         )
 
 
