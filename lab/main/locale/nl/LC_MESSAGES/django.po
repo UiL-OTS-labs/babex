@@ -81,12 +81,12 @@ msgstr "Welkom {}!"
 #. Translators: This is the title that will end up in the header (in blue)
 #: main/templates/base/site_header.html:4
 msgid "site:header:title"
-msgstr "Babex Admin"
+msgstr "Babylabportaal"
 
 #. Translators: This is the title that will end up in the tab of the browser
 #: main/templates/base/site_title.html:5
 msgid "site:name"
-msgstr "Babex Admin"
+msgstr "Babylabportaal"
 
 #: main/templates/main/index.html:6 main/templates/main/index.html:13
 msgid "main:home:header"

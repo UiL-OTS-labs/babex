@@ -130,7 +130,7 @@ msgstr ""
 #: main/templates/base/babex_base.html:26
 #: main/templates/base/site_header.html:4
 msgid "site:header:title"
-msgstr "Babex Admin"
+msgstr "Babylab Portal"
 
 #: main/templates/base/babex_base.html:50
 #: main/templates/base/login_header.html:6
@@ -148,7 +148,7 @@ msgstr ""
 #. Translators: This is the title that will end up in the tab of the browser
 #: main/templates/base/site_title.html:5
 msgid "site:name"
-msgstr "Babex Admin"
+msgstr "Babylab Portal"
 
 #: main/templates/main/index.html:6 main/templates/main/index.html:12
 msgid "main:home:header"
