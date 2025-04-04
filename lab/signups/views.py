@@ -97,7 +97,7 @@ def reject_signup(signup: Signup):
 class SignupVerifyView(views.APIView):
     def get(self, request, *args, **kwargs):
         signup = Signup.objects.get(link_token=kwargs["token"])
-        if timezone.now() - signup.created > timedelta(days=1):
+        if timezone.now() - signup.created > timedelta(days=2):
             # expired
             with translation.override("nl"):
                 return Response(dict(reason=gettext("signups:verify:error:expired")), status=410)
