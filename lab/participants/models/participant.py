@@ -173,7 +173,8 @@ class Participant(models.Model):
 
         with transaction.atomic():
             for appointment in self.appointments.all():
-                appointment.cancel()
+                if not appointment.is_past:
+                    appointment.cancel()
             self.data.delete()
             self.data = None
             self.extradata_set.all().delete()

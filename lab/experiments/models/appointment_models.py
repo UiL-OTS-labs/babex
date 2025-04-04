@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 
 from cdh.mail.classes import TemplateEmail
 from django.db import models
-from django.utils import translation
+from django.utils import timezone, translation
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
@@ -111,6 +111,10 @@ class Appointment(models.Model):
     @property
     def is_canceled(self):
         return self.outcome == Appointment.Outcome.CANCELED
+
+    @property
+    def is_past(self):
+        return self.start < timezone.now()
 
 
 def make_appointment(experiment: Experiment, participant: Participant, leader: User, start: datetime):
