@@ -24,7 +24,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
     class AppointmentParticipantSerializer(serializers.ModelSerializer):
         class Meta:
             model = Participant
-            fields = ["id", "name"]
+            fields = ["id", "name", "deactivated"]
 
     class Meta:
         model = Appointment

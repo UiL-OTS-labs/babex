@@ -82,9 +82,12 @@
         <div>
             <strong>{{ _('Participant:') }}</strong>
             <div>
-                <a :href="'/participants/' + event.extendedProps.participant.id">
+                <a v-if="!event.extendedProps.participant.deactivated" :href="'/participants/' + event.extendedProps.participant.id">
                     {{event.extendedProps.participant.name}}
                 </a>
+                <span v-if="event.extendedProps.participant.deactivated">
+                    {{event.extendedProps.participant.name}}
+                </span>
             </div>
         </div>
         <div>
