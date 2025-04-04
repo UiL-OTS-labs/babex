@@ -71,6 +71,8 @@ class CallHomeView(ExperimentLeaderMixin, TemplateView):
             months=dc.max_age_months, days=dc.max_age_days
         )
 
+        context["removed_soon"] = participant.is_removed_soon()
+
         participation_from, participation_to = ageutil.date_of_birth(participant.birth_date).range_for(age_pred)
         context["participation_range"] = (participation_from, participation_to)
         context["participation_from"] = participation_from.strftime("%d-%m-%Y") if participation_from else None

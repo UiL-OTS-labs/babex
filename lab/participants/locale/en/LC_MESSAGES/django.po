@@ -445,3 +445,6 @@ msgstr "click to show"
 
 msgid "participant:attribute:multilingual"
 msgstr "Multilingual"
+
+msgid "participants:removal_soon"
+msgstr "This participant will be removed from the system after {} due to data management policy."

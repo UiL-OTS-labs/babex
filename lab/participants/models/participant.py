@@ -1,8 +1,8 @@
+import datetime
 from typing import List
 
 import ageutil
 from cdh.mail.classes import TemplateEmail
-from django.conf import settings
 from django.db import models, transaction
 from django.utils import timezone, translation
 from django.utils.translation import gettext
@@ -211,3 +211,14 @@ class Participant(models.Model):
             for pd in ParticipantData.objects.efilter(email=email)
             if hasattr(pd, "participant") and pd.participant.deactivated is None
         ]
+
+    @property
+    def removal_date(self):
+        threshold = ageutil.age(2, months=6)
+        if self.save_longer:
+            threshold = ageutil.age(10)
+
+        return ageutil.date_of_birth(self.birth_date).range_for(threshold)[0]
+
+    def is_removed_soon(self):
+        return (self.removal_date - datetime.datetime.today().date()).days < 30

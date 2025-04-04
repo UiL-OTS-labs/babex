@@ -72,6 +72,11 @@
                 </p>
             {% endif %}
 
+            {% if removed_soon %}
+                <p class="alert alert-warning mb-5">
+                    {% transformat 'participants:removal_soon' participant.removal_date %}
+                </p>
+            {% endif %}
         <section id="participant-general">
             <a href="{% url 'participants:edit' participant.data.pk %}" class="btn btn-secondary float-end">
                 {% trans 'participants:detail:edit' %}

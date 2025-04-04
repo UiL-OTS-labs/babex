@@ -83,9 +83,12 @@ class ParticipantDetailView(RandomLeaderMixin, generic.DetailView):
         return can_leader_access_participant(user, self.get_object())
 
     def get_context_data(self, *args, **kwargs):
+        pp = self.get_object()
         context = super().get_context_data(*args, **kwargs)
-        context["comment_form"] = CommentForm(initial=dict(participant=self.get_object()))
-        context["calls"] = self.get_object().call_set.exclude(status=Call.CallStatus.CANCELLED)
+        context["comment_form"] = CommentForm(initial=dict(participant=pp))
+        context["calls"] = pp.call_set.exclude(status=Call.CallStatus.CANCELLED)
+
+        context["removed_soon"] = pp.is_removed_soon()
         return context
 
 

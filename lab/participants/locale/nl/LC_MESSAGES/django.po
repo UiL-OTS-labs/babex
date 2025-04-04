@@ -446,3 +446,6 @@ msgstr "Opslaan"
 
 msgid "participants:remove_old:mail:subject"
 msgstr "Babylab voor Taalonderzoek: Bevestiging van uitschrijven"
+
+msgid "participants:removal_soon"
+msgstr "Deze participant wordt uit het systeem verwijdert na {} i.v.m. het datamanagement beleid."
