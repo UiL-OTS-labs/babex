@@ -1,0 +1,29 @@
+{% extends 'mail/base_new.html' %}
+
+{% block banner %}
+    Aanmleding Babylab voor Taalonderzoek
+{% endblock %}
+
+{% block content %}
+    <p>Beste ouder/verzorger,</p>
+
+    <p>
+        Wij kregen een melding dat u uw kind gisteren heeft aangemeld. Daarna is er een mail naar u toegestuurd met een link om uw e-mailadres te bevestigen; deze is 48 uur geldig. Het lijkt nog niet gelukt te zijn om uw e-mailadres te bevestigen. Dat betekent ook dat uw kind nog niet staat ingeschreven bij het Babylab voor Taalonderzoek.
+    </p>
+
+    <p>
+        U kunt uw e-mailadres alsnog bevestigen via deze <a href="{{ base_url }}signup/verify/{{ link_token }}">link</a>.
+    </p>
+
+    <p>
+        Mocht u uw e-mailadres niet binnen de komende 24 uur kunnen bevestigen, dan wordt uw aanmelding geannuleerd en worden uw gegevens verwijderd. U kunt uw kind altijd opnieuw aanmelden via <a href="https://babylab.wp.hum.uu.nl/aanmelden/">https://babylab.wp.hum.uu.nl/aanmelden/</a>.
+    </p>
+    <p>
+        Bij voorbaat hartelijk dank.
+    </p>
+
+    <p>
+        Vriendelijke groet,<br><br>
+        Het team van het Babylab voor Taalonderzoek
+    </p>
+{% endblock %}

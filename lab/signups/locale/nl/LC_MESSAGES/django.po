@@ -90,6 +90,9 @@ msgstr "Aanmelding afgewezen"
 msgid "signups:mail:validation:subject"
 msgstr "Babylab voor Taalonderzoek: Bevestiging e-mailadres"
 
+msgid "signups:mail:reminder:subject"
+msgstr "Babylab voor Taalonderzoek: Herinnering"
+
 msgid "signups:verify:error:expired"
 msgstr ""
 "<p>Deze link is niet meer geldig. Uw gegevens hebben wij daarom helaas moeten verwijderen.</p>"

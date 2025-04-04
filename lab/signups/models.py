@@ -6,7 +6,7 @@ from cdh.core.fields.mixin import EncryptedMixin
 from cdh.mail.classes import TemplateEmail
 from django.conf import settings
 from django.db import models
-from django.utils import translation
+from django.utils import timezone, translation
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
@@ -58,6 +58,7 @@ class Signup(models.Model):
 
     created = models.DateTimeField(auto_now_add=True, verbose_name=_("participant:attribute:created"))
     email_verified = models.DateTimeField(null=True, blank=True)
+    reminder_sent = models.DateTimeField(null=True)
     link_token = models.CharField(max_length=64, default=token_urlsafe, unique=True)
 
     def send_email_validation(self):
@@ -75,3 +76,18 @@ class Signup(models.Model):
                 subject=gettext("signups:mail:validation:subject"),
             )
             mail.send()
+
+    def send_reminder(self):
+        with translation.override("nl"):
+            mail = TemplateEmail(
+                html_template="signups/mail/reminder.html",
+                context=dict(
+                    base_url=settings.PARENT_URI,
+                    link_token=self.link_token,
+                ),
+                to=[self.email],
+                subject=gettext("signups:mail:reminder:subject"),
+            )
+            mail.send()
+        self.reminder_sent = timezone.now()
+        self.save()
