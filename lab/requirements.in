@@ -1,6 +1,6 @@
 Django>=4.2,<5.0
 django-braces
-django-csp
+django-csp<4.0
 django-simple-menu
 django-extensions # QoF for the admin, adds a lot of useful manage.py commands
 cryptography
