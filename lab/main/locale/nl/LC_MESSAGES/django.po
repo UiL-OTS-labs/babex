@@ -327,3 +327,19 @@ msgstr ""
 
 msgid "user:attribute:is_support"
 msgstr "Lab support"
+
+msgid "main:error:not_found:header"
+msgstr "Niet Gevonden"
+
+msgid "main:error:not_found:text"
+msgstr ""
+"De pagina die je probeert te openen kan niet worden gevonden. "
+"Neem contact op met de labmanagers voor assistentie."
+
+msgid "main:error:generic:header"
+msgstr "Onverwachte Fout"
+
+msgid "main:error:generic:text"
+msgstr ""
+"Er is een onverwachte fout opgetreden. "
+"Neem contact op met de labmanagers voor assistentie."

@@ -1,0 +1,13 @@
+{% extends "base/babex_base.html" %}
+{% load i18n %}
+
+{% block content %}
+    <div class="uu-hero">
+        <h1>
+            {% translate 'main:error:not_found:header' %}
+        </h1>
+    </div>
+    <div class="uu-inner-container">
+        {% translate 'main:error:not_found:text' %}
+    </div>
+{% endblock %}

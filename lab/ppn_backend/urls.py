@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.conf import settings
 from django.contrib import admin
 from django.shortcuts import redirect, render
@@ -59,8 +60,6 @@ if hasattr(settings, "SAML_CONFIG"):
         path("saml/", include("djangosaml2.urls")),
     ]
 
-
-def handler403(request, exception):
-    if request.user.is_authenticated:
-        return render(request, "403.html", status=403)
-    return redirect(settings.LOGIN_URL)
+handler403 = "main.views.error403"
+handler404 = "main.views.error404"
+handler500 = "main.views.error500"

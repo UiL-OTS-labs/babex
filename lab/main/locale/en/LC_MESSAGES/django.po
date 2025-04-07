@@ -362,3 +362,19 @@ msgstr "X"
 
 msgid "user:attribute:is_support"
 msgstr "Lab support"
+
+msgid "main:error:not_found:header"
+msgstr "Not Found"
+
+msgid "main:error:not_found:text"
+msgstr ""
+"The page you are trying to access cannot be found. Please contact the "
+"lab managers for assistance."
+
+msgid "main:error:generic:header"
+msgstr "Unexpected Error"
+
+msgid "main:error:generic:text"
+msgstr ""
+"The system has encountered an unexpected error. Please contact the "
+"lab managers for assistance."
