@@ -193,3 +193,42 @@ def test_call_deactivate(page, sample_experiment, sample_participant, sample_lea
     # check that confirmation mail was sent to parent
     assert len(mail.outbox) == 1
     assert mail.outbox[0].to[0] == sample_participant.email
+
+
+def test_call_status_after_cancellation(page, sample_experiment, sample_participant, sample_leader, as_leader):
+    """a participant should not show up as confirmed on the call list after an appointment has been cancelled"""
+
+    sample_experiment.leaders.add(sample_leader)
+    sample_experiment.leaders.add(as_leader)
+
+    page.get_by_role("button", name="Experiments").click()
+    page.get_by_role("link", name="Overview").click()
+    page.click("button.icon-menu")
+    page.locator("a").get_by_text("Invite").click()
+    page.locator("td.actions").get_by_text("Call").click()
+    page.locator("button").get_by_text("Schedule").click()
+
+    # pick time
+    tomorrow = date.today() + timedelta(days=1)
+    page.click(f'td[data-date="{tomorrow}"]')
+    page.click('td.fc-timegrid-slot-lane[data-time="10:00:00"]')
+    page.locator("button").get_by_text("Next").click()
+
+    # pick leader
+    page.locator(".modal-content select").select_option("Leader McLeader")
+    page.locator("button").get_by_text("Confirm").click()
+
+    while not page.evaluate("() => (tinymce.activeEditor && tinymce.activeEditor.getContent())"):
+        time.sleep(0.2)
+
+    page.locator("button").get_by_text("Send").click()
+    page.get_by_role("button", name="Send").wait_for(state="hidden")
+
+    Appointment.objects.last().cancel()
+
+    page.get_by_role("button", name="Experiments").click()
+    page.get_by_role("link", name="Overview").click()
+    page.click("button.icon-menu")
+    page.locator("a").get_by_text("Invite").click()
+    expect(page.get_by_text("Baby McBaby")).to_be_visible()
+    expect(page.get_by_text("Confirmed")).not_to_be_visible()

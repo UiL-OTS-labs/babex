@@ -32,6 +32,7 @@ class Call(models.Model):
         # parent prefers email communication
         EMAIL = "EMAIL", _("experiments:call:status:email")
         # appointment confirmed
+        # TODO: this is somewhat pointless and is perhaps better removed
         CONFIRMED = "CONFIRMED", _("experiments:call:status:confirmed")
         # cancel call
         CANCELLED = "CANCELLED", _("experiments:call:status:cancelled")
