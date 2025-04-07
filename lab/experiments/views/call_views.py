@@ -54,6 +54,7 @@ class CallHomeView(ExperimentLeaderMixin, TemplateView):
         context["previous_calls"] = (
             Call.objects.filter(experiment=experiment, participant=participant)
             .exclude(status=Call.CallStatus.STARTED)
+            .exclude(status=Call.CallStatus.CANCELLED)
             .all()
         )
 
