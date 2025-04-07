@@ -219,7 +219,7 @@ def test_signup_confirmation_expired(page, apps, signup, as_admin, link_from_mai
 
     Signup = apps.lab.get_model("signups", "Signup")
     s = Signup.objects.last()
-    s.created = timezone.now() - datetime.timedelta(hours=25)
+    s.created = timezone.now() - datetime.timedelta(hours=49)
     s.save()
 
     if link := link_from_mail(address, "Bevestiging"):
