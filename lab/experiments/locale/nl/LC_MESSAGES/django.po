@@ -921,7 +921,7 @@ msgid "experiments:participants:expected"
 msgstr "Verwacht"
 
 msgid "experiments:participants:completed"
-msgstr "Vooltoid"
+msgstr "Voltooid"
 
 msgid "experiments:participants:excluded"
 msgstr "Geëxcludeerd"
