@@ -168,7 +168,7 @@ class UpdateCall(generics.UpdateAPIView):
         if call.leader != request.user:
             raise PermissionDenied
 
-        call.status = request.data["status"]
+        call.status = Call.CallStatus(request.data["status"]).value
         call.comment = request.data["comment"]
         call.save()
 

@@ -31,8 +31,9 @@ class Call(models.Model):
         VOICEMAIL = "VOICEMAIL", _("experiments:call:status:voicemail")
         # parent prefers email communication
         EMAIL = "EMAIL", _("experiments:call:status:email")
-        # appointment confirmed
-        # TODO: this is somewhat pointless and is perhaps better removed
+        # appointment confirmed:
+        # this status may appear somewhat pointless, but we need it in order to
+        # indicate the call was completed succesfully
         CONFIRMED = "CONFIRMED", _("experiments:call:status:confirmed")
         # cancel call
         CANCELLED = "CANCELLED", _("experiments:call:status:cancelled")

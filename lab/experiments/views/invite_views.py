@@ -35,7 +35,7 @@ class InviteParticipantsForExperimentView(ExperimentLeaderMixin, ExperimentObjec
 
                 calls = participant.call_set.filter(experiment=self.experiment).order_by("-creation_date")
 
-                # the participant appears cannot appear on the call list when they have a confirmed
+                # a participant cannot appear on the call list when they have a confirmed
                 # appointment, so it never makes sense to show the confirmed status
                 calls = calls.exclude(status=Call.CallStatus.CONFIRMED)
 
