@@ -35,9 +35,12 @@ EMAIL_FROM = "babex@localhost.local"
 # Database
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-    },
+        "ENGINE": "django.db.backends.mysql",
+        "HOST": os.getenv("DB_HOST") or "localhost",
+        "NAME": os.getenv("DB_NAME") or "babex",
+        "USER": os.getenv("DB_USER") or "babex",
+        "PASSWORD": os.getenv("DB_PASSWORD") or "babex",
+    }
 }
 
 AUTH_PASSWORD_VALIDATORS = []

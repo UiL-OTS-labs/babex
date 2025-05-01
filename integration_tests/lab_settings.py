@@ -1,3 +1,4 @@
+import os
 import sys
 import base64
 sys.path.append('../lab')
@@ -19,9 +20,12 @@ EMAIL_FROM = "babex@localhost.local"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "lab.int.db.sqlite3",
-    },
+        "ENGINE": "django.db.backends.mysql",
+        "HOST": os.getenv("DB_HOST") or "localhost",
+        "NAME": os.getenv("DB_NAME") or "babex",
+        "USER": os.getenv("DB_USER") or "babex",
+        "PASSWORD": os.getenv("DB_PASSWORD") or "babex",
+    }
 }
 
 FIXTURE_DIRS = ['data_fixtures']
