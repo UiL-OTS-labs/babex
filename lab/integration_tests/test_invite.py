@@ -134,6 +134,7 @@ def test_call_exclusion(page, sample_experiment, sample_participant, sample_lead
     # indicates participant can't participate
     page.click('input[value="EXCLUDE"]')
     page.locator("button").get_by_text("Save").click()
+    page.locator("button").get_by_text("Save").wait_for(state="hidden")
 
     # baby mcbaby shouldn't be available anymore
     page.get_by_role("button", name="Experiments").click()

@@ -57,11 +57,10 @@ jobs:
         env:
           MARIADB_ROOT_PASSWORD: babex
         ports:
-          - 3306:3306
+          - 3306/tcp
 
 
     strategy:
-      max-parallel: 2
       matrix:
         python-version: ['3.10']
         app: ['lab', 'parent']
@@ -97,6 +96,7 @@ jobs:
       - name: DB env variables
         run: |
           echo "DB_HOST=127.0.0.1" >> $GITHUB_ENV
+          echo "DB_PORT=${{ job.services.db.ports['3306'] }}" >> $GITHUB_ENV
           echo "DB_USER=root" >> $GITHUB_ENV
       - name: Compile 18n
         run: |
@@ -151,7 +151,7 @@ jobs:
         env:
           MARIADB_ROOT_PASSWORD: babex
         ports:
-          - 3306:3306
+          - 3306/tcp
 
     strategy:
       matrix:
@@ -197,6 +197,7 @@ jobs:
       - name: DB env variables
         run: |
           echo "DB_HOST=127.0.0.1" >> $GITHUB_ENV
+          echo "DB_PORT=${{ job.services.db.ports['3306'] }}" >> $GITHUB_ENV
           echo "DB_USER=root" >> $GITHUB_ENV
           echo "DB_NAME=babex_test" >> $GITHUB_ENV
       - name: Integration tests
