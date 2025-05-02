@@ -1,11 +1,13 @@
 import time
 from datetime import date, datetime, timedelta
 
+import pytest
 from django.core import mail
 from django.core.files.uploadedfile import SimpleUploadedFile
 from playwright.sync_api import expect
 
 from experiments.models import Appointment, TimeSlot
+from participants.models import Language, Participant
 
 
 def test_experiment_list(page, sample_experiment, sample_participant, as_leader):
@@ -233,3 +235,108 @@ def test_call_status_after_cancellation(page, sample_experiment, sample_particip
     page.locator("a").get_by_text("Invite").click()
     expect(page.get_by_text("Baby McBaby")).to_be_visible()
     expect(page.get_by_text("Confirmed")).not_to_be_visible()
+
+
+@pytest.mark.freeze_time("2021-01-01")
+def test_sort_participants_by_age(page, sample_experiment, as_leader):
+    as_leader.experiments.add(sample_experiment)
+    pp1 = Participant.objects.create(
+        email="baby@baby.com",
+        name="Baby1",
+        sex=Participant.Sex.UNKNOWN,
+        parent_first_name="Parent",
+        parent_last_name="McParent",
+        birth_date=date(2020, 1, 1),
+        phonenumber="987654321",
+        dyslexic_parent=Participant.WhichParent.NEITHER,
+        email_subscription=True,
+    )
+    pp2 = Participant.objects.create(
+        email="baby3@baby.com",
+        name="Baby2",
+        sex=Participant.Sex.UNKNOWN,
+        parent_first_name="Parent",
+        parent_last_name="McParent",
+        birth_date=date(2019, 1, 1),
+        phonenumber="987654321",
+        dyslexic_parent=Participant.WhichParent.NEITHER,
+        email_subscription=True,
+    )
+    pp3 = Participant.objects.create(
+        email="baby2@baby.com",
+        name="Baby3",
+        sex=Participant.Sex.UNKNOWN,
+        parent_first_name="Parent",
+        parent_last_name="McParent",
+        birth_date=date(2010, 1, 1),
+        phonenumber="987654321",
+        dyslexic_parent=Participant.WhichParent.NEITHER,
+        email_subscription=True,
+    )
+
+    page.get_by_role("button", name="Experiments").click()
+    page.get_by_role("link", name="Overview").click()
+    page.click("button.icon-menu")
+    page.locator("a").get_by_text("Invite").click()
+
+    time.sleep(1)
+    page.locator("#DataTables_Table_0 th").nth(1).click()
+
+    rows = page.locator("#DataTables_Table_0 tbody tr")
+    rendered_order = [rows.nth(i).locator("td").nth(0).inner_text() for i in range(rows.count())]
+
+    assert len(rendered_order) == 3
+    assert rendered_order == [pp3.name, pp2.name, pp1.name]
+
+
+def test_sort_participants_by_date_of_birth(page, sample_experiment, as_leader):
+    as_leader.experiments.add(sample_experiment)
+    pp1 = Participant.objects.create(
+        email="baby@baby.com",
+        name="Baby1",
+        sex=Participant.Sex.UNKNOWN,
+        parent_first_name="Parent",
+        parent_last_name="McParent",
+        birth_date=date(2020, 1, 1),
+        phonenumber="987654321",
+        dyslexic_parent=Participant.WhichParent.NEITHER,
+        email_subscription=True,
+    )
+    pp2 = Participant.objects.create(
+        email="baby3@baby.com",
+        name="Baby2",
+        sex=Participant.Sex.UNKNOWN,
+        parent_first_name="Parent",
+        parent_last_name="McParent",
+        birth_date=date(2020, 2, 1),
+        phonenumber="987654321",
+        dyslexic_parent=Participant.WhichParent.NEITHER,
+        email_subscription=True,
+    )
+    pp3 = Participant.objects.create(
+        email="baby2@baby.com",
+        name="Baby3",
+        sex=Participant.Sex.UNKNOWN,
+        parent_first_name="Parent",
+        parent_last_name="McParent",
+        birth_date=date(2020, 10, 1),
+        phonenumber="987654321",
+        dyslexic_parent=Participant.WhichParent.NEITHER,
+        email_subscription=True,
+    )
+
+    page.get_by_role("button", name="Experiments").click()
+    page.get_by_role("link", name="Overview").click()
+    page.click("button.icon-menu")
+    page.locator("a").get_by_text("Invite").click()
+
+    time.sleep(1)
+    page.locator("#DataTables_Table_0 th").nth(2).click()
+    # click twice to order descending
+    page.locator("#DataTables_Table_0 th").nth(2).click()
+
+    rows = page.locator("#DataTables_Table_0 tbody tr")
+    rendered_order = [rows.nth(i).locator("td").nth(0).inner_text() for i in range(rows.count())]
+
+    assert len(rendered_order) == 3
+    assert rendered_order == [pp3.name, pp2.name, pp1.name]

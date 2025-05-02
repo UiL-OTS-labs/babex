@@ -11,3 +11,4 @@ faker
 playwright
 pytest-playwright
 pytest-xdist
+pytest-freezegun

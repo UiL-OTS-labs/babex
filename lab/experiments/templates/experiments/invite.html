@@ -85,10 +85,10 @@
                                         {{ participant.fullname }}
                                     </a>
                                 </td>
-                                <td>
+                                <td data-order="{{ participant.birth_date|date:'Y-m-d' }}">
                                     {{ participant.age_short }}
                                 </td>
-                                <td>
+                                <td data-order="{{ participant.birth_date|date:'Y-m-d' }}">
                                     {{ participant.birth_date }}
                                 </td>
                                 <td>
