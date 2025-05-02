@@ -98,6 +98,26 @@ class AppointmentTests(TestCase):
         with self.assertRaises(Exception):
             AppointmentConfirm.as_view()(request)
 
+    def test_appointment_confirm_unique(self):
+        data = {
+            "experiment": self.experiment.pk,
+            "start": timezone.now() + timedelta(days=1),
+            "leader": self.user.pk,
+            "participant": self.participant.pk,
+        }
+
+        request = self.factory.post("/experiments/call/appointment/", data, format="json")
+        force_authenticate(request, self.user)
+        response = AppointmentConfirm.as_view()(request)
+        self.assert_(json.loads(response.content))
+
+        # repeat booking
+        with self.assertRaises(Exception):
+            request = self.factory.post("/experiments/call/appointment/", data, format="json")
+            force_authenticate(request, self.user)
+            response = AppointmentConfirm.as_view()(request)
+            self.assert_(json.loads(response.content))
+
 
 class InviteTests(TestCase):
     @classmethod
