@@ -46,6 +46,7 @@ class DjangoServerProcess:
         connection = MySQLdb.connect(
             user=settings_module.DATABASES["default"]["USER"],
             host=settings_module.DATABASES["default"]["HOST"],
+            port=settings_module.DATABASES["default"]["PORT"],
             password=settings_module.DATABASES["default"]["PASSWORD"],
         )
         db_name = settings_module.DATABASES["default"]["NAME"]
