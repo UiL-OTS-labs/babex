@@ -62,7 +62,7 @@ class Appointment(models.Model):
 
         # verify that the appointment is unique to the experiment and participant
         existing = Appointment.objects.filter(participant=self.participant, experiment=self.experiment).exclude(
-            outcome__in=[Appointment.Outcome.CANCELED, Appointment.Outcome.EXCLUDED]
+            outcome__in=[Appointment.Outcome.CANCELED, Appointment.Outcome.EXCLUDED, Appointment.Outcome.NOSHOW]
         )
         unique = False
         if self._state.adding:
