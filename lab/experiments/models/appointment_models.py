@@ -31,20 +31,16 @@ class TimeSlot(models.Model):
         return "{}: {}".format(self.experiment.name, self.datetime)
 
 
-class _Outcome(models.TextChoices):
-    # appointment was succesfully completed
-    COMPLETED = "COMPLETED", _("experiments:appointment:outcome:completed")
-    # participant did not participate
-    NOSHOW = "NOSHOW", _("experiments:appointment:outcome:noshow")
-    # participant had to be excluded
-    EXCLUDED = "EXCLUDED", _("experiments:appointment:outcome:excluded")
-    # canceled appointment
-    CANCELED = "CANCELED", _("experiments:appointment:outcome:canceled")
-
-
 class Appointment(models.Model):
-    # declaring _Outcome above is requried for refering to it in the UniqueConstraint
-    Outcome = _Outcome
+    class Outcome(models.TextChoices):
+        # appointment was succesfully completed
+        COMPLETED = "COMPLETED", _("experiments:appointment:outcome:completed")
+        # participant did not participate
+        NOSHOW = "NOSHOW", _("experiments:appointment:outcome:noshow")
+        # participant had to be excluded
+        EXCLUDED = "EXCLUDED", _("experiments:appointment:outcome:excluded")
+        # canceled appointment
+        CANCELED = "CANCELED", _("experiments:appointment:outcome:canceled")
 
     participant = models.ForeignKey(Participant, on_delete=models.PROTECT, related_name="appointments")
     timeslot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE, related_name="appointments", null=True, blank=True)
@@ -58,18 +54,20 @@ class Appointment(models.Model):
 
     class Meta:
         ordering = ["creation_date"]
-        constraints = [
-            models.UniqueConstraint(
-                fields=["participant", "experiment"],
-                condition=~models.Q(outcome__in=[_Outcome.CANCELED, _Outcome.EXCLUDED]),
-                name="unique_appointment",
-            ),
-        ]
 
     def save(self, *args, **kwargs):
         # verify that the leader is valid
         if self.leader not in self.experiment.leaders.all():
             raise ValueError("Leader {} is not part of experiment {}".format(self.leader, self.experiment))
+
+        # verify that the appointment is unique to the experiment and participant
+        existing = Appointment.objects.filter(participant=self.participant, experiment=self.experiment).exclude(
+            outcome__in=[Appointment.Outcome.CANCELED, Appointment.Outcome.EXCLUDED]
+        )
+        if existing:
+            raise ValueError(
+                "Participant {} is already booked for experiment {}".format(self.participant, self.experiment)
+            )
 
         # make sure the end time is correct
         self.end = self.start + timedelta(minutes=self.experiment.session_duration)
