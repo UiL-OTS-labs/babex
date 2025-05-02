@@ -64,7 +64,16 @@ class Appointment(models.Model):
         existing = Appointment.objects.filter(participant=self.participant, experiment=self.experiment).exclude(
             outcome__in=[Appointment.Outcome.CANCELED, Appointment.Outcome.EXCLUDED]
         )
-        if existing:
+        unique = False
+        if self._state.adding:
+            # when creating a new appointment
+            unique = not existing
+        else:
+            # editing an existing appointment, the queryset should include only the appointment which
+            # we are now modifying
+            unique = existing.count() == 1
+
+        if not unique:
             raise ValueError(
                 "Participant {} is already booked for experiment {}".format(self.participant, self.experiment)
             )
