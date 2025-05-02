@@ -112,7 +112,7 @@ def test_agenda_modify_appointment(page, appointment_tomorrow, as_leader):
     appointment_tomorrow.experiment.leaders.add(as_leader)
     page.locator("a").get_by_text("Agenda").click()
 
-    page.click(f'td[data-date="{appointment_tomorrow.start.date()}"]')
+    page.click(f'td[data-date="{appointment_tomorrow.start.date()}"] .fc-daygrid-event')
     original_time = appointment_tomorrow.timeslot.start
     new_time = original_time + timedelta(days=3)
 
