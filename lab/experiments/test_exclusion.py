@@ -35,6 +35,9 @@ def test_required_experiment(admin_user, sample_participant):
     # cannot participate in #2 unless participated in #1
     experiment_2.required_experiments.add(experiment_1)
 
+    # ensure that participant can participate in #1
+    assert sample_participant in get_eligible_participants_for_experiment(experiment_1)
+
     assert sample_participant not in get_eligible_participants_for_experiment(experiment_2)
 
     # mark participant as having participated in experiment #1

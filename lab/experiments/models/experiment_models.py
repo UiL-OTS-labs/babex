@@ -71,6 +71,8 @@ class Experiment(models.Model):
         verbose_name=_("experiment:attribute:excluded_experiments"),
         blank=True,
         help_text=_("experiment:attribute:excluded_experiments:help_text"),
+        symmetrical=False,
+        related_name="experiments_excluding",
     )
 
     required_experiments = models.ManyToManyField(
@@ -78,6 +80,8 @@ class Experiment(models.Model):
         verbose_name=_("experiment:attribute:required_experiments"),
         blank=True,
         help_text=_("experiment:attribute:required_experiments:help_text"),
+        symmetrical=False,
+        related_name="experiments_requiring",
     )
 
     leaders = models.ManyToManyField(
