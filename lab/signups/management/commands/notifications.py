@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime, timedelta
 
 from cdh.mail.classes import TemplateEmail
@@ -6,6 +7,8 @@ from django.core.management.base import BaseCommand
 
 from main.models import User
 from signups.models import Signup
+
+log = logging.getLogger()
 
 
 class Command(BaseCommand):
@@ -23,6 +26,10 @@ class Command(BaseCommand):
         # mail should reach all lab managers
         recipients = User.objects.filter(is_staff=True)
         if new_signups > 0:
+            if not settings.SIGNUP_NOTIFICATIONS:
+                log.info("Signup notifications turned off, not sending")
+                return
+
             mail = TemplateEmail(
                 html_template="signups/mail/notification.html",
                 context=dict(
