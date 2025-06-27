@@ -401,3 +401,7 @@ msgstr "Geannuleerd"
 msgid "parent:forms:signup:languages:help_text"
 msgstr ""
 "Als een taal niet in de lijst staat, dan kunt u die zelf intypen."
+
+msgid "parent:error:rate_limit"
+msgstr ""
+"Er zijn te veel verzoeken gekomen uit uw IP-adres. Probeer het later nog een keer."

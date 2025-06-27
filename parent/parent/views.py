@@ -4,9 +4,9 @@ import logging
 
 from django.contrib import messages
 from django.http.response import JsonResponse
-from django.utils.safestring import mark_safe
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import TemplateView
@@ -37,6 +37,9 @@ class SignupView(FormView):
         if ok:
             self.request.session["email"] = form.cleaned_data["email"]
             return super().form_valid(form)
+
+        if result["detail"] == "rate_limit":
+            messages.error(self.request, _("parent:error:rate_limit"))
 
         log.error("Couldn't reach server while processing signup")
         return super().get(self.request)

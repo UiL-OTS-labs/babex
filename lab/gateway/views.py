@@ -38,10 +38,14 @@ class Signups(viewsets.GenericViewSet, mixins.CreateModelMixin):
     queryset = Signup.objects.all()
     serializer_class = SignupSerializer
     permission_classes = [SignedSource]
+    throttle_scope = "signups"
 
     def perform_create(self, serializer):
         super().perform_create(serializer)
         serializer.instance.send_email_validation()
+
+    def throttled(self, request, *args):
+        raise APIException("rate_limit")
 
 
 class SessionView(views.APIView):
