@@ -10,6 +10,8 @@ from django.utils import timezone, translation
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
+from utils.models import EncryptedManager
+
 
 class EncryptedJSONListField(EncryptedMixin, models.JSONField):
     def to_python(self, value):
@@ -20,6 +22,8 @@ class EncryptedJSONListField(EncryptedMixin, models.JSONField):
 
 
 class Signup(models.Model):
+    objects = EncryptedManager()
+
     name = e_fields.EncryptedCharField(max_length=100, verbose_name=_("participant:attribute:name"))
     sex = e_fields.EncryptedCharField(max_length=50)
     birth_date = e_fields.EncryptedDateField()

@@ -52,3 +52,10 @@ CSRF_COOKIE_SECURE = False
 SECURE_SSL_REDIRECT = False
 
 SIGNUP_NOTIFICATIONS = False
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": "/tmp/django_cache",
+    }
+}
