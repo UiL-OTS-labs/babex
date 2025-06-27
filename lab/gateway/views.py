@@ -42,6 +42,14 @@ class Signups(viewsets.GenericViewSet, mixins.CreateModelMixin):
     throttle_scope = "signups"
 
     def perform_create(self, serializer):
+        existing = Signup.objects.efilter(email=serializer.validated_data["email"])
+        unverified = [s for s in existing if s.email_verified is None]
+
+        # do not allow more than 10 unverified signups from a single email address
+        if len(unverified) > 10:
+            with translation.override("nl"):
+                raise APIException(_("signups:error:unverified"))
+
         super().perform_create(serializer)
         serializer.instance.send_email_validation()
 

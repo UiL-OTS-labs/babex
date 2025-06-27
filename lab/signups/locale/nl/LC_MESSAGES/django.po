@@ -103,3 +103,8 @@ msgid "signups:error:rate_limit"
 msgstr ""
 "Er zijn te veel verzoeken gekomen uit uw IP-adres. Probeer het later nog een keer."
 
+msgid "signups:error:unverified"
+msgstr ""
+"U heeft uw kind meerdere keer ingeschreven en nog niet uw emailadres bevestigd. "
+"Neem alstublieft contact met ons "
+"op via e-mail: babylab.ilslabs@uu.nl"
