@@ -37,9 +37,8 @@ class SignupView(FormView):
         if ok:
             self.request.session["email"] = form.cleaned_data["email"]
             return super().form_valid(form)
-
-        if result["detail"] == "rate_limit":
-            messages.error(self.request, _("parent:error:rate_limit"))
+        else:
+            messages.error(self.request, result["detail"])
 
         log.error("Couldn't reach server while processing signup")
         return super().get(self.request)

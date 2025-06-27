@@ -1,4 +1,5 @@
-from django.utils import timezone
+from django.utils import timezone, translation
+from django.utils.translation import gettext_lazy as _
 from rest_framework import generics, mixins, permissions, views, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import APIException
@@ -45,7 +46,8 @@ class Signups(viewsets.GenericViewSet, mixins.CreateModelMixin):
         serializer.instance.send_email_validation()
 
     def throttled(self, request, *args):
-        raise APIException("rate_limit")
+        with translation.override("nl"):
+            raise APIException(_("signups:error:rate_limit"))
 
 
 class SessionView(views.APIView):

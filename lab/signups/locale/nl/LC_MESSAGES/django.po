@@ -98,3 +98,8 @@ msgstr ""
 "<p>Deze link is niet meer geldig. Uw gegevens hebben wij daarom helaas moeten verwijderen.</p>"
 "<p>Wilt u uw kind toch graag aanmelden voor het Babylab voor Taalonderzoek, "
 "dan verzoeken wij u vriendelijk om dit opnieuw te doen via AANMELDEN hieronder.</p>"
+
+msgid "signups:error:rate_limit"
+msgstr ""
+"Er zijn te veel verzoeken gekomen uit uw IP-adres. Probeer het later nog een keer."
+
