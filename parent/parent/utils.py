@@ -42,6 +42,7 @@ def gateway(
         algorithm=settings.JWT_ALGORITHM,
     )
     headers["Authorization"] = "Bearer {}".format(jwt_token)
+    headers["X-Forwarded-For"] = request.META.get("HTTP_X_FORWARDED_FOR", request.META["REMOTE_ADDR"])
 
     if method is None:
         if data is not None:
