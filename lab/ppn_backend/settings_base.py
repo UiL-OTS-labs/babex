@@ -210,6 +210,13 @@ SESSION_COOKIE_AGE = 60 * 60 * 12  # 12 hours
 VUE_MANIFEST = BASE_DIR / "main/static/vue/.vite/manifest.json"
 VUE_URL = "/static/vue/"
 
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": "/tmp/django_cache",
+    }
+}
+
 
 # used for loading secrets when deployed with docker
 def secret(name):
