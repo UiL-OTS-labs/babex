@@ -98,7 +98,7 @@ REST_FRAMEWORK = {
     "DEFAULT_THROTTLE_CLASSES": [
         "rest_framework.throttling.ScopedRateThrottle",
     ],
-    "DEFAULT_THROTTLE_RATES": {"signups": "10/hour"},
+    "DEFAULT_THROTTLE_RATES": {"signups": "5/hour"},
 }
 
 REST_PERMITTED_CLIENTS = ["127.0.0.1"]

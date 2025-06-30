@@ -45,8 +45,8 @@ class Signups(viewsets.GenericViewSet, mixins.CreateModelMixin):
         existing = Signup.objects.efilter(email=serializer.validated_data["email"])
         unverified = [s for s in existing if s.email_verified is None]
 
-        # do not allow more than 10 unverified signups from a single email address
-        if len(unverified) > 10:
+        # do not allow more than 5 unverified signups from a single email address
+        if len(unverified) > 5:
             with translation.override("nl"):
                 raise APIException(_("signups:error:unverified"))
 
