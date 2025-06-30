@@ -1,4 +1,5 @@
-from django.utils import timezone
+from django.utils import timezone, translation
+from django.utils.translation import gettext_lazy as _
 from rest_framework import generics, mixins, permissions, views, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import APIException
@@ -38,10 +39,23 @@ class Signups(viewsets.GenericViewSet, mixins.CreateModelMixin):
     queryset = Signup.objects.all()
     serializer_class = SignupSerializer
     permission_classes = [SignedSource]
+    throttle_scope = "signups"
 
     def perform_create(self, serializer):
+        existing = Signup.objects.efilter(email=serializer.validated_data["email"])
+        unverified = [s for s in existing if s.email_verified is None]
+
+        # do not allow more than 5 unverified signups from a single email address
+        if len(unverified) > 5:
+            with translation.override("nl"):
+                raise APIException(_("signups:error:unverified"))
+
         super().perform_create(serializer)
         serializer.instance.send_email_validation()
+
+    def throttled(self, request, *args):
+        with translation.override("nl"):
+            raise APIException(_("signups:error:rate_limit"))
 
 
 class SessionView(views.APIView):

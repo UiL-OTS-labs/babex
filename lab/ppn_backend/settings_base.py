@@ -95,6 +95,10 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.SessionAuthentication",
     ],
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.ScopedRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {"signups": "5/hour"},
 }
 
 REST_PERMITTED_CLIENTS = ["127.0.0.1"]
@@ -205,6 +209,13 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 60 * 60 * 12  # 12 hours
 VUE_MANIFEST = BASE_DIR / "main/static/vue/.vite/manifest.json"
 VUE_URL = "/static/vue/"
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": "/tmp/django_cache",
+    }
+}
 
 
 # used for loading secrets when deployed with docker
