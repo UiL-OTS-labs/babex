@@ -33,3 +33,5 @@ FIXTURE_DIRS = ['data_fixtures']
 
 ALLOWED_HOSTS = ["localhost"]
 DEBUG = True
+
+REST_FRAMEWORK["DEFAULT_THROTTLE_RATES"] = {"signups": "1000/hour"}
