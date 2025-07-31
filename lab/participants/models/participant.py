@@ -8,6 +8,7 @@ from django.utils import timezone, translation
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
+
 from .participantdata import ParticipantData
 
 
@@ -215,11 +216,26 @@ class Participant(models.Model):
 
     @property
     def removal_date(self):
-        threshold = ageutil.age(2, months=6)
+        # avoid circular import
+        from experiments.models import Appointment
+        age = ageutil.age(2, months=6)
         if self.save_longer:
-            threshold = ageutil.age(10)
+            age = ageutil.age(10)
 
-        return ageutil.date_of_birth(self.birth_date).range_for(threshold)[0]
+        age_threshold = ageutil.date_of_birth(self.birth_date).range_for(age)[0]
+
+        # remove at least 180 days after last participation
+        last_appointment = (
+            self.appointments.exclude(outcome=Appointment.Outcome.CANCELED)
+            .exclude(outcome=Appointment.Outcome.NOSHOW)
+            .order_by("-timeslot__start")
+            .last()
+        )
+        participation_threshold = datetime.date.today()
+        if last_appointment:
+            participation_threshold = (last_appointment.start + datetime.timedelta(days=180)).date()
+
+        return max(age_threshold, participation_threshold)
 
     def is_removed_soon(self):
         return (self.removal_date - datetime.datetime.today().date()).days < 30

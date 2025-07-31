@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date
 
 from ageutil import date_of_birth
 from cdh.mail.classes import TemplateEmail
@@ -27,11 +27,10 @@ class Command(BaseCommand):
         to_remove_longer = []  # participants that are older than 10 years
 
         for p in participants:
-            y, m, _ = p.age
-            if y >= 10:
-                to_remove_longer.append(p)
-            elif (y >= 2 and m > 6) or y >= 3:
-                if not p.save_longer:
+            if p.removal_date <= date.today():
+                if p.save_longer:
+                    to_remove_longer.append(p)
+                else:
                     to_remove.append(p)
 
         if not options["dry_run"]:
