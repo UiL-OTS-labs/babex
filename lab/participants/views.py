@@ -8,6 +8,7 @@ from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy as reverse
+from django.utils.html import escape
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
 from rest_framework import views
@@ -46,7 +47,7 @@ class ParticipantListDataView(views.APIView):
         pp_url = reverse("participants:detail", args=(pp.pk,))
 
         return [
-            f'<a href="{pp_url}">{pp.fullname}</a>',
+            f'<a href="{pp_url}">{escape(pp.fullname)}</a>',
             pp.birth_date.strftime("%Y-%m-%d"),
             pp.age_short,
             pp.get_sex_display() or "",
