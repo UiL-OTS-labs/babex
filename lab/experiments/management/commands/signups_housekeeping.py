@@ -31,7 +31,7 @@ class Command(BaseCommand):
     def send_reminders(self):
         start = timezone.now() - timedelta(days=2)
         end = timezone.now() - timedelta(days=1)
-        signups = Signup.objects.filter(created__gt=start, created__lte=end, reminder_sent=None)
+        signups = Signup.objects.filter(created__gt=start, created__lte=end, reminder_sent=None, email_verified=None)
         count = signups.count()
         for signup in signups.all():
             signup.send_reminder()
