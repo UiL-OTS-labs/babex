@@ -44,4 +44,4 @@ class CommentsDeleteView(braces.UserPassesTestMixin, DeleteSuccessMessageMixin, 
         return reverse("participants:detail", args=(self.object.participant.pk,))
 
     def test_func(self, user):
-        return user.is_superuser or user == self.object.leader
+        return user.is_superuser or user == self.get_object().leader
