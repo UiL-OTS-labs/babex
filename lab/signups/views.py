@@ -84,6 +84,7 @@ def approve_signup(signup: Signup):
     participant.languages.set(languages)
 
     participant.created = signup.created
+    participant.save()
 
     signup.status = Signup.Status.APPROVED
     signup.save()
