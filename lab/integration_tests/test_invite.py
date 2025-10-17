@@ -50,7 +50,7 @@ def test_schedule_appointment(page, sample_experiment, sample_participant, sampl
     page.get_by_role("button", name="Confirm").wait_for(state="hidden")
 
     # wait for email content to be ready
-    expect(page.frame_locator("#mce_0_ifr").locator("body")).to_be_visible()
+    expect(page.frame_locator("#mce_0_ifr").locator("body div")).not_to_have_count(0)
 
     page.locator("button").get_by_text("Send").click()
     page.get_by_role("button", name="Send").wait_for(state="hidden")
@@ -221,7 +221,7 @@ def test_call_status_after_cancellation(page, sample_experiment, sample_particip
     page.locator(".modal-content select").select_option("Leader McLeader")
     page.locator("button").get_by_text("Confirm").click()
 
-    expect(page.frame_locator("#mce_0_ifr").locator("body")).to_be_visible()
+    expect(page.frame_locator("#mce_0_ifr").locator("body div")).not_to_have_count(0)
 
     page.locator("button").get_by_text("Send").click()
     page.get_by_role("button", name="Send").wait_for(state="hidden")
