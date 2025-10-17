@@ -15,6 +15,8 @@
         multilingual_no: true,
         premature_yes: true,
         premature_no: true,
+        save_longer_yes: true,
+        save_longer_no: true,
     });
 
 
@@ -194,6 +196,19 @@
                         </label>
                         <label>
                             <input v-model="criteria.premature_no" type="checkbox">
+                            {{ _('No') }}
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    {{ _('Save until 10 years') }}
+                    <div class="float-end">
+                        <label>
+                            <input v-model="criteria.save_longer_yes" type="checkbox">
+                            {{ _('Yes') }}
+                        </label>
+                        <label>
+                            <input v-model="criteria.save_longer_no" type="checkbox">
                             {{ _('No') }}
                         </label>
                     </div>

@@ -206,7 +206,17 @@ class DemographicsDataView(views.APIView):
                     [pp for pp in participants if pp.pregnancy_duration != Participant.PregnancyDuration.LESS_THAN_37]
                 )
 
-            result = dyslexia_result.intersection(multilingual_result).intersection(premature_result)
+            save_longer_result = set()
+            if criteria.get("save_longer_yes"):
+                save_longer_result.update([pp for pp in participants if pp.save_longer])
+            if criteria.get("save_longer_no"):
+                save_longer_result.update([pp for pp in participants if not pp.save_longer])
+
+            result = (
+                dyslexia_result.intersection(multilingual_result)
+                .intersection(premature_result)
+                .intersection(save_longer_result)
+            )
         ages = [age(pp) for pp in result]
         return JsonResponse(dict(all=ages))
 
