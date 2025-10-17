@@ -234,7 +234,7 @@ msgstr "Account aangepast!"
 
 #: main/views/users.py:57 main/views/users.py:67
 msgid "users:message:created"
-msgstr "Nieuw admin account aangemaakt!"
+msgstr "Account aangemaakt!"
 
 #: main/views/users.py:84
 msgid "users:message:changed_password"
