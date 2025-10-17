@@ -50,8 +50,8 @@ def test_schedule_appointment(page, sample_experiment, sample_participant, sampl
     page.get_by_role("button", name="Confirm").wait_for(state="hidden")
 
     # wait for email content to be ready
-    while not page.evaluate("() => (tinymce.activeEditor && tinymce.activeEditor.getContent())"):
-        time.sleep(0.2)
+    expect(page.frame_locator("#mce_0_ifr").locator("body")).to_be_visible()
+
     page.locator("button").get_by_text("Send").click()
     page.get_by_role("button", name="Send").wait_for(state="hidden")
 
@@ -105,13 +105,13 @@ def test_schedule_appointment_edit_email(page, sample_experiment, sample_partici
     page.locator(".modal-content select").select_option("Leader McLeader")
     page.locator("button").get_by_text("Confirm").click()
 
-    while not page.evaluate("() => (tinymce.activeEditor && tinymce.activeEditor.getContent())"):
-        time.sleep(0.2)
-
     # set tinymce editor with a custom email string
-    test_email = "<em>this is a test email</em>"
+    test_email = "this is a test email"
     test_email_plain = "this is a test email"
-    page.evaluate('() => tinymce.activeEditor.setContent("{}")'.format(test_email))
+    expect(page.frame_locator("#mce_0_ifr").locator("body div")).not_to_have_count(0)
+    page.frame_locator("#mce_0_ifr").locator("body").fill(test_email)
+    page.keyboard.press("Control+A")
+    page.keyboard.press("Control+I")
 
     assert len(mail.outbox) == 0
     page.locator("button").get_by_text("Send").click()
@@ -221,8 +221,7 @@ def test_call_status_after_cancellation(page, sample_experiment, sample_particip
     page.locator(".modal-content select").select_option("Leader McLeader")
     page.locator("button").get_by_text("Confirm").click()
 
-    while not page.evaluate("() => (tinymce.activeEditor && tinymce.activeEditor.getContent())"):
-        time.sleep(0.2)
+    expect(page.frame_locator("#mce_0_ifr").locator("body")).to_be_visible()
 
     page.locator("button").get_by_text("Send").click()
     page.get_by_role("button", name="Send").wait_for(state="hidden")
