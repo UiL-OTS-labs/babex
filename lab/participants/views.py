@@ -70,7 +70,11 @@ class ParticipantListDataView(views.APIView):
         filtered = qs
         if search is not None:
             search = search.lower()
-            filtered = [row for row in qs if search in row.name.lower() or search in row.phonenumber]
+            filtered = [
+                pp
+                for pp in qs
+                if search in pp.name.lower() or search in pp.phonenumber or search in pp.parent_last_name.lower()
+            ]
         as_list = sorted(filtered, key=lambda row: getattr(row, columns[order_by]), reverse=not order_asc)
         pps = [self.format_row(pp) for pp in as_list[start : start + length]]
         return JsonResponse(dict(draw=int(request.GET["draw"]), recordsTotal=total, recordsFiltered=total, data=pps))
