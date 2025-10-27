@@ -37,6 +37,10 @@ Object.defineProperty(window, 'babex', {
 
 // register a global handler for uncaught promise rejections
 window.addEventListener('unhandledrejection', function (error) {
+    if (error?.reason?.name == 'AbortError') {
+        // don't show toast for aborted requests
+        return;
+    }
     Toaster.error(error.reason);
 });
 
