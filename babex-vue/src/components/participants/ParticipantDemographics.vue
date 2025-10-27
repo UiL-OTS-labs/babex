@@ -17,6 +17,8 @@
         premature_no: true,
         save_longer_yes: true,
         save_longer_no: true,
+        min_age: null,
+        max_age: null
     });
 
 
@@ -25,6 +27,25 @@
     defineProps(['experiments']);
 
     let request = null;
+
+    function makeHistogram(data, binSize) {
+        let counter = {};
+        data.all.forEach(d => {
+            let m = Math.floor((d[0] * 12 + d[1]) / binSize);
+            if (counter[m]) counter[m]++;
+            else counter[m] = 1;
+        });
+        return counter;
+    }
+
+    function chooseBinSize(data, width) {
+        let maxBins = width / 30;
+        let histogram = makeHistogram(data, 1);
+        let min = Math.min(...Object.keys(histogram));
+        let max = Math.max(...Object.keys(histogram));
+        let delta = max - min;
+        return Math.max(1, Math.floor(delta / maxBins));
+    }
 
     function makeGraph(container) {
         let graph = d3.select(container);
@@ -43,22 +64,15 @@
                 .attr("transform",
                       "translate(" + margin.left + "," + margin.top + ")");
 
-            let histogram = [];
-            let counter = {};
-            data.all.forEach(d => {
-                let m = d[0] * 12 + d[1];
-                if (counter[m]) counter[m]++;
-                else counter[m] = 1;
-            });
-            histogram = Object.keys(counter).map(key => { return {age: parseInt(key, 10), count: counter[key]}; });
+            let binSize = chooseBinSize(data, width - margin.right - margin.left*1.5);
+            let histogram = makeHistogram(data, binSize);
+            let series = Object.keys(histogram).map(key => { return {age: parseInt(key, 10)*binSize, count: histogram[key]}; });
 
-            let series = histogram;
-
-            let minMonth = Math.min(...series.map(d => d.age));
-            let maxMonth = Math.max(...series.map(d => d.age));
+            let minMonth = Math.min(0, ...series.map(d => d.age));
+            let maxMonth = Math.max(0, ...series.map(d => d.age).filter(v => v > 0));
 
             let months = [];
-            for (let i=minMonth; i<=maxMonth; i++) {
+            for (let i=minMonth; i<=maxMonth; i+=binSize) {
                 months.push(i);
             }
 
@@ -211,6 +225,16 @@
                             <input v-model="criteria.save_longer_no" type="checkbox">
                             {{ _('No') }}
                         </label>
+                    </div>
+                </div>
+                <div class="d-flex mt-2">
+                    <div class="me-3">
+                        <div>{{ _('Min months:') }}</div>
+                        <input type="number" class="form-control input-sm" v-model="criteria.min_age" min="0">
+                    </div>
+                    <div>
+                        <div>{{ _('Max months:') }}</div>
+                        <input type="number" class="form-control input-sm" v-model="criteria.max_age" min="0">
                     </div>
                 </div>
             </div>

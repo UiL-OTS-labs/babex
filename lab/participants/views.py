@@ -212,10 +212,30 @@ class DemographicsDataView(views.APIView):
             if criteria.get("save_longer_no"):
                 save_longer_result.update([pp for pp in participants if not pp.save_longer])
 
+            def age_months(pp):
+                y, m = age(pp)
+                return m + y * 12
+
+            min_age_set = set()
+            if criteria.get("min_age"):
+                threshold = int(criteria["min_age"])
+                min_age_set.update([pp for pp in participants if age_months(pp) >= threshold])
+            else:
+                min_age_set.update(participants)
+
+            max_age_set = set()
+            if criteria.get("max_age"):
+                threshold = int(criteria["max_age"])
+                max_age_set.update([pp for pp in participants if age_months(pp) <= threshold])
+            else:
+                max_age_set.update(participants)
+
             result = (
                 dyslexia_result.intersection(multilingual_result)
                 .intersection(premature_result)
                 .intersection(save_longer_result)
+                .intersection(min_age_set)
+                .intersection(max_age_set)
             )
         ages = [age(pp) for pp in result]
         return JsonResponse(dict(all=ages))
