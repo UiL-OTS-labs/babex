@@ -1,6 +1,7 @@
 import random
 import string
 from datetime import date, timedelta
+from django.conf import settings
 from django.utils import timezone
 
 
@@ -52,9 +53,9 @@ def test_cancel_appointment_from_email(apps, participant, mailbox, link_from_mai
     appointment.refresh_from_db()
     assert appointment.outcome == Appointment.Outcome.CANCELED
 
-    # check that leader was notified
+    # check that babylab mailbox was notified
     try:
-        mail = mailbox(leader.email)
+        mail = mailbox(settings.BABYLAB_MAILBOX)
         assert len(mail) == 1
         text = mail[0].get_payload()[0].get_payload()
         assert participant.name not in text  # avoid exposing participant name in email

@@ -52,5 +52,3 @@ CSRF_COOKIE_SECURE = False
 SECURE_SSL_REDIRECT = False
 
 SIGNUP_NOTIFICATIONS = False
-
-BABYLAB_MAILBOX = "babylab.ilslabs@uu.nl"

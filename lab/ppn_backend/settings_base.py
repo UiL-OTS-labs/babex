@@ -222,3 +222,6 @@ CACHES = {
 def secret(name):
     path = Path("/run/secrets") / name
     return path.read_text().strip()
+
+
+BABYLAB_MAILBOX = "babylab.ilslabs@uu.nl"
