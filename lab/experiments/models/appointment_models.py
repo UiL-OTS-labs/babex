@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 
 from cdh.mail.classes import TemplateEmail
+from django.conf import settings
 from django.db import models
 from django.utils import timezone, translation
 from django.utils.translation import gettext
@@ -112,7 +113,7 @@ class Appointment(models.Model):
             self.outcome = Appointment.Outcome.CANCELED
             self.save()
             if not silent:
-                _inform_leaders(self)
+                _inform_babylab(self)
                 _send_cancel_confirmation(self)
 
     @property
@@ -155,6 +156,21 @@ def _inform_leaders(appointment: Appointment) -> None:
             subject=subject,
         )
         mail.send()
+
+
+def _inform_babylab(appointment: Appointment) -> None:
+    subject = "ILS appointment canceled by parent"
+    context = {
+        "appointment": appointment,
+    }
+
+    mail = TemplateEmail(
+        html_template="mail/appointment/canceled_leader.html",
+        context=context,
+        to=[settings.BABYLAB_MAILBOX],
+        subject=subject,
+    )
+    mail.send()
 
 
 def _send_cancel_confirmation(appointment: Appointment) -> None:
