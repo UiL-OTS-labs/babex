@@ -53,13 +53,14 @@ class ApiRequest<T> {
                 cb();
             }
             else if (result.status >= 400) {
-                let msg = result.statusText;
+                let msg;
                 try {
                     msg = (await result.json()).detail;
                 }
-                finally {
-                    throw new ApiError(result.status, msg);
+                catch {
+                    msg = result.statusText;
                 }
+                throw new ApiError(result.status, msg);
             }
             else {
                 callback(await result.json() as T);
