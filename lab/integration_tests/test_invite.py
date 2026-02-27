@@ -4,6 +4,7 @@ from datetime import date, datetime, timedelta
 import pytest
 from django.core import mail
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.utils import timezone
 from playwright.sync_api import expect
 
 from experiments.models import Appointment, TimeSlot
@@ -339,3 +340,40 @@ def test_sort_participants_by_date_of_birth(page, sample_experiment, as_leader):
 
     assert len(rendered_order) == 3
     assert rendered_order == [pp3.name, pp2.name, pp1.name]
+
+
+def test_appointment_reminder(freezer, page, sample_experiment, sample_participant, as_leader, appointment_tomorrow):
+    as_leader.experiments.add(sample_experiment)
+    from experiments.management.commands.send_reminders import (
+        Command as SendRemindersCommand,
+    )
+
+    freezer.move_to(appointment_tomorrow.timeslot.start - timedelta(days=1, minutes=5))
+    SendRemindersCommand().handle()
+    assert len(mail.outbox) == 1
+    assert mail.outbox[0].to[0] == sample_participant.email
+
+    # reschedule appointment, reminder should be sent later again
+
+    page.locator("a").get_by_text("Agenda").click()
+
+    page.click(f'td[data-date="{appointment_tomorrow.start.date()}"] .fc-daygrid-event')
+    new_time = appointment_tomorrow.timeslot.start + timedelta(days=3)
+
+    page.fill(".appointment-start input", new_time.strftime("%d-%m-%Y %H:%M"))
+    page.click(".action-panel .save")
+    # confirm change
+    page.get_by_text("Ok").click()
+
+    # skip confirmation mail
+    page.get_by_role("button", name="Cancel", exact=True).click()
+
+    page.locator(".action-panel .save").wait_for(state="hidden")
+    appointment_tomorrow.refresh_from_db()
+    assert appointment_tomorrow.timeslot.start == new_time
+
+    freezer.move_to(new_time - timedelta(days=1, minutes=5))
+    SendRemindersCommand().handle()
+
+    assert len(mail.outbox) == 2
+    assert mail.outbox[1].to[0] == sample_participant.email

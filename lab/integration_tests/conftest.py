@@ -1,8 +1,9 @@
-from datetime import date
+from datetime import date, datetime, timedelta
 
 import pytest
+from django.utils import timezone
 
-from experiments.models import DefaultCriteria, Location
+from experiments.models import Appointment, Location, TimeSlot
 from main.models import User
 from participants.models import Language, Participant
 
@@ -80,3 +81,19 @@ def sample_leader(db):
 @pytest.fixture
 def sample_location(db):
     yield Location.objects.create(name="Location")
+
+
+@pytest.fixture
+def appointment_tomorrow(db, sample_experiment, sample_leader, sample_participant):
+    sample_experiment.leaders.add(sample_leader)
+    start = datetime(
+        date.today().year, date.today().month, date.today().day, 12, 0, tzinfo=timezone.get_current_timezone()
+    ) + timedelta(days=1)
+    timeslot = TimeSlot.objects.create(
+        start=start,
+        end=start + timedelta(hours=1),
+        experiment=sample_experiment,
+    )
+    yield Appointment.objects.create(
+        participant=sample_participant, experiment=sample_experiment, timeslot=timeslot, leader=sample_leader
+    )

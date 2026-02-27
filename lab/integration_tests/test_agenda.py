@@ -7,7 +7,6 @@ from django.utils import timezone
 from playwright.sync_api import expect
 
 from agenda.models import Closing
-from experiments.models import Appointment, TimeSlot
 
 
 @pytest.fixture
@@ -55,22 +54,6 @@ def appointment_yesterday(db, sample_experiment, sample_leader, sample_participa
     timeslot = TimeSlot.objects.create(
         start=midnight - timedelta(hours=13),
         end=midnight - timedelta(hours=12),
-        experiment=sample_experiment,
-    )
-    yield Appointment.objects.create(
-        participant=sample_participant, experiment=sample_experiment, timeslot=timeslot, leader=sample_leader
-    )
-
-
-@pytest.fixture
-def appointment_tomorrow(db, sample_experiment, sample_leader, sample_participant):
-    sample_experiment.leaders.add(sample_leader)
-    start = datetime(
-        date.today().year, date.today().month, date.today().day, 12, 0, tzinfo=timezone.get_current_timezone()
-    ) + timedelta(days=1)
-    timeslot = TimeSlot.objects.create(
-        start=start,
-        end=start + timedelta(hours=1),
         experiment=sample_experiment,
     )
     yield Appointment.objects.create(
