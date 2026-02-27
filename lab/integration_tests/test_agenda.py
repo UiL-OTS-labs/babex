@@ -7,6 +7,7 @@ from django.utils import timezone
 from playwright.sync_api import expect
 
 from agenda.models import Closing
+from experiments.models import Appointment, TimeSlot
 
 
 @pytest.fixture
