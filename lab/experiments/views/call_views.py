@@ -11,6 +11,7 @@ from django.utils.dateparse import parse_datetime
 from django.utils.translation import gettext
 from django.views.generic import TemplateView
 from rest_framework import generics, serializers, views
+from rest_framework.exceptions import APIException
 
 from experiments.models import Appointment, Experiment, make_appointment
 from experiments.models.invite_models import Call
@@ -98,12 +99,12 @@ class AppointmentConfirm(generics.CreateAPIView):
         start = parse_datetime(request.data["start"])
 
         if start < timezone.now():
-            raise BadRequest("Invalid appointment time")
+            raise APIException("Invalid appointment time")
 
         participant = Participant.objects.get(pk=request.data["participant"])
 
         if not self.check_age_at_appointment(participant, experiment, start):
-            raise BadRequest("Invalid appointment time")
+            raise APIException("Invalid appointment time")
 
         leader = User.objects.filter(
             # make sure leader belongs to experiment
@@ -112,7 +113,10 @@ class AppointmentConfirm(generics.CreateAPIView):
             pk=request.data["leader"],
         )
 
-        appointment = make_appointment(experiment, participant, leader, start)
+        try:
+            appointment = make_appointment(experiment, participant, leader, start)
+        except ValueError as e:
+            raise APIException(str(e))
         return JsonResponse(self.serializer_class(appointment).data)
 
     def check_age_at_appointment(self, participant: Participant, experiment: Experiment, start: datetime.date) -> bool:

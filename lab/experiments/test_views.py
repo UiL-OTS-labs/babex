@@ -1,7 +1,6 @@
 import json
 from datetime import date, timedelta, datetime
 
-from django.core.exceptions import BadRequest
 from django.test import TestCase
 from django.utils import timezone
 from freezegun import freeze_time
@@ -54,8 +53,7 @@ class AppointmentTests(TestCase):
 
         request = self.factory.post("/experiments/call/appointment/", data, format="json")
         force_authenticate(request, self.user)
-        with self.assertRaises(BadRequest):
-            AppointmentConfirm.as_view()(request)
+        assert AppointmentConfirm.as_view()(request).status_code == 500
 
     def test_appointment_confirm_when_eligible_age(self):
         self.experiment.defaultcriteria.min_age_days = 0
@@ -95,8 +93,7 @@ class AppointmentTests(TestCase):
 
         request = self.factory.post("/experiments/call/appointment/", data, format="json")
         force_authenticate(request, self.user)
-        with self.assertRaises(Exception):
-            AppointmentConfirm.as_view()(request)
+        assert AppointmentConfirm.as_view()(request).status_code == 500
 
     def test_appointment_confirm_unique(self):
         data = {
