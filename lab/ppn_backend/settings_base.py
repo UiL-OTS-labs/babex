@@ -224,3 +224,5 @@ def secret(name):
 
 
 BABYLAB_MAILBOX = "babylab.ilslabs@uu.nl"
+
+DEBUG_TOOLBAR = False

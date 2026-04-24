@@ -12,6 +12,7 @@ SECRET_KEY = "hk+83s0m6j8(ei)gxgy)e59b@^n77y_bmd4(#yyknr#whcrf^#"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+DEBUG_TOOLBAR = True
 
 ALLOWED_HOSTS: List[str] = []
 INTERNAL_IPS = ["127.0.0.1"]
