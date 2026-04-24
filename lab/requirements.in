@@ -1,4 +1,4 @@
-Django>=4.2,<5.0
+Django<6
 django-braces
 django-csp<4.0
 django-simple-menu
@@ -10,7 +10,7 @@ djangorestframework
 django-debug-toolbar
 cryptography
 python-dateutil
-cdh-django-core[all] @ git+https://github.com/CentreForDigitalHumanities/django-shared-core@v3.2.0#egg=cdh-django-core
+cdh-django-core[all] @ git+https://github.com/CentreForDigitalHumanities/django-shared-core.git@v3.4.0-pre1
 mysqlclient
 django-impersonate
 pytest-django
