@@ -111,7 +111,7 @@ jobs:
           cd ${{ matrix.app }}
           make test
       - name: Download vue app
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: babex-vue
       - name: Unpack vue app
@@ -187,7 +187,7 @@ jobs:
           cd parent
           python manage.py compilemessages
       - name: Download vue app
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: babex-vue
       - name: Unpack vue app
