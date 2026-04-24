@@ -41,7 +41,7 @@ class AppointmentTests(TestCase):
         request = self.factory.post("/experiments/call/appointment/", data, format="json")
         force_authenticate(request, self.user)
         response = AppointmentConfirm.as_view()(request)
-        self.assert_(json.loads(response.content))
+        self.assertTrue(json.loads(response.content))
 
     def test_appointment_confirm_fail_in_past(self):
         data = {
@@ -106,14 +106,14 @@ class AppointmentTests(TestCase):
         request = self.factory.post("/experiments/call/appointment/", data, format="json")
         force_authenticate(request, self.user)
         response = AppointmentConfirm.as_view()(request)
-        self.assert_(json.loads(response.content))
+        self.assertTrue(json.loads(response.content))
 
         # repeat booking
         with self.assertRaises(Exception):
             request = self.factory.post("/experiments/call/appointment/", data, format="json")
             force_authenticate(request, self.user)
             response = AppointmentConfirm.as_view()(request)
-            self.assert_(json.loads(response.content))
+            self.assertTrue(json.loads(response.content))
 
 
 class InviteTests(TestCase):
