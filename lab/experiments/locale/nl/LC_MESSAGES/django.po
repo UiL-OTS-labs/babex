@@ -337,17 +337,29 @@ msgstr "Max. leeftijd (maanden)"
 msgid "experiments:delete:header"
 msgstr "Verwijder experiment"
 
+msgid "experiments:archive:header"
+msgstr "Archiveer experiment"
+
 #: experiments/templates/experiments/delete.html:19
 msgid "experiments:delete:text"
 msgstr "Weet je zeker dat je het experiment '{}' wilt verwijderen?"
+
+msgid "experiments:archive:text"
+msgstr "Weet je zeker dat je het experiment '{}' wilt archiveren?"
 
 #: experiments/templates/experiments/delete.html:22
 msgid "experiments:delete:cancel"
 msgstr "Annuleer"
 
+msgid "experiments:archive:cancel"
+msgstr "Annuleer"
+
 #: experiments/templates/experiments/delete.html:25
 msgid "experiments:delete:confirm"
 msgstr "Verwijder experiment"
+
+msgid "experiments:archive:confirm"
+msgstr "Archiveer experiment"
 
 #: experiments/templates/experiments/detail.html:9
 #: experiments/templates/experiments/detail.html:21
@@ -516,6 +528,9 @@ msgstr "Participanten"
 #: experiments/templates/experiments/experiment_actions_snippit.html:64
 msgid "experiments:home:delete:title"
 msgstr "Verwijder experiment"
+
+msgid "experiments:home:archive:title"
+msgstr "Archiveer experiment"
 
 #: experiments/templates/experiments/index.html:8
 #: experiments/templates/experiments/index.html:20
@@ -726,6 +741,9 @@ msgstr "Experiment aangepast"
 #: experiments/views/experiment_views.py:108
 msgid "experiments:message:deleted_experiment"
 msgstr "Experiment verwijderd!"
+
+msgid "experiments:message:archived_experiment"
+msgstr "Experiment Gearchiveerd!"
 
 #: experiments/views/experiment_views.py:154
 msgid "experiments:message:exclude:included"

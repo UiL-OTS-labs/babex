@@ -27,6 +27,7 @@ Menu.add_item("main", MenuItem(_("mainmenu:agenda"), reverse("agenda:home"), che
 experiments_menu = [
     MenuItem(_("mainmenu:experiments:overview"), reverse("experiments:home")),
     MenuItem(_("mainmenu:locations"), reverse("experiments:location_home"), check=_user_is_admin),
+    MenuItem(_("mainmenu:experiments:archived"), reverse("experiments:archived"), check=_user_is_admin),
 ]
 
 Menu.add_item(

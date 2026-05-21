@@ -1,9 +1,11 @@
 import braces.views as braces
 from cdh.core.views.mixins import DeleteSuccessMessageMixin
+from django.contrib import messages
 from django.contrib.auth.views import RedirectURLMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count, Q
 from django.http.response import HttpResponse
+from django.shortcuts import redirect
 from django.urls import reverse_lazy as reverse
 from django.utils import timezone
 from django.utils.http import url_has_allowed_host_and_scheme
@@ -24,9 +26,12 @@ from .mixins import ExperimentObjectMixin
 class ExperimentHomeView(RandomLeaderMixin, generic.ListView):
     template_name = "experiments/index.html"
     model = Experiment
+    archived = False
 
     def get_queryset(self):
         qs = self.model.objects.select_related("location")
+        if not self.archived:
+            qs = qs.filter(archived=None)
 
         if not self.request.user.is_staff:
             qs = qs.filter(pk__in=self.request.user.experiments.all())
@@ -101,6 +106,28 @@ class ExperimentDetailView(ExperimentLeaderMixin, ExperimentObjectMixin, generic
         progress["to_test"] = max(0, progress["target"] - progress["tested"])
         context["progress"] = progress
         return context
+
+
+class ExperimentArchiveView(braces.SuperuserRequiredMixin, ExperimentObjectMixin, generic.TemplateView):
+    model = Experiment
+    success_url = reverse("experiments:home")
+    template_name = "experiments/archive.html"
+    success_message = _("experiments:message:archived_experiment")
+    experiment_kwargs_name = "pk"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["experiment"] = self.experiment
+        return context
+
+    def post(self, *args, **kwargs):
+        # because self.experiment is a property that runs a query, we cannot use it directly when we want to save changes
+        experiment = self.experiment
+        if experiment.archived is None:
+            experiment.archived = timezone.now()
+            experiment.save()
+        messages.success(self.request, self.success_message)
+        return redirect(self.success_url)
 
 
 class ExperimentDeleteView(braces.SuperuserRequiredMixin, DeleteSuccessMessageMixin, generic.DeleteView):

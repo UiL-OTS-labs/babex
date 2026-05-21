@@ -247,6 +247,9 @@ msgstr "Agenda"
 msgid "mainmenu:experiments:overview"
 msgstr "Overzicht"
 
+msgid "mainmenu:experiments:archived"
+msgstr "Archief"
+
 msgid "mainmenu:participants:overview"
 msgstr "Overzicht"
 

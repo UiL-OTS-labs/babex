@@ -490,17 +490,29 @@ msgstr "Max age"
 msgid "experiments:delete:header"
 msgstr "Delete experiment"
 
+msgid "experiments:archive:header"
+msgstr "Archive experiment"
+
 #: experiments/templates/experiments/delete.html:19
 msgid "experiments:delete:text"
 msgstr "Are you sure you want to delete the experiment '{}'?"
+
+msgid "experiments:archive:text"
+msgstr "Are you sure you want to archive the experiment '{}'?"
 
 #: experiments/templates/experiments/delete.html:22
 msgid "experiments:delete:cancel"
 msgstr "Cancel"
 
+msgid "experiments:archive:cancel"
+msgstr "Cancel"
+
 #: experiments/templates/experiments/delete.html:25
 msgid "experiments:delete:confirm"
 msgstr "Delete experiment"
+
+msgid "experiments:archive:confirm"
+msgstr "Archive experiment"
 
 #: experiments/templates/experiments/detail.html:9
 #: experiments/templates/experiments/detail.html:15
@@ -679,6 +691,9 @@ msgstr "Participants"
 msgid "experiments:home:delete:title"
 msgstr "Delete experiment"
 
+msgid "experiments:home:archive:title"
+msgstr "Archive experiment"
+
 #: experiments/templates/experiments/index.html:8
 #: experiments/templates/experiments/index.html:26
 msgid "experiments:home:header"
@@ -841,6 +856,9 @@ msgstr "Successfully updated experiment"
 #: experiments/views/experiment_views.py:98
 msgid "experiments:message:deleted_experiment"
 msgstr "Experiment deleted!"
+
+msgid "experiments:message:deleted_experiment"
+msgstr "Experiment archived!"
 
 #: experiments/views/invite_views.py:53
 msgid "experiments:message:invite_failure"
