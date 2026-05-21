@@ -857,7 +857,7 @@ msgstr "Successfully updated experiment"
 msgid "experiments:message:deleted_experiment"
 msgstr "Experiment deleted!"
 
-msgid "experiments:message:deleted_experiment"
+msgid "experiments:message:archived_experiment"
 msgstr "Experiment archived!"
 
 #: experiments/views/invite_views.py:53
