@@ -16,7 +16,7 @@ bpython==0.24
     # via
     #   -r requirements.in
     #   cdh-django-core
-cdh-django-core[all,core,federated-auth,files,mail,recommended,rest,vue] @ git+https://github.com/CentreForDigitalHumanities/django-shared-core@develop
+cdh-django-core[all,core,federated-auth,files,mail,recommended,rest,vue] @ git+https://github.com/CentreForDigitalHumanities/django-shared-core@v3.2.0
     # via -r requirements.in
 certifi==2024.2.2
     # via requests
