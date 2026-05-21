@@ -824,7 +824,7 @@ msgstr "Voicemail"
 
 #: experiments/models/invite_models.py:33
 msgid "experiments:call:status:email"
-msgstr "Wil verder contact via e-mail"
+msgstr "E-mail gestuurd"
 
 #: experiments/models/invite_models.py:35
 msgid "experiments:call:status:confirmed"

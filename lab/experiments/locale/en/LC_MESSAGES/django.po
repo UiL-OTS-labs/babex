@@ -306,7 +306,7 @@ msgstr "Voicemail"
 
 #: experiments/models/invite_models.py:33
 msgid "experiments:call:status:email"
-msgstr "Prefer email"
+msgstr "Sent e-mail"
 
 #: experiments/models/invite_models.py:35
 msgid "experiments:call:status:confirmed"
