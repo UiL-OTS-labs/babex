@@ -30,7 +30,9 @@ class ExperimentHomeView(RandomLeaderMixin, generic.ListView):
 
     def get_queryset(self):
         qs = self.model.objects.select_related("location")
-        if not self.archived:
+        if self.archived:
+            qs = qs.exclude(archived=None)
+        else:
             qs = qs.filter(archived=None)
 
         if not self.request.user.is_staff:
