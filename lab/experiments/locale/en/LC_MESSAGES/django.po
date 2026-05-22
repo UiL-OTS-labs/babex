@@ -493,12 +493,18 @@ msgstr "Delete experiment"
 msgid "experiments:archive:header"
 msgstr "Archive experiment"
 
+msgid "experiments:unarchive:header"
+msgstr "Restore experiment from archive"
+
 #: experiments/templates/experiments/delete.html:19
 msgid "experiments:delete:text"
 msgstr "Are you sure you want to delete the experiment '{}'?"
 
 msgid "experiments:archive:text"
 msgstr "Are you sure you want to archive the experiment '{}'?"
+
+msgid "experiments:unarchive:text"
+msgstr "Are you sure you want to restore the experiment '{}'?"
 
 #: experiments/templates/experiments/delete.html:22
 msgid "experiments:delete:cancel"
@@ -507,12 +513,18 @@ msgstr "Cancel"
 msgid "experiments:archive:cancel"
 msgstr "Cancel"
 
+msgid "experiments:unarchive:cancel"
+msgstr "Cancel"
+
 #: experiments/templates/experiments/delete.html:25
 msgid "experiments:delete:confirm"
 msgstr "Delete experiment"
 
 msgid "experiments:archive:confirm"
 msgstr "Archive experiment"
+
+msgid "experiments:unarchive:confirm"
+msgstr "Restore experiment"
 
 #: experiments/templates/experiments/detail.html:9
 #: experiments/templates/experiments/detail.html:15
@@ -694,6 +706,9 @@ msgstr "Delete experiment"
 msgid "experiments:home:archive:title"
 msgstr "Archive experiment"
 
+msgid "experiments:home:unarchive:title"
+msgstr "Restore experiment from archive"
+
 #: experiments/templates/experiments/index.html:8
 #: experiments/templates/experiments/index.html:26
 msgid "experiments:home:header"
@@ -859,6 +874,9 @@ msgstr "Experiment deleted!"
 
 msgid "experiments:message:archived_experiment"
 msgstr "Experiment archived!"
+
+msgid "experiments:message:unarchived_experiment"
+msgstr "Experiment restored!"
 
 #: experiments/views/invite_views.py:53
 msgid "experiments:message:invite_failure"

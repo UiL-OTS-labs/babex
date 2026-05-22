@@ -2,6 +2,7 @@ from django.urls import path
 
 from experiments.views import (
     ExperimentArchiveView,
+    ExperimentUnarchiveView,
     ExperimentAttachmentView,
     ExperimentCreateView,
     ExperimentCriteriaView,
@@ -18,6 +19,7 @@ urlpatterns = [
     path("<int:pk>/", ExperimentDetailView.as_view(), name="detail"),
     path("<int:pk>/update/", ExperimentUpdateView.as_view(), name="update"),
     path("<int:pk>/archive/", ExperimentArchiveView.as_view(), name="archive"),
+    path("<int:pk>/unarchive/", ExperimentUnarchiveView.as_view(), name="unarchive"),
     path("<int:pk>/delete/", ExperimentDeleteView.as_view(), name="delete"),
     path("<int:pk>/attachment/<int:attachment>", ExperimentAttachmentView.as_view(), name="attachment"),
     path("<int:pk>/criteria/", ExperimentCriteriaView.as_view(), name="criteria"),

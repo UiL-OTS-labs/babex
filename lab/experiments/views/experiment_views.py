@@ -132,6 +132,27 @@ class ExperimentArchiveView(LabManagerMixin, ExperimentObjectMixin, generic.Temp
         return redirect(self.success_url)
 
 
+class ExperimentUnarchiveView(LabManagerMixin, ExperimentObjectMixin, generic.TemplateView):
+    model = Experiment
+    success_url = reverse("experiments:home")
+    template_name = "experiments/unarchive.html"
+    success_message = _("experiments:message:unarchived_experiment")
+    experiment_kwargs_name = "pk"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["experiment"] = self.experiment
+        return context
+
+    def post(self, *args, **kwargs):
+        # because self.experiment is a property that runs a query, we cannot use it directly when we want to save changes
+        experiment = self.experiment
+        experiment.archived = None
+        experiment.save()
+        messages.success(self.request, self.success_message)
+        return redirect(self.success_url)
+
+
 class ExperimentDeleteView(braces.SuperuserRequiredMixin, DeleteSuccessMessageMixin, generic.DeleteView):
     model = Experiment
     success_url = reverse("experiments:home")

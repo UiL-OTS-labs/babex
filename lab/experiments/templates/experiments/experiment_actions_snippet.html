@@ -30,9 +30,15 @@
         </li>
         {% if user.is_staff %}
         <li>
-            <a href="{% url 'experiments:archive' experiment.pk %}" class="dropdown-item">
-                {% trans 'experiments:home:archive:title' %}
-            </a>
+            {% if experiment.archived %}
+                <a href="{% url 'experiments:unarchive' experiment.pk %}" class="dropdown-item">
+                    {% trans 'experiments:home:unarchive:title' %}
+                </a>
+            {% else %}
+                <a href="{% url 'experiments:archive' experiment.pk %}" class="dropdown-item">
+                    {% trans 'experiments:home:archive:title' %}
+                </a>
+            {% endif %}
         </li>
         {% endif %}
         {% if user.is_superuser %}

@@ -340,12 +340,18 @@ msgstr "Verwijder experiment"
 msgid "experiments:archive:header"
 msgstr "Archiveer experiment"
 
+msgid "experiments:unarchive:header"
+msgstr "Experiment uit het archief halen"
+
 #: experiments/templates/experiments/delete.html:19
 msgid "experiments:delete:text"
 msgstr "Weet je zeker dat je het experiment '{}' wilt verwijderen?"
 
 msgid "experiments:archive:text"
 msgstr "Weet je zeker dat je het experiment '{}' wilt archiveren?"
+
+msgid "experiments:unarchive:text"
+msgstr "Weet je zeker dat je het experiment '{}' uit het archief wil halen?"
 
 #: experiments/templates/experiments/delete.html:22
 msgid "experiments:delete:cancel"
@@ -354,12 +360,18 @@ msgstr "Annuleer"
 msgid "experiments:archive:cancel"
 msgstr "Annuleer"
 
+msgid "experiments:unarchive:cancel"
+
+msgstr "Annuleer"
 #: experiments/templates/experiments/delete.html:25
 msgid "experiments:delete:confirm"
 msgstr "Verwijder experiment"
 
 msgid "experiments:archive:confirm"
 msgstr "Archiveer experiment"
+
+msgid "experiments:unarchive:confirm"
+msgstr "Haal experiment uit het archief"
 
 #: experiments/templates/experiments/detail.html:9
 #: experiments/templates/experiments/detail.html:21
@@ -531,6 +543,9 @@ msgstr "Verwijder experiment"
 
 msgid "experiments:home:archive:title"
 msgstr "Archiveer experiment"
+
+msgid "experiments:home:unarchive:title"
+msgstr "Experiment uit het archief halen"
 
 #: experiments/templates/experiments/index.html:8
 #: experiments/templates/experiments/index.html:20
@@ -743,7 +758,10 @@ msgid "experiments:message:deleted_experiment"
 msgstr "Experiment verwijderd!"
 
 msgid "experiments:message:archived_experiment"
-msgstr "Experiment Gearchiveerd!"
+msgstr "Experiment gearchiveerd!"
+
+msgid "experiments:message:unarchived_experiment"
+msgstr "Experiment uit het archief gehaald!"
 
 #: experiments/views/experiment_views.py:154
 msgid "experiments:message:exclude:included"
