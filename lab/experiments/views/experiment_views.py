@@ -110,7 +110,7 @@ class ExperimentDetailView(ExperimentLeaderMixin, ExperimentObjectMixin, generic
         return context
 
 
-class ExperimentArchiveView(braces.SuperuserRequiredMixin, ExperimentObjectMixin, generic.TemplateView):
+class ExperimentArchiveView(LabManagerMixin, ExperimentObjectMixin, generic.TemplateView):
     model = Experiment
     success_url = reverse("experiments:home")
     template_name = "experiments/archive.html"
