@@ -26,7 +26,7 @@ class HomeView(braces.LoginRequiredMixin, generic.TemplateView):
         user = self.request.user
 
         if self.request.user.is_leader:
-            context["experiments"] = user.experiments.all()
+            context["experiments"] = user.experiments.filter(archived=None)
 
             context["call_back"] = self.get_callback_calls(user)
             context["open_calls"] = user.call_set.filter(status=Call.CallStatus.STARTED)
