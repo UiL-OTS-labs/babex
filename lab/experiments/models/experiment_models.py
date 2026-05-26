@@ -97,6 +97,8 @@ class Experiment(models.Model):
         help_text=_("experiment:attribute:responsible_researcher:help_text"),
     )
 
+    archived = models.DateTimeField(null=True)
+
     defaultcriteria = models.OneToOneField(DefaultCriteria, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):

@@ -42,6 +42,9 @@ msgstr "Agenda"
 msgid "mainmenu:experiments:overview"
 msgstr "Overview"
 
+msgid "mainmenu:experiments:archived"
+msgstr "Archive"
+
 #: main/menus.py:33
 msgid "mainmenu:locations"
 msgstr "Locations"

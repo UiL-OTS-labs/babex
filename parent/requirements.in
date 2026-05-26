@@ -2,7 +2,7 @@ Django>=4.2,<5.0
 django-simple-menu
 djangorestframework
 django-debug-toolbar
-cdh-django-core[all] @ git+https://github.com/CentreForDigitalHumanities/django-shared-core@develop#egg=cdh-django-core
+cdh-django-core[all] @ git+https://github.com/CentreForDigitalHumanities/django-shared-core@v3.2.0#egg=cdh-django-core
 -e git+https://github.com/UiL-OTS-labs/django-vue3-tag@main#egg=django-vue3-tag
 requests
 -e git+https://github.com/UiL-OTS-labs/ageutil@main#egg=ageutil
