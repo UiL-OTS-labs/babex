@@ -33,7 +33,10 @@ class Command(BaseCommand):
                 else:
                     to_remove.append(p)
 
-        if not options["dry_run"]:
+        count = len(to_remove + to_remove_longer)
+        if options["dry_run"]:
+            print(f"Would deactivate {count} participants, but it's a dry run")
+        else:
             for p in to_remove:
                 email = p.email
                 p.deactivate(send_mail=False)
@@ -57,5 +60,4 @@ class Command(BaseCommand):
                     )
                     mail.send()
 
-        count = len(to_remove + to_remove_longer)
-        print(f"Deactivated {count} participants")
+            print(f"Deactivated {count} participants")
