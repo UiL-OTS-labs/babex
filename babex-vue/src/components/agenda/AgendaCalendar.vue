@@ -48,6 +48,13 @@
                 fetch(
                     this.url + '?' + new URLSearchParams(args)
                 ).then(async response => {
+                    if (!response.ok) {
+                        if (response.status == 403) {
+                            // session expired, probably
+                            window.location = '/login';
+                        }
+                        throw "Unknown error while fetching agenda events";
+                    }
                     let skip = false;
                     let data = await response.json();
                     if (this.last != null && JSON.stringify(this.lastArgs) == JSON.stringify(args)) {

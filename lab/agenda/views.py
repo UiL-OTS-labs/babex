@@ -9,17 +9,18 @@ from experiments.models import Appointment, Experiment, Location
 from experiments.serializers import AppointmentSerializer
 from main.auth.util import (
     IsExperimentLeader,
-    LabManagerMixin,
     LabSupportMixin,
     RandomLeaderMixin,
+    RandomLeaderAPIMixin,
 )
 from utils.appointment_mail import prepare_appointment_mail, send_appointment_mail
 
 from .models import Closing, ClosingSerializer
 
 
-class AppointmentFeed(RandomLeaderMixin, generics.ListAPIView):
+class AppointmentFeed(generics.ListAPIView):
     serializer_class = AppointmentSerializer
+    permission_classes = [RandomLeaderAPIMixin]
 
     def get_queryset(self):
         from_date = dateutil.parser.parse(self.request.GET["start"])
@@ -50,7 +51,7 @@ class AgendaHome(RandomLeaderMixin, generic.TemplateView):
 class ClosingPermission(permissions.BasePermission):
     def has_permission(self, request, view):
         if view.action == "list":
-            return True
+            return request.user.is_authenticated
         return request.user.is_support or request.user.is_staff
 
 

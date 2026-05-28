@@ -1,5 +1,5 @@
 from braces.views import StaffuserRequiredMixin, UserPassesTestMixin
-from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.permissions import BasePermission, IsAdminUser, IsAuthenticated
 
 
 class LabManagerMixin(StaffuserRequiredMixin):
@@ -50,6 +50,20 @@ class RandomLeaderMixin(UserPassesTestMixin):
             return False
         # staff = lab managers, can access any experiment
         return (user.is_leader or user.is_staff) and self.test_leader(user)
+
+
+class RandomLeaderAPIMixin(BasePermission):
+    """A version of RandomLeaderMixin for DRF"""
+
+    def test_leader(self, user):
+        # used by child view for finer grained control over leader access
+        return True
+
+    def has_permission(self, request, view):
+        if not request.user.is_authenticated:
+            return False
+        # staff = lab managers, can access any experiment
+        return (request.user.is_leader or request.user.is_staff) and self.test_leader(request.user)
 
 
 class IsLabManager(IsAdminUser):
