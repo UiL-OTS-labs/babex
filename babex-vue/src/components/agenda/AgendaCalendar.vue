@@ -51,7 +51,7 @@
                     if (!response.ok) {
                         if (response.status == 403) {
                             // session expired, probably
-                            window.location = '/login';
+                            window.location.href = '/login';
                         }
                         throw "Unknown error while fetching agenda events";
                     }
