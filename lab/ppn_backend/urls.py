@@ -47,7 +47,7 @@ if "datamanagement" in settings.INSTALLED_APPS:
         path("datamanagement/", include("datamanagement.urls")),
     ] + urlpatterns  # type: ignore
 
-if settings.DEBUG:
+if settings.DEBUG and settings.DEBUG_TOOLBAR:
     import debug_toolbar
 
     urlpatterns = [

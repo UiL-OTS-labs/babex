@@ -45,7 +45,7 @@ handler404 = "parent.views.error404"
 handler500 = "parent.views.error500"
 
 
-if settings.DEBUG:
+if settings.DEBUG and settings.DEBUG_TOOLBAR:
     import debug_toolbar
 
     urlpatterns = [

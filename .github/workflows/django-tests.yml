@@ -13,12 +13,12 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16]
+        node-version: [24]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: Set up Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
@@ -41,7 +41,7 @@ jobs:
           cd lab/main/static/
           tar cvf babex-vue.tar vue
           gzip babex-vue.tar
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: babex-vue
           path: lab/main/static/babex-vue.tar.gz
@@ -62,7 +62,7 @@ jobs:
 
     strategy:
       matrix:
-        python-version: ['3.10']
+        python-version: ['3.11', '3.13']
         app: ['lab', 'parent']
 
     steps:
@@ -70,9 +70,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libldap2-dev libsasl2-dev libssl-dev gettext poppler-utils poppler-data libpoppler-cpp-dev
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
           cache: 'pip'
@@ -111,7 +111,7 @@ jobs:
           cd ${{ matrix.app }}
           make test
       - name: Download vue app
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: babex-vue
       - name: Unpack vue app
@@ -123,7 +123,7 @@ jobs:
         id: playwright-version
         run: echo "PLAYWRIGHT_VERSION=$(pip freeze | grep ^playwright | cut -d= -f3)" >> $GITHUB_ENV
       - name: Cache playwright binaries
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         id: playwright-cache
         with:
           key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
@@ -134,7 +134,7 @@ jobs:
           playwright install
           export DJANGO_ALLOW_ASYNC_UNSAFE=1
           make testint
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         if: failure()
         with:
           name: ${{ matrix.app }}-pytest_logs
@@ -155,16 +155,16 @@ jobs:
 
     strategy:
       matrix:
-        python-version: ['3.10']
+        python-version: ['3.11', '3.13']
 
     steps:
       - name: Install OS dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y libldap2-dev libsasl2-dev libssl-dev gettext poppler-utils poppler-data libpoppler-cpp-dev xmlsec1
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
           cache: 'pip'
@@ -187,7 +187,7 @@ jobs:
           cd parent
           python manage.py compilemessages
       - name: Download vue app
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: babex-vue
       - name: Unpack vue app
@@ -206,7 +206,7 @@ jobs:
           playwright install
           export DJANGO_ALLOW_ASYNC_UNSAFE=1
           pytest --tracing retain-on-failure
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         if: failure()
         with:
           name: integration-pytest_logs

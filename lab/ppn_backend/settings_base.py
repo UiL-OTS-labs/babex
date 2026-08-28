@@ -139,7 +139,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.PBKDF2PasswordHasher",
-    "cdh.core.hashers.PBKDF2WrappedMD5PasswordHasher",
 ]
 
 # Internationalization
@@ -225,3 +224,5 @@ def secret(name):
 
 
 BABYLAB_MAILBOX = "babylab.ilslabs@uu.nl"
+
+DEBUG_TOOLBAR = False
