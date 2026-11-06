@@ -11,6 +11,7 @@ CSRF_TRUSTED_ORIGINS = ["https://" + getenv("PARENT_SERVER")]
 STATIC_ROOT = "/static"
 
 API_HOST = "https://" + getenv("LAB_SERVER")
+SECRET_KEY = secret("SECRET_KEY")
 JWT_SECRET = secret("JWT_SECRET")
 
 
